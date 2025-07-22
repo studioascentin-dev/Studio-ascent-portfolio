@@ -26,7 +26,7 @@ interface HeaderProps {
     }
 }
 
-const NavLink = ({ item, activeSection, isMobile }: { item: typeof navItems[0], activeSection: string, isMobile: boolean }) => {
+const NavLink = ({ item, activeSection }: { item: typeof navItems[0], activeSection: string }) => {
     const isActive = activeSection === item.refKey;
 
     const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -34,37 +34,30 @@ const NavLink = ({ item, activeSection, isMobile }: { item: typeof navItems[0], 
         const targetId = item.href.substring(1);
         const targetElement = document.getElementById(targetId);
         
-        // The 'hero' section corresponds to the top of the page, so we use a different ID.
-        const scrollTarget = targetId === 'hero' ? document.getElementById('hero-section') : targetElement;
-        
         if (targetElement) {
             targetElement.scrollIntoView({ behavior: 'smooth' });
         }
     };
     
-    const LinkContent = () => (
-        <a 
-            href={item.href}
-            onClick={handleClick}
-            className={cn(
-                "relative z-10 flex h-12 w-12 items-center justify-center rounded-full transition-colors duration-300",
-                isActive ? "text-primary-foreground" : "text-muted-foreground hover:text-foreground"
-            )}
-        >
-            <item.icon className="h-6 w-6" />
-            <span className="sr-only">{item.text}</span>
-        </a>
-    );
-
-    if (isMobile) {
-        return <LinkContent />;
-    }
-
     return (
         <Tooltip>
             <TooltipTrigger asChild>
-                <div className="relative">
-                    <LinkContent />
+                <motion.div
+                    whileHover={{ scale: 1.4, y: -8 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                    className="relative"
+                >
+                    <a 
+                        href={item.href}
+                        onClick={handleClick}
+                        className={cn(
+                            "relative z-10 flex h-12 w-12 items-center justify-center rounded-full transition-colors duration-300",
+                            isActive ? "text-primary-foreground" : "text-muted-foreground hover:text-foreground"
+                        )}
+                    >
+                        <item.icon className="h-6 w-6" />
+                        <span className="sr-only">{item.text}</span>
+                    </a>
                      {isActive && (
                         <motion.div
                             className="absolute inset-0 z-0 rounded-full bg-primary"
@@ -72,7 +65,7 @@ const NavLink = ({ item, activeSection, isMobile }: { item: typeof navItems[0], 
                             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                         />
                     )}
-                </div>
+                </motion.div>
             </TooltipTrigger>
             <TooltipContent side="bottom">
                 <p>{item.text}</p>
@@ -83,14 +76,6 @@ const NavLink = ({ item, activeSection, isMobile }: { item: typeof navItems[0], 
 
 export function Header({ refs }: HeaderProps) {
     const [activeSection, setActiveSection] = React.useState('aboutRef');
-    const [isMobile, setIsMobile] = React.useState(false);
-
-    React.useEffect(() => {
-        const checkMobile = () => setIsMobile(window.innerWidth < 768);
-        checkMobile();
-        window.addEventListener('resize', checkMobile);
-        return () => window.removeEventListener('resize', checkMobile);
-    }, []);
 
     const observerOptions = {
       threshold: 0.3,
@@ -117,7 +102,7 @@ export function Header({ refs }: HeaderProps) {
                 <nav className="rounded-full border bg-background/50 p-2 shadow-lg backdrop-blur-md">
                     <div className="flex items-center justify-center gap-2">
                         {navItems.map((item) => (
-                            <NavLink key={item.text} item={item} activeSection={activeSection} isMobile={isMobile} />
+                            <NavLink key={item.text} item={item} activeSection={activeSection} />
                         ))}
                     </div>
                 </nav>

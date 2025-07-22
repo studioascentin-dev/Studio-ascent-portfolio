@@ -66,7 +66,7 @@ export function HeroSection() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, type: 'spring' }}
-        className="max-w-3xl mx-auto text-xl md:text-2xl lg:text-3xl text-foreground/80 font-light tracking-wider leading-relaxed mt-12 z-20">
+        className="max-w-3xl mx-auto text-lg md:text-2xl lg:text-3xl text-foreground/80 font-light tracking-wider leading-relaxed mt-12 z-20">
         A CREATIVE DEVELOPER & DESIGNER
         <br />
         PASSIONATE ABOUT CRAFTING BOLD AND
@@ -78,7 +78,7 @@ export function HeroSection() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4, type: 'spring' }}
        className="mt-8 z-20">
-        <Button asChild className="font-bold text-lg py-6 px-12 bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-lg transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95">
+        <Button asChild className="font-bold text-base py-4 px-10 md:text-lg md:py-6 md:px-12 bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-lg transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95">
           <a href="/about">About Me</a>
         </Button>
       </motion.div>

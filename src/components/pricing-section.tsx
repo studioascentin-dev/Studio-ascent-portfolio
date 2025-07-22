@@ -5,24 +5,24 @@ import { AnimatedSection } from '@/components/animated-section';
 
 const pricingTiers = [
   {
-    name: 'Starter',
-    price: '$199',
-    description: 'Perfect for small projects and individuals.',
-    features: ['1 Core Service', 'Basic Support', '5-day Delivery'],
+    name: 'Content Focus',
+    price: '₹15,000',
+    description: 'Perfect for individuals and startups needing high-quality content.',
+    features: ['Choose 1: Video, Photo, or PPT', 'Standard Delivery (7 days)', 'Basic Support'],
     isPopular: false,
   },
   {
-    name: 'Pro',
-    price: '$499',
-    description: 'Ideal for businesses and growing brands.',
-    features: ['Up to 2 Services', 'Priority Support', '3-day Delivery', 'Source Files'],
+    name: 'Web Pro',
+    price: '₹40,000',
+    description: 'Ideal for businesses looking to establish a strong online presence.',
+    features: ['Web Design & Development', 'Priority Delivery (5 days)', 'Source Files', 'Priority Support'],
     isPopular: true,
   },
   {
-    name: 'Enterprise',
+    name: 'Full Suite',
     price: 'Custom',
-    description: 'Tailored solutions for large-scale needs.',
-    features: ['All Services', 'Dedicated Account Manager', 'Custom Timelines', 'Full Licensing'],
+    description: 'Comprehensive solutions for brands that need it all.',
+    features: ['All Services Included', 'Dedicated Project Manager', 'Custom Timelines', 'Full Licensing & Ownership'],
     isPopular: false,
   },
 ];
@@ -48,7 +48,7 @@ export function PricingSection() {
                 <CardDescription className="mt-2">{tier.description}</CardDescription>
                 <div className="mt-4">
                   <span className="text-4xl font-bold font-headline text-primary">{tier.price}</span>
-                  {tier.name !== 'Enterprise' && <span className="text-muted-foreground">/project</span>}
+                  {tier.name !== 'Full Suite' && <span className="text-muted-foreground">/project</span>}
                 </div>
               </CardHeader>
               <CardContent className="flex-1">

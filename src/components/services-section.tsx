@@ -49,7 +49,7 @@ export function ServicesSection() {
         </div>
         <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 py-12 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((service) => (
-            <Card key={service.title} className="group flex flex-col items-center justify-center text-center p-6 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 hover:bg-card/90">
+            <Card key={service.title} className="group flex flex-col items-center justify-center text-center p-6 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 bg-card">
               <CardHeader className="transition-all duration-300 group-hover:scale-110">
                 {service.icon}
               </CardHeader>

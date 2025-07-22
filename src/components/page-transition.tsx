@@ -6,50 +6,29 @@ import { usePathname } from 'next/navigation';
 import { LoadingScreen } from './loading-screen';
 
 export function PageTransition({ children }: { children: React.ReactNode }) {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const pathname = usePathname();
 
   useEffect(() => {
-    // Hide loading screen on initial load
-    setIsLoading(false);
-  }, []);
+    // Hide loading screen after initial load/transition
+    const timer = setTimeout(() => {
+        setIsLoading(false);
+    }, 500); // Adjust delay as needed for fade-out
 
+    return () => clearTimeout(timer);
+  }, [pathname]);
+  
   useEffect(() => {
-    let timer: NodeJS.Timeout;
-
-    const handleRouteChangeStart = () => {
-      timer = setTimeout(() => {
-        setIsLoading(true);
-      }, 200); // Only show loading screen for navigations that take longer than 200ms
-    };
-
-    const handleRouteChangeComplete = () => {
-      clearTimeout(timer);
-      setIsLoading(false);
-    };
-
-    // This is a simplified simulation, for a real app, you would use Next.js router events
-    // For this environment, we'll use the pathname change to simulate it.
-    
-    // Simulate start
-    handleRouteChangeStart();
-
-    // Simulate end after a delay (e.g. 1s) to show the loading screen
-    const endTimer = setTimeout(() => {
-        handleRouteChangeComplete();
-    }, 1000);
-
-
-    return () => {
-      clearTimeout(timer);
-      clearTimeout(endTimer);
-    };
+    // Reset loading state on path change to trigger for new pages
+    setIsLoading(true);
   }, [pathname]);
 
   return (
     <>
       <LoadingScreen isLoading={isLoading} />
-      {children}
+      <div className={`${isLoading ? 'opacity-0' : 'opacity-100 transition-opacity duration-500'}`}>
+        {children}
+      </div>
     </>
   );
 }

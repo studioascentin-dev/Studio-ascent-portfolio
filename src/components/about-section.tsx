@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
 const aboutDetails = [
-    { icon: <User className="h-8 w-8 text-primary" />, title: "Full Name", value: "Dev Kumar Das", details: "This is the name my parents gave me. You can call me Dev." },
+    { icon: <User className="h-8 w-8 text-primary" />, title: "Full Name", value: "Dev Kumar Das", details: "I'm 22 years old and male. This is the name my parents gave me. You can call me Dev." },
     { icon: <MapPin className="h-8 w-8 text-primary" />, title: "From", value: "Sonapur, India", details: "I'm currently based here, but I enjoy working with people from all over the world. I am from a small town called Sonapur which is located in north-east part of India." },
     { icon: <BookOpen className="h-8 w-8 text-primary" />, title: "Studies", value: "K.V Digaru & Sonapur College", details: "I completed my schooling from K.V Digaru and completed my secondary and my bachelor's degree from Sonapur College in 2025." },
     { icon: <Heart className="h-8 w-8 text-primary" />, title: "Hobbies", value: "Travel & Eating new dishes", details: "I like to travel and enjoy visiting new places, although I don't have any money to do so 😂." },

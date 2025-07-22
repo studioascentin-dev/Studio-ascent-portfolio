@@ -105,7 +105,13 @@ export function PricingSection() {
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start max-w-5xl mx-auto">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          variants={sectionVariants}
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start max-w-5xl mx-auto"
+        >
           {pricingTiers.map((tier, index) => (
             <motion.div key={tier.name} variants={cardVariants}>
               <Card className={cn("flex flex-col h-full", tier.isFeatured ? "border-primary ring-2 ring-primary shadow-lg" : "bg-card/80")}>
@@ -135,7 +141,7 @@ export function PricingSection() {
               </Card>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </motion.div>
     </section>
   );

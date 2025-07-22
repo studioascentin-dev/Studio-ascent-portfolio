@@ -20,7 +20,6 @@ export function AboutSection() {
     const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
     const [unlockedIndices, setUnlockedIndices] = useState<Set<number>>(new Set());
     const dragControls = useDragControls();
-    const constraintsRef = useRef<HTMLDivElement>(null);
     const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
     const handleDrop = (index: number) => {
@@ -46,7 +45,7 @@ export function AboutSection() {
     };
     
     return (
-        <section id="about-me" className="py-16 md:py-24 lg:py-32 overflow-hidden" ref={constraintsRef}>
+        <section id="about-me" className="py-16 md:py-24 lg:py-32 overflow-hidden">
             <div className="container mx-auto px-4 md:px-6">
                 <div className="space-y-8">
                     <div className="text-center relative">
@@ -70,8 +69,8 @@ export function AboutSection() {
                                     }
                                 });
                             }}
-                            whileDrag={{ scale: 1.2, rotate: -15, zIndex: 50 }}
-                            className="absolute top-1/2 -translate-y-1/2 right-0 md:right-24 lg:right-48 cursor-grab"
+                            whileDrag={{ scale: 1.2, rotate: -15, zIndex: 100 }}
+                            className="absolute top-1/2 -translate-y-1/2 right-0 md:right-24 lg:right-48 cursor-grab z-50"
                          >
                              <KeyRound className="h-10 w-10 text-primary-foreground/50 hover:text-primary-foreground transition-colors" />
                          </motion.div>

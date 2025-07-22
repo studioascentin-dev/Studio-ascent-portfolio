@@ -8,7 +8,7 @@ const roles = ["DEV", "A VIDEO EDITOR", "A WEB DEVELOPER", "A DESIGNER", "A PHOT
 
 export function HeroSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [containerWidth, setContainerWidth] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
   const roleRefs = useRef<(HTMLSpanElement | null)[]>([]);
 
   useEffect(() => {
@@ -17,25 +17,17 @@ export function HeroSection() {
     }, 2500);
     return () => clearInterval(interval);
   }, []);
-
-  useEffect(() => {
-    if (roleRefs.current[currentIndex]) {
-      setContainerWidth(roleRefs.current[currentIndex]!.offsetWidth);
-    }
-  }, [currentIndex]);
   
   return (
     <AnimatedSection id="hero" className="relative w-full h-screen flex flex-col items-center justify-center text-center p-8 md:p-12 lg:p-16">
       <div 
+        ref={containerRef}
         className="flex items-baseline justify-center transition-all duration-500 ease-in-out"
       >
         <h1 className="text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter text-foreground whitespace-nowrap">
-          HI, I'M{' '}
+          HI, I'M
         </h1>
-        <div 
-          className="relative text-primary text-left transition-all duration-500 ease-in-out" 
-          style={{ width: containerWidth ? `${containerWidth}px` : 'auto' }}
-        >
+        <div className="relative text-primary text-left ml-4">
           <div
             className="h-[1.2em] overflow-hidden"
           >

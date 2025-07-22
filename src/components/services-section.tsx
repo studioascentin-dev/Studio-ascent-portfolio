@@ -163,7 +163,7 @@ const MobileCarousel = ({ projects }: { projects: typeof services[0]['projects']
                 {projects.map((project, index) => (
                     <div
                         key={project.name}
-                        className="flex-[0_0_80%] min-w-0 pl-4"
+                        className="flex-[0_0_90%] min-w-0 pl-4"
                         style={{
                             ...(tweenValues.length && {
                                 opacity: numberWithinRange(tweenValues[index], 0.3, 1),
@@ -236,7 +236,7 @@ export function ServicesSection() {
                           initial="hidden"
                           whileInView="visible"
                           viewport={{ once: true, amount: 0.2 }}
-                          className="mx-auto max-w-6xl"
+                          className="mx-auto max-w-7xl"
                         >
                             <div className="hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
                                 {service.projects.map((project) => (

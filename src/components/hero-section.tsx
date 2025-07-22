@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useEffect } from 'react';
@@ -19,22 +18,20 @@ export function HeroSection() {
 
   return (
     <AnimatedSection id="hero" className="relative w-full h-screen flex flex-col items-center justify-center text-center p-4">
-      <h1 className="text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter text-foreground flex items-baseline justify-center whitespace-nowrap">
+      <h1 className="text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter text-foreground flex items-baseline justify-center">
         <span>HI, I'M&nbsp;</span>
-        <span className="relative text-primary">
-          <span className="inline-block h-[1.2em] overflow-hidden align-bottom">
-            <span
-              className="inline-block transition-transform duration-700 ease-in-out"
-              style={{ transform: `translateY(-${currentIndex * 1.2}em)` }}
-            >
-              {roles.map((role, index) => (
-                <span key={index} className="block h-[1.2em] leading-none">
-                  {role}
-                </span>
-              ))}
-            </span>
-          </span>
-        </span>
+        <div className="relative h-[1.2em] overflow-hidden">
+          <div
+            className="transition-transform duration-700 ease-in-out"
+            style={{ transform: `translateY(-${currentIndex * 1.2}em)` }}
+          >
+            {roles.map((role, index) => (
+              <div key={index} className="h-[1.2em] text-primary">
+                {role}
+              </div>
+            ))}
+          </div>
+        </div>
       </h1>
 
       <p className="max-w-3xl mx-auto text-xl md:text-2xl lg:text-3xl text-foreground/80 font-light tracking-wider leading-relaxed mt-12">

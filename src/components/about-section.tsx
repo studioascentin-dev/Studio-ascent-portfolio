@@ -3,21 +3,22 @@
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { AnimatedSection } from '@/components/animated-section';
-import { User, MapPin, BookOpen, Code, Target, Heart } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { User, MapPin, BookOpen, Code, Target, Heart, ChevronDown } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
 const aboutDetails = [
-    { icon: <User className="h-6 w-6 text-primary" />, title: "Full Name", value: "Dev Kumar Das" },
-    { icon: <MapPin className="h-6 w-6 text-primary" />, title: "From", value: "[Your City, Your Country]" },
-    { icon: <BookOpen className="h-6 w-6 text-primary" />, title: "Studies", value: "[Your Degree or Field of Study]" },
-    { icon: <Code className="h-6 w-6 text-primary" />, title: "Websites I've Built", value: "[List a few projects or types of sites]" },
-    { icon: <Heart className="h-6 w-6 text-primary" />, title: "Hobbies", value: "[Your Hobbies]" },
-    { icon: <Target className="h-6 w-6 text-primary" />, title: "Ambition", value: "[Your professional ambition or goal]" },
+    { icon: <User className="h-6 w-6 text-primary" />, title: "Full Name", value: "Dev Kumar Das", details: "This is the name my parents gave me. You can call me Dev." },
+    { icon: <MapPin className="h-6 w-6 text-primary" />, title: "From", value: "[Your City, Your Country]", details: "I've been living here for my entire life and love the culture and people." },
+    { icon: <BookOpen className="h-6 w-6 text-primary" />, title: "Studies", value: "[Your Degree or Field of Study]", details: "My studies have provided me with a strong foundation in both theoretical concepts and practical applications." },
+    { icon: <Code className="h-6 w-6 text-primary" />, title: "Websites I've Built", value: "[List a few projects or types of sites]", details: "I enjoy building a diverse range of websites, from sleek portfolios to complex e-commerce platforms." },
+    { icon: <Heart className="h-6 w-6 text-primary" />, title: "Hobbies", value: "[Your Hobbies]", details: "When I'm not coding, I enjoy... It's a great way to unwind and recharge my creativity." },
+    { icon: <Target className="h-6 w-6 text-primary" />, title: "Ambition", value: "[Your professional ambition or goal]", details: "My long-term goal is to leverage my skills to build innovative solutions that make a meaningful impact." },
 ];
 
 export function AboutSection() {
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+    const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
     const cardVariants = {
         initial: {
@@ -34,6 +35,19 @@ export function AboutSection() {
             opacity: 0.5,
             scale: 0.95,
             transition: { duration: 0.3 }
+        }
+    };
+
+    const contentVariants = {
+        hidden: { opacity: 0, height: 0, y: -10 },
+        visible: {
+            opacity: 1,
+            height: 'auto',
+            y: 0,
+            transition: {
+                duration: 0.3,
+                ease: "easeInOut"
+            }
         }
     };
 
@@ -61,17 +75,42 @@ export function AboutSection() {
                                         ? 'hovered'
                                         : 'blurred'
                                 }
+                                layout
                             >
-                                <Card className={cn(
-                                    "bg-card/50 h-full transition-all duration-300",
-                                    { "animated-gradient-border": hoveredIndex === index }
-                                )}>
-                                    <CardHeader className="flex flex-row items-center gap-4 pb-2">
-                                        {detail.icon}
-                                        <CardTitle className="text-lg font-headline">{detail.title}</CardTitle>
+                                <Card
+                                    className={cn(
+                                        "bg-card/50 h-full transition-all duration-300 cursor-pointer",
+                                        { "animated-gradient-border": hoveredIndex === index || expandedIndex === index }
+                                    )}
+                                    onClick={() => setExpandedIndex(expandedIndex === index ? null : index)}
+                                >
+                                    <CardHeader className="flex flex-row items-center justify-between gap-4 pb-2">
+                                        <div className="flex flex-row items-center gap-4">
+                                            {detail.icon}
+                                            <CardTitle className="text-lg font-headline">{detail.title}</CardTitle>
+                                        </div>
+                                        <motion.div
+                                            animate={{ rotate: expandedIndex === index ? 180 : 0 }}
+                                            transition={{ duration: 0.3 }}
+                                        >
+                                            <ChevronDown className="h-5 w-5 text-muted-foreground" />
+                                        </motion.div>
                                     </CardHeader>
                                     <CardContent>
-                                        <p className="text-muted-foreground">{detail.value}</p>
+                                        <motion.p layout className="text-muted-foreground">{detail.value}</motion.p>
+                                        <AnimatePresence>
+                                            {expandedIndex === index && (
+                                                <motion.div
+                                                    variants={contentVariants}
+                                                    initial="hidden"
+                                                    animate="visible"
+                                                    exit="hidden"
+                                                    className="overflow-hidden"
+                                                >
+                                                    <p className="pt-4 text-muted-foreground/80">{detail.details}</p>
+                                                </motion.div>
+                                            )}
+                                        </AnimatePresence>
                                     </CardContent>
                                 </Card>
                             </motion.div>

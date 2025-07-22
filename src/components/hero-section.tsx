@@ -1,10 +1,11 @@
+
 "use client";
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from './ui/button';
 
-const roles = ["DEV            ", "A DESIGNER    ", "A WEB DEVELOPER", "A VIDEO EDITOR ", "A PHOTO EDITOR "];
+const roles = ["A DESIGNER    ", "A WEB DEVELOPER", "A VIDEO EDITOR ", "A PHOTO EDITOR "];
 const TYPING_SPEED = 100;
 const DELETING_SPEED = 50;
 const DELAY_AFTER_TYPING = 1500;
@@ -48,7 +49,7 @@ export function HeroSection() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1, type: 'spring' }}
         className="text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter text-foreground z-20">
-        HI, I'M 
+        <span className="block md:inline">HI, I'M </span>
         <span className="text-primary font-code">
           <span>{text}</span>
           <motion.span

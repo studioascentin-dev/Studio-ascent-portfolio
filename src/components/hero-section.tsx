@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from './ui/button';
 
-const roles = ["A DESIGNER", "A WEB DEVELOPER", "A VIDEO EDITOR", "A PHOTO EDITOR"];
+const roles = ["A DESIGNER    ", "A WEB DEVELOPER", "A VIDEO EDITOR ", "A PHOTO EDITOR "];
 const TYPING_SPEED = 100;
 const DELETING_SPEED = 50;
 const DELAY_AFTER_TYPING = 1500;
@@ -49,7 +49,7 @@ export function HeroSection() {
         transition={{ delay: 0.1, type: 'spring' }}
         className="text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter text-foreground">
         HI, I'M&nbsp;
-        <span className="inline-block text-left w-[15ch] text-primary">
+        <span className="text-primary font-code">
           <span>{text}</span>
           <motion.span
             initial={{ opacity: 0 }}

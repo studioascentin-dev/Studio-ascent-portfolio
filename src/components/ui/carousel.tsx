@@ -123,7 +123,6 @@ const Carousel = React.forwardRef<
       api.on("reInit", onSelect)
       api.on("select", onSelect)
       
-      // We need to listen to scroll to update the active class during scroll.
       const onScroll = () => {
           onSelect(api);
       };

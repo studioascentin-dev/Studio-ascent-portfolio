@@ -33,8 +33,8 @@ const pricingTiers = [
 
 const itemVariants = {
     hidden: { opacity: 0, y: 30 },
-    visible: { 
-        opacity: 1, 
+    visible: {
+        opacity: 1,
         y: 0,
         transition: {
             duration: 0.4,
@@ -68,9 +68,9 @@ const cardVariants = {
 
 export function PricingSection() {
   return (
-    <AnimatedSection id="pricing">
+    <AnimatedSection id="pricing" className="py-20">
       <div className="container px-4 md:px-6">
-        <div 
+        <div
           className="flex flex-col items-center justify-center space-y-4 text-center"
         >
           <div className="space-y-2">
@@ -80,9 +80,9 @@ export function PricingSection() {
             </motion.p>
           </div>
         </div>
-        <motion.div 
+        <motion.div
           variants={cardContainerVariants}
-          className="mx-auto grid max-w-5xl grid-cols-1 gap-8 py-12 md:grid-cols-3"
+          className="mx-auto grid max-w-5xl grid-cols-1 gap-8 pt-12 md:grid-cols-3"
         >
           {pricingTiers.map((tier) => (
             <motion.div key={tier.name} variants={cardVariants}>

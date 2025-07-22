@@ -57,7 +57,7 @@ export function HeroSection() {
             </p>
             <div className="mt-8">
               <Button asChild className="font-bold text-lg py-6 px-12 bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-lg transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95">
-                <a href="#contact">About Me</a>
+                <a href="#about-me">About Me</a>
               </Button>
             </div>
         </div>

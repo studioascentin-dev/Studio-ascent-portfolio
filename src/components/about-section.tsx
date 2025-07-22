@@ -52,6 +52,7 @@ export function AboutSection() {
                          <motion.div 
                             drag 
                             dragControls={dragControls}
+                            dragSnapToOrigin={true}
                             onDragEnd={(_event, info) => {
                                 const { point } = info;
                                 cardRefs.current.forEach((cardRef, index) => {

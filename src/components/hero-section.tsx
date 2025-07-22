@@ -27,22 +27,24 @@ export function HeroSection() {
   return (
     <AnimatedSection id="hero" className="relative w-full h-screen flex flex-col items-center justify-center text-center overflow-hidden p-8 md:p-12 lg:p-16">
         <div className="flex flex-col items-center justify-center">
-            <h1 className="text-7xl md:text-9xl lg:text-[8rem] font-extrabold font-headline tracking-tighter text-foreground leading-none h-48 flex items-center justify-center">
+            <h1 className="text-7xl md:text-9xl lg:text-[8rem] font-extrabold font-headline tracking-tighter text-foreground leading-none flex items-center justify-center">
               HI, I'M&nbsp;
-              <span className="text-primary relative overflow-hidden h-[1.2em] w-full max-w-full">
-                <span 
+              <span className="text-primary relative overflow-hidden h-[1.2em] flex-shrink-0" style={{width: '10ch'}}>
+                <span
                   className={cn(
                     "absolute inset-0 transition-transform duration-500 ease-in-out",
                     isAnimating ? '-translate-y-full' : 'translate-y-0'
                   )}
+                  key={currentIndex}
                 >
                   {roles[currentIndex]}
                 </span>
-                <span 
+                <span
                   className={cn(
                     "absolute inset-0 transition-transform duration-500 ease-in-out",
                     isAnimating ? 'translate-y-0' : 'translate-y-full'
                   )}
+                  key={currentIndex + 1}
                 >
                   {roles[(currentIndex + 1) % roles.length]}
                 </span>

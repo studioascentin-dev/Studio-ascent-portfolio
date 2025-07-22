@@ -20,22 +20,22 @@ export function HeroSection() {
     <AnimatedSection id="hero" className="relative w-full h-screen flex flex-col items-center justify-center text-center p-4">
       <div className="flex items-baseline justify-center whitespace-nowrap">
         <h1 className="text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter text-foreground">
-          HI, I'M&nbsp;
+          HI, I'M{' '}
+          <span className="relative text-primary">
+            <span className="inline-block h-[1.2em] overflow-hidden align-bottom">
+              <span
+                className="inline-block transition-transform duration-700 ease-in-out"
+                style={{ transform: `translateY(-${currentIndex * 1.2}em)` }}
+              >
+                {roles.map((role, index) => (
+                  <span key={index} className="block h-[1.2em] leading-none">
+                    {role}
+                  </span>
+                ))}
+              </span>
+            </span>
+          </span>
         </h1>
-        <div className="relative text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter text-primary">
-          <div className="h-[1.2em] overflow-hidden">
-            <div
-              className="transition-transform duration-700 ease-in-out"
-              style={{ transform: `translateY(-${currentIndex * 1.2}em)` }}
-            >
-              {roles.map((role, index) => (
-                <div key={index} className="h-[1.2em] leading-none">
-                  {role}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
       </div>
 
       <p className="max-w-3xl mx-auto text-xl md:text-2xl lg:text-3xl text-foreground/80 font-light tracking-wider leading-relaxed mt-12">

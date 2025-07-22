@@ -13,7 +13,6 @@ const navItems = [
   { href: '#services', text: 'Services', icon: Users, refKey: 'servicesRef' },
   { href: '#pricing', text: 'Pricing', icon: Tag, refKey: 'pricingRef' },
   { href: '#hire-me', text: 'Hire Me', icon: Briefcase, refKey: 'hireMeRef' },
-  { href: '#contact', text: 'Contact', icon: Mail, refKey: 'contactRef' },
 ];
 
 interface HeaderProps {
@@ -22,7 +21,6 @@ interface HeaderProps {
         servicesRef: React.RefObject<HTMLElement>;
         pricingRef: React.RefObject<HTMLElement>;
         hireMeRef: React.RefObject<HTMLElement>;
-        contactRef: React.RefObject<HTMLElement>;
     }
 }
 
@@ -86,17 +84,15 @@ export function Header({ refs }: HeaderProps) {
     const isServicesOnScreen = useOnScreen(refs.servicesRef, observerOptions);
     const isPricingOnScreen = useOnScreen(refs.pricingRef, observerOptions);
     const isHireMeOnScreen = useOnScreen(refs.hireMeRef, observerOptions);
-    const isContactOnScreen = useOnScreen(refs.contactRef, observerOptions);
     
     React.useEffect(() => {
         let currentSection = 'aboutRef';
-        if (isAboutOnScreen) currentSection = 'aboutRef';
-        if (isServicesOnScreen) currentSection = 'servicesRef';
-        if (isPricingOnScreen) currentSection = 'pricingRef';
         if (isHireMeOnScreen) currentSection = 'hireMeRef';
-        if (isContactOnScreen) currentSection = 'contactRef';
+        if (isPricingOnScreen) currentSection = 'pricingRef';
+        if (isServicesOnScreen) currentSection = 'servicesRef';
+        if (isAboutOnScreen) currentSection = 'aboutRef';
         setActiveSection(currentSection);
-    }, [isAboutOnScreen, isServicesOnScreen, isPricingOnScreen, isHireMeOnScreen, isContactOnScreen]);
+    }, [isAboutOnScreen, isServicesOnScreen, isPricingOnScreen, isHireMeOnScreen]);
 
     return (
         <header className="fixed bottom-4 left-1/2 z-50 -translate-x-1/2 md:bottom-auto md:top-4">

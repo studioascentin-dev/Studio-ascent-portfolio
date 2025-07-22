@@ -14,11 +14,10 @@ export default function Home() {
   const servicesRef = React.useRef<HTMLDivElement>(null);
   const pricingRef = React.useRef<HTMLDivElement>(null);
   const hireMeRef = React.useRef<HTMLDivElement>(null);
-  const contactRef = React.useRef<HTMLDivElement>(null);
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
-      <Header refs={{ aboutRef, servicesRef, pricingRef, hireMeRef, contactRef }} />
+      <Header refs={{ aboutRef, servicesRef, pricingRef, hireMeRef }} />
       <main className="flex-1">
         <div id="hero-section" ref={aboutRef}>
             <HeroSection />
@@ -33,9 +32,7 @@ export default function Home() {
             <HireMeSection />
         </div>
       </main>
-      <div id="contact" ref={contactRef}>
-        <Footer />
-      </div>
+      <Footer />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import { Video, Camera, Presentation, Globe, Code, PenTool } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { AnimatedSection } from './animated-section';
+import { AnimatedSection } from '@/components/animated-section';
 
 const services = [
   {

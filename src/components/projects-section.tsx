@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { AnimatedSection } from './animated-section';
+import { AnimatedSection } from '@/components/animated-section';
 import { cn } from '@/lib/utils';
 
 const projects = [

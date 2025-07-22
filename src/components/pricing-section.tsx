@@ -1,7 +1,7 @@
 import { Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { AnimatedSection } from './animated-section';
+import { AnimatedSection } from '@/components/animated-section';
 
 const pricingTiers = [
   {

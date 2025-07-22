@@ -1,42 +1,32 @@
 "use client";
 
-import { useRef, type ReactNode } from 'react';
+import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useOnScreen } from '@/hooks/use-on-screen';
 import { cn } from '@/lib/utils';
 
-interface AnimatedSectionProps {
-  children: ReactNode;
-  className?: string;
-  id?: string;
+interface AnimatedSectionProps extends React.HTMLAttributes<HTMLElement> {
+  children: React.ReactNode;
 }
 
-const sectionVariants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: { 
-    opacity: 1, 
-    y: 0,
-    transition: {
-      type: 'spring',
-      damping: 15,
-      stiffness: 100,
-      duration: 0.8
-    }
-  },
-};
-
-export function AnimatedSection({ children, className, id }: AnimatedSectionProps) {
+export function AnimatedSection({ children, className, ...props }: AnimatedSectionProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const isIntersecting = useOnScreen(ref, { threshold: 0.1, rootMargin: '0px 0px -100px 0px' });
+  const isOnScreen = useOnScreen(ref, { once: true, amount: 0.2 });
+
+  const variants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+  };
 
   return (
     <motion.section
-      id={id}
       ref={ref}
-      className={cn(className)}
-      variants={sectionVariants}
       initial="hidden"
-      animate={isIntersecting ? "visible" : "hidden"}
+      animate={isOnScreen ? 'visible' : 'hidden'}
+      variants={variants}
+      transition={{ duration: 0.5, ease: 'easeOut' }}
+      className={cn("w-full py-12 md:py-24 lg:py-32", className)}
+      {...props}
     >
       {children}
     </motion.section>

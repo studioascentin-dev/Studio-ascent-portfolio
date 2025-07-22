@@ -44,7 +44,7 @@ export function HeroSection() {
                     "absolute inset-x-0 transition-transform duration-500 ease-in-out",
                     isAnimating ? 'translate-y-0' : 'translate-y-full'
                   )}
-                  key={currentIndex + 1}
+                  key={(currentIndex + 1) % roles.length} // Correct key for incoming element
                 >
                   {roles[(currentIndex + 1) % roles.length]}
                 </span>

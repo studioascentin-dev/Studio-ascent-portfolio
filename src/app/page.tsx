@@ -20,7 +20,7 @@ export default function Home() {
     <div className="flex min-h-screen flex-col bg-background text-foreground">
       <Header refs={{ aboutRef, servicesRef, pricingRef, hireMeRef, contactRef }} />
       <main className="flex-1">
-        <div ref={aboutRef}>
+        <div id="hero-section" ref={aboutRef}>
             <HeroSection />
         </div>
         <div ref={servicesRef}>

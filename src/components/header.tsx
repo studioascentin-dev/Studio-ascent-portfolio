@@ -3,12 +3,13 @@
 
 import * as React from 'react';
 import { motion } from 'framer-motion';
-import { User, Users, Tag, Mail, Briefcase } from 'lucide-react';
+import { User, Briefcase, Tag, Mail, Users, Home } from 'lucide-react';
 import { useOnScreen } from '@/hooks/use-on-screen';
 import { cn } from '@/lib/utils';
+import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip';
 
 const navItems = [
-  { href: '#hero', text: 'About', icon: User, refKey: 'aboutRef' },
+  { href: '#hero', text: 'About', icon: Home, refKey: 'aboutRef' },
   { href: '#services', text: 'Services', icon: Users, refKey: 'servicesRef' },
   { href: '#pricing', text: 'Pricing', icon: Tag, refKey: 'pricingRef' },
   { href: '#hire-me', text: 'Hire Me', icon: Briefcase, refKey: 'hireMeRef' },
@@ -25,84 +26,102 @@ interface HeaderProps {
     }
 }
 
-const NavLink = ({ item, activeSection }: { item: typeof navItems[0], activeSection: string }) => {
-    const [isHovered, setIsHovered] = React.useState(false);
+const NavLink = ({ item, activeSection, isMobile }: { item: typeof navItems[0], activeSection: string, isMobile: boolean }) => {
     const isActive = activeSection === item.refKey;
 
     const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
         e.preventDefault();
         const targetId = item.href.substring(1);
         const targetElement = document.getElementById(targetId);
+        
+        // The 'hero' section corresponds to the top of the page, so we use a different ID.
+        const scrollTarget = targetId === 'hero' ? document.getElementById('hero-section') : targetElement;
+        
         if (targetElement) {
             targetElement.scrollIntoView({ behavior: 'smooth' });
         }
     };
-
-    return (
+    
+    const LinkContent = () => (
         <a 
             href={item.href}
             onClick={handleClick}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
             className={cn(
-                "relative text-sm font-medium uppercase tracking-widest transition-colors",
-                isActive ? "text-primary" : "hover:text-primary"
+                "relative z-10 flex h-12 w-12 items-center justify-center rounded-full transition-colors duration-300",
+                isActive ? "text-primary-foreground" : "text-muted-foreground hover:text-foreground"
             )}
         >
-            <span className="md:hidden">
-                <item.icon className="h-6 w-6" />
-            </span>
-            <span className="hidden md:block">{item.text}</span>
-            {isHovered && (
-                <motion.div
-                    className="absolute bottom-[-4px] left-0 right-0 h-[2px] bg-primary"
-                    layoutId="underline"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                />
-            )}
-            {isActive && (
-                 <motion.div
-                    className="absolute bottom-[-4px] left-0 right-0 h-[2px] bg-primary"
-                    layoutId="underline"
-                />
-            )}
+            <item.icon className="h-6 w-6" />
+            <span className="sr-only">{item.text}</span>
         </a>
+    );
+
+    if (isMobile) {
+        return <LinkContent />;
+    }
+
+    return (
+        <Tooltip>
+            <TooltipTrigger asChild>
+                <div className="relative">
+                    <LinkContent />
+                     {isActive && (
+                        <motion.div
+                            className="absolute inset-0 z-0 rounded-full bg-primary"
+                            layoutId="active-nav-item"
+                            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                        />
+                    )}
+                </div>
+            </TooltipTrigger>
+            <TooltipContent side="bottom">
+                <p>{item.text}</p>
+            </TooltipContent>
+        </Tooltip>
     )
 }
 
 export function Header({ refs }: HeaderProps) {
-  const [activeSection, setActiveSection] = React.useState('aboutRef');
+    const [activeSection, setActiveSection] = React.useState('aboutRef');
+    const [isMobile, setIsMobile] = React.useState(false);
 
-  const observerOptions = {
-    threshold: 0.3,
-  };
+    React.useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
-  const isAboutOnScreen = useOnScreen(refs.aboutRef, observerOptions);
-  const isServicesOnScreen = useOnScreen(refs.servicesRef, observerOptions);
-  const isPricingOnScreen = useOnScreen(refs.pricingRef, observerOptions);
-  const isHireMeOnScreen = useOnScreen(refs.hireMeRef, observerOptions);
-  const isContactOnScreen = useOnScreen(refs.contactRef, observerOptions);
+    const observerOptions = {
+      threshold: 0.3,
+      rootMargin: '-50% 0px -50% 0px'
+    };
   
-  React.useEffect(() => {
-    if (isAboutOnScreen) setActiveSection('aboutRef');
-    if (isServicesOnScreen) setActiveSection('servicesRef');
-    if (isPricingOnScreen) setActiveSection('pricingRef');
-    if (isHireMeOnScreen) setActiveSection('hireMeRef');
-    if (isContactOnScreen) setActiveSection('contactRef');
-  }, [isAboutOnScreen, isServicesOnScreen, isPricingOnScreen, isHireMeOnScreen, isContactOnScreen]);
+    const isAboutOnScreen = useOnScreen(refs.aboutRef, observerOptions);
+    const isServicesOnScreen = useOnScreen(refs.servicesRef, observerOptions);
+    const isPricingOnScreen = useOnScreen(refs.pricingRef, observerOptions);
+    const isHireMeOnScreen = useOnScreen(refs.hireMeRef, observerOptions);
+    const isContactOnScreen = useOnScreen(refs.contactRef, observerOptions);
+    
+    React.useEffect(() => {
+      if (isAboutOnScreen) setActiveSection('aboutRef');
+      if (isServicesOnScreen) setActiveSection('servicesRef');
+      if (isPricingOnScreen) setActiveSection('pricingRef');
+      if (isHireMeOnScreen) setActiveSection('hireMeRef');
+      if (isContactOnScreen) setActiveSection('contactRef');
+    }, [isAboutOnScreen, isServicesOnScreen, isPricingOnScreen, isHireMeOnScreen, isContactOnScreen]);
 
-  return (
-    <header className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur-sm">
-      <div className="container mx-auto flex h-24 items-center justify-center px-4 md:px-6">
-        <nav className="flex gap-6 md:gap-10">
-          {navItems.map((item) => (
-            <NavLink key={item.text} item={item} activeSection={activeSection} />
-          ))}
-        </nav>
-      </div>
-    </header>
-  );
+    return (
+        <header className="fixed bottom-4 left-1/2 z-50 -translate-x-1/2 md:bottom-auto md:top-4">
+            <TooltipProvider>
+                <nav className="rounded-full border bg-background/50 p-2 shadow-lg backdrop-blur-md">
+                    <div className="flex items-center justify-center gap-2">
+                        {navItems.map((item) => (
+                            <NavLink key={item.text} item={item} activeSection={activeSection} isMobile={isMobile} />
+                        ))}
+                    </div>
+                </nav>
+            </TooltipProvider>
+        </header>
+    );
 }

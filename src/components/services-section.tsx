@@ -196,18 +196,18 @@ const MobileCarousel = ({ projects }: { projects: typeof services[0]['projects']
 
 export function ServicesSection() {
   return (
-    <section id="services" className="bg-background py-28">
+    <section id="services" className="bg-background min-h-[80vh] flex flex-col justify-center py-20 md:py-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.3 }}
                 variants={sectionVariants}
-                className="mb-12"
+                className="mb-20"
             >
                 <div className="max-w-3xl mx-auto text-center">
-                    <motion.h2 variants={itemVariants} className="text-3xl font-bold font-headline tracking-tighter sm:text-5xl">My Services</motion.h2>
-                    <motion.p variants={itemVariants} className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed mt-4">
+                    <motion.h2 variants={itemVariants} className="text-4xl font-bold font-headline tracking-tighter sm:text-5xl md:text-6xl">My Services</motion.h2>
+                    <motion.p variants={itemVariants} className="text-muted-foreground md:text-xl/relaxed lg:text-lg/relaxed xl:text-xl/relaxed mt-6 max-w-2xl mx-auto">
                         A closer look at the digital services I provide to bring your vision to life.
                     </motion.p>
                 </div>
@@ -221,14 +221,14 @@ export function ServicesSection() {
                         whileInView="visible"
                         viewport={{ once: true, amount: 0.1 }}
                         variants={sectionVariants}
-                        className="space-y-12"
+                        className="space-y-16"
                     >
-                        <motion.div variants={itemVariants} className="max-w-5xl space-y-10 mx-auto text-center">
-                            <div className="inline-block p-3 bg-primary/10 rounded-full">
-                                {service.icon}
+                        <motion.div variants={itemVariants} className="max-w-5xl space-y-6 mx-auto text-center">
+                            <div className="inline-block p-4 bg-primary/10 rounded-full">
+                                {React.cloneElement(service.icon, { className: 'h-12 w-12 text-primary' })}
                             </div>
-                            <h3 className="text-2xl md:text-3xl font-bold font-headline">{service.title}</h3>
-                            <p className="text-muted-foreground text-lg">{service.description}</p>
+                            <h3 className="text-3xl md:text-4xl font-bold font-headline">{service.title}</h3>
+                            <p className="text-muted-foreground text-lg md:text-xl max-w-3xl mx-auto">{service.description}</p>
                         </motion.div>
                         
                         <motion.div
@@ -256,7 +256,7 @@ export function ServicesSection() {
                                                 />
                                             </CardHeader>
                                             <CardContent className="p-6 flex-grow">
-                                                <h4 className="font-headline text-xl">{project.name}</h4>
+                                                <h4 className="font-headline text-2xl">{project.name}</h4>
                                             </CardContent>
                                         </Card>
                                     </motion.div>

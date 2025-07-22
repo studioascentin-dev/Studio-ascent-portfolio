@@ -69,7 +69,7 @@ export function HeroSection({ onSuggestions }: HeroSectionProps) {
       <ThreeWelcome />
       <div className="absolute inset-0 flex items-center justify-center bg-transparent">
         <div className="container px-4 md:px-6 text-center text-primary-foreground">
-          <div className="bg-transparent backdrop-blur-sm rounded-xl p-8 md:p-12 border-0">
+          <div className="bg-black/20 backdrop-blur-sm rounded-xl p-8 md:p-12 border-0">
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold font-headline tracking-tighter text-shadow-lg">
               Dev Kumar Das
             </h1>

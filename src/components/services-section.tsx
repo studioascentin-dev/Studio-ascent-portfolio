@@ -90,19 +90,20 @@ export function ServicesSection() {
   return (
     <section id="services" className="bg-background py-16 md:py-24 lg:py-32">
         <div className="container px-4 md:px-6">
-            <div className="mx-auto max-w-3xl text-center mb-12">
-                <motion.div
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, amount: 0.3 }}
-                    variants={sectionVariants}
-                >
+            <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+                variants={sectionVariants}
+                className="mb-12"
+            >
+                <div className="max-w-3xl text-right ml-auto">
                     <h2 className="text-3xl font-bold font-headline tracking-tighter sm:text-5xl">My Services</h2>
                     <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed mt-4">
                         A closer look at the digital services I provide to bring your vision to life.
                     </p>
-                </motion.div>
-            </div>
+                </div>
+            </motion.div>
             
             <div className="flex flex-col gap-24 md:gap-32">
                 {services.map((service, serviceIndex) => (
@@ -114,7 +115,7 @@ export function ServicesSection() {
                         variants={sectionVariants}
                         className="space-y-12"
                     >
-                        <div className="mx-auto max-w-3xl space-y-4 text-center">
+                        <div className="max-w-5xl space-y-8 text-right ml-auto">
                             <div className="inline-block p-3 bg-primary/10 rounded-full">
                                 {service.icon}
                             </div>
@@ -153,7 +154,7 @@ export function ServicesSection() {
                             </div>
                         </div>
 
-                        <div className="text-center">
+                        <div className="text-center mt-12">
                             <Button size="lg" className="font-bold text-lg py-6 px-12 bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-lg transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95">
                                 View More
                             </Button>

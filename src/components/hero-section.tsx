@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from './ui/button';
 
-const roles = ["A DESIGNER    ", "A WEB DEVELOPER", "A VIDEO EDITOR ", "A PHOTO EDITOR "];
+const roles = ["DEV            ", "A DESIGNER    ", "A WEB DEVELOPER", "A VIDEO EDITOR ", "A PHOTO EDITOR "];
 const TYPING_SPEED = 100;
 const DELETING_SPEED = 50;
 const DELAY_AFTER_TYPING = 1500;

@@ -183,8 +183,8 @@ const MobileCarousel = ({ projects }: { projects: typeof services[0]['projects']
                                     data-ai-hint={project.dataAiHint}
                                 />
                             </CardHeader>
-                            <CardContent className="p-6 flex-grow">
-                                <h4 className="font-headline text-xl">{project.name}</h4>
+                            <CardContent className="p-8 flex-grow">
+                                <h4 className="font-headline text-3xl">{project.name}</h4>
                             </CardContent>
                         </Card>
                     </div>
@@ -236,9 +236,9 @@ export function ServicesSection() {
                           initial="hidden"
                           whileInView="visible"
                           viewport={{ once: true, amount: 0.2 }}
-                          className="mx-auto max-w-5xl"
+                          className="mx-auto max-w-6xl"
                         >
-                            <div className="hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                            <div className="hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
                                 {service.projects.map((project) => (
                                     <motion.div
                                         key={project.name}
@@ -255,8 +255,8 @@ export function ServicesSection() {
                                                     data-ai-hint={project.dataAiHint}
                                                 />
                                             </CardHeader>
-                                            <CardContent className="p-6 flex-grow">
-                                                <h4 className="font-headline text-2xl">{project.name}</h4>
+                                            <CardContent className="p-8 flex-grow">
+                                                <h4 className="font-headline text-3xl">{project.name}</h4>
                                             </CardContent>
                                         </Card>
                                     </motion.div>

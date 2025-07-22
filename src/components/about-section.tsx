@@ -54,7 +54,6 @@ export function AboutSection() {
                             drag 
                             dragControls={dragControls}
                             dragElastic={0.2}
-                            dragSnapToOrigin
                             onDragEnd={(_event, info) => {
                                 const { point } = info;
                                 cardRefs.current.forEach((cardRef, index) => {

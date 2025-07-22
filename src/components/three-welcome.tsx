@@ -74,9 +74,11 @@ export function ThreeWelcome() {
 
     // Handle resize
     const handleResize = () => {
-      camera.aspect = currentMount.clientWidth / currentMount.clientHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(currentMount.clientWidth, currentMount.clientHeight);
+      if (currentMount) {
+        camera.aspect = currentMount.clientWidth / currentMount.clientHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(currentMount.clientWidth, currentMount.clientHeight);
+      }
     };
 
     window.addEventListener('resize', handleResize);
@@ -93,7 +95,7 @@ export function ThreeWelcome() {
     // Cleanup
     return () => {
       window.removeEventListener('resize', handleResize);
-      if(currentMount) {
+      if(currentMount && renderer.domElement) {
         currentMount.removeChild(renderer.domElement);
       }
       // Dispose of Three.js objects

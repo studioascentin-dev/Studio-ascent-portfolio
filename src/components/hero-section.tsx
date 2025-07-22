@@ -21,26 +21,24 @@ export function HeroSection() {
   return (
     <AnimatedSection id="hero" className="relative w-full h-screen flex flex-col items-center justify-center text-center p-8 md:p-12 lg:p-16">
       <div className="flex flex-col items-center justify-center">
-        <h1 className="text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter text-foreground leading-none flex items-baseline justify-center">
-          <span>HI, I'M</span>
-          <span className="text-primary relative h-[1.2em] overflow-hidden ml-4">
-            {roles.map((role, index) => (
-              <span
-                key={index}
-                className={cn(
-                  "absolute inset-0 transition-transform duration-700 ease-in-out",
-                  {
-                    'translate-y-0': currentIndex === index,
-                    '-translate-y-full': currentIndex > index,
-                    'translate-y-full': currentIndex < index,
-                  }
-                )}
-              >
-                {role}
-              </span>
-            ))}
-          </span>
-        </h1>
+        <div className="flex items-center justify-center">
+            <h1 className="text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter text-foreground leading-none flex items-baseline">
+                <span>HI, I'M</span>
+                <div className="relative h-[1.2em] overflow-hidden ml-4 text-primary text-left">
+                    <div
+                        className="transition-transform duration-700 ease-in-out"
+                        style={{ transform: `translateY(-${currentIndex * 1.2}em)` }}
+                    >
+                        {roles.map((role, index) => (
+                            <div key={index} className="h-[1.2em] leading-none">
+                                {role}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </h1>
+        </div>
+
         <p className="max-w-3xl mx-auto text-xl md:text-2xl lg:text-3xl text-foreground/80 font-light tracking-wider leading-relaxed mt-12">
           A CREATIVE DEVELOPER & DESIGNER
           <br />

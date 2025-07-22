@@ -8,7 +8,7 @@ const roles = ["DEV", "A VIDEO EDITOR", "A WEB DEVELOPER", "A DESIGNER", "A PHOT
 
 export function HeroSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [currentWidth, setCurrentWidth] = useState(0);
+  const [containerWidth, setContainerWidth] = useState(0);
   const roleRefs = useRef<(HTMLSpanElement | null)[]>([]);
 
   useEffect(() => {
@@ -20,7 +20,7 @@ export function HeroSection() {
 
   useEffect(() => {
     if (roleRefs.current[currentIndex]) {
-      setCurrentWidth(roleRefs.current[currentIndex]!.offsetWidth);
+      setContainerWidth(roleRefs.current[currentIndex]!.offsetWidth);
     }
   }, [currentIndex]);
   
@@ -30,11 +30,11 @@ export function HeroSection() {
         className="flex items-baseline justify-center transition-all duration-500 ease-in-out"
       >
         <h1 className="text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter text-foreground whitespace-nowrap">
-          HI, I'M&nbsp;
+          HI, I'M{' '}
         </h1>
         <div 
           className="relative text-primary text-left transition-all duration-500 ease-in-out" 
-          style={{ width: currentWidth }}
+          style={{ width: containerWidth ? `${containerWidth}px` : 'auto' }}
         >
           <div
             className="h-[1.2em] overflow-hidden"

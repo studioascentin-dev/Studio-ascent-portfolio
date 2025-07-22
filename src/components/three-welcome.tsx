@@ -41,7 +41,7 @@ export function ThreeWelcome() {
     // Camera Body
     const bodyGeometry = new THREE.BoxGeometry(2.5, 1.5, 1);
     const bodyMaterial = new THREE.MeshStandardMaterial({
-        color: 0x333333,
+        color: 0xcccccc,
         metalness: 0.8,
         roughness: 0.4,
     });
@@ -92,7 +92,7 @@ export function ThreeWelcome() {
 
 
     // Lights
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 2);
     scene.add(ambientLight);
 
     const pointLight1 = new THREE.PointLight(0xffa500, 20, 100);

@@ -76,13 +76,15 @@ const Carousel = React.forwardRef<
       setCanScrollPrev(api.canScrollPrev())
       setCanScrollNext(api.canScrollNext())
       
-      api.slideNodes().forEach((node, index) => {
+      // This is the key change to correctly apply active class on scroll
+      const slides = api.slideNodes()
+      slides.forEach((slide, index) => {
         if (index === api.selectedScrollSnap()) {
-          node.classList.add('embla__slide--active');
+          slide.classList.add('embla__slide--active')
         } else {
-          node.classList.remove('embla__slide--active');
+          slide.classList.remove('embla__slide--active')
         }
-      });
+      })
     }, [])
 
     const scrollPrev = React.useCallback(() => {
@@ -122,16 +124,12 @@ const Carousel = React.forwardRef<
       onSelect(api)
       api.on("reInit", onSelect)
       api.on("select", onSelect)
-      
-      const onScroll = () => {
-          onSelect(api);
-      };
-      api.on("scroll", onScroll);
-
+      api.on("scroll", onSelect); // Use onSelect for scroll event as well
 
       return () => {
         api?.off("select", onSelect)
-        api?.off("scroll", onScroll)
+        api?.off("scroll", onSelect)
+        api?.off("reInit", onSelect)
       }
     }, [api, onSelect])
 

@@ -24,7 +24,7 @@ export function HeroSection() {
       <motion.h1 
         className="text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter text-foreground flex items-baseline justify-center whitespace-nowrap">
         <span>HI, I'M&nbsp;</span>
-        <div className="relative h-[1.2em] w-[8.5ch] overflow-hidden text-left text-primary">
+        <div className="relative h-[1.2em] w-[8.5ch] overflow-hidden text-primary">
           <AnimatePresence mode="wait">
             <motion.span
               key={index}

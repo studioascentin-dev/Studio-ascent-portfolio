@@ -7,11 +7,8 @@ export function useOnScreen(ref: RefObject<Element>, options?: IntersectionObser
 
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        setIntersecting(true);
-        // Disconnect observer once the element is visible to prevent re-triggering
-        observer.disconnect();
-      }
+      // Set state based on whether the element is intersecting or not.
+      setIntersecting(entry.isIntersecting);
     }, options);
 
     const currentRef = ref.current;

@@ -37,7 +37,7 @@ const services = [
 
 export function ServicesSection() {
   return (
-    <AnimatedSection id="services" className="bg-background">
+    <AnimatedSection id="services" className="bg-secondary/50">
       <div className="container px-4 md:px-6">
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
           <div className="space-y-2">
@@ -47,15 +47,15 @@ export function ServicesSection() {
             </p>
           </div>
         </div>
-        <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 py-12 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 py-12 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((service) => (
-            <Card key={service.title} className="flex flex-col items-center justify-center text-center p-6 border-2 border-transparent hover:border-primary hover:shadow-xl transition-all duration-300">
-              <CardHeader>
+            <Card key={service.title} className="group flex flex-col items-center justify-center text-center p-6 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 hover:bg-card/90">
+              <CardHeader className="transition-all duration-300 group-hover:scale-110">
                 {service.icon}
-                <CardTitle className="font-headline mt-4">{service.title}</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-muted-foreground">{service.description}</p>
+                <CardTitle className="font-headline mt-2 text-xl">{service.title}</CardTitle>
+                <p className="text-sm text-muted-foreground mt-2">{service.description}</p>
               </CardContent>
             </Card>
           ))}

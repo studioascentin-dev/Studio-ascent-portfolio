@@ -90,7 +90,7 @@ export function ServicesSection() {
   return (
     <section id="services" className="bg-background py-16 md:py-24 lg:py-32">
         <div className="container px-4 md:px-6">
-            <div className="mx-auto max-w-xl text-center mb-12">
+            <div className="mx-auto max-w-3xl text-center mb-12">
                 <motion.div
                     initial="hidden"
                     whileInView="visible"

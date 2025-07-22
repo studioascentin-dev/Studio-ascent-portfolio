@@ -112,7 +112,7 @@ const cardVariants = {
     }
 };
 
-const TWEEN_FACTOR = 2.5;
+const TWEEN_FACTOR = 1.2;
 
 const numberWithinRange = (number: number, min: number, max: number): number =>
   Math.min(Math.max(number, min), max);

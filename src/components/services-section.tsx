@@ -123,7 +123,7 @@ export function ServicesSection() {
                             <p className="text-muted-foreground text-lg">{service.description}</p>
                         </div>
                         
-                        <div className="mx-auto max-w-5xl">
+                        <div className="mx-auto max-w-5xl md:block hidden">
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                                 {service.projects.map((project, projectIndex) => (
                                     <motion.div
@@ -133,6 +133,38 @@ export function ServicesSection() {
                                         whileInView="visible"
                                         viewport={{ once: true, amount: 0.5 }}
                                         variants={cardVariants}
+                                    >
+                                        <Card className="overflow-hidden bg-card/80 backdrop-blur-sm group h-full flex flex-col">
+                                            <CardHeader className="p-0 relative">
+                                                <Image
+                                                    src={project.image}
+                                                    alt={project.name}
+                                                    width={600}
+                                                    height={400}
+                                                    className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
+                                                    data-ai-hint={project.dataAiHint}
+                                                />
+                                            </CardHeader>
+                                            <CardContent className="p-6 flex-grow">
+                                                <h4 className="font-headline text-xl">{project.name}</h4>
+                                            </CardContent>
+                                        </Card>
+                                    </motion.div>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div className="md:hidden -mx-4 overflow-x-auto">
+                            <div className="flex flex-nowrap gap-6 px-4">
+                                {service.projects.map((project, projectIndex) => (
+                                    <motion.div
+                                        key={project.name}
+                                        custom={projectIndex}
+                                        initial="hidden"
+                                        whileInView="visible"
+                                        viewport={{ once: true, amount: 0.5 }}
+                                        variants={cardVariants}
+                                        className="flex-shrink-0 w-4/5"
                                     >
                                         <Card className="overflow-hidden bg-card/80 backdrop-blur-sm group h-full flex flex-col">
                                             <CardHeader className="p-0 relative">

@@ -68,7 +68,7 @@ const cardVariants = {
 
 export function PricingSection() {
   return (
-    <AnimatedSection id="pricing" className="py-16 md:py-24">
+    <AnimatedSection id="pricing">
       <div className="container px-4 md:px-6">
         <div
           className="flex flex-col items-center justify-center space-y-4 text-center"

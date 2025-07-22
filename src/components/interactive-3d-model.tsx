@@ -17,7 +17,7 @@ export function Interactive3DModel() {
 
     // Camera
     const camera = new THREE.PerspectiveCamera(75, currentMount.clientWidth / currentMount.clientHeight, 0.1, 1000);
-    camera.position.z = 5;
+    camera.position.set(0, 1, 5);
 
     // Renderer
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -33,18 +33,51 @@ export function Interactive3DModel() {
     controls.enablePan = false;
     controls.autoRotate = true;
     controls.autoRotateSpeed = 0.5;
+    controls.target.set(0, 1, 0);
 
-    // Geometry & Material
-    const geometry = new THREE.TorusKnotGeometry(1.5, 0.4, 100, 16);
+    // Material
     const material = new THREE.MeshStandardMaterial({
         color: 0x9333ea,
         metalness: 0.8,
-        roughness: 0.1,
-        emissive: 0x9333ea,
-        emissiveIntensity: 0.1
+        roughness: 0.2,
     });
-    const torusKnot = new THREE.Mesh(geometry, material);
-    scene.add(torusKnot);
+    
+    // Human Model Group
+    const human = new THREE.Group();
+
+    // Head
+    const head = new THREE.Mesh(new THREE.SphereGeometry(0.5, 32, 32), material);
+    head.position.y = 2.5;
+
+    // Torso
+    const torso = new THREE.Mesh(new THREE.BoxGeometry(1, 1.5, 0.5), material);
+    torso.position.y = 1.25;
+
+    // Arms
+    const leftArm = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.1, 1.2), material);
+    leftArm.position.set(-0.75, 1.5, 0);
+    leftArm.rotation.z = Math.PI / 8;
+    
+    const rightArm = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.1, 1.2), material);
+    rightArm.position.set(0.75, 1.5, 0);
+    rightArm.rotation.z = -Math.PI / 8;
+    
+    // Legs
+    const leftLeg = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.15, 1.5), material);
+    leftLeg.position.set(-0.3, -0.25, 0);
+
+    const rightLeg = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.15, 1.5), material);
+    rightLeg.position.set(0.3, -0.25, 0);
+    
+    human.add(head);
+    human.add(torso);
+    human.add(leftArm);
+    human.add(rightArm);
+    human.add(leftLeg);
+    human.add(rightLeg);
+    
+    scene.add(human);
+
 
     // Lights
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
@@ -92,8 +125,10 @@ export function Interactive3DModel() {
       controls.autoRotate = !controls.manualStart;
       
       // Subtle mouse follow effect
-      torusKnot.rotation.y += (mouseX * 0.5 - torusKnot.rotation.y) * 0.02;
-      torusKnot.rotation.x += (mouseY * 0.5 - torusKnot.rotation.x) * 0.02;
+      human.rotation.y += (mouseX * 0.5 - human.rotation.y) * 0.02;
+      
+      // Make the model bob up and down
+      human.position.y = Math.sin(elapsedTime * 2) * 0.1;
 
       // Make the light pulse
       pointLight1.intensity = Math.sin(elapsedTime * 2) * 20 + 40;
@@ -113,7 +148,14 @@ export function Interactive3DModel() {
         currentMount.removeEventListener('mousemove', handleMouseMove);
         currentMount.removeChild(renderer.domElement);
       }
-      geometry.dispose();
+      // Dispose geometries
+      (head.geometry as THREE.SphereGeometry).dispose();
+      (torso.geometry as THREE.BoxGeometry).dispose();
+      (leftArm.geometry as THREE.CylinderGeometry).dispose();
+      (rightArm.geometry as THREE.CylinderGeometry).dispose();
+      (leftLeg.geometry as THREE.CylinderGeometry).dispose();
+      (rightLeg.geometry as THREE.CylinderGeometry).dispose();
+
       material.dispose();
       controls.dispose();
     };

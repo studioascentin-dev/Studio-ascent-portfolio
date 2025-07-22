@@ -23,18 +23,14 @@ export function HeroSection() {
         <h1 className="text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter text-foreground whitespace-nowrap">
           HI, I'M
         </h1>
-        <div className="relative text-primary ml-4 h-[1.2em] overflow-hidden">
+        <div className="ml-4 text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter text-primary whitespace-nowrap h-[1.2em] overflow-hidden">
             <div
               className="transition-transform duration-700 ease-in-out"
               style={{ transform: `translateY(-${currentIndex * 1.2}em)` }}
             >
               {roles.map((role, index) => (
                 <div key={index} className="h-[1.2em] leading-none">
-                  <span 
-                    className="text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter whitespace-nowrap"
-                  >
-                    {role}
-                  </span>
+                  {role}
                 </div>
               ))}
             </div>

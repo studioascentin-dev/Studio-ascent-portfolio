@@ -29,7 +29,7 @@ export function HeroSection() {
         <div className="flex flex-col items-center justify-center">
             <h1 className="text-6xl md:text-8xl lg:text-[7rem] font-extrabold font-headline tracking-tighter text-foreground leading-none flex items-center">
               <span>HI, I'M&nbsp;</span>
-              <span className="text-primary relative h-[1.2em] w-[15ch] overflow-hidden text-left">
+              <span className="text-primary relative h-[1.2em] w-[15ch] overflow-hidden text-right">
                 <span
                   className={cn(
                     "absolute inset-x-0 transition-transform duration-500 ease-in-out",

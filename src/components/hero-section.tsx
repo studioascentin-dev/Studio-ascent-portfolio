@@ -10,7 +10,7 @@ export function HeroSection() {
         <div className="flex flex-col gap-8 items-start">
           <div className="flex flex-col justify-center text-left">
             <h1 className="text-6xl md:text-8xl lg:text-9xl font-extrabold font-headline tracking-tighter text-foreground">
-              HI, I'M<br />DEV
+              HI, I'M DEV
             </h1>
             <p className="mt-4 max-w-md text-lg md:text-xl text-muted-foreground">
               A CREATIVE DEVELOPER & DESIGNER PASSIONATE ABOUT CRAFTING BOLD AND MEMORABLE PROJECTS

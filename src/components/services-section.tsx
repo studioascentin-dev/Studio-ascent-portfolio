@@ -112,7 +112,7 @@ const cardVariants = {
     }
 };
 
-const TWEEN_FACTOR = 4.2;
+const TWEEN_FACTOR = 2.5;
 
 const numberWithinRange = (number: number, min: number, max: number): number =>
   Math.min(Math.max(number, min), max);
@@ -179,7 +179,7 @@ const MobileCarousel = ({ projects }: { projects: typeof services[0]['projects']
                                     alt={project.name}
                                     width={600}
                                     height={400}
-                                    className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
+                                    className="w-full h-auto object-cover"
                                     data-ai-hint={project.dataAiHint}
                                 />
                             </CardHeader>

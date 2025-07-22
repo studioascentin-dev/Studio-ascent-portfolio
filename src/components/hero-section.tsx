@@ -17,11 +17,11 @@ export function HeroSection() {
               <br />
               MEMORABLE PROJECTS
             </p>
-        </div>
-        <div className="absolute bottom-0 left-0 right-0 pb-20">
-            <Button asChild className="font-bold text-lg py-6 px-12 bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-lg transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95">
-              <a href="#contact">About Me</a>
-            </Button>
+            <div className="mt-12">
+              <Button asChild className="font-bold text-lg py-6 px-12 bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-lg transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95">
+                <a href="#contact">About Me</a>
+              </Button>
+            </div>
         </div>
     </AnimatedSection>
   );

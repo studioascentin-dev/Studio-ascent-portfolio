@@ -6,9 +6,10 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import { cn } from '@/lib/utils';
 import * as React from 'react';
+import useEmblaCarousel from 'embla-carousel-react';
+import { EmblaCarouselType } from 'embla-carousel';
 
 const services = [
   {
@@ -111,6 +112,88 @@ const cardVariants = {
     }
 };
 
+const TWEEN_FACTOR = 4.2;
+
+const numberWithinRange = (number: number, min: number, max: number): number =>
+  Math.min(Math.max(number, min), max);
+
+const MobileCarousel = ({ projects }: { projects: typeof services[0]['projects'] }) => {
+    const [emblaRef, emblaApi] = useEmblaCarousel({
+        loop: true,
+        align: 'center',
+        skipSnaps: false,
+    });
+    const [tweenValues, setTweenValues] = React.useState<number[]>([]);
+
+    const onScroll = React.useCallback(() => {
+        if (!emblaApi) return;
+
+        const engine = emblaApi.internalEngine();
+        const scrollProgress = emblaApi.scrollProgress();
+
+        const styles = emblaApi.scrollSnapList().map((scrollSnap, index) => {
+            let diffToTarget = scrollSnap - scrollProgress;
+
+            if (engine.options.loop) {
+                engine.slideLooper.loopPoints.forEach((loopItem) => {
+                    const target = loopItem.target();
+                    if (index === loopItem.index && target !== 0) {
+                        const sign = Math.sign(target);
+                        if (sign === -1) diffToTarget = scrollSnap - (1 + scrollProgress);
+                        if (sign === 1) diffToTarget = scrollSnap + (1 - scrollProgress);
+                    }
+                });
+            }
+            const tweenValue = 1 - Math.abs(diffToTarget * TWEEN_FACTOR);
+            return numberWithinRange(tweenValue, 0, 1);
+        });
+        setTweenValues(styles);
+    }, [emblaApi, setTweenValues]);
+
+    React.useEffect(() => {
+        if (!emblaApi) return;
+        onScroll();
+        emblaApi.on('scroll', onScroll);
+        emblaApi.on('reInit', onScroll);
+    }, [emblaApi, onScroll]);
+
+    return (
+        <div className="overflow-hidden" ref={emblaRef}>
+            <div className="flex -ml-4">
+                {projects.map((project, index) => (
+                    <div
+                        key={project.name}
+                        className="flex-[0_0_80%] min-w-0 pl-4"
+                        style={{
+                            ...(tweenValues.length && {
+                                opacity: tweenValues[index],
+                                transform: `scale(${tweenValues[index]})`,
+                                filter: `blur(${ (1 - tweenValues[index]) * 8 }px)`,
+                                transition: 'opacity 0.3s ease, transform 0.3s ease, filter 0.3s ease',
+                            }),
+                        }}
+                    >
+                        <Card className="overflow-hidden bg-card/80 backdrop-blur-sm group h-full flex flex-col">
+                            <CardHeader className="p-0 relative">
+                                <Image
+                                    src={project.image}
+                                    alt={project.name}
+                                    width={600}
+                                    height={400}
+                                    className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
+                                    data-ai-hint={project.dataAiHint}
+                                />
+                            </CardHeader>
+                            <CardContent className="p-6 flex-grow">
+                                <h4 className="font-headline text-xl">{project.name}</h4>
+                            </CardContent>
+                        </Card>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+};
 
 export function ServicesSection() {
   return (
@@ -132,7 +215,7 @@ export function ServicesSection() {
             </motion.div>
             
             <div className="flex flex-col gap-24 md:gap-32">
-                {services.map((service, serviceIndex) => (
+                {services.map((service) => (
                     <motion.div 
                         key={service.title}
                         initial="hidden"
@@ -183,48 +266,7 @@ export function ServicesSection() {
                         </motion.div>
 
                         <div className="md:hidden">
-                            <style jsx>{`
-                                .embla__slide {
-                                    transition: opacity 0.3s ease-in-out, filter 0.3s ease-in-out, transform 0.3s ease-in-out;
-                                    filter: blur(4px);
-                                    opacity: 0.5;
-                                    transform: scale(0.9);
-                                }
-                                .embla__slide--active {
-                                    filter: blur(0px);
-                                    opacity: 1;
-                                    transform: scale(1);
-                                }
-                            `}</style>
-                            <Carousel
-                                opts={{
-                                align: 'center',
-                                loop: true,
-                                }}
-                                className="w-full"
-                            >
-                                <CarouselContent className="-ml-4">
-                                {service.projects.map((project) => (
-                                    <CarouselItem key={project.name} className="basis-4/5 pl-4">
-                                        <Card className="overflow-hidden bg-card/80 backdrop-blur-sm group h-full flex flex-col">
-                                            <CardHeader className="p-0 relative">
-                                                <Image
-                                                    src={project.image}
-                                                    alt={project.name}
-                                                    width={600}
-                                                    height={400}
-                                                    className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
-                                                    data-ai-hint={project.dataAiHint}
-                                                />
-                                            </CardHeader>
-                                            <CardContent className="p-6 flex-grow">
-                                                <h4 className="font-headline text-xl">{project.name}</h4>
-                                            </CardContent>
-                                        </Card>
-                                    </CarouselItem>
-                                ))}
-                                </CarouselContent>
-                            </Carousel>
+                            <MobileCarousel projects={service.projects} />
                         </div>
 
 
@@ -240,3 +282,5 @@ export function ServicesSection() {
     </section>
   );
 }
+
+    

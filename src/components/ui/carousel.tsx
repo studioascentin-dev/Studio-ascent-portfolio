@@ -75,15 +75,6 @@ const Carousel = React.forwardRef<
       }
       setCanScrollPrev(api.canScrollPrev())
       setCanScrollNext(api.canScrollNext())
-      
-      const slides = api.slideNodes()
-      slides.forEach((slide, index) => {
-        if (api.selectedScrollSnap() === index) {
-          slide.classList.add('embla__slide--active')
-        } else {
-          slide.classList.remove('embla__slide--active')
-        }
-      })
     }, [])
 
     const scrollPrev = React.useCallback(() => {
@@ -194,7 +185,7 @@ const CarouselItem = React.forwardRef<
       role="group"
       aria-roledescription="slide"
       className={cn(
-        "min-w-0 shrink-0 grow-0 basis-full embla__slide",
+        "min-w-0 shrink-0 grow-0 basis-full",
         orientation === "horizontal" ? "pl-4" : "pt-4",
         className
       )}
@@ -270,3 +261,5 @@ export {
   CarouselPrevious,
   CarouselNext,
 }
+
+    

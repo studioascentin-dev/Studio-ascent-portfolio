@@ -9,7 +9,7 @@ import { cn } from '@/lib/utils';
 import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip';
 
 const navItems = [
-  { href: '#hero', text: 'About', icon: Home, refKey: 'aboutRef' },
+  { href: '#hero-section', text: 'About', icon: Home, refKey: 'aboutRef' },
   { href: '#services', text: 'Services', icon: Users, refKey: 'servicesRef' },
   { href: '#pricing', text: 'Pricing', icon: Tag, refKey: 'pricingRef' },
   { href: '#hire-me', text: 'Hire Me', icon: Briefcase, refKey: 'hireMeRef' },
@@ -89,11 +89,13 @@ export function Header({ refs }: HeaderProps) {
     const isContactOnScreen = useOnScreen(refs.contactRef, observerOptions);
     
     React.useEffect(() => {
-      if (isAboutOnScreen) setActiveSection('aboutRef');
-      if (isServicesOnScreen) setActiveSection('servicesRef');
-      if (isPricingOnScreen) setActiveSection('pricingRef');
-      if (isHireMeOnScreen) setActiveSection('hireMeRef');
-      if (isContactOnScreen) setActiveSection('contactRef');
+        let currentSection = 'aboutRef';
+        if (isAboutOnScreen) currentSection = 'aboutRef';
+        if (isServicesOnScreen) currentSection = 'servicesRef';
+        if (isPricingOnScreen) currentSection = 'pricingRef';
+        if (isHireMeOnScreen) currentSection = 'hireMeRef';
+        if (isContactOnScreen) currentSection = 'contactRef';
+        setActiveSection(currentSection);
     }, [isAboutOnScreen, isServicesOnScreen, isPricingOnScreen, isHireMeOnScreen, isContactOnScreen]);
 
     return (

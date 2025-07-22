@@ -23,17 +23,17 @@ export default function Home() {
         <div id="hero-section" ref={aboutRef}>
             <HeroSection />
         </div>
-        <div ref={servicesRef}>
+        <div id="services" ref={servicesRef}>
             <ServicesSection />
         </div>
-        <div ref={pricingRef}>
+        <div id="pricing" ref={pricingRef}>
             <PricingSection />
         </div>
-        <div ref={hireMeRef}>
+        <div id="hire-me" ref={hireMeRef}>
             <HireMeSection />
         </div>
       </main>
-      <div ref={contactRef}>
+      <div id="contact" ref={contactRef}>
         <Footer />
       </div>
     </div>

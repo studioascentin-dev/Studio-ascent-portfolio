@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { AnimatedSection } from './animated-section';
 import { Button } from './ui/button';
 
-const roles = ["A DEVELOPER", "A VIDEO EDITOR", "A WEB DEVELOPER", "A DESIGNER", "A PHOTO EDITOR"];
+const roles = ["DEV KUMAR DAS", "A DEVELOPER", "A VIDEO EDITOR", "A WEB DEVELOPER", "A DESIGNER", "A PHOTO EDITOR"];
 
 export function HeroSection() {
   const [index, setIndex] = useState(0);

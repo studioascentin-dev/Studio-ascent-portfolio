@@ -85,3 +85,36 @@
     @apply w-full py-12 md:py-24 lg:py-32;
   }
 }
+
+@layer utilities {
+  @keyframes animated-gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .animated-gradient-border {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .animated-gradient-border::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    z-index: -1;
+    background: conic-gradient(from 180deg at 50% 50%, hsl(var(--primary)) 0%, hsl(var(--accent)) 50%, hsl(var(--primary)) 100%);
+    background-size: 200% 200%;
+    animation: animated-gradient 3s ease infinite;
+    border-radius: calc(var(--radius) + 2px);
+  }
+}

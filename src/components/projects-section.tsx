@@ -37,7 +37,7 @@ export function ProjectsSection({ suggestedProjects }: ProjectsSectionProps) {
           {projects.map((project) => {
             const isSuggested = hasSuggestions && suggestedProjects.some(suggestion => project.name.toLowerCase().includes(suggestion.toLowerCase()) || project.category.toLowerCase().includes(suggestion.toLowerCase()));
             return (
-              <Card key={project.name} className={cn("overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2", isSuggested && "ring-2 ring-accent ring-offset-4 ring-offset-background")}>
+              <Card key={project.name} className={cn("overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2", isSuggested && "ring-2 ring-accent ring-offset-4 ring-offset-background", "bg-card")}>
                 <CardHeader className="p-0 relative">
                   <Image
                     src={project.image}

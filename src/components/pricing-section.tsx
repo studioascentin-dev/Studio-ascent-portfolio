@@ -41,7 +41,7 @@ export function PricingSection() {
         </div>
         <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 py-12 md:grid-cols-3">
           {pricingTiers.map((tier) => (
-            <Card key={tier.name} className={`flex flex-col ${tier.isPopular ? 'border-primary border-2 shadow-2xl' : ''}`}>
+            <Card key={tier.name} className={`flex flex-col ${tier.isPopular ? 'border-primary border-2 shadow-2xl' : ''} bg-card`}>
               <CardHeader className="text-center">
                 {tier.isPopular && <div className="text-sm font-semibold text-primary uppercase">Most Popular</div>}
                 <CardTitle className="text-3xl font-headline mt-2">{tier.name}</CardTitle>

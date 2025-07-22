@@ -20,23 +20,23 @@ export function HeroSection() {
 
   return (
     <AnimatedSection id="hero" className="relative w-full h-screen flex flex-col items-center justify-center text-center p-4">
-      <div className="text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter text-foreground flex items-baseline justify-center whitespace-nowrap">
-        <span className="mr-4">HI, I'M</span>
-        <div className="relative h-[1.2em] w-[11ch] overflow-hidden text-left">
-          <AnimatePresence>
-            <motion.div
+      <h1 className="text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter text-foreground flex items-baseline justify-center whitespace-nowrap">
+        <span>HI, I'M&nbsp;</span>
+        <div className="relative h-[1.2em] overflow-hidden text-left text-primary">
+          <AnimatePresence mode="wait">
+            <motion.span
               key={index}
               initial={{ y: '100%' }}
               animate={{ y: '0%' }}
               exit={{ y: '-100%' }}
               transition={{ duration: 0.5, ease: 'easeInOut' }}
-              className="absolute inset-0 text-primary"
+              className="inline-block"
             >
               {roles[index]}
-            </motion.div>
+            </motion.span>
           </AnimatePresence>
         </div>
-      </div>
+      </h1>
 
       <p className="max-w-3xl mx-auto text-xl md:text-2xl lg:text-3xl text-foreground/80 font-light tracking-wider leading-relaxed mt-12">
         A CREATIVE DEVELOPER & DESIGNER

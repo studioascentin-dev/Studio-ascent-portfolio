@@ -61,28 +61,51 @@ const services = [
 ];
 
 const sectionVariants = {
-    hidden: { opacity: 0, y: 50 },
+    hidden: { opacity: 0 },
+    visible: { 
+        opacity: 1,
+        transition: {
+            duration: 0.3,
+            ease: "easeOut",
+            when: "beforeChildren",
+            staggerChildren: 0.2
+        }
+    }
+};
+
+const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
     visible: { 
         opacity: 1, 
         y: 0,
         transition: {
-            duration: 0.5,
+            duration: 0.4,
             ease: "easeOut"
         }
     }
 };
 
+const cardContainerVariants = {
+    hidden: {},
+    visible: {
+        transition: {
+            staggerChildren: 0.15,
+            delayChildren: 0.2,
+        }
+    }
+};
+
 const cardVariants = {
-    hidden: { opacity: 0, scale: 0.95 },
-    visible: (i: number) => ({
+    hidden: { opacity: 0, y: 40, scale: 0.98 },
+    visible: {
         opacity: 1,
+        y: 0,
         scale: 1,
         transition: {
-            delay: i * 0.1,
             duration: 0.4,
             ease: "easeOut"
         }
-    })
+    }
 };
 
 
@@ -98,10 +121,10 @@ export function ServicesSection() {
                 className="mb-12"
             >
                 <div className="max-w-3xl mx-auto text-center">
-                    <h2 className="text-3xl font-bold font-headline tracking-tighter sm:text-5xl">My Services</h2>
-                    <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed mt-4">
+                    <motion.h2 variants={itemVariants} className="text-3xl font-bold font-headline tracking-tighter sm:text-5xl">My Services</motion.h2>
+                    <motion.p variants={itemVariants} className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed mt-4">
                         A closer look at the digital services I provide to bring your vision to life.
-                    </p>
+                    </motion.p>
                 </div>
             </motion.div>
             
@@ -111,27 +134,29 @@ export function ServicesSection() {
                         key={service.title}
                         initial="hidden"
                         whileInView="visible"
-                        viewport={{ once: true, amount: 0.2 }}
+                        viewport={{ once: true, amount: 0.1 }}
                         variants={sectionVariants}
                         className="space-y-12"
                     >
-                        <div className="max-w-5xl space-y-8 mx-auto text-center">
+                        <motion.div variants={itemVariants} className="max-w-5xl space-y-8 mx-auto text-center">
                             <div className="inline-block p-3 bg-primary/10 rounded-full">
                                 {service.icon}
                             </div>
                             <h3 className="text-2xl md:text-3xl font-bold font-headline">{service.title}</h3>
                             <p className="text-muted-foreground text-lg">{service.description}</p>
-                        </div>
+                        </motion.div>
                         
-                        <div className="mx-auto max-w-5xl md:block hidden">
+                        <motion.div
+                          variants={cardContainerVariants}
+                          initial="hidden"
+                          whileInView="visible"
+                          viewport={{ once: true, amount: 0.2 }}
+                          className="mx-auto max-w-5xl md:block hidden"
+                        >
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                                 {service.projects.map((project, projectIndex) => (
                                     <motion.div
                                         key={project.name}
-                                        custom={projectIndex}
-                                        initial="hidden"
-                                        whileInView="visible"
-                                        viewport={{ once: true, amount: 0.5 }}
                                         variants={cardVariants}
                                     >
                                         <Card className="overflow-hidden bg-card/80 backdrop-blur-sm group h-full flex flex-col">
@@ -152,17 +177,19 @@ export function ServicesSection() {
                                     </motion.div>
                                 ))}
                             </div>
-                        </div>
+                        </motion.div>
 
-                        <div className="md:hidden -mx-4 overflow-x-auto">
+                        <motion.div
+                          variants={cardContainerVariants}
+                          initial="hidden"
+                          whileInView="visible"
+                          viewport={{ once: true, amount: 0.2 }}
+                          className="md:hidden -mx-4 overflow-x-auto"
+                        >
                             <div className="flex flex-nowrap gap-6 px-4">
                                 {service.projects.map((project, projectIndex) => (
                                     <motion.div
                                         key={project.name}
-                                        custom={projectIndex}
-                                        initial="hidden"
-                                        whileInView="visible"
-                                        viewport={{ once: true, amount: 0.5 }}
                                         variants={cardVariants}
                                         className="flex-shrink-0 w-4/5"
                                     >
@@ -184,13 +211,13 @@ export function ServicesSection() {
                                     </motion.div>
                                 ))}
                             </div>
-                        </div>
+                        </motion.div>
 
-                        <div className="text-center mt-12">
+                        <motion.div variants={itemVariants} className="text-center mt-12">
                             <Button size="lg" className="font-bold text-lg py-6 px-12 bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-lg transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95">
                                 View More
                             </Button>
-                        </div>
+                        </motion.div>
                     </motion.div>
                 ))}
             </div>

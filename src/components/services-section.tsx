@@ -169,7 +169,6 @@ const MobileCarousel = ({ projects }: { projects: typeof services[0]['projects']
                                 opacity: tweenValues[index],
                                 transform: `scale(${tweenValues[index]})`,
                                 filter: `blur(${ (1 - tweenValues[index]) * 8 }px)`,
-                                transition: 'opacity 0.3s ease, transform 0.3s ease, filter 0.3s ease',
                             }),
                         }}
                     >

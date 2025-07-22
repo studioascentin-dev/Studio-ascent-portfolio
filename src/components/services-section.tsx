@@ -97,7 +97,7 @@ export function ServicesSection() {
                 variants={sectionVariants}
                 className="mb-12"
             >
-                <div className="max-w-3xl text-right ml-auto">
+                <div className="max-w-3xl mx-auto text-center">
                     <h2 className="text-3xl font-bold font-headline tracking-tighter sm:text-5xl">My Services</h2>
                     <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed mt-4">
                         A closer look at the digital services I provide to bring your vision to life.
@@ -115,7 +115,7 @@ export function ServicesSection() {
                         variants={sectionVariants}
                         className="space-y-12"
                     >
-                        <div className="max-w-5xl space-y-8 text-right ml-auto">
+                        <div className="max-w-5xl space-y-8 mx-auto text-center">
                             <div className="inline-block p-3 bg-primary/10 rounded-full">
                                 {service.icon}
                             </div>

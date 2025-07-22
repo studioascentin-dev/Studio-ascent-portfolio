@@ -3,18 +3,15 @@
  * @fileOverview A Genkit flow for text-to-speech.
  *
  * - sayHi - A function that converts text to speech.
- * - SayHiOutput - The return type for the sayHi function.
  */
 
 import {ai} from '@/ai/genkit';
 import {googleAI} from '@genkit-ai/googleai';
 import {z} from 'genkit';
 import wav from 'wav';
+import type { SayHiOutput } from '@/ai/flows/types';
+import { SayHiOutputSchema } from '@/ai/flows/types';
 
-export const SayHiOutputSchema = z.object({
-  media: z.string().describe('The base64 encoded audio data URI.'),
-});
-export type SayHiOutput = z.infer<typeof SayHiOutputSchema>;
 
 async function toWav(
   pcmData: Buffer,

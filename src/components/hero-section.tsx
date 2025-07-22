@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect } from 'react';
@@ -20,7 +21,10 @@ export function HeroSection() {
 
   return (
     <AnimatedSection id="hero" className="relative w-full h-screen flex flex-col items-center justify-center text-center p-4">
-      <h1 className="text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter text-foreground flex items-baseline justify-center whitespace-nowrap">
+      <motion.h1 
+        layout
+        transition={{ type: 'spring', damping: 15, stiffness: 100 }}
+        className="text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter text-foreground flex items-baseline justify-center whitespace-nowrap">
         <span>HI, I'M&nbsp;</span>
         <div className="relative h-[1.2em] overflow-hidden text-left text-primary">
           <AnimatePresence mode="wait">
@@ -36,7 +40,7 @@ export function HeroSection() {
             </motion.span>
           </AnimatePresence>
         </div>
-      </h1>
+      </motion.h1>
 
       <p className="max-w-3xl mx-auto text-xl md:text-2xl lg:text-3xl text-foreground/80 font-light tracking-wider leading-relaxed mt-12">
         A CREATIVE DEVELOPER & DESIGNER

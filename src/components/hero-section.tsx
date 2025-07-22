@@ -21,9 +21,9 @@ export function HeroSection() {
   return (
     <AnimatedSection id="hero" className="relative w-full h-screen flex flex-col items-center justify-center text-center p-8 md:p-12 lg:p-16">
       <div className="flex flex-col items-center justify-center">
-        <h1 className="text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter text-foreground leading-none flex items-baseline">
-          <span>HI, I'M </span>
-          <span className="text-primary relative h-[1.2em] overflow-hidden text-right">
+        <h1 className="text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter text-foreground leading-none flex items-baseline justify-center">
+          <span>HI, I'M</span>
+          <span className="text-primary relative h-[1.2em] overflow-hidden ml-4">
             {roles.map((role, index) => (
               <span
                 key={index}

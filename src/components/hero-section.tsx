@@ -31,20 +31,19 @@ export function HeroSection() {
     <AnimatedSection id="hero" className="relative w-full h-screen flex flex-col items-center justify-center text-center p-8 md:p-12 lg:p-16">
       <div className="flex flex-col items-center justify-center">
         <div 
-          className="flex items-baseline justify-center transition-transform duration-500 ease-in-out"
-          style={{ transform: `translateX(calc(-50% + ${containerWidth / 2}px))` }}
+          className="flex items-baseline justify-center transition-all duration-500 ease-in-out"
         >
           <h1 className="text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter text-foreground whitespace-nowrap">
-            <span>HI, I'M&nbsp;</span>
+            HI, I'M&nbsp;
           </h1>
-          <div className="relative h-[1.2em] overflow-hidden text-primary text-left">
+          <div className="relative h-[1.2em] overflow-hidden text-primary text-left" style={{ width: containerWidth, transition: 'width 0.5s ease-in-out' }}>
             <div
-              className="transition-transform duration-700 ease-in-out"
+              className="transition-transform duration-700 ease-in-out absolute"
               style={{ transform: `translateY(-${currentIndex * 1.2}em)` }}
             >
               {roles.map((role, index) => (
                 <div key={index} className="h-[1.2em] leading-none">
-                  <span ref={(el) => (roleRefs.current[index] = el)} className="text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter">
+                  <span ref={(el) => (roleRefs.current[index] = el)} className="text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter whitespace-nowrap">
                     {role}
                   </span>
                 </div>

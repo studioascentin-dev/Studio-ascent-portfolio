@@ -1,10 +1,10 @@
 
 "use client";
 
-import { useState, useRef, RefObject } from 'react';
+import { useState, useRef } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { User, MapPin, BookOpen, Code, Target, Heart, ChevronDown, KeyRound } from 'lucide-react';
-import { motion, AnimatePresence, useDragControls } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
 const aboutDetails = [
@@ -19,7 +19,6 @@ const aboutDetails = [
 export function AboutSection() {
     const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
     const [unlockedIndices, setUnlockedIndices] = useState<Set<number>>(new Set());
-    const dragControls = useDragControls();
     const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
     const handleDrop = (index: number) => {
@@ -51,8 +50,6 @@ export function AboutSection() {
                     <div className="text-center relative">
                          <motion.div 
                             drag 
-                            dragControls={dragControls}
-                            dragSnapToOrigin={true}
                             onDragEnd={(_event, info) => {
                                 const { point } = info;
                                 cardRefs.current.forEach((cardRef, index) => {
@@ -77,13 +74,15 @@ export function AboutSection() {
                         <motion.h2 
                             variants={textVariants}
                             initial="hidden"
-                            animate="visible"
+                            whileInView="visible"
+                            viewport={{ once: true }}
                             transition={{ duration: 0.5 }}
                             className="text-3xl font-bold font-headline tracking-tighter sm:text-4xl md:text-5xl">About Me</motion.h2>
                         <motion.p 
                             variants={textVariants}
                             initial="hidden"
-                            animate="visible"
+                            whileInView="visible"
+                            viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: 0.2 }}
                             className="mt-4 text-muted-foreground md:text-xl max-w-2xl mx-auto">Drag the key to unlock each section and learn more about me.</motion.p>
                     </div>
@@ -96,6 +95,7 @@ export function AboutSection() {
                             return (
                                 <div
                                     key={detail.title}
+                                    ref={el => cardRefs.current[index] = el}
                                     className={cn(
                                         "relative flex items-center mb-12",
                                         index % 2 === 0 ? "justify-start" : "justify-end"
@@ -104,7 +104,6 @@ export function AboutSection() {
                                     <div className={cn("absolute left-1/2 w-4 h-4 bg-primary rounded-full -translate-x-1/2 border-4 border-background")}></div>
                                     
                                     <motion.div 
-                                        ref={el => cardRefs.current[index] = el}
                                         className={cn("w-5/12", index % 2 === 0 ? "pr-8" : "pl-8")}
                                         initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
                                         whileInView={{ opacity: 1, x: 0 }}

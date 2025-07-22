@@ -54,11 +54,6 @@ export function Interactive3DModel() {
         
         // Add the loaded model to the scene
         scene.add(model);
-
-        // If your model has eyes you want to control, you'd find them like this:
-        // const leftEye = model.getObjectByName('LeftEyeObjectName');
-        // const rightEye = model.getObjectByName('RightEyeObjectName');
-        // You would then use these references in the animation loop below.
       },
       undefined, // Optional: onProgress callback
       (error) => {
@@ -66,49 +61,29 @@ export function Interactive3DModel() {
       }
     );
     */
-    // 4. Comment out or remove the "Procedural Face" section below.
+    // 4. Comment out or remove the "Icosahedron" section below.
     // #endregion
 
     
-    // #region --- Procedural Face (Current Implementation) ---
-    // Material
-    const headMaterial = new THREE.MeshStandardMaterial({
-        color: 0x9333ea, // primary color
+    // #region --- Icosahedron (Current Implementation) ---
+    const icoGeometry = new THREE.IcosahedronGeometry(1.5, 0);
+    const icoMaterial = new THREE.MeshStandardMaterial({
+        color: 0xf2691d, // primary color
         metalness: 0.7,
         roughness: 0.3,
     });
-    const eyeMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
-    const pupilMaterial = new THREE.MeshBasicMaterial({ color: 0x0a0a0a });
+    const icosahedron = new THREE.Mesh(icoGeometry, icoMaterial);
+    scene.add(icosahedron);
     
-    // Face Group
-    const face = new THREE.Group();
-
-    // Head
-    const head = new THREE.Mesh(new THREE.SphereGeometry(1.5, 64, 64), headMaterial);
-    face.add(head);
-
-    // Eyes
-    const eyeGroup = new THREE.Group();
-    const eyeRadius = 0.4;
-    const pupilRadius = 0.2;
-
-    const leftEye = new THREE.Mesh(new THREE.SphereGeometry(eyeRadius, 32, 32), eyeMaterial);
-    leftEye.position.set(-0.6, 0.2, 1.2);
-    const leftPupil = new THREE.Mesh(new THREE.SphereGeometry(pupilRadius, 32, 32), pupilMaterial);
-    leftPupil.position.z = eyeRadius;
-    leftEye.add(leftPupil);
-    
-    const rightEye = new THREE.Mesh(new THREE.SphereGeometry(eyeRadius, 32, 32), eyeMaterial);
-    rightEye.position.set(0.6, 0.2, 1.2);
-    const rightPupil = new THREE.Mesh(new THREE.SphereGeometry(pupilRadius, 32, 32), pupilMaterial);
-    rightPupil.position.z = eyeRadius;
-    rightEye.add(rightPupil);
-
-    eyeGroup.add(leftEye);
-    eyeGroup.add(rightEye);
-    face.add(eyeGroup);
-    
-    scene.add(face);
+    const wireframeMaterial = new THREE.MeshStandardMaterial({
+        color: 0xffffff,
+        wireframe: true,
+        transparent: true,
+        opacity: 0.1
+    });
+    const wireframe = new THREE.Mesh(icoGeometry, wireframeMaterial);
+    wireframe.scale.set(1.001, 1.001, 1.001);
+    scene.add(wireframe);
     // #endregion
 
 
@@ -116,7 +91,7 @@ export function Interactive3DModel() {
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
     scene.add(ambientLight);
 
-    const pointLight1 = new THREE.PointLight(0x9333ea, 50, 100);
+    const pointLight1 = new THREE.PointLight(0xf2691d, 50, 100);
     pointLight1.position.set(5, 5, 5);
     scene.add(pointLight1);
     
@@ -127,16 +102,6 @@ export function Interactive3DModel() {
     const pointLight3 = new THREE.PointLight(0x3b82f6, 30, 100);
     pointLight3.position.set(0, 5, -5);
     scene.add(pointLight3);
-
-    // Mouse interaction
-    let mouseX = 0;
-    let mouseY = 0;
-    const handleMouseMove = (event: MouseEvent) => {
-        const { left, top, width, height } = currentMount.getBoundingClientRect();
-        mouseX = ((event.clientX - left) / width) * 2 - 1;
-        mouseY = -((event.clientY - top) / height) * 2 + 1;
-    };
-    currentMount.addEventListener('mousemove', handleMouseMove);
 
 
     // Handle resize
@@ -156,17 +121,6 @@ export function Interactive3DModel() {
       
       controls.autoRotate = !controls.manualStart;
       
-      // This part controls the face and eye movement.
-      // If you load your own model, you would apply these rotations to it.
-      face.rotation.y += (mouseX * 0.3 - face.rotation.y) * 0.05;
-      face.rotation.x += (-mouseY * 0.3 - face.rotation.x) * 0.05;
-
-      // To move the eyes of your custom model, you would need to get a reference
-      // to them after loading (see the loader section above).
-      leftEye.rotation.y = rightEye.rotation.y = mouseX * 0.5;
-      leftEye.rotation.x = rightEye.rotation.x = -mouseY * 0.5;
-
-
       // Make the light pulse
       pointLight1.intensity = Math.sin(elapsedTime * 1.5) * 20 + 40;
       pointLight2.intensity = Math.cos(elapsedTime * 2) * 20 + 40;
@@ -182,19 +136,14 @@ export function Interactive3DModel() {
     return () => {
       window.removeEventListener('resize', handleResize);
       if(currentMount) {
-        currentMount.removeEventListener('mousemove', handleMouseMove);
         currentMount.removeChild(renderer.domElement);
       }
       // Dispose geometries
-      (head.geometry as THREE.SphereGeometry).dispose();
-      (leftEye.geometry as THREE.SphereGeometry).dispose();
-      (rightEye.geometry as THREE.SphereGeometry).dispose();
-      (leftPupil.geometry as THREE.SphereGeometry).dispose();
-      (rightPupil.geometry as THREE.SphereGeometry).dispose();
+      icoGeometry.dispose();
 
-      headMaterial.dispose();
-      eyeMaterial.dispose();
-      pupilMaterial.dispose();
+      // Dispose materials
+      icoMaterial.dispose();
+      wireframeMaterial.dispose();
       controls.dispose();
     };
   }, []);

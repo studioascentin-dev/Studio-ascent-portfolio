@@ -53,7 +53,6 @@ export function AboutSection() {
                          <motion.div 
                             drag 
                             dragControls={dragControls}
-                            dragConstraints={constraintsRef}
                             dragElastic={0.2}
                             dragSnapToOrigin
                             onDragEnd={(_event, info) => {

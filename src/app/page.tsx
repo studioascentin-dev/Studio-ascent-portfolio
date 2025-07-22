@@ -3,6 +3,7 @@
 import { Header } from '@/components/header';
 import { HeroSection } from '@/components/hero-section';
 import { ServicesSection } from '@/components/services-section';
+import { PricingSection } from '@/components/pricing-section';
 import { Footer } from '@/components/footer';
 
 export default function Home() {
@@ -12,6 +13,7 @@ export default function Home() {
       <main className="flex-1">
         <HeroSection />
         <ServicesSection />
+        <PricingSection />
       </main>
       <Footer />
     </div>

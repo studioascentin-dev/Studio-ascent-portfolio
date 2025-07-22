@@ -1,36 +1,24 @@
 "use client";
 
-import { useState, useEffect } from 'react';
 import { AnimatedSection } from './animated-section';
 import { Button } from './ui/button';
 
 const roles = ["DEV", "A VIDEO EDITOR", "A WEB DEVELOPER", "A DESIGNER", "A PHOTO EDITOR"];
+const extendedRoles = [...roles, roles[0]]; // Add the first role to the end for a seamless loop
 
 export function HeroSection() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % roles.length);
-    }, 2500);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <AnimatedSection id="hero" className="relative w-full h-screen flex flex-col items-center justify-center text-center p-4">
-      <div className="text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter text-foreground whitespace-nowrap">
-        <span>HI, I'M </span>
+      <div className="text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter text-foreground flex items-baseline justify-center whitespace-nowrap">
+        <span className="mr-4">HI, I'M</span>
         <div className="inline-grid align-top text-primary h-[1.2em] overflow-hidden">
-          <div
-            className="transition-transform duration-500 ease-in-out"
-            style={{ transform: `translateY(-${currentIndex * 1.2}em)` }}
-          >
-            {roles.map((role, index) => (
-              <div key={index} className="h-[1.2em]">
+          <ul className="animate-scroll-up">
+            {extendedRoles.map((role, index) => (
+              <li key={index} className="h-[1.2em] leading-[1.2em]">
                 {role}
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </div>
 

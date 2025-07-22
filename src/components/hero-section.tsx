@@ -9,7 +9,7 @@ export function HeroSection() {
       <div className="container px-4 md:px-6 z-10">
         <div className="flex flex-col gap-8 items-start">
           <div className="flex flex-col justify-center text-left">
-            <h1 className="text-6xl md:text-8xl lg:text-9xl font-extrabold font-headline tracking-tighter text-foreground">
+            <h1 className="text-8xl md:text-[12rem] lg:text-[14rem] font-extrabold font-headline tracking-tighter leading-none text-foreground">
               HI, I'M DEV
             </h1>
             <p className="mt-4 max-w-md text-lg md:text-xl text-muted-foreground">

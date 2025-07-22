@@ -72,7 +72,7 @@ export function AboutSection() {
                                 <div className={cn("absolute left-1/2 w-4 h-4 bg-primary rounded-full -translate-x-1/2 border-4 border-background")}></div>
                                 
                                 <motion.div 
-                                    className={cn("w-5/12", index % 2 === 0 ? "pr-8" : "pl-8")}
+                                    className={cn("w-[48%]", index % 2 === 0 ? "pr-8" : "pl-8")}
                                     initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
                                     whileInView={{ opacity: 1, x: 0 }}
                                     viewport={{ once: true, amount: 0.5 }}

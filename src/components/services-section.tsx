@@ -115,12 +115,12 @@ export function ServicesSection() {
                         variants={sectionVariants}
                         className="space-y-12"
                     >
-                        <div className="text-center md:text-left space-y-4">
+                        <div className="text-center space-y-4">
                             <div className="inline-block p-3 bg-primary/10 rounded-full">
                                 {service.icon}
                             </div>
                             <h3 className="text-2xl md:text-3xl font-bold font-headline">{service.title}</h3>
-                            <p className="text-muted-foreground text-lg max-w-3xl mx-auto md:mx-0">{service.description}</p>
+                            <p className="text-muted-foreground text-lg max-w-3xl mx-auto">{service.description}</p>
                         </div>
                         
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">

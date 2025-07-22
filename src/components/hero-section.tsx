@@ -18,11 +18,11 @@ export function HeroSection() {
 
   return (
     <AnimatedSection id="hero" className="relative w-full h-screen flex flex-col items-center justify-center text-center p-4">
-      <div className="flex items-baseline justify-center">
-        <h1 className="text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter text-foreground whitespace-nowrap">
+      <div className="flex items-baseline justify-center whitespace-nowrap">
+        <h1 className="text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter text-foreground">
           HI, I'M&nbsp;
         </h1>
-        <div className="text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter text-primary">
+        <div className="relative text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter text-primary">
           <div className="h-[1.2em] overflow-hidden">
             <div
               className="transition-transform duration-700 ease-in-out"

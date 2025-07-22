@@ -64,7 +64,7 @@ export function AboutSection() {
                             <div
                                 key={detail.title}
                                 className={cn(
-                                    "relative flex items-center mb-12",
+                                    "relative flex items-center mb-24",
                                     index % 2 === 0 ? "justify-start" : "justify-end"
                                 )}
                             >

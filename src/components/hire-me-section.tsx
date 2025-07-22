@@ -91,15 +91,20 @@ export function HireMeSection() {
             className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"
         >
           {reasons.map((reason) => (
-            <motion.div key={reason.title} variants={itemVariants}>
-              <Card className="bg-card/80 backdrop-blur-sm h-full shadow-lg hover:shadow-primary/20 transition-shadow duration-300">
+            <motion.div 
+              key={reason.title} 
+              variants={itemVariants}
+              whileHover={{ scale: 1.05, y: -5 }}
+              transition={{ type: 'spring', stiffness: 300 }}
+            >
+              <Card className="bg-card/80 backdrop-blur-sm h-full shadow-lg hover:shadow-primary/20 transition-shadow duration-300 flex flex-col">
                 <CardHeader>
                   <div className="flex items-center gap-4">
                     {reason.icon}
                     <CardTitle className="text-2xl font-headline">{reason.title}</CardTitle>
                   </div>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="flex-grow">
                   <p className="text-muted-foreground">{reason.description}</p>
                 </CardContent>
               </Card>

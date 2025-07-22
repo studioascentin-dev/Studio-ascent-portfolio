@@ -33,13 +33,28 @@ export function AboutSection() {
         }
     };
 
+    const textVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0 },
+    };
+
     return (
         <AnimatedSection id="about-me" className="py-16 md:py-24 lg:py-32">
             <div className="container mx-auto px-4 md:px-6">
                 <div className="space-y-8">
                     <div className="text-center">
-                        <h2 className="text-3xl font-bold font-headline tracking-tighter sm:text-4xl md:text-5xl">About Me</h2>
-                        <p className="mt-4 text-muted-foreground md:text-xl max-w-2xl mx-auto">A little bit about my journey and passions.</p>
+                        <motion.h2 
+                            variants={textVariants}
+                            initial="hidden"
+                            animate="visible"
+                            transition={{ duration: 0.5 }}
+                            className="text-3xl font-bold font-headline tracking-tighter sm:text-4xl md:text-5xl">About Me</motion.h2>
+                        <motion.p 
+                            variants={textVariants}
+                            initial="hidden"
+                            animate="visible"
+                            transition={{ duration: 0.5, delay: 0.2 }}
+                            className="mt-4 text-muted-foreground md:text-xl max-w-2xl mx-auto">A little bit about my journey and passions.</motion.p>
                     </div>
 
                     <div className="relative max-w-2xl mx-auto">

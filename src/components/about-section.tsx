@@ -1,9 +1,9 @@
 
 "use client";
 
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { User, MapPin, BookOpen, Code, Target, Heart, ChevronDown, KeyRound } from 'lucide-react';
+import { User, MapPin, BookOpen, Code, Target, Heart, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
@@ -18,12 +18,6 @@ const aboutDetails = [
 
 export function AboutSection() {
     const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
-    const [unlockedIndices, setUnlockedIndices] = useState<Set<number>>(new Set());
-    const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
-
-    const handleDrop = (index: number) => {
-        setUnlockedIndices(prev => new Set(prev).add(index));
-    };
 
     const textVariants = {
         hidden: { opacity: 0, y: 20 },
@@ -47,30 +41,7 @@ export function AboutSection() {
         <section id="about-me" className="py-16 md:py-24 lg:py-32 overflow-hidden">
             <div className="container mx-auto px-4 md:px-6">
                 <div className="space-y-8">
-                    <div className="text-center relative">
-                         <motion.div 
-                            drag 
-                            onDragEnd={(_event, info) => {
-                                const { point } = info;
-                                cardRefs.current.forEach((cardRef, index) => {
-                                    if (cardRef) {
-                                        const rect = cardRef.getBoundingClientRect();
-                                        if (
-                                            point.x >= rect.left &&
-                                            point.x <= rect.right &&
-                                            point.y >= rect.top &&
-                                            point.y <= rect.bottom
-                                        ) {
-                                            handleDrop(index);
-                                        }
-                                    }
-                                });
-                            }}
-                            whileDrag={{ scale: 1.2, rotate: -15, zIndex: 100 }}
-                            className="absolute top-1/2 -translate-y-1/2 right-0 md:right-24 lg:right-48 cursor-grab z-50"
-                         >
-                             <KeyRound className="h-10 w-10 text-primary-foreground/50 hover:text-primary-foreground transition-colors" />
-                         </motion.div>
+                    <div className="text-center">
                         <motion.h2 
                             variants={textVariants}
                             initial="hidden"
@@ -84,79 +55,68 @@ export function AboutSection() {
                             whileInView="visible"
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: 0.2 }}
-                            className="mt-4 text-muted-foreground md:text-xl max-w-2xl mx-auto">Drag the key to unlock each section and learn more about me.</motion.p>
+                            className="mt-4 text-muted-foreground md:text-xl max-w-2xl mx-auto">A little more about my journey, skills, and passions.</motion.p>
                     </div>
 
                     <div className="relative max-w-2xl mx-auto">
                         <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-border -translate-x-1/2"></div>
                         
-                        {aboutDetails.map((detail, index) => {
-                             const isUnlocked = unlockedIndices.has(index);
-                            return (
-                                <div
-                                    key={detail.title}
-                                    ref={el => cardRefs.current[index] = el}
-                                    className={cn(
-                                        "relative flex items-center mb-12",
-                                        index % 2 === 0 ? "justify-start" : "justify-end"
-                                    )}
+                        {aboutDetails.map((detail, index) => (
+                            <div
+                                key={detail.title}
+                                className={cn(
+                                    "relative flex items-center mb-12",
+                                    index % 2 === 0 ? "justify-start" : "justify-end"
+                                )}
+                            >
+                                <div className={cn("absolute left-1/2 w-4 h-4 bg-primary rounded-full -translate-x-1/2 border-4 border-background")}></div>
+                                
+                                <motion.div 
+                                    className={cn("w-5/12", index % 2 === 0 ? "pr-8" : "pl-8")}
+                                    initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true, amount: 0.5 }}
+                                    transition={{ duration: 0.5 }}
                                 >
-                                    <div className={cn("absolute left-1/2 w-4 h-4 bg-primary rounded-full -translate-x-1/2 border-4 border-background")}></div>
-                                    
-                                    <motion.div 
-                                        className={cn("w-5/12", index % 2 === 0 ? "pr-8" : "pl-8")}
-                                        initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                                        whileInView={{ opacity: 1, x: 0 }}
-                                        viewport={{ once: true, amount: 0.5 }}
-                                        transition={{ duration: 0.5 }}
-                                        animate={{
-                                            filter: isUnlocked ? 'blur(0px)' : 'blur(4px)',
-                                            scale: isUnlocked ? 1 : 0.95,
-                                        }}
+                                    <Card
+                                        className={cn(
+                                            "bg-card/80 backdrop-blur-sm shadow-lg transition-all duration-300 w-full cursor-pointer hover:shadow-primary/20",
+                                            { "ring-2 ring-primary": expandedIndex === index }
+                                        )}
+                                        onClick={() => setExpandedIndex(expandedIndex === index ? null : index)}
                                     >
-                                        <Card
-                                            className={cn(
-                                                "bg-card/80 backdrop-blur-sm shadow-lg transition-all duration-300 w-full",
-                                                { "cursor-pointer hover:shadow-primary/20": isUnlocked },
-                                                { "ring-2 ring-primary": expandedIndex === index }
-                                            )}
-                                            onClick={() => isUnlocked && setExpandedIndex(expandedIndex === index ? null : index)}
-                                        >
-                                            <CardHeader className="flex flex-row items-center justify-between gap-4 pb-2">
-                                                <div className="flex flex-col items-start gap-2">
-                                                    {detail.icon}
-                                                    <CardTitle className="text-xl font-headline">{detail.title}</CardTitle>
-                                                </div>
-                                                {isUnlocked && (
+                                        <CardHeader className="flex flex-row items-center justify-between gap-4 pb-2">
+                                            <div className="flex flex-col items-start gap-2">
+                                                {detail.icon}
+                                                <CardTitle className="text-xl font-headline">{detail.title}</CardTitle>
+                                            </div>
+                                            <motion.div
+                                                animate={{ rotate: expandedIndex === index ? 180 : 0 }}
+                                                transition={{ duration: 0.3 }}
+                                            >
+                                                <ChevronDown className="h-5 w-5 text-muted-foreground" />
+                                            </motion.div>
+                                        </CardHeader>
+                                        <CardContent>
+                                            <motion.p layout className="text-muted-foreground">{detail.value}</motion.p>
+                                            <AnimatePresence>
+                                                {expandedIndex === index && (
                                                     <motion.div
-                                                        animate={{ rotate: expandedIndex === index ? 180 : 0 }}
-                                                        transition={{ duration: 0.3 }}
+                                                        variants={contentVariants}
+                                                        initial="hidden"
+                                                        animate="visible"
+                                                        exit="hidden"
+                                                        className="overflow-hidden"
                                                     >
-                                                        <ChevronDown className="h-5 w-5 text-muted-foreground" />
+                                                        <p className="pt-4 text-muted-foreground/80">{detail.details}</p>
                                                     </motion.div>
                                                 )}
-                                            </CardHeader>
-                                            <CardContent>
-                                                <motion.p layout className="text-muted-foreground">{detail.value}</motion.p>
-                                                <AnimatePresence>
-                                                    {expandedIndex === index && isUnlocked && (
-                                                        <motion.div
-                                                            variants={contentVariants}
-                                                            initial="hidden"
-                                                            animate="visible"
-                                                            exit="hidden"
-                                                            className="overflow-hidden"
-                                                        >
-                                                            <p className="pt-4 text-muted-foreground/80">{detail.details}</p>
-                                                        </motion.div>
-                                                    )}
-                                                </AnimatePresence>
-                                            </CardContent>
-                                        </Card>
-                                    </motion.div>
-                                </div>
-                            )
-                        })}
+                                            </AnimatePresence>
+                                        </CardContent>
+                                    </Card>
+                                </motion.div>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>

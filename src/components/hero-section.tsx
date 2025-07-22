@@ -1,36 +1,29 @@
 "use client";
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { AnimatedSection } from './animated-section';
 import { Button } from './ui/button';
+import { cn } from '@/lib/utils';
 
 const roles = ["DEV", "A VIDEO EDITOR", "A WEB DEVELOPER", "A DESIGNER", "A PHOTO EDITOR"];
 
 export function HeroSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const roleRefs = useRef<(HTMLSpanElement | null)[]>([]);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % roles.length);
-    }, 2500);
+    }, 2500); // Change role every 2.5 seconds
     return () => clearInterval(interval);
   }, []);
   
   return (
-    <AnimatedSection id="hero" className="relative w-full h-screen flex flex-col items-center justify-center text-center p-8 md:p-12 lg:p-16">
-      <div 
-        ref={containerRef}
-        className="flex items-baseline justify-center transition-all duration-500 ease-in-out"
-      >
+    <AnimatedSection id="hero" className="relative w-full h-screen flex flex-col items-center justify-center text-center p-4">
+      <div className="flex items-baseline justify-center">
         <h1 className="text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter text-foreground whitespace-nowrap">
           HI, I'M
         </h1>
-        <div className="relative text-primary text-left ml-4">
-          <div
-            className="h-[1.2em] overflow-hidden"
-          >
+        <div className="relative text-primary ml-4 h-[1.2em] overflow-hidden">
             <div
               className="transition-transform duration-700 ease-in-out"
               style={{ transform: `translateY(-${currentIndex * 1.2}em)` }}
@@ -38,7 +31,6 @@ export function HeroSection() {
               {roles.map((role, index) => (
                 <div key={index} className="h-[1.2em] leading-none">
                   <span 
-                    ref={(el) => (roleRefs.current[index] = el)} 
                     className="text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter whitespace-nowrap"
                   >
                     {role}
@@ -46,7 +38,6 @@ export function HeroSection() {
                 </div>
               ))}
             </div>
-          </div>
         </div>
       </div>
 

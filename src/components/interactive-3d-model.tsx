@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
-export function ThreeWelcome() {
+export function Interactive3DModel() {
   const mountRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -28,48 +28,57 @@ export function ThreeWelcome() {
     // Controls
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
     controls.enableZoom = false;
     controls.enablePan = false;
     controls.autoRotate = true;
-    controls.autoRotateSpeed = 0.5;
-
+    controls.autoRotateSpeed = 1.0;
 
     // Geometry & Material
-    const icoGeometry = new THREE.IcosahedronGeometry(1.5, 0);
+    const icoGeometry = new THREE.IcosahedronGeometry(2, 1);
     const icoMaterial = new THREE.MeshStandardMaterial({
-        color: 0x6a0dad, 
-        metalness: 0.6,
-        roughness: 0.3,
+        color: 0x9333ea, // purple-600
+        metalness: 0.7,
+        roughness: 0.2,
     });
     const icosahedron = new THREE.Mesh(icoGeometry, icoMaterial);
     scene.add(icosahedron);
-    
+
     const wireframeMaterial = new THREE.MeshStandardMaterial({
-        color: 0xffffff,
+        color: 0xe879f9, // fuchsia-400
         wireframe: true,
         transparent: true,
-        opacity: 0.1
+        opacity: 0.2
     });
     const wireframe = new THREE.Mesh(icoGeometry, wireframeMaterial);
     wireframe.scale.set(1.001, 1.001, 1.001);
     scene.add(wireframe);
 
-
     // Lights
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
     scene.add(ambientLight);
 
-    const pointLight1 = new THREE.PointLight(0x8A2BE2, 20, 100);
+    const pointLight1 = new THREE.PointLight(0x9333ea, 30, 100);
     pointLight1.position.set(5, 5, 5);
     scene.add(pointLight1);
     
-    const pointLight2 = new THREE.PointLight(0xFF1493, 20, 100);
+    const pointLight2 = new THREE.PointLight(0xdb2777, 30, 100);
     pointLight2.position.set(-5, -5, -5);
     scene.add(pointLight2);
     
-    const pointLight3 = new THREE.PointLight(0x4169E1, 10, 100);
+    const pointLight3 = new THREE.PointLight(0x3b82f6, 15, 100);
     pointLight3.position.set(0, 5, -5);
     scene.add(pointLight3);
+
+    // Mouse interaction
+    let mouseX = 0;
+    let mouseY = 0;
+    const handleMouseMove = (event: MouseEvent) => {
+        const { left, top, width, height } = currentMount.getBoundingClientRect();
+        mouseX = ((event.clientX - left) / width) * 2 - 1;
+        mouseY = -((event.clientY - top) / height) * 2 + 1;
+    };
+    currentMount.addEventListener('mousemove', handleMouseMove);
 
 
     // Handle resize
@@ -85,6 +94,13 @@ export function ThreeWelcome() {
 
     // Animation loop
     const animate = () => {
+      // Slow down auto-rotation when user is interacting
+      controls.autoRotate = !controls.manualStart;
+      
+      // Subtle mouse follow effect
+      icosahedron.rotation.y += (mouseX * 0.5 - icosahedron.rotation.y) * 0.02;
+      icosahedron.rotation.x += (mouseY * 0.5 - icosahedron.rotation.x) * 0.02;
+
       controls.update();
       renderer.render(scene, camera);
       requestAnimationFrame(animate);
@@ -95,7 +111,8 @@ export function ThreeWelcome() {
     // Cleanup
     return () => {
       window.removeEventListener('resize', handleResize);
-      if(currentMount && renderer.domElement) {
+      if(currentMount) {
+        currentMount.removeEventListener('mousemove', handleMouseMove);
         currentMount.removeChild(renderer.domElement);
       }
       // Dispose of Three.js objects
@@ -106,5 +123,5 @@ export function ThreeWelcome() {
     };
   }, []);
 
-  return <div ref={mountRef} className="absolute inset-0 z-10" />;
+  return <div ref={mountRef} className="absolute inset-0 w-full h-full" />;
 }

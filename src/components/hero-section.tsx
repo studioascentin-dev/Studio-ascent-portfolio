@@ -1,8 +1,7 @@
-
 "use client";
 
-import Image from 'next/image';
 import { Button } from './ui/button';
+import { Interactive3DModel } from './interactive-3d-model';
 
 export function HeroSection() {
   return (
@@ -23,15 +22,8 @@ export function HeroSection() {
               CONTACT ME »
             </Button>
           </div>
-          <div className="relative flex items-center justify-center h-full">
-            <Image
-              src="https://placehold.co/800x800.png"
-              alt="3D Character"
-              width={800}
-              height={800}
-              className="w-full h-auto max-w-md md:max-w-full"
-              data-ai-hint="3d character"
-            />
+          <div className="relative flex items-center justify-center h-full min-h-[400px] md:min-h-[500px]">
+            <Interactive3DModel />
           </div>
         </div>
       </div>

@@ -68,7 +68,7 @@ const cardVariants = {
 
 export function PricingSection() {
   return (
-    <AnimatedSection id="pricing" className="py-20">
+    <AnimatedSection id="pricing" className="py-16 md:py-24">
       <div className="container px-4 md:px-6">
         <div
           className="flex flex-col items-center justify-center space-y-4 text-center"
@@ -82,7 +82,7 @@ export function PricingSection() {
         </div>
         <motion.div
           variants={cardContainerVariants}
-          className="mx-auto grid max-w-5xl grid-cols-1 gap-8 pt-12 md:grid-cols-3"
+          className="mx-auto grid max-w-5xl grid-cols-1 gap-8 pt-8 md:grid-cols-3"
         >
           {pricingTiers.map((tier) => (
             <motion.div key={tier.name} variants={cardVariants}>

@@ -30,24 +30,22 @@ export function HeroSection() {
             <h1 className="text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter text-foreground leading-none flex items-baseline">
               <span>HI, I'M&nbsp;</span>
               <span className="text-primary relative h-[1.2em] w-[16ch] overflow-hidden text-right">
-                <span
-                  className={cn(
-                    "absolute inset-x-0 transition-transform duration-500 ease-in-out",
-                    isAnimating ? '-translate-y-full' : 'translate-y-0'
-                  )}
-                  key={currentIndex}
-                >
-                  {roles[currentIndex]}
-                </span>
-                <span
-                  className={cn(
-                    "absolute inset-x-0 transition-transform duration-500 ease-in-out",
-                    isAnimating ? 'translate-y-0' : 'translate-y-full'
-                  )}
-                  key={(currentIndex + 1) % roles.length} // Correct key for incoming element
-                >
-                  {roles[(currentIndex + 1) % roles.length]}
-                </span>
+                {roles.map((role, index) => (
+                  <span
+                    key={index}
+                    className={cn(
+                      "absolute inset-0 transition-transform duration-500 ease-in-out",
+                      currentIndex === index
+                        ? "translate-y-0"
+                        : "translate-y-full",
+                      currentIndex === (index + 1) % roles.length && !isAnimating && "translate-y-full",
+                      isAnimating && currentIndex === (index + 1) % roles.length && "translate-y-0",
+                      isAnimating && currentIndex === index && "-translate-y-full"
+                    )}
+                  >
+                    {role}
+                  </span>
+                ))}
               </span>
             </h1>
             <p className="max-w-3xl mx-auto text-xl md:text-2xl lg:text-3xl text-foreground/80 font-light tracking-wider leading-relaxed mt-12">

@@ -7,7 +7,7 @@ export function HeroSection() {
   return (
     <section id="about" className="relative w-full h-[calc(100vh-6rem)] flex items-center justify-center overflow-hidden">
       <div className="container px-4 md:px-6 z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        <div className="flex flex-col gap-8 items-start">
           <div className="flex flex-col justify-center text-left">
             <h1 className="text-6xl md:text-8xl lg:text-9xl font-extrabold font-headline tracking-tighter text-foreground">
               HI, I'M<br />DEV
@@ -25,7 +25,7 @@ export function HeroSection() {
               </span>
             </Button>
           </div>
-          <div className="relative flex items-center justify-center h-full min-h-[400px] md:min-h-[500px]">
+          <div className="relative flex items-center justify-center h-full min-h-[400px] md:min-h-[500px] w-full">
             <Interactive3DModel />
           </div>
         </div>

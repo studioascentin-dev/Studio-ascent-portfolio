@@ -1,45 +1,50 @@
 import { Video, Camera, Presentation, Globe, Code, PenTool } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import Image from 'next/image';
 import { AnimatedSection } from '@/components/animated-section';
 
 const services = [
   {
     icon: <Video className="h-10 w-10 text-primary" />,
     title: 'Video Editing',
-    description: 'Professional video editing to make your content shine.',
+    description: 'From corporate brand films to dynamic social media ads, I bring your vision to life with professional video editing that captivates and engages your audience.',
+    image: 'https://placehold.co/600x400.png',
+    dataAiHint: 'video editing software'
   },
   {
     icon: <Camera className="h-10 w-10 text-primary" />,
     title: 'Photo Editing',
-    description: 'High-quality photo retouching and manipulation services.',
+    description: 'With high-quality photo retouching and manipulation, I enhance your images to perfection, ensuring your product shots and portraits look stunning and professional.',
+    image: 'https://placehold.co/600x400.png',
+    dataAiHint: 'camera photography'
   },
   {
     icon: <Presentation className="h-10 w-10 text-primary" />,
     title: 'PPT Design',
-    description: 'Creating stunning and effective presentations for any occasion.',
+    description: 'I create stunning and effective presentations that not only look great but also communicate your message clearly, making sure you stand out in any setting.',
+    image: 'https://placehold.co/600x400.png',
+    dataAiHint: 'presentation slide'
   },
   {
     icon: <PenTool className="h-10 w-10 text-primary" />,
     title: 'Web Design',
-    description: 'Designing beautiful, intuitive, and user-friendly web interfaces.',
+    description: 'I design beautiful, intuitive, and user-friendly web interfaces that provide an exceptional user experience and make a lasting impression on your visitors.',
+    image: 'https://placehold.co/600x400.png',
+    dataAiHint: 'website design'
   },
   {
     icon: <Code className="h-10 w-10 text-primary" />,
     title: 'Web Development',
-    description: 'Building robust, scalable, and high-performance websites and apps.',
-  },
-  {
-    icon: <Globe className="h-10 w-10 text-primary" />,
-    title: 'And More',
-    description: 'Explore a variety of other creative and technical services.',
+    description: 'I build robust, scalable, and high-performance websites and applications that are not only fast and reliable but also tailored to your specific business needs.',
+    image: 'https://placehold.co/600x400.png',
+    dataAiHint: 'coding programming'
   },
 ];
 
 export function ServicesSection() {
   return (
-    <AnimatedSection id="services" className="bg-secondary/50">
+    <AnimatedSection id="services" className="bg-background">
       <div className="container px-4 md:px-6">
-        <div className="flex flex-col items-center justify-center space-y-4 text-center">
+        <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
           <div className="space-y-2">
             <h2 className="text-3xl font-bold font-headline tracking-tighter sm:text-5xl">My Services</h2>
             <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
@@ -47,17 +52,27 @@ export function ServicesSection() {
             </p>
           </div>
         </div>
-        <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 py-12 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((service) => (
-            <Card key={service.title} className="group flex flex-col items-center justify-center text-center p-6 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 bg-card">
-              <CardHeader className="transition-all duration-300 group-hover:scale-110">
-                {service.icon}
-              </CardHeader>
-              <CardContent>
-                <CardTitle className="font-headline mt-2 text-xl">{service.title}</CardTitle>
-                <p className="text-sm text-muted-foreground mt-2">{service.description}</p>
-              </CardContent>
-            </Card>
+        <div className="flex flex-col gap-16 md:gap-24">
+          {services.map((service, index) => (
+            <div key={service.title} className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+              <div className={`flex justify-center ${index % 2 === 1 ? 'md:order-2' : ''}`}>
+                <Image
+                  src={service.image}
+                  alt={service.title}
+                  width={600}
+                  height={400}
+                  className="rounded-lg shadow-2xl w-full h-auto object-cover"
+                  data-ai-hint={service.dataAiHint}
+                />
+              </div>
+              <div className={`space-y-4 ${index % 2 === 1 ? 'md:order-1' : ''}`}>
+                <div className="inline-block p-3 bg-primary/10 rounded-full">
+                  {service.icon}
+                </div>
+                <h3 className="text-2xl font-bold font-headline">{service.title}</h3>
+                <p className="text-muted-foreground text-lg">{service.description}</p>
+              </div>
+            </div>
           ))}
         </div>
       </div>

@@ -50,8 +50,7 @@ export function HeroSection() {
         transition={{ delay: 0.1, type: 'spring' }}
         className="text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter text-foreground z-20 leading-tight">
         <span className="block md:inline">HI, I'M </span>
-        <br className="md:hidden" />
-        <span className="text-primary font-code">
+        <span className="text-primary font-code block md:inline">
           <span>{text}</span>
           <motion.span
             initial={{ opacity: 0 }}

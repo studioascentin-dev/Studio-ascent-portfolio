@@ -52,7 +52,6 @@ export function AboutSection() {
                          <motion.div 
                             drag 
                             dragControls={dragControls}
-                            dragElastic={0.2}
                             onDragEnd={(_event, info) => {
                                 const { point } = info;
                                 cardRefs.current.forEach((cardRef, index) => {

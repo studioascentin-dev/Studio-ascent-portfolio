@@ -9,32 +9,35 @@ const roles = ["DEV", "A VIDEO EDITOR", "A WEB DEVELOPER", "A DESIGNER", "A PHOT
 export function HeroSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentWidth, setCurrentWidth] = useState(0);
-  const widthRef = useRef<HTMLSpanElement>(null);
+  const roleRefs = useRef<(HTMLSpanElement | null)[]>([]);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % roles.length);
-    }, 2500);
+    }, 2500); // Change role every 2.5 seconds
     return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
-    if (widthRef.current) {
-      setCurrentWidth(widthRef.current.offsetWidth);
+    // Measure the width of the current role and update the state to set the container width
+    const currentRoleRef = roleRefs.current[currentIndex];
+    if (currentRoleRef) {
+      setCurrentWidth(currentRoleRef.offsetWidth);
     }
   }, [currentIndex]);
 
+
   return (
     <AnimatedSection id="hero" className="relative w-full h-screen flex flex-col items-center justify-center text-center p-4">
-        <h1 className="text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter text-foreground flex items-baseline">
+        <h1 className="text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter text-foreground flex items-baseline justify-center whitespace-nowrap">
           <span>HI, I'M&nbsp;</span>
           <div
-            className="relative inline-block text-left transition-all duration-500 ease-in-out"
+            className="relative inline-block text-left transition-all duration-300 ease-in-out"
             style={{ width: `${currentWidth}px` }}
           >
             <div className="absolute inset-0 h-[1.2em] overflow-hidden">
               <div
-                className="transition-transform duration-700 ease-in-out"
+                className="transition-transform duration-500 ease-in-out"
                 style={{ transform: `translateY(-${currentIndex * 1.2}em)` }}
               >
                 {roles.map((role, index) => (
@@ -44,11 +47,16 @@ export function HeroSection() {
                 ))}
               </div>
             </div>
-            {/* Hidden span to measure width */}
-            <span ref={widthRef} className="invisible h-[1.2em]">{roles[currentIndex]}</span>
+            {/* Hidden elements to measure width of each role */}
+            <div className="invisible h-0 overflow-hidden">
+                {roles.map((role, index) => (
+                    <span ref={el => roleRefs.current[index] = el} key={index} className="h-[1.2em]">
+                        {role}
+                    </span>
+                ))}
+            </div>
           </div>
         </h1>
-
 
       <p className="max-w-3xl mx-auto text-xl md:text-2xl lg:text-3xl text-foreground/80 font-light tracking-wider leading-relaxed mt-12">
         A CREATIVE DEVELOPER & DESIGNER

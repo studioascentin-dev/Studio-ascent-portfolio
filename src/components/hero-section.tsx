@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from './ui/button';
-import { ThreeWelcome } from './three-welcome';
 
 const roles = ["DEV            ", "A DESIGNER    ", "A WEB DEVELOPER", "A VIDEO EDITOR ", "A PHOTO EDITOR "];
 const TYPING_SPEED = 100;
@@ -44,13 +43,12 @@ export function HeroSection() {
 
   return (
     <section id="hero" className="relative w-full h-screen flex flex-col items-center justify-center text-center p-4 overflow-hidden">
-      <ThreeWelcome />
       <motion.h1 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1, type: 'spring' }}
         className="text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter text-foreground z-20">
-        HI, I'M&nbsp;
+        HI, I'M 
         <span className="text-primary font-code">
           <span>{text}</span>
           <motion.span

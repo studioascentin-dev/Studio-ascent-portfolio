@@ -6,21 +6,18 @@ import { usePathname } from 'next/navigation';
 import { LoadingScreen } from './loading-screen';
 
 export function PageTransition({ children }: { children: React.ReactNode }) {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
-    // Hide loading screen after initial load/transition
+    // This effect runs on route changes.
+    // We set loading to true, then false after a short delay to allow the animation to play.
+    setIsLoading(true);
     const timer = setTimeout(() => {
         setIsLoading(false);
-    }, 500); // Adjust delay as needed for fade-out
+    }, 1000); // Duration of the loading screen
 
     return () => clearTimeout(timer);
-  }, [pathname]);
-  
-  useEffect(() => {
-    // Reset loading state on path change to trigger for new pages
-    setIsLoading(true);
   }, [pathname]);
 
   return (

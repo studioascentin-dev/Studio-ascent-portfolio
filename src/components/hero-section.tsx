@@ -13,7 +13,7 @@ export function HeroSection() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % roles.length);
-    }, 2500); // Time each role is displayed
+    }, 2500);
 
     return () => clearInterval(interval);
   }, []);

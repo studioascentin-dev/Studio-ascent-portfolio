@@ -24,7 +24,7 @@ export function HeroSection() {
     if (currentRoleRef) {
       setCurrentWidth(currentRoleRef.offsetWidth);
     }
-  }, [currentIndex]);
+  }, [currentIndex, roles]);
 
 
   return (
@@ -50,7 +50,7 @@ export function HeroSection() {
             {/* Hidden elements to measure width of each role */}
             <div className="invisible h-0 overflow-hidden">
                 {roles.map((role, index) => (
-                    <span ref={el => roleRefs.current[index] = el} key={index} className="h-[1.2em]">
+                    <span ref={el => roleRefs.current[index] = el} key={index} className="h-[1.2em] inline-block">
                         {role}
                     </span>
                 ))}

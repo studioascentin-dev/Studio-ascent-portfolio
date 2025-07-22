@@ -11,20 +11,23 @@ import * as React from 'react';
 
 export default function Home() {
   const aboutRef = React.useRef<HTMLDivElement>(null);
-  const servicesRef = React.useRef<HTMLDivElement>(null);
   const pricingRef = React.useRef<HTMLDivElement>(null);
   const hireMeRef = React.useRef<HTMLDivElement>(null);
 
+  const videoEditingRef = React.useRef<HTMLDivElement>(null);
+  const photoEditingRef = React.useRef<HTMLDivElement>(null);
+  const pptDesignRef = React.useRef<HTMLDivElement>(null);
+  const webDesignRef = React.useRef<HTMLDivElement>(null);
+  const webDevelopmentRef = React.useRef<HTMLDivElement>(null);
+
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
-      <Header refs={{ aboutRef, servicesRef, pricingRef, hireMeRef }} />
+      <Header refs={{ aboutRef, videoEditingRef, photoEditingRef, pptDesignRef, webDesignRef, webDevelopmentRef, pricingRef, hireMeRef }} />
       <main className="flex-1">
         <div id="hero-section" ref={aboutRef}>
             <HeroSection />
         </div>
-        <div id="services" ref={servicesRef}>
-            <ServicesSection />
-        </div>
+        <ServicesSection refs={{ videoEditingRef, photoEditingRef, pptDesignRef, webDesignRef, webDevelopmentRef }} />
         <div id="pricing" ref={pricingRef}>
             <PricingSection />
         </div>

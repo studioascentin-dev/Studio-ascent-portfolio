@@ -3,14 +3,18 @@
 
 import * as React from 'react';
 import { motion } from 'framer-motion';
-import { User, Briefcase, Tag, Mail, Users, Home } from 'lucide-react';
+import { Briefcase, Tag, Home, Video, Camera, Presentation, Code, PenTool } from 'lucide-react';
 import { useOnScreen } from '@/hooks/use-on-screen';
 import { cn } from '@/lib/utils';
 import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip';
 
 const navItems = [
   { href: '#hero-section', text: 'About', icon: Home, refKey: 'aboutRef' },
-  { href: '#services', text: 'Services', icon: Users, refKey: 'servicesRef' },
+  { href: '#video-editing', text: 'Video Editing', icon: Video, refKey: 'videoEditingRef' },
+  { href: '#photo-editing', text: 'Photo Editing', icon: Camera, refKey: 'photoEditingRef' },
+  { href: '#ppt-design', text: 'PPT Design', icon: Presentation, refKey: 'pptDesignRef' },
+  { href: '#web-design', text: 'Web Design', icon: PenTool, refKey: 'webDesignRef' },
+  { href: '#web-development', text: 'Web Development', icon: Code, refKey: 'webDevelopmentRef' },
   { href: '#pricing', text: 'Pricing', icon: Tag, refKey: 'pricingRef' },
   { href: '#hire-me', text: 'Hire Me', icon: Briefcase, refKey: 'hireMeRef' },
 ];
@@ -18,7 +22,11 @@ const navItems = [
 interface HeaderProps {
     refs: {
         aboutRef: React.RefObject<HTMLElement>;
-        servicesRef: React.RefObject<HTMLElement>;
+        videoEditingRef: React.RefObject<HTMLElement>;
+        photoEditingRef: React.RefObject<HTMLElement>;
+        pptDesignRef: React.RefObject<HTMLElement>;
+        webDesignRef: React.RefObject<HTMLElement>;
+        webDevelopmentRef: React.RefObject<HTMLElement>;
         pricingRef: React.RefObject<HTMLElement>;
         hireMeRef: React.RefObject<HTMLElement>;
     }
@@ -81,7 +89,11 @@ export function Header({ refs }: HeaderProps) {
     };
   
     const isAboutOnScreen = useOnScreen(refs.aboutRef, observerOptions);
-    const isServicesOnScreen = useOnScreen(refs.servicesRef, observerOptions);
+    const isVideoEditingOnScreen = useOnScreen(refs.videoEditingRef, observerOptions);
+    const isPhotoEditingOnScreen = useOnScreen(refs.photoEditingRef, observerOptions);
+    const isPptDesignOnScreen = useOnScreen(refs.pptDesignRef, observerOptions);
+    const isWebDesignOnScreen = useOnScreen(refs.webDesignRef, observerOptions);
+    const isWebDevelopmentOnScreen = useOnScreen(refs.webDevelopmentRef, observerOptions);
     const isPricingOnScreen = useOnScreen(refs.pricingRef, observerOptions);
     const isHireMeOnScreen = useOnScreen(refs.hireMeRef, observerOptions);
     
@@ -89,10 +101,14 @@ export function Header({ refs }: HeaderProps) {
         let currentSection = 'aboutRef';
         if (isHireMeOnScreen) currentSection = 'hireMeRef';
         if (isPricingOnScreen) currentSection = 'pricingRef';
-        if (isServicesOnScreen) currentSection = 'servicesRef';
+        if (isWebDevelopmentOnScreen) currentSection = 'webDevelopmentRef';
+        if (isWebDesignOnScreen) currentSection = 'webDesignRef';
+        if (isPptDesignOnScreen) currentSection = 'pptDesignRef';
+        if (isPhotoEditingOnScreen) currentSection = 'photoEditingRef';
+        if (isVideoEditingOnScreen) currentSection = 'videoEditingRef';
         if (isAboutOnScreen) currentSection = 'aboutRef';
         setActiveSection(currentSection);
-    }, [isAboutOnScreen, isServicesOnScreen, isPricingOnScreen, isHireMeOnScreen]);
+    }, [isAboutOnScreen, isVideoEditingOnScreen, isPhotoEditingOnScreen, isPptDesignOnScreen, isWebDesignOnScreen, isWebDevelopmentOnScreen, isPricingOnScreen, isHireMeOnScreen]);
 
     return (
         <header className="fixed bottom-4 left-1/2 z-50 -translate-x-1/2 md:bottom-auto md:top-4">

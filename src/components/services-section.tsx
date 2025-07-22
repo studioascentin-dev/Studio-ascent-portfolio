@@ -13,6 +13,7 @@ import { EmblaCarouselType } from 'embla-carousel';
 
 const services = [
   {
+    id: 'video-editing',
     icon: <Video className="h-10 w-10 text-primary" />,
     title: 'Video Editing',
     description: 'From corporate brand films to dynamic social media ads, I bring your vision to life with professional video editing that ancapts and engages your audience.',
@@ -23,6 +24,7 @@ const services = [
     ]
   },
   {
+    id: 'photo-editing',
     icon: <Camera className="h-10 w-10 text-primary" />,
     title: 'Photo Editing',
     description: 'With high-quality photo retouching and manipulation, I enhance your images to perfection, ensuring your product shots and portraits look stunning and professional.',
@@ -33,6 +35,7 @@ const services = [
     ]
   },
   {
+    id: 'ppt-design',
     icon: <Presentation className="h-10 w-10 text-primary" />,
     title: 'PPT Design',
     description: 'I create stunning and effective presentations that not only look great but also communicate your message clearly, making sure you stand out in any setting.',
@@ -43,6 +46,7 @@ const services = [
     ]
   },
   {
+    id: 'web-design',
     icon: <PenTool className="h-10 w-10 text-primary" />,
     title: 'Web Design',
     description: 'I design beautiful, intuitive, and user-friendly web interfaces that provide an exceptional user experience and make a lasting impression on your visitors.',
@@ -53,6 +57,7 @@ const services = [
     ]
   },
   {
+    id: 'web-development',
     icon: <Code className="h-10 w-10 text-primary" />,
     title: 'Web Development',
     description: 'I build robust, scalable, and high-performance websites and applications that are not only fast and reliable but also tailored to your specific business needs.',
@@ -194,7 +199,25 @@ const MobileCarousel = ({ projects }: { projects: typeof services[0]['projects']
     );
 };
 
-export function ServicesSection() {
+interface ServicesSectionProps {
+  refs: {
+    videoEditingRef: React.RefObject<HTMLDivElement>;
+    photoEditingRef: React.RefObject<HTMLDivElement>;
+    pptDesignRef: React.RefObject<HTMLDivElement>;
+    webDesignRef: React.RefObject<HTMLDivElement>;
+    webDevelopmentRef: React.RefObject<HTMLDivElement>;
+  }
+}
+
+export function ServicesSection({ refs }: ServicesSectionProps) {
+  const serviceRefs = {
+    'video-editing': refs.videoEditingRef,
+    'photo-editing': refs.photoEditingRef,
+    'ppt-design': refs.pptDesignRef,
+    'web-design': refs.webDesignRef,
+    'web-development': refs.webDevelopmentRef,
+  };
+
   return (
     <section id="services" className="bg-background min-h-screen flex flex-col justify-center py-24 md:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -217,6 +240,8 @@ export function ServicesSection() {
                 {services.map((service) => (
                     <motion.div 
                         key={service.title}
+                        id={service.id}
+                        ref={serviceRefs[service.id as keyof typeof serviceRefs]}
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true, amount: 0.1 }}

@@ -29,7 +29,7 @@ export function HeroSection() {
               initial={{ y: '100%' }}
               animate={{ y: '0%' }}
               exit={{ y: '-100%' }}
-              transition={{ duration: 0.5, ease: 'easeInOut' }}
+              transition={{ type: "spring", damping: 15, stiffness: 100 }}
               className="inline-block"
             >
               {roles[index]}

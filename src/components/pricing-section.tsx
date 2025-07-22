@@ -31,19 +31,6 @@ const pricingTiers = [
   },
 ];
 
-const sectionVariants = {
-    hidden: { opacity: 0 },
-    visible: { 
-        opacity: 1,
-        transition: {
-            duration: 0.3,
-            ease: "easeOut",
-            when: "beforeChildren",
-            staggerChildren: 0.2
-        }
-    }
-};
-
 const itemVariants = {
     hidden: { opacity: 0, y: 30 },
     visible: { 
@@ -83,11 +70,7 @@ export function PricingSection() {
   return (
     <AnimatedSection id="pricing">
       <div className="container px-4 md:px-6">
-        <motion.div 
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={sectionVariants}
+        <div 
           className="flex flex-col items-center justify-center space-y-4 text-center"
         >
           <div className="space-y-2">
@@ -96,12 +79,9 @@ export function PricingSection() {
               Choose a plan that works for you. Simple, transparent pricing for every need.
             </motion.p>
           </div>
-        </motion.div>
+        </div>
         <motion.div 
           variants={cardContainerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
           className="mx-auto grid max-w-5xl grid-cols-1 gap-8 py-12 md:grid-cols-3"
         >
           {pricingTiers.map((tier) => (

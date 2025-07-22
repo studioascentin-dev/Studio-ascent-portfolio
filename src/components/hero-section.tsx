@@ -9,58 +9,51 @@ const roles = ["DEV", "A VIDEO EDITOR", "A WEB DEVELOPER", "A DESIGNER", "A PHOT
 
 export function HeroSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setIsAnimating(true);
-      setTimeout(() => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % roles.length);
-        setIsAnimating(false);
-      }, 500); // Corresponds to animation duration
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % roles.length);
     }, 2500); // Time each role is displayed
 
     return () => clearInterval(interval);
   }, []);
 
-
   return (
     <AnimatedSection id="hero" className="relative w-full h-screen flex flex-col items-center justify-center text-center p-8 md:p-12 lg:p-16">
-        <div className="flex flex-col items-center justify-center">
-            <h1 className="text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter text-foreground leading-none flex items-baseline">
-              <span>HI, I'M&nbsp;</span>
-              <span className="text-primary relative h-[1.2em] w-[16ch] overflow-hidden text-right">
-                {roles.map((role, index) => (
-                  <span
-                    key={index}
-                    className={cn(
-                      "absolute inset-0 transition-transform duration-500 ease-in-out",
-                      currentIndex === index
-                        ? "translate-y-0"
-                        : "translate-y-full",
-                      currentIndex === (index + 1) % roles.length && !isAnimating && "translate-y-full",
-                      isAnimating && currentIndex === (index + 1) % roles.length && "translate-y-0",
-                      isAnimating && currentIndex === index && "-translate-y-full"
-                    )}
-                  >
-                    {role}
-                  </span>
-                ))}
+      <div className="flex flex-col items-center justify-center">
+        <h1 className="text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter text-foreground leading-none flex items-baseline">
+          <span>HI, I'M&nbsp;</span>
+          <span className="text-primary relative h-[1.2em] w-[16ch] overflow-hidden text-right">
+            {roles.map((role, index) => (
+              <span
+                key={index}
+                className={cn(
+                  "absolute inset-0 transition-transform duration-700 ease-in-out",
+                  {
+                    'translate-y-0': currentIndex === index,
+                    '-translate-y-full': currentIndex > index,
+                    'translate-y-full': currentIndex < index,
+                  }
+                )}
+              >
+                {role}
               </span>
-            </h1>
-            <p className="max-w-3xl mx-auto text-xl md:text-2xl lg:text-3xl text-foreground/80 font-light tracking-wider leading-relaxed mt-12">
-              A CREATIVE DEVELOPER & DESIGNER
-              <br />
-              PASSIONATE ABOUT CRAFTING BOLD AND
-              <br />
-              MEMORABLE PROJECTS
-            </p>
-            <div className="mt-8">
-              <Button asChild className="font-bold text-lg py-6 px-12 bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-lg transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95">
-                <a href="#about-me">About Me</a>
-              </Button>
-            </div>
+            ))}
+          </span>
+        </h1>
+        <p className="max-w-3xl mx-auto text-xl md:text-2xl lg:text-3xl text-foreground/80 font-light tracking-wider leading-relaxed mt-12">
+          A CREATIVE DEVELOPER & DESIGNER
+          <br />
+          PASSIONATE ABOUT CRAFTING BOLD AND
+          <br />
+          MEMORABLE PROJECTS
+        </p>
+        <div className="mt-8">
+          <Button asChild className="font-bold text-lg py-6 px-12 bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-lg transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95">
+            <a href="#about-me">About Me</a>
+          </Button>
         </div>
+      </div>
     </AnimatedSection>
   );
 }

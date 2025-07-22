@@ -122,7 +122,7 @@ export function ServicesSection() {
                             <p className="text-muted-foreground text-lg max-w-3xl mx-auto">{service.description}</p>
                         </div>
                         
-                        <div className="flex justify-center">
+                        <div className="mx-auto max-w-5xl">
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                                 {service.projects.map((project, projectIndex) => (
                                     <motion.div

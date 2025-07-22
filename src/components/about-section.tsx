@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { User, MapPin, BookOpen, Code, Target, Heart, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { Button } from './ui/button';
 
 const aboutDetails = [
     { icon: <User className="h-8 w-8 text-primary" />, title: "Full Name", value: "Dev Kumar Das", details: "I'm 22 years old. This is the name my parents gave me. You can call me Dev." },
@@ -116,6 +117,12 @@ export function AboutSection() {
                                 </motion.div>
                             </div>
                         ))}
+                    </div>
+
+                    <div className="text-center mt-12">
+                        <Button asChild className="font-bold text-lg py-4 px-10 bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-lg transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95">
+                          <a href="/">Go Back</a>
+                        </Button>
                     </div>
                 </div>
             </div>

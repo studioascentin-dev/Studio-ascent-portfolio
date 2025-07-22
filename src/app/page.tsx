@@ -2,7 +2,6 @@
 
 import { Header } from '@/components/header';
 import { HeroSection } from '@/components/hero-section';
-import { ProjectsSection } from '@/components/projects-section';
 import { ServicesSection } from '@/components/services-section';
 import { PricingSection } from '@/components/pricing-section';
 import { Footer } from '@/components/footer';
@@ -14,7 +13,6 @@ export default function Home() {
       <main className="flex-1">
         <HeroSection />
         <ServicesSection />
-        <ProjectsSection suggestedProjects={[]} />
         <PricingSection />
       </main>
       <Footer />

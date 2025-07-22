@@ -1,9 +1,9 @@
 
 "use client";
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { User, MapPin, BookOpen, Code, Target, Heart, ChevronDown } from 'lucide-react';
+import { User, MapPin, BookOpen, Code, Target, Heart, ChevronDown, KeyRound } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
@@ -85,7 +85,7 @@ export function AboutSection() {
                                         )}
                                         onClick={() => setExpandedIndex(expandedIndex === index ? null : index)}
                                     >
-                                        <CardHeader className="flex flex-row items-center justify-between gap-4 pb-2">
+                                        <CardHeader className="flex flex-row items-center justify-between gap-4 pb-4">
                                             <div className="flex flex-col items-start gap-2">
                                                 {detail.icon}
                                                 <CardTitle className="text-xl font-headline">{detail.title}</CardTitle>
@@ -98,7 +98,6 @@ export function AboutSection() {
                                             </motion.div>
                                         </CardHeader>
                                         <CardContent>
-                                            <motion.p layout className="text-muted-foreground">{detail.value}</motion.p>
                                             <AnimatePresence>
                                                 {expandedIndex === index && (
                                                     <motion.div
@@ -108,6 +107,7 @@ export function AboutSection() {
                                                         exit="hidden"
                                                         className="overflow-hidden"
                                                     >
+                                                        <p className="text-muted-foreground">{detail.value}</p>
                                                         <p className="pt-4 text-muted-foreground/80">{detail.details}</p>
                                                     </motion.div>
                                                 )}

@@ -54,6 +54,11 @@ const itemVariants = {
 };
 
 export function HireMeSection() {
+  const phoneNumber = "911234567890"; // TODO: Replace with your WhatsApp number (e.g., 91 for India)
+  const message = "Hello! I'm interested in your services and would like to discuss a project."; // TODO: Customize your default message
+
+  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
   return (
     <section id="hire-me" className="py-24 md:py-32 bg-secondary/30">
       <motion.div 
@@ -103,8 +108,8 @@ export function HireMeSection() {
         </motion.div>
 
         <motion.div variants={itemVariants} className="text-center mt-16">
-            <Button size="lg" className="font-bold text-lg py-6 px-12 bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-lg transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95">
-              Let's Talk
+            <Button asChild size="lg" className="font-bold text-lg py-6 px-12 bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-lg transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95">
+              <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">Let's Talk</a>
             </Button>
         </motion.div>
       </motion.div>

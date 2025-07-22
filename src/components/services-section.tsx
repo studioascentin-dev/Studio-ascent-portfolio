@@ -196,7 +196,7 @@ const MobileCarousel = ({ projects }: { projects: typeof services[0]['projects']
 
 export function ServicesSection() {
   return (
-    <section id="services" className="bg-background py-16 md:py-24 lg:py-32">
+    <section id="services" className="bg-background">
         <div className="container px-4 md:px-6">
             <motion.div
                 initial="hidden"
@@ -236,9 +236,9 @@ export function ServicesSection() {
                           initial="hidden"
                           whileInView="visible"
                           viewport={{ once: true, amount: 0.2 }}
-                          className="mx-auto max-w-5xl hidden md:block"
+                          className="mx-auto max-w-5xl"
                         >
-                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                            <div className="hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                                 {service.projects.map((project) => (
                                     <motion.div
                                         key={project.name}

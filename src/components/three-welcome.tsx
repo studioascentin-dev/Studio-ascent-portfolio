@@ -28,35 +28,71 @@ export function ThreeWelcome() {
     // Controls
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
-    controls.enableZoom = false;
-    controls.enablePan = false;
+    controls.enableZoom = true;
+    controls.enablePan = true;
     controls.autoRotate = true;
-    controls.autoRotateSpeed = 0.5;
+    controls.autoRotateSpeed = 0.8;
 
 
-    // Geometry & Material
-    const icoGeometry = new THREE.IcosahedronGeometry(1.5, 0);
-    const icoMaterial = new THREE.MeshStandardMaterial({
-        color: 0x6a0dad, 
-        metalness: 0.6,
-        roughness: 0.3,
+    // Camera Model
+    const cameraGroup = new THREE.Group();
+    scene.add(cameraGroup);
+
+    // Camera Body
+    const bodyGeometry = new THREE.BoxGeometry(2.5, 1.5, 1);
+    const bodyMaterial = new THREE.MeshStandardMaterial({
+        color: 0x333333,
+        metalness: 0.8,
+        roughness: 0.4,
     });
-    const icosahedron = new THREE.Mesh(icoGeometry, icoMaterial);
-    scene.add(icosahedron);
-    
-    const wireframeMaterial = new THREE.MeshStandardMaterial({
-        color: 0xffffff,
-        wireframe: true,
+    const cameraBody = new THREE.Mesh(bodyGeometry, bodyMaterial);
+    cameraGroup.add(cameraBody);
+
+    // Camera Lens
+    const lensGeometry = new THREE.CylinderGeometry(0.5, 0.5, 1, 32);
+    const lensMaterial = new THREE.MeshStandardMaterial({
+        color: 0x222222,
+        metalness: 0.9,
+        roughness: 0.2,
+    });
+    const cameraLens = new THREE.Mesh(lensGeometry, lensMaterial);
+    cameraLens.position.z = 0.5;
+    cameraLens.rotation.x = Math.PI / 2;
+    cameraGroup.add(cameraLens);
+
+    // Lens Glass
+    const glassGeometry = new THREE.CircleGeometry(0.4, 32);
+    const glassMaterial = new THREE.MeshStandardMaterial({
+        color: 0xaaaaff,
+        metalness: 0.1,
+        roughness: 0.1,
         transparent: true,
-        opacity: 0.1
+        opacity: 0.5
     });
-    const wireframe = new THREE.Mesh(icoGeometry, wireframeMaterial);
-    wireframe.scale.set(1.001, 1.001, 1.001);
-    scene.add(wireframe);
+    const lensGlass = new THREE.Mesh(glassGeometry, glassMaterial);
+    lensGlass.position.z = 1.01;
+    cameraGroup.add(lensGlass);
+    
+    // Viewfinder
+    const viewfinderGeometry = new THREE.BoxGeometry(0.3, 0.3, 0.3);
+    const viewfinder = new THREE.Mesh(viewfinderGeometry, bodyMaterial);
+    viewfinder.position.set(-0.9, 0.9, 0);
+    cameraGroup.add(viewfinder);
+
+    // Button
+    const buttonGeometry = new THREE.CylinderGeometry(0.2, 0.2, 0.1, 16);
+    const buttonMaterial = new THREE.MeshStandardMaterial({
+        color: 0xcc0000,
+        metalness: 0.5,
+        roughness: 0.8,
+    });
+    const shutterButton = new THREE.Mesh(buttonGeometry, buttonMaterial);
+    shutterButton.position.set(0.9, 0.8, 0);
+    cameraGroup.add(shutterButton);
 
 
     // Lights
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
     scene.add(ambientLight);
 
     const pointLight1 = new THREE.PointLight(0x8A2BE2, 20, 100);
@@ -86,6 +122,7 @@ export function ThreeWelcome() {
     // Animation loop
     const animate = () => {
       controls.update();
+      cameraGroup.rotation.y += 0.001;
       renderer.render(scene, camera);
       requestAnimationFrame(animate);
     };
@@ -99,9 +136,15 @@ export function ThreeWelcome() {
         currentMount.removeChild(renderer.domElement);
       }
       // Dispose of Three.js objects
-      icoGeometry.dispose();
-      icoMaterial.dispose();
-      wireframeMaterial.dispose();
+      bodyGeometry.dispose();
+      bodyMaterial.dispose();
+      lensGeometry.dispose();
+      lensMaterial.dispose();
+      glassGeometry.dispose();
+      glassMaterial.dispose();
+      viewfinderGeometry.dispose();
+      buttonGeometry.dispose();
+      buttonMaterial.dispose();
       controls.dispose();
     };
   }, []);

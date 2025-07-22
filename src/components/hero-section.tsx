@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from './ui/button';
+import { ThreeWelcome } from './three-welcome';
 
 const roles = ["DEV            ", "A DESIGNER    ", "A WEB DEVELOPER", "A VIDEO EDITOR ", "A PHOTO EDITOR "];
 const TYPING_SPEED = 100;
@@ -42,7 +43,8 @@ export function HeroSection() {
   }, [text, isDeleting, roleIndex]);
 
   return (
-    <section id="hero" className="w-full h-screen flex flex-col items-center justify-center text-center p-4 overflow-hidden">
+    <section id="hero" className="relative w-full h-screen flex flex-col items-center justify-center text-center p-4 overflow-hidden">
+      <ThreeWelcome />
       <motion.h1 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

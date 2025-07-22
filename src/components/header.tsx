@@ -3,7 +3,7 @@
 
 import * as React from 'react';
 import { motion } from 'framer-motion';
-import { User, Users, Tag, Mail } from 'lucide-react';
+import { User, Users, Tag, Mail, Briefcase } from 'lucide-react';
 import { useOnScreen } from '@/hooks/use-on-screen';
 import { cn } from '@/lib/utils';
 
@@ -11,6 +11,7 @@ const navItems = [
   { href: '#hero', text: 'About', icon: User, refKey: 'aboutRef' },
   { href: '#services', text: 'Services', icon: Users, refKey: 'servicesRef' },
   { href: '#pricing', text: 'Pricing', icon: Tag, refKey: 'pricingRef' },
+  { href: '#hire-me', text: 'Hire Me', icon: Briefcase, refKey: 'hireMeRef' },
   { href: '#contact', text: 'Contact', icon: Mail, refKey: 'contactRef' },
 ];
 
@@ -19,6 +20,7 @@ interface HeaderProps {
         aboutRef: React.RefObject<HTMLElement>;
         servicesRef: React.RefObject<HTMLElement>;
         pricingRef: React.RefObject<HTMLElement>;
+        hireMeRef: React.RefObject<HTMLElement>;
         contactRef: React.RefObject<HTMLElement>;
     }
 }
@@ -27,9 +29,19 @@ const NavLink = ({ item, activeSection }: { item: typeof navItems[0], activeSect
     const [isHovered, setIsHovered] = React.useState(false);
     const isActive = activeSection === item.refKey;
 
+    const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+        e.preventDefault();
+        const targetId = item.href.substring(1);
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
     return (
         <a 
             href={item.href}
+            onClick={handleClick}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             className={cn(
@@ -71,14 +83,16 @@ export function Header({ refs }: HeaderProps) {
   const isAboutOnScreen = useOnScreen(refs.aboutRef, observerOptions);
   const isServicesOnScreen = useOnScreen(refs.servicesRef, observerOptions);
   const isPricingOnScreen = useOnScreen(refs.pricingRef, observerOptions);
+  const isHireMeOnScreen = useOnScreen(refs.hireMeRef, observerOptions);
   const isContactOnScreen = useOnScreen(refs.contactRef, observerOptions);
   
   React.useEffect(() => {
     if (isAboutOnScreen) setActiveSection('aboutRef');
     if (isServicesOnScreen) setActiveSection('servicesRef');
     if (isPricingOnScreen) setActiveSection('pricingRef');
+    if (isHireMeOnScreen) setActiveSection('hireMeRef');
     if (isContactOnScreen) setActiveSection('contactRef');
-  }, [isAboutOnScreen, isServicesOnScreen, isPricingOnScreen, isContactOnScreen]);
+  }, [isAboutOnScreen, isServicesOnScreen, isPricingOnScreen, isHireMeOnScreen, isContactOnScreen]);
 
   return (
     <header className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur-sm">

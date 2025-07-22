@@ -3,30 +3,27 @@
 import { useState, useEffect, useRef } from 'react';
 import { AnimatedSection } from './animated-section';
 import { Button } from './ui/button';
-import { cn } from '@/lib/utils';
 
 const roles = ["DEV", "A VIDEO EDITOR", "A WEB DEVELOPER", "A DESIGNER", "A PHOTO EDITOR"];
 
 export function HeroSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [containerWidth, setContainerWidth] = useState(0);
+  const [currentWidth, setCurrentWidth] = useState(0);
   const roleRefs = useRef<(HTMLSpanElement | null)[]>([]);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % roles.length);
     }, 2500);
-
     return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
     if (roleRefs.current[currentIndex]) {
-      setContainerWidth(roleRefs.current[currentIndex]!.offsetWidth);
+      setCurrentWidth(roleRefs.current[currentIndex]!.offsetWidth);
     }
   }, [currentIndex]);
   
-
   return (
     <AnimatedSection id="hero" className="relative w-full h-screen flex flex-col items-center justify-center text-center p-8 md:p-12 lg:p-16">
       <div className="flex flex-col items-center justify-center">
@@ -36,18 +33,28 @@ export function HeroSection() {
           <h1 className="text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter text-foreground whitespace-nowrap">
             HI, I'M&nbsp;
           </h1>
-          <div className="relative h-[1.2em] overflow-hidden text-primary text-left" style={{ width: containerWidth, transition: 'width 0.5s ease-in-out' }}>
+          <div 
+            className="relative text-primary text-left transition-all duration-500 ease-in-out" 
+            style={{ width: currentWidth }}
+          >
             <div
-              className="transition-transform duration-700 ease-in-out absolute"
-              style={{ transform: `translateY(-${currentIndex * 1.2}em)` }}
+              className="h-[1.2em] overflow-hidden"
             >
-              {roles.map((role, index) => (
-                <div key={index} className="h-[1.2em] leading-none">
-                  <span ref={(el) => (roleRefs.current[index] = el)} className="text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter whitespace-nowrap">
-                    {role}
-                  </span>
-                </div>
-              ))}
+              <div
+                className="transition-transform duration-700 ease-in-out"
+                style={{ transform: `translateY(-${currentIndex * 1.2}em)` }}
+              >
+                {roles.map((role, index) => (
+                  <div key={index} className="h-[1.2em] leading-none">
+                    <span 
+                      ref={(el) => (roleRefs.current[index] = el)} 
+                      className="text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter whitespace-nowrap"
+                    >
+                      {role}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>

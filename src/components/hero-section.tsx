@@ -41,7 +41,7 @@ export function HeroSection() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1, type: 'spring' }}
-        className="text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter text-foreground flex items-baseline">
+        className="text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter text-foreground flex items-baseline justify-center">
         HI, I'M&nbsp;
         <span className="text-primary relative" style={{ width: '24ch', display: 'inline-block' }}>
           <AnimatePresence mode="wait">
@@ -51,7 +51,7 @@ export function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 20 }}
               transition={{ duration: 0.5 }}
-              className="absolute left-0 w-full text-left"
+              className="absolute left-0 w-full"
             >
               {currentText}
               <span className="animate-ping">|</span>

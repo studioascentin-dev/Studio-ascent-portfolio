@@ -5,10 +5,10 @@ import { Interactive3DModel } from './interactive-3d-model';
 
 export function HeroSection() {
   return (
-    <section id="about" className="relative w-full h-[calc(100vh-6rem)] flex items-center justify-center">
+    <section id="about" className="relative w-full h-[calc(100vh-6rem)] flex items-center justify-center overflow-hidden">
       <div className="container px-4 md:px-6 z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-          <div className="text-left">
+          <div className="text-left bg-black/30 backdrop-blur-sm p-8 rounded-lg">
             <h1 className="text-6xl md:text-8xl lg:text-9xl font-extrabold font-headline tracking-tighter text-foreground">
               HI, I'M DEV
             </h1>

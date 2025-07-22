@@ -32,41 +32,33 @@ export function Interactive3DModel() {
     controls.enableZoom = false;
     controls.enablePan = false;
     controls.autoRotate = true;
-    controls.autoRotateSpeed = 1.0;
+    controls.autoRotateSpeed = 0.5;
 
     // Geometry & Material
-    const icoGeometry = new THREE.IcosahedronGeometry(2, 1);
-    const icoMaterial = new THREE.MeshStandardMaterial({
-        color: 0x9333ea, // purple-600
-        metalness: 0.7,
-        roughness: 0.2,
+    const geometry = new THREE.TorusKnotGeometry(1.5, 0.4, 100, 16);
+    const material = new THREE.MeshStandardMaterial({
+        color: 0x9333ea,
+        metalness: 0.8,
+        roughness: 0.1,
+        emissive: 0x9333ea,
+        emissiveIntensity: 0.1
     });
-    const icosahedron = new THREE.Mesh(icoGeometry, icoMaterial);
-    scene.add(icosahedron);
-
-    const wireframeMaterial = new THREE.MeshStandardMaterial({
-        color: 0xe879f9, // fuchsia-400
-        wireframe: true,
-        transparent: true,
-        opacity: 0.2
-    });
-    const wireframe = new THREE.Mesh(icoGeometry, wireframeMaterial);
-    wireframe.scale.set(1.001, 1.001, 1.001);
-    scene.add(wireframe);
+    const torusKnot = new THREE.Mesh(geometry, material);
+    scene.add(torusKnot);
 
     // Lights
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
     scene.add(ambientLight);
 
-    const pointLight1 = new THREE.PointLight(0x9333ea, 30, 100);
+    const pointLight1 = new THREE.PointLight(0x9333ea, 50, 100);
     pointLight1.position.set(5, 5, 5);
     scene.add(pointLight1);
     
-    const pointLight2 = new THREE.PointLight(0xdb2777, 30, 100);
+    const pointLight2 = new THREE.PointLight(0xdb2777, 50, 100);
     pointLight2.position.set(-5, -5, -5);
     scene.add(pointLight2);
     
-    const pointLight3 = new THREE.PointLight(0x3b82f6, 15, 100);
+    const pointLight3 = new THREE.PointLight(0x3b82f6, 25, 100);
     pointLight3.position.set(0, 5, -5);
     scene.add(pointLight3);
 
@@ -89,17 +81,23 @@ export function Interactive3DModel() {
         renderer.setSize(currentMount.clientWidth, currentMount.clientHeight);
       }
     };
-
     window.addEventListener('resize', handleResize);
 
     // Animation loop
+    const clock = new THREE.Clock();
     const animate = () => {
+      const elapsedTime = clock.getElapsedTime();
+      
       // Slow down auto-rotation when user is interacting
       controls.autoRotate = !controls.manualStart;
       
       // Subtle mouse follow effect
-      icosahedron.rotation.y += (mouseX * 0.5 - icosahedron.rotation.y) * 0.02;
-      icosahedron.rotation.x += (mouseY * 0.5 - icosahedron.rotation.x) * 0.02;
+      torusKnot.rotation.y += (mouseX * 0.5 - torusKnot.rotation.y) * 0.02;
+      torusKnot.rotation.x += (mouseY * 0.5 - torusKnot.rotation.x) * 0.02;
+
+      // Make the light pulse
+      pointLight1.intensity = Math.sin(elapsedTime * 2) * 20 + 40;
+      pointLight2.intensity = Math.cos(elapsedTime * 1.5) * 20 + 40;
 
       controls.update();
       renderer.render(scene, camera);
@@ -115,10 +113,8 @@ export function Interactive3DModel() {
         currentMount.removeEventListener('mousemove', handleMouseMove);
         currentMount.removeChild(renderer.domElement);
       }
-      // Dispose of Three.js objects
-      icoGeometry.dispose();
-      icoMaterial.dispose();
-      wireframeMaterial.dispose();
+      geometry.dispose();
+      material.dispose();
       controls.dispose();
     };
   }, []);

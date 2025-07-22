@@ -8,35 +8,16 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
 const aboutDetails = [
-    { icon: <User className="h-6 w-6 text-primary" />, title: "Full Name", value: "Dev Kumar Das", details: "This is the name my parents gave me. You can call me Dev." },
-    { icon: <MapPin className="h-6 w-6 text-primary" />, title: "From", value: "[Your City, Your Country]", details: "I've been living here for my entire life and love the culture and people." },
-    { icon: <BookOpen className="h-6 w-6 text-primary" />, title: "Studies", value: "[Your Degree or Field of Study]", details: "My studies have provided me with a strong foundation in both theoretical concepts and practical applications." },
-    { icon: <Code className="h-6 w-6 text-primary" />, title: "Websites I've Built", value: "[List a few projects or types of sites]", details: "I enjoy building a diverse range of websites, from sleek portfolios to complex e-commerce platforms." },
-    { icon: <Heart className="h-6 w-6 text-primary" />, title: "Hobbies", value: "[Your Hobbies]", details: "When I'm not coding, I enjoy... It's a great way to unwind and recharge my creativity." },
-    { icon: <Target className="h-6 w-6 text-primary" />, title: "Ambition", value: "[Your professional ambition or goal]", details: "My long-term goal is to leverage my skills to build innovative solutions that make a meaningful impact." },
+    { icon: <User className="h-8 w-8 text-primary" />, title: "Full Name", value: "Dev Kumar Das", details: "This is the name my parents gave me. You can call me Dev." },
+    { icon: <MapPin className="h-8 w-8 text-primary" />, title: "From", value: "[Your City, Your Country]", details: "I've been living here for my entire life and love the culture and people." },
+    { icon: <BookOpen className="h-8 w-8 text-primary" />, title: "Studies", value: "[Your Degree or Field of Study]", details: "My studies have provided me with a strong foundation in both theoretical concepts and practical applications." },
+    { icon: <Code className="h-8 w-8 text-primary" />, title: "Websites I've Built", value: "[List a few projects or types of sites]", details: "I enjoy building a diverse range of websites, from sleek portfolios to complex e-commerce platforms." },
+    { icon: <Heart className="h-8 w-8 text-primary" />, title: "Hobbies", value: "[Your Hobbies]", details: "When I'm not coding, I enjoy... It's a great way to unwind and recharge my creativity." },
+    { icon: <Target className="h-8 w-8 text-primary" />, title: "Ambition", value: "[Your professional ambition or goal]", details: "My long-term goal is to leverage my skills to build innovative solutions that make a meaningful impact." },
 ];
 
 export function AboutSection() {
-    const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
     const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
-
-    const cardVariants = {
-        initial: {
-            scale: 1,
-            filter: 'blur(0px)',
-            opacity: 1,
-        },
-        hovered: {
-            scale: 1.05,
-            transition: { type: 'spring', stiffness: 300, damping: 20 }
-        },
-        blurred: {
-            filter: 'blur(4px)',
-            opacity: 0.5,
-            scale: 0.95,
-            transition: { duration: 0.3 }
-        }
-    };
 
     const contentVariants = {
         hidden: { opacity: 0, height: 0, y: -10 },
@@ -59,61 +40,65 @@ export function AboutSection() {
                         <h2 className="text-3xl font-bold font-headline tracking-tighter sm:text-4xl md:text-5xl">About Me</h2>
                         <p className="mt-4 text-muted-foreground md:text-xl max-w-2xl mx-auto">A little bit about my journey and passions.</p>
                     </div>
-                    <div
-                        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto"
-                        onMouseLeave={() => setHoveredIndex(null)}
-                    >
+
+                    <div className="relative max-w-2xl mx-auto">
+                        <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-border -translate-x-1/2"></div>
+                        
                         {aboutDetails.map((detail, index) => (
-                            <motion.div
+                            <div
                                 key={detail.title}
-                                onHoverStart={() => setHoveredIndex(index)}
-                                variants={cardVariants}
-                                animate={
-                                    hoveredIndex === null
-                                        ? 'initial'
-                                        : hoveredIndex === index
-                                        ? 'hovered'
-                                        : 'blurred'
-                                }
-                                layout
+                                className={cn(
+                                    "relative flex items-center mb-12",
+                                    index % 2 === 0 ? "justify-start" : "justify-end"
+                                )}
                             >
-                                <Card
-                                    className={cn(
-                                        "bg-card/50 h-full transition-all duration-300 cursor-pointer",
-                                        { "animated-gradient-border": hoveredIndex === index || expandedIndex === index }
-                                    )}
-                                    onClick={() => setExpandedIndex(expandedIndex === index ? null : index)}
+                                <div className={cn("absolute left-1/2 w-4 h-4 bg-primary rounded-full -translate-x-1/2 border-4 border-background")}></div>
+                                
+                                <motion.div 
+                                    className={cn("w-5/12", index % 2 === 0 ? "pr-8" : "pl-8")}
+                                    initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true, amount: 0.5 }}
+                                    transition={{ duration: 0.5 }}
                                 >
-                                    <CardHeader className="flex flex-row items-center justify-between gap-4 pb-2">
-                                        <div className="flex flex-row items-center gap-4">
-                                            {detail.icon}
-                                            <CardTitle className="text-lg font-headline">{detail.title}</CardTitle>
-                                        </div>
-                                        <motion.div
-                                            animate={{ rotate: expandedIndex === index ? 180 : 0 }}
-                                            transition={{ duration: 0.3 }}
-                                        >
-                                            <ChevronDown className="h-5 w-5 text-muted-foreground" />
-                                        </motion.div>
-                                    </CardHeader>
-                                    <CardContent>
-                                        <motion.p layout className="text-muted-foreground">{detail.value}</motion.p>
-                                        <AnimatePresence>
-                                            {expandedIndex === index && (
-                                                <motion.div
-                                                    variants={contentVariants}
-                                                    initial="hidden"
-                                                    animate="visible"
-                                                    exit="hidden"
-                                                    className="overflow-hidden"
-                                                >
-                                                    <p className="pt-4 text-muted-foreground/80">{detail.details}</p>
-                                                </motion.div>
-                                            )}
-                                        </AnimatePresence>
-                                    </CardContent>
-                                </Card>
-                            </motion.div>
+                                    <Card
+                                        className={cn(
+                                            "bg-card/80 backdrop-blur-sm shadow-lg hover:shadow-primary/20 transition-all duration-300 cursor-pointer w-full",
+                                            { "ring-2 ring-primary": expandedIndex === index }
+                                        )}
+                                        onClick={() => setExpandedIndex(expandedIndex === index ? null : index)}
+                                    >
+                                        <CardHeader className="flex flex-row items-center justify-between gap-4 pb-2">
+                                            <div className="flex flex-col items-start gap-2">
+                                                {detail.icon}
+                                                <CardTitle className="text-xl font-headline">{detail.title}</CardTitle>
+                                            </div>
+                                            <motion.div
+                                                animate={{ rotate: expandedIndex === index ? 180 : 0 }}
+                                                transition={{ duration: 0.3 }}
+                                            >
+                                                <ChevronDown className="h-5 w-5 text-muted-foreground" />
+                                            </motion.div>
+                                        </CardHeader>
+                                        <CardContent>
+                                            <motion.p layout className="text-muted-foreground">{detail.value}</motion.p>
+                                            <AnimatePresence>
+                                                {expandedIndex === index && (
+                                                    <motion.div
+                                                        variants={contentVariants}
+                                                        initial="hidden"
+                                                        animate="visible"
+                                                        exit="hidden"
+                                                        className="overflow-hidden"
+                                                    >
+                                                        <p className="pt-4 text-muted-foreground/80">{detail.details}</p>
+                                                    </motion.div>
+                                                )}
+                                            </AnimatePresence>
+                                        </CardContent>
+                                    </Card>
+                                </motion.div>
+                            </div>
                         ))}
                     </div>
                 </div>

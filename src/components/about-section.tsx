@@ -9,7 +9,7 @@ import { cn } from '@/lib/utils';
 
 const aboutDetails = [
     { icon: <User className="h-8 w-8 text-primary" />, title: "Full Name", value: "Dev Kumar Das", details: "This is the name my parents gave me. You can call me Dev." },
-    { icon: <MapPin className="h-8 w-8 text-primary" />, title: "From", value: "Sonapur, India", details: "I am from a small town called Sonapur which is located in north-east part of India." },
+    { icon: <MapPin className="h-8 w-8 text-primary" />, title: "From", value: "Sonapur, India", details: "I am from a small town called Sonapur which is located in north-east part of India. I'm currently based here, but I enjoy working with people from all over the world." },
     { icon: <BookOpen className="h-8 w-8 text-primary" />, title: "Studies", value: "[Your Degree or Field of Study]", details: "My studies have provided me with a strong foundation in both theoretical concepts and practical applications." },
     { icon: <Code className="h-8 w-8 text-primary" />, title: "Websites I've Built", value: "[List a few projects or types of sites]", details: "I enjoy building a diverse range of websites, from sleek portfolios to complex e-commerce platforms." },
     { icon: <Heart className="h-8 w-8 text-primary" />, title: "Hobbies", value: "[Your Hobbies]", details: "When I'm not coding, I enjoy... It's a great way to unwind and recharge my creativity." },

@@ -27,12 +27,12 @@ export function HeroSection() {
   return (
     <AnimatedSection id="hero" className="relative w-full h-screen flex flex-col items-center justify-center text-center p-8 md:p-12 lg:p-16">
         <div className="flex flex-col items-center justify-center">
-            <h1 className="text-6xl md:text-8xl lg:text-[7rem] font-extrabold font-headline tracking-tighter text-foreground leading-none flex items-center justify-center">
-              HI, I'M&nbsp;
-              <span className="text-primary relative h-[1.2em] overflow-hidden" style={{width: '15ch'}}>
+            <h1 className="text-6xl md:text-8xl lg:text-[7rem] font-extrabold font-headline tracking-tighter text-foreground leading-none flex items-center">
+              <span>HI, I'M&nbsp;</span>
+              <span className="text-primary relative h-[1.2em] w-[15ch] overflow-hidden text-left">
                 <span
                   className={cn(
-                    "absolute inset-x-0 text-left transition-transform duration-500 ease-in-out",
+                    "absolute inset-x-0 transition-transform duration-500 ease-in-out",
                     isAnimating ? '-translate-y-full' : 'translate-y-0'
                   )}
                   key={currentIndex}
@@ -41,7 +41,7 @@ export function HeroSection() {
                 </span>
                 <span
                   className={cn(
-                    "absolute inset-x-0 text-left transition-transform duration-500 ease-in-out",
+                    "absolute inset-x-0 transition-transform duration-500 ease-in-out",
                     isAnimating ? 'translate-y-0' : 'translate-y-full'
                   )}
                   key={currentIndex + 1}
@@ -57,7 +57,7 @@ export function HeroSection() {
               <br />
               MEMORABLE PROJECTS
             </p>
-            <div className="mt-12">
+            <div className="mt-8">
               <Button asChild className="font-bold text-lg py-6 px-12 bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-lg transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95">
                 <a href="#contact">About Me</a>
               </Button>

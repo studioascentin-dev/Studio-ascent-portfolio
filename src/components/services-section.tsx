@@ -15,7 +15,7 @@ const services = [
   {
     icon: <Video className="h-10 w-10 text-primary" />,
     title: 'Video Editing',
-    description: 'From corporate brand films to dynamic social media ads, I bring your vision to life with professional video editing that captivates and engages your audience.',
+    description: 'From corporate brand films to dynamic social media ads, I bring your vision to life with professional video editing that ancapts and engages your audience.',
     projects: [
       { name: 'Corporate Brand Film', image: 'https://placehold.co/600x400.png', dataAiHint: 'corporate video' },
       { name: 'Social Media Ad Campaign', image: 'https://placehold.co/600x400.png', dataAiHint: 'social media marketing' },
@@ -197,7 +197,7 @@ const MobileCarousel = ({ projects }: { projects: typeof services[0]['projects']
 export function ServicesSection() {
   return (
     <section id="services" className="bg-background">
-        <div className="container px-4 md:px-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
                 initial="hidden"
                 whileInView="visible"

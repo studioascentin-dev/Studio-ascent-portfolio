@@ -1,21 +1,45 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Button } from './ui/button';
 
 const roles = ["A DESIGNER", "A WEB DEVELOPER", "A VIDEO EDITOR", "A PHOTO EDITOR"];
+const TYPING_SPEED = 100;
+const DELETING_SPEED = 50;
+const DELAY_AFTER_TYPING = 1500;
 
 export function HeroSection() {
-  const [index, setIndex] = useState(0);
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [text, setText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setIndex((prevIndex) => (prevIndex + 1) % roles.length);
-    }, 4000); // Change role every 4 seconds
+    const handleTyping = () => {
+      const currentRole = roles[roleIndex];
+      if (isDeleting) {
+        // Deleting text
+        if (text.length > 0) {
+          setText((prev) => prev.substring(0, prev.length - 1));
+        } else {
+          setIsDeleting(false);
+          setRoleIndex((prev) => (prev + 1) % roles.length);
+        }
+      } else {
+        // Typing text
+        if (text.length < currentRole.length) {
+          setText((prev) => currentRole.substring(0, prev.length + 1));
+        } else {
+          // Pause and then start deleting
+          setTimeout(() => setIsDeleting(true), DELAY_AFTER_TYPING);
+        }
+      }
+    };
 
-    return () => clearInterval(timer);
-  }, []);
+    const typingTimeout = setTimeout(handleTyping, isDeleting ? DELETING_SPEED : TYPING_SPEED);
+
+    return () => clearTimeout(typingTimeout);
+  }, [text, isDeleting, roleIndex]);
 
   return (
     <section id="hero" className="relative w-full h-screen flex flex-col items-center justify-center text-center p-4">
@@ -26,18 +50,14 @@ export function HeroSection() {
         className="text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter text-foreground">
         HI, I'M&nbsp;
         <span className="inline-block text-left w-[15ch] text-primary">
-          <AnimatePresence mode="wait">
-            <motion.span
-              key={roles[index]}
-              initial={{ opacity: 0, y: -30 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 30 }}
-              transition={{ duration: 0.5, type: 'spring', stiffness: 100 }}
-              className="inline-block"
-            >
-              {roles[index]}
-            </motion.span>
-          </AnimatePresence>
+          <span>{text}</span>
+          <motion.span
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ repeat: Infinity, duration: 0.8, ease: "easeInOut" }}
+            className="inline-block w-[2px] h-[1em] bg-primary ml-1 translate-y-1"
+          ></motion.span>
         </span>
       </motion.h1>
 

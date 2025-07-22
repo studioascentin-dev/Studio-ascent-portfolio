@@ -14,10 +14,10 @@ export function HeroSection() {
           MEMORABLE PROJECTS
         </p>
       </div>
-      <div className="absolute inset-0 w-full h-full z-0">
+      <div className="absolute inset-0 w-full h-full z-0 flex items-center justify-center">
         <Interactive3DModel />
       </div>
-      <div className="relative z-10 p-4">
+      <div className="relative z-10 p-4 flex items-center justify-center">
         <h1 className="text-6xl md:text-8xl lg:text-9xl font-extrabold font-headline tracking-tighter text-foreground">
           HI, I'M DEV
         </h1>

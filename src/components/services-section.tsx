@@ -6,7 +6,6 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { cn } from '@/lib/utils';
 
 const services = [
   {
@@ -123,33 +122,35 @@ export function ServicesSection() {
                             <p className="text-muted-foreground text-lg max-w-3xl mx-auto">{service.description}</p>
                         </div>
                         
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
-                            {service.projects.map((project, projectIndex) => (
-                                <motion.div
-                                    key={project.name}
-                                    custom={projectIndex}
-                                    initial="hidden"
-                                    whileInView="visible"
-                                    viewport={{ once: true, amount: 0.5 }}
-                                    variants={cardVariants}
-                                >
-                                    <Card className="overflow-hidden bg-card/80 backdrop-blur-sm group h-full flex flex-col">
-                                        <CardHeader className="p-0 relative">
-                                            <Image
-                                                src={project.image}
-                                                alt={project.name}
-                                                width={600}
-                                                height={400}
-                                                className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
-                                                data-ai-hint={project.dataAiHint}
-                                            />
-                                        </CardHeader>
-                                        <CardContent className="p-6 flex-grow">
-                                            <h4 className="font-headline text-xl">{project.name}</h4>
-                                        </CardContent>
-                                    </Card>
-                                </motion.div>
-                            ))}
+                        <div className="flex justify-center">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                                {service.projects.map((project, projectIndex) => (
+                                    <motion.div
+                                        key={project.name}
+                                        custom={projectIndex}
+                                        initial="hidden"
+                                        whileInView="visible"
+                                        viewport={{ once: true, amount: 0.5 }}
+                                        variants={cardVariants}
+                                    >
+                                        <Card className="overflow-hidden bg-card/80 backdrop-blur-sm group h-full flex flex-col">
+                                            <CardHeader className="p-0 relative">
+                                                <Image
+                                                    src={project.image}
+                                                    alt={project.name}
+                                                    width={600}
+                                                    height={400}
+                                                    className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
+                                                    data-ai-hint={project.dataAiHint}
+                                                />
+                                            </CardHeader>
+                                            <CardContent className="p-6 flex-grow">
+                                                <h4 className="font-headline text-xl">{project.name}</h4>
+                                            </CardContent>
+                                        </Card>
+                                    </motion.div>
+                                ))}
+                            </div>
                         </div>
 
                         <div className="text-center">

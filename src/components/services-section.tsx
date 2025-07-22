@@ -203,7 +203,7 @@ export function ServicesSection() {
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.3 }}
                 variants={sectionVariants}
-                className="mb-20"
+                className="mb-24"
             >
                 <div className="max-w-3xl mx-auto text-center">
                     <motion.h2 variants={itemVariants} className="text-4xl font-bold font-headline tracking-tighter sm:text-5xl md:text-6xl">My Services</motion.h2>
@@ -213,7 +213,7 @@ export function ServicesSection() {
                 </div>
             </motion.div>
             
-            <div className="flex flex-col gap-32 md:gap-40">
+            <div className="flex flex-col gap-40 md:gap-48">
                 {services.map((service) => (
                     <motion.div 
                         key={service.title}
@@ -221,13 +221,13 @@ export function ServicesSection() {
                         whileInView="visible"
                         viewport={{ once: true, amount: 0.1 }}
                         variants={sectionVariants}
-                        className="space-y-16"
+                        className="space-y-20"
                     >
                         <motion.div variants={itemVariants} className="max-w-5xl space-y-6 mx-auto text-center">
                             <div className="inline-block p-4 bg-primary/10 rounded-full">
                                 {React.cloneElement(service.icon, { className: 'h-12 w-12 text-primary' })}
                             </div>
-                            <h3 className="text-3xl md:text-4xl font-bold font-headline">{service.title}</h3>
+                            <h3 className="text-4xl md:text-5xl font-bold font-headline">{service.title}</h3>
                             <p className="text-muted-foreground text-lg md:text-xl max-w-3xl mx-auto">{service.description}</p>
                         </motion.div>
                         
@@ -281,5 +281,3 @@ export function ServicesSection() {
     </section>
   );
 }
-
-    

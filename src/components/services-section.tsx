@@ -90,7 +90,7 @@ export function ServicesSection() {
   return (
     <section id="services" className="bg-background py-16 md:py-24 lg:py-32">
         <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
+            <div className="mx-auto max-w-xl text-center mb-12">
                 <motion.div
                     initial="hidden"
                     whileInView="visible"
@@ -98,7 +98,7 @@ export function ServicesSection() {
                     variants={sectionVariants}
                 >
                     <h2 className="text-3xl font-bold font-headline tracking-tighter sm:text-5xl">My Services</h2>
-                    <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed mt-4">
+                    <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed mt-4">
                         A closer look at the digital services I provide to bring your vision to life.
                     </p>
                 </motion.div>
@@ -114,12 +114,12 @@ export function ServicesSection() {
                         variants={sectionVariants}
                         className="space-y-12"
                     >
-                        <div className="text-center space-y-4">
+                        <div className="mx-auto max-w-3xl space-y-4 text-center">
                             <div className="inline-block p-3 bg-primary/10 rounded-full">
                                 {service.icon}
                             </div>
                             <h3 className="text-2xl md:text-3xl font-bold font-headline">{service.title}</h3>
-                            <p className="text-muted-foreground text-lg max-w-3xl mx-auto">{service.description}</p>
+                            <p className="text-muted-foreground text-lg">{service.description}</p>
                         </div>
                         
                         <div className="mx-auto max-w-5xl">

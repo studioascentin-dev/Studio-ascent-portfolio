@@ -22,7 +22,7 @@ export function HeroSection() {
     <AnimatedSection id="hero" className="relative w-full h-screen flex flex-col items-center justify-center text-center p-8 md:p-12 lg:p-16">
       <div className="flex flex-col items-center justify-center">
         <h1 className="text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter text-foreground leading-none flex items-baseline">
-          <span>HI, I'M&nbsp;</span>
+          <span>HI, I'M </span>
           <span className="text-primary relative h-[1.2em] w-[16ch] overflow-hidden text-right">
             {roles.map((role, index) => (
               <span

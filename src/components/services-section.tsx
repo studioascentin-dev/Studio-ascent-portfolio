@@ -196,7 +196,7 @@ const MobileCarousel = ({ projects }: { projects: typeof services[0]['projects']
 
 export function ServicesSection() {
   return (
-    <section id="services" className="bg-background min-h-[80vh] flex flex-col justify-center py-20 md:py-28">
+    <section id="services" className="bg-background min-h-screen flex flex-col justify-center py-24 md:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
                 initial="hidden"
@@ -213,7 +213,7 @@ export function ServicesSection() {
                 </div>
             </motion.div>
             
-            <div className="flex flex-col gap-28 md:gap-36">
+            <div className="flex flex-col gap-32 md:gap-40">
                 {services.map((service) => (
                     <motion.div 
                         key={service.title}
@@ -281,3 +281,5 @@ export function ServicesSection() {
     </section>
   );
 }
+
+    

@@ -17,7 +17,7 @@ export function Interactive3DModel() {
 
     // Camera
     const camera = new THREE.PerspectiveCamera(75, currentMount.clientWidth / currentMount.clientHeight, 0.1, 1000);
-    camera.position.set(0, 1, 5);
+    camera.position.set(0, 0, 5);
 
     // Renderer
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -33,54 +33,50 @@ export function Interactive3DModel() {
     controls.enablePan = false;
     controls.autoRotate = true;
     controls.autoRotateSpeed = 0.5;
-    controls.target.set(0, 1, 0);
+    controls.target.set(0, 0, 0);
 
     // Material
-    const material = new THREE.MeshStandardMaterial({
-        color: 0x9333ea,
-        metalness: 0.8,
-        roughness: 0.2,
+    const headMaterial = new THREE.MeshStandardMaterial({
+        color: 0x9333ea, // primary color
+        metalness: 0.7,
+        roughness: 0.3,
     });
+    const eyeMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+    const pupilMaterial = new THREE.MeshBasicMaterial({ color: 0x0a0a0a });
     
-    // Human Model Group
-    const human = new THREE.Group();
+    // Face Group
+    const face = new THREE.Group();
 
     // Head
-    const head = new THREE.Mesh(new THREE.SphereGeometry(0.5, 32, 32), material);
-    head.position.y = 2.5;
+    const head = new THREE.Mesh(new THREE.SphereGeometry(1.5, 64, 64), headMaterial);
+    face.add(head);
 
-    // Torso
-    const torso = new THREE.Mesh(new THREE.BoxGeometry(1, 1.5, 0.5), material);
-    torso.position.y = 1.25;
+    // Eyes
+    const eyeGroup = new THREE.Group();
+    const eyeRadius = 0.4;
+    const pupilRadius = 0.2;
 
-    // Arms
-    const leftArm = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.1, 1.2), material);
-    leftArm.position.set(-0.75, 1.5, 0);
-    leftArm.rotation.z = Math.PI / 8;
+    const leftEye = new THREE.Mesh(new THREE.SphereGeometry(eyeRadius, 32, 32), eyeMaterial);
+    leftEye.position.set(-0.6, 0.2, 1.2);
+    const leftPupil = new THREE.Mesh(new THREE.SphereGeometry(pupilRadius, 32, 32), pupilMaterial);
+    leftPupil.position.z = eyeRadius;
+    leftEye.add(leftPupil);
     
-    const rightArm = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.1, 1.2), material);
-    rightArm.position.set(0.75, 1.5, 0);
-    rightArm.rotation.z = -Math.PI / 8;
-    
-    // Legs
-    const leftLeg = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.15, 1.5), material);
-    leftLeg.position.set(-0.3, -0.25, 0);
+    const rightEye = new THREE.Mesh(new THREE.SphereGeometry(eyeRadius, 32, 32), eyeMaterial);
+    rightEye.position.set(0.6, 0.2, 1.2);
+    const rightPupil = new THREE.Mesh(new THREE.SphereGeometry(pupilRadius, 32, 32), pupilMaterial);
+    rightPupil.position.z = eyeRadius;
+    rightEye.add(rightPupil);
 
-    const rightLeg = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.15, 1.5), material);
-    rightLeg.position.set(0.3, -0.25, 0);
+    eyeGroup.add(leftEye);
+    eyeGroup.add(rightEye);
+    face.add(eyeGroup);
     
-    human.add(head);
-    human.add(torso);
-    human.add(leftArm);
-    human.add(rightArm);
-    human.add(leftLeg);
-    human.add(rightLeg);
-    
-    scene.add(human);
+    scene.add(face);
 
 
     // Lights
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
     scene.add(ambientLight);
 
     const pointLight1 = new THREE.PointLight(0x9333ea, 50, 100);
@@ -91,7 +87,7 @@ export function Interactive3DModel() {
     pointLight2.position.set(-5, -5, -5);
     scene.add(pointLight2);
     
-    const pointLight3 = new THREE.PointLight(0x3b82f6, 25, 100);
+    const pointLight3 = new THREE.PointLight(0x3b82f6, 30, 100);
     pointLight3.position.set(0, 5, -5);
     scene.add(pointLight3);
 
@@ -121,18 +117,18 @@ export function Interactive3DModel() {
     const animate = () => {
       const elapsedTime = clock.getElapsedTime();
       
-      // Slow down auto-rotation when user is interacting
       controls.autoRotate = !controls.manualStart;
       
-      // Subtle mouse follow effect
-      human.rotation.y += (mouseX * 0.5 - human.rotation.y) * 0.02;
-      
-      // Make the model bob up and down
-      human.position.y = Math.sin(elapsedTime * 2) * 0.1;
+      // Face and eye look at cursor
+      face.rotation.y += (mouseX * 0.3 - face.rotation.y) * 0.05;
+      face.rotation.x += (-mouseY * 0.3 - face.rotation.x) * 0.05;
+      leftEye.rotation.y = rightEye.rotation.y = mouseX * 0.5;
+      leftEye.rotation.x = rightEye.rotation.x = -mouseY * 0.5;
+
 
       // Make the light pulse
-      pointLight1.intensity = Math.sin(elapsedTime * 2) * 20 + 40;
-      pointLight2.intensity = Math.cos(elapsedTime * 1.5) * 20 + 40;
+      pointLight1.intensity = Math.sin(elapsedTime * 1.5) * 20 + 40;
+      pointLight2.intensity = Math.cos(elapsedTime * 2) * 20 + 40;
 
       controls.update();
       renderer.render(scene, camera);
@@ -150,13 +146,14 @@ export function Interactive3DModel() {
       }
       // Dispose geometries
       (head.geometry as THREE.SphereGeometry).dispose();
-      (torso.geometry as THREE.BoxGeometry).dispose();
-      (leftArm.geometry as THREE.CylinderGeometry).dispose();
-      (rightArm.geometry as THREE.CylinderGeometry).dispose();
-      (leftLeg.geometry as THREE.CylinderGeometry).dispose();
-      (rightLeg.geometry as THREE.CylinderGeometry).dispose();
+      (leftEye.geometry as THREE.SphereGeometry).dispose();
+      (rightEye.geometry as THREE.SphereGeometry).dispose();
+      (leftPupil.geometry as THREE.SphereGeometry).dispose();
+      (rightPupil.geometry as THREE.SphereGeometry).dispose();
 
-      material.dispose();
+      headMaterial.dispose();
+      eyeMaterial.dispose();
+      pupilMaterial.dispose();
       controls.dispose();
     };
   }, []);

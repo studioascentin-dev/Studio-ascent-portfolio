@@ -21,14 +21,14 @@ const navItems = [
 
 interface HeaderProps {
     refs: {
-        aboutRef: React.RefObject<HTMLElement>;
-        videoEditingRef: React.RefObject<HTMLElement>;
-        photoEditingRef: React.RefObject<HTMLElement>;
-        pptDesignRef: React.RefObject<HTMLElement>;
-        webDesignRef: React.RefObject<HTMLElement>;
-        webDevelopmentRef: React.RefObject<HTMLElement>;
-        pricingRef: React.RefObject<HTMLElement>;
-        hireMeRef: React.RefObject<HTMLElement>;
+        aboutRef?: React.RefObject<HTMLElement>;
+        videoEditingRef?: React.RefObject<HTMLElement>;
+        photoEditingRef?: React.RefObject<HTMLElement>;
+        pptDesignRef?: React.RefObject<HTMLElement>;
+        webDesignRef?: React.RefObject<HTMLElement>;
+        webDevelopmentRef?: React.RefObject<HTMLElement>;
+        pricingRef?: React.RefObject<HTMLElement>;
+        hireMeRef?: React.RefObject<HTMLElement>;
     }
 }
 
@@ -80,7 +80,7 @@ const NavLink = ({ item, activeSection }: { item: typeof navItems[0], activeSect
     )
 }
 
-export function Header({ refs }: HeaderProps) {
+export function Header({ refs = {} }: HeaderProps) {
     const [activeSection, setActiveSection] = React.useState('aboutRef');
 
     const observerOptions = {
@@ -88,14 +88,14 @@ export function Header({ refs }: HeaderProps) {
       rootMargin: '-50% 0px -50% 0px'
     };
   
-    const isAboutOnScreen = useOnScreen(refs.aboutRef, observerOptions);
-    const isVideoEditingOnScreen = useOnScreen(refs.videoEditingRef, observerOptions);
-    const isPhotoEditingOnScreen = useOnScreen(refs.photoEditingRef, observerOptions);
-    const isPptDesignOnScreen = useOnScreen(refs.pptDesignRef, observerOptions);
-    const isWebDesignOnScreen = useOnScreen(refs.webDesignRef, observerOptions);
-    const isWebDevelopmentOnScreen = useOnScreen(refs.webDevelopmentRef, observerOptions);
-    const isPricingOnScreen = useOnScreen(refs.pricingRef, observerOptions);
-    const isHireMeOnScreen = useOnScreen(refs.hireMeRef, observerOptions);
+    const isAboutOnScreen = useOnScreen(refs.aboutRef!, observerOptions);
+    const isVideoEditingOnScreen = useOnScreen(refs.videoEditingRef!, observerOptions);
+    const isPhotoEditingOnScreen = useOnScreen(refs.photoEditingRef!, observerOptions);
+    const isPptDesignOnScreen = useOnScreen(refs.pptDesignRef!, observerOptions);
+    const isWebDesignOnScreen = useOnScreen(refs.webDesignRef!, observerOptions);
+    const isWebDevelopmentOnScreen = useOnScreen(refs.webDevelopmentRef!, observerOptions);
+    const isPricingOnScreen = useOnScreen(refs.pricingRef!, observerOptions);
+    const isHireMeOnScreen = useOnScreen(refs.hireMeRef!, observerOptions);
     
     React.useEffect(() => {
         let currentSection = 'aboutRef';

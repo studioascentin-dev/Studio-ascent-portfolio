@@ -82,7 +82,7 @@ export function ThreeWelcome() {
     // Button
     const buttonGeometry = new THREE.CylinderGeometry(0.2, 0.2, 0.1, 16);
     const buttonMaterial = new THREE.MeshStandardMaterial({
-        color: 0xcc0000,
+        color: 0xffa500,
         metalness: 0.5,
         roughness: 0.8,
     });
@@ -95,15 +95,15 @@ export function ThreeWelcome() {
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
     scene.add(ambientLight);
 
-    const pointLight1 = new THREE.PointLight(0x8A2BE2, 20, 100);
+    const pointLight1 = new THREE.PointLight(0xffa500, 20, 100);
     pointLight1.position.set(5, 5, 5);
     scene.add(pointLight1);
     
-    const pointLight2 = new THREE.PointLight(0xFF1493, 20, 100);
+    const pointLight2 = new THREE.PointLight(0xff7f50, 20, 100);
     pointLight2.position.set(-5, -5, -5);
     scene.add(pointLight2);
     
-    const pointLight3 = new THREE.PointLight(0x4169E1, 10, 100);
+    const pointLight3 = new THREE.PointLight(0xffd700, 10, 100);
     pointLight3.position.set(0, 5, -5);
     scene.add(pointLight3);
 

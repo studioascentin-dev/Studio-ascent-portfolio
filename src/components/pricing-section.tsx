@@ -82,7 +82,7 @@ export function PricingSection() {
         </div>
         <motion.div
           variants={cardContainerVariants}
-          className="mx-auto grid max-w-5xl grid-cols-1 gap-8 pt-8 md:grid-cols-3"
+          className="mx-auto grid max-w-5xl grid-cols-1 gap-8 pt-12 md:grid-cols-3"
         >
           {pricingTiers.map((tier) => (
             <motion.div key={tier.name} variants={cardVariants}>

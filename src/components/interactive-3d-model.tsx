@@ -3,6 +3,8 @@
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+// To load your own model, you would use a loader like GLTFLoader
+// import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 export function Interactive3DModel() {
   const mountRef = useRef<HTMLDivElement>(null);
@@ -35,6 +37,40 @@ export function Interactive3DModel() {
     controls.autoRotateSpeed = 0.5;
     controls.target.set(0, 0, 0);
 
+    // #region --- How to load your own 3D Model ---
+    // 1. Place your 3D model file (e.g., `myFace.glb`) in the `/public` directory.
+    // 2. Uncomment the `GLTFLoader` import at the top of this file.
+    // 3. Uncomment the code block below.
+
+    /*
+    const loader = new GLTFLoader();
+    loader.load(
+      '/myFace.glb', // Path to your model in the /public folder
+      (gltf) => {
+        const model = gltf.scene;
+        // You might need to scale, position, or rotate your model
+        model.position.set(0, 0, 0);
+        model.scale.set(1, 1, 1);
+        
+        // Add the loaded model to the scene
+        scene.add(model);
+
+        // If your model has eyes you want to control, you'd find them like this:
+        // const leftEye = model.getObjectByName('LeftEyeObjectName');
+        // const rightEye = model.getObjectByName('RightEyeObjectName');
+        // You would then use these references in the animation loop below.
+      },
+      undefined, // Optional: onProgress callback
+      (error) => {
+        console.error('An error happened while loading the model:', error);
+      }
+    );
+    */
+    // 4. Comment out or remove the "Procedural Face" section below.
+    // #endregion
+
+    
+    // #region --- Procedural Face (Current Implementation) ---
     // Material
     const headMaterial = new THREE.MeshStandardMaterial({
         color: 0x9333ea, // primary color
@@ -73,6 +109,7 @@ export function Interactive3DModel() {
     face.add(eyeGroup);
     
     scene.add(face);
+    // #endregion
 
 
     // Lights
@@ -119,9 +156,13 @@ export function Interactive3DModel() {
       
       controls.autoRotate = !controls.manualStart;
       
-      // Face and eye look at cursor
+      // This part controls the face and eye movement.
+      // If you load your own model, you would apply these rotations to it.
       face.rotation.y += (mouseX * 0.3 - face.rotation.y) * 0.05;
       face.rotation.x += (-mouseY * 0.3 - face.rotation.x) * 0.05;
+
+      // To move the eyes of your custom model, you would need to get a reference
+      // to them after loading (see the loader section above).
       leftEye.rotation.y = rightEye.rotation.y = mouseX * 0.5;
       leftEye.rotation.x = rightEye.rotation.x = -mouseY * 0.5;
 

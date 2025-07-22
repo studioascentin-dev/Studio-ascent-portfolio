@@ -1,3 +1,4 @@
+
 "use client"
 
 import * as React from "react"
@@ -67,14 +68,25 @@ const Carousel = React.forwardRef<
     )
     const [canScrollPrev, setCanScrollPrev] = React.useState(false)
     const [canScrollNext, setCanScrollNext] = React.useState(false)
+    const [_, setSelectedIndex] = React.useState(0);
 
     const onSelect = React.useCallback((api: CarouselApi) => {
       if (!api) {
         return
       }
 
+      setSelectedIndex(api.selectedScrollSnap());
       setCanScrollPrev(api.canScrollPrev())
       setCanScrollNext(api.canScrollNext())
+      
+      api.slideNodes().forEach((node, index) => {
+        if (index === api.selectedScrollSnap()) {
+          node.classList.add('embla__slide--active');
+        } else {
+          node.classList.remove('embla__slide--active');
+        }
+      });
+
     }, [])
 
     const scrollPrev = React.useCallback(() => {
@@ -114,9 +126,11 @@ const Carousel = React.forwardRef<
       onSelect(api)
       api.on("reInit", onSelect)
       api.on("select", onSelect)
+      api.on("scroll", onSelect) // Add this line
 
       return () => {
         api?.off("select", onSelect)
+        api?.off("scroll", onSelect) // And this line
       }
     }, [api, onSelect])
 
@@ -184,7 +198,7 @@ const CarouselItem = React.forwardRef<
       role="group"
       aria-roledescription="slide"
       className={cn(
-        "min-w-0 shrink-0 grow-0 basis-full",
+        "min-w-0 shrink-0 grow-0 basis-full embla__slide",
         orientation === "horizontal" ? "pl-4" : "pt-4",
         className
       )}

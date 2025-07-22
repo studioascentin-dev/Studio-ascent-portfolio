@@ -6,6 +6,9 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
+import { cn } from '@/lib/utils';
+import * as React from 'react';
 
 const services = [
   {
@@ -154,7 +157,7 @@ export function ServicesSection() {
                           className="mx-auto max-w-5xl md:block hidden"
                         >
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                                {service.projects.map((project, projectIndex) => (
+                                {service.projects.map((project) => (
                                     <motion.div
                                         key={project.name}
                                         variants={cardVariants}
@@ -179,20 +182,28 @@ export function ServicesSection() {
                             </div>
                         </motion.div>
 
-                        <motion.div
-                          variants={cardContainerVariants}
-                          initial="hidden"
-                          whileInView="visible"
-                          viewport={{ once: true, amount: 0.2 }}
-                          className="md:hidden -mx-4 overflow-x-auto"
-                        >
-                            <div className="flex flex-nowrap gap-6 px-4">
-                                {service.projects.map((project, projectIndex) => (
-                                    <motion.div
-                                        key={project.name}
-                                        variants={cardVariants}
-                                        className="flex-shrink-0 w-4/5"
-                                    >
+                        <div className="md:hidden">
+                            <style jsx>{`
+                                .embla__slide {
+                                    transition: opacity 0.3s ease-in-out, filter 0.3s ease-in-out;
+                                    filter: blur(4px);
+                                    opacity: 0.5;
+                                }
+                                .embla__slide--active {
+                                    filter: blur(0px);
+                                    opacity: 1;
+                                }
+                            `}</style>
+                            <Carousel
+                                opts={{
+                                align: 'center',
+                                loop: true,
+                                }}
+                                className="w-full"
+                            >
+                                <CarouselContent className="-ml-4">
+                                {service.projects.map((project) => (
+                                    <CarouselItem key={project.name} className="basis-4/5 pl-4">
                                         <Card className="overflow-hidden bg-card/80 backdrop-blur-sm group h-full flex flex-col">
                                             <CardHeader className="p-0 relative">
                                                 <Image
@@ -208,10 +219,12 @@ export function ServicesSection() {
                                                 <h4 className="font-headline text-xl">{project.name}</h4>
                                             </CardContent>
                                         </Card>
-                                    </motion.div>
+                                    </CarouselItem>
                                 ))}
-                            </div>
-                        </motion.div>
+                                </CarouselContent>
+                            </Carousel>
+                        </div>
+
 
                         <motion.div variants={itemVariants} className="text-center mt-12">
                             <Button size="lg" className="font-bold text-lg py-6 px-12 bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-lg transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95">

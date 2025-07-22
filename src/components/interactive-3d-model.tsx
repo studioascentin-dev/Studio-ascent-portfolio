@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 // To load your own model, you would use a loader like GLTFLoader
-// import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 export function Interactive3DModel() {
   const mountRef = useRef<HTMLDivElement>(null);
@@ -42,10 +42,10 @@ export function Interactive3DModel() {
     // 2. Uncomment the `GLTFLoader` import at the top of this file.
     // 3. Uncomment the code block below.
 
-    /*
+    
     const loader = new GLTFLoader();
     loader.load(
-      '/myFace.glb', // Path to your model in the /public folder
+      '/my-model.glb', // Path to your model in the /public folder
       (gltf) => {
         const model = gltf.scene;
         // You might need to scale, position, or rotate your model
@@ -60,12 +60,13 @@ export function Interactive3DModel() {
         console.error('An error happened while loading the model:', error);
       }
     );
-    */
+    
     // 4. Comment out or remove the "Icosahedron" section below.
     // #endregion
 
     
     // #region --- Icosahedron (Current Implementation) ---
+    /*
     const icoGeometry = new THREE.IcosahedronGeometry(1.5, 0);
     const icoMaterial = new THREE.MeshStandardMaterial({
         color: 0xf2691d, // primary color
@@ -84,6 +85,7 @@ export function Interactive3DModel() {
     const wireframe = new THREE.Mesh(icoGeometry, wireframeMaterial);
     wireframe.scale.set(1.001, 1.001, 1.001);
     scene.add(wireframe);
+    */
     // #endregion
 
 
@@ -139,11 +141,11 @@ export function Interactive3DModel() {
         currentMount.removeChild(renderer.domElement);
       }
       // Dispose geometries
-      icoGeometry.dispose();
+      // icoGeometry.dispose();
 
       // Dispose materials
-      icoMaterial.dispose();
-      wireframeMaterial.dispose();
+      // icoMaterial.dispose();
+      // wireframeMaterial.dispose();
       controls.dispose();
     };
   }, []);

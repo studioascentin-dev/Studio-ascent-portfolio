@@ -8,53 +8,34 @@ const roles = ["A DESIGNER", "A WEB DEVELOPER", "A VIDEO EDITOR", "A PHOTO EDITO
 
 export function HeroSection() {
   const [index, setIndex] = useState(0);
-  const [currentText, setCurrentText] = useState('');
-  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    const handleTyping = () => {
-      const fullText = roles[index];
-      if (isDeleting) {
-        setCurrentText(fullText.substring(0, currentText.length - 1));
-      } else {
-        setCurrentText(fullText.substring(0, currentText.length + 1));
-      }
+    const timer = setInterval(() => {
+      setIndex((prevIndex) => (prevIndex + 1) % roles.length);
+    }, 4000); // Change role every 4 seconds
 
-      if (!isDeleting && currentText === fullText) {
-        setTimeout(() => setIsDeleting(true), 2000);
-      } else if (isDeleting && currentText === '') {
-        setIsDeleting(false);
-        setIndex((prevIndex) => (prevIndex + 1) % roles.length);
-      }
-    };
-
-    const typingSpeed = isDeleting ? 100 : 150;
-    const timer = setTimeout(handleTyping, typingSpeed);
-
-    return () => clearTimeout(timer);
-  }, [currentText, isDeleting, index]);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <section id="hero" className="relative w-full h-screen flex flex-col items-center justify-center text-center p-4">
       <motion.h1 
-        layout
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1, type: 'spring' }}
-        className="text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter text-foreground flex items-baseline justify-center">
+        className="text-5xl md:text-7xl lg:text-[6rem] font-extrabold font-headline tracking-tighter text-foreground">
         HI, I'M&nbsp;
-        <span className="text-primary relative" style={{ width: '24ch', display: 'inline-block' }}>
+        <span className="inline-block text-left w-[15ch] text-primary">
           <AnimatePresence mode="wait">
             <motion.span
-              key={index}
-              initial={{ opacity: 0, y: -20 }}
+              key={roles[index]}
+              initial={{ opacity: 0, y: -30 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 20 }}
-              transition={{ duration: 0.5 }}
-              className="absolute left-0 w-full"
+              exit={{ opacity: 0, y: 30 }}
+              transition={{ duration: 0.5, type: 'spring', stiffness: 100 }}
+              className="inline-block"
             >
-              {currentText}
-              <span className="animate-ping">|</span>
+              {roles[index]}
             </motion.span>
           </AnimatePresence>
         </span>

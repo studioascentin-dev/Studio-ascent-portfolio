@@ -166,7 +166,7 @@ const MobileCarousel = ({ projects }: { projects: typeof services[0]['projects']
                         className="flex-[0_0_80%] min-w-0 pl-4"
                         style={{
                             ...(tweenValues.length && {
-                                opacity: tweenValues[index],
+                                opacity: numberWithinRange(tweenValues[index], 0.3, 1),
                                 transform: `scale(${tweenValues[index]})`,
                                 filter: `blur(${ (1 - tweenValues[index]) * 8 }px)`,
                             }),

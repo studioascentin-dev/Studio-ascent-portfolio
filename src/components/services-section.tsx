@@ -185,13 +185,15 @@ export function ServicesSection() {
                         <div className="md:hidden">
                             <style jsx>{`
                                 .embla__slide {
-                                    transition: opacity 0.3s ease-in-out, filter 0.3s ease-in-out;
+                                    transition: opacity 0.3s ease-in-out, filter 0.3s ease-in-out, transform 0.3s ease-in-out;
                                     filter: blur(4px);
                                     opacity: 0.5;
+                                    transform: scale(0.9);
                                 }
                                 .embla__slide--active {
                                     filter: blur(0px);
                                     opacity: 1;
+                                    transform: scale(1);
                                 }
                             `}</style>
                             <Carousel

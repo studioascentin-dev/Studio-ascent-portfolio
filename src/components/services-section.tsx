@@ -226,7 +226,7 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.3 }}
                 variants={sectionVariants}
-                className="mb-16 md:mb-24"
+                className="mb-12 md:mb-24"
             >
                 <div className="max-w-3xl mx-auto text-center">
                     <motion.h2 variants={itemVariants} className="text-4xl font-bold font-headline tracking-tighter sm:text-5xl md:text-6xl">My Services</motion.h2>
@@ -236,7 +236,7 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
                 </div>
             </motion.div>
             
-            <div className="flex flex-col gap-24 md:gap-48">
+            <div className="flex flex-col gap-16 md:gap-48">
                 {services.map((service) => (
                     <motion.div 
                         key={service.title}
@@ -246,14 +246,14 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
                         whileInView="visible"
                         viewport={{ once: true, amount: 0.1 }}
                         variants={sectionVariants}
-                        className="space-y-12 md:space-y-20"
+                        className="space-y-8 md:space-y-20"
                     >
                         <motion.div variants={itemVariants} className="max-w-5xl space-y-6 mx-auto text-center">
                             <div className="inline-block p-4 bg-primary/10 rounded-full">
                                 {React.cloneElement(service.icon, { className: 'h-12 w-12 text-primary' })}
                             </div>
-                            <h3 className="text-4xl md:text-5xl font-bold font-headline">{service.title}</h3>
-                            <p className="text-muted-foreground text-lg md:text-xl max-w-3xl mx-auto">{service.description}</p>
+                            <h3 className="text-3xl md:text-5xl font-bold font-headline">{service.title}</h3>
+                            <p className="text-muted-foreground text-base md:text-lg max-w-3xl mx-auto">{service.description}</p>
                         </motion.div>
                         
                         <motion.div
@@ -295,7 +295,7 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
 
 
                         <motion.div variants={itemVariants} className="text-center mt-8 md:mt-12">
-                            <Button size="lg" className="font-bold text-lg py-6 px-12 bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-lg transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95">
+                            <Button size="lg" className="font-bold text-lg md:py-6 md:px-12 bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-lg transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95">
                                 View More
                             </Button>
                         </motion.div>

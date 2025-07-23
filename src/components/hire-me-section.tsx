@@ -101,7 +101,7 @@ export function HireMeSection() {
                 <CardHeader>
                   <div className="flex items-center gap-4">
                     {reason.icon}
-                    <CardTitle className="text-2xl font-headline">{reason.title}</CardTitle>
+                    <CardTitle className="text-xl md:text-2xl font-headline">{reason.title}</CardTitle>
                   </div>
                 </CardHeader>
                 <CardContent className="flex-grow">
@@ -113,7 +113,7 @@ export function HireMeSection() {
         </motion.div>
 
         <motion.div variants={itemVariants} className="text-center mt-16">
-            <Button asChild size="lg" className="font-bold text-lg py-6 px-12 bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-lg transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95">
+            <Button asChild size="lg" className="font-bold text-base md:text-lg py-4 px-10 md:py-6 md:px-12 bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-lg transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95">
               <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">Let's Talk</a>
             </Button>
         </motion.div>

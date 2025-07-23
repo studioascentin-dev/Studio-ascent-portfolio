@@ -66,7 +66,7 @@ export function HeroSection() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, type: 'spring' }}
-        className="max-w-3xl mx-auto text-base md:text-2xl lg:text-3xl text-foreground/80 font-light tracking-wider leading-relaxed mt-12 z-20">
+        className="max-w-3xl mx-auto text-base md:text-xl lg:text-2xl text-foreground/80 font-light tracking-wider leading-relaxed mt-12 z-20">
         A CREATIVE DEVELOPER & DESIGNER
         <br />
         PASSIONATE ABOUT CRAFTING BOLD AND

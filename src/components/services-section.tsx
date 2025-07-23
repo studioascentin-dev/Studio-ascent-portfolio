@@ -125,7 +125,7 @@ const numberWithinRange = (number: number, min: number, max: number): number =>
 const MobileCarousel = ({ projects }: { projects: typeof services[0]['projects'] }) => {
     const [emblaRef, emblaApi] = useEmblaCarousel({
         loop: true,
-        align: 'start',
+        align: 'center',
         skipSnaps: false,
     });
     const [tweenValues, setTweenValues] = React.useState<number[]>([]);
@@ -220,7 +220,7 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
 
   return (
     <section id="services" className="bg-background min-h-screen flex flex-col justify-center py-16 md:py-24">
-        <div className="max-w-7xl mx-auto w-full">
+        <div className="container mx-auto px-4 md:px-6">
             <motion.div
                 initial="hidden"
                 whileInView="visible"
@@ -228,9 +228,9 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
                 variants={sectionVariants}
                 className="mb-12 md:mb-16"
             >
-                <div className="max-w-3xl mx-auto text-center px-4">
+                <div className="max-w-3xl mx-auto text-center">
                     <motion.h2 variants={itemVariants} className="text-4xl font-bold font-headline tracking-tighter sm:text-5xl md:text-6xl">My Services</motion.h2>
-                    <motion.p variants={itemVariants} className="text-muted-foreground md:text-xl/relaxed lg:text-lg/relaxed xl:text-xl/relaxed mt-6 max-w-2xl mx-auto">
+                    <motion.p variants={itemVariants} className="text-muted-foreground md:text-xl/relaxed mt-6 max-w-2xl mx-auto">
                         A closer look at the digital services I provide to bring your vision to life.
                     </motion.p>
                 </div>
@@ -248,12 +248,12 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
                         variants={sectionVariants}
                         className="space-y-8 md:space-y-12"
                     >
-                        <motion.div variants={itemVariants} className="max-w-5xl space-y-6 mx-auto text-left md:text-center px-4">
+                        <motion.div variants={itemVariants} className="max-w-5xl space-y-6 mx-auto text-center">
                             <div className="inline-block p-4 bg-primary/10 rounded-full">
-                                {React.cloneElement(service.icon, { className: 'h-12 w-12 text-primary' })}
+                                {React.cloneElement(service.icon, { className: 'h-10 w-10 md:h-12 md:w-12 text-primary' })}
                             </div>
                             <h3 className="text-3xl md:text-5xl font-bold font-headline">{service.title}</h3>
-                            <p className="text-base md:text-lg text-muted-foreground max-w-3xl md:mx-auto">{service.description}</p>
+                            <p className="text-base md:text-lg text-muted-foreground max-w-3xl mx-auto">{service.description}</p>
                         </motion.div>
                         
                         <motion.div
@@ -263,7 +263,7 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
                           viewport={{ once: true, amount: 0.2 }}
                           className="mx-auto max-w-7xl"
                         >
-                            <div className="hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 px-4">
+                            <div className="hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
                                 {service.projects.map((project) => (
                                     <motion.div
                                         key={project.name}
@@ -289,13 +289,13 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
                             </div>
                         </motion.div>
 
-                        <div className="md:hidden px-4">
+                        <div className="md:hidden">
                             <MobileCarousel projects={service.projects} />
                         </div>
 
 
                         <motion.div variants={itemVariants} className="text-center mt-8 md:mt-12">
-                            <Button size="default" className="font-bold text-lg md:text-lg md:py-6 md:px-12 bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-lg transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95">
+                            <Button size="default" className="font-bold text-base md:text-lg md:py-6 md:px-12 bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-lg transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95">
                                 View More
                             </Button>
                         </motion.div>

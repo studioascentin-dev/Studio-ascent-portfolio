@@ -116,12 +116,12 @@ export function PricingSection() {
             <motion.div key={tier.name} variants={cardVariants}>
               <Card className={cn("flex flex-col h-full", tier.isFeatured ? "border-primary ring-2 ring-primary shadow-lg" : "bg-card/80")}>
                 <CardHeader className="text-center pb-4">
-                  <CardTitle className="text-2xl font-headline mb-2">{tier.name}</CardTitle>
+                  <CardTitle className="text-xl md:text-2xl font-headline mb-2">{tier.name}</CardTitle>
                   <CardDescription className="px-6">{tier.description}</CardDescription>
                 </CardHeader>
                 <CardContent className="flex flex-col flex-grow items-center p-6">
                   <div className="mb-8 text-center">
-                    <span className="text-5xl font-bold tracking-tighter">{tier.price}</span>
+                    <span className="text-4xl md:text-5xl font-bold tracking-tighter">{tier.price}</span>
                     <span className="text-muted-foreground">{tier.period}</span>
                   </div>
                   <ul className="space-y-4 text-sm w-full">

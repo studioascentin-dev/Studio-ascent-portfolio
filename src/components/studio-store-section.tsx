@@ -108,7 +108,7 @@ export function StudioStoreSection() {
                 </CardHeader>
                 <CardContent className="p-6 flex-grow flex flex-col">
                   <p className="text-sm font-medium text-primary mb-1">{product.category}</p>
-                  <CardTitle className="text-2xl font-headline mb-3">{product.title}</CardTitle>
+                  <CardTitle className="text-xl md:text-2xl font-headline mb-3">{product.title}</CardTitle>
                   <CardDescription className="text-muted-foreground flex-grow">{product.description}</CardDescription>
                   <div className="flex flex-wrap gap-2 mt-4">
                     {product.tags.map(tag => (

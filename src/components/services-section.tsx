@@ -220,7 +220,7 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
 
   return (
     <section id="services" className="bg-background min-h-screen flex flex-col justify-center py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
             <motion.div
                 initial="hidden"
                 whileInView="visible"
@@ -236,7 +236,7 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
                 </div>
             </motion.div>
             
-            <div className="flex flex-col gap-16">
+            <div className="flex flex-col gap-16 px-4">
                 {services.map((service) => (
                     <motion.div 
                         key={service.title}

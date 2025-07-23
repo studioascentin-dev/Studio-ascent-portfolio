@@ -306,5 +306,3 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
     </section>
   );
 }
-
-    

@@ -59,11 +59,11 @@ const NavLink = ({ item, activeSection }: { item: typeof navItems[0], activeSect
                         href={item.href}
                         onClick={handleClick}
                         className={cn(
-                            "relative z-10 flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-full transition-colors duration-300",
+                            "relative z-10 flex h-9 w-9 md:h-12 md:w-12 items-center justify-center rounded-full transition-colors duration-300",
                             isActive ? "text-primary-foreground" : "text-muted-foreground hover:text-foreground"
                         )}
                     >
-                        <item.icon className="h-5 w-5 md:h-6 md:w-6" />
+                        <item.icon className="h-4 w-4 md:h-6 md:w-6" />
                         <span className="sr-only">{item.text}</span>
                     </a>
                      {isActive && (
@@ -117,8 +117,8 @@ export function Header({ refs = {} }: HeaderProps) {
     return (
         <header className="fixed top-4 left-1/2 z-50 -translate-x-1/2 w-full max-w-[90vw] md:max-w-none md:w-auto">
             <TooltipProvider>
-                <nav className="rounded-full border bg-background/50 p-2 shadow-lg backdrop-blur-md">
-                    <div className="flex items-center justify-start md:justify-center gap-2 overflow-x-auto">
+                <nav className="rounded-full border bg-background/50 p-1 shadow-lg backdrop-blur-md">
+                    <div className="flex items-center justify-start md:justify-center gap-1 overflow-x-auto scrollbar-hide">
                         {navItems.map((item) => (
                             <NavLink key={item.text} item={item} activeSection={activeSection} />
                         ))}

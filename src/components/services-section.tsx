@@ -248,12 +248,12 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
                         variants={sectionVariants}
                         className="space-y-8"
                     >
-                        <motion.div variants={itemVariants} className="max-w-5xl space-y-6 mx-auto text-center px-4">
+                        <motion.div variants={itemVariants} className="max-w-5xl space-y-6 mx-auto text-left md:text-center px-4">
                             <div className="inline-block p-4 bg-primary/10 rounded-full">
                                 {React.cloneElement(service.icon, { className: 'h-12 w-12 text-primary' })}
                             </div>
                             <h3 className="text-3xl md:text-5xl font-bold font-headline">{service.title}</h3>
-                            <p className="text-muted-foreground text-base md:text-lg max-w-3xl mx-auto">{service.description}</p>
+                            <p className="text-muted-foreground text-base md:text-lg max-w-3xl md:mx-auto">{service.description}</p>
                         </motion.div>
                         
                         <motion.div
@@ -306,3 +306,5 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
     </section>
   );
 }
+
+    

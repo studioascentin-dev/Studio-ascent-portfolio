@@ -115,10 +115,10 @@ export function Header({ refs = {} }: HeaderProps) {
     }, [isAboutOnScreen, isVideoEditingOnScreen, isPhotoEditingOnScreen, isPptDesignOnScreen, isWebDesignOnScreen, isWebDevelopmentOnScreen, isStoreOnScreen, isPricingOnScreen, isHireMeOnScreen]);
 
     return (
-        <header className="fixed top-4 left-1/2 z-50 -translate-x-1/2">
+        <header className="fixed top-4 left-1/2 z-50 -translate-x-1/2 w-full max-w-[90vw] md:max-w-none md:w-auto">
             <TooltipProvider>
                 <nav className="rounded-full border bg-background/50 p-2 shadow-lg backdrop-blur-md">
-                    <div className="flex items-center justify-center gap-2">
+                    <div className="flex items-center justify-start md:justify-center gap-2 overflow-x-auto">
                         {navItems.map((item) => (
                             <NavLink key={item.text} item={item} activeSection={activeSection} />
                         ))}

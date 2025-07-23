@@ -168,7 +168,7 @@ const MobileCarousel = ({ projects }: { projects: typeof services[0]['projects']
                 {projects.map((project, index) => (
                     <div
                         key={project.name}
-                        className="flex-[0_0_90%] min-w-0 pl-4"
+                        className="flex-[0_0_80%] min-w-0 pl-4"
                         style={{
                             ...(tweenValues.length && {
                                 opacity: numberWithinRange(tweenValues[index], 0.3, 1),
@@ -188,8 +188,8 @@ const MobileCarousel = ({ projects }: { projects: typeof services[0]['projects']
                                     data-ai-hint={project.dataAiHint}
                                 />
                             </CardHeader>
-                            <CardContent className="p-8 flex-grow">
-                                <h4 className="font-headline text-3xl">{project.name}</h4>
+                            <CardContent className="p-4 flex-grow">
+                                <h4 className="font-headline text-xl">{project.name}</h4>
                             </CardContent>
                         </Card>
                     </div>
@@ -219,14 +219,14 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
   };
 
   return (
-    <section id="services" className="bg-background min-h-screen flex flex-col justify-center py-16 md:py-32">
+    <section id="services" className="bg-background min-h-screen flex flex-col justify-center py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.3 }}
                 variants={sectionVariants}
-                className="mb-12 md:mb-24"
+                className="mb-12"
             >
                 <div className="max-w-3xl mx-auto text-center">
                     <motion.h2 variants={itemVariants} className="text-4xl font-bold font-headline tracking-tighter sm:text-5xl md:text-6xl">My Services</motion.h2>
@@ -236,7 +236,7 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
                 </div>
             </motion.div>
             
-            <div className="flex flex-col gap-16 md:gap-48">
+            <div className="flex flex-col gap-16">
                 {services.map((service) => (
                     <motion.div 
                         key={service.title}
@@ -246,7 +246,7 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
                         whileInView="visible"
                         viewport={{ once: true, amount: 0.1 }}
                         variants={sectionVariants}
-                        className="space-y-8 md:space-y-20"
+                        className="space-y-8"
                     >
                         <motion.div variants={itemVariants} className="max-w-5xl space-y-6 mx-auto text-center">
                             <div className="inline-block p-4 bg-primary/10 rounded-full">
@@ -295,7 +295,7 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
 
 
                         <motion.div variants={itemVariants} className="text-center mt-8 md:mt-12">
-                            <Button size="lg" className="font-bold text-lg md:py-6 md:px-12 bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-lg transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95">
+                            <Button size="default" className="font-bold text-lg md:py-6 md:px-12 bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-lg transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95 md:text-lg">
                                 View More
                             </Button>
                         </motion.div>
@@ -306,3 +306,5 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
     </section>
   );
 }
+
+    

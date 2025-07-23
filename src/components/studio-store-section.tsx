@@ -118,7 +118,7 @@ export function StudioStoreSection() {
                 </CardContent>
                 <CardFooter className="p-6 pt-4">
                   <Button className="w-full">
-                    Request this Product
+                    View More
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </CardFooter>

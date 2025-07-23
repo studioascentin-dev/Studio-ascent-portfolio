@@ -228,7 +228,7 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
                 variants={sectionVariants}
                 className="mb-12"
             >
-                <div className="max-w-3xl mx-auto text-center">
+                <div className="max-w-3xl mx-auto text-center px-4">
                     <motion.h2 variants={itemVariants} className="text-4xl font-bold font-headline tracking-tighter sm:text-5xl md:text-6xl">My Services</motion.h2>
                     <motion.p variants={itemVariants} className="text-muted-foreground md:text-xl/relaxed lg:text-lg/relaxed xl:text-xl/relaxed mt-6 max-w-2xl mx-auto">
                         A closer look at the digital services I provide to bring your vision to life.
@@ -236,7 +236,7 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
                 </div>
             </motion.div>
             
-            <div className="flex flex-col gap-16 px-4">
+            <div className="flex flex-col gap-16">
                 {services.map((service) => (
                     <motion.div 
                         key={service.title}
@@ -248,7 +248,7 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
                         variants={sectionVariants}
                         className="space-y-8"
                     >
-                        <motion.div variants={itemVariants} className="max-w-5xl space-y-6 mx-auto text-center">
+                        <motion.div variants={itemVariants} className="max-w-5xl space-y-6 mx-auto text-center px-4">
                             <div className="inline-block p-4 bg-primary/10 rounded-full">
                                 {React.cloneElement(service.icon, { className: 'h-12 w-12 text-primary' })}
                             </div>
@@ -261,7 +261,7 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
                           initial="hidden"
                           whileInView="visible"
                           viewport={{ once: true, amount: 0.2 }}
-                          className="mx-auto max-w-7xl"
+                          className="mx-auto max-w-7xl px-4 md:px-0"
                         >
                             <div className="hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
                                 {service.projects.map((project) => (
@@ -306,5 +306,3 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
     </section>
   );
 }
-
-    

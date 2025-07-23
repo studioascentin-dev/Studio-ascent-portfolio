@@ -219,14 +219,14 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
   };
 
   return (
-    <section id="services" className="bg-background min-h-screen flex flex-col justify-center py-24 md:py-32">
+    <section id="services" className="bg-background min-h-screen flex flex-col justify-center py-16 md:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.3 }}
                 variants={sectionVariants}
-                className="mb-24"
+                className="mb-16 md:mb-24"
             >
                 <div className="max-w-3xl mx-auto text-center">
                     <motion.h2 variants={itemVariants} className="text-4xl font-bold font-headline tracking-tighter sm:text-5xl md:text-6xl">My Services</motion.h2>
@@ -236,7 +236,7 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
                 </div>
             </motion.div>
             
-            <div className="flex flex-col gap-40 md:gap-48">
+            <div className="flex flex-col gap-24 md:gap-48">
                 {services.map((service) => (
                     <motion.div 
                         key={service.title}
@@ -246,7 +246,7 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
                         whileInView="visible"
                         viewport={{ once: true, amount: 0.1 }}
                         variants={sectionVariants}
-                        className="space-y-20"
+                        className="space-y-12 md:space-y-20"
                     >
                         <motion.div variants={itemVariants} className="max-w-5xl space-y-6 mx-auto text-center">
                             <div className="inline-block p-4 bg-primary/10 rounded-full">
@@ -294,7 +294,7 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
                         </div>
 
 
-                        <motion.div variants={itemVariants} className="text-center mt-12">
+                        <motion.div variants={itemVariants} className="text-center mt-8 md:mt-12">
                             <Button size="lg" className="font-bold text-lg py-6 px-12 bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-lg transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95">
                                 View More
                             </Button>

@@ -3,7 +3,7 @@
 
 import * as React from 'react';
 import { motion } from 'framer-motion';
-import { Briefcase, Tag, Home, Video, Camera, Presentation, Code, PenTool } from 'lucide-react';
+import { Briefcase, Tag, Home, Video, Camera, Presentation, Code, PenTool, Store } from 'lucide-react';
 import { useOnScreen } from '@/hooks/use-on-screen';
 import { cn } from '@/lib/utils';
 import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip';
@@ -15,18 +15,20 @@ const navItems = [
   { href: '#ppt-design', text: 'PPT Design', icon: Presentation, refKey: 'pptDesignRef' },
   { href: '#web-design', text: 'Web Design', icon: PenTool, refKey: 'webDesignRef' },
   { href: '#web-development', text: 'Web Development', icon: Code, refKey: 'webDevelopmentRef' },
+  { href: '#store', text: 'Store', icon: Store, refKey: 'storeRef' },
   { href: '#pricing', text: 'Pricing', icon: Tag, refKey: 'pricingRef' },
   { href: '#hire-me', text: 'Hire Me', icon: Briefcase, refKey: 'hireMeRef' },
 ];
 
 interface HeaderProps {
-    refs: {
+    refs?: {
         aboutRef?: React.RefObject<HTMLElement>;
         videoEditingRef?: React.RefObject<HTMLElement>;
         photoEditingRef?: React.RefObject<HTMLElement>;
         pptDesignRef?: React.RefObject<HTMLElement>;
         webDesignRef?: React.RefObject<HTMLElement>;
         webDevelopmentRef?: React.RefObject<HTMLElement>;
+        storeRef?: React.RefObject<HTMLElement>;
         pricingRef?: React.RefObject<HTMLElement>;
         hireMeRef?: React.RefObject<HTMLElement>;
     }
@@ -88,19 +90,21 @@ export function Header({ refs = {} }: HeaderProps) {
       rootMargin: '-50% 0px -50% 0px'
     };
   
-    const isAboutOnScreen = useOnScreen(refs.aboutRef!, observerOptions);
-    const isVideoEditingOnScreen = useOnScreen(refs.videoEditingRef!, observerOptions);
-    const isPhotoEditingOnScreen = useOnScreen(refs.photoEditingRef!, observerOptions);
-    const isPptDesignOnScreen = useOnScreen(refs.pptDesignRef!, observerOptions);
-    const isWebDesignOnScreen = useOnScreen(refs.webDesignRef!, observerOptions);
-    const isWebDevelopmentOnScreen = useOnScreen(refs.webDevelopmentRef!, observerOptions);
-    const isPricingOnScreen = useOnScreen(refs.pricingRef!, observerOptions);
-    const isHireMeOnScreen = useOnScreen(refs.hireMeRef!, observerOptions);
+    const isAboutOnScreen = useOnScreen(refs.aboutRef, observerOptions);
+    const isVideoEditingOnScreen = useOnScreen(refs.videoEditingRef, observerOptions);
+    const isPhotoEditingOnScreen = useOnScreen(refs.photoEditingRef, observerOptions);
+    const isPptDesignOnScreen = useOnScreen(refs.pptDesignRef, observerOptions);
+    const isWebDesignOnScreen = useOnScreen(refs.webDesignRef, observerOptions);
+    const isWebDevelopmentOnScreen = useOnScreen(refs.webDevelopmentRef, observerOptions);
+    const isStoreOnScreen = useOnScreen(refs.storeRef, observerOptions);
+    const isPricingOnScreen = useOnScreen(refs.pricingRef, observerOptions);
+    const isHireMeOnScreen = useOnScreen(refs.hireMeRef, observerOptions);
     
     React.useEffect(() => {
         let currentSection = 'aboutRef';
         if (isHireMeOnScreen) currentSection = 'hireMeRef';
         if (isPricingOnScreen) currentSection = 'pricingRef';
+        if (isStoreOnScreen) currentSection = 'storeRef';
         if (isWebDevelopmentOnScreen) currentSection = 'webDevelopmentRef';
         if (isWebDesignOnScreen) currentSection = 'webDesignRef';
         if (isPptDesignOnScreen) currentSection = 'pptDesignRef';
@@ -108,7 +112,7 @@ export function Header({ refs = {} }: HeaderProps) {
         if (isVideoEditingOnScreen) currentSection = 'videoEditingRef';
         if (isAboutOnScreen) currentSection = 'aboutRef';
         setActiveSection(currentSection);
-    }, [isAboutOnScreen, isVideoEditingOnScreen, isPhotoEditingOnScreen, isPptDesignOnScreen, isWebDesignOnScreen, isWebDevelopmentOnScreen, isPricingOnScreen, isHireMeOnScreen]);
+    }, [isAboutOnScreen, isVideoEditingOnScreen, isPhotoEditingOnScreen, isPptDesignOnScreen, isWebDesignOnScreen, isWebDevelopmentOnScreen, isStoreOnScreen, isPricingOnScreen, isHireMeOnScreen]);
 
     return (
         <header className="fixed bottom-4 left-1/2 z-50 -translate-x-1/2 md:bottom-auto md:top-4">

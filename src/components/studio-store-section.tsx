@@ -5,14 +5,13 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { ShoppingCart } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const products = [
   {
     title: 'Modern Portfolio Website Template',
     category: 'Web Template',
-    price: '₹4,500',
     description: 'A sleek, modern, and fully responsive Next.js template for creatives and professionals.',
     image: 'https://placehold.co/600x400.png',
     dataAiHint: 'website template',
@@ -21,7 +20,6 @@ const products = [
   {
     title: 'Cinematic LUTs Pack',
     category: 'Photoshop Presets',
-    price: '₹1,200',
     description: 'A collection of 15 professional color grading presets for Photoshop to give your photos a cinematic look.',
     image: 'https://placehold.co/600x400.png',
     dataAiHint: 'color presets',
@@ -30,7 +28,6 @@ const products = [
   {
     title: 'Corporate Web Design System',
     category: 'Web Design',
-    price: '₹2,800',
     description: 'A complete Figma design system for corporate websites, including components, icons, and styles.',
     image: 'https://placehold.co/600x400.png',
     dataAiHint: 'design system',
@@ -119,11 +116,10 @@ export function StudioStoreSection() {
                     ))}
                   </div>
                 </CardContent>
-                <CardFooter className="p-6 pt-0 flex justify-between items-center">
-                  <p className="text-2xl font-bold text-foreground">{product.price}</p>
-                  <Button>
-                    <ShoppingCart className="mr-2 h-4 w-4" />
-                    Add to Cart
+                <CardFooter className="p-6 pt-4">
+                  <Button className="w-full">
+                    Request this Product
+                    <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </CardFooter>
               </Card>

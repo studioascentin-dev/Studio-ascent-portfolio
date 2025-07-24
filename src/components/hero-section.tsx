@@ -67,7 +67,7 @@ export function HeroSection() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, type: 'spring' }}
         className="max-w-3xl mx-auto text-base md:text-xl lg:text-2xl text-foreground/90 font-medium tracking-wide leading-relaxed mt-12 z-20">
-        I build and design beautiful digital experiences that make an impact.
+        From captivating visuals to seamless code, I bring your ideas to life.
       </motion.p>
       <motion.div
         initial={{ opacity: 0, y: 20 }}

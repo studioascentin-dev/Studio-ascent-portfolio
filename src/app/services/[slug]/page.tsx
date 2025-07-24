@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Video, Camera, Presentation, Code, PenTool } from 'lucide-react';
-import { notFound } from 'next/navigation';
+import { notFound, useParams } from 'next/navigation';
 import * as React from 'react';
 
 const servicesData = {
@@ -100,7 +100,9 @@ const cardVariants = {
 };
 
 
-export default function ServicePage({ params: { slug } }: { params: { slug: string } }) {
+export default function ServicePage() {
+  const params = useParams();
+  const slug = params.slug as string;
   const service = servicesData[slug as keyof typeof servicesData];
 
   if (!service) {

@@ -38,8 +38,7 @@ const services = [
     "Photo Editing",
     "PPT Design",
     "Web Design",
-    "Web Development",
-    "Something Else"
+    "Web Development"
 ];
 
 const sectionVariants = {

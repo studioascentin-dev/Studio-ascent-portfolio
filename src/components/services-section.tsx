@@ -292,8 +292,8 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
                         </motion.div>
 
                         <motion.div variants={itemVariants} className="text-center mt-8 md:mt-12">
-                            <Button size="lg" className="font-bold text-lg md:text-base py-3 px-8 md:py-6 md:px-12 bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-lg transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95">
-                                View More
+                             <Button asChild size="lg" className="font-bold text-lg md:text-base py-3 px-8 md:py-6 md:px-12 bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-lg transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95">
+                                <a href={`/services/${service.id}`}>View More</a>
                             </Button>
                         </motion.div>
                     </motion.div>
@@ -303,3 +303,5 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
     </section>
   );
 }
+
+    

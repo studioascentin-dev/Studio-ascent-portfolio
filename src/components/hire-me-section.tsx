@@ -1,10 +1,14 @@
 
 "use client";
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Lightbulb, Handshake, IndianRupee, Rocket } from 'lucide-react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogTrigger } from '@/components/ui/dialog';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Label } from '@/components/ui/label';
 
 const reasons = [
   {
@@ -27,6 +31,15 @@ const reasons = [
     title: "Payment Terms",
     description: "To ensure commitment and secure project scheduling, a 50% advance payment is required for all projects with a total cost exceeding ₹10,000."
   }
+];
+
+const services = [
+    "Video Editing",
+    "Photo Editing",
+    "PPT Design",
+    "Web Design",
+    "Web Development",
+    "Something Else"
 ];
 
 const sectionVariants = {
@@ -54,10 +67,17 @@ const itemVariants = {
 };
 
 export function HireMeSection() {
-  const phoneNumber = "911234567890"; // TODO: Replace with your WhatsApp number (e.g., 91 for India)
-  const message = "Hello! I'm interested in your services and would like to discuss a project."; // TODO: Customize your default message
+  const [selectedService, setSelectedService] = useState(services[0]);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+  const phoneNumber = "911234567890"; // TODO: Replace with your WhatsApp number (e.g., 91 for India)
+  
+  const handleContinue = () => {
+    const message = `Hello! I'm interested in your services, specifically for ${selectedService}. I'd like to discuss a project.`;
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    setIsDialogOpen(false);
+  }
 
   return (
     <section id="hire-me" className="py-24 md:py-32 bg-secondary/30">
@@ -113,9 +133,36 @@ export function HireMeSection() {
         </motion.div>
 
         <motion.div variants={itemVariants} className="text-center mt-16">
-            <Button asChild size="lg" className="font-bold text-base md:text-lg py-4 px-10 md:py-6 md:px-12 bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-lg transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95">
-              <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">Let's Talk</a>
-            </Button>
+            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+              <DialogTrigger asChild>
+                <Button size="lg" className="font-bold text-base md:text-lg py-4 px-10 md:py-6 md:px-12 bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-lg transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95">
+                  Let's Talk
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-[425px]">
+                <DialogHeader>
+                  <DialogTitle>What can I help you with?</DialogTitle>
+                  <DialogDescription>
+                    Select a service you're interested in so I can better understand your needs.
+                  </DialogDescription>
+                </DialogHeader>
+                <div className="py-4">
+                  <RadioGroup defaultValue={selectedService} onValueChange={setSelectedService}>
+                    <div className="grid grid-cols-2 gap-4">
+                      {services.map((service) => (
+                        <div key={service} className="flex items-center space-x-2">
+                            <RadioGroupItem value={service} id={service.replace(/\s+/g, '-').toLowerCase()} />
+                            <Label htmlFor={service.replace(/\s+/g, '-').toLowerCase()} className="cursor-pointer">{service}</Label>
+                        </div>
+                      ))}
+                    </div>
+                  </RadioGroup>
+                </div>
+                <DialogFooter>
+                  <Button onClick={handleContinue} className="w-full">Continue to WhatsApp</Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
         </motion.div>
       </motion.div>
     </section>

@@ -69,7 +69,7 @@ export function HireMeSection() {
   const [selectedService, setSelectedService] = useState(services[0]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  const phoneNumber = "911234567890"; // TODO: Replace with your WhatsApp number (e.g., 91 for India)
+  const phoneNumber = "919707191619"; 
   
   const handleContinue = () => {
     const message = `Hello! I'm interested in your services, specifically for ${selectedService}. I'd like to discuss a project.`;

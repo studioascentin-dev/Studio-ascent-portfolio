@@ -2,7 +2,6 @@
 "use client";
 
 import { Video, Camera, Presentation, Code, PenTool } from 'lucide-react';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
@@ -18,9 +17,9 @@ const services = [
     title: 'Video Editing',
     description: 'From corporate brand films to dynamic social media ads, I bring your vision to life with professional video editing that ancapts and engages your audience.',
     projects: [
-      { name: 'YouTube Videos', image: 'https://placehold.co/600x400.png', dataAiHint: 'youtube vlogger' },
-      { name: 'Instagram Reels', image: 'https://placehold.co/600x400.png', dataAiHint: 'social media influencer' },
-      { name: 'Color Grading & VFX', image: 'https://placehold.co/600x400.png', dataAiHint: 'visual effects' },
+      { name: 'YouTube Videos', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4' },
+      { name: 'Instagram Reels', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4' },
+      { name: 'Color Grading & VFX', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4' },
     ]
   },
   {
@@ -29,9 +28,9 @@ const services = [
     title: 'Photo Editing',
     description: 'With high-quality photo retouching and manipulation, I enhance your images to perfection, ensuring your product shots and portraits look stunning and professional.',
     projects: [
-        { name: 'E-commerce Product Showcase', image: 'https://placehold.co/600x400.png', dataAiHint: 'product photography' },
-        { name: 'Fashion Lookbook', image: 'https://placehold.co/600x400.png', dataAiHint: 'fashion model' },
-        { name: 'Real Estate Photography', image: 'https://placehold.co/600x400.png', dataAiHint: 'luxury home' },
+        { name: 'E-commerce Product Showcase', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4' },
+        { name: 'Fashion Lookbook', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4' },
+        { name: 'Real Estate Photography', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4' },
     ]
   },
   {
@@ -40,9 +39,9 @@ const services = [
     title: 'PPT Design',
     description: 'I create stunning and effective presentations that not only look great but also communicate your message clearly, making sure you stand out in any setting.',
     projects: [
-        { name: 'Startup Pitch Deck', image: 'https://placehold.co/600x400.png', dataAiHint: 'business presentation' },
-        { name: 'Corporate Training Materials', image: 'https://placehold.co/600x400.png', dataAiHint: 'corporate training' },
-        { name: 'Webinar Slides', image: 'https://placehold.co/600x400.png', dataAiHint: 'online webinar' },
+        { name: 'Startup Pitch Deck', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4' },
+        { name: 'Corporate Training Materials', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4' },
+        { name: 'Webinar Slides', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4' },
     ]
   },
   {
@@ -51,9 +50,9 @@ const services = [
     title: 'Web Design',
     description: 'I design beautiful, intuitive, and user-friendly web interfaces that provide an exceptional user experience and make a lasting impression on your visitors.',
     projects: [
-        { name: 'Artist Portfolio Website', image: 'https://placehold.co/600x400.png', dataAiHint: 'art portfolio' },
-        { name: 'Restaurant Booking Site', image: 'https://placehold.co/600x400.png', dataAiHint: 'restaurant interior' },
-        { name: 'Non-Profit Organization Site', image: 'https://placehold.co/600x400.png', dataAiHint: 'charity event' },
+        { name: 'Artist Portfolio Website', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4' },
+        { name: 'Restaurant Booking Site', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4' },
+        { name: 'Non-Profit Organization Site', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4' },
     ]
   },
   {
@@ -62,9 +61,9 @@ const services = [
     title: 'Web Development',
     description: 'I build robust, scalable, and high-performance websites and applications that are not only fast and reliable but also tailored to your specific business needs.',
     projects: [
-        { name: 'SaaS Platform Development', image: 'https://placehold.co/600x400.png', dataAiHint: 'dashboard interface' },
-        { name: 'Custom E-commerce Store', image: 'https://placehold.co/600x400.png', dataAiHint: 'online shopping' },
-        { name: 'Content Management System', image: 'https://placehold.co/600x400.png', dataAiHint: 'blogging platform' },
+        { name: 'SaaS Platform Development', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4' },
+        { name: 'Custom E-commerce Store', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4' },
+        { name: 'Content Management System', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4' },
     ]
   },
 ];
@@ -179,14 +178,14 @@ const MobileCarousel = ({ projects }: { projects: typeof services[0]['projects']
                             }}
                         >
                             <Card className="overflow-hidden bg-card/80 backdrop-blur-sm group h-full flex flex-col">
-                                <CardHeader className="p-0 relative">
-                                    <Image
-                                        src={project.image}
-                                        alt={project.name}
-                                        width={600}
-                                        height={400}
-                                        className="w-full h-auto object-cover"
-                                        data-ai-hint={project.dataAiHint}
+                                <CardHeader className="p-0 relative aspect-video">
+                                    <video
+                                        src={project.video}
+                                        autoPlay
+                                        muted
+                                        loop
+                                        playsInline
+                                        className="w-full h-full object-cover"
                                     />
                                 </CardHeader>
                                 <CardContent className="p-4 flex-grow">
@@ -272,14 +271,14 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
                                         variants={cardVariants}
                                     >
                                         <Card className="overflow-hidden bg-card/80 backdrop-blur-sm group h-full flex flex-col">
-                                            <CardHeader className="p-0 relative">
-                                                <Image
-                                                    src={project.image}
-                                                    alt={project.name}
-                                                    width={600}
-                                                    height={400}
-                                                    className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
-                                                    data-ai-hint={project.dataAiHint}
+                                            <CardHeader className="p-0 relative aspect-video">
+                                                <video
+                                                    src={project.video}
+                                                    autoPlay
+                                                    muted
+                                                    loop
+                                                    playsInline
+                                                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                                                 />
                                             </CardHeader>
                                             <CardContent className="p-8 flex-grow">

@@ -119,12 +119,6 @@ export default function ServicePage({ params: { slug } }: { params: { slug: stri
                         transition={{ duration: 0.5 }}
                         className="max-w-3xl mx-auto space-y-4"
                     >
-                        <Button asChild variant="ghost" className="pl-0 text-muted-foreground hover:text-primary">
-                            <a href="/#services">
-                                <ArrowLeft className="mr-2 h-4 w-4" />
-                                Back to Services
-                            </a>
-                        </Button>
                         <div className="flex flex-col items-center text-center space-y-4">
                             <div className="inline-block p-4 bg-primary/10 rounded-full">
                                 {React.cloneElement(service.icon, { className: 'h-10 w-10 md:h-12 md:w-12 text-primary' })}
@@ -163,6 +157,15 @@ export default function ServicePage({ params: { slug } }: { params: { slug: stri
                             </motion.div>
                         ))}
                     </motion.div>
+
+                    <div className="text-center mt-12">
+                        <Button asChild className="font-bold text-lg py-4 px-10 bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-lg transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95">
+                            <a href="/#services">
+                                <ArrowLeft className="mr-2 h-4 w-4" />
+                                Back to Services
+                            </a>
+                        </Button>
+                    </div>
                 </div>
             </div>
         </section>

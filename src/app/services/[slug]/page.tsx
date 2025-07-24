@@ -100,8 +100,8 @@ const cardVariants = {
 };
 
 
-export default function ServicePage({ params }: { params: { slug: string } }) {
-  const service = servicesData[params.slug as keyof typeof servicesData];
+export default function ServicePage({ params: { slug } }: { params: { slug: string } }) {
+  const service = servicesData[slug as keyof typeof servicesData];
 
   if (!service) {
     notFound();

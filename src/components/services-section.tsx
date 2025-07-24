@@ -18,9 +18,9 @@ const services = [
     title: 'Video Editing',
     description: 'From corporate brand films to dynamic social media ads, I bring your vision to life with professional video editing that ancapts and engages your audience.',
     projects: [
-      { name: 'Corporate Brand Film', image: 'https://placehold.co/600x400.png', dataAiHint: 'corporate video' },
-      { name: 'Social Media Ad Campaign', image: 'https://placehold.co/600x400.png', dataAiHint: 'social media marketing' },
-      { name: 'Wedding Highlights', image: 'https://placehold.co/600x400.png', dataAiHint: 'wedding film' },
+      { name: 'YouTube Videos', image: 'https://placehold.co/600x400.png', dataAiHint: 'youtube vlogger' },
+      { name: 'Instagram Reels', image: 'https://placehold.co/600x400.png', dataAiHint: 'social media influencer' },
+      { name: 'Color Grading & VFX', image: 'https://placehold.co/600x400.png', dataAiHint: 'visual effects' },
     ]
   },
   {
@@ -163,37 +163,39 @@ const MobileCarousel = ({ projects }: { projects: typeof services[0]['projects']
     }, [emblaApi, onScroll]);
 
     return (
-        <div className="overflow-hidden" ref={emblaRef}>
-            <div className="flex -ml-4">
-                {projects.map((project, index) => (
-                    <div
-                        key={project.name}
-                        className="flex-[0_0_80%] min-w-0 pl-4"
-                        style={{
-                            ...(tweenValues.length && {
-                                opacity: numberWithinRange(tweenValues[index], 0.3, 1),
-                                transform: `scale(${tweenValues[index]})`,
-                                filter: `blur(${ (1 - tweenValues[index]) * 8 }px)`,
-                            }),
-                        }}
-                    >
-                        <Card className="overflow-hidden bg-card/80 backdrop-blur-sm group h-full flex flex-col">
-                            <CardHeader className="p-0 relative">
-                                <Image
-                                    src={project.image}
-                                    alt={project.name}
-                                    width={600}
-                                    height={400}
-                                    className="w-full h-auto object-cover"
-                                    data-ai-hint={project.dataAiHint}
-                                />
-                            </CardHeader>
-                            <CardContent className="p-4 flex-grow">
-                                <h4 className="font-headline text-xl">{project.name}</h4>
-                            </CardContent>
-                        </Card>
-                    </div>
-                ))}
+        <div className="overflow-hidden md:hidden">
+            <div className="-ml-4" ref={emblaRef}>
+                <div className="flex">
+                    {projects.map((project, index) => (
+                        <div
+                            key={project.name}
+                            className="flex-[0_0_80%] min-w-0 pl-4"
+                            style={{
+                                ...(tweenValues.length && {
+                                    opacity: numberWithinRange(tweenValues[index], 0.3, 1),
+                                    transform: `scale(${tweenValues[index]})`,
+                                    filter: `blur(${ (1 - tweenValues[index]) * 8 }px)`,
+                                }),
+                            }}
+                        >
+                            <Card className="overflow-hidden bg-card/80 backdrop-blur-sm group h-full flex flex-col">
+                                <CardHeader className="p-0 relative">
+                                    <Image
+                                        src={project.image}
+                                        alt={project.name}
+                                        width={600}
+                                        height={400}
+                                        className="w-full h-auto object-cover"
+                                        data-ai-hint={project.dataAiHint}
+                                    />
+                                </CardHeader>
+                                <CardContent className="p-4 flex-grow">
+                                    <h4 className="font-headline text-xl">{project.name}</h4>
+                                </CardContent>
+                            </Card>
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     );
@@ -287,15 +289,11 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
                                     </motion.div>
                                 ))}
                             </div>
+                            <MobileCarousel projects={service.projects} />
                         </motion.div>
 
-                        <div className="md:hidden">
-                            <MobileCarousel projects={service.projects} />
-                        </div>
-
-
                         <motion.div variants={itemVariants} className="text-center mt-8 md:mt-12">
-                            <Button size="default" className="font-bold text-base md:text-lg md:py-6 md:px-12 bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-lg transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95">
+                            <Button size="lg" className="font-bold text-lg md:text-base py-3 px-8 md:py-6 md:px-12 bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-lg transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95">
                                 View More
                             </Button>
                         </motion.div>

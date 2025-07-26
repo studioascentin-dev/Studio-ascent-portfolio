@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
 import * as React from 'react';
 import useEmblaCarousel, { EmblaCarouselType } from 'embla-carousel-react';
+import Image from 'next/image';
 
 const services = [
   {
@@ -27,9 +28,9 @@ const services = [
     title: 'Photo Editing',
     description: 'With high-quality photo retouching and manipulation, I enhance your images to perfection, ensuring your product shots and portraits look stunning and professional.',
     projects: [
-        { name: 'E-commerce Product Showcase', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4' },
-        { name: 'Fashion Lookbook', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4' },
-        { name: 'Real Estate Photography', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4' },
+        { name: 'E-commerce Product Showcase', image: 'https://placehold.co/600x450.png', dataAiHint: 'product photography' },
+        { name: 'Fashion Lookbook', image: 'https://placehold.co/600x450.png', dataAiHint: 'fashion model' },
+        { name: 'Real Estate Photography', image: 'https://placehold.co/600x450.png', dataAiHint: 'modern interior' },
     ]
   },
   {
@@ -120,7 +121,7 @@ const TWEEN_FACTOR = 2.2;
 const numberWithinRange = (number: number, min: number, max: number): number =>
   Math.min(Math.max(number, min), max);
 
-const MobileCarousel = ({ projects }: { projects: typeof services[0]['projects'] }) => {
+const MobileCarousel = ({ projects }: { projects: (typeof services[0]['projects']) }) => {
     const [emblaRef, emblaApi] = useEmblaCarousel({
         loop: true,
         align: 'center',
@@ -176,7 +177,7 @@ const MobileCarousel = ({ projects }: { projects: typeof services[0]['projects']
         <div className="relative overflow-hidden md:hidden">
             <div className="px-4" ref={emblaRef}>
                 <div className="flex -ml-4">
-                    {projects.map((project, index) => (
+                    {projects.map((project: any, index) => (
                         <div
                             key={project.name}
                             className="flex-[0_0_80%] min-w-0 pl-4"
@@ -190,14 +191,25 @@ const MobileCarousel = ({ projects }: { projects: typeof services[0]['projects']
                         >
                             <Card className="overflow-hidden bg-card/80 backdrop-blur-sm group h-full flex flex-col">
                                 <CardHeader className="p-0 relative aspect-video">
-                                    <video
-                                        src={project.video}
-                                        autoPlay
-                                        muted
-                                        loop
-                                        playsInline
-                                        className="w-full h-full object-cover"
-                                    />
+                                    {project.video ? (
+                                        <video
+                                            src={project.video}
+                                            autoPlay
+                                            muted
+                                            loop
+                                            playsInline
+                                            className="w-full h-full object-cover"
+                                        />
+                                    ) : (
+                                        <Image
+                                            src={project.image}
+                                            alt={project.name}
+                                            width={600}
+                                            height={450}
+                                            className="w-full h-full object-cover"
+                                            data-ai-hint={project.dataAiHint}
+                                        />
+                                    )}
                                 </CardHeader>
                                 <CardContent className="p-4 flex-grow">
                                     <h4 className="font-headline text-xl">{project.name}</h4>
@@ -298,21 +310,32 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
                           className="mx-auto max-w-7xl"
                         >
                             <div className="hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-                                {service.projects.map((project) => (
+                                {service.projects.map((project: any) => (
                                     <motion.div
                                         key={project.name}
                                         variants={cardVariants}
                                     >
                                         <Card className="overflow-hidden bg-card/80 backdrop-blur-sm group h-full flex flex-col">
                                             <CardHeader className="p-0 relative aspect-video">
-                                                <video
-                                                    src={project.video}
-                                                    autoPlay
-                                                    muted
-                                                    loop
-                                                    playsInline
-                                                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                                                />
+                                                {project.video ? (
+                                                    <video
+                                                        src={project.video}
+                                                        autoPlay
+                                                        muted
+                                                        loop
+                                                        playsInline
+                                                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                                                    />
+                                                ) : (
+                                                    <Image
+                                                        src={project.image}
+                                                        alt={project.name}
+                                                        width={600}
+                                                        height={450}
+                                                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                                                        data-ai-hint={project.dataAiHint}
+                                                    />
+                                                )}
                                             </CardHeader>
                                             <CardContent className="p-8 flex-grow">
                                                 <h4 className="font-headline text-3xl">{project.name}</h4>

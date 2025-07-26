@@ -30,8 +30,8 @@ const services = [
     description: 'With high-quality photo retouching and manipulation, I enhance your images to perfection, ensuring your product shots and portraits look stunning and professional.',
     projects: [
         { name: 'E-commerce Product Showcase', before: 'https://placehold.co/600x450.png', after: 'https://placehold.co/600x450.png', dataAiHint: 'product photography' },
-        { name: 'Fashion Lookbook', before: 'https://placehold.co/600x450.png', after: 'https://placehold.co/600x450.png', dataAiHint: 'fashion model' },
-        { name: 'Real Estate Photography', before: 'https://placehold.co/600x450.png', after: 'https://placehold.co/600x450.png', dataAiHint: 'modern interior' },
+        { name: 'Fashion Lookbook', before: 'https://placehold.co/600x800.png', after: 'https://placehold.co/600x800.png', dataAiHint: 'fashion model' },
+        { name: 'Real Estate Photography', before: 'https://placehold.co/800x600.png', after: 'https://placehold.co/800x600.png', dataAiHint: 'modern interior' },
     ]
   },
   {
@@ -181,14 +181,15 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
                           viewport={{ once: true, amount: 0.2 }}
                           className="mx-auto max-w-7xl"
                         >
-                            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-10">
+                            <div className="columns-2 md:columns-3 gap-4 md:gap-8">
                                 {service.projects.slice(0, 3).map((project: any) => (
                                     <motion.div
                                         key={project.name}
                                         variants={cardVariants}
+                                        className="mb-4 md:mb-8 break-inside-avoid"
                                     >
                                         <Card className="overflow-hidden bg-card/80 backdrop-blur-sm group h-full flex flex-col">
-                                            <CardHeader className="p-0 relative aspect-video">
+                                            <CardHeader className="p-0 relative">
                                                 {project.video ? (
                                                     <video
                                                         src={project.video}
@@ -210,13 +211,13 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
                                                         alt={project.name}
                                                         width={600}
                                                         height={450}
-                                                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                                                        className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
                                                         data-ai-hint={project.dataAiHint}
                                                     />
                                                 )}
                                             </CardHeader>
-                                            <CardContent className="p-4 md:p-8 flex-grow">
-                                                <h4 className="font-headline text-lg md:text-3xl">{project.name}</h4>
+                                            <CardContent className="p-4 flex-grow">
+                                                <h4 className="font-headline text-lg">{project.name}</h4>
                                             </CardContent>
                                         </Card>
                                     </motion.div>
@@ -236,3 +237,5 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
     </section>
   );
 }
+
+    

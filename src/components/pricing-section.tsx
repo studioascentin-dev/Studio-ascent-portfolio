@@ -137,8 +137,14 @@ export function PricingSection() {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 items-start max-w-7xl mx-auto"
         >
           {pricingTiers.map((tier) => (
-            <motion.div key={tier.name} variants={cardVariants} className="flex h-full">
-              <Card className={cn("flex flex-col w-full", tier.isFeatured ? "border-primary ring-2 ring-primary shadow-lg" : "bg-card/80")}>
+            <motion.div 
+              key={tier.name} 
+              variants={cardVariants} 
+              className="flex h-full"
+              whileHover={{ y: -8, scale: 1.03 }}
+              transition={{ type: 'spring', stiffness: 300 }}
+            >
+              <Card className={cn("flex flex-col w-full transition-shadow duration-300", tier.isFeatured ? "border-primary ring-2 ring-primary shadow-lg" : "bg-card/80", !tier.isFeatured && "hover:shadow-lg hover:shadow-primary/20")}>
                 <CardHeader className="text-center pb-4">
                   <CardTitle className="text-xl md:text-2xl font-headline mb-2">{tier.name}</CardTitle>
                   <CardDescription className="px-6 h-12">{tier.description}</CardDescription>

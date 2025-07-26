@@ -7,6 +7,7 @@ import { ProjectsSection } from '@/components/projects-section';
 import { ServicesSection } from '@/components/services-section';
 import { Footer } from '@/components/footer';
 import * as React from 'react';
+import { HireMeSection } from '@/components/hire-me-section';
 
 export default function Home() {
   const aboutRef = React.useRef<HTMLDivElement>(null);
@@ -17,10 +18,11 @@ export default function Home() {
   const pptDesignRef = React.useRef<HTMLDivElement>(null);
   const webDesignRef = React.useRef<HTMLDivElement>(null);
   const webDevelopmentRef = React.useRef<HTMLDivElement>(null);
+  const hireMeRef = React.useRef<HTMLDivElement>(null);
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
-      <Header refs={{ aboutRef, projectsRef, videoEditingRef, photoEditingRef, pptDesignRef, webDesignRef, webDevelopmentRef }} />
+      <Header refs={{ aboutRef, projectsRef, videoEditingRef, photoEditingRef, pptDesignRef, webDesignRef, webDevelopmentRef, hireMeRef }} />
       <main className="flex-1">
         <div id="hero-section" ref={aboutRef}>
             <HeroSection />
@@ -29,6 +31,9 @@ export default function Home() {
             <ProjectsSection />
         </div>
         <ServicesSection refs={{ videoEditingRef, photoEditingRef, pptDesignRef, webDesignRef, webDevelopmentRef }} />
+        <div id="hire-me" ref={hireMeRef}>
+          <HireMeSection />
+        </div>
       </main>
       <Footer />
     </div>

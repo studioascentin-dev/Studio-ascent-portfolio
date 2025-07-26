@@ -9,47 +9,71 @@ import { cn } from '@/lib/utils';
 
 const pricingTiers = [
   {
-    name: 'Starter',
-    price: '₹8,000',
-    period: '/ project',
-    description: 'Perfect for individuals and small projects getting off the ground.',
+    name: 'Photo Editing',
+    price: '₹2,000',
+    period: '/ 10 photos',
+    description: 'Perfect for enhancing your product shots, portraits, and social media content.',
     features: [
-      'Basic Video/Photo Editing',
-      'Simple PPT Design (up to 15 slides)',
-      '1 Round of Revisions',
-      'Standard Turnaround Time',
+      'Advanced Retouching',
+      'Color Correction & Grading',
+      'Background Removal',
+      '2 Rounds of Revisions',
     ],
     buttonText: 'Get Started',
     isFeatured: false,
   },
   {
-    name: 'Pro',
-    price: '₹20,000',
-    period: '/ project',
-    description: 'Ideal for startups and businesses needing professional-grade assets.',
+    name: 'Video Editing',
+    price: '₹5,000',
+    period: '/ minute',
+    description: 'Ideal for creating engaging short-form content like reels and ads.',
     features: [
-      'Advanced Video/Photo Editing',
-      'Custom Web Design (up to 5 pages)',
-      'Interactive PPT Design',
+      'Professional Cutting & Pacing',
+      'Basic Color Grading',
+      'Royalty-Free Music',
+      '2 Rounds of Revisions',
+    ],
+    buttonText: 'Choose Plan',
+    isFeatured: false,
+  },
+  {
+    name: 'PPT Design',
+    price: '₹10,000',
+    period: '/ presentation',
+    description: 'For compelling pitch decks, webinars, and corporate presentations.',
+    features: [
+      'Custom Branded Template',
+      'Up to 20 Slides',
+      'Infographics & Charts',
       '3 Rounds of Revisions',
-      'Faster Turnaround Time',
-      'Source Files Included',
+    ],
+    buttonText: 'Choose Plan',
+    isFeatured: false,
+  },
+  {
+    name: 'Web Design',
+    price: '₹25,000',
+    period: '/ project',
+    description: 'A complete, beautiful, and user-friendly website design.',
+    features: [
+      'Up to 5 Pages UI/UX Design',
+      'Responsive Mobile-First Design',
+      'Interactive Prototypes',
+      'Source Files (Figma)',
     ],
     buttonText: 'Choose Pro',
     isFeatured: true,
   },
   {
-    name: 'Enterprise',
-    price: '₹45,000+',
-    period: '/ month',
-    description: 'Comprehensive solutions for established businesses and ongoing needs.',
+    name: 'Web Development',
+    price: '₹50,000',
+    period: '/ project',
+    description: 'Robust and scalable websites built with the latest technology.',
     features: [
-      'Full-scale Web Development',
-      'Dedicated Project Management',
-      'Unlimited Revisions',
-      'Priority Support (24/7)',
-      'Monthly Retainer for all services',
-      'Custom Analytics & Reporting'
+      'Everything in Web Design',
+      'Next.js Development',
+      'Content Management System',
+      '1 Month of Support',
     ],
     buttonText: 'Contact Sales',
     isFeatured: false,
@@ -110,24 +134,24 @@ export function PricingSection() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
           variants={sectionVariants}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start max-w-5xl mx-auto"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 items-start max-w-7xl mx-auto"
         >
-          {pricingTiers.map((tier, index) => (
-            <motion.div key={tier.name} variants={cardVariants}>
-              <Card className={cn("flex flex-col h-full", tier.isFeatured ? "border-primary ring-2 ring-primary shadow-lg" : "bg-card/80")}>
+          {pricingTiers.map((tier) => (
+            <motion.div key={tier.name} variants={cardVariants} className="flex h-full">
+              <Card className={cn("flex flex-col w-full", tier.isFeatured ? "border-primary ring-2 ring-primary shadow-lg" : "bg-card/80")}>
                 <CardHeader className="text-center pb-4">
                   <CardTitle className="text-xl md:text-2xl font-headline mb-2">{tier.name}</CardTitle>
-                  <CardDescription className="px-6">{tier.description}</CardDescription>
+                  <CardDescription className="px-6 h-12">{tier.description}</CardDescription>
                 </CardHeader>
                 <CardContent className="flex flex-col flex-grow items-center p-6">
                   <div className="mb-8 text-center">
                     <span className="text-4xl md:text-5xl font-bold tracking-tighter">{tier.price}</span>
                     <span className="text-muted-foreground">{tier.period}</span>
                   </div>
-                  <ul className="space-y-4 text-sm w-full">
+                  <ul className="space-y-4 text-sm w-full flex-grow">
                     {tier.features.map((feature, i) => (
-                      <li key={i} className="flex items-center gap-3">
-                        <Check className="h-5 w-5 text-green-500" />
+                      <li key={i} className="flex items-start gap-3">
+                        <Check className="h-5 w-5 text-green-500 mt-0.5 shrink-0" />
                         <span className="text-muted-foreground">{feature}</span>
                       </li>
                     ))}

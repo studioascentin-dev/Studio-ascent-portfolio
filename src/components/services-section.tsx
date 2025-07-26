@@ -181,15 +181,14 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
                           viewport={{ once: true, amount: 0.2 }}
                           className="mx-auto max-w-7xl"
                         >
-                            <div className="columns-2 md:columns-3 gap-4 md:gap-8">
+                            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8">
                                 {service.projects.slice(0, 3).map((project: any) => (
                                     <motion.div
                                         key={project.name}
                                         variants={cardVariants}
-                                        className="mb-4 md:mb-8 break-inside-avoid"
                                     >
                                         <Card className="overflow-hidden bg-card/80 backdrop-blur-sm group h-full flex flex-col">
-                                            <CardHeader className="p-0 relative">
+                                            <CardHeader className="p-0 relative aspect-video">
                                                 {project.video ? (
                                                     <video
                                                         src={project.video}
@@ -216,8 +215,8 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
                                                     />
                                                 )}
                                             </CardHeader>
-                                            <CardContent className="p-4 flex-grow">
-                                                <h4 className="font-headline text-lg">{project.name}</h4>
+                                            <CardContent className="p-4 flex-grow flex flex-col">
+                                                <h4 className="font-headline text-lg flex-grow">{project.name}</h4>
                                             </CardContent>
                                         </Card>
                                     </motion.div>
@@ -237,5 +236,3 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
     </section>
   );
 }
-
-    

@@ -50,18 +50,11 @@ const reasonsToHire = [
 
 export function HireMeSection() {
     const phoneNumber = "919707191619";
-    const emailAddress = "devkumardas@example.com";
 
     const handleWhatsAppClick = () => {
         const message = "Hello! I'm interested in your services and would like to discuss a project.";
         const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
         window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-    }
-
-    const handleEmailClick = () => {
-        const subject = "Project Inquiry from your Portfolio";
-        const mailtoUrl = `mailto:${emailAddress}?subject=${encodeURIComponent(subject)}`;
-        window.location.href = mailtoUrl;
     }
 
     return (
@@ -128,15 +121,6 @@ export function HireMeSection() {
                     >
                         <Phone className="mr-2 h-5 w-5" />
                         Contact on WhatsApp
-                    </Button>
-                    <Button
-                        size="lg"
-                        variant="outline"
-                        className="w-full sm:w-auto font-bold text-lg py-4 px-10 shadow-lg transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95"
-                        onClick={handleEmailClick}
-                    >
-                        <Mail className="mr-2 h-5 w-5" />
-                        Send an Email
                     </Button>
                 </motion.div>
             </motion.div>

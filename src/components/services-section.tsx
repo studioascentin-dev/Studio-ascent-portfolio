@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
 import * as React from 'react';
-import useEmblaCarousel, { EmblaCarouselType } from 'embla-carousel-react';
+import useEmblaCarousel, { EmblaCarouselType, EmblaOptionsType } from 'embla-carousel-react';
 import Image from 'next/image';
 import { ImageCompare } from './image-compare';
 
@@ -123,11 +123,15 @@ const numberWithinRange = (number: number, min: number, max: number): number =>
   Math.min(Math.max(number, min), max);
 
 const MobileCarousel = ({ projects }: { projects: (typeof services[0]['projects']) }) => {
+    const [isDragging, setIsDragging] = React.useState(false);
+    
     const [emblaRef, emblaApi] = useEmblaCarousel({
         loop: true,
         align: 'center',
         skipSnaps: false,
+        watchDrag: !isDragging,
     });
+
     const [tweenValues, setTweenValues] = React.useState<number[]>([]);
     const [canScrollPrev, setCanScrollPrev] = React.useState(false);
     const [canScrollNext, setCanScrollNext] = React.useState(false);
@@ -191,7 +195,7 @@ const MobileCarousel = ({ projects }: { projects: (typeof services[0]['projects'
                             }}
                         >
                             <Card className="overflow-hidden bg-card/80 backdrop-blur-sm group h-full flex flex-col">
-                                <CardHeader className="p-0 relative aspect-video" onTouchMove={(e) => e.stopPropagation()}>
+                                <CardHeader className="p-0 relative aspect-video">
                                     {project.video ? (
                                         <video
                                             src={project.video}
@@ -202,11 +206,16 @@ const MobileCarousel = ({ projects }: { projects: (typeof services[0]['projects'
                                             className="w-full h-full object-cover"
                                         />
                                     ) : project.before && project.after ? (
-                                        <ImageCompare
-                                            before={project.before}
-                                            after={project.after}
-                                            alt={project.name}
-                                        />
+                                        <div
+                                            onTouchStart={() => setIsDragging(true)}
+                                            onTouchEnd={() => setIsDragging(false)}
+                                        >
+                                            <ImageCompare
+                                                before={project.before}
+                                                after={project.after}
+                                                alt={project.name}
+                                            />
+                                        </div>
                                     ) : (
                                         <Image
                                             src={project.image}

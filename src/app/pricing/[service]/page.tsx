@@ -3,51 +3,85 @@
 
 import { notFound, useParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Check, ArrowLeft } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { Footer } from '@/components/footer';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogTrigger } from '@/components/ui/dialog';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Label } from '@/components/ui/label';
+import * as React from 'react';
 
 const pricingData = {
   'photo-editing': {
     title: 'Photo Editing',
     tiers: [
-      { name: 'Basic', price: '₹399', period: '/5 photos', features: ['Basic Retouching', 'Color Correction', '1 Round of Revisions', 'Single photo editing @ ₹99'], isFeatured: false },
-      { name: 'Intermediate', price: '₹999', period: '/10 photos', features: ['Advanced Retouching', 'Color Grading', 'Background Removal', '2 Rounds of Revisions', 'Single photo editing @ ₹199'], isFeatured: false },
-      { name: 'Pro', price: '₹1,999', period: '/5 photos', features: ['High-End Retouching', 'Complex Manipulations', 'Source Files', '3 Rounds of Revisions', 'Single photo editing @ ₹399'], isFeatured: false },
+      { 
+        name: 'Basic', 
+        price: '₹399', 
+        period: '/5 photos', 
+        features: ['Basic Retouching', 'Color Correction', '1 Round of Revisions'], 
+        single: { price: '₹99', name: 'Single Photo Edit' },
+        whatsapp: {
+          package: "Hi! 👋 I'm interested in the Basic Photo Editing Package (₹399 for 5 photos). I'd like basic retouching and color correction. Please let me know how to proceed and where to send the photos. Thanks!",
+          single: "Hi! I'd like to get a single photo edited for ₹99 with basic retouching and color correction. Can you let me know the next steps?"
+        }
+      },
+      { 
+        name: 'Intermediate', 
+        price: '₹999', 
+        period: '/10 photos', 
+        features: ['Advanced Retouching', 'Color Grading', 'Background Removal', '2 Rounds of Revisions'], 
+        single: { price: '₹199', name: 'Single Photo Edit' },
+        whatsapp: {
+            package: "Hello! I'd like to go ahead with the Intermediate Photo Editing Package (₹999 for 10 photos). I need advanced retouching, color grading, and background removal. Let me know what you need from my side and how to start. 😊",
+            single: "Hello! I need a single photo edited for ₹199, including advanced retouching and color grading. Please advise on how to proceed."
+        }
+      },
+      { 
+        name: 'Pro', 
+        price: '₹1,999', 
+        period: '/5 photos', 
+        features: ['High-End Retouching', 'Complex Manipulations', 'Source Files', '3 Rounds of Revisions'], 
+        single: { price: '₹399', name: 'Single Photo Edit' },
+        whatsapp: {
+            package: "Hi there! I'm ready to start with the Pro Photo Editing Package (₹1,999 for 5 photos). I'm looking for high-end retouching and complex manipulations. What's the next step?",
+            single: "Hi, I'm interested in the Pro single photo editing service for ₹399. I need high-end, complex manipulation work done. Let's discuss the details."
+        }
+      },
     ]
   },
   'video-editing': {
     title: 'Video Editing',
     tiers: [
-      { name: 'Basic', price: '₹3,000', period: '/min', features: ['Up to 1 min video', 'Basic Cuts & Transitions', 'Royalty-Free Music', '1 Round of Revisions'], isFeatured: false },
-      { name: 'Intermediate', price: '₹7,500', period: '/min', features: ['Up to 3 min video', 'Advanced Transitions', 'Basic Color Grading', '2 Rounds of Revisions'], isFeatured: false },
-      { name: 'Pro', price: '₹15,000', period: '/min', features: ['Up to 5 min video', 'Custom Animations & VFX', 'Advanced Color Grading', '3 Rounds of Revisions'], isFeatured: false },
+      { name: 'Basic', price: '₹3,000', period: '/min', features: ['Up to 1 min video', 'Basic Cuts & Transitions', 'Royalty-Free Music', '1 Round of Revisions'] },
+      { name: 'Intermediate', price: '₹7,500', period: '/min', features: ['Up to 3 min video', 'Advanced Transitions', 'Basic Color Grading', '2 Rounds of Revisions'] },
+      { name: 'Pro', price: '₹15,000', period: '/min', features: ['Up to 5 min video', 'Custom Animations & VFX', 'Advanced Color Grading', '3 Rounds of Revisions'] },
     ]
   },
   'ppt-design': {
     title: 'PPT Design',
     tiers: [
-      { name: 'Basic', price: '₹2,500', period: '/deck', features: ['Up to 10 Slides', 'Template-based Design', '2 Rounds of Revisions'], isFeatured: false },
-      { name: 'Intermediate', price: '₹6,000', period: '/deck', features: ['Up to 20 Slides', 'Custom Branded Template', 'Infographics & Charts', '3 Rounds of Revisions'], isFeatured: false },
-      { name: 'Pro', price: '₹12,000', period: '/deck', features: ['Up to 35 Slides', 'Full Custom Design', 'Advanced Animations', 'Source Files'], isFeatured: false },
+      { name: 'Basic', price: '₹2,500', period: '/deck', features: ['Up to 10 Slides', 'Template-based Design', '2 Rounds of Revisions'] },
+      { name: 'Intermediate', price: '₹6,000', period: '/deck', features: ['Up to 20 Slides', 'Custom Branded Template', 'Infographics & Charts', '3 Rounds of Revisions'] },
+      { name: 'Pro', price: '₹12,000', period: '/deck', features: ['Up to 35 Slides', 'Full Custom Design', 'Advanced Animations', 'Source Files'] },
     ]
   },
   'web-design': {
     title: 'Web Design',
     tiers: [
-      { name: 'Basic', price: '₹10,000', period: '', features: ['1-Page Landing Page', 'Responsive Design', '2 Rounds of Revisions'], isFeatured: false },
-      { name: 'Intermediate', price: '₹25,000', period: '', features: ['Up to 5 Pages', 'UI/UX Design', 'Interactive Prototypes', '3 Rounds of Revisions'], isFeatured: false },
-      { name: 'Pro', price: '₹50,000', period: '', features: ['Up to 10 Pages', 'Complete Design System', 'Advanced Animations', 'Source Files (Figma)'], isFeatured: false },
+      { name: 'Basic', price: '₹10,000', period: '', features: ['1-Page Landing Page', 'Responsive Design', '2 Rounds of Revisions'] },
+      { name: 'Intermediate', price: '₹25,000', period: '', features: ['Up to 5 Pages', 'UI/UX Design', 'Interactive Prototypes', '3 Rounds of Revisions'] },
+      { name: 'Pro', price: '₹50,000', period: '', features: ['Up to 10 Pages', 'Complete Design System', 'Advanced Animations', 'Source Files (Figma)'] },
     ]
   },
   'web-development': {
     title: 'Web Development',
     tiers: [
-      { name: 'Basic', price: '₹20,000', period: '', features: ['Landing Page Dev', 'Next.js', 'Basic CMS', '1 Month Support'], isFeatured: false },
-      { name: 'Intermediate', price: '₹60,000', period: '', features: ['Everything in Web Design Pro', 'Full-stack Development', 'Advanced CMS', '2 Months Support'], isFeatured: false },
-      { name: 'Pro', price: '₹1,20,000+', period: '', features: ['Complex Web Application', 'API Integrations', 'E-commerce Functionality', '3 Months Support'], isFeatured: false },
+      { name: 'Basic', price: '₹20,000', period: '', features: ['Landing Page Dev', 'Next.js', 'Basic CMS', '1 Month Support'] },
+      { name: 'Intermediate', price: '₹60,000', period: '', features: ['Everything in Web Design Pro', 'Full-stack Development', 'Advanced CMS', '2 Months Support'] },
+      { name: 'Pro', price: '₹1,20,000+', period: '', features: ['Complex Web Application', 'API Integrations', 'E-commerce Functionality', '3 Months Support'] },
     ]
   }
 };
@@ -76,13 +110,48 @@ const cardVariants = {
     },
 };
 
+type Tier = (typeof pricingData)['photo-editing']['tiers'][0];
+
 export default function ServicePricingPage() {
   const params = useParams();
   const serviceId = params.service as string;
   const data = pricingData[serviceId as keyof typeof pricingData];
+  const phoneNumber = "919707191619"; 
+
+  const [isDialogOpen, setIsDialogOpen] = React.useState(false);
+  const [selectedTier, setSelectedTier] = React.useState<Tier | null>(null);
+  const [selectedPlan, setSelectedPlan] = React.useState<'package' | 'single'>('package');
 
   if (!data) {
     notFound();
+  }
+  
+  const handleGetStartedClick = (tier: Tier) => {
+    if (serviceId === 'photo-editing') {
+        setSelectedTier(tier);
+        setSelectedPlan('package');
+        setIsDialogOpen(true);
+    } else {
+        const message = `Hello! I'm interested in the ${tier.name} package for ${data.title}. I'd like to discuss a project.`;
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+        window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    }
+  };
+
+  const handleContinue = () => {
+    if (!selectedTier || !('whatsapp' in selectedTier)) return;
+
+    const message = selectedTier.whatsapp[selectedPlan];
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    setIsDialogOpen(false);
+  };
+  
+  const singlePhotoFeature = (tier: Tier) => {
+    if (serviceId === 'photo-editing' && 'single' in tier) {
+        return `Single photo editing @ ${tier.single.price}`
+    }
+    return null;
   }
 
   return (
@@ -96,18 +165,18 @@ export default function ServicePricingPage() {
                     variants={sectionVariants}
                 >
                     <div className="text-center max-w-3xl mx-auto mb-16">
-                    <motion.h2 
-                        variants={cardVariants}
-                        className="text-4xl font-bold font-headline tracking-tighter sm:text-5xl md:text-6xl"
-                    >
-                        {data.title} Pricing
-                    </motion.h2>
-                    <motion.p 
-                        variants={cardVariants}
-                        className="mt-6 text-muted-foreground md:text-xl/relaxed"
-                    >
-                        Choose the perfect plan for your needs. All prices are negotiable.
-                    </motion.p>
+                        <motion.h2 
+                            variants={cardVariants}
+                            className="text-4xl font-bold font-headline tracking-tighter sm:text-5xl md:text-6xl"
+                        >
+                            {data.title} Pricing
+                        </motion.h2>
+                        <motion.p 
+                            variants={cardVariants}
+                            className="mt-6 text-muted-foreground md:text-xl/relaxed"
+                        >
+                            Choose the perfect plan for your needs. All prices are negotiable.
+                        </motion.p>
                     </div>
 
                     <motion.div
@@ -116,7 +185,7 @@ export default function ServicePricingPage() {
                         variants={sectionVariants}
                         className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch max-w-5xl mx-auto"
                     >
-                    {data.tiers.map((tier) => (
+                    {(data.tiers as Tier[]).map((tier) => (
                         <motion.div 
                             key={tier.name} 
                             variants={cardVariants} 
@@ -143,11 +212,17 @@ export default function ServicePricingPage() {
                                         <span className="text-muted-foreground">{feature}</span>
                                     </li>
                                     ))}
+                                    {singlePhotoFeature(tier) && (
+                                        <li className="flex items-start gap-3">
+                                            <Check className="h-5 w-5 text-green-500 mt-0.5 shrink-0" />
+                                            <span className="text-muted-foreground">{singlePhotoFeature(tier)}</span>
+                                        </li>
+                                    )}
                                 </ul>
                                 </CardContent>
                                 <CardFooter>
-                                <Button asChild size="lg" className="w-full font-bold">
-                                    <a href="/#hire-me">Get Started</a>
+                                <Button size="lg" className="w-full font-bold" onClick={() => handleGetStartedClick(tier)}>
+                                    Get Started
                                 </Button>
                                 </CardFooter>
                             </Card>
@@ -166,6 +241,35 @@ export default function ServicePricingPage() {
                 </motion.div>
             </section>
         </main>
+        {selectedTier && serviceId === 'photo-editing' && (
+            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+                <DialogContent className="sm:max-w-[425px]">
+                    <DialogHeader>
+                        <DialogTitle>Choose Your Plan</DialogTitle>
+                        <DialogDescription>
+                           Select the option that best fits your needs for the {selectedTier.name} plan.
+                        </DialogDescription>
+                    </DialogHeader>
+                    <div className="py-4">
+                        <RadioGroup defaultValue={selectedPlan} onValueChange={(val) => setSelectedPlan(val as 'package' | 'single')}>
+                            <div className="flex items-center space-x-2">
+                                <RadioGroupItem value="package" id="package" />
+                                <Label htmlFor="package" className="cursor-pointer">{selectedTier.name} Package ({selectedTier.price}{selectedTier.period})</Label>
+                            </div>
+                            {'single' in selectedTier && (
+                                <div className="flex items-center space-x-2">
+                                    <RadioGroupItem value="single" id="single" />
+                                    <Label htmlFor="single" className="cursor-pointer">{selectedTier.single.name} ({selectedTier.single.price}/photo)</Label>
+                                </div>
+                            )}
+                        </RadioGroup>
+                    </div>
+                    <DialogFooter>
+                        <Button onClick={handleContinue} className="w-full">Continue to WhatsApp</Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
+        )}
         <Footer />
     </div>
   );

@@ -14,7 +14,7 @@ const pricingData = {
     title: 'Photo Editing',
     tiers: [
       { name: 'Basic', price: '₹399', period: '/5 photos', features: ['Basic Retouching', 'Color Correction', '1 Round of Revisions', 'Single photo editing @ ₹99'], isFeatured: false },
-      { name: 'Intermediate', price: '₹999', period: '/10 photos', features: ['Advanced Retouching', 'Color Grading', 'Background Removal', '2 Rounds of Revisions', 'Single photo editing @ ₹199'], isFeatured: true },
+      { name: 'Intermediate', price: '₹999', period: '/10 photos', features: ['Advanced Retouching', 'Color Grading', 'Background Removal', '2 Rounds of Revisions', 'Single photo editing @ ₹199'], isFeatured: false },
       { name: 'Pro', price: '₹1,999', period: '/5 photos', features: ['High-End Retouching', 'Complex Manipulations', 'Source Files', '3 Rounds of Revisions', 'Single photo editing @ ₹399'], isFeatured: false },
     ]
   },
@@ -22,7 +22,7 @@ const pricingData = {
     title: 'Video Editing',
     tiers: [
       { name: 'Basic', price: '₹3,000', period: '/min', features: ['Up to 1 min video', 'Basic Cuts & Transitions', 'Royalty-Free Music', '1 Round of Revisions'], isFeatured: false },
-      { name: 'Intermediate', price: '₹7,500', period: '/min', features: ['Up to 3 min video', 'Advanced Transitions', 'Basic Color Grading', '2 Rounds of Revisions'], isFeatured: true },
+      { name: 'Intermediate', price: '₹7,500', period: '/min', features: ['Up to 3 min video', 'Advanced Transitions', 'Basic Color Grading', '2 Rounds of Revisions'], isFeatured: false },
       { name: 'Pro', price: '₹15,000', period: '/min', features: ['Up to 5 min video', 'Custom Animations & VFX', 'Advanced Color Grading', '3 Rounds of Revisions'], isFeatured: false },
     ]
   },
@@ -30,7 +30,7 @@ const pricingData = {
     title: 'PPT Design',
     tiers: [
       { name: 'Basic', price: '₹2,500', period: '/deck', features: ['Up to 10 Slides', 'Template-based Design', '2 Rounds of Revisions'], isFeatured: false },
-      { name: 'Intermediate', price: '₹6,000', period: '/deck', features: ['Up to 20 Slides', 'Custom Branded Template', 'Infographics & Charts', '3 Rounds of Revisions'], isFeatured: true },
+      { name: 'Intermediate', price: '₹6,000', period: '/deck', features: ['Up to 20 Slides', 'Custom Branded Template', 'Infographics & Charts', '3 Rounds of Revisions'], isFeatured: false },
       { name: 'Pro', price: '₹12,000', period: '/deck', features: ['Up to 35 Slides', 'Full Custom Design', 'Advanced Animations', 'Source Files'], isFeatured: false },
     ]
   },
@@ -38,7 +38,7 @@ const pricingData = {
     title: 'Web Design',
     tiers: [
       { name: 'Basic', price: '₹10,000', period: '', features: ['1-Page Landing Page', 'Responsive Design', '2 Rounds of Revisions'], isFeatured: false },
-      { name: 'Intermediate', price: '₹25,000', period: '', features: ['Up to 5 Pages', 'UI/UX Design', 'Interactive Prototypes', '3 Rounds of Revisions'], isFeatured: true },
+      { name: 'Intermediate', price: '₹25,000', period: '', features: ['Up to 5 Pages', 'UI/UX Design', 'Interactive Prototypes', '3 Rounds of Revisions'], isFeatured: false },
       { name: 'Pro', price: '₹50,000', period: '', features: ['Up to 10 Pages', 'Complete Design System', 'Advanced Animations', 'Source Files (Figma)'], isFeatured: false },
     ]
   },
@@ -46,7 +46,7 @@ const pricingData = {
     title: 'Web Development',
     tiers: [
       { name: 'Basic', price: '₹20,000', period: '', features: ['Landing Page Dev', 'Next.js', 'Basic CMS', '1 Month Support'], isFeatured: false },
-      { name: 'Intermediate', price: '₹60,000', period: '', features: ['Everything in Web Design Pro', 'Full-stack Development', 'Advanced CMS', '2 Months Support'], isFeatured: true },
+      { name: 'Intermediate', price: '₹60,000', period: '', features: ['Everything in Web Design Pro', 'Full-stack Development', 'Advanced CMS', '2 Months Support'], isFeatured: false },
       { name: 'Pro', price: '₹1,20,000+', period: '', features: ['Complex Web Application', 'API Integrations', 'E-commerce Functionality', '3 Months Support'], isFeatured: false },
     ]
   }
@@ -126,7 +126,7 @@ export default function ServicePricingPage() {
                         >
                             <Card className={cn(
                                 "flex flex-col w-full bg-card/80 transition-all duration-300 hover:shadow-lg",
-                                tier.isFeatured ? "border-primary ring-2 ring-primary shadow-primary/20" : "hover:border-primary hover:ring-2 hover:ring-primary hover:shadow-primary/20"
+                                "hover:border-primary hover:ring-2 hover:ring-primary hover:shadow-primary/20"
                             )}>
                                 <CardHeader className="text-center pb-4">
                                     <CardTitle className="text-2xl md:text-3xl font-headline mb-2">{tier.name}</CardTitle>
@@ -146,7 +146,7 @@ export default function ServicePricingPage() {
                                 </ul>
                                 </CardContent>
                                 <CardFooter>
-                                <Button asChild size="lg" className={cn("w-full font-bold", !tier.isFeatured && "bg-secondary text-secondary-foreground hover:bg-secondary/80")}>
+                                <Button asChild size="lg" className="w-full font-bold">
                                     <a href="/#hire-me">Get Started</a>
                                 </Button>
                                 </CardFooter>

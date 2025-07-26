@@ -91,14 +91,15 @@ export function HireMeSection() {
                     </motion.h3>
                     <motion.div 
                         variants={sectionVariants}
-                        className="grid grid-cols-1 md:grid-cols-3 gap-8"
+                        className="flex overflow-x-auto scrollbar-hide md:grid md:grid-cols-3 gap-8 pb-4"
                     >
                         {reasonsToHire.map((reason) => (
                             <motion.div 
                                 key={reason.title} 
                                 variants={itemVariants}
+                                className="w-[80vw] md:w-auto flex-shrink-0"
                             >
-                                <Card className="h-full bg-card/80 backdrop-blur-sm shadow-lg hover:shadow-primary/20 transition-all duration-300 hover:border-primary border-transparent border-2 flex flex-col text-center items-center p-4">
+                                <Card className="h-full bg-card/80 backdrop-blur-sm shadow-lg hover:shadow-primary/20 transition-all duration-300 hover:border-primary border-transparent border-2 flex flex-col text-center items-center p-4 md:p-6">
                                     <CardHeader className="items-center p-2 md:p-6">
                                         <div className="p-3 bg-primary/10 rounded-full mb-4">
                                             {reason.icon}

@@ -117,150 +117,6 @@ const cardVariants = {
     }
 };
 
-const TWEEN_FACTOR = 2.2;
-
-const numberWithinRange = (number: number, min: number, max: number): number =>
-  Math.min(Math.max(number, min), max);
-
-const MobileCarousel = ({ projects }: { projects: (typeof services[0]['projects']) }) => {
-    const [isDragging, setIsDragging] = React.useState(false);
-    
-    const [emblaRef, emblaApi] = useEmblaCarousel({
-        loop: true,
-        align: 'center',
-        skipSnaps: false,
-        watchDrag: !isDragging,
-    });
-
-    const [tweenValues, setTweenValues] = React.useState<number[]>([]);
-    const [canScrollPrev, setCanScrollPrev] = React.useState(false);
-    const [canScrollNext, setCanScrollNext] = React.useState(false);
-
-    const scrollPrev = React.useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
-    const scrollNext = React.useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
-
-    const onSelect = React.useCallback((emblaApi: EmblaCarouselType) => {
-        setCanScrollPrev(emblaApi.canScrollPrev());
-        setCanScrollNext(emblaApi.canScrollNext());
-    }, []);
-
-    const onScroll = React.useCallback(() => {
-        if (!emblaApi) return;
-
-        const engine = emblaApi.internalEngine();
-        const scrollProgress = emblaApi.scrollProgress();
-
-        const styles = emblaApi.scrollSnapList().map((scrollSnap, index) => {
-            let diffToTarget = scrollSnap - scrollProgress;
-
-            if (engine.options.loop) {
-                engine.slideLooper.loopPoints.forEach((loopItem) => {
-                    const target = loopItem.target();
-                    if (index === loopItem.index && target !== 0) {
-                        const sign = Math.sign(target);
-                        if (sign === -1) diffToTarget = scrollSnap - (1 + scrollProgress);
-                        if (sign === 1) diffToTarget = scrollSnap + (1 - scrollProgress);
-                    }
-                });
-            }
-            const tweenValue = 1 - Math.abs(diffToTarget * TWEEN_FACTOR);
-            return numberWithinRange(tweenValue, 0, 1);
-        });
-        setTweenValues(styles);
-    }, [emblaApi, setTweenValues]);
-
-    React.useEffect(() => {
-        if (!emblaApi) return;
-        onScroll();
-        onSelect(emblaApi);
-        emblaApi.on('scroll', onScroll);
-        emblaApi.on('reInit', onScroll);
-        emblaApi.on('select', onSelect);
-    }, [emblaApi, onScroll, onSelect]);
-
-    return (
-        <div className="relative overflow-hidden md:hidden">
-            <div className="px-4" ref={emblaRef}>
-                <div className="flex -ml-4">
-                    {projects.map((project: any, index) => (
-                        <div
-                            key={project.name}
-                            className="flex-[0_0_80%] min-w-0 pl-4"
-                            style={{
-                                ...(tweenValues.length && {
-                                    opacity: numberWithinRange(tweenValues[index], 0.3, 1),
-                                    transform: `scale(${tweenValues[index]})`,
-                                    filter: `blur(${ (1 - tweenValues[index]) * 8 }px)`,
-                                }),
-                            }}
-                        >
-                            <Card className="overflow-hidden bg-card/80 backdrop-blur-sm group h-full flex flex-col">
-                                <CardHeader className="p-0 relative aspect-video">
-                                    {project.video ? (
-                                        <video
-                                            src={project.video}
-                                            autoPlay
-                                            muted
-                                            loop
-                                            playsInline
-                                            className="w-full h-full object-cover"
-                                        />
-                                    ) : project.before && project.after ? (
-                                        <div
-                                            onTouchStart={() => setIsDragging(true)}
-                                            onTouchEnd={() => setIsDragging(false)}
-                                        >
-                                            <ImageCompare
-                                                before={project.before}
-                                                after={project.after}
-                                                alt={project.name}
-                                            />
-                                        </div>
-                                    ) : (
-                                        <Image
-                                            src={project.image}
-                                            alt={project.name}
-                                            width={600}
-                                            height={450}
-                                            className="w-full h-full object-cover"
-                                            data-ai-hint={project.dataAiHint}
-                                        />
-                                    )}
-                                </CardHeader>
-                                <CardContent className="p-4 flex-grow">
-                                    <h4 className="font-headline text-xl">{project.name}</h4>
-                                </CardContent>
-                            </Card>
-                        </div>
-                    ))}
-                </div>
-            </div>
-             <div className="absolute inset-y-0 left-0 flex items-center">
-                <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={scrollPrev}
-                    disabled={!canScrollPrev}
-                    className="h-10 w-10 rounded-full bg-background/50 hover:bg-background/80 disabled:opacity-30"
-                >
-                    <ChevronLeft className="h-6 w-6" />
-                </Button>
-            </div>
-            <div className="absolute inset-y-0 right-0 flex items-center">
-                <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={scrollNext}
-                    disabled={!canScrollNext}
-                    className="h-10 w-10 rounded-full bg-background/50 hover:bg-background/80 disabled:opacity-30"
-                >
-                    <ChevronRight className="h-6 w-6" />
-                </Button>
-            </div>
-        </div>
-    );
-};
-
 interface ServicesSectionProps {
   refs: {
     videoEditingRef: React.RefObject<HTMLDivElement>;
@@ -325,8 +181,8 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
                           viewport={{ once: true, amount: 0.2 }}
                           className="mx-auto max-w-7xl"
                         >
-                            <div className="hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-                                {service.projects.map((project: any) => (
+                            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-10">
+                                {service.projects.slice(0, 3).map((project: any) => (
                                     <motion.div
                                         key={project.name}
                                         variants={cardVariants}
@@ -359,14 +215,13 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
                                                     />
                                                 )}
                                             </CardHeader>
-                                            <CardContent className="p-8 flex-grow">
-                                                <h4 className="font-headline text-3xl">{project.name}</h4>
+                                            <CardContent className="p-4 md:p-8 flex-grow">
+                                                <h4 className="font-headline text-lg md:text-3xl">{project.name}</h4>
                                             </CardContent>
                                         </Card>
                                     </motion.div>
                                 ))}
                             </div>
-                            <MobileCarousel projects={service.projects} />
                         </motion.div>
 
                         <motion.div variants={itemVariants} className="text-center mt-8 md:mt-12">

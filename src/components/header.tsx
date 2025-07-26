@@ -59,7 +59,7 @@ const NavLink = ({ item, activeSection }: { item: typeof navItems[0], activeSect
                         href={item.href}
                         onClick={handleClick}
                         className={cn(
-                            "relative z-10 flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-full transition-colors duration-300",
+                            "relative z-10 flex h-10 w-10 items-center justify-center rounded-full transition-colors duration-300 md:h-12 md:w-12",
                             isActive ? "text-primary-foreground" : "text-muted-foreground hover:text-foreground"
                         )}
                     >
@@ -113,7 +113,7 @@ export function Header({ refs = {} }: HeaderProps) {
     }, [isAboutOnScreen, isProjectsOnScreen, isVideoEditingOnScreen, isPhotoEditingOnScreen, isPptDesignOnScreen, isWebDesignOnScreen, isWebDevelopmentOnScreen, isHireMeOnScreen]);
 
     return (
-        <header className="fixed top-4 left-1/2 z-50 -translate-x-1/2 w-full max-w-[95vw] md:max-w-none md:w-auto">
+        <header className="fixed top-4 left-1/2 z-50 -translate-x-1/2 w-auto">
             <TooltipProvider>
                 <nav className="rounded-full border bg-background/50 p-1 shadow-lg backdrop-blur-md">
                     <div className="flex items-center justify-start md:justify-center gap-0.5 md:gap-1">

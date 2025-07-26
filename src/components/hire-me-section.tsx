@@ -86,31 +86,9 @@ export function HireMeSection() {
                     >
                         I'm currently available for freelance projects. If you have an idea you'd like to discuss, feel free to reach out.
                     </motion.p>
-                    <motion.div
-                        variants={itemVariants}
-                        className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
-                    >
-                        <Button
-                            size="lg"
-                            className="w-full sm:w-auto font-bold text-lg py-4 px-10 bg-green-500 hover:bg-green-600 text-primary-foreground shadow-lg transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95"
-                            onClick={handleWhatsAppClick}
-                        >
-                            <Phone className="mr-2 h-5 w-5" />
-                            Contact on WhatsApp
-                        </Button>
-                        <Button
-                            size="lg"
-                            variant="outline"
-                            className="w-full sm:w-auto font-bold text-lg py-4 px-10 shadow-lg transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95"
-                            onClick={handleEmailClick}
-                        >
-                            <Mail className="mr-2 h-5 w-5" />
-                            Send an Email
-                        </Button>
-                    </motion.div>
                 </div>
-
-                <div className="max-w-5xl mx-auto mt-24">
+                
+                <div className="max-w-5xl mx-auto mt-16">
                     <motion.h3 
                         variants={itemVariants}
                         className="text-3xl font-bold font-headline tracking-tighter sm:text-4xl md:text-5xl text-center mb-12"
@@ -138,6 +116,29 @@ export function HireMeSection() {
                         ))}
                     </motion.div>
                 </div>
+
+                <motion.div
+                    variants={itemVariants}
+                    className="mt-16 flex flex-col sm:flex-row items-center justify-center gap-4"
+                >
+                    <Button
+                        size="lg"
+                        className="w-full sm:w-auto font-bold text-lg py-4 px-10 bg-green-500 hover:bg-green-600 text-primary-foreground shadow-lg transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95"
+                        onClick={handleWhatsAppClick}
+                    >
+                        <Phone className="mr-2 h-5 w-5" />
+                        Contact on WhatsApp
+                    </Button>
+                    <Button
+                        size="lg"
+                        variant="outline"
+                        className="w-full sm:w-auto font-bold text-lg py-4 px-10 shadow-lg transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95"
+                        onClick={handleEmailClick}
+                    >
+                        <Mail className="mr-2 h-5 w-5" />
+                        Send an Email
+                    </Button>
+                </motion.div>
             </motion.div>
         </section>
     );

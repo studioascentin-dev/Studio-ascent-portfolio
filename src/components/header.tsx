@@ -27,7 +27,6 @@ interface HeaderProps {
         pptDesignRef?: React.RefObject<HTMLElement>;
         webDesignRef?: React.RefObject<HTMLElement>;
         webDevelopmentRef?: React.RefObject<HTMLElement>;
-        hireMeRef?: React.RefObject<HTMLElement>;
     }
 }
 
@@ -94,11 +93,9 @@ export function Header({ refs = {} }: HeaderProps) {
     const isPptDesignOnScreen = useOnScreen(refs.pptDesignRef, observerOptions);
     const isWebDesignOnScreen = useOnScreen(refs.webDesignRef, observerOptions);
     const isWebDevelopmentOnScreen = useOnScreen(refs.webDevelopmentRef, observerOptions);
-    const isHireMeOnScreen = useOnScreen(refs.hireMeRef, observerOptions);
     
     React.useEffect(() => {
         let currentSection = 'aboutRef';
-        if (isHireMeOnScreen) currentSection = 'hireMeRef';
         if (isWebDevelopmentOnScreen) currentSection = 'webDevelopmentRef';
         if (isWebDesignOnScreen) currentSection = 'webDesignRef';
         if (isPptDesignOnScreen) currentSection = 'pptDesignRef';
@@ -107,7 +104,7 @@ export function Header({ refs = {} }: HeaderProps) {
         if (isProjectsOnScreen) currentSection = 'projectsRef';
         if (isAboutOnScreen) currentSection = 'aboutRef';
         setActiveSection(currentSection);
-    }, [isAboutOnScreen, isProjectsOnScreen, isVideoEditingOnScreen, isPhotoEditingOnScreen, isPptDesignOnScreen, isWebDesignOnScreen, isWebDevelopmentOnScreen, isHireMeOnScreen]);
+    }, [isAboutOnScreen, isProjectsOnScreen, isVideoEditingOnScreen, isPhotoEditingOnScreen, isPptDesignOnScreen, isWebDesignOnScreen, isWebDevelopmentOnScreen]);
 
     return (
         <header className="fixed top-4 left-1/2 z-50 -translate-x-1/2 w-full max-w-[90vw] md:max-w-none md:w-auto">

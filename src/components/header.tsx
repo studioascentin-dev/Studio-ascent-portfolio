@@ -86,7 +86,7 @@ export function Header({ refs = {} }: HeaderProps) {
     const [activeSection, setActiveSection] = React.useState('aboutRef');
 
     const observerOptions = {
-      threshold: 0.3,
+      threshold: 0.1,
       rootMargin: '-50% 0px -50% 0px'
     };
   

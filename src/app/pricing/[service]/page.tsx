@@ -13,9 +13,9 @@ const pricingData = {
   'photo-editing': {
     title: 'Photo Editing',
     tiers: [
-      { name: 'Basic', price: '₹500', period: '/photo', features: ['Basic Retouching', 'Color Correction', '1 Round of Revisions'], isFeatured: false },
-      { name: 'Intermediate', price: '₹1,500', period: '/photo', features: ['Advanced Retouching', 'Color Grading', 'Background Removal', '2 Rounds of Revisions'], isFeatured: true },
-      { name: 'Pro', price: '₹3,000', period: '/photo', features: ['High-End Retouching', 'Complex Manipulations', 'Source Files', '3 Rounds of Revisions'], isFeatured: false },
+      { name: 'Basic', price: '₹399', period: '/5 photos', features: ['Basic Retouching', 'Color Correction', '1 Round of Revisions', 'Single photo editing @ ₹99'], isFeatured: false },
+      { name: 'Intermediate', price: '₹999', period: '/10 photos', features: ['Advanced Retouching', 'Color Grading', 'Background Removal', '2 Rounds of Revisions', 'Single photo editing @ ₹199'], isFeatured: true },
+      { name: 'Pro', price: '₹1,999', period: '/5 photos', features: ['High-End Retouching', 'Complex Manipulations', 'Source Files', '3 Rounds of Revisions', 'Single photo editing @ ₹399'], isFeatured: false },
     ]
   },
   'video-editing': {
@@ -125,8 +125,8 @@ export default function ServicePricingPage() {
                             transition={{ type: 'spring', stiffness: 300 }}
                         >
                             <Card className={cn(
-                                "flex flex-col w-full bg-card/80 transition-all duration-300 hover:shadow-lg hover:shadow-primary/20",
-                                tier.isFeatured ? "border-primary ring-2 ring-primary shadow-primary/20" : "hover:border-primary hover:ring-2 hover:ring-primary"
+                                "flex flex-col w-full bg-card/80 transition-all duration-300 hover:shadow-lg",
+                                tier.isFeatured ? "border-primary ring-2 ring-primary shadow-primary/20" : "hover:border-primary hover:ring-2 hover:ring-primary hover:shadow-primary/20"
                             )}>
                                 <CardHeader className="text-center pb-4">
                                     <CardTitle className="text-2xl md:text-3xl font-headline mb-2">{tier.name}</CardTitle>

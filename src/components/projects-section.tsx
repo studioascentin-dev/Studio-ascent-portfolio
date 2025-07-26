@@ -96,7 +96,7 @@ export function ProjectsSection() {
 
                 <motion.div
                     variants={sectionVariants}
-                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto"
+                    className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 max-w-6xl mx-auto"
                 >
                     {projects.map((project) => (
                         <motion.div
@@ -117,9 +117,9 @@ export function ProjectsSection() {
                                             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                                         />
                                     </CardHeader>
-                                    <CardContent className="p-6 flex-grow flex flex-col">
+                                    <CardContent className="p-4 md:p-6 flex-grow flex flex-col">
                                         <p className="text-sm font-medium text-primary mb-1">{project.category}</p>
-                                        <h4 className="font-headline text-2xl flex-grow">{project.name}</h4>
+                                        <h4 className="font-headline text-lg md:text-2xl flex-grow">{project.name}</h4>
                                     </CardContent>
                                 </Card>
                             </Link>

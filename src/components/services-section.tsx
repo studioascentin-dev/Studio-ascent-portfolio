@@ -9,6 +9,7 @@ import { cn } from '@/lib/utils';
 import * as React from 'react';
 import useEmblaCarousel, { EmblaCarouselType } from 'embla-carousel-react';
 import Image from 'next/image';
+import { ImageCompare } from './image-compare';
 
 const services = [
   {
@@ -28,9 +29,9 @@ const services = [
     title: 'Photo Editing',
     description: 'With high-quality photo retouching and manipulation, I enhance your images to perfection, ensuring your product shots and portraits look stunning and professional.',
     projects: [
-        { name: 'E-commerce Product Showcase', image: 'https://placehold.co/600x450.png', dataAiHint: 'product photography' },
-        { name: 'Fashion Lookbook', image: 'https://placehold.co/600x450.png', dataAiHint: 'fashion model' },
-        { name: 'Real Estate Photography', image: 'https://placehold.co/600x450.png', dataAiHint: 'modern interior' },
+        { name: 'E-commerce Product Showcase', before: 'https://placehold.co/600x450.png', after: 'https://placehold.co/600x450.png', dataAiHint: 'product photography' },
+        { name: 'Fashion Lookbook', before: 'https://placehold.co/600x450.png', after: 'https://placehold.co/600x450.png', dataAiHint: 'fashion model' },
+        { name: 'Real Estate Photography', before: 'https://placehold.co/600x450.png', after: 'https://placehold.co/600x450.png', dataAiHint: 'modern interior' },
     ]
   },
   {
@@ -200,6 +201,12 @@ const MobileCarousel = ({ projects }: { projects: (typeof services[0]['projects'
                                             playsInline
                                             className="w-full h-full object-cover"
                                         />
+                                    ) : project.before && project.after ? (
+                                        <ImageCompare
+                                            before={project.before}
+                                            after={project.after}
+                                            alt={project.name}
+                                        />
                                     ) : (
                                         <Image
                                             src={project.image}
@@ -325,6 +332,12 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
                                                         loop
                                                         playsInline
                                                         className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                                                    />
+                                                ) : project.before && project.after ? (
+                                                    <ImageCompare
+                                                        before={project.before}
+                                                        after={project.after}
+                                                        alt={project.name}
                                                     />
                                                 ) : (
                                                     <Image

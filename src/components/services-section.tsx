@@ -27,9 +27,9 @@ const services = [
     title: 'Photo Editing',
     description: 'With high-quality photo retouching and manipulation, I enhance your images to perfection, ensuring your product shots and portraits look stunning and professional.',
     projects: [
-        { name: 'E-commerce Product Showcase', before: 'https://placehold.co/600x800.png', after: 'https://placehold.co/600x800.png', dataAiHint: 'product photography' },
-        { name: 'Fashion Lookbook', before: 'https://placehold.co/600x800.png', after: 'https://placehold.co/600x800.png', dataAiHint: 'fashion model' },
-        { name: 'Real Estate Photography', before: 'https://placehold.co/600x800.png', after: 'https://placehold.co/600x800.png', dataAiHint: 'modern interior' },
+        { name: 'Custom Photoshop Work', before: 'https://placehold.co/600x800.png', after: 'https://placehold.co/600x800.png', dataAiHint: 'product photography' },
+        { name: 'High-End Retouching', before: 'https://placehold.co/600x800.png', after: 'https://placehold.co/600x800.png', dataAiHint: 'fashion model' },
+        { name: 'Image Compositing', before: 'https://placehold.co/600x800.png', after: 'https://placehold.co/600x800.png', dataAiHint: 'modern interior' },
     ]
   },
   {
@@ -61,7 +61,7 @@ const services = [
     description: 'I build robust, scalable, and high-performance websites and applications that are not only fast and reliable but also tailored to your specific business needs.',
     projects: [
         { name: 'SaaS Platform Front-End', image: 'https://placehold.co/600x450.png', dataAiHint: 'dashboard ui' },
-        { name: 'E-commerce Website', image: 'https://placehold.co/600x450.png', dataAiHint: 'ecommerce homepage' },
+        { name: 'Custom E-commerce Store', image: 'https://placehold.co/600x450.png', dataAiHint: 'ecommerce homepage' },
         { name: 'Portfolio Website', image: 'https://placehold.co/600x450.png', dataAiHint: 'portfolio website' },
     ]
   },
@@ -235,3 +235,5 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
     </section>
   );
 }
+
+    

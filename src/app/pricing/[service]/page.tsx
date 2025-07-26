@@ -25,8 +25,8 @@ const pricingData = {
         period: '/5 photos', 
         features: ['Basic Retouching', 'Color Correction', '1 Round of Revisions'], 
         single: { price: '₹99', name: 'Single Photo Edit' },
-        image: 'https://placehold.co/600x400.png',
-        dataAiHint: 'photo retouch',
+        images: ['https://placehold.co/400x300.png', 'https://placehold.co/400x300.png', 'https://placehold.co/400x300.png'],
+        dataAiHint: ['basic retouch', 'color correction', 'simple edit'],
         whatsapp: {
           package: "Hi! 👋 I'm interested in the Basic Photo Editing Package (₹399 for 5 photos). I'd like basic retouching and color correction. Please let me know how to proceed and where to send the photos. Thanks!",
           single: "Hello! I’d like to get 1 photo edited under the Basic Plan (₹99). Just need simple retouching and color correction. Let me know what’s next!"
@@ -38,8 +38,8 @@ const pricingData = {
         period: '/10 photos', 
         features: ['Advanced Retouching', 'Color Grading', 'Background Removal', '2 Rounds of Revisions'], 
         single: { price: '₹199', name: 'Single Photo Edit' },
-        image: 'https://placehold.co/600x400.png',
-        dataAiHint: 'color grade',
+        images: ['https://placehold.co/400x300.png', 'https://placehold.co/400x300.png', 'https://placehold.co/400x300.png'],
+        dataAiHint: ['advanced retouch', 'color grading', 'background removal'],
         whatsapp: {
             package: "Hello! I'd like to go ahead with the Intermediate Photo Editing Package (₹999 for 10 photos). I need advanced retouching, color grading, and background removal. Let me know what you need from my side and how to start. 😊",
             single: "Hi! I’d like to use the Intermediate Plan for a single photo (₹199). I want advanced retouching with background removal. Please share the details!"
@@ -51,8 +51,8 @@ const pricingData = {
         period: '/5 photos', 
         features: ['High-End Retouching', 'Complex Manipulations', 'Source Files', '3 Rounds of Revisions'], 
         single: { price: '₹399', name: 'Single Photo Edit' },
-        image: 'https://placehold.co/600x400.png',
-        dataAiHint: 'photo manipulation',
+        images: ['https://placehold.co/400x300.png', 'https://placehold.co/400x300.png', 'https://placehold.co/400x300.png'],
+        dataAiHint: ['high-end retouching', 'photo manipulation', 'creative edit'],
         whatsapp: {
             package: "Hi there! I'm ready to start with the Pro Photo Editing Package (₹1,999 for 5 photos). I'm looking for high-end retouching and complex manipulations. What's the next step?",
             single: "Hey! I’m looking for Pro-level single photo editing (₹399). I need high-end retouching and complex edits. Can you tell me how to proceed?"
@@ -194,7 +194,7 @@ export default function ServicePricingPage() {
                         variants={sectionVariants}
                         className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch max-w-5xl mx-auto"
                     >
-                    {(data.tiers as Tier[]).map((tier) => (
+                    {(data.tiers as Tier[]).map((tier, tierIndex) => (
                         <motion.div 
                             key={tier.name} 
                             variants={cardVariants} 
@@ -206,18 +206,6 @@ export default function ServicePricingPage() {
                                 "flex flex-col w-full bg-card/80 transition-all duration-300 hover:shadow-lg overflow-hidden",
                                 "hover:border-primary hover:ring-2 hover:ring-primary hover:shadow-primary/20"
                             )}>
-                                {'image' in tier && (
-                                <CardHeader className="p-0">
-                                    <Image
-                                        src={(tier as any).image}
-                                        alt={tier.name}
-                                        width={600}
-                                        height={400}
-                                        className="w-full h-auto object-cover"
-                                        data-ai-hint={(tier as any).dataAiHint}
-                                    />
-                                </CardHeader>
-                                )}
                                 <CardHeader className="text-center pb-4 pt-6">
                                     <CardTitle className="text-2xl md:text-3xl font-headline mb-2">{tier.name}</CardTitle>
                                     <div className="flex items-baseline justify-center gap-1">
@@ -226,6 +214,21 @@ export default function ServicePricingPage() {
                                     </div>
                                 </CardHeader>
                                 <CardContent className="flex flex-col flex-grow items-center p-6 pt-0">
+                                {'images' in tier && (
+                                    <div className="grid grid-cols-3 gap-2 mb-6">
+                                    {(tier as any).images.map((image: string, index: number) => (
+                                        <Image
+                                        key={index}
+                                        src={image}
+                                        alt={`${tier.name} example ${index + 1}`}
+                                        width={150}
+                                        height={100}
+                                        className="w-full h-auto object-cover rounded-md"
+                                        data-ai-hint={(tier as any).dataAiHint[index]}
+                                        />
+                                    ))}
+                                    </div>
+                                )}
                                 <ul className="space-y-4 text-sm w-full flex-grow">
                                     {tier.features.map((feature, i) => (
                                     <li key={i} className="flex items-start gap-3">

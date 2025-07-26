@@ -9,6 +9,7 @@ import { ArrowLeft, Video, Camera, Presentation, Code, PenTool } from 'lucide-re
 import { notFound, useParams } from 'next/navigation';
 import * as React from 'react';
 import Image from 'next/image';
+import { ImageCompare } from '@/components/image-compare';
 
 const servicesData = {
   'video-editing': {
@@ -29,12 +30,12 @@ const servicesData = {
     title: 'Photo Editing',
     description: 'With high-quality photo retouching and manipulation, I enhance your images to perfection, ensuring your product shots and portraits look stunning and professional.',
     projects: [
-        { name: 'Custom Photoshop Work', image: 'https://placehold.co/600x450.png', dataAiHint: 'photo retouching' },
-        { name: 'High-End Retouching', image: 'https://placehold.co/600x450.png', dataAiHint: 'portrait retouch' },
-        { name: 'Image Compositing', image: 'https://placehold.co/600x450.png', dataAiHint: 'photo manipulation' },
-        { name: 'Portrait Retouching', image: 'https://placehold.co/600x450.png', dataAiHint: 'professional portrait' },
-        { name: 'Food & Product Retouching', image: 'https://placehold.co/600x450.png', dataAiHint: 'product photography' },
-        { name: 'Creative Color Grading', image: 'https://placehold.co/600x450.png', dataAiHint: 'artistic color' },
+        { name: 'Custom Photoshop Work', before: 'https://placehold.co/600x450.png', after: 'https://placehold.co/600x450.png', dataAiHint: 'photo retouching' },
+        { name: 'High-End Retouching', before: 'https://placehold.co/600x450.png', after: 'https://placehold.co/600x450.png', dataAiHint: 'portrait retouch' },
+        { name: 'Image Compositing', before: 'https://placehold.co/600x450.png', after: 'https://placehold.co/600x450.png', dataAiHint: 'photo manipulation' },
+        { name: 'Portrait Retouching', before: 'https://placehold.co/600x450.png', after: 'https://placehold.co/600x450.png', dataAiHint: 'professional portrait' },
+        { name: 'Food & Product Retouching', before: 'https://placehold.co/600x450.png', after: 'https://placehold.co/600x450.png', dataAiHint: 'product photography' },
+        { name: 'Creative Color Grading', before: 'https://placehold.co/600x450.png', after: 'https://placehold.co/600x450.png', dataAiHint: 'artistic color' },
     ]
   },
   'ppt-design': {
@@ -152,6 +153,12 @@ export default function ServicePage() {
                                                 loop
                                                 playsInline
                                                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                                            />
+                                        ) : project.before && project.after ? (
+                                            <ImageCompare
+                                                before={project.before}
+                                                after={project.after}
+                                                alt={project.name}
                                             />
                                         ) : (
                                             <Image

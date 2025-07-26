@@ -1,4 +1,5 @@
 
+
 "use client";
 
 import { notFound, useParams } from 'next/navigation';
@@ -12,6 +13,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, Di
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import * as React from 'react';
+import Image from 'next/image';
 
 const pricingData = {
   'photo-editing': {
@@ -23,6 +25,8 @@ const pricingData = {
         period: '/5 photos', 
         features: ['Basic Retouching', 'Color Correction', '1 Round of Revisions'], 
         single: { price: '₹99', name: 'Single Photo Edit' },
+        image: 'https://placehold.co/600x400.png',
+        dataAiHint: 'photo retouch',
         whatsapp: {
           package: "Hi! 👋 I'm interested in the Basic Photo Editing Package (₹399 for 5 photos). I'd like basic retouching and color correction. Please let me know how to proceed and where to send the photos. Thanks!",
           single: "Hello! I’d like to get 1 photo edited under the Basic Plan (₹99). Just need simple retouching and color correction. Let me know what’s next!"
@@ -34,6 +38,8 @@ const pricingData = {
         period: '/10 photos', 
         features: ['Advanced Retouching', 'Color Grading', 'Background Removal', '2 Rounds of Revisions'], 
         single: { price: '₹199', name: 'Single Photo Edit' },
+        image: 'https://placehold.co/600x400.png',
+        dataAiHint: 'color grade',
         whatsapp: {
             package: "Hello! I'd like to go ahead with the Intermediate Photo Editing Package (₹999 for 10 photos). I need advanced retouching, color grading, and background removal. Let me know what you need from my side and how to start. 😊",
             single: "Hi! I’d like to use the Intermediate Plan for a single photo (₹199). I want advanced retouching with background removal. Please share the details!"
@@ -45,6 +51,8 @@ const pricingData = {
         period: '/5 photos', 
         features: ['High-End Retouching', 'Complex Manipulations', 'Source Files', '3 Rounds of Revisions'], 
         single: { price: '₹399', name: 'Single Photo Edit' },
+        image: 'https://placehold.co/600x400.png',
+        dataAiHint: 'photo manipulation',
         whatsapp: {
             package: "Hi there! I'm ready to start with the Pro Photo Editing Package (₹1,999 for 5 photos). I'm looking for high-end retouching and complex manipulations. What's the next step?",
             single: "Hey! I’m looking for Pro-level single photo editing (₹399). I need high-end retouching and complex edits. Can you tell me how to proceed?"
@@ -110,7 +118,8 @@ const cardVariants = {
     },
 };
 
-type Tier = (typeof pricingData)['photo-editing']['tiers'][0];
+type Tier = (typeof pricingData)['photo-editing']['tiers'][0] | (typeof pricingData)['video-editing']['tiers'][0];
+
 
 export default function ServicePricingPage() {
   const params = useParams();
@@ -141,7 +150,7 @@ export default function ServicePricingPage() {
   const handleContinue = () => {
     if (!selectedTier || !('whatsapp' in selectedTier)) return;
 
-    const message = selectedTier.whatsapp[selectedPlan];
+    const message = (selectedTier as any).whatsapp[selectedPlan];
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
     setIsDialogOpen(false);
@@ -149,7 +158,7 @@ export default function ServicePricingPage() {
   
   const singlePhotoFeature = (tier: Tier) => {
     if (serviceId === 'photo-editing' && 'single' in tier) {
-        return `Single photo editing @ ${tier.single.price}`
+        return `Single photo editing @ ${(tier as any).single.price}`
     }
     return null;
   }
@@ -194,10 +203,22 @@ export default function ServicePricingPage() {
                             transition={{ type: 'spring', stiffness: 300 }}
                         >
                             <Card className={cn(
-                                "flex flex-col w-full bg-card/80 transition-all duration-300 hover:shadow-lg",
+                                "flex flex-col w-full bg-card/80 transition-all duration-300 hover:shadow-lg overflow-hidden",
                                 "hover:border-primary hover:ring-2 hover:ring-primary hover:shadow-primary/20"
                             )}>
-                                <CardHeader className="text-center pb-4">
+                                {'image' in tier && (
+                                <CardHeader className="p-0">
+                                    <Image
+                                        src={(tier as any).image}
+                                        alt={tier.name}
+                                        width={600}
+                                        height={400}
+                                        className="w-full h-auto object-cover"
+                                        data-ai-hint={(tier as any).dataAiHint}
+                                    />
+                                </CardHeader>
+                                )}
+                                <CardHeader className="text-center pb-4 pt-6">
                                     <CardTitle className="text-2xl md:text-3xl font-headline mb-2">{tier.name}</CardTitle>
                                     <div className="flex items-baseline justify-center gap-1">
                                         <span className="text-4xl font-bold">{tier.price}</span>
@@ -259,7 +280,7 @@ export default function ServicePricingPage() {
                             {'single' in selectedTier && (
                                 <div className="flex items-center space-x-2">
                                     <RadioGroupItem value="single" id="single" />
-                                    <Label htmlFor="single" className="cursor-pointer">{selectedTier.single.name} ({selectedTier.single.price}/photo)</Label>
+                                    <Label htmlFor="single" className="cursor-pointer">{(selectedTier as any).single.name} ({(selectedTier as any).single.price}/photo)</Label>
                                 </div>
                             )}
                         </RadioGroup>

@@ -20,7 +20,6 @@ const pricingTiers = [
       '2 Rounds of Revisions',
     ],
     buttonText: 'Get Started',
-    isFeatured: false,
   },
   {
     name: 'Video Editing',
@@ -34,7 +33,6 @@ const pricingTiers = [
       '2 Rounds of Revisions',
     ],
     buttonText: 'Choose Plan',
-    isFeatured: false,
   },
   {
     name: 'PPT Design',
@@ -48,7 +46,6 @@ const pricingTiers = [
       '3 Rounds of Revisions',
     ],
     buttonText: 'Choose Plan',
-    isFeatured: false,
   },
   {
     name: 'Web Design',
@@ -62,7 +59,6 @@ const pricingTiers = [
       'Source Files (Figma)',
     ],
     buttonText: 'Choose Pro',
-    isFeatured: true,
   },
   {
     name: 'Web Development',
@@ -76,7 +72,6 @@ const pricingTiers = [
       '1 Month of Support',
     ],
     buttonText: 'Contact Sales',
-    isFeatured: false,
   },
 ];
 
@@ -144,7 +139,7 @@ export function PricingSection() {
               whileHover={{ y: -8, scale: 1.03 }}
               transition={{ type: 'spring', stiffness: 300 }}
             >
-              <Card className={cn("flex flex-col w-full transition-shadow duration-300", tier.isFeatured ? "border-primary ring-2 ring-primary shadow-lg" : "bg-card/80", !tier.isFeatured && "hover:shadow-lg hover:shadow-primary/20")}>
+              <Card className="flex flex-col w-full bg-card/80 transition-all duration-300 hover:border-primary hover:ring-2 hover:ring-primary hover:shadow-lg hover:shadow-primary/20">
                 <CardHeader className="text-center pb-4">
                   <CardTitle className="text-xl md:text-2xl font-headline mb-2">{tier.name}</CardTitle>
                   <CardDescription className="px-6 h-12">{tier.description}</CardDescription>
@@ -164,7 +159,7 @@ export function PricingSection() {
                   </ul>
                 </CardContent>
                 <CardFooter>
-                  <Button size="lg" className={cn("w-full font-bold", !tier.isFeatured && "bg-secondary text-secondary-foreground")}>
+                  <Button size="lg" className="w-full font-bold">
                     {tier.buttonText}
                   </Button>
                 </CardFooter>

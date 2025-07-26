@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Button } from './ui/button';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const projects = [
     { 
@@ -21,7 +22,8 @@ const projects = [
     },
     { 
       name: 'Modern Logo Design', 
-      video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
+      image: 'https://placehold.co/600x450.png',
+      dataAiHint: 'modern logo',
       category: 'Graphic Design',
       href: '/services/graphic-design'
     },
@@ -98,7 +100,7 @@ export function ProjectsSection() {
                     variants={sectionVariants}
                     className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 max-w-6xl mx-auto"
                 >
-                    {projects.map((project) => (
+                    {projects.map((project: any) => (
                         <motion.div
                             key={project.name}
                             variants={itemVariants}
@@ -108,14 +110,25 @@ export function ProjectsSection() {
                             <Link href={project.href} className="block h-full">
                                 <Card className="flex flex-col h-full bg-card/80 backdrop-blur-sm shadow-lg hover:shadow-primary/20 transition-all duration-300 overflow-hidden group">
                                     <CardHeader className="p-0 relative aspect-video">
-                                         <video
-                                            src={project.video}
-                                            autoPlay
-                                            muted
-                                            loop
-                                            playsInline
-                                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                                        />
+                                         {project.video ? (
+                                            <video
+                                                src={project.video}
+                                                autoPlay
+                                                muted
+                                                loop
+                                                playsInline
+                                                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                                            />
+                                        ) : (
+                                            <Image
+                                                src={project.image}
+                                                alt={project.name}
+                                                width={600}
+                                                height={450}
+                                                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                                                data-ai-hint={project.dataAiHint}
+                                            />
+                                        )}
                                     </CardHeader>
                                     <CardContent className="p-4 md:p-6 flex-grow flex flex-col">
                                         <p className="text-sm font-medium text-primary mb-1">{project.category}</p>

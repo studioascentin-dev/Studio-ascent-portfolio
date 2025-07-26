@@ -56,12 +56,12 @@ const servicesData = {
     title: 'Graphic Design',
     description: 'I create compelling and beautiful visuals that tell a story, define a brand, and capture attention. From logos to complete brand identities, I craft designs that make an impact.',
     projects: [
-        { name: 'Modern Logo Design', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4' },
-        { name: 'Brand Identity Pack', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4' },
-        { name: 'Social Media Campaign', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4' },
-        { name: 'Event Poster Design', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4' },
-        { name: 'Product Packaging', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4' },
-        { name: 'Book Cover Design', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4' },
+        { name: 'Modern Logo Design', image: 'https://placehold.co/600x450.png', dataAiHint: 'modern logo' },
+        { name: 'Brand Identity Pack', image: 'https://placehold.co/600x450.png', dataAiHint: 'branding identity' },
+        { name: 'Social Media Campaign', image: 'https://placehold.co/600x450.png', dataAiHint: 'social media' },
+        { name: 'Event Poster Design', image: 'https://placehold.co/600x450.png', dataAiHint: 'event poster' },
+        { name: 'Product Packaging', image: 'https://placehold.co/600x450.png', dataAiHint: 'product package' },
+        { name: 'Book Cover Design', image: 'https://placehold.co/600x450.png', dataAiHint: 'book cover' },
     ]
   },
   'web-development': {
@@ -160,7 +160,7 @@ export default function ServicePage() {
                                                 after={project.after}
                                                 alt={project.name}
                                             />
-                                        ) : (
+                                        ) : project.image ? (
                                             <Image
                                                 src={project.image}
                                                 alt={project.name}
@@ -169,7 +169,7 @@ export default function ServicePage() {
                                                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                                                 data-ai-hint={project.dataAiHint}
                                             />
-                                        )}
+                                        ) : null}
                                     </CardHeader>
                                     <CardContent className="p-4 flex-grow">
                                         <h4 className="font-headline text-xl">{project.name}</h4>

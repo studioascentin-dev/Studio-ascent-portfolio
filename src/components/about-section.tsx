@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { User, MapPin, BookOpen, Code, Target, Heart, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -16,8 +16,13 @@ const aboutDetails = [
     { icon: <Target className="h-8 w-8 text-primary" />, title: "Ambition", value: "To Build Impactful Websites", details: "My ambition is to became like Jeff Bezos by creating my own website which can change people life and make it more easier. Build new things is always my liking. I also still learning new things." },
 ];
 
+const MAX_VISIBLE_ITEMS = 2;
+
 export function AboutSection() {
     const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+    const [showAll, setShowAll] = useState(false);
+
+    const visibleDetails = showAll ? aboutDetails : aboutDetails.slice(0, MAX_VISIBLE_ITEMS);
 
     const textVariants = {
         hidden: { opacity: 0, y: 20 },
@@ -59,45 +64,46 @@ export function AboutSection() {
                     </div>
 
                     <div className="relative max-w-2xl mx-auto">
-                        <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-border -translate-x-1/2"></div>
+                        <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-border -translate-x-1/2"></div>
                         
-                        {aboutDetails.map((detail, index) => (
-                            <div
-                                key={detail.title}
-                                className={cn(
-                                    "relative flex items-center mb-24",
-                                    index % 2 === 0 ? "justify-start" : "justify-end"
-                                )}
-                            >
-                                <div className={cn("absolute left-1/2 w-4 h-4 bg-primary rounded-full -translate-x-1/2 border-4 border-background")}></div>
-                                
-                                <motion.div 
-                                    className={cn("w-[48%]", index % 2 === 0 ? "pr-8" : "pl-8")}
-                                    initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    viewport={{ once: true, amount: 0.5 }}
-                                    transition={{ duration: 0.5 }}
+                        <AnimatePresence>
+                            {visibleDetails.map((detail, index) => (
+                                <motion.div
+                                    key={detail.title}
+                                    layout
+                                    initial={{ opacity: 0, scale: 0.8 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    exit={{ opacity: 0, scale: 0.8 }}
+                                    transition={{ duration: 0.5, type: 'spring' }}
+                                    className={cn(
+                                        "relative flex items-center mb-12",
+                                        index % 2 === 0 ? "justify-start" : "justify-end"
+                                    )}
                                 >
-                                    <Card
-                                        className={cn(
-                                            "bg-card/80 backdrop-blur-sm shadow-lg transition-all duration-300 w-full cursor-pointer hover:shadow-primary/20",
-                                            { "ring-2 ring-primary": expandedIndex === index }
-                                        )}
-                                        onClick={() => setExpandedIndex(expandedIndex === index ? null : index)}
+                                    <div className={cn("absolute left-1/2 w-4 h-4 bg-primary rounded-full -translate-x-1/2 border-4 border-background")}></div>
+                                    
+                                    <div 
+                                        className={cn("w-[calc(50%-2rem)]", index % 2 === 0 ? "pr-0" : "pl-0")}
                                     >
-                                        <CardHeader className="flex flex-row items-center justify-between gap-4 pb-4">
-                                            <div className="flex flex-col items-start gap-2">
-                                                {detail.icon}
-                                                <CardTitle className="text-xl font-headline">{detail.title}</CardTitle>
-                                            </div>
-                                            <motion.div
-                                                animate={{ rotate: expandedIndex === index ? 180 : 0 }}
-                                                transition={{ duration: 0.3 }}
-                                            >
-                                                <ChevronDown className="h-5 w-5 text-muted-foreground" />
-                                            </motion.div>
-                                        </CardHeader>
-                                        <CardContent>
+                                        <Card
+                                            className={cn(
+                                                "bg-secondary/80 backdrop-blur-sm shadow-lg transition-all duration-300 w-full cursor-pointer hover:shadow-primary/20",
+                                                { "ring-2 ring-primary": expandedIndex === index }
+                                            )}
+                                            onClick={() => setExpandedIndex(expandedIndex === index ? null : index)}
+                                        >
+                                            <CardHeader className="flex flex-row items-center justify-between gap-4 p-4">
+                                                <div className="flex items-center gap-4">
+                                                    {detail.icon}
+                                                    <CardTitle className="text-lg font-headline">{detail.title}</CardTitle>
+                                                </div>
+                                                <motion.div
+                                                    animate={{ rotate: expandedIndex === index ? 180 : 0 }}
+                                                    transition={{ duration: 0.3 }}
+                                                >
+                                                    <ChevronDown className="h-5 w-5 text-muted-foreground" />
+                                                </motion.div>
+                                            </CardHeader>
                                             <AnimatePresence>
                                                 {expandedIndex === index && (
                                                     <motion.div
@@ -107,20 +113,28 @@ export function AboutSection() {
                                                         exit="hidden"
                                                         className="overflow-hidden"
                                                     >
-                                                        <p className="text-muted-foreground">{detail.value}</p>
-                                                        <p className="pt-4 text-muted-foreground/80">{detail.details}</p>
+                                                        <CardContent className="p-4 pt-0">
+                                                            <p className="text-muted-foreground">{detail.value}</p>
+                                                            <p className="pt-2 text-muted-foreground/80 text-sm">{detail.details}</p>
+                                                        </CardContent>
                                                     </motion.div>
                                                 )}
                                             </AnimatePresence>
-                                        </CardContent>
-                                    </Card>
+                                        </Card>
+                                    </div>
                                 </motion.div>
-                            </div>
-                        ))}
+                            ))}
+                        </AnimatePresence>
                     </div>
 
+                    {!showAll && (
+                        <div className="text-center">
+                            <Button variant="outline" onClick={() => setShowAll(true)}>See More</Button>
+                        </div>
+                    )}
+
                     <div className="text-center mt-12">
-                        <Button asChild className="font-bold text-lg py-4 px-10 bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-lg transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95">
+                        <Button asChild size="lg">
                           <a href="/">Go Back</a>
                         </Button>
                     </div>

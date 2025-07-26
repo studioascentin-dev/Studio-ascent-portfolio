@@ -4,8 +4,7 @@
 import { motion } from 'framer-motion';
 import { Button } from './ui/button';
 import { Mail, Phone, Gem, Code, HeartHandshake } from 'lucide-react';
-import { Card, CardHeader, CardTitle, CardContent } from './ui/card';
-import { cn } from '@/lib/utils';
+import { Card, CardContent } from './ui/card';
 
 const sectionVariants = {
     hidden: { opacity: 0 },
@@ -100,8 +99,8 @@ export function HireMeSection() {
                             >
                                 <Card className="h-full bg-card/80 backdrop-blur-sm shadow-lg hover:shadow-primary/20 transition-all duration-300 hover:border-primary border-transparent border-2">
                                     <CardContent className="p-6">
-                                        <div className="flex flex-row md:flex-col md:items-center md:text-center gap-6 items-start">
-                                            <div className="p-3 bg-primary/10 rounded-full">
+                                        <div className="flex flex-row items-start gap-4 md:flex-col md:items-center md:text-center">
+                                            <div className="p-3 bg-primary/10 rounded-full shrink-0">
                                                 {reason.icon}
                                             </div>
                                             <div className="flex-1">
@@ -122,7 +121,7 @@ export function HireMeSection() {
                 >
                     <Button
                         size="lg"
-                        className="w-full sm:w-auto font-bold text-lg py-4 px-10 bg-green-500 hover:bg-green-600 text-primary-foreground shadow-lg transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95"
+                        className="w-full sm:w-auto font-bold text-lg py-4 px-10 bg-green-500 hover:bg-green-600 text-white shadow-lg transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95"
                         onClick={handleWhatsAppClick}
                     >
                         <Phone className="mr-2 h-5 w-5" />

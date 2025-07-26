@@ -35,10 +35,10 @@ const prompt = ai.definePrompt({
   output: {schema: SuggestProjectsOutputSchema},
   prompt: `Based on the user's selections: {{{selections}}},
   suggest the most relevant project examples from the following categories:
-  video editing, photo editing, PPT, web design, web development.
+  video editing, photo editing, PPT, graphic design, web development.
   Return a list of project names that would be most impactful to the user.
   Be concise. Focus on matching the user's stated needs to a specific project type.
-  For example, if the user is interested in "video editing" and "web design", return example projects from those categories.
+  For example, if the user is interested in "video editing" and "graphic design", return example projects from those categories.
   Do not return project examples that are not related to the user's selections.
   `,
 });

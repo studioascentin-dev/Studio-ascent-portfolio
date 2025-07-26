@@ -20,10 +20,10 @@ const projects = [
       href: '/services/video-editing'
     },
     { 
-      name: 'SaaS Landing Page', 
+      name: 'Modern Logo Design', 
       video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
-      category: 'Web Design',
-      href: '/services/web-design'
+      category: 'Graphic Design',
+      href: '/services/graphic-design'
     },
     { 
       name: 'Custom E-commerce Store', 

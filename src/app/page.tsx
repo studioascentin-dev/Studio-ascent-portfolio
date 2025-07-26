@@ -16,13 +16,13 @@ export default function Home() {
   const videoEditingRef = React.useRef<HTMLDivElement>(null);
   const photoEditingRef = React.useRef<HTMLDivElement>(null);
   const pptDesignRef = React.useRef<HTMLDivElement>(null);
-  const webDesignRef = React.useRef<HTMLDivElement>(null);
+  const graphicDesignRef = React.useRef<HTMLDivElement>(null);
   const webDevelopmentRef = React.useRef<HTMLDivElement>(null);
   const hireMeRef = React.useRef<HTMLDivElement>(null);
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
-      <Header refs={{ aboutRef, projectsRef, videoEditingRef, photoEditingRef, pptDesignRef, webDesignRef, webDevelopmentRef, hireMeRef }} />
+      <Header refs={{ aboutRef, projectsRef, videoEditingRef, photoEditingRef, pptDesignRef, graphicDesignRef, webDevelopmentRef, hireMeRef }} />
       <main className="flex-1">
         <div id="hero-section" ref={aboutRef}>
             <HeroSection />
@@ -30,7 +30,7 @@ export default function Home() {
         <div id="projects" ref={projectsRef}>
             <ProjectsSection />
         </div>
-        <ServicesSection refs={{ videoEditingRef, photoEditingRef, pptDesignRef, webDesignRef, webDevelopmentRef }} />
+        <ServicesSection refs={{ videoEditingRef, photoEditingRef, pptDesignRef, graphicDesignRef, webDevelopmentRef }} />
         <div id="hire-me" ref={hireMeRef}>
           <HireMeSection />
         </div>

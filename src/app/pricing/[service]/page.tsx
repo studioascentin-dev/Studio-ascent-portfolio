@@ -76,12 +76,12 @@ const pricingData = {
       { name: 'Pro', price: '₹12,000', period: '/deck', features: ['Up to 35 Slides', 'Full Custom Design', 'Advanced Animations', 'Source Files'] },
     ]
   },
-  'web-design': {
-    title: 'Web Design',
+  'graphic-design': {
+    title: 'Graphic Design',
     tiers: [
-      { name: 'Basic', price: '₹10,000', period: '', features: ['1-Page Landing Page', 'Responsive Design', '2 Rounds of Revisions'] },
-      { name: 'Intermediate', price: '₹25,000', period: '', features: ['Up to 5 Pages', 'UI/UX Design', 'Interactive Prototypes', '3 Rounds of Revisions'] },
-      { name: 'Pro', price: '₹50,000', period: '', features: ['Up to 10 Pages', 'Complete Design System', 'Advanced Animations', 'Source Files (Figma)'] },
+      { name: 'Basic', price: '₹4000', period: '', features: ['1 Logo Concept', '2 Rounds of Revisions', 'JPG & PNG Files'] },
+      { name: 'Intermediate', price: '₹10,000', period: '', features: ['3 Logo Concepts', 'Social Media Kit', 'Vector Files', '3 Rounds of Revisions'] },
+      { name: 'Pro', price: '₹20,000', period: '', features: ['5 Logo Concepts', 'Full Brand Style Guide', 'Stationery Designs', 'Source Files (AI, EPS)'] },
     ]
   },
   'web-development': {

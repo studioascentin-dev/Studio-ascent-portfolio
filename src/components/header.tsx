@@ -15,7 +15,7 @@ const navItems = [
   { href: '#video-editing', text: 'Video Editing', icon: Video, refKey: 'videoEditingRef' },
   { href: '#photo-editing', text: 'Photo Editing', icon: Camera, refKey: 'photoEditingRef' },
   { href: '#ppt-design', text: 'PPT Design', icon: Presentation, refKey: 'pptDesignRef' },
-  { href: '#web-design', text: 'Web Design', icon: PenTool, refKey: 'webDesignRef' },
+  { href: '#graphic-design', text: 'Graphic Design', icon: PenTool, refKey: 'graphicDesignRef' },
   { href: '#web-development', text: 'Web Development', icon: Code, refKey: 'webDevelopmentRef' },
   { href: '#hire-me', text: 'Hire Me', icon: MessageCircle, refKey: 'hireMeRef' },
 ];
@@ -27,7 +27,7 @@ interface HeaderProps {
         videoEditingRef?: React.RefObject<HTMLElement>;
         photoEditingRef?: React.RefObject<HTMLElement>;
         pptDesignRef?: React.RefObject<HTMLElement>;
-        webDesignRef?: React.RefObject<HTMLElement>;
+        graphicDesignRef?: React.RefObject<HTMLElement>;
         webDevelopmentRef?: React.RefObject<HTMLElement>;
         hireMeRef?: React.RefObject<HTMLElement>;
     }
@@ -95,7 +95,7 @@ export function Header({ refs = {} }: HeaderProps) {
     const isVideoEditingOnScreen = useOnScreen(refs.videoEditingRef, observerOptions);
     const isPhotoEditingOnScreen = useOnScreen(refs.photoEditingRef, observerOptions);
     const isPptDesignOnScreen = useOnScreen(refs.pptDesignRef, observerOptions);
-    const isWebDesignOnScreen = useOnScreen(refs.webDesignRef, observerOptions);
+    const isGraphicDesignOnScreen = useOnScreen(refs.graphicDesignRef, observerOptions);
     const isWebDevelopmentOnScreen = useOnScreen(refs.webDevelopmentRef, observerOptions);
     const isHireMeOnScreen = useOnScreen(refs.hireMeRef, observerOptions);
     
@@ -103,14 +103,14 @@ export function Header({ refs = {} }: HeaderProps) {
         let currentSection = 'aboutRef';
         if (isHireMeOnScreen) currentSection = 'hireMeRef';
         if (isWebDevelopmentOnScreen) currentSection = 'webDevelopmentRef';
-        if (isWebDesignOnScreen) currentSection = 'webDesignRef';
+        if (isGraphicDesignOnScreen) currentSection = 'graphicDesignRef';
         if (isPptDesignOnScreen) currentSection = 'pptDesignRef';
         if (isPhotoEditingOnScreen) currentSection = 'photoEditingRef';
         if (isVideoEditingOnScreen) currentSection = 'videoEditingRef';
         if (isProjectsOnScreen) currentSection = 'projectsRef';
         if (isAboutOnScreen) currentSection = 'aboutRef';
         setActiveSection(currentSection);
-    }, [isAboutOnScreen, isProjectsOnScreen, isVideoEditingOnScreen, isPhotoEditingOnScreen, isPptDesignOnScreen, isWebDesignOnScreen, isWebDevelopmentOnScreen, isHireMeOnScreen]);
+    }, [isAboutOnScreen, isProjectsOnScreen, isVideoEditingOnScreen, isPhotoEditingOnScreen, isPptDesignOnScreen, isGraphicDesignOnScreen, isWebDevelopmentOnScreen, isHireMeOnScreen]);
 
     return (
         <header className="fixed top-4 left-1/2 z-50 -translate-x-1/2 w-auto">

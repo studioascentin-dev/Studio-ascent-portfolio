@@ -51,17 +51,17 @@ const servicesData = {
         { name: 'Educational Lecture', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4' },
     ]
   },
-  'web-design': {
+  'graphic-design': {
     icon: <PenTool className="h-10 w-10 text-primary" />,
-    title: 'Web Design',
-    description: 'I design beautiful, intuitive, and user-friendly web interfaces that provide an exceptional user experience and make a lasting impression on your visitors.',
+    title: 'Graphic Design',
+    description: 'I create compelling and beautiful visuals that tell a story, define a brand, and capture attention. From logos to complete brand identities, I craft designs that make an impact.',
     projects: [
-        { name: 'Artist Portfolio Website', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4' },
-        { name: 'Restaurant Booking Site', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4' },
-        { name: 'Non-Profit Organization Site', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4' },
-        { name: 'E-commerce UI/UX', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4' },
-        { name: 'SaaS Landing Page', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4' },
-        { name: 'Mobile App Design', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4' },
+        { name: 'Modern Logo Design', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4' },
+        { name: 'Brand Identity Pack', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4' },
+        { name: 'Social Media Campaign', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4' },
+        { name: 'Event Poster Design', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4' },
+        { name: 'Product Packaging', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4' },
+        { name: 'Book Cover Design', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4' },
     ]
   },
   'web-development': {

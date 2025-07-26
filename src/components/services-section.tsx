@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import * as React from 'react';
 import Image from 'next/image';
 import { ImageCompare } from './image-compare';
+import useEmblaCarousel from 'embla-carousel-react';
 
 const services = [
   {
@@ -44,14 +45,14 @@ const services = [
     ]
   },
   {
-    id: 'web-design',
+    id: 'graphic-design',
     icon: <PenTool className="h-10 w-10 text-primary" />,
-    title: 'Web Design',
-    description: 'I design beautiful, intuitive, and user-friendly web interfaces that provide an exceptional user experience and make a lasting impression on your visitors.',
+    title: 'Graphic Design',
+    description: 'I create compelling and beautiful visuals that tell a story, define a brand, and capture attention. From logos to complete brand identities, I craft designs that make an impact.',
     projects: [
-        { name: 'Artist Portfolio Website', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4' },
-        { name: 'Restaurant Booking Site', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4' },
-        { name: 'Non-Profit Organization Site', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4' },
+        { name: 'Modern Logo Design', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4' },
+        { name: 'Brand Identity Pack', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4' },
+        { name: 'Social Media Campaign', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4' },
     ]
   },
   {
@@ -120,7 +121,7 @@ interface ServicesSectionProps {
     videoEditingRef: React.RefObject<HTMLDivElement>;
     photoEditingRef: React.RefObject<HTMLDivElement>;
     pptDesignRef: React.RefObject<HTMLDivElement>;
-    webDesignRef: React.RefObject<HTMLDivElement>;
+    graphicDesignRef: React.RefObject<HTMLDivElement>;
     webDevelopmentRef: React.RefObject<HTMLDivElement>;
   }
 }
@@ -130,7 +131,7 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
     'video-editing': refs.videoEditingRef,
     'photo-editing': refs.photoEditingRef,
     'ppt-design': refs.pptDesignRef,
-    'web-design': refs.webDesignRef,
+    'graphic-design': refs.graphicDesignRef,
     'web-development': refs.webDevelopmentRef,
   };
 

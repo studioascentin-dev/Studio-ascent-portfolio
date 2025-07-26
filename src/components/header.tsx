@@ -57,11 +57,11 @@ const NavLink = ({ item, activeSection }: { item: typeof navItems[0], activeSect
                         href={item.href}
                         onClick={handleClick}
                         className={cn(
-                            "relative z-10 flex h-9 w-9 md:h-12 md:w-12 items-center justify-center rounded-full transition-colors duration-300",
+                            "relative z-10 flex h-12 w-12 items-center justify-center rounded-full transition-colors duration-300",
                             isActive ? "text-primary-foreground" : "text-muted-foreground hover:text-foreground"
                         )}
                     >
-                        <item.icon className="h-4 w-4 md:h-6 md:w-6" />
+                        <item.icon className="h-6 w-6" />
                         <span className="sr-only">{item.text}</span>
                     </a>
                      {isActive && (

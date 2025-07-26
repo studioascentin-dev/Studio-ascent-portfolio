@@ -7,8 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
 import * as React from 'react';
-import useEmblaCarousel from 'embla-carousel-react';
-import { EmblaCarouselType } from 'embla-carousel';
+import useEmblaCarousel, { EmblaCarouselType } from 'embla-carousel-react';
 
 const services = [
   {
@@ -116,7 +115,7 @@ const cardVariants = {
     }
 };
 
-const TWEEN_FACTOR = 1.2;
+const TWEEN_FACTOR = 2.2;
 
 const numberWithinRange = (number: number, min: number, max: number): number =>
   Math.min(Math.max(number, min), max);
@@ -163,12 +162,12 @@ const MobileCarousel = ({ projects }: { projects: typeof services[0]['projects']
 
     return (
         <div className="overflow-hidden md:hidden">
-            <div className="-ml-4" ref={emblaRef}>
-                <div className="flex">
+            <div className="px-4" ref={emblaRef}>
+                <div className="flex -ml-4">
                     {projects.map((project, index) => (
                         <div
                             key={project.name}
-                            className="flex-[0_0_80%] min-w-0 pl-4"
+                            className="flex-[0_0_70%] min-w-0 pl-4"
                             style={{
                                 ...(tweenValues.length && {
                                     opacity: numberWithinRange(tweenValues[index], 0.3, 1),

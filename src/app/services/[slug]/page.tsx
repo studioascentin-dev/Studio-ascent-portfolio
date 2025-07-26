@@ -144,7 +144,7 @@ export default function ServicePage() {
                                 variants={cardVariants}
                             >
                                 <Card className="overflow-hidden bg-card/80 backdrop-blur-sm group h-full flex flex-col">
-                                    <CardHeader className="p-0 relative aspect-video">
+                                    <CardHeader className="p-0 relative aspect-square">
                                         {project.video ? (
                                             <video
                                                 src={project.video}
@@ -171,8 +171,8 @@ export default function ServicePage() {
                                             />
                                         )}
                                     </CardHeader>
-                                    <CardContent className="p-6 flex-grow">
-                                        <h4 className="font-headline text-2xl">{project.name}</h4>
+                                    <CardContent className="p-4 flex-grow">
+                                        <h4 className="font-headline text-xl">{project.name}</h4>
                                     </CardContent>
                                 </Card>
                             </motion.div>

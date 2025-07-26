@@ -14,7 +14,7 @@ export function ImageCompare({ before, after, alt }: ImageCompareProps) {
         <ReactCompareSlider
             itemOne={<ReactCompareSliderImage src={before} alt={`Before - ${alt}`} />}
             itemTwo={<ReactCompareSliderImage src={after} alt={`After - ${alt}`} />}
-            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            className="w-full h-full object-cover"
         />
     );
 }

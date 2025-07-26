@@ -114,17 +114,19 @@ export default function ServicePricingPage() {
                         initial="hidden"
                         animate="visible"
                         variants={sectionVariants}
-                        className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center max-w-5xl mx-auto"
+                        className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch max-w-5xl mx-auto"
                     >
                     {data.tiers.map((tier) => (
                         <motion.div 
                             key={tier.name} 
                             variants={cardVariants} 
                             className="flex h-full"
+                            whileHover={{ y: -8, scale: 1.03 }}
+                            transition={{ type: 'spring', stiffness: 300 }}
                         >
                             <Card className={cn(
-                                "flex flex-col w-full bg-card/80 transition-all duration-300 hover:shadow-lg",
-                                tier.isFeatured ? "border-primary ring-2 ring-primary shadow-primary/20" : "hover:border-primary"
+                                "flex flex-col w-full bg-card/80 transition-all duration-300 hover:shadow-lg hover:shadow-primary/20",
+                                tier.isFeatured ? "border-primary ring-2 ring-primary shadow-primary/20" : "hover:border-primary hover:ring-2 hover:ring-primary"
                             )}>
                                 <CardHeader className="text-center pb-4">
                                     <CardTitle className="text-2xl md:text-3xl font-headline mb-2">{tier.name}</CardTitle>
@@ -168,4 +170,3 @@ export default function ServicePricingPage() {
     </div>
   );
 }
-

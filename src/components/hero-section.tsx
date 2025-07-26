@@ -18,6 +18,8 @@ export function HeroSection() {
   useEffect(() => {
     const handleTyping = () => {
       const currentRole = roles[roleIndex];
+      const isFirstRole = roleIndex === 0;
+
       if (isDeleting) {
         // Deleting text
         if (text.length > 0) {
@@ -32,7 +34,8 @@ export function HeroSection() {
           setText((prev) => currentRole.substring(0, prev.length + 1));
         } else {
           // Pause and then start deleting
-          setTimeout(() => setIsDeleting(true), DELAY_AFTER_TYPING);
+          const delay = isFirstRole ? 2000 : DELAY_AFTER_TYPING;
+          setTimeout(() => setIsDeleting(true), delay);
         }
       }
     };

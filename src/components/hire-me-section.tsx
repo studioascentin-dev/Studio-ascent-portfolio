@@ -91,24 +91,21 @@ export function HireMeSection() {
                     </motion.h3>
                     <motion.div 
                         variants={sectionVariants}
-                        className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8"
+                        className="grid grid-cols-1 md:grid-cols-3 gap-8"
                     >
-                        {reasonsToHire.map((reason, index) => (
+                        {reasonsToHire.map((reason) => (
                             <motion.div 
                                 key={reason.title} 
                                 variants={itemVariants}
-                                className={cn(
-                                    {'col-span-2 md:col-span-1': index === reasonsToHire.length -1}
-                                )}
                             >
                                 <Card className="h-full bg-card/80 backdrop-blur-sm shadow-lg hover:shadow-primary/20 transition-all duration-300 hover:border-primary border-transparent border-2 flex flex-col text-center items-center p-4">
                                     <CardHeader className="items-center p-2 md:p-6">
-                                        <div className="p-3 md:p-4 bg-primary/10 rounded-full mb-4">
+                                        <div className="p-3 bg-primary/10 rounded-full mb-4">
                                             {reason.icon}
                                         </div>
                                         <CardTitle className="text-xl md:text-2xl font-headline">{reason.title}</CardTitle>
                                     </CardHeader>
-                                    <CardContent className="p-2 md:p-6">
+                                    <CardContent className="p-2 md:p-6 pt-0">
                                         <p className="text-muted-foreground text-sm md:text-base">{reason.description}</p>
                                     </CardContent>
                                 </Card>

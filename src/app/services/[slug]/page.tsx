@@ -172,7 +172,7 @@ export default function ServicePage() {
                                         ) : null}
                                     </CardHeader>
                                     <CardContent className="p-4 flex-grow">
-                                        <h4 className="font-headline text-xl">{project.name}</h4>
+                                        <h4 className="font-headline text-base md:text-xl">{project.name}</h4>
                                     </CardContent>
                                 </Card>
                             </motion.div>

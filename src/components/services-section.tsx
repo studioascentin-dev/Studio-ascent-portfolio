@@ -191,7 +191,7 @@ const MobileCarousel = ({ projects }: { projects: (typeof services[0]['projects'
                             }}
                         >
                             <Card className="overflow-hidden bg-card/80 backdrop-blur-sm group h-full flex flex-col">
-                                <CardHeader className="p-0 relative aspect-video">
+                                <CardHeader className="p-0 relative aspect-video" onTouchMove={(e) => e.stopPropagation()}>
                                     {project.video ? (
                                         <video
                                             src={project.video}

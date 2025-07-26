@@ -6,9 +6,11 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
+import Link from 'next/link';
 
 const pricingTiers = [
   {
+    id: 'photo-editing',
     name: 'Photo Editing',
     description: 'Perfect for enhancing your product shots, portraits, and social media content.',
     features: [
@@ -20,6 +22,7 @@ const pricingTiers = [
     buttonText: 'View Prices',
   },
   {
+    id: 'video-editing',
     name: 'Video Editing',
     description: 'Ideal for creating engaging short-form content like reels and ads.',
     features: [
@@ -31,6 +34,7 @@ const pricingTiers = [
     buttonText: 'View Prices',
   },
   {
+    id: 'ppt-design',
     name: 'PPT Design',
     description: 'For compelling pitch decks, webinars, and corporate presentations.',
     features: [
@@ -42,6 +46,7 @@ const pricingTiers = [
     buttonText: 'View Prices',
   },
   {
+    id: 'web-design',
     name: 'Web Design',
     description: 'A complete, beautiful, and user-friendly website design.',
     features: [
@@ -53,6 +58,7 @@ const pricingTiers = [
     buttonText: 'View Prices',
   },
   {
+    id: 'web-development',
     name: 'Web Development',
     description: 'Robust and scalable websites built with the latest technology.',
     features: [
@@ -145,9 +151,9 @@ export function PricingSection() {
                   </ul>
                 </CardContent>
                 <CardFooter>
-                  <Button size="lg" className="w-full font-bold">
-                    {tier.buttonText}
-                  </Button>
+                    <Button asChild size="lg" className="w-full font-bold">
+                        <Link href={`/pricing/${tier.id}`}>{tier.buttonText}</Link>
+                    </Button>
                 </CardFooter>
               </Card>
             </motion.div>
@@ -157,3 +163,4 @@ export function PricingSection() {
     </section>
   );
 }
+

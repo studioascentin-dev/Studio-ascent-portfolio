@@ -42,12 +42,12 @@ const servicesData = {
     title: 'PPT Design',
     description: 'I create stunning and effective presentations that not only look great but also communicate your message clearly, making sure you stand out in any setting.',
     projects: [
-        { name: 'Startup Pitch Deck', image: 'https://placehold.co/600x450.png', dataAiHint: 'startup pitch' },
-        { name: 'Corporate Training Materials', image: 'https://placehold.co/600x450.png', dataAiHint: 'corporate training' },
-        { name: 'Webinar Slides', image: 'https://placehold.co/600x450.png', dataAiHint: 'webinar slides' },
-        { name: 'Investor Update Deck', image: 'https://placehold.co/600x450.png', dataAiHint: 'investor deck' },
-        { name: 'Sales Presentation', image: 'https://placehold.co/600x450.png', dataAiHint: 'sales presentation' },
-        { name: 'Educational Lecture', image: 'https://placehold.co/600x450.png', dataAiHint: 'lecture slides' },
+        { name: 'Startup Pitch Deck', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4' },
+        { name: 'Corporate Training Materials', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4' },
+        { name: 'Webinar Slides', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4' },
+        { name: 'Investor Update Deck', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4' },
+        { name: 'Sales Presentation', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4' },
+        { name: 'Educational Lecture', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4' },
     ]
   },
   'web-design': {
@@ -188,5 +188,3 @@ export default function ServicePage() {
     </div>
   );
 }
-
-    

@@ -192,64 +192,71 @@ export default function ServicePricingPage() {
                         initial="hidden"
                         animate="visible"
                         variants={sectionVariants}
-                        className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch max-w-5xl mx-auto"
+                        className="grid grid-cols-1 lg:grid-cols-3 gap-x-8 gap-y-16 items-start max-w-5xl mx-auto"
                     >
                     {(data.tiers as Tier[]).map((tier, tierIndex) => (
                         <motion.div 
                             key={tier.name} 
                             variants={cardVariants} 
-                            className="flex h-full"
-                            whileHover={{ y: -8, scale: 1.03 }}
-                            transition={{ type: 'spring', stiffness: 300 }}
+                            className="flex flex-col h-full"
                         >
-                            <Card className={cn(
-                                "flex flex-col w-full bg-card/80 transition-all duration-300 hover:shadow-lg overflow-hidden",
-                                "hover:border-primary hover:ring-2 hover:ring-primary hover:shadow-primary/20"
-                            )}>
-                                <CardHeader className="text-center pb-4 pt-6">
-                                    <CardTitle className="text-2xl md:text-3xl font-headline mb-2">{tier.name}</CardTitle>
-                                    <div className="flex items-baseline justify-center gap-1">
-                                        <span className="text-4xl font-bold">{tier.price}</span>
-                                        <span className="text-sm text-muted-foreground">{tier.period}</span>
+                            {'images' in tier && (
+                                <div className="mb-8">
+                                    <h3 className="text-2xl font-headline text-center mb-4">{tier.name} Examples</h3>
+                                    <div className="grid grid-cols-3 gap-2">
+                                        {(tier as any).images.map((image: string, index: number) => (
+                                            <Image
+                                                key={index}
+                                                src={image}
+                                                alt={`${tier.name} example ${index + 1}`}
+                                                width={150}
+                                                height={100}
+                                                className="w-full h-auto object-cover rounded-md shadow-md"
+                                                data-ai-hint={(tier as any).dataAiHint[index]}
+                                            />
+                                        ))}
                                     </div>
-                                </CardHeader>
-                                <CardContent className="flex flex-col flex-grow items-center p-6 pt-0">
-                                {'images' in tier && (
-                                    <div className="grid grid-cols-3 gap-2 mb-6">
-                                    {(tier as any).images.map((image: string, index: number) => (
-                                        <Image
-                                        key={index}
-                                        src={image}
-                                        alt={`${tier.name} example ${index + 1}`}
-                                        width={150}
-                                        height={100}
-                                        className="w-full h-auto object-cover rounded-md"
-                                        data-ai-hint={(tier as any).dataAiHint[index]}
-                                        />
-                                    ))}
-                                    </div>
-                                )}
-                                <ul className="space-y-4 text-sm w-full flex-grow">
-                                    {tier.features.map((feature, i) => (
-                                    <li key={i} className="flex items-start gap-3">
-                                        <Check className="h-5 w-5 text-green-500 mt-0.5 shrink-0" />
-                                        <span className="text-muted-foreground">{feature}</span>
-                                    </li>
-                                    ))}
-                                    {singlePhotoFeature(tier) && (
-                                        <li className="flex items-start gap-3">
-                                            <Check className="h-5 w-5 text-green-500 mt-0.5 shrink-0" />
-                                            <span className="text-muted-foreground">{singlePhotoFeature(tier)}</span>
-                                        </li>
-                                    )}
-                                </ul>
-                                </CardContent>
-                                <CardFooter>
-                                <Button size="lg" className="w-full font-bold" onClick={() => handleGetStartedClick(tier)}>
-                                    Get Started
-                                </Button>
-                                </CardFooter>
-                            </Card>
+                                </div>
+                            )}
+                            <motion.div
+                                className="flex h-full"
+                                whileHover={{ y: -8, scale: 1.03 }}
+                                transition={{ type: 'spring', stiffness: 300 }}
+                            >
+                                <Card className={cn(
+                                    "flex flex-col w-full bg-card/80 transition-all duration-300 hover:shadow-lg overflow-hidden",
+                                    "hover:border-primary hover:ring-2 hover:ring-primary hover:shadow-primary/20"
+                                )}>
+                                    <CardHeader className="text-center pb-4 pt-6">
+                                        <CardTitle className="text-2xl md:text-3xl font-headline mb-2">{tier.name}</CardTitle>
+                                        <div className="flex items-baseline justify-center gap-1">
+                                            <span className="text-4xl font-bold">{tier.price}</span>
+                                            <span className="text-sm text-muted-foreground">{tier.period}</span>
+                                        </div>
+                                    </CardHeader>
+                                    <CardContent className="flex flex-col flex-grow items-center p-6 pt-0">
+                                        <ul className="space-y-4 text-sm w-full flex-grow">
+                                            {tier.features.map((feature, i) => (
+                                            <li key={i} className="flex items-start gap-3">
+                                                <Check className="h-5 w-5 text-green-500 mt-0.5 shrink-0" />
+                                                <span className="text-muted-foreground">{feature}</span>
+                                            </li>
+                                            ))}
+                                            {singlePhotoFeature(tier) && (
+                                                <li className="flex items-start gap-3">
+                                                    <Check className="h-5 w-5 text-green-500 mt-0.5 shrink-0" />
+                                                    <span className="text-muted-foreground">{singlePhotoFeature(tier)}</span>
+                                                </li>
+                                            )}
+                                        </ul>
+                                    </CardContent>
+                                    <CardFooter>
+                                    <Button size="lg" className="w-full font-bold" onClick={() => handleGetStartedClick(tier)}>
+                                        Get Started
+                                    </Button>
+                                    </CardFooter>
+                                </Card>
+                            </motion.div>
                         </motion.div>
                     ))}
                     </motion.div>

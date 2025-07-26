@@ -179,7 +179,7 @@ const MobileCarousel = ({ projects }: { projects: typeof services[0]['projects']
                     {projects.map((project, index) => (
                         <div
                             key={project.name}
-                            className="flex-[0_0_70%] min-w-0 pl-4"
+                            className="flex-[0_0_80%] min-w-0 pl-4"
                             style={{
                                 ...(tweenValues.length && {
                                     opacity: numberWithinRange(tweenValues[index], 0.3, 1),

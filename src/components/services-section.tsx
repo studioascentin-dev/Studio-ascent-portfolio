@@ -1,13 +1,11 @@
 
 "use client";
 
-import { Video, Camera, Presentation, Code, PenTool, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Video, Camera, Presentation, Code, PenTool } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { cn } from '@/lib/utils';
 import * as React from 'react';
-import useEmblaCarousel, { EmblaCarouselType, EmblaOptionsType } from 'embla-carousel-react';
 import Image from 'next/image';
 import { ImageCompare } from './image-compare';
 
@@ -181,11 +179,12 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
                           viewport={{ once: true, amount: 0.2 }}
                           className="mx-auto max-w-7xl"
                         >
-                            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8">
+                            <div className="flex overflow-x-auto snap-x snap-mandatory md:grid md:grid-cols-3 gap-4 md:gap-8 -mx-4 px-4 scrollbar-hide">
                                 {service.projects.slice(0, 3).map((project: any) => (
                                     <motion.div
                                         key={project.name}
                                         variants={cardVariants}
+                                        className="w-4/5 flex-shrink-0 snap-center md:w-auto"
                                     >
                                         <Card className="overflow-hidden bg-card/80 backdrop-blur-sm group h-full flex flex-col">
                                             <CardHeader className="p-0 relative aspect-video">

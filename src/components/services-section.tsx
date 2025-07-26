@@ -1,7 +1,7 @@
 
 "use client";
 
-import { Video, Camera, Presentation, Code, PenTool } from 'lucide-react';
+import { Video, Camera, Presentation, Code, PenTool, ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
@@ -127,6 +127,16 @@ const MobileCarousel = ({ projects }: { projects: typeof services[0]['projects']
         skipSnaps: false,
     });
     const [tweenValues, setTweenValues] = React.useState<number[]>([]);
+    const [canScrollPrev, setCanScrollPrev] = React.useState(false);
+    const [canScrollNext, setCanScrollNext] = React.useState(false);
+
+    const scrollPrev = React.useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
+    const scrollNext = React.useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
+
+    const onSelect = React.useCallback((emblaApi: EmblaCarouselType) => {
+        setCanScrollPrev(emblaApi.canScrollPrev());
+        setCanScrollNext(emblaApi.canScrollNext());
+    }, []);
 
     const onScroll = React.useCallback(() => {
         if (!emblaApi) return;
@@ -156,12 +166,14 @@ const MobileCarousel = ({ projects }: { projects: typeof services[0]['projects']
     React.useEffect(() => {
         if (!emblaApi) return;
         onScroll();
+        onSelect(emblaApi);
         emblaApi.on('scroll', onScroll);
         emblaApi.on('reInit', onScroll);
-    }, [emblaApi, onScroll]);
+        emblaApi.on('select', onSelect);
+    }, [emblaApi, onScroll, onSelect]);
 
     return (
-        <div className="overflow-hidden md:hidden">
+        <div className="relative overflow-hidden md:hidden">
             <div className="px-4" ref={emblaRef}>
                 <div className="flex -ml-4">
                     {projects.map((project, index) => (
@@ -194,6 +206,28 @@ const MobileCarousel = ({ projects }: { projects: typeof services[0]['projects']
                         </div>
                     ))}
                 </div>
+            </div>
+             <div className="absolute inset-y-0 left-0 flex items-center">
+                <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={scrollPrev}
+                    disabled={!canScrollPrev}
+                    className="h-10 w-10 rounded-full bg-background/50 hover:bg-background/80 disabled:opacity-30"
+                >
+                    <ChevronLeft className="h-6 w-6" />
+                </Button>
+            </div>
+            <div className="absolute inset-y-0 right-0 flex items-center">
+                <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={scrollNext}
+                    disabled={!canScrollNext}
+                    className="h-10 w-10 rounded-full bg-background/50 hover:bg-background/80 disabled:opacity-30"
+                >
+                    <ChevronRight className="h-6 w-6" />
+                </Button>
             </div>
         </div>
     );

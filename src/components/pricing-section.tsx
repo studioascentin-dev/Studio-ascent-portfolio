@@ -10,8 +10,6 @@ import { cn } from '@/lib/utils';
 const pricingTiers = [
   {
     name: 'Photo Editing',
-    price: '₹2,000',
-    period: '/ 10 photos',
     description: 'Perfect for enhancing your product shots, portraits, and social media content.',
     features: [
       'Advanced Retouching',
@@ -19,12 +17,10 @@ const pricingTiers = [
       'Background Removal',
       '2 Rounds of Revisions',
     ],
-    buttonText: 'Get Started',
+    buttonText: 'View Prices',
   },
   {
     name: 'Video Editing',
-    price: '₹5,000',
-    period: '/ minute',
     description: 'Ideal for creating engaging short-form content like reels and ads.',
     features: [
       'Professional Cutting & Pacing',
@@ -32,12 +28,10 @@ const pricingTiers = [
       'Royalty-Free Music',
       '2 Rounds of Revisions',
     ],
-    buttonText: 'Choose Plan',
+    buttonText: 'View Prices',
   },
   {
     name: 'PPT Design',
-    price: '₹10,000',
-    period: '/ presentation',
     description: 'For compelling pitch decks, webinars, and corporate presentations.',
     features: [
       'Custom Branded Template',
@@ -45,12 +39,10 @@ const pricingTiers = [
       'Infographics & Charts',
       '3 Rounds of Revisions',
     ],
-    buttonText: 'Choose Plan',
+    buttonText: 'View Prices',
   },
   {
     name: 'Web Design',
-    price: '₹25,000',
-    period: '/ project',
     description: 'A complete, beautiful, and user-friendly website design.',
     features: [
       'Up to 5 Pages UI/UX Design',
@@ -58,12 +50,10 @@ const pricingTiers = [
       'Interactive Prototypes',
       'Source Files (Figma)',
     ],
-    buttonText: 'Choose Pro',
+    buttonText: 'View Prices',
   },
   {
     name: 'Web Development',
-    price: '₹50,000',
-    period: '/ project',
     description: 'Robust and scalable websites built with the latest technology.',
     features: [
       'Everything in Web Design',
@@ -71,7 +61,7 @@ const pricingTiers = [
       'Content Management System',
       '1 Month of Support',
     ],
-    buttonText: 'Contact Sales',
+    buttonText: 'View Prices',
   },
 ];
 
@@ -142,13 +132,9 @@ export function PricingSection() {
               <Card className="flex flex-col w-full bg-card/80 transition-all duration-300 hover:border-primary hover:ring-2 hover:ring-primary hover:shadow-lg hover:shadow-primary/20">
                 <CardHeader className="text-center pb-4">
                   <CardTitle className="text-xl md:text-2xl font-headline mb-2">{tier.name}</CardTitle>
-                  <CardDescription className="px-6 h-12">{tier.description}</CardDescription>
+                  <CardDescription className="px-6 h-20">{tier.description}</CardDescription>
                 </CardHeader>
-                <CardContent className="flex flex-col flex-grow items-center p-6">
-                  <div className="mb-8 text-center">
-                    <span className="text-4xl md:text-5xl font-bold tracking-tighter">{tier.price}</span>
-                    <span className="text-muted-foreground">{tier.period}</span>
-                  </div>
+                <CardContent className="flex flex-col flex-grow items-center p-6 pt-0">
                   <ul className="space-y-4 text-sm w-full flex-grow">
                     {tier.features.map((feature, i) => (
                       <li key={i} className="flex items-start gap-3">

@@ -33,17 +33,17 @@ const itemVariants = {
 
 const reasonsToHire = [
     {
-        icon: <Gem className="h-8 w-8 md:h-10 md:w-10 text-primary" />,
+        icon: <Gem className="h-8 w-8 text-primary" />,
         title: "Pixel-Perfect Design",
         description: "I bring your vision to life with meticulous attention to detail, ensuring every element is perfectly placed and visually stunning."
     },
     {
-        icon: <Code className="h-8 w-8 md:h-10 md:w-10 text-primary" />,
+        icon: <Code className="h-8 w-8 text-primary" />,
         title: "High-Quality Code",
         description: "I write clean, efficient, and scalable code using modern technologies, resulting in fast, reliable, and maintainable websites."
     },
     {
-        icon: <HeartHandshake className="h-8 w-8 md:h-10 md:w-10 text-primary" />,
+        icon: <HeartHandshake className="h-8 w-8 text-primary" />,
         title: "Client-Focused Approach",
         description: "I prioritize clear communication and collaboration, working closely with you to ensure the final product exceeds your expectations."
     }
@@ -91,23 +91,24 @@ export function HireMeSection() {
                     </motion.h3>
                     <motion.div 
                         variants={sectionVariants}
-                        className="flex overflow-x-auto scrollbar-hide md:grid md:grid-cols-3 gap-8 pb-4"
+                        className="grid grid-cols-1 md:grid-cols-3 gap-8"
                     >
                         {reasonsToHire.map((reason) => (
                             <motion.div 
                                 key={reason.title} 
                                 variants={itemVariants}
-                                className="w-[80vw] md:w-auto flex-shrink-0"
                             >
-                                <Card className="h-full bg-card/80 backdrop-blur-sm shadow-lg hover:shadow-primary/20 transition-all duration-300 hover:border-primary border-transparent border-2 flex flex-col text-center items-center p-4 md:p-6">
-                                    <CardHeader className="items-center p-2 md:p-6">
-                                        <div className="p-3 bg-primary/10 rounded-full mb-4">
-                                            {reason.icon}
+                                <Card className="h-full bg-card/80 backdrop-blur-sm shadow-lg hover:shadow-primary/20 transition-all duration-300 hover:border-primary border-transparent border-2">
+                                    <CardContent className="p-6">
+                                        <div className="flex flex-row md:flex-col md:items-center md:text-center gap-6 items-start">
+                                            <div className="p-3 bg-primary/10 rounded-full">
+                                                {reason.icon}
+                                            </div>
+                                            <div className="flex-1">
+                                                <h4 className="text-xl font-headline mb-2">{reason.title}</h4>
+                                                <p className="text-muted-foreground text-sm">{reason.description}</p>
+                                            </div>
                                         </div>
-                                        <CardTitle className="text-xl md:text-2xl font-headline">{reason.title}</CardTitle>
-                                    </CardHeader>
-                                    <CardContent className="p-2 md:p-6 pt-0">
-                                        <p className="text-muted-foreground text-sm md:text-base">{reason.description}</p>
                                     </CardContent>
                                 </Card>
                             </motion.div>

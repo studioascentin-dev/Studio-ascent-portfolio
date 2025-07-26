@@ -29,12 +29,12 @@ const servicesData = {
     title: 'Photo Editing',
     description: 'With high-quality photo retouching and manipulation, I enhance your images to perfection, ensuring your product shots and portraits look stunning and professional.',
     projects: [
-        { name: 'Custom Photoshop Work', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4' },
-        { name: 'High-End Retouching', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4' },
-        { name: 'Image Compositing', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4' },
-        { name: 'Portrait Retouching', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4' },
-        { name: 'Food & Product Retouching', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4' },
-        { name: 'Creative Color Grading', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4' },
+        { name: 'Custom Photoshop Work', image: 'https://placehold.co/600x450.png', dataAiHint: 'photo retouching' },
+        { name: 'High-End Retouching', image: 'https://placehold.co/600x450.png', dataAiHint: 'portrait retouch' },
+        { name: 'Image Compositing', image: 'https://placehold.co/600x450.png', dataAiHint: 'photo manipulation' },
+        { name: 'Portrait Retouching', image: 'https://placehold.co/600x450.png', dataAiHint: 'professional portrait' },
+        { name: 'Food & Product Retouching', image: 'https://placehold.co/600x450.png', dataAiHint: 'product photography' },
+        { name: 'Creative Color Grading', image: 'https://placehold.co/600x450.png', dataAiHint: 'artistic color' },
     ]
   },
   'ppt-design': {

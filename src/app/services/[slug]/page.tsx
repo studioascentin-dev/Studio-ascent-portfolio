@@ -8,6 +8,7 @@ import { motion } from 'framer-motion';
 import { ArrowLeft, Video, Camera, Presentation, Code, PenTool } from 'lucide-react';
 import { notFound, useParams } from 'next/navigation';
 import * as React from 'react';
+import Image from 'next/image';
 
 const servicesData = {
   'video-editing': {
@@ -41,12 +42,12 @@ const servicesData = {
     title: 'PPT Design',
     description: 'I create stunning and effective presentations that not only look great but also communicate your message clearly, making sure you stand out in any setting.',
     projects: [
-        { name: 'Startup Pitch Deck', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4' },
-        { name: 'Corporate Training Materials', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4' },
-        { name: 'Webinar Slides', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4' },
-        { name: 'Investor Update Deck', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4' },
-        { name: 'Sales Presentation', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4' },
-        { name: 'Educational Lecture', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4' },
+        { name: 'Startup Pitch Deck', image: 'https://placehold.co/600x450.png', dataAiHint: 'startup pitch' },
+        { name: 'Corporate Training Materials', image: 'https://placehold.co/600x450.png', dataAiHint: 'corporate training' },
+        { name: 'Webinar Slides', image: 'https://placehold.co/600x450.png', dataAiHint: 'webinar slides' },
+        { name: 'Investor Update Deck', image: 'https://placehold.co/600x450.png', dataAiHint: 'investor deck' },
+        { name: 'Sales Presentation', image: 'https://placehold.co/600x450.png', dataAiHint: 'sales presentation' },
+        { name: 'Educational Lecture', image: 'https://placehold.co/600x450.png', dataAiHint: 'lecture slides' },
     ]
   },
   'web-design': {
@@ -136,21 +137,32 @@ export default function ServicePage() {
                       animate="visible"
                       className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
                     >
-                        {service.projects.map((project) => (
+                        {service.projects.map((project: any) => (
                             <motion.div
                                 key={project.name}
                                 variants={cardVariants}
                             >
                                 <Card className="overflow-hidden bg-card/80 backdrop-blur-sm group h-full flex flex-col">
                                     <CardHeader className="p-0 relative aspect-video">
-                                        <video
-                                            src={project.video}
-                                            autoPlay
-                                            muted
-                                            loop
-                                            playsInline
-                                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                                        />
+                                        {project.video ? (
+                                            <video
+                                                src={project.video}
+                                                autoPlay
+                                                muted
+                                                loop
+                                                playsInline
+                                                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                                            />
+                                        ) : (
+                                            <Image
+                                                src={project.image}
+                                                alt={project.name}
+                                                width={600}
+                                                height={450}
+                                                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                                                data-ai-hint={project.dataAiHint}
+                                            />
+                                        )}
                                     </CardHeader>
                                     <CardContent className="p-6 flex-grow">
                                         <h4 className="font-headline text-2xl">{project.name}</h4>
@@ -176,3 +188,5 @@ export default function ServicePage() {
     </div>
   );
 }
+
+    

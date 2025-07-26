@@ -60,9 +60,9 @@ const services = [
     title: 'Web Development',
     description: 'I build robust, scalable, and high-performance websites and applications that are not only fast and reliable but also tailored to your specific business needs.',
     projects: [
-        { name: 'SaaS Platform Development', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4' },
-        { name: 'Custom E-commerce Store', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4' },
-        { name: 'Content Management System', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4' },
+        { name: 'SaaS Platform Front-End', image: 'https://placehold.co/600x450.png', dataAiHint: 'dashboard ui' },
+        { name: 'E-commerce Website', image: 'https://placehold.co/600x450.png', dataAiHint: 'ecommerce homepage' },
+        { name: 'Portfolio Website', image: 'https://placehold.co/600x450.png', dataAiHint: 'portfolio website' },
     ]
   },
 ];

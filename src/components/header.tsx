@@ -7,6 +7,7 @@ import { Briefcase, Home, Video, Camera, Presentation, Code, PenTool, FolderKanb
 import { useOnScreen } from '@/hooks/use-on-screen';
 import { cn } from '@/lib/utils';
 import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const navItems = [
   { href: '#hero-section', text: 'About', icon: Home, refKey: 'aboutRef' },
@@ -34,6 +35,7 @@ interface HeaderProps {
 
 const NavLink = ({ item, activeSection }: { item: typeof navItems[0], activeSection: string }) => {
     const isActive = activeSection === item.refKey;
+    const isMobile = useIsMobile();
 
     const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
         e.preventDefault();
@@ -49,7 +51,7 @@ const NavLink = ({ item, activeSection }: { item: typeof navItems[0], activeSect
         <Tooltip>
             <TooltipTrigger asChild>
                 <motion.div
-                    whileHover={{ scale: 1.4, y: -8 }}
+                    whileHover={!isMobile ? { scale: 1.4, y: -8 } : {}}
                     transition={{ type: "spring", stiffness: 300, damping: 15 }}
                     className="relative"
                 >

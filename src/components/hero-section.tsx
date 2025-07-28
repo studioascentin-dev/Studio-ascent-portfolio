@@ -44,7 +44,7 @@ export function HeroSection() {
   return (
     <section id="hero" className="relative w-full h-screen flex flex-col items-center justify-center text-center p-4 overflow-hidden">
       <div className="absolute inset-0 z-0">
-        <Suspense fallback={null}>
+        <Suspense fallback={<div className="w-full h-full bg-background" />}>
           <SplineScene />
         </Suspense>
       </div>
@@ -52,7 +52,7 @@ export function HeroSection() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1, type: 'spring' }}
-        className="text-4xl md:text-7xl lg:text-[5.5rem] font-extrabold font-headline tracking-tight text-foreground z-20 leading-tight">
+        className="text-4xl md:text-7xl lg:text-[5.5rem] font-extrabold font-headline tracking-tight text-foreground z-10 leading-tight">
         <span className="block">HI, I'M DEV. I'M</span>
         <span className="text-primary font-headline block">
           <span>{text}</span>
@@ -70,14 +70,14 @@ export function HeroSection() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, type: 'spring' }}
-        className="max-w-3xl mx-auto text-base md:text-xl lg:text-2xl text-muted-foreground font-light tracking-wide leading-relaxed mt-12 z-20">
+        className="max-w-3xl mx-auto text-base md:text-xl lg:text-2xl text-muted-foreground font-light tracking-wide leading-relaxed mt-12 z-10">
         Pixel-perfect designs and powerful code. Let's build something unforgettable together.
       </motion.p>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4, type: 'spring' }}
-       className="mt-8 z-20">
+       className="mt-8 z-10">
         <Button asChild size="lg" className="font-bold text-base py-4 px-10 md:text-lg md:py-6 md:px-12 bg-primary text-primary-foreground shadow-lg transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95">
           <a href="/about">About Me</a>
         </Button>

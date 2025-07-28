@@ -4,7 +4,7 @@
 import { useState, useEffect, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from './ui/button';
-import { SplineScene } from './spline-scene';
+import Spline from '@splinetool/react-spline';
 
 const roles = ["A FULL-STACK DEVELOPER", "A CREATIVE DESIGNER", "A VIDEO EDITOR", "A PHOTO EDITOR"];
 const TYPING_SPEED = 80;
@@ -45,7 +45,10 @@ export function HeroSection() {
     <section id="hero" className="relative w-full h-screen flex flex-col items-center justify-center text-center p-4 overflow-hidden">
       <div className="absolute inset-0 z-0">
         <Suspense fallback={<div className="w-full h-full bg-background" />}>
-          <SplineScene />
+          <Spline
+            className="w-full h-full"
+            scene="https://my.spline.design/100followers-eY7b4hu9JR2TUtdVOUl9gl3v/" 
+          />
         </Suspense>
       </div>
       <motion.h1 

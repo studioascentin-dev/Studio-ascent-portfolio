@@ -11,6 +11,7 @@ import {z} from 'genkit';
 import wav from 'wav';
 import type { SayHiOutput } from '@/ai/flows/types';
 import { SayHiOutputSchema } from '@/ai/flows/types';
+import { Readable } from 'stream';
 
 
 async function toWav(
@@ -35,8 +36,12 @@ async function toWav(
       resolve(Buffer.concat(bufs).toString('base64'));
     });
 
-    writer.write(pcmData);
-    writer.end();
+    const readable = new Readable();
+    readable._read = () => {};
+    readable.push(pcmData);
+    readable.push(null);
+
+    readable.pipe(writer);
   });
 }
 

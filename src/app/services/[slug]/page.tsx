@@ -31,12 +31,12 @@ const servicesData = {
     title: 'Photo Editing',
     description: 'With high-quality photo retouching and manipulation, I enhance your images to perfection, ensuring your product shots and portraits look stunning and professional.',
     projects: [
-        { name: 'Custom Photoshop Work', before: 'https://placehold.co/600x450.png', after: 'https://placehold.co/600x450.png', dataAiHint: 'photo retouching' },
-        { name: 'High-End Retouching', before: 'YOUR_BEFORE_IMAGE_URL_HERE', after: 'YOUR_AFTER_IMAGE_URL_HERE', dataAiHint: 'portrait retouch' },
-        { name: 'Image Compositing', before: 'https://placehold.co/600x450.png', after: 'https://placehold.co/600x450.png', dataAiHint: 'photo manipulation' },
-        { name: 'Portrait Retouching', before: 'https://placehold.co/600x450.png', after: 'https://placehold.co/600x450.png', dataAiHint: 'professional portrait' },
-        { name: 'Food & Product Retouching', before: 'https://placehold.co/600x450.png', after: 'https://placehold.co/600x450.png', dataAiHint: 'product photography' },
-        { name: 'Creative Color Grading', before: 'https://placehold.co/600x450.png', after: 'https://placehold.co/600x450.png', dataAiHint: 'artistic color' },
+        { name: 'Custom Photoshop Work', before: '/images/photoshop-before.png', after: '/images/photoshop-after.png', dataAiHint: 'photo retouching' },
+        { name: 'High-End Retouching', before: '/images/retouch-before.png', after: '/images/retouch-after.png', dataAiHint: 'portrait retouch' },
+        { name: 'Image Compositing', before: '/images/compositing-before.png', after: '/images/compositing-after.png', dataAiHint: 'photo manipulation' },
+        { name: 'Portrait Retouching', before: '/images/portrait-before.png', after: '/images/portrait-after.png', dataAiHint: 'professional portrait' },
+        { name: 'Food & Product Retouching', before: '/images/food-before.png', after: '/images/food-after.png', dataAiHint: 'product photography' },
+        { name: 'Creative Color Grading', before: '/images/color-before.png', after: '/images/color-after.png', dataAiHint: 'artistic color' },
     ]
   },
   'ppt-design': {

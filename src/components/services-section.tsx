@@ -27,9 +27,9 @@ const services = [
     title: 'Photo Editing',
     description: 'With high-quality photo retouching and manipulation, I enhance your images to perfection, ensuring your product shots and portraits look stunning and professional.',
     projects: [
-        { name: 'Custom Photoshop Work', before: 'https://placehold.co/600x800.png', after: 'https://placehold.co/600x800.png', dataAiHint: 'product photography' },
-        { name: 'High-End Retouching', before: 'https://placehold.co/600x800.png', after: 'https://placehold.co/600x800.png', dataAiHint: 'fashion model' },
-        { name: 'Image Compositing', before: 'https://placehold.co/600x800.png', after: 'https://placehold.co/600x800.png', dataAiHint: 'modern interior' },
+        { name: 'Custom Photoshop Work', before: '/images/photoshop-before.png', after: '/images/photoshop-after.png', dataAiHint: 'product photography' },
+        { name: 'High-End Retouching', before: '/images/retouch-before.png', after: '/images/retouch-after.png', dataAiHint: 'fashion model' },
+        { name: 'Image Compositing', before: '/images/compositing-before.png', after: '/images/compositing-after.png', dataAiHint: 'modern interior' },
     ]
   },
   {

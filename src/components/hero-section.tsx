@@ -44,7 +44,9 @@ export function HeroSection() {
   return (
     <section id="hero" className="relative w-full h-screen flex flex-col items-center justify-center text-center p-4 overflow-hidden">
       <div className="absolute inset-0 z-0">
+        <Suspense fallback={null}>
           <SplineScene />
+        </Suspense>
       </div>
       <motion.h1 
         initial={{ opacity: 0, y: 20 }}

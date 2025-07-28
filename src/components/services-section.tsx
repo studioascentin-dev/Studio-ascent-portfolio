@@ -28,7 +28,7 @@ const services = [
     description: 'With high-quality photo retouching and manipulation, I enhance your images to perfection, ensuring your product shots and portraits look stunning and professional.',
     projects: [
         { name: 'Custom Photoshop Work', before: '/images/photoshop-before.png', after: '/images/photoshop-after.png', dataAiHint: 'product photography' },
-        { name: 'High-End Retouching', before: '/beforeimg1.png', after: '/afterimg1.png', dataAiHint: 'fashion model' },
+        { name: 'High-End Retouching', before: 'images/beforeimg1.jpg', after: 'images/afterimg1.png', dataAiHint: 'fashion model' },
         { name: 'Image Compositing', before: '/images/compositing-before.png', after: '/images/compositing-after.png', dataAiHint: 'modern interior' },
     ]
   },

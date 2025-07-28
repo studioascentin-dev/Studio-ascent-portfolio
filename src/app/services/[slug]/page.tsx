@@ -36,7 +36,7 @@ const servicesData = {
         { name: 'Image Compositing', before: '/images/compositing-before.png', after: '/images/compositing-after.png', dataAiHint: 'photo manipulation' },
         { name: 'Portrait Retouching', before: '/images/portrait-before.png', after: '/images/portrait-after.png', dataAiHint: 'professional portrait' },
         { name: 'Food & Product Retouching', before: '/images/food-before.png', after: '/images/food-after.png', dataAiHint: 'product photography' },
-        { name: 'Creative Color Grading', before: '/images/color-before.png', after: '/images/color-after.png', dataAiHint: 'artistic color' },
+        { name: 'Simple Color Grading', before: '/images/color-before.png', after: '/images/color-after.png', dataAiHint: 'artistic color' },
     ]
   },
   'ppt-design': {

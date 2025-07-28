@@ -25,8 +25,8 @@ const pricingData = {
         period: '/5 photos', 
         features: ['Basic Retouching', 'Color Correction', '1 Round of Revisions'], 
         single: { price: '₹99', name: 'Single Photo Edit' },
-        images: ['https://placehold.co/400x300.png', 'https://placehold.co/400x300.png', 'https://placehold.co/400x300.png'],
-        dataAiHint: ['basic retouch', 'color correction', 'simple edit'],
+        images: ['https://placehold.co/400x300.png'],
+        dataAiHint: ['basic retouch'],
         whatsapp: {
           package: "Hi! 👋 I'm interested in the Basic Photo Editing Package (₹399 for 5 photos). I'd like basic retouching and color correction. Please let me know how to proceed and where to send the photos. Thanks!",
           single: "Hello! I’d like to get 1 photo edited under the Basic Plan (₹99). Just need simple retouching and color correction. Let me know what’s next!"
@@ -38,8 +38,8 @@ const pricingData = {
         period: '/10 photos', 
         features: ['Advanced Retouching', 'Color Grading', 'Background Removal', '2 Rounds of Revisions'], 
         single: { price: '₹199', name: 'Single Photo Edit' },
-        images: ['https://placehold.co/400x300.png', 'https://placehold.co/400x300.png', 'https://placehold.co/400x300.png'],
-        dataAiHint: ['advanced retouch', 'color grading', 'background removal'],
+        images: ['https://placehold.co/400x300.png'],
+        dataAiHint: ['advanced retouch'],
         whatsapp: {
             package: "Hello! I'd like to go ahead with the Intermediate Photo Editing Package (₹999 for 10 photos). I need advanced retouching, color grading, and background removal. Let me know what you need from my side and how to start. 😊",
             single: "Hi! I’d like to use the Intermediate Plan for a single photo (₹199). I want advanced retouching with background removal. Please share the details!"
@@ -51,8 +51,8 @@ const pricingData = {
         period: '/5 photos', 
         features: ['High-End Retouching', 'Complex Manipulations', 'Source Files', '3 Rounds of Revisions'], 
         single: { price: '₹399', name: 'Single Photo Edit' },
-        images: ['https://placehold.co/400x300.png', 'https://placehold.co/400x300.png', 'https://placehold.co/400x300.png'],
-        dataAiHint: ['high-end retouching', 'photo manipulation', 'creative edit'],
+        images: ['https://placehold.co/400x300.png'],
+        dataAiHint: ['high-end retouching'],
         whatsapp: {
             package: "Hi there! I'm ready to start with the Pro Photo Editing Package (₹1,999 for 5 photos). I'm looking for high-end retouching and complex manipulations. What's the next step?",
             single: "Hey! I’m looking for Pro-level single photo editing (₹399). I need high-end retouching and complex edits. Can you tell me how to proceed?"
@@ -202,15 +202,15 @@ export default function ServicePricingPage() {
                         >
                             {'images' in tier && (
                                 <div className="mb-8">
-                                    <h3 className="text-2xl font-headline text-center mb-4">{tier.name} Examples</h3>
-                                    <div className="grid grid-cols-3 gap-2">
+                                    <h3 className="text-2xl font-headline text-center mb-4">{tier.name} Example</h3>
+                                    <div className="grid grid-cols-1 gap-2">
                                         {(tier as any).images.map((image: string, index: number) => (
                                             <Image
                                                 key={index}
                                                 src={image}
                                                 alt={`${tier.name} example ${index + 1}`}
-                                                width={150}
-                                                height={100}
+                                                width={400}
+                                                height={300}
                                                 className="w-full h-auto object-cover rounded-md shadow-md"
                                                 data-ai-hint={(tier as any).dataAiHint[index]}
                                             />

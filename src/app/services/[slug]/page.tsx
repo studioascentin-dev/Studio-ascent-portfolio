@@ -11,6 +11,7 @@ import { notFound, useParams } from 'next/navigation';
 import * as React from 'react';
 import Image from 'next/image';
 import { ImageCompare } from '@/components/image-compare';
+import Link from 'next/link';
 
 const servicesData = {
   'video-editing': {
@@ -20,9 +21,9 @@ const servicesData = {
     projects: [
       { name: 'YouTube Videos', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4' },
       { name: 'Instagram Reels', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4' },
-      { name: 'Color Grading', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4' },
-      { name: 'Brand Story', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4' },
-      { name: 'Wedding Film', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4' },
+      { name: 'Colour Grading', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4' },
+      { name: 'Slideshow Or Photo Videos', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4' },
+      { name: 'Educational Videos', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4' },
       { name: 'Social Media Ad', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4' },
     ]
   },
@@ -31,12 +32,13 @@ const servicesData = {
     title: 'Photo Editing',
     description: 'With high-quality photo retouching and manipulation, I enhance your images to perfection, ensuring your product shots and portraits look stunning and professional.',
     projects: [
-        { name: 'Custom Photoshop Work', before: '/images/photoshop-before.png', after: '/images/photoshop-after.png', dataAiHint: 'photo retouching' },
+        { name: 'Custom Photoshop Work', image: '/images/photoshop-after.png', dataAiHint: 'photo retouching' },
         { name: 'High-End Retouching', before: '/beforeimg1.png', after: '/afterimg1.png', dataAiHint: 'portrait retouch' },
-        { name: 'Image Compositing', before: '/images/compositing-before.png', after: '/images/compositing-after.png', dataAiHint: 'photo manipulation' },
-        { name: 'Portrait Retouching', before: '/images/portrait-before.png', after: '/images/portrait-after.png', dataAiHint: 'professional portrait' },
-        { name: 'Food & Product Retouching', before: '/images/food-before.png', after: '/images/food-after.png', dataAiHint: 'product photography' },
+        { name: 'Logo Design', image: '/images/compositing-after.png', dataAiHint: 'photo manipulation' },
+        { name: 'Social Media Content Design', image: '/images/portrait-after.png', dataAiHint: 'professional portrait' },
+        { name: 'Menu or Brochure Design', image: '/images/food-after.png', dataAiHint: 'product photography' },
         { name: 'Simple Color Grading', before: '/images/color-before.png', after: '/images/color-after.png', dataAiHint: 'artistic color' },
+        { name: 'Poster & Flyer Design', image: '/images/color-after.png', dataAiHint: 'artistic color' },
     ]
   },
   'ppt-design': {
@@ -44,11 +46,11 @@ const servicesData = {
     title: 'PPT Design',
     description: 'I create stunning and effective presentations that not only look great but also communicate your message clearly, making sure you stand out in any setting.',
     projects: [
-        { name: 'Startup Pitch Deck', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4' },
-        { name: 'Corporate Training Materials', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4' },
+        { name: 'School/College Presentation Design', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4' },
+        { name: 'Projects Report in PPT', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4' },
         { name: 'Webinar Slides', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4' },
-        { name: 'Investor Update Deck', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4' },
-        { name: 'Sales Presentation', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4' },
+        { name: 'Company Profile PPT', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4' },
+        { name: 'Product/Service Portfolio', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4' },
         { name: 'Educational Lecture', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4' },
     ]
   },
@@ -57,12 +59,12 @@ const servicesData = {
     title: 'Graphic Design',
     description: 'I create compelling and beautiful visuals that tell a story, define a brand, and capture attention. From logos to complete brand identities, I craft designs that make an impact.',
     projects: [
-        { name: 'Modern Logo Design', image: 'https://placehold.co/600x450.png', dataAiHint: 'modern logo' },
-        { name: 'Brand Identity Pack', image: 'https://placehold.co/600x450.png', dataAiHint: 'branding identity' },
-        { name: 'Social Media Campaign', image: 'https://placehold.co/600x450.png', dataAiHint: 'social media' },
-        { name: 'Event Poster Design', image: 'https://placehold.co/600x450.png', dataAiHint: 'event poster' },
-        { name: 'Product Packaging', image: 'https://placehold.co/600x450.png', dataAiHint: 'product package' },
-        { name: 'Book Cover Design', image: 'https://placehold.co/600x450.png', dataAiHint: 'book cover' },
+        { name: 'Personal Portfolio Website design', image: 'https://placehold.co/600x450.png', dataAiHint: 'modern logo' },
+        { name: 'Business or Startup Landing Page', image: 'https://placehold.co/600x450.png', dataAiHint: 'branding identity' },
+        { name: 'E-commerce Website UI Design', image: 'https://placehold.co/600x450.png', dataAiHint: 'social media' },
+        { name: 'Admin Dashboard Design (UI only)', image: 'https://placehold.co/600x450.png', dataAiHint: 'event poster' },
+        { name: 'Education / Coaching Center Website', image: 'https://placehold.co/600x450.png', dataAiHint: 'product package' },
+        { name: 'Contact Forms & CTA Sections', image: 'https://placehold.co/600x450.png', dataAiHint: 'book cover' },
     ]
   },
   'web-development': {
@@ -144,6 +146,7 @@ export default function ServicePage() {
                                 key={project.name}
                                 variants={cardVariants}
                             >
+                                <Link href={`/services/${slug}`} className="block h-full">
                                 <Card className="overflow-hidden bg-card/80 backdrop-blur-sm group h-full flex flex-col">
                                     <CardHeader className="p-0 relative aspect-square">
                                         {project.video ? (
@@ -176,6 +179,7 @@ export default function ServicePage() {
                                         <h4 className="font-headline text-base md:text-xl">{project.name}</h4>
                                     </CardContent>
                                 </Card>
+                                </Link>
                             </motion.div>
                         ))}
                     </motion.div>

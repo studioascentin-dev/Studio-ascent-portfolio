@@ -18,7 +18,7 @@ const services = [
     projects: [
       { name: 'YouTube Videos', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4' },
       { name: 'Instagram Reels', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4' },
-      { name: 'Color Grading & VFX', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4' },
+      { name: 'Colour Grading', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4' },
     ]
   },
   {
@@ -28,8 +28,8 @@ const services = [
     description: 'With high-quality photo retouching and manipulation, I enhance your images to perfection, ensuring your product shots and portraits look stunning and professional.',
     projects: [
         { name: 'Custom Photoshop Work', before: '/images/photoshop-before.png', after: '/images/photoshop-after.png', dataAiHint: 'product photography' },
-        { name: 'High-End Retouching', before: 'images/beforeimg1.jpg', after: 'images/afterimg1.png', dataAiHint: 'fashion model' },
-        { name: 'Image Compositing', before: '/images/compositing-before.png', after: '/images/compositing-after.png', dataAiHint: 'modern interior' },
+        { name: 'High-End Retouching', before: '/images/beforeimg1.jpg', after: '/images/afterimg1.png', dataAiHint: 'fashion model' },
+        { name: 'Logo Design', before: '/images/compositing-before.png', after: '/images/compositing-after.png', dataAiHint: 'modern interior' },
     ]
   },
   {
@@ -38,9 +38,9 @@ const services = [
     title: 'PPT Design',
     description: 'I create stunning and effective presentations that not only look great but also communicate your message clearly, making sure you stand out in any setting.',
     projects: [
-        { name: 'Startup Pitch Deck', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4' },
-        { name: 'Corporate Training Materials', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4' },
-        { name: 'Webinar Slides', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4' },
+        { name: 'School/College Presentation Design', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4' },
+        { name: 'Projects Report in PPT', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4' },
+        { name: 'Company Profile PPT', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4' },
     ]
   },
   {
@@ -49,9 +49,9 @@ const services = [
     title: 'Graphic Design',
     description: 'I create compelling and beautiful visuals that tell a story, define a brand, and capture attention. From logos to complete brand identities, I craft designs that make an impact.',
     projects: [
-        { name: 'Modern Logo Design', image: 'https://placehold.co/600x450.png', dataAiHint: 'modern logo' },
-        { name: 'Brand Identity Pack', image: 'https://placehold.co/600x450.png', dataAiHint: 'branding identity' },
-        { name: 'Social Media Campaign', image: 'https://placehold.co/600x450.png', dataAiHint: 'social media' },
+        { name: 'Personal Portfolio Website design', image: 'https://placehold.co/600x450.png', dataAiHint: 'modern logo' },
+        { name: 'Business or Startup Landing Page', image: 'https://placehold.co/600x450.png', dataAiHint: 'branding identity' },
+        { name: 'E-commerce Website UI Design', image: 'https://placehold.co/600x450.png', dataAiHint: 'social media' },
     ]
   },
   {

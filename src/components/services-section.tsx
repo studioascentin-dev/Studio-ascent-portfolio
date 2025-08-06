@@ -1,7 +1,7 @@
 
 "use client";
 
-import { Video, Camera, Presentation, Code, PenTool } from 'lucide-react';
+import { Video, Camera, Presentation, Code, PenTool, ExternalLink } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
@@ -61,9 +61,9 @@ const services = [
     title: 'Web Development',
     description: 'I build robust, scalable, and high-performance websites and applications that are not only fast and reliable but also tailored to your specific business needs.',
     projects: [
-        { name: 'SaaS Platform Front-End', image: 'https://placehold.co/600x450.png', dataAiHint: 'dashboard ui' },
-        { name: 'Custom E-commerce Store', image: 'https://placehold.co/600x450.png', dataAiHint: 'ecommerce homepage' },
-        { name: 'Portfolio Website', image: 'https://placehold.co/600x450.png', dataAiHint: 'portfolio website' },
+        { name: 'SaaS Platform Front-End', image: 'https://placehold.co/600x450.png', dataAiHint: 'dashboard ui', link: 'https://your-website-link.com' },
+        { name: 'Custom E-commerce Store', image: 'https://placehold.co/600x450.png', dataAiHint: 'ecommerce homepage', link: 'https://your-website-link.com' },
+        { name: 'Portfolio Website', image: 'https://placehold.co/600x450.png', dataAiHint: 'portfolio website', link: 'https://your-website-link.com' },
     ]
   },
 ];
@@ -135,6 +135,58 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
     'web-development': refs.webDevelopmentRef,
   };
 
+  const ProjectCard = ({ project, serviceId }: { project: any, serviceId: string }) => {
+    const cardContent = (
+      <Card className="overflow-hidden bg-card/80 backdrop-blur-sm group h-full flex flex-col">
+          <CardHeader className="p-0 relative aspect-video">
+              {project.video ? (
+                  <video
+                      src={project.video}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+              ) : project.before && project.after ? (
+                  <ImageCompare
+                      before={project.before}
+                      after={project.after}
+                      alt={project.name}
+                  />
+              ) : project.image ? (
+                  <Image
+                      src={project.image}
+                      alt={project.name}
+                      width={600}
+                      height={450}
+                      className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
+                      data-ai-hint={project.dataAiHint}
+                  />
+              ) : null}
+          </CardHeader>
+          <CardContent className="p-4 flex-grow flex items-center justify-between">
+              <h4 className="font-headline text-lg flex-grow">{project.name}</h4>
+              {project.link && <ExternalLink className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />}
+          </CardContent>
+      </Card>
+    );
+
+    if (project.link) {
+      return (
+        <a href={project.link} target="_blank" rel="noopener noreferrer" className="block h-full">
+            {cardContent}
+        </a>
+      );
+    }
+
+    return (
+      <Link href={`/services/${serviceId}`} className="block h-full">
+          {cardContent}
+      </Link>
+    );
+  };
+
   return (
     <section id="services" className="bg-background min-h-screen flex flex-col justify-center py-16 md:py-24">
         <div className="container mx-auto px-4 md:px-6">
@@ -187,40 +239,7 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
                                         variants={cardVariants}
                                         className="w-4/5 flex-shrink-0 snap-center md:w-auto"
                                     >
-                                      <Link href={`/services/${service.id}`} className="block h-full">
-                                        <Card className="overflow-hidden bg-card/80 backdrop-blur-sm group h-full flex flex-col">
-                                            <CardHeader className="p-0 relative aspect-video">
-                                                {project.video ? (
-                                                    <video
-                                                        src={project.video}
-                                                        autoPlay
-                                                        muted
-                                                        loop
-                                                        playsInline
-                                                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                                                    />
-                                                ) : project.before && project.after ? (
-                                                    <ImageCompare
-                                                        before={project.before}
-                                                        after={project.after}
-                                                        alt={project.name}
-                                                    />
-                                                ) : project.image ? (
-                                                    <Image
-                                                        src={project.image}
-                                                        alt={project.name}
-                                                        width={600}
-                                                        height={450}
-                                                        className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
-                                                        data-ai-hint={project.dataAiHint}
-                                                    />
-                                                ): null}
-                                            </CardHeader>
-                                            <CardContent className="p-4 flex-grow flex flex-col">
-                                                <h4 className="font-headline text-lg flex-grow">{project.name}</h4>
-                                            </CardContent>
-                                        </Card>
-                                      </Link>
+                                      <ProjectCard project={project} serviceId={service.id} />
                                     </motion.div>
                                 ))}
                             </div>

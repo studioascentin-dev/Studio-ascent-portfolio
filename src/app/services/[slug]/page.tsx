@@ -6,7 +6,7 @@ import { Footer } from '@/components/footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Video, Camera, Presentation, Code, PenTool } from 'lucide-react';
+import { ArrowLeft, Video, Camera, Presentation, Code, PenTool, ExternalLink } from 'lucide-react';
 import { notFound, useParams } from 'next/navigation';
 import * as React from 'react';
 import Image from 'next/image';
@@ -72,12 +72,12 @@ const servicesData = {
     title: 'Web Development',
     description: 'I build robust, scalable, and high-performance websites and applications that are not only fast and reliable but also tailored to your specific business needs.',
     projects: [
-        { name: 'SaaS Platform Front-End', image: 'https://placehold.co/600x450.png', dataAiHint: 'dashboard ui' },
-        { name: 'Custom E-commerce Store', image: 'https://placehold.co/600x450.png', dataAiHint: 'ecommerce homepage' },
-        { name: 'Portfolio Website', image: 'https://placehold.co/600x450.png', dataAiHint: 'portfolio website' },
-        { name: 'API Integration Project', image: 'https://placehold.co/600x450.png', dataAiHint: 'api integration' },
-        { name: 'Next.js & Firebase App', image: 'https://placehold.co/600x450.png', dataAiHint: 'web application' },
-        { name: 'Headless CMS Website', image: 'https://placehold.co/600x450.png', dataAiHint: 'cms website' },
+        { name: 'SaaS Platform Front-End', image: 'https://placehold.co/600x450.png', dataAiHint: 'dashboard ui', link: 'https://your-website-link.com' },
+        { name: 'Custom E-commerce Store', image: 'https://placehold.co/600x450.png', dataAiHint: 'ecommerce homepage', link: 'https://your-website-link.com' },
+        { name: 'Portfolio Website', image: 'https://placehold.co/600x450.png', dataAiHint: 'portfolio website', link: 'https://your-website-link.com' },
+        { name: 'API Integration Project', image: 'https://placehold.co/600x450.png', dataAiHint: 'api integration', link: 'https://your-website-link.com' },
+        { name: 'Next.js & Firebase App', image: 'https://placehold.co/600x450.png', dataAiHint: 'web application', link: 'https://your-website-link.com' },
+        { name: 'Headless CMS Website', image: 'https://placehold.co/600x450.png', dataAiHint: 'cms website', link: 'https://your-website-link.com' },
     ]
   },
 };
@@ -113,6 +113,58 @@ export default function ServicePage() {
   if (!service) {
     notFound();
   }
+  
+  const ProjectCard = ({ project }: { project: any }) => {
+    const cardContent = (
+      <Card className="overflow-hidden bg-card/80 backdrop-blur-sm group h-full flex flex-col">
+          <CardHeader className="p-0 relative aspect-square">
+              {project.video ? (
+                  <video
+                      src={project.video}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+              ) : project.before && project.after ? (
+                  <ImageCompare
+                      before={project.before}
+                      after={project.after}
+                      alt={project.name}
+                  />
+              ) : project.image ? (
+                  <Image
+                      src={project.image}
+                      alt={project.name}
+                      width={600}
+                      height={450}
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      data-ai-hint={project.dataAiHint}
+                  />
+              ) : null}
+          </CardHeader>
+          <CardContent className="p-4 flex-grow flex items-center justify-between">
+              <h4 className="font-headline text-base md:text-xl">{project.name}</h4>
+              {project.link && <ExternalLink className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />}
+          </CardContent>
+      </Card>
+    );
+
+    if (project.link) {
+        return (
+            <a href={project.link} target="_blank" rel="noopener noreferrer" className="block h-full">
+                {cardContent}
+            </a>
+        );
+    }
+
+    return (
+        <Link href={`/services/${slug}`} className="block h-full">
+            {cardContent}
+        </Link>
+    );
+};
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
@@ -146,40 +198,7 @@ export default function ServicePage() {
                                 key={project.name}
                                 variants={cardVariants}
                             >
-                                <Link href={`/services/${slug}`} className="block h-full">
-                                <Card className="overflow-hidden bg-card/80 backdrop-blur-sm group h-full flex flex-col">
-                                    <CardHeader className="p-0 relative aspect-square">
-                                        {project.video ? (
-                                            <video
-                                                src={project.video}
-                                                autoPlay
-                                                muted
-                                                loop
-                                                playsInline
-                                                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                                            />
-                                        ) : project.before && project.after ? (
-                                            <ImageCompare
-                                                before={project.before}
-                                                after={project.after}
-                                                alt={project.name}
-                                            />
-                                        ) : project.image ? (
-                                            <Image
-                                                src={project.image}
-                                                alt={project.name}
-                                                width={600}
-                                                height={450}
-                                                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                                                data-ai-hint={project.dataAiHint}
-                                            />
-                                        ) : null}
-                                    </CardHeader>
-                                    <CardContent className="p-4 flex-grow">
-                                        <h4 className="font-headline text-base md:text-xl">{project.name}</h4>
-                                    </CardContent>
-                                </Card>
-                                </Link>
+                                <ProjectCard project={project} />
                             </motion.div>
                         ))}
                     </motion.div>

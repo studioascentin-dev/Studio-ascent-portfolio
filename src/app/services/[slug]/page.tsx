@@ -33,11 +33,11 @@ const servicesData = {
     description: 'With high-quality photo retouching and manipulation, I enhance your images to perfection, ensuring your product shots and portraits look stunning and professional.',
     projects: [
         { name: 'Custom Photoshop Work', image: '/images/photoshop-after.png', dataAiHint: 'photo retouching' },
-        { name: 'High-End Retouching', before: '/beforeimg1.png', after: '/afterimg1.png', dataAiHint: 'portrait retouch' },
+        { name: 'High-End Retouching', before: '/images/beforeimg1.jpg', after: '/images/afterimg1.png', dataAiHint: 'portrait retouch' },
         { name: 'Logo Design', image: '/images/compositing-after.png', dataAiHint: 'photo manipulation' },
         { name: 'Social Media Content Design', image: '/images/portrait-after.png', dataAiHint: 'professional portrait' },
         { name: 'Menu or Brochure Design', image: '/images/food-after.png', dataAiHint: 'product photography' },
-        { name: 'Simple Color Grading', before: '/images/color-before.png', after: '/images/color-after.png', dataAiHint: 'artistic color' },
+        { name: 'Simple Color Grading', before: '/images/indiandog.jpg', after: '/images/indiandog.png', dataAiHint: 'artistic color' },
         { name: 'Poster & Flyer Design', image: '/images/color-after.png', dataAiHint: 'artistic color' },
     ]
   },

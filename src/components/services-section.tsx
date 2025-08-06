@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import * as React from 'react';
 import Image from 'next/image';
 import { ImageCompare } from './image-compare';
+import Link from 'next/link';
 
 const services = [
   {
@@ -27,9 +28,9 @@ const services = [
     title: 'Photo Editing',
     description: 'With high-quality photo retouching and manipulation, I enhance your images to perfection, ensuring your product shots and portraits look stunning and professional.',
     projects: [
-        { name: 'Custom Photoshop Work', before: '/images/photoshop-before.png', after: '/images/photoshop-after.png', dataAiHint: 'product photography' },
-        { name: 'High-End Retouching', before: '/images/beforeimg1.jpg', after: '/images/afterimg1.png', dataAiHint: 'fashion model' },
-        { name: 'Logo Design', before: '/images/compositing-before.png', after: '/images/compositing-after.png', dataAiHint: 'modern interior' },
+        { name: 'Custom Photoshop Work', image: '/photoshop-after.png', dataAiHint: 'product photography' },
+        { name: 'High-End Retouching', before: '/beforeimg1.png', after: '/afterimg1.png', dataAiHint: 'fashion model' },
+        { name: 'Logo Design', image: '/compositing-after.png', dataAiHint: 'modern interior' },
     ]
   },
   {
@@ -186,6 +187,7 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
                                         variants={cardVariants}
                                         className="w-4/5 flex-shrink-0 snap-center md:w-auto"
                                     >
+                                      <Link href={`/services/${service.id}`} className="block h-full">
                                         <Card className="overflow-hidden bg-card/80 backdrop-blur-sm group h-full flex flex-col">
                                             <CardHeader className="p-0 relative aspect-video">
                                                 {project.video ? (
@@ -203,7 +205,7 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
                                                         after={project.after}
                                                         alt={project.name}
                                                     />
-                                                ) : (
+                                                ) : project.image ? (
                                                     <Image
                                                         src={project.image}
                                                         alt={project.name}
@@ -212,12 +214,13 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
                                                         className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
                                                         data-ai-hint={project.dataAiHint}
                                                     />
-                                                )}
+                                                ): null}
                                             </CardHeader>
                                             <CardContent className="p-4 flex-grow flex flex-col">
                                                 <h4 className="font-headline text-lg flex-grow">{project.name}</h4>
                                             </CardContent>
                                         </Card>
+                                      </Link>
                                     </motion.div>
                                 ))}
                             </div>

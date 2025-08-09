@@ -35,8 +35,8 @@ const servicesData = {
         { name: 'High-End Retouching', before: '/beforeimg1.png', after: '/afterimg1.png', dataAiHint: 'portrait retouch' },
         { name: 'Logo Design', image: '/images/logokit.png', dataAiHint: 'photo manipulation' },
         { name: 'Social Media Content Design', image: '/images/portrait-after.png', dataAiHint: 'professional portrait' },
-        { name: 'Menu or Brochure Design', image: '/images/food-after.png', dataAiHint: 'product photography' },
-        { name: 'Simple Color Grading', before: '/indiandog.jpg', after: '/indiandog.png', dataAiHint: 'artistic color' },
+        { name: 'Menu or Brochure Design', image: '/images/menu.png', dataAiHint: 'product photography' },
+        { name: 'Simple Color Grading', before: '/images/indiandog.jpg', after: '/images/indiandog.png', dataAiHint: 'artistic color' },
         { name: 'Poster & Flyer Design', image: '/images/poster.png', dataAiHint: 'artistic color' },
     ]
   },
@@ -45,12 +45,12 @@ const servicesData = {
     title: 'PPT Design',
     description: 'I create stunning and effective presentations that not only look great but also communicate your message clearly, making sure you stand out in any setting.',
     projects: [
-        { name: 'School/College Presentation Design', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4' },
-        { name: 'Projects Report in PPT', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4' },
-        { name: 'Webinar Slides', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4' },
-        { name: 'Company Profile PPT', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4' },
-        { name: 'Product/Service Portfolio', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4' },
-        { name: 'Educational Lecture', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4' },
+        { name: 'School/College Presentation Design', image: 'https://placehold.co/600x450.png', pdf: '/school-ppt.pdf', dataAiHint: 'education presentation' },
+        { name: 'Projects Report in PPT', image: 'https://placehold.co/600x450.png', pdf: '/report-ppt.pdf', dataAiHint: 'business report' },
+        { name: 'Webinar Slides', image: 'https://placehold.co/600x450.png', pdf: '/webinar-ppt.pdf', dataAiHint: 'tech webinar' },
+        { name: 'Company Profile PPT', image: 'https://placehold.co/600x450.png', pdf: '/company-profile.pdf', dataAiHint: 'corporate deck' },
+        { name: 'Product/Service Portfolio', image: 'https://placehold.co/600x450.png', pdf: '/portfolio-deck.pdf', dataAiHint: 'product portfolio' },
+        { name: 'Educational Lecture', image: 'https://placehold.co/600x450.png', pdf: '/lecture-slides.pdf', dataAiHint: 'lecture slides' },
     ]
   },
   'graphic-design': {
@@ -116,7 +116,7 @@ export default function ServicePage() {
   const ProjectCard = ({ project }: { project: any }) => {
     const cardContent = (
       <Card className="overflow-hidden bg-card/80 backdrop-blur-sm group h-full flex flex-col">
-          <CardHeader className="p-0 relative aspect-square">
+          <CardHeader className="p-0 relative aspect-video">
               {project.video ? (
                   <video
                       src={project.video}
@@ -145,14 +145,14 @@ export default function ServicePage() {
           </CardHeader>
           <CardContent className="p-4 flex-grow flex items-center justify-between">
               <h4 className="font-headline text-base md:text-xl">{project.name}</h4>
-              {project.link && <ExternalLink className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />}
+              {(project.link || project.pdf) && <ExternalLink className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />}
           </CardContent>
       </Card>
     );
 
-    if (project.link) {
+    if (project.link || project.pdf) {
         return (
-            <a href={project.link} target="_blank" rel="noopener noreferrer" className="block h-full">
+            <a href={project.link || project.pdf} target="_blank" rel="noopener noreferrer" className="block h-full">
                 {cardContent}
             </a>
         );

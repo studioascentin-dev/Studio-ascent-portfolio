@@ -30,7 +30,7 @@ const services = [
     projects: [
         { name: 'High-End Retouching', before: '/beforeimg1.png', after: '/afterimg1.png', dataAiHint: 'fashion model' },
         { name: 'Logo Design', image: '/images/logokit.png', dataAiHint: 'modern interior' },
-        { name: 'Simple Color Grading', before: '/indiandog.jpg', after: '/indiandog.png', dataAiHint: 'artistic color' },
+        { name: 'Simple Color Grading', before: '/images/indiandog.jpg', after: '/images/indiandog.png', dataAiHint: 'artistic color' },
     ]
   },
   {
@@ -39,9 +39,9 @@ const services = [
     title: 'PPT Design',
     description: 'I create stunning and effective presentations that not only look great but also communicate your message clearly, making sure you stand out in any setting.',
     projects: [
-        { name: 'School/College Presentation Design', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4' },
-        { name: 'Projects Report in PPT', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4' },
-        { name: 'Company Profile PPT', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4' },
+        { name: 'School/College Presentation Design', image: 'https://placehold.co/600x450.png', pdf: '/school-ppt.pdf', dataAiHint: 'education presentation' },
+        { name: 'Projects Report in PPT', image: 'https://placehold.co/600x450.png', pdf: '/report-ppt.pdf', dataAiHint: 'business report' },
+        { name: 'Company Profile PPT', image: 'https://placehold.co/600x450.png', pdf: '/company-profile.pdf', dataAiHint: 'corporate deck' },
     ]
   },
   {
@@ -167,14 +167,14 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
           </CardHeader>
           <CardContent className="p-4 flex-grow flex items-center justify-between">
               <h4 className="font-headline text-lg flex-grow">{project.name}</h4>
-              {project.link && <ExternalLink className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />}
+              {(project.link || project.pdf) && <ExternalLink className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />}
           </CardContent>
       </Card>
     );
 
-    if (project.link) {
+    if (project.link || project.pdf) {
       return (
-        <a href={project.link} target="_blank" rel="noopener noreferrer" className="block h-full">
+        <a href={project.link || project.pdf} target="_blank" rel="noopener noreferrer" className="block h-full">
             {cardContent}
         </a>
       );

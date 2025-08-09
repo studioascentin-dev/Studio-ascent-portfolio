@@ -1,4 +1,5 @@
 
+
 "use client";
 
 import { Video, Camera, Presentation, Code, PenTool, ExternalLink } from 'lucide-react';
@@ -29,8 +30,8 @@ const services = [
     description: 'With high-quality photo retouching and manipulation, I enhance your images to perfection, ensuring your product shots and portraits look stunning and professional.',
     projects: [
         { name: 'High-End Retouching', before: '/beforeimg1.png', after: '/afterimg1.png', dataAiHint: 'fashion model' },
-        { name: 'Logo Design', image: '/images/logokit.png', dataAiHint: 'modern interior' },
-        { name: 'Simple Color Grading', before: '/images/indiandog.jpg', after: '/images/indiandog.png', dataAiHint: 'artistic color' },
+        { name: 'Logo Design', image: '/logokit.png', dataAiHint: 'modern interior' },
+        { name: 'Simple Color Grading', before: '/indiandog.jpg', after: '/indiandog.png', dataAiHint: 'artistic color' },
     ]
   },
   {
@@ -39,7 +40,7 @@ const services = [
     title: 'PPT Design',
     description: 'I create stunning and effective presentations that not only look great but also communicate your message clearly, making sure you stand out in any setting.',
     projects: [
-        { name: 'School/College Presentation Design', image: '/images/ppt screenshot.png', pdf: '/college presentaion.pdf', dataAiHint: 'education presentation' },
+        { name: 'School/College Presentation Design', image: '/ppt screenshot.png', pdf: '/college presentation.pdf', dataAiHint: 'education presentation' },
         { name: 'Projects Report in PPT', image: 'https://placehold.co/600x450.png', pdf: '/report-ppt.pdf', dataAiHint: 'business report' },
         { name: 'Company Profile PPT', image: 'https://placehold.co/600x450.png', pdf: '/company-profile.pdf', dataAiHint: 'corporate deck' },
     ]

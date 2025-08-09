@@ -45,7 +45,7 @@ const servicesData = {
     title: 'PPT Design',
     description: 'I create stunning and effective presentations that not only look great but also communicate your message clearly, making sure you stand out in any setting.',
     projects: [
-        { name: 'School/College Presentation Design', image: 'https://placehold.co/600x450.png', pdf: '/school-ppt.pdf', dataAiHint: 'education presentation' },
+        { name: 'School/College Presentation Design', image: '/images/ppt screenshot.png', pdf: '/college presentaion.pdf', dataAiHint: 'education presentation' },
         { name: 'Projects Report in PPT', image: 'https://placehold.co/600x450.png', pdf: '/report-ppt.pdf', dataAiHint: 'business report' },
         { name: 'Webinar Slides', image: 'https://placehold.co/600x450.png', pdf: '/webinar-ppt.pdf', dataAiHint: 'tech webinar' },
         { name: 'Company Profile PPT', image: 'https://placehold.co/600x450.png', pdf: '/company-profile.pdf', dataAiHint: 'corporate deck' },

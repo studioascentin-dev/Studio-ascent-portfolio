@@ -40,7 +40,7 @@ const services = [
     title: 'PPT Design',
     description: 'I create stunning and effective presentations that not only look great but also communicate your message clearly, making sure you stand out in any setting.',
     projects: [
-        { name: 'School/College Presentation Design', image: '/ppt screenshot.png', pdf: '/college presentation.pdf', dataAiHint: 'education presentation' },
+        { name: 'School/College Presentation Design', image: '/collegepresentation.png', pdf: '/collegepresentation.pdf', dataAiHint: 'education presentation' },
         { name: 'Projects Report in PPT', image: 'https://placehold.co/600x450.png', pdf: '/report-ppt.pdf', dataAiHint: 'business report' },
         { name: 'Company Profile PPT', image: 'https://placehold.co/600x450.png', pdf: '/company-profile.pdf', dataAiHint: 'corporate deck' },
     ]

@@ -46,11 +46,11 @@ const servicesData = {
     description: 'I create stunning and effective presentations that not only look great but also communicate your message clearly, making sure you stand out in any setting.',
     projects: [
         { name: 'School/College Presentation', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4', dataAiHint: 'education presentation' },
-        { name: 'Projects Report in PPT', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4', dataAiHint: 'business report' },
-        { name: 'Webinar Slides', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4', dataAiHint: 'tech webinar' },
-        { name: 'Company Profile PPT', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4', dataAiHint: 'corporate deck' },
-        { name: 'Product/Service Portfolio', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4', dataAiHint: 'product portfolio' },
-        { name: 'Educational Lecture', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4', dataAiHint: 'lecture slides' },
+        { name: 'Projects Report in PPT', image: 'https://placehold.co/600x450.png', pdf: '/project-report.pdf', dataAiHint: 'business report' },
+        { name: 'Webinar Slides', image: 'https://placehold.co/600x450.png', pdf: '/webinar-slides.pdf', dataAiHint: 'tech webinar' },
+        { name: 'Company Profile PPT', image: 'https://placehold.co/600x450.png', pdf: '/company-profile.pdf', dataAiHint: 'corporate deck' },
+        { name: 'Product/Service Portfolio', image: 'https://placehold.co/600x450.png', pdf: '/product-portfolio.pdf', dataAiHint: 'product portfolio' },
+        { name: 'Educational Lecture', image: 'https://placehold.co/600x450.png', pdf: '/educational-lecture.pdf', dataAiHint: 'lecture slides' },
     ]
   },
   'graphic-design': {

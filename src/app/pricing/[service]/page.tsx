@@ -76,8 +76,8 @@ const pricingData = {
       { name: 'Pro', price: '₹12,000', period: '/deck', features: ['Up to 35 Slides', 'Full Custom Design', 'Advanced Animations', 'Source Files'] },
     ]
   },
-  'graphic-design': {
-    title: 'Graphic Design',
+  'ui-ux-design': {
+    title: 'UI/UX Design',
     tiers: [
       { name: 'Basic', price: '₹4000', period: '', features: ['1 Logo Concept', '2 Rounds of Revisions', 'JPG & PNG Files'] },
       { name: 'Intermediate', price: '₹10,000', period: '', features: ['3 Logo Concepts', 'Social Media Kit', 'Vector Files', '3 Rounds of Revisions'] },

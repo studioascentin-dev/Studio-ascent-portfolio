@@ -32,7 +32,7 @@ const servicesData = {
     title: 'Photo Editing',
     description: 'With high-quality photo retouching and manipulation, I enhance your images to perfection, ensuring your product shots and portraits look stunning and professional.',
     projects: [
-        { name: 'High-End Retouching', before: '/beforeimg1.jpg', after: '/afterimg1.png', dataAiHint: 'portrait retouch' },
+        { name: 'High-End Retouching', before: '/beforeimg1.png', after: '/afterimg1.png', dataAiHint: 'portrait retouch' },
         { name: 'Logo Design', image: '/logokit.png', dataAiHint: 'photo manipulation' },
         { name: 'Social Media Content Design', image: '/portrait-after.png', dataAiHint: 'professional portrait' },
         { name: 'Menu or Brochure Design', image: '/menu.png', dataAiHint: 'product photography' },
@@ -53,9 +53,9 @@ const servicesData = {
         { name: 'Educational Lecture', image: '/educational-lecture.png', pdf: '/educational-lecture.pdf', dataAiHint: 'lecture slides' },
     ]
   },
-  'graphic-design': {
+  'ui-ux-design': {
     icon: <PenTool className="h-10 w-10 text-primary" />,
-    title: 'Graphic Design',
+    title: 'UI/UX Design',
     description: 'I create compelling and beautiful visuals that tell a story, define a brand, and capture attention. From logos to complete brand identities, I craft designs that make an impact.',
     projects: [
         { name: 'Personal Portfolio Website design', image: 'https://placehold.co/600x450.png', dataAiHint: 'modern logo' },

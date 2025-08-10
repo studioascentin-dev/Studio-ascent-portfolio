@@ -29,7 +29,7 @@ const services = [
     title: 'Photo Editing',
     description: 'With high-quality photo retouching and manipulation, I enhance your images to perfection, ensuring your product shots and portraits look stunning and professional.',
     projects: [
-        { name: 'High-End Retouching', before: '/beforeimg1.jpg', after: '/afterimg1.png', dataAiHint: 'fashion model' },
+        { name: 'High-End Retouching', before: '/beforeimg1.png', after: '/afterimg1.png', dataAiHint: 'fashion model' },
         { name: 'Logo Design', image: '/logokit.png', dataAiHint: 'modern interior' },
         { name: 'Simple Color Grading', before: '/indiandog.jpg', after: '/indiandog.png', dataAiHint: 'artistic color' },
     ]
@@ -46,9 +46,9 @@ const services = [
     ]
   },
   {
-    id: 'graphic-design',
+    id: 'ui-ux-design',
     icon: <PenTool className="h-10 w-10 text-primary" />,
-    title: 'Graphic Design',
+    title: 'UI/UX Design',
     description: 'I create compelling and beautiful visuals that tell a story, define a brand, and capture attention. From logos to complete brand identities, I craft designs that make an impact.',
     projects: [
         { name: 'Personal Portfolio Website design', image: 'https://placehold.co/600x450.png', dataAiHint: 'modern logo' },
@@ -132,7 +132,7 @@ export function ServicesSection({ refs }: ServicesSectionProps) {
     'video-editing': refs.videoEditingRef,
     'photo-editing': refs.photoEditingRef,
     'ppt-design': refs.pptDesignRef,
-    'graphic-design': refs.graphicDesignRef,
+    'ui-ux-design': refs.graphicDesignRef,
     'web-development': refs.webDevelopmentRef,
   };
 

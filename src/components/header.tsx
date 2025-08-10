@@ -15,7 +15,7 @@ const navItems = [
   { href: '#video-editing', text: 'Video Editing', icon: Video, refKey: 'videoEditingRef' },
   { href: '#photo-editing', text: 'Photo Editing', icon: Camera, refKey: 'photoEditingRef' },
   { href: '#ppt-design', text: 'PPT Design', icon: Presentation, refKey: 'pptDesignRef' },
-  { href: '#graphic-design', text: 'Graphic Design', icon: PenTool, refKey: 'graphicDesignRef' },
+  { href: '#ui-ux-design', text: 'UI/UX Design', icon: PenTool, refKey: 'graphicDesignRef' },
   { href: '#web-development', text: 'Web Development', icon: Code, refKey: 'webDevelopmentRef' },
   { href: '#hire-me', text: 'Hire Me', icon: MessageCircle, refKey: 'hireMeRef' },
 ];

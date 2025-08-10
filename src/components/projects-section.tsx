@@ -24,8 +24,8 @@ const projects = [
       name: 'Modern Logo Design', 
       image: 'https://placehold.co/600x450.png',
       dataAiHint: 'modern logo',
-      category: 'Graphic Design',
-      href: '/services/graphic-design'
+      category: 'UI/UX Design',
+      href: '/services/ui-ux-design'
     },
     { 
       name: 'Custom E-commerce Store', 

@@ -45,7 +45,7 @@ const servicesData = {
     title: 'PPT Design',
     description: 'I create stunning and effective presentations that not only look great but also communicate your message clearly, making sure you stand out in any setting.',
     projects: [
-        { name: 'School/College Presentation', video: 'https://streamable.com/e/ri18q1', dataAiHint: 'education presentation' },
+        { name: 'School/College Presentation', video: 'https://files.streamable.com/ri18q1.mp4', dataAiHint: 'education presentation' },
         { name: 'Projects Report in PPT', image: '/project-report.png', pdf: '/project-report.pdf', dataAiHint: 'business report' },
         { name: 'Webinar Slides', image: '/webinar-slides.png', pdf: '/webinar-slides.pdf', dataAiHint: 'tech webinar' },
         { name: 'Company Profile PPT', image: '/company-profile.png', pdf: '/company-profile.pdf', dataAiHint: 'corporate deck' },

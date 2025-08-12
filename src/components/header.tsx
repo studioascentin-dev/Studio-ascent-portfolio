@@ -50,14 +50,13 @@ export function Header() {
             >
                 {navItems.map((item) => (
                     <motion.div key={item.name} variants={itemVariants}>
-                        <Link href={item.href} passHref legacyBehavior>
-                           <a
-                                onClick={(e) => handleScroll(e, item.href)}
-                                className="text-lg font-medium text-foreground hover:text-primary transition-colors relative group"
-                            >
-                                {item.name}
-                                <span className="absolute left-0 bottom-[-2px] h-[2px] w-full bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></span>
-                            </a>
+                        <Link
+                            href={item.href}
+                            onClick={(e) => handleScroll(e, item.href)}
+                            className="text-lg font-medium text-foreground hover:text-primary transition-colors relative group"
+                        >
+                            {item.name}
+                            <span className="absolute left-0 bottom-[-2px] h-[2px] w-full bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></span>
                         </Link>
                     </motion.div>
                 ))}

@@ -34,17 +34,17 @@ const hiringPoints = [
     {
         icon: <Award className="w-6 h-6 text-foreground" />,
         title: "Quality & Experience",
-        description: "With a strong foundation in modern web development and design, I deliver high-quality, professional results that align with the latest industry standards."
+        description: "I deliver high-quality, professional results that align with the latest industry standards."
     },
     {
         icon: <MessageSquare className="w-6 h-6 text-foreground" />,
         title: "Client-Centric Approach",
-        description: "I prioritize clear communication and collaboration to ensure the final product perfectly aligns with your vision and goals. Your satisfaction is my top priority."
+        description: "I prioritize clear communication to ensure the final product perfectly aligns with your vision and goals."
     },
     {
         icon: <Target className="w-6 h-6 text-foreground" />,
         title: "Passion for Creativity",
-        description: "I bring a creative and solution-oriented mindset to every project, crafting unique and impactful digital experiences that stand out from the crowd."
+        description: "I bring a creative, solution-oriented mindset to every project, crafting unique and impactful digital experiences."
     }
 ];
 

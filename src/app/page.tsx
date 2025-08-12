@@ -9,7 +9,6 @@ import { ServicesSection } from '@/components/services-section';
 import { Footer } from '@/components/footer';
 import * as React from 'react';
 import { HireMeSection } from '@/components/hire-me-section';
-import { AboutSection } from '@/components/about-section';
 
 export default function Home() {
 
@@ -18,9 +17,6 @@ export default function Home() {
       <Header />
       <main className="flex-1">
         <HeroSection />
-        <div id="about">
-          <AboutSection />
-        </div>
         <div id="services">
           <ServicesSection />
         </div>

@@ -4,7 +4,8 @@
 import { motion } from 'framer-motion';
 import { Button } from './ui/button';
 import Image from 'next/image';
-import { ArrowRight, Dribbble, Instagram, Linkedin, Code, PenTool, Camera, Video } from 'lucide-react';
+import { ArrowRight, Dribbble, Instagram, Linkedin, Code, PenTool, Camera, Video, Presentation } from 'lucide-react';
+import { AboutSection } from './about-section';
 
 export function HeroSection() {
  
@@ -22,8 +23,8 @@ export function HeroSection() {
   });
 
   return (
-    <section id="home" className="relative w-full min-h-screen flex items-center overflow-hidden">
-      <div className="container mx-auto px-4 z-10">
+    <section id="home" className="relative w-full flex flex-col items-center overflow-hidden">
+      <div className="container mx-auto px-4 z-10 min-h-screen flex items-center">
         <div className="grid md:grid-cols-2 gap-8 items-center">
             <motion.div
                 initial={{ opacity: 0, x: -50 }}
@@ -77,7 +78,7 @@ export function HeroSection() {
                     initial={{ opacity: 0, y: 100 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1, ease: 'easeOut' }}
-                    className="relative w-[700px] h-[900px]"
+                    className="relative w-[700px] h-[900px] filter blur-sm"
                  >
                     <div className="absolute inset-0 z-0 text-primary/10">
                         <motion.div variants={iconVariants(3, 0.5)} initial="initial" animate="animate" className="absolute top-20 left-10">
@@ -92,24 +93,24 @@ export function HeroSection() {
                         <motion.div variants={iconVariants(5, 1.5)} initial="initial" animate="animate" className="absolute bottom-1/3 right-1/2">
                             <Video className="h-16 w-16" strokeWidth={1} />
                         </motion.div>
-                        <motion.div variants={iconVariants(4.5, 0.2)} initial="initial" animate="animate" className="absolute top-1/4 right-10">
+                         <motion.div variants={iconVariants(4.2, 0.8)} initial="initial" animate="animate" className="absolute top-10 right-10">
+                            <Presentation className="h-20 w-20" strokeWidth={1} />
+                        </motion.div>
+                        <motion.div variants={iconVariants(3.8, 1.8)} initial="initial" animate="animate" className="absolute bottom-10 left-20">
                             <Code className="h-16 w-16" strokeWidth={1} />
                         </motion.div>
-                        <motion.div variants={iconVariants(3.8, 1.2)} initial="initial" animate="animate" className="absolute bottom-10 left-1/2">
-                            <Camera className="h-20 w-20" strokeWidth={1} />
-                        </motion.div>
                     </div>
-                    <div className="relative w-[400px] h-[500px] scale-[2.2]">
-  <Image
-    src="/images/profileicon.png"
-    alt="Dev Kumar Das Hero Image"
-    fill
-    className="object-contain z-10"
-    style={{ filter: 'drop-shadow(0px 30px 15px rgba(0,0,0,0.3))' }}
-    priority
-  />
-                     </div>
                  </motion.div>
+                 <div className="absolute w-[400px] h-[500px] scale-[2.2]">
+                    <Image
+                        src="/images/profileicon.png"
+                        alt="Dev Kumar Das Hero Image"
+                        fill
+                        className="object-contain z-10"
+                        style={{ filter: 'drop-shadow(0px 30px 15px rgba(0,0,0,0.3))' }}
+                        priority
+                    />
+                 </div>
             </div>
             <div className="md:hidden col-span-1 flex items-center justify-center">
                  <motion.div
@@ -130,6 +131,10 @@ export function HeroSection() {
             </div>
         </div>
       </div>
+      <div id="about" className="w-full bg-secondary/50 -mt-48 pt-48">
+          <AboutSection />
+      </div>
     </section>
   );
 }
+

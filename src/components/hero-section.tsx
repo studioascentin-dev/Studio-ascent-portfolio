@@ -104,7 +104,7 @@ export function HeroSection() {
             <div>
                 <h1 className="text-5xl md:text-7xl font-bold font-headline tracking-tight text-foreground leading-tight">
                     <motion.span variants={itemVariants} className="block text-4xl md:text-6xl font-semibold">Hi, I'm</motion.span>
-                    <motion.span variants={itemVariants} className="block">Dev Kumar Das.</motion.span>
+                    <motion.span variants={itemVariants} className="block uppercase text-primary text-6xl md:text-8xl">Dev Kumar Das.</motion.span>
                 </h1>
                 <motion.div variants={lineVariants} className="h-1 bg-primary mt-4 mx-auto"></motion.div>
             </div>

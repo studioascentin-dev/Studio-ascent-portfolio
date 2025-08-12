@@ -1,19 +1,19 @@
 import type {Metadata} from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
-import { Roboto, Oswald } from 'next/font/google';
+import { Montserrat, Poppins } from 'next/font/google';
 
-const roboto = Roboto({
+const poppins = Poppins({
   subsets: ['latin'],
   variable: '--font-body',
   weight: ['400', '500', '700'],
   display: 'swap',
 });
 
-const oswald = Oswald({
+const montserrat = Montserrat({
   subsets: ['latin'],
   variable: '--font-headline',
-  weight: ['600', '700'],
+  weight: ['600', '700', '800', '900'],
   display: 'swap',
 });
 
@@ -30,7 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className="dark !scroll-smooth">
-      <body className={`${roboto.variable} ${oswald.variable} font-body antialiased bg-background text-foreground`}>
+      <body className={`${poppins.variable} ${montserrat.variable} font-body antialiased bg-background text-foreground`}>
         {children}
         <Toaster />
       </body>

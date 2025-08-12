@@ -93,25 +93,18 @@ export function HeroSection() {
         <div className="flex flex-col justify-center text-center">
           <div className="relative space-y-8 inline-block">
             <motion.div variants={itemVariants} className='absolute -top-24 -left-12 md:-top-16 md:-left-4 opacity-50'>
-              <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-primary h-auto w-[80px] md:w-[100px]">
+            <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-primary h-auto w-[80px] md:w-[100px]">
                 <g stroke="currentColor" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M62.5 12.5L25 50L37.5 62.5L75 25L62.5 12.5Z" />
-                  <path d="M50 25L25 50" />
-                  <path d="M56.25 31.25L43.75 43.75" />
-                  <path d="M62.5 37.5L50 50" />
-                  <path d="M68.75 43.75L56.25 56.25" />
-                  <path d="M75 50L62.5 62.5" />
-                  <path d="M81.25 18.75L90.625 28.125" />
-                  <path d="M18.75 81.25L28.125 90.625" />
-                  <path d="M75 62.5L87.5 75V87.5H75L62.5 75H75V62.5Z" />
-                  <path d="M25 37.5L12.5 25V12.5H25L37.5 25H25V37.5Z" />
+                    <path d="M25 12.5L75 12.5L75 87.5L25 87.5L25 12.5Z" />
+                    <path d="M75 12.5L25 87.5" />
+                    <path d="M50 12.5L50 87.5" />
                 </g>
-              </svg>
+            </svg>
             </motion.div>
             <div>
-                <h1 className="text-6xl md:text-8xl font-bold font-headline tracking-tight text-foreground leading-tight">
-                    <motion.span variants={itemVariants} className="block">Dev Kumar</motion.span>
-                    <motion.span variants={itemVariants} className="block">Das.</motion.span>
+                <h1 className="text-5xl md:text-7xl font-bold font-headline tracking-tight text-foreground leading-tight">
+                    <motion.span variants={itemVariants} className="block text-4xl md:text-6xl font-semibold">Hi, I'm</motion.span>
+                    <motion.span variants={itemVariants} className="block">Dev Kumar Das.</motion.span>
                 </h1>
                 <motion.div variants={lineVariants} className="h-1 bg-primary mt-4 mx-auto"></motion.div>
             </div>

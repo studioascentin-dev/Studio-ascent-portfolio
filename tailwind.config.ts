@@ -17,8 +17,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        body: ['var(--font-body)', 'Roboto', 'sans-serif'],
-        headline: ['var(--font-headline)', 'Oswald', 'sans-serif'],
+        body: ['var(--font-body)', 'Poppins', 'sans-serif'],
+        headline: ['var(--font-headline)', 'Montserrat', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",

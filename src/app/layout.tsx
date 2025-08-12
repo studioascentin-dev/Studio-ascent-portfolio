@@ -2,16 +2,18 @@ import type {Metadata} from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 import { PageTransition } from '@/components/page-transition';
-import { Inter, Lexend } from 'next/font/google';
+import { Roboto, Poppins } from 'next/font/google';
 
-const inter = Inter({
+const roboto = Roboto({
   subsets: ['latin'],
   variable: '--font-body',
+  weight: ['400', '500', '700'],
 });
 
-const lexend = Lexend({
+const poppins = Poppins({
   subsets: ['latin'],
   variable: '--font-headline',
+  weight: ['600', '700', '800'],
 });
 
 
@@ -27,7 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className="!scroll-smooth">
-      <body className={`${inter.variable} ${lexend.variable} font-body antialiased`}>
+      <body className={`${roboto.variable} ${poppins.variable} font-body antialiased`}>
         <PageTransition>
           {children}
         </PageTransition>

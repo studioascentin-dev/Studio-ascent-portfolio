@@ -44,7 +44,7 @@ export function AboutSection() {
     };
 
     return (
-        <section className="py-16 md:py-24">
+        <section className="py-24 md:py-32 bg-secondary/50">
             <motion.div 
                 className="container mx-auto px-4"
                 variants={sectionVariants}
@@ -91,7 +91,7 @@ export function AboutSection() {
                                 <div className="flex justify-between mb-1">
                                     <span className="font-medium text-lg">{skill.name}</span>
                                     <span className="text-muted-foreground">{skill.level}%</span>
-                                </div>
+                                 </div>
                                 <div className="w-full bg-secondary rounded-full h-2.5">
                                     <motion.div 
                                         className="bg-primary h-2.5 rounded-full"

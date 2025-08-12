@@ -59,7 +59,6 @@ export function HeroSection() {
                 </motion.div>
             </motion.div>
 
-            {/* Image Column */}
             <div className="hidden md:flex justify-center items-center">
                  <motion.div
                     initial={{ opacity: 0, y: 100 }}
@@ -77,7 +76,6 @@ export function HeroSection() {
                     />
                  </motion.div>
             </div>
-             {/* Image for Small screens */}
             <div className="md:hidden col-span-1 flex items-center justify-center">
                  <motion.div
                     initial={{ opacity: 0, y: 100 }}

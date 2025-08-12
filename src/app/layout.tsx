@@ -1,25 +1,26 @@
 import type {Metadata} from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
-import { PageTransition } from '@/components/page-transition';
 import { Roboto, Poppins } from 'next/font/google';
 
 const roboto = Roboto({
   subsets: ['latin'],
   variable: '--font-body',
   weight: ['400', '500', '700'],
+  display: 'swap',
 });
 
 const poppins = Poppins({
   subsets: ['latin'],
   variable: '--font-headline',
   weight: ['600', '700', '800'],
+  display: 'swap',
 });
 
 
 export const metadata: Metadata = {
-  title: 'Studio Ascent',
-  description: 'Portfolio of Dev Kumar Das',
+  title: 'Dev Kumar Das | Portfolio',
+  description: 'Portfolio of Dev Kumar Das, a full-stack developer and creative designer.',
 };
 
 export default function RootLayout({
@@ -30,9 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className="!scroll-smooth">
       <body className={`${roboto.variable} ${poppins.variable} font-body antialiased`}>
-        <PageTransition>
-          {children}
-        </PageTransition>
+        {children}
         <Toaster />
       </body>
     </html>

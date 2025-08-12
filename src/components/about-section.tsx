@@ -1,145 +1,113 @@
 
 "use client";
 
-import { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { User, MapPin, BookOpen, Code, Target, Heart, ChevronDown } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { cn } from '@/lib/utils';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { Button } from './ui/button';
 
-const aboutDetails = [
-    { icon: <User className="h-8 w-8 text-primary" />, title: "Full Name", value: "Dev Kumar Das", details: "I'm 22 years old. This is the name my parents gave me. You can call me Dev." },
-    { icon: <MapPin className="h-8 w-8 text-primary" />, title: "From", value: "Sonapur, India", details: "I'm currently based here, but I enjoy working with people from all over the world. I am from a small town called Sonapur which is located in north-east part of India." },
-    { icon: <BookOpen className="h-8 w-8 text-primary" />, title: "Studies", value: "K.V Digaru & Sonapur College", details: "I completed my schooling from K.V Digaru and completed my secondary and my bachelor's degree from Sonapur College in 2025." },
-    { icon: <Heart className="h-8 w-8 text-primary" />, title: "Hobbies", value: "Travel & Eating new dishes", details: "I like to travel and enjoy visiting new places, although I don't have any money to do so 😂." },
-    { icon: <Target className="h-8 w-8 text-primary" />, title: "Ambition", value: "To Build Impactful Websites", details: "My ambition is to became like Jeff Bezos by creating my own website which can change people life and make it more easier. Build new things is always my liking. I also still learning new things." },
+const skills = [
+    { name: 'HTML', level: 95 },
+    { name: 'CSS', level: 90 },
+    { name: 'JavaScript', level: 85 },
+    { name: 'React', level: 88 },
+    { name: 'Next.js', level: 86 },
+    { name: 'Node.js', level: 80 },
+    { name: 'Figma', level: 92 },
+    { name: 'Photoshop', level: 95 },
 ];
 
-const MAX_VISIBLE_ITEMS = 2;
-
 export function AboutSection() {
-    const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
-    const [showAll, setShowAll] = useState(false);
+    
+    const sectionVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                duration: 0.5,
+                ease: 'easeOut',
+                staggerChildren: 0.2,
+            },
+        },
+    };
 
-    const visibleDetails = showAll ? aboutDetails : aboutDetails.slice(0, MAX_VISIBLE_ITEMS);
-
-    const textVariants = {
+    const itemVariants = {
         hidden: { opacity: 0, y: 20 },
         visible: { opacity: 1, y: 0 },
     };
 
-    const contentVariants = {
-        hidden: { opacity: 0, height: 0, y: -10 },
-        visible: {
-            opacity: 1,
-            height: 'auto',
-            y: 0,
-            transition: {
-                duration: 0.3,
-                ease: "easeInOut"
-            }
-        }
+    const barVariants = {
+        hidden: { width: 0 },
+        visible: { 
+            width: 'var(--level)',
+            transition: { duration: 1.5, ease: 'easeOut' }
+        },
     };
-    
+
     return (
-        <section id="about-me" className="py-16 md:py-24 lg:py-32 overflow-hidden">
-            <div className="container mx-auto px-4 md:px-6">
-                <div className="space-y-8">
-                    <div className="text-center">
-                        <motion.h2 
-                            variants={textVariants}
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.5 }}
-                            className="text-3xl font-bold font-headline tracking-tighter sm:text-4xl md:text-5xl">About Me</motion.h2>
-                        <motion.p 
-                            variants={textVariants}
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: 0.2 }}
-                            className="mt-4 text-muted-foreground md:text-xl max-w-2xl mx-auto">A little more about my journey, skills, and passions.</motion.p>
-                    </div>
+        <section id="about" className="py-24 md:py-32">
+            <motion.div 
+                className="container mx-auto px-4"
+                variants={sectionVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.2 }}
+            >
+                <motion.h2 
+                    variants={itemVariants}
+                    className="text-4xl font-bold font-headline text-center mb-12"
+                >
+                    About <span className="text-primary">Me</span>
+                </motion.h2>
 
-                    <div className="relative max-w-2xl mx-auto">
-                        <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-border -translate-x-1/2"></div>
-                        
-                        <AnimatePresence>
-                            {visibleDetails.map((detail, index) => (
-                                <motion.div
-                                    key={detail.title}
-                                    layout
-                                    initial={{ opacity: 0, scale: 0.8 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    exit={{ opacity: 0, scale: 0.8 }}
-                                    transition={{ duration: 0.5, type: 'spring' }}
-                                    className={cn(
-                                        "relative flex items-center mb-12",
-                                        index % 2 === 0 ? "justify-start" : "justify-end"
-                                    )}
-                                >
-                                    <div className={cn("absolute left-1/2 w-4 h-4 bg-primary rounded-full -translate-x-1/2 border-4 border-background")}></div>
-                                    
-                                    <div 
-                                        className={cn("w-[calc(50%-2rem)]", index % 2 === 0 ? "pr-0" : "pl-0")}
-                                    >
-                                        <Card
-                                            className={cn(
-                                                "bg-secondary/80 backdrop-blur-sm shadow-lg transition-all duration-300 w-full cursor-pointer hover:shadow-primary/20",
-                                                { "ring-2 ring-primary": expandedIndex === index }
-                                            )}
-                                            onClick={() => setExpandedIndex(expandedIndex === index ? null : index)}
-                                        >
-                                            <CardHeader className="flex flex-row items-center justify-between gap-4 p-4">
-                                                <div className="flex items-center gap-4">
-                                                    {detail.icon}
-                                                    <CardTitle className="text-lg font-headline">{detail.title}</CardTitle>
-                                                </div>
-                                                <motion.div
-                                                    animate={{ rotate: expandedIndex === index ? 180 : 0 }}
-                                                    transition={{ duration: 0.3 }}
-                                                >
-                                                    <ChevronDown className="h-5 w-5 text-muted-foreground" />
-                                                </motion.div>
-                                            </CardHeader>
-                                            <AnimatePresence>
-                                                {expandedIndex === index && (
-                                                    <motion.div
-                                                        variants={contentVariants}
-                                                        initial="hidden"
-                                                        animate="visible"
-                                                        exit="hidden"
-                                                        className="overflow-hidden"
-                                                    >
-                                                        <CardContent className="p-4 pt-0">
-                                                            <p className="text-muted-foreground">{detail.value}</p>
-                                                            <p className="pt-2 text-muted-foreground/80 text-sm">{detail.details}</p>
-                                                        </CardContent>
-                                                    </motion.div>
-                                                )}
-                                            </AnimatePresence>
-                                        </Card>
-                                    </div>
-                                </motion.div>
-                            ))}
-                        </AnimatePresence>
-                    </div>
-
-                    {!showAll && (
-                        <div className="text-center">
-                            <Button variant="outline" onClick={() => setShowAll(true)}>See More</Button>
-                        </div>
-                    )}
-
-                    <div className="text-center mt-12">
-                        <Button asChild size="lg">
-                          <a href="/">Go Back</a>
+                <div className="grid md:grid-cols-2 gap-12 items-center">
+                    <motion.div variants={itemVariants}>
+                        <Image 
+                            src="https://placehold.co/600x600.png"
+                            alt="Dev Kumar Das"
+                            width={600}
+                            height={600}
+                            className="rounded-lg shadow-lg"
+                            data-ai-hint="professional developer portrait"
+                        />
+                    </motion.div>
+                    <motion.div variants={itemVariants} className="space-y-6">
+                        <h3 className="text-3xl font-headline font-bold">A dedicated Developer based in Sonapur, India 📍</h3>
+                        <p className="text-muted-foreground text-lg">
+                            As a Junior Full-Stack Developer, I possess an impressive arsenal of skills in HTML, CSS, JavaScript, React, and Next.js. My expertise lies in crafting dynamic, engaging interfaces through writing clean and optimized code and utilizing cutting-edge development tools and techniques. I am also a team player who thrives in collaborating with cross-functional teams to produce outstanding web applications.
+                        </p>
+                        <Button asChild size="lg" className="font-bold">
+                            <a href="#contact">Hire Me</a>
                         </Button>
-                    </div>
+                    </motion.div>
                 </div>
-            </div>
+
+                <motion.div 
+                    variants={itemVariants}
+                    className="mt-24"
+                >
+                    <h3 className="text-3xl font-bold font-headline text-center mb-12">My <span className="text-primary">Skills</span></h3>
+                    <div className="grid md:grid-cols-2 gap-x-12 gap-y-8">
+                        {skills.map(skill => (
+                            <div key={skill.name}>
+                                <div className="flex justify-between mb-1">
+                                    <span className="font-medium text-lg">{skill.name}</span>
+                                    <span className="text-muted-foreground">{skill.level}%</span>
+                                </div>
+                                <div className="w-full bg-secondary rounded-full h-2.5">
+                                    <motion.div 
+                                        className="bg-primary h-2.5 rounded-full"
+                                        style={{ '--level': `${skill.level}%` } as React.CSSProperties}
+                                        variants={barVariants}
+                                        initial="hidden"
+                                        whileInView="visible"
+                                        viewport={{ once: true }}
+                                    />
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </motion.div>
+            </motion.div>
         </section>
     );
 }

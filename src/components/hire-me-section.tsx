@@ -2,9 +2,9 @@
 "use client";
 
 import { motion } from 'framer-motion';
-import { Button } from './ui/button';
-import { Mail, Phone, Gem, Code, HeartHandshake } from 'lucide-react';
+import { Mail, Phone, MapPin } from 'lucide-react';
 import { Card, CardContent } from './ui/card';
+import { Button } from './ui/button';
 
 const sectionVariants = {
     hidden: { opacity: 0 },
@@ -30,37 +30,20 @@ const itemVariants = {
     },
 };
 
-const reasonsToHire = [
-    {
-        icon: <Gem className="h-8 w-8 text-primary" />,
-        title: "Pixel-Perfect Design",
-        description: "I bring your vision to life with meticulous attention to detail, ensuring every element is perfectly placed and visually stunning."
-    },
-    {
-        icon: <Code className="h-8 w-8 text-primary" />,
-        title: "High-Quality Code",
-        description: "I write clean, efficient, and scalable code using modern technologies, resulting in fast, reliable, and maintainable websites."
-    },
-    {
-        icon: <HeartHandshake className="h-8 w-8 text-primary" />,
-        title: "Client-Focused Approach",
-        description: "I prioritize clear communication and collaboration, working closely with you to ensure the final product exceeds your expectations."
-    }
-]
 
 export function HireMeSection() {
     const phoneNumber = "919707191619";
 
     const handleWhatsAppClick = () => {
-        const message = "Hello! I'm interested in your services and would like to discuss a project.";
+        const message = "Hello! I saw your portfolio and I'm interested in your services. Let's discuss a project.";
         const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
         window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
     }
-
+    
     return (
-        <section id="hire-me" className="py-24 md:py-32 bg-secondary/30">
+        <section id="contact" className="py-24 md:py-32 bg-secondary/50">
             <motion.div
-                className="container mx-auto px-4 md:px-6"
+                className="container mx-auto px-4"
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.2 }}
@@ -69,9 +52,9 @@ export function HireMeSection() {
                 <div className="text-center max-w-3xl mx-auto">
                     <motion.h2
                         variants={itemVariants}
-                        className="text-4xl font-bold font-headline tracking-tighter sm:text-5xl md:text-6xl"
+                        className="text-4xl font-bold font-headline tracking-tighter sm:text-5xl"
                     >
-                        Let's Create Something Amazing
+                        Contact <span className="text-primary">Me</span>
                     </motion.h2>
                     <motion.p
                         variants={itemVariants}
@@ -81,51 +64,47 @@ export function HireMeSection() {
                     </motion.p>
                 </div>
                 
-                <div className="max-w-5xl mx-auto mt-16">
-                    <motion.h3 
-                        variants={itemVariants}
-                        className="text-3xl font-bold font-headline tracking-tighter sm:text-4xl md:text-5xl text-center mb-12"
-                    >
-                        Why Hire Me?
-                    </motion.h3>
-                    <motion.div 
-                        variants={sectionVariants}
-                        className="grid grid-cols-1 md:grid-cols-3 gap-8"
-                    >
-                        {reasonsToHire.map((reason) => (
-                            <motion.div 
-                                key={reason.title} 
-                                variants={itemVariants}
-                            >
-                                <Card className="h-full bg-card/80 backdrop-blur-sm shadow-lg hover:shadow-primary/20 transition-all duration-300 hover:border-primary border-transparent border-2">
-                                    <CardContent className="p-6">
-                                        <div className="flex flex-row items-start gap-4 md:flex-col md:items-center md:text-center">
-                                            <div className="p-3 bg-primary/10 rounded-full shrink-0">
-                                                {reason.icon}
-                                            </div>
-                                            <div className="flex-1">
-                                                <h4 className="text-xl font-headline mb-2">{reason.title}</h4>
-                                                <p className="text-muted-foreground text-sm">{reason.description}</p>
-                                            </div>
-                                        </div>
-                                    </CardContent>
-                                </Card>
-                            </motion.div>
-                        ))}
-                    </motion.div>
-                </div>
+                <motion.div 
+                    variants={itemVariants}
+                    className="mt-16 grid md:grid-cols-3 gap-8 max-w-4xl mx-auto text-center"
+                >
+                    <Card className="bg-card/80">
+                        <CardContent className="p-6">
+                            <MapPin className="h-10 w-10 text-primary mx-auto mb-4" />
+                            <h3 className="text-xl font-bold font-headline">Location</h3>
+                            <p className="text-muted-foreground">Sonapur, India</p>
+                        </CardContent>
+                    </Card>
+                    <Card className="bg-card/80">
+                        <CardContent className="p-6">
+                            <Mail className="h-10 w-10 text-primary mx-auto mb-4" />
+                            <h3 className="text-xl font-bold font-headline">Email</h3>
+                            <a href="mailto:devkumardas2003@gmail.com" className="text-muted-foreground hover:text-primary transition-colors">
+                                devkumardas2003@gmail.com
+                            </a>
+                        </CardContent>
+                    </Card>
+                     <Card className="bg-card/80">
+                        <CardContent className="p-6">
+                            <Phone className="h-10 w-10 text-primary mx-auto mb-4" />
+                            <h3 className="text-xl font-bold font-headline">WhatsApp</h3>
+                             <a href="#" onClick={handleWhatsAppClick} className="text-muted-foreground hover:text-primary transition-colors">
+                                +91 9707191619
+                            </a>
+                        </CardContent>
+                    </Card>
+                </motion.div>
 
                 <motion.div
                     variants={itemVariants}
-                    className="mt-16 flex flex-col sm:flex-row items-center justify-center gap-4"
+                    className="mt-12 text-center"
                 >
                     <Button
                         size="lg"
-                        className="w-full sm:w-auto font-bold text-lg py-4 px-10 bg-green-500 hover:bg-green-600 text-white shadow-lg transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95"
+                        className="font-bold text-lg py-4 px-10 bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95"
                         onClick={handleWhatsAppClick}
                     >
-                        <Phone className="mr-2 h-5 w-5" />
-                        Contact on WhatsApp
+                        Get in Touch
                     </Button>
                 </motion.div>
             </motion.div>

@@ -1,7 +1,8 @@
 
+
 "use client";
 
-import { Sidebar } from '@/components/sidebar';
+import { Header } from '@/components/header';
 import { HeroSection } from '@/components/hero-section';
 import { ProjectsSection } from '@/components/projects-section';
 import { ServicesSection } from '@/components/services-section';
@@ -11,37 +12,24 @@ import { HireMeSection } from '@/components/hire-me-section';
 import { AboutSection } from '@/components/about-section';
 
 export default function Home() {
-  const heroRef = React.useRef<HTMLDivElement>(null);
-  const aboutRef = React.useRef<HTMLDivElement>(null);
-  const servicesRef = React.useRef<HTMLDivElement>(null);
-  const projectsRef = React.useRef<HTMLDivElement>(null);
-  const contactRef = React.useRef<HTMLDivElement>(null);
-
-  const sections = {
-    heroRef,
-    aboutRef,
-    servicesRef,
-    projectsRef,
-    contactRef,
-  }
 
   return (
-    <div className="flex min-h-screen w-full bg-background">
-      <Sidebar sections={sections} />
-      <main className="flex-1 md:pl-[300px]">
-        <div id="home" ref={heroRef}>
+    <div className="flex min-h-screen w-full bg-background flex-col">
+      <Header />
+      <main className="flex-1">
+        <div id="home">
           <HeroSection />
         </div>
-        <div id="about" ref={aboutRef}>
+        <div id="about">
           <AboutSection />
         </div>
-        <div id="services" ref={servicesRef}>
+        <div id="services">
           <ServicesSection />
         </div>
-        <div id="projects" ref={projectsRef}>
+        <div id="work">
           <ProjectsSection />
         </div>
-        <div id="contact" ref={contactRef}>
+        <div id="contact">
           <HireMeSection />
         </div>
         <Footer />

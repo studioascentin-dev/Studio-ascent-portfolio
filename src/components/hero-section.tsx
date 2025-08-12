@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Button } from './ui/button';
 import Image from 'next/image';
 import { ArrowRight, Dribbble, Instagram, Linkedin, Code, PenTool, Camera, Video, Presentation } from 'lucide-react';
+import { AboutSection } from './about-section';
 
 export function HeroSection() {
  
@@ -95,7 +96,7 @@ export function HeroSection() {
 
             <div className="hidden md:flex justify-end items-center">
                  <motion.div 
-                    className="relative w-[500px] h-[600px] z-10"
+                    className="relative w-[600px] h-[720px] z-10"
                     initial={{ opacity: 0, y: 100 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1, ease: 'easeOut' }}

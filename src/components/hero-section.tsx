@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from './ui/button';
 import Image from 'next/image';
+import { Plus } from 'lucide-react';
 
 const roles = ["A FULL-STACK DEVELOPER", "A CREATIVE DESIGNER", "A VIDEO EDITOR", "A PHOTO EDITOR"];
 const TYPING_SPEED = 80;
@@ -68,8 +69,11 @@ export function HeroSection() {
                 <p className="max-w-xl text-lg text-muted-foreground font-light tracking-wide leading-relaxed mt-6">
                     Pixel-perfect designs and powerful code. Let's build something unforgettable together.
                 </p>
-                <Button asChild size="lg" className="font-bold mt-8">
-                    <a href="#about">My Story</a>
+                <Button asChild variant="link" size="lg" className="font-bold text-primary mt-8 px-0 text-lg group">
+                    <a href="#about">
+                        My Story
+                        <Plus className="h-5 w-5 transition-transform duration-300 group-hover:rotate-90" />
+                    </a>
                 </Button>
             </motion.div>
             <motion.div

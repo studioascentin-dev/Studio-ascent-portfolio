@@ -22,9 +22,30 @@ export function HeroSection() {
   });
 
   return (
-    <section id="home" className="relative w-full flex flex-col items-center overflow-hidden">
-      <div className="container mx-auto px-4 z-10 min-h-screen flex items-center">
-        <div className="grid md:grid-cols-2 gap-8 items-center">
+    <section id="home" className="relative w-full flex flex-col items-center justify-center min-h-screen overflow-hidden">
+        <div className="absolute inset-0 z-0 text-primary/10 filter blur-sm">
+            <motion.div variants={iconVariants(3, 0.5)} initial="initial" animate="animate" className="absolute top-20 left-10">
+                <Code className="h-24 w-24" strokeWidth={1} />
+            </motion.div>
+            <motion.div variants={iconVariants(4, 1)} initial="initial" animate="animate" className="absolute top-1/2 left-1/4 -translate-y-1/2">
+                <PenTool className="h-20 w-20" strokeWidth={1} />
+            </motion.div>
+            <motion.div variants={iconVariants(3.5, 0)} initial="initial" animate="animate" className="absolute bottom-24 right-20">
+                <Camera className="h-28 w-28" strokeWidth={1} />
+            </motion.div>
+            <motion.div variants={iconVariants(5, 1.5)} initial="initial" animate="animate" className="absolute bottom-1/3 right-1/2">
+                <Video className="h-16 w-16" strokeWidth={1} />
+            </motion.div>
+                <motion.div variants={iconVariants(4.2, 0.8)} initial="initial" animate="animate" className="absolute top-10 right-10">
+                <Presentation className="h-20 w-20" strokeWidth={1} />
+            </motion.div>
+            <motion.div variants={iconVariants(3.8, 1.8)} initial="initial" animate="animate" className="absolute bottom-10 left-20">
+                <Code className="h-16 w-16" strokeWidth={1} />
+            </motion.div>
+        </div>
+
+      <div className="container mx-auto px-4 z-10 flex items-center">
+        <div className="grid md:grid-cols-2 gap-8 items-center w-full">
             <motion.div
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -72,29 +93,7 @@ export function HeroSection() {
                 </motion.div>
             </motion.div>
 
-            <div className="hidden md:flex justify-end items-center relative">
-                 <div
-                    className="absolute inset-0 z-0 text-primary/10 filter blur-sm"
-                 >
-                    <motion.div variants={iconVariants(3, 0.5)} initial="initial" animate="animate" className="absolute top-20 left-10">
-                        <Code className="h-24 w-24" strokeWidth={1} />
-                    </motion.div>
-                    <motion.div variants={iconVariants(4, 1)} initial="initial" animate="animate" className="absolute top-1/2 left-1/4 -translate-y-1/2">
-                        <PenTool className="h-20 w-20" strokeWidth={1} />
-                    </motion.div>
-                    <motion.div variants={iconVariants(3.5, 0)} initial="initial" animate="animate" className="absolute bottom-24 right-20">
-                        <Camera className="h-28 w-28" strokeWidth={1} />
-                    </motion.div>
-                    <motion.div variants={iconVariants(5, 1.5)} initial="initial" animate="animate" className="absolute bottom-1/3 right-1/2">
-                        <Video className="h-16 w-16" strokeWidth={1} />
-                    </motion.div>
-                     <motion.div variants={iconVariants(4.2, 0.8)} initial="initial" animate="animate" className="absolute top-10 right-10">
-                        <Presentation className="h-20 w-20" strokeWidth={1} />
-                    </motion.div>
-                    <motion.div variants={iconVariants(3.8, 1.8)} initial="initial" animate="animate" className="absolute bottom-10 left-20">
-                        <Code className="h-16 w-16" strokeWidth={1} />
-                    </motion.div>
-                 </div>
+            <div className="hidden md:flex justify-end items-center">
                  <motion.div 
                     className="relative w-[500px] h-[600px] z-10"
                     initial={{ opacity: 0, y: 100 }}

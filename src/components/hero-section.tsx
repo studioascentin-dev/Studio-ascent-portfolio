@@ -72,7 +72,7 @@ export function HeroSection() {
                 </motion.div>
             </motion.div>
 
-            <div className="hidden md:flex justify-center items-center relative">
+            <div className="hidden md:flex justify-end items-center relative">
                  <div
                     className="absolute inset-0 z-0 text-primary/10 filter blur-sm"
                  >
@@ -96,7 +96,7 @@ export function HeroSection() {
                     </motion.div>
                  </div>
                  <motion.div 
-                    className="relative w-[400px] h-[500px] z-10"
+                    className="relative w-[500px] h-[600px] z-10"
                     initial={{ opacity: 0, y: 100 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1, ease: 'easeOut' }}

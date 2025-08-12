@@ -92,15 +92,7 @@ export function HeroSection() {
       >
         <div className="flex flex-col justify-center text-center">
           <div className="relative space-y-8 inline-block">
-            <motion.div variants={itemVariants} className='absolute -top-32 -left-20 md:-top-24 md:-left-16 opacity-50'>
-            <svg width="200" height="200" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-primary h-auto w-[120px] md:w-[150px]">
-                <g stroke="currentColor" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M25 12.5L75 12.5L75 87.5L25 87.5L25 12.5Z" />
-                    <path d="M75 12.5L25 87.5" />
-                    <path d="M50 12.5L50 87.5" />
-                </g>
-            </svg>
-            </motion.div>
+            
             <div>
                 <h1 className="text-5xl md:text-7xl font-bold font-headline tracking-tight text-foreground leading-tight">
                     <motion.span variants={itemVariants} className="block text-4xl md:text-6xl font-semibold">Hi, I'm</motion.span>

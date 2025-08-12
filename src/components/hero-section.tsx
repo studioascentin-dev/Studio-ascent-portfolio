@@ -93,10 +93,19 @@ export function HeroSection() {
         <div className="flex flex-col justify-center text-center">
           <div className="relative space-y-8 inline-block">
             <motion.div variants={itemVariants} className='absolute -top-24 -left-12 md:-top-16 md:-left-4 opacity-50'>
-              <svg width="100" height="100" viewBox="0 0 100 100" fill="currentColor" xmlns="http://www.w3.org/2000/svg" className="text-primary h-auto w-[80px] md:w-[100px]">
-                <path d="M80 0H20C8.95431 0 0 8.95431 0 20V80C0 91.0457 8.95431 100 20 100H80C91.0457 100 100 91.0457 100 80V20C100 8.95431 91.0457 0 80 0ZM80 80H20V20H80V80Z" fill="none" stroke="currentColor" strokeWidth="20" />
-                <path d="M80 20C80 8.95431 71.0457 0 60 0H40C28.9543 0 20 8.95431 20 20V80C20 91.0457 28.9543 100 40 100H60C71.0457 100 80 91.0457 80 80V20Z" fill="currentColor" />
-                <path d="M60,20 C71.045695,20 80,28.954305 80,40 L80,60 C80,71.045695 71.045695,80 60,80 L40,80 C28.954305,80 20,71.045695 20,60 L20,40 C20,28.954305 28.954305,20 40,20 L60,20 Z M60,0 C82.09139,0 100,17.90861 100,40 L100,60 C100,82.09139 82.09139,100 60,100 L40,100 C17.90861,100 0,82.09139 0,60 L0,40 C0,17.90861 17.90861,0 40,0 L60,0 Z" />
+              <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-primary h-auto w-[80px] md:w-[100px]">
+                <g stroke="currentColor" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M62.5 12.5L25 50L37.5 62.5L75 25L62.5 12.5Z" />
+                  <path d="M50 25L25 50" />
+                  <path d="M56.25 31.25L43.75 43.75" />
+                  <path d="M62.5 37.5L50 50" />
+                  <path d="M68.75 43.75L56.25 56.25" />
+                  <path d="M75 50L62.5 62.5" />
+                  <path d="M81.25 18.75L90.625 28.125" />
+                  <path d="M18.75 81.25L28.125 90.625" />
+                  <path d="M75 62.5L87.5 75V87.5H75L62.5 75H75V62.5Z" />
+                  <path d="M25 37.5L12.5 25V12.5H25L37.5 25H25V37.5Z" />
+                </g>
               </svg>
             </motion.div>
             <div>

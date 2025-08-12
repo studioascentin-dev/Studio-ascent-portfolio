@@ -69,7 +69,7 @@ export function HeroSection() {
                     Pixel-perfect designs and powerful code. Let's build something unforgettable together.
                 </p>
                 <Button asChild size="lg" className="font-bold mt-8">
-                    <a href="#contact">Hire Me</a>
+                    <a href="#about">My Story</a>
                 </Button>
             </motion.div>
             <motion.div

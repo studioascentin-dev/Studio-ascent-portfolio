@@ -44,7 +44,7 @@ export function AboutSection() {
     };
 
     return (
-        <section id="about" className="py-24 md:py-32">
+        <section id="about" className="py-16 md:py-24">
             <motion.div 
                 className="container mx-auto px-4"
                 variants={sectionVariants}

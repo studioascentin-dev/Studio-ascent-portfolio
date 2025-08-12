@@ -5,7 +5,6 @@ import { motion } from 'framer-motion';
 import { Button } from './ui/button';
 import Image from 'next/image';
 import { ArrowRight, Dribbble, Instagram, Linkedin, Code, PenTool, Camera, Video, Presentation } from 'lucide-react';
-import { AboutSection } from './about-section';
 
 export function HeroSection() {
  
@@ -94,11 +93,11 @@ export function HeroSection() {
                 </motion.div>
             </motion.div>
 
-            <div className="hidden md:flex justify-end items-center">
+            <div className="hidden md:flex justify-center items-center">
                  <motion.div 
-                    className="relative w-[600px] h-[720px] z-10"
-                    initial={{ opacity: 0, y: 100 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    className="relative w-[500px] h-[600px] z-10"
+                    initial={{ opacity: 0, y: 100, scale: 0.8 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
                     transition={{ duration: 1, ease: 'easeOut' }}
                   >
                     <Image
@@ -106,12 +105,12 @@ export function HeroSection() {
                         alt="Dev Kumar Das Hero Image"
                         fill
                         className="object-contain"
-                        style={{ filter: 'drop-shadow(0px 30px 15px rgba(0,0,0,0.3))' }}
+                        style={{ filter: 'drop-shadow(0px 20px 25px rgba(0,0,0,0.4))' }}
                         priority
                     />
                  </motion.div>
             </div>
-            <div className="md:hidden col-span-1 flex items-center justify-center">
+            <div className="md:hidden col-span-1 flex items-center justify-center mt-8">
                  <motion.div
                     initial={{ opacity: 0, y: 100 }}
                     animate={{ opacity: 1, y: 0 }}

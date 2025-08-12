@@ -1,95 +1,74 @@
 
 "use client";
 
-import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from './ui/button';
 import Image from 'next/image';
-import { ArrowRight } from 'lucide-react';
-
-const roles = ["A FULL-STACK DEVELOPER", "A CREATIVE DESIGNER", "A VIDEO EDITOR", "A PHOTO EDITOR"];
-const TYPING_SPEED = 80;
-const DELETING_SPEED = 40;
-const DELAY_AFTER_TYPING = 1800;
+import { ArrowRight, Dribbble, Instagram, Linkedin } from 'lucide-react';
 
 export function HeroSection() {
-  const [roleIndex, setRoleIndex] = useState(0);
-  const [text, setText] = useState('');
-  const [isDeleting, setIsDeleting] = useState(false);
-
-  useEffect(() => {
-    const handleTyping = () => {
-      const currentRole = roles[roleIndex];
-
-      if (isDeleting) {
-        if (text.length > 0) {
-          setText((prev) => prev.substring(0, prev.length - 1));
-        } else {
-          setIsDeleting(false);
-          setRoleIndex((prev) => (prev + 1) % roles.length);
-        }
-      } else {
-        if (text.length < currentRole.length) {
-          setText((prev) => currentRole.substring(0, prev.length + 1));
-        } else {
-          setTimeout(() => setIsDeleting(true), DELAY_AFTER_TYPING);
-        }
-      }
-    };
-
-    const typingTimeout = setTimeout(handleTyping, isDeleting ? DELETING_SPEED : TYPING_SPEED);
-
-    return () => clearTimeout(typingTimeout);
-  }, [text, isDeleting, roleIndex]);
-
+ 
   return (
-    <section id="hero" className="w-full min-h-screen flex items-center justify-center bg-background">
-      <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+    <section id="home" className="relative w-full min-h-screen flex items-center overflow-hidden">
+      {/* Background Image */}
+      <div className="absolute inset-y-0 right-0 w-1/2 xl:w-7/12 h-full z-0">
+          <Image 
+              src="https://placehold.co/800x1200.png"
+              alt="Dev Kumar Das Hero Image"
+              fill
+              className="object-cover object-center"
+              data-ai-hint="developer portrait stylized"
+              priority
+          />
+      </div>
+
+      <div className="container mx-auto px-4 z-10">
+        <div className="grid md:grid-cols-2 gap-8 items-center">
+            {/* Left Content Column */}
             <motion.div
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
-                className="text-left"
+                className="relative text-left space-y-8"
             >
-                <h1 className="text-4xl md:text-6xl font-extrabold font-headline tracking-tight text-foreground leading-tight">
-                    <span>I'm Dev Kumar Das</span>
-                    <br/>
-                    <span className="text-primary font-headline">
-                      <span>{text}</span>
-                      <motion.span
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ repeat: Infinity, duration: 0.8, ease: "easeInOut" }}
-                        className="inline-block w-1 h-[0.8em] bg-primary ml-2 translate-y-1"
-                      />
-                    </span>
-                </h1>
-                <p className="max-w-xl text-lg text-muted-foreground font-light tracking-wide leading-relaxed mt-6">
-                    Pixel-perfect designs and powerful code. Let's build something unforgettable together.
+                <div className='absolute -top-32 left-0 text-primary font-bold text-6xl font-headline'>D</div>
+                <div>
+                  <h1 className="text-6xl md:text-8xl font-bold font-headline tracking-tight text-foreground leading-tight">
+                      <span>Dev Kumar</span>
+                      <br/>
+                      <span>Das.</span>
+                  </h1>
+                  <div className="w-16 h-1 bg-primary mt-4"></div>
+                </div>
+                <div className="flex space-x-4">
+                  <a href="#" className="text-foreground/80 hover:text-primary transition-colors"><Dribbble size={20} /></a>
+                  <a href="#" className="text-foreground/80 hover:text-primary transition-colors"><Instagram size={20} /></a>
+                  <a href="#" className="text-foreground/80 hover:text-primary transition-colors"><Linkedin size={20} /></a>
+                </div>
+            </motion.div>
+
+            {/* Right Content Column */}
+            <motion.div
+                 initial={{ opacity: 0, x: 50 }}
+                 animate={{ opacity: 1, x: 0 }}
+                 transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+                 className="space-y-6"
+            >
+              <div>
+                <p className="text-sm text-muted-foreground font-medium mb-2">— INTRODUCTION</p>
+                <h2 className="text-3xl lg:text-4xl font-bold font-headline leading-tight">
+                  Full-Stack Developer &<br/>Creative Designer, based in India.
+                </h2>
+              </div>
+                <p className="max-w-md text-muted-foreground leading-relaxed">
+                   I design and code beautifully simple things, and I love what I do. Just simple like that!
                 </p>
-                <Button asChild variant="link" size="lg" className="font-bold text-primary mt-8 px-0 text-lg group">
+                <Button asChild variant="link" size="lg" className="font-bold text-primary p-0 text-base group">
                     <a href="#about">
-                        My Story
-                        <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                        My story
+                        <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1 ml-2" />
                     </a>
                 </Button>
-            </motion.div>
-            <motion.div
-                 initial={{ opacity: 0, scale: 0.8 }}
-                 animate={{ opacity: 1, scale: 1 }}
-                 transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-                 className="hidden md:block"
-            >
-                <Image 
-                    src="https://placehold.co/600x600.png"
-                    alt="Dev Kumar Das Hero Image"
-                    width={600}
-                    height={600}
-                    className="rounded-full shadow-lg border-4 border-primary/20"
-                    data-ai-hint="developer portrait stylized"
-                />
             </motion.div>
         </div>
       </div>

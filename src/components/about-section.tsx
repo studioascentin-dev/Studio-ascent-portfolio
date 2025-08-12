@@ -1,5 +1,4 @@
 
-
 "use client";
 
 import { motion } from 'framer-motion';
@@ -63,12 +62,11 @@ export function AboutSection() {
                 <div className="grid md:grid-cols-2 gap-12 items-center">
                     <motion.div variants={itemVariants}>
                         <Image 
-                            src="https://placehold.co/600x600.png"
+                            src="/images/profileicon.png"
                             alt="Dev Kumar Das"
                             width={600}
                             height={600}
                             className="rounded-lg shadow-lg"
-                            data-ai-hint="professional developer portrait"
                         />
                     </motion.div>
                     <motion.div variants={itemVariants} className="space-y-6">

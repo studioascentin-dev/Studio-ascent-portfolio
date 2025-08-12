@@ -13,11 +13,10 @@ export function HeroSection() {
       {/* Background Image */}
       <div className="absolute inset-y-0 right-0 w-1/2 xl:w-7/12 h-full z-0">
           <Image 
-              src="https://placehold.co/800x1200.png"
+              src="/images/profileicon.png"
               alt="Dev Kumar Das Hero Image"
               fill
               className="object-cover object-center"
-              data-ai-hint="developer portrait stylized"
               priority
           />
       </div>

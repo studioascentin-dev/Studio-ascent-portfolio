@@ -38,7 +38,6 @@ export function Footer() {
                 </a>
             </div>
         </div>
-        <p className="text-sm text-muted-foreground pt-8 border-t border-border">Copyright &copy; {new Date().getFullYear()} Dev Kumar Das. All Rights Reserved.</p>
       </div>
     </footer>
   );

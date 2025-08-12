@@ -51,7 +51,6 @@ export function HeroSection() {
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
-                className="space-y-8"
             >
                 <div className="relative space-y-8">
                     <div className='absolute -top-32 left-0 text-primary font-bold text-6xl font-headline'>D</div>
@@ -74,7 +73,7 @@ export function HeroSection() {
                     initial={{ opacity: 0, x: 50 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-                    className="space-y-6"
+                    className="space-y-6 mt-8"
                 >
                 <div>
                     <p className="text-sm text-muted-foreground font-medium mb-2">— INTRODUCTION</p>

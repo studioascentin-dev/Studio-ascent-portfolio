@@ -93,8 +93,10 @@ export function HeroSection() {
         <div className="flex flex-col justify-center text-center">
           <div className="relative space-y-8 inline-block">
             <motion.div variants={itemVariants} className='absolute -top-24 -left-12 md:-top-16 md:-left-4 opacity-50'>
-              <svg width="100" height="120" viewBox="0 0 100 120" fill="currentColor" xmlns="http://www.w3.org/2000/svg" className="text-primary h-auto w-[80px] md:w-[100px]">
-                <path d="M93.5385 0H52.5C23.505 0 0 24.6243 0 55C0 85.3757 23.505 110 52.5 110H93.5385V86.5376H56.0385C36.9278 86.5376 21.5385 72.5879 21.5385 55C21.5385 37.4121 36.9278 23.4624 56.0385 23.4624H93.5385V0Z"/>
+              <svg width="100" height="100" viewBox="0 0 100 100" fill="currentColor" xmlns="http://www.w3.org/2000/svg" className="text-primary h-auto w-[80px] md:w-[100px]">
+                <path d="M80 0H20C8.95431 0 0 8.95431 0 20V80C0 91.0457 8.95431 100 20 100H80C91.0457 100 100 91.0457 100 80V20C100 8.95431 91.0457 0 80 0ZM80 80H20V20H80V80Z" fill="none" stroke="currentColor" strokeWidth="20" />
+                <path d="M80 20C80 8.95431 71.0457 0 60 0H40C28.9543 0 20 8.95431 20 20V80C20 91.0457 28.9543 100 40 100H60C71.0457 100 80 91.0457 80 80V20Z" fill="currentColor" />
+                <path d="M60,20 C71.045695,20 80,28.954305 80,40 L80,60 C80,71.045695 71.045695,80 60,80 L40,80 C28.954305,80 20,71.045695 20,60 L20,40 C20,28.954305 28.954305,20 40,20 L60,20 Z M60,0 C82.09139,0 100,17.90861 100,40 L100,60 C100,82.09139 82.09139,100 60,100 L40,100 C17.90861,100 0,82.09139 0,60 L0,40 C0,17.90861 17.90861,0 40,0 L60,0 Z" />
               </svg>
             </motion.div>
             <div>

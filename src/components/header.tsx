@@ -60,13 +60,8 @@ export function Header() {
                 variants={navVariants}
                 initial="hidden"
                 animate="visible"
-                className="flex items-center justify-between"
+                className="flex items-center justify-end"
             >
-                <Link href="/" className="flex items-center gap-3 group">
-                    <motion.span variants={itemVariants} className="font-bold font-headline text-xl">
-                        Dev Kumar Das
-                    </motion.span>
-                </Link>
                 <nav className="flex items-center justify-end gap-6 md:gap-8">
                     {navItems.map((item) => (
                          <motion.div key={item.name} variants={itemVariants}>

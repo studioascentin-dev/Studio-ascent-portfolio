@@ -64,7 +64,7 @@ export function HeroSection() {
                     initial={{ opacity: 0, y: 100 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1, ease: 'easeOut' }}
-                    className="relative w-[550px] h-[700px]"
+                    className="relative w-[650px] h-[820px]"
                  >
                     <div className="absolute inset-0 z-0 opacity-20">
                         <svg width="100%" height="100%" viewBox="0 0 550 700" fill="none" xmlns="http://www.w3.org/2000/svg">

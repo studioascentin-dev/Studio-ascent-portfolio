@@ -1,7 +1,7 @@
 import type {Metadata} from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
-import { Roboto, Poppins } from 'next/font/google';
+import { Roboto, Oswald } from 'next/font/google';
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -10,10 +10,10 @@ const roboto = Roboto({
   display: 'swap',
 });
 
-const poppins = Poppins({
+const oswald = Oswald({
   subsets: ['latin'],
   variable: '--font-headline',
-  weight: ['600', '700', '800'],
+  weight: ['600', '700'],
   display: 'swap',
 });
 
@@ -30,7 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className="!scroll-smooth">
-      <body className={`${roboto.variable} ${poppins.variable} font-body antialiased`}>
+      <body className={`${roboto.variable} ${oswald.variable} font-body antialiased`}>
         {children}
         <Toaster />
       </body>

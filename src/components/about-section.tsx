@@ -54,7 +54,7 @@ export function AboutSection() {
             >
                 <motion.h2 
                     variants={itemVariants}
-                    className="text-4xl font-bold font-headline text-center mb-12"
+                    className="text-5xl md:text-6xl font-bold font-headline text-center mb-12"
                 >
                     About <span className="text-primary">Me</span>
                 </motion.h2>
@@ -70,8 +70,8 @@ export function AboutSection() {
                         />
                     </motion.div>
                     <motion.div variants={itemVariants} className="space-y-6">
-                        <h3 className="text-3xl font-headline font-bold">A dedicated Developer based in Sonapur, India 📍</h3>
-                        <p className="text-muted-foreground text-lg">
+                        <h3 className="text-4xl font-headline font-bold">A dedicated Developer based in Sonapur, India 📍</h3>
+                        <p className="text-muted-foreground text-xl">
                             As a Junior Full-Stack Developer, I possess an impressive arsenal of skills in HTML, CSS, JavaScript, React, and Next.js. My expertise lies in crafting dynamic, engaging interfaces through writing clean and optimized code and utilizing cutting-edge development tools and techniques. I am also a team player who thrives in collaborating with cross-functional teams to produce outstanding web applications.
                         </p>
                         <Button asChild size="lg" className="font-bold">

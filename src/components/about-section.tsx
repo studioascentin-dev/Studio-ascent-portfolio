@@ -4,17 +4,6 @@
 import { motion } from 'framer-motion';
 import { Button } from './ui/button';
 
-const skills = [
-    { name: 'HTML', level: 95 },
-    { name: 'CSS', level: 90 },
-    { name: 'JavaScript', level: 85 },
-    { name: 'React', level: 88 },
-    { name: 'Next.js', level: 86 },
-    { name: 'Node.js', level: 80 },
-    { name: 'Figma', level: 92 },
-    { name: 'Photoshop', level: 95 },
-];
-
 export function AboutSection() {
     
     const sectionVariants = {
@@ -32,14 +21,6 @@ export function AboutSection() {
     const itemVariants = {
         hidden: { opacity: 0, y: 20 },
         visible: { opacity: 1, y: 0 },
-    };
-
-    const barVariants = {
-        hidden: { width: 0 },
-        visible: { 
-            width: 'var(--level)',
-            transition: { duration: 1.5, ease: 'easeOut' }
-        },
     };
 
     return (
@@ -69,33 +50,6 @@ export function AboutSection() {
                         </Button>
                     </motion.div>
                 </div>
-
-                <motion.div 
-                    variants={itemVariants}
-                    className="mt-24"
-                >
-                    <h3 className="text-3xl font-bold font-headline text-center mb-12">My <span className="text-primary">Skills</span></h3>
-                    <div className="grid md:grid-cols-2 gap-x-12 gap-y-8">
-                        {skills.map(skill => (
-                            <div key={skill.name}>
-                                <div className="flex justify-between mb-1">
-                                    <span className="font-medium text-lg">{skill.name}</span>
-                                    <span className="text-muted-foreground">{skill.level}%</span>
-                                 </div>
-                                <div className="w-full bg-secondary rounded-full h-2.5">
-                                    <motion.div 
-                                        className="bg-primary h-2.5 rounded-full"
-                                        style={{ '--level': `${skill.level}%` } as React.CSSProperties}
-                                        variants={barVariants}
-                                        initial="hidden"
-                                        whileInView="visible"
-                                        viewport={{ once: true }}
-                                    />
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </motion.div>
             </motion.div>
         </section>
     );

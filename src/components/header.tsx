@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 import { usePathname } from 'next/navigation';
 import { cn } from "@/lib/utils";
 import * as React from 'react';
-import Image from "next/image";
 
 const navItems = [
     { name: "Services", href: "#services" },
@@ -64,16 +63,7 @@ export function Header() {
                 className="flex items-center justify-between"
             >
                 <Link href="/" className="flex items-center gap-3 group">
-                    <motion.div variants={itemVariants}>
-                        <Image 
-                            src="/images/profileicon.png"
-                            alt="Dev Kumar Das"
-                            width={50}
-                            height={50}
-                            className="rounded-full border-2 border-primary/50 group-hover:border-primary transition-colors"
-                        />
-                    </motion.div>
-                    <motion.span variants={itemVariants} className="font-bold font-headline text-xl hidden sm:block">
+                    <motion.span variants={itemVariants} className="font-bold font-headline text-xl">
                         Dev Kumar Das
                     </motion.span>
                 </Link>

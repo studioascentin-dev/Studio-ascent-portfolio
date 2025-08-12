@@ -8,6 +8,19 @@ import { ArrowRight, Dribbble, Instagram, Linkedin, Code, PenTool, Camera, Video
 
 export function HeroSection() {
  
+  const iconVariants = (duration: number, delay: number) => ({
+    initial: { y: 0 },
+    animate: {
+      y: [0, -15, 0],
+      transition: {
+        duration,
+        ease: "easeInOut",
+        repeat: Infinity,
+        delay,
+      },
+    },
+  });
+
   return (
     <section id="home" className="relative w-full min-h-screen flex items-center overflow-hidden">
       <div className="container mx-auto px-4 z-10">
@@ -67,10 +80,24 @@ export function HeroSection() {
                     className="relative w-[700px] h-[900px]"
                  >
                     <div className="absolute inset-0 z-0 text-primary/10">
-                        <Code className="absolute top-20 left-10 h-24 w-24" strokeWidth={1} />
-                        <PenTool className="absolute top-1/2 left-1/4 h-20 w-20 -translate-y-1/2" strokeWidth={1} />
-                        <Camera className="absolute bottom-24 right-20 h-28 w-28" strokeWidth={1} />
-                        <Video className="absolute bottom-1/3 right-1/2 h-16 w-16" strokeWidth={1} />
+                        <motion.div variants={iconVariants(3, 0.5)} initial="initial" animate="animate" className="absolute top-20 left-10">
+                            <Code className="h-24 w-24" strokeWidth={1} />
+                        </motion.div>
+                        <motion.div variants={iconVariants(4, 1)} initial="initial" animate="animate" className="absolute top-1/2 left-1/4 -translate-y-1/2">
+                            <PenTool className="h-20 w-20" strokeWidth={1} />
+                        </motion.div>
+                        <motion.div variants={iconVariants(3.5, 0)} initial="initial" animate="animate" className="absolute bottom-24 right-20">
+                            <Camera className="h-28 w-28" strokeWidth={1} />
+                        </motion.div>
+                        <motion.div variants={iconVariants(5, 1.5)} initial="initial" animate="animate" className="absolute bottom-1/3 right-1/2">
+                            <Video className="h-16 w-16" strokeWidth={1} />
+                        </motion.div>
+                        <motion.div variants={iconVariants(4.5, 0.2)} initial="initial" animate="animate" className="absolute top-1/4 right-10">
+                            <Code className="h-16 w-16" strokeWidth={1} />
+                        </motion.div>
+                        <motion.div variants={iconVariants(3.8, 1.2)} initial="initial" animate="animate" className="absolute bottom-10 left-1/2">
+                            <Camera className="h-20 w-20" strokeWidth={1} />
+                        </motion.div>
                     </div>
                     <div className="relative w-[400px] h-[500px] scale-[2.2]">
   <Image

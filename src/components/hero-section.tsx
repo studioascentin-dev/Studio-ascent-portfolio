@@ -64,13 +64,49 @@ export function HeroSection() {
                     initial={{ opacity: 0, y: 100 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1, ease: 'easeOut' }}
-                    className="relative w-[500px] h-[600px]"
+                    className="relative w-[550px] h-[700px]"
                  >
+                    <div className="absolute inset-0 z-0 opacity-20">
+                        <svg width="100%" height="100%" viewBox="0 0 550 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <motion.circle 
+                                cx="150" 
+                                cy="150" 
+                                r="80" 
+                                stroke="hsl(var(--primary))" 
+                                strokeWidth="2"
+                                initial={{ pathLength: 0, opacity: 0 }}
+                                animate={{ pathLength: 1, opacity: 1 }}
+                                transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
+                            />
+                            <motion.path 
+                                d="M400 300 L500 400 L400 500" 
+                                stroke="hsl(var(--primary))" 
+                                strokeWidth="2" 
+                                fill="none"
+                                initial={{ pathLength: 0, opacity: 0 }}
+                                animate={{ pathLength: 1, opacity: 1 }}
+                                transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
+                            />
+                             <motion.rect
+                                x="450"
+                                y="50"
+                                width="50"
+                                height="50"
+                                rx="10"
+                                stroke="hsl(var(--primary))"
+                                strokeWidth="2"
+                                fill="none"
+                                initial={{ scale: 0, opacity: 0, rotate: -45 }}
+                                animate={{ scale: 1, opacity: 1, rotate: 0 }}
+                                transition={{ duration: 0.7, delay: 1, ease: 'easeOut' }}
+                            />
+                        </svg>
+                    </div>
                     <Image 
                         src="/images/profileicon.png"
                         alt="Dev Kumar Das Hero Image"
                         fill
-                        className="object-contain"
+                        className="object-contain z-10"
                         style={{ filter: 'drop-shadow(0px 10px 15px rgba(0,0,0,0.3))' }}
                         priority
                     />

@@ -106,9 +106,6 @@ export function HireMeSection() {
                     variants={itemVariants}
                     className="mt-16 text-center"
                 >
-                     <p className="text-muted-foreground text-lg max-w-3xl mx-auto mb-8">
-                        Ready to build something amazing together? Let's talk.
-                    </p>
                     <Button
                         size="lg"
                         className="font-bold text-lg py-4 px-10 bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95"

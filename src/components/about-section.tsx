@@ -34,17 +34,17 @@ export function AboutSection() {
 
     const info = [
         {
-            icon: <User className="w-8 h-8 text-primary group-hover:text-primary-foreground transition-colors duration-300" />,
+            icon: <User className="w-8 h-8 text-card-foreground group-hover:text-primary-foreground transition-colors duration-300" />,
             title: "About Me",
             description: "A passionate developer who loves creating beautiful and functional web experiences."
         },
         {
-            icon: <Briefcase className="w-8 h-8 text-primary group-hover:text-primary-foreground transition-colors duration-300" />,
+            icon: <Briefcase className="w-8 h-8 text-card-foreground group-hover:text-primary-foreground transition-colors duration-300" />,
             title: "Profession",
             description: "Junior Full-Stack Developer skilled in React, Next.js, and modern web technologies."
         },
         {
-            icon: <MapPin className="w-8 h-8 text-primary group-hover:text-primary-foreground transition-colors duration-300" />,
+            icon: <MapPin className="w-8 h-8 text-card-foreground group-hover:text-primary-foreground transition-colors duration-300" />,
             title: "Based In",
             description: "Sonapur, Assam, India"
         }

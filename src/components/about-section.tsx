@@ -41,7 +41,7 @@ export function AboutSection() {
 
                 <div className="flex justify-center">
                     <motion.div variants={itemVariants} className="space-y-6 max-w-3xl text-center">
-                        <h3 className="text-4xl font-headline font-bold">A dedicated Developer based in Sonapur, India 📍</h3>
+                        <h3 className="text-4xl font-headline font-bold">A dedicated Developer based in Sonapur, India</h3>
                         <p className="text-muted-foreground text-xl">
                             As a Junior Full-Stack Developer, I possess an impressive arsenal of skills in HTML, CSS, JavaScript, React, and Next.js. My expertise lies in crafting dynamic, engaging interfaces through writing clean and optimized code and utilizing cutting-edge development tools and techniques. I am also a team player who thrives in collaborating with cross-functional teams to produce outstanding web applications.
                         </p>

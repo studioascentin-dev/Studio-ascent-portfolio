@@ -66,14 +66,27 @@ export function HeroSection() {
                     transition={{ duration: 1, ease: 'easeOut' }}
                     className="relative w-[700px] h-[900px]"
                  >
-                   <Image
-                    src="/images/profileicon.png"
-                    alt="Dev Kumar Das Hero Image"
-                    className="object-contain z-10"
-                    style={{ filter: 'drop-shadow(0px 30px 15px rgba(0,0,0,0.3))' }}
-                    fill
-                    priority
-                  />
+                    <div className="absolute inset-0 z-0 opacity-10">
+                        <svg width="100%" height="100%" viewBox="0 0 500 700" xmlns="http://www.w3.org/2000/svg">
+                            <g fill="hsl(var(--primary))">
+                                <circle cx="50" cy="150" r="30" />
+                                <rect x="400" y="50" width="60" height="60" rx="10" />
+                                <path d="M100 600 L150 550 L200 600 Z" />
+                                <rect x="200" y="300" width="100" height="20" rx="10" />
+                                <circle cx="450" cy="650" r="40" />
+                            </g>
+                        </svg>
+                    </div>
+                    <div className="relative w-[400px] h-[500px] scale-[2.2]">
+  <Image
+    src="/images/profileicon.png"
+    alt="Dev Kumar Das Hero Image"
+    fill
+    className="object-contain z-10"
+    style={{ filter: 'drop-shadow(0px 30px 15px rgba(0,0,0,0.3))' }}
+    priority
+  />
+                     </div>
                  </motion.div>
             </div>
             <div className="md:hidden col-span-1 flex items-center justify-center">

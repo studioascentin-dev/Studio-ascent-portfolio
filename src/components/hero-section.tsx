@@ -22,35 +22,36 @@ export function HeroSection() {
   });
 
   return (
-    <section id="home" className="relative w-full flex flex-col items-center justify-center min-h-screen overflow-hidden">
-        <div className="absolute inset-0 z-0 text-primary/10 filter blur-sm">
-            <motion.div variants={iconVariants(3, 0.5)} initial="initial" animate="animate" className="absolute top-20 left-10">
-                <Code className="h-24 w-24" strokeWidth={1} />
-            </motion.div>
-            <motion.div variants={iconVariants(4, 1)} initial="initial" animate="animate" className="absolute top-1/2 left-1/4 -translate-y-1/2">
-                <PenTool className="h-20 w-20" strokeWidth={1} />
-            </motion.div>
-            <motion.div variants={iconVariants(3.5, 0)} initial="initial" animate="animate" className="absolute bottom-24 right-20">
-                <Camera className="h-28 w-28" strokeWidth={1} />
-            </motion.div>
-            <motion.div variants={iconVariants(5, 1.5)} initial="initial" animate="animate" className="absolute bottom-1/3 right-1/2">
-                <Video className="h-16 w-16" strokeWidth={1} />
-            </motion.div>
-                <motion.div variants={iconVariants(4.2, 0.8)} initial="initial" animate="animate" className="absolute top-10 right-10">
-                <Presentation className="h-20 w-20" strokeWidth={1} />
-            </motion.div>
-            <motion.div variants={iconVariants(3.8, 1.8)} initial="initial" animate="animate" className="absolute bottom-10 left-20">
-                <Code className="h-16 w-16" strokeWidth={1} />
-            </motion.div>
-        </div>
+    <section id="home" className="relative w-full min-h-screen overflow-hidden">
+      <div className="absolute inset-0 z-0 text-primary/10 filter blur-sm">
+          <motion.div variants={iconVariants(3, 0.5)} initial="initial" animate="animate" className="absolute top-20 left-10">
+              <Code className="h-24 w-24" strokeWidth={1} />
+          </motion.div>
+          <motion.div variants={iconVariants(4, 1)} initial="initial" animate="animate" className="absolute top-1/2 left-1/4 -translate-y-1/2">
+              <PenTool className="h-20 w-20" strokeWidth={1} />
+          </motion.div>
+          <motion.div variants={iconVariants(3.5, 0)} initial="initial" animate="animate" className="absolute bottom-24 right-20">
+              <Camera className="h-28 w-28" strokeWidth={1} />
+          </motion.div>
+          <motion.div variants={iconVariants(5, 1.5)} initial="initial" animate="animate" className="absolute bottom-1/3 right-1/2">
+              <Video className="h-16 w-16" strokeWidth={1} />
+          </motion.div>
+              <motion.div variants={iconVariants(4.2, 0.8)} initial="initial" animate="animate" className="absolute top-10 right-10">
+              <Presentation className="h-20 w-20" strokeWidth={1} />
+          </motion.div>
+          <motion.div variants={iconVariants(3.8, 1.8)} initial="initial" animate="animate" className="absolute bottom-10 left-20">
+              <Code className="h-16 w-16" strokeWidth={1} />
+          </motion.div>
+      </div>
 
-      <div className="container mx-auto px-4 z-10 flex items-center">
-        <div className="grid md:grid-cols-2 gap-8 items-center w-full">
+      <div className="container mx-auto px-4 z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 min-h-screen">
+          <div className="flex flex-col justify-center text-left py-24">
             <motion.div
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
-                className="text-left space-y-8"
+                className="space-y-8"
             >
                 <div className="relative space-y-8">
                     <div className='absolute -top-32 left-0 text-primary font-bold text-6xl font-headline'>D</div>
@@ -92,25 +93,27 @@ export function HeroSection() {
                     </Button>
                 </motion.div>
             </motion.div>
-
-            <div className="hidden md:flex justify-end items-center">
-                 <motion.div 
-                    className="relative w-[750px] h-[900px] z-10"
-                    initial={{ opacity: 0, y: 100, scale: 0.8 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    transition={{ duration: 1, ease: 'easeOut' }}
-                  >
-                    <Image
-                        src="/images/profileicon.png"
-                        alt="Dev Kumar Das Hero Image"
-                        fill
-                        className="object-contain"
-                        style={{ filter: 'drop-shadow(0px 20px 25px rgba(0,0,0,0.4))' }}
-                        priority
-                    />
-                 </motion.div>
-            </div>
-            <div className="md:hidden col-span-1 flex items-center justify-center mt-8">
+          </div>
+          
+          <div className="hidden md:flex relative">
+              <motion.div 
+                className="w-full h-full"
+                initial={{ opacity: 0, x: 100 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <Image
+                    src="/images/profileicon.png"
+                    alt="Dev Kumar Das Hero Image"
+                    fill
+                    className="object-cover object-center"
+                    style={{ filter: 'drop-shadow(0px 15px 25px rgba(0,0,0,0.5))' }}
+                    priority
+                />
+              </motion.div>
+          </div>
+          
+          <div className="md:hidden flex items-center justify-center -mt-24">
                  <motion.div
                     initial={{ opacity: 0, y: 100 }}
                     animate={{ opacity: 1, y: 0 }}

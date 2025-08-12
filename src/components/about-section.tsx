@@ -72,7 +72,7 @@ export function AboutSection() {
                 >
                     {info.map((item, index) => (
                         <motion.div key={index} variants={itemVariants}>
-                            <Card className="bg-card/80 p-6 text-center h-full hover:-translate-y-2 transition-transform duration-300">
+                            <Card className="bg-card/80 p-6 text-center h-full hover:-translate-y-2 transition-all duration-300 hover:bg-secondary">
                                 <CardHeader className="p-0 items-center mb-4">
                                     <div className="p-3 bg-primary/10 rounded-full mb-4 inline-block">
                                         {item.icon}

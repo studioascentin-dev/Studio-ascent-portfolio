@@ -4,7 +4,7 @@
 import { motion } from 'framer-motion';
 import { Button } from './ui/button';
 import Image from 'next/image';
-import { ArrowRight, Dribbble, Instagram, Linkedin } from 'lucide-react';
+import { ArrowRight, Dribbble, Instagram, Linkedin, Code, PenTool, Camera, Video } from 'lucide-react';
 
 export function HeroSection() {
  
@@ -66,16 +66,11 @@ export function HeroSection() {
                     transition={{ duration: 1, ease: 'easeOut' }}
                     className="relative w-[700px] h-[900px]"
                  >
-                    <div className="absolute inset-0 z-0 opacity-10">
-                        <svg width="100%" height="100%" viewBox="0 0 500 700" xmlns="http://www.w3.org/2000/svg">
-                            <g fill="hsl(var(--primary))">
-                                <circle cx="50" cy="150" r="30" />
-                                <rect x="400" y="50" width="60" height="60" rx="10" />
-                                <path d="M100 600 L150 550 L200 600 Z" />
-                                <rect x="200" y="300" width="100" height="20" rx="10" />
-                                <circle cx="450" cy="650" r="40" />
-                            </g>
-                        </svg>
+                    <div className="absolute inset-0 z-0 text-primary/10">
+                        <Code className="absolute top-20 left-10 h-24 w-24" strokeWidth={1} />
+                        <PenTool className="absolute top-1/2 left-1/4 h-20 w-20 -translate-y-1/2" strokeWidth={1} />
+                        <Camera className="absolute bottom-24 right-20 h-28 w-28" strokeWidth={1} />
+                        <Video className="absolute bottom-1/3 right-1/2 h-16 w-16" strokeWidth={1} />
                     </div>
                     <div className="relative w-[400px] h-[500px] scale-[2.2]">
   <Image

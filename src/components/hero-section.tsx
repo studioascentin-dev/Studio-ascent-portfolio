@@ -92,7 +92,11 @@ export function HeroSection() {
       >
         <div className="flex flex-col justify-center text-center">
           <div className="relative space-y-8 inline-block">
-            <motion.div variants={itemVariants} className='absolute -top-16 -left-4 text-primary font-bold text-8xl font-headline opacity-50'>D</motion.div>
+            <motion.div variants={itemVariants} className='absolute -top-24 -left-12 md:-top-16 md:-left-4 opacity-50'>
+              <svg width="100" height="120" viewBox="0 0 100 120" fill="currentColor" xmlns="http://www.w3.org/2000/svg" className="text-primary h-auto w-[80px] md:w-[100px]">
+                <path d="M93.5385 0H52.5C23.505 0 0 24.6243 0 55C0 85.3757 23.505 110 52.5 110H93.5385V86.5376H56.0385C36.9278 86.5376 21.5385 72.5879 21.5385 55C21.5385 37.4121 36.9278 23.4624 56.0385 23.4624H93.5385V0Z"/>
+              </svg>
+            </motion.div>
             <div>
                 <h1 className="text-6xl md:text-8xl font-bold font-headline tracking-tight text-foreground leading-tight">
                     <motion.span variants={itemVariants} className="block">Dev Kumar</motion.span>

@@ -59,7 +59,7 @@ export function AboutSection() {
                     About <span className="text-primary">Me</span>
                 </motion.h2>
 
-                <div className="grid md:grid-cols-2 gap-12 items-center">
+                <div className="grid md:grid-cols-2 gap-12 items-start">
                     <motion.div variants={itemVariants}>
                         <Image 
                             src="/images/profileicon.png"

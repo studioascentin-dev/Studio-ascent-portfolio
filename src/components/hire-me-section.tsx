@@ -2,7 +2,7 @@
 "use client";
 
 import { motion } from 'framer-motion';
-import { Gem, Users, HeartHandshake, Award, Target, MessageSquare } from 'lucide-react';
+import { Award, MessageSquare, Target } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 
@@ -32,17 +32,17 @@ const itemVariants = {
 
 const hiringPoints = [
     {
-        icon: <Award className="w-8 h-8 text-card-foreground group-hover:text-primary-foreground transition-colors duration-300" />,
+        icon: <Award className="w-6 h-6 text-foreground" />,
         title: "Quality & Experience",
         description: "With a strong foundation in modern web development and design, I deliver high-quality, professional results that align with the latest industry standards."
     },
     {
-        icon: <MessageSquare className="w-8 h-8 text-card-foreground group-hover:text-primary-foreground transition-colors duration-300" />,
+        icon: <MessageSquare className="w-6 h-6 text-foreground" />,
         title: "Client-Centric Approach",
         description: "I prioritize clear communication and collaboration to ensure the final product perfectly aligns with your vision and goals. Your satisfaction is my top priority."
     },
     {
-        icon: <Target className="w-8 h-8 text-card-foreground group-hover:text-primary-foreground transition-colors duration-300" />,
+        icon: <Target className="w-6 h-6 text-foreground" />,
         title: "Passion for Creativity",
         description: "I bring a creative and solution-oriented mindset to every project, crafting unique and impactful digital experiences that stand out from the crowd."
     }
@@ -86,16 +86,16 @@ export function HireMeSection() {
                     className="mt-16 grid md:grid-cols-3 gap-8 max-w-5xl mx-auto"
                 >
                     {hiringPoints.map((point, index) => (
-                        <motion.div key={index} variants={itemVariants} className="group">
-                            <Card className="bg-card/80 p-6 text-center h-full hover:-translate-y-2 transition-all duration-300 hover:bg-primary group-hover:text-primary-foreground">
+                        <motion.div key={index} variants={itemVariants}>
+                             <Card className="bg-card/80 p-6 text-center h-full hover:-translate-y-2 transition-all duration-300">
                                 <CardHeader className="p-0 items-center mb-4">
-                                    <div className="p-3 bg-primary/10 rounded-full mb-4 inline-block group-hover:bg-primary-foreground/20 transition-colors duration-300">
+                                    <div className="p-3 bg-primary/10 rounded-full mb-4 inline-block">
                                         {point.icon}
                                     </div>
-                                    <CardTitle className="font-headline text-2xl">{point.title}</CardTitle>
+                                    <CardTitle className="font-headline text-xl">{point.title}</CardTitle>
                                 </CardHeader>
                                 <CardContent className="p-0">
-                                    <p className="text-muted-foreground group-hover:text-primary-foreground/90 transition-colors duration-300">{point.description}</p>
+                                    <p className="text-muted-foreground text-sm">{point.description}</p>
                                 </CardContent>
                             </Card>
                         </motion.div>

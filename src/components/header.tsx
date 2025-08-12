@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { usePathname } from 'next/navigation';
 import { cn } from "@/lib/utils";
 import * as React from 'react';
+import Image from "next/image";
 
 const navItems = [
     { name: "Services", href: "#services" },
@@ -56,33 +57,49 @@ export function Header() {
 
     return (
         <header className="absolute top-0 left-0 right-0 z-50 p-4 md:p-8">
-            <motion.nav
+            <motion.div
                 variants={navVariants}
                 initial="hidden"
                 animate="visible"
-                className="flex items-center justify-end gap-6 md:gap-8"
+                className="flex items-center justify-between"
             >
-                {navItems.map((item) => (
-                     <motion.div key={item.name} variants={itemVariants}>
-                        <Link
-                            href={item.href}
-                            onClick={(e) => handleScroll(e, item.href)}
-                            className={cn(
-                                "text-lg font-medium text-muted-foreground hover:text-primary transition-colors relative group",
-                                isLinkActive(item) && "text-foreground font-semibold"
-                            )}
-                        >
-                            {item.name}
-                            {isLinkActive(item) && (
-                                <motion.span 
-                                    layoutId="active-dot"
-                                    className="absolute left-1/2 -translate-x-1/2 -bottom-2 h-1.5 w-1.5 bg-primary rounded-full"
-                                />
-                            )}
-                        </Link>
+                <Link href="/" className="flex items-center gap-3 group">
+                    <motion.div variants={itemVariants}>
+                        <Image 
+                            src="/images/profileicon.png"
+                            alt="Dev Kumar Das"
+                            width={50}
+                            height={50}
+                            className="rounded-full border-2 border-primary/50 group-hover:border-primary transition-colors"
+                        />
                     </motion.div>
-                ))}
-            </motion.nav>
+                    <motion.span variants={itemVariants} className="font-bold font-headline text-xl hidden sm:block">
+                        Dev Kumar Das
+                    </motion.span>
+                </Link>
+                <nav className="flex items-center justify-end gap-6 md:gap-8">
+                    {navItems.map((item) => (
+                         <motion.div key={item.name} variants={itemVariants}>
+                            <Link
+                                href={item.href}
+                                onClick={(e) => handleScroll(e, item.href)}
+                                className={cn(
+                                    "text-lg font-medium text-muted-foreground hover:text-primary transition-colors relative group",
+                                    isLinkActive(item) && "text-foreground font-semibold"
+                                )}
+                            >
+                                {item.name}
+                                {isLinkActive(item) && (
+                                    <motion.span 
+                                        layoutId="active-dot"
+                                        className="absolute left-1/2 -translate-x-1/2 -bottom-2 h-1.5 w-1.5 bg-primary rounded-full"
+                                    />
+                                )}
+                            </Link>
+                        </motion.div>
+                    ))}
+                </nav>
+            </motion.div>
         </header>
     );
 }

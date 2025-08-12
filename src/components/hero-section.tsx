@@ -3,7 +3,6 @@
 
 import { motion } from 'framer-motion';
 import { Button } from './ui/button';
-import Image from 'next/image';
 import { ArrowRight, Dribbble, Instagram, Linkedin, Code, PenTool, Camera, Video, Presentation } from 'lucide-react';
 
 export function HeroSection() {
@@ -22,7 +21,7 @@ export function HeroSection() {
   });
 
   return (
-    <section id="home" className="relative w-full min-h-screen overflow-hidden">
+    <section id="home" className="relative w-full min-h-screen overflow-hidden flex items-center justify-center">
       <div className="absolute inset-0 z-0 text-primary/10 filter blur-sm">
           <motion.div variants={iconVariants(3, 0.5)} initial="initial" animate="animate" className="absolute top-20 left-10">
               <Code className="h-24 w-24" strokeWidth={1} />
@@ -45,43 +44,42 @@ export function HeroSection() {
       </div>
 
       <div className="container mx-auto px-4 z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 min-h-screen">
-          <div className="flex flex-col justify-center text-left py-24">
+        <div className="flex flex-col justify-center text-center">
             <motion.div
-                initial={{ opacity: 0, x: -50 }}
-                animate={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: -50 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
             >
-                <div className="relative space-y-8">
-                    <div className='absolute -top-32 left-0 text-primary font-bold text-6xl font-headline'>D</div>
+                <div className="relative space-y-8 inline-block">
+                    <div className='absolute -top-16 -left-4 text-primary font-bold text-8xl font-headline opacity-50'>D</div>
                     <div>
-                    <h1 className="text-6xl md:text-8xl font-bold font-headline tracking-tight text-foreground leading-tight">
-                        <span>Dev Kumar</span>
-                        <br/>
-                        <span>Das.</span>
-                    </h1>
-                    <div className="w-16 h-1 bg-primary mt-4"></div>
+                        <h1 className="text-6xl md:text-8xl font-bold font-headline tracking-tight text-foreground leading-tight">
+                            <span>Dev Kumar</span>
+                            <br/>
+                            <span>Das.</span>
+                        </h1>
+                        <div className="w-16 h-1 bg-primary mt-4 mx-auto"></div>
                     </div>
-                    <div className="flex space-x-4">
-                    <a href="#" className="text-foreground/80 hover:text-primary transition-colors"><Dribbble size={20} /></a>
-                    <a href="#" className="text-foreground/80 hover:text-primary transition-colors"><Instagram size={20} /></a>
-                    <a href="#" className="text-foreground/80 hover:text-primary transition-colors"><Linkedin size={20} /></a>
+                    <div className="flex space-x-4 justify-center">
+                        <a href="#" className="text-foreground/80 hover:text-primary transition-colors"><Dribbble size={20} /></a>
+                        <a href="#" className="text-foreground/80 hover:text-primary transition-colors"><Instagram size={20} /></a>
+                        <a href="#" className="text-foreground/80 hover:text-primary transition-colors"><Linkedin size={20} /></a>
                     </div>
                 </div>
 
                 <motion.div
-                    initial={{ opacity: 0, x: 50 }}
-                    animate={{ opacity: 1, x: 0 }}
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
                     className="space-y-6 mt-8"
                 >
-                <div>
-                    <p className="text-sm text-muted-foreground font-medium mb-2">— INTRODUCTION</p>
-                    <h2 className="text-3xl lg:text-4xl font-bold font-headline leading-tight">
-                    Full-Stack Developer &<br/>Creative Designer, based in India.
-                    </h2>
-                </div>
-                    <p className="max-w-md text-muted-foreground leading-relaxed">
+                    <div>
+                        <p className="text-sm text-muted-foreground font-medium mb-2">— INTRODUCTION</p>
+                        <h2 className="text-3xl lg:text-4xl font-bold font-headline leading-tight">
+                        Full-Stack Developer &<br/>Creative Designer, based in India.
+                        </h2>
+                    </div>
+                    <p className="max-w-md text-muted-foreground leading-relaxed mx-auto">
                     I design and code beautifully simple things, and I love what I do. Just simple like that!
                     </p>
                     <Button asChild variant="link" size="lg" className="font-bold text-primary p-0 text-base group">
@@ -93,44 +91,7 @@ export function HeroSection() {
                 </motion.div>
             </motion.div>
           </div>
-          
-          <div className="hidden md:flex relative">
-              <motion.div 
-                className="w-full h-full"
-                initial={{ opacity: 0, x: 100 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-              >
-                <Image
-                    src="/images/profileicon.png"
-                    alt="Dev Kumar Das Hero Image"
-                    fill
-                    className="object-cover object-center"
-                    style={{ filter: 'drop-shadow(0px 15px 25px rgba(0,0,0,0.5))' }}
-                    priority
-                />
-              </motion.div>
-          </div>
-          
-          <div className="md:hidden flex items-center justify-center -mt-24">
-                 <motion.div
-                    initial={{ opacity: 0, y: 100 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1, ease: 'easeOut' }}
-                    className="relative w-full max-w-sm h-96"
-                 >
-                    <Image 
-                        src="/images/profileicon.png"
-                        alt="Dev Kumar Das Hero Image"
-                        fill
-                        className="object-contain object-bottom"
-                        style={{ filter: 'drop-shadow(0px 10px 15px rgba(0,0,0,0.3))' }}
-                        priority
-                    />
-                 </motion.div>
-            </div>
         </div>
-      </div>
     </section>
   );
 }

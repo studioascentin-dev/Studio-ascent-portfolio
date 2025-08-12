@@ -68,7 +68,7 @@ export function Header() {
                             href={item.href}
                             onClick={(e) => handleScroll(e, item.href)}
                             className={cn(
-                                "text-lg font-medium text-foreground/60 hover:text-primary transition-colors relative group",
+                                "text-lg font-medium text-muted-foreground hover:text-primary transition-colors relative group",
                                 isLinkActive(item) && "text-foreground font-semibold"
                             )}
                         >

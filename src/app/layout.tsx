@@ -29,8 +29,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className="!scroll-smooth">
-      <body className={`${roboto.variable} ${oswald.variable} font-body antialiased`}>
+    <html lang="en" suppressHydrationWarning className="dark !scroll-smooth">
+      <body className={`${roboto.variable} ${oswald.variable} font-body antialiased bg-background text-foreground`}>
         {children}
         <Toaster />
       </body>

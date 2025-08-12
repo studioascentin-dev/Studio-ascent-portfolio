@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from './ui/button';
 import Image from 'next/image';
-import { Plus } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 const roles = ["A FULL-STACK DEVELOPER", "A CREATIVE DESIGNER", "A VIDEO EDITOR", "A PHOTO EDITOR"];
 const TYPING_SPEED = 80;
@@ -72,7 +72,7 @@ export function HeroSection() {
                 <Button asChild variant="link" size="lg" className="font-bold text-primary mt-8 px-0 text-lg group">
                     <a href="#about">
                         My Story
-                        <Plus className="h-5 w-5 transition-transform duration-300 group-hover:rotate-90" />
+                        <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
                     </a>
                 </Button>
             </motion.div>

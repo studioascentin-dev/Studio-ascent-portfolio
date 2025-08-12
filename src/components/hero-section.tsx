@@ -10,15 +10,17 @@ export function HeroSection() {
  
   return (
     <section id="home" className="relative w-full min-h-screen flex items-center overflow-hidden">
-      {/* Background Image */}
-      <div className="absolute inset-y-0 right-0 w-1/2 xl:w-7/12 h-full z-0">
-          <Image 
-              src="/images/profileicon.png"
-              alt="Dev Kumar Das Hero Image"
-              fill
-              className="object-cover object-center"
-              priority
-          />
+      {/* The image is now absolutely positioned to allow precise control */}
+      <div className="absolute bottom-0 right-0 h-full w-full md:w-2/3 lg:w-1/2 z-0">
+          <div className="relative h-full w-full">
+            <Image 
+                src="/images/profileicon.png"
+                alt="Dev Kumar Das Hero Image"
+                fill
+                className="object-contain object-bottom"
+                priority
+            />
+          </div>
       </div>
 
       <div className="container mx-auto px-4 z-10">

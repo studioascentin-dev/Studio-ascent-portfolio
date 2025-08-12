@@ -20,7 +20,7 @@ const montserrat = Montserrat({
 
 export const metadata: Metadata = {
   title: 'Dev Kumar Das | Portfolio',
-  description: 'Portfolio of Dev Kumar Das, a full-stack developer and creative designer.',
+  description: 'A portfolio for a full-stack developer and creative designer.',
 };
 
 export default function RootLayout({

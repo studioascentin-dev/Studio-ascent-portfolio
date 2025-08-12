@@ -5,6 +5,47 @@ import { motion } from 'framer-motion';
 import { Button } from './ui/button';
 import { ArrowRight, Dribbble, Instagram, Linkedin, Code, PenTool, Camera, Video, Presentation } from 'lucide-react';
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.3,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut",
+    },
+  },
+};
+
+const lineVariants = {
+  hidden: { width: 0 },
+  visible: {
+    width: '4rem', // w-16
+    transition: {
+      duration: 0.5,
+      ease: "easeOut",
+      delay: 0.8,
+    },
+  },
+};
+
+const socialIconVariants = {
+  rest: { y: 0 },
+  hover: { y: -4 },
+};
+
+
 export function HeroSection() {
  
   const iconVariants = (duration: number, delay: number) => ({
@@ -43,55 +84,53 @@ export function HeroSection() {
           </motion.div>
       </div>
 
-      <div className="container mx-auto px-4 z-10">
+      <motion.div 
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="container mx-auto px-4 z-10"
+      >
         <div className="flex flex-col justify-center text-center">
-            <motion.div
-                initial={{ opacity: 0, y: -50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-            >
-                <div className="relative space-y-8 inline-block">
-                    <div className='absolute -top-16 -left-4 text-primary font-bold text-8xl font-headline opacity-50'>D</div>
-                    <div>
-                        <h1 className="text-6xl md:text-8xl font-bold font-headline tracking-tight text-foreground leading-tight">
-                            <span>Dev Kumar</span>
-                            <br/>
-                            <span>Das.</span>
-                        </h1>
-                        <div className="w-16 h-1 bg-primary mt-4 mx-auto"></div>
-                    </div>
-                    <div className="flex space-x-4 justify-center">
-                        <a href="#" className="text-foreground/80 hover:text-primary transition-colors"><Dribbble size={20} /></a>
-                        <a href="#" className="text-foreground/80 hover:text-primary transition-colors"><Instagram size={20} /></a>
-                        <a href="#" className="text-foreground/80 hover:text-primary transition-colors"><Linkedin size={20} /></a>
-                    </div>
-                </div>
-
-                <motion.div
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-                    className="space-y-6 mt-8"
-                >
-                    <div>
-                        <p className="text-sm text-muted-foreground font-medium mb-2">— INTRODUCTION</p>
-                        <h2 className="text-3xl lg:text-4xl font-bold font-headline leading-tight">
-                        Full-Stack Developer &<br/>Creative Designer, based in India.
-                        </h2>
-                    </div>
-                    <p className="max-w-md text-muted-foreground leading-relaxed mx-auto">
-                    I design and code beautifully simple things, and I love what I do. Just simple like that!
-                    </p>
-                    <Button asChild variant="link" size="lg" className="font-bold text-primary p-0 text-base group">
-                        <a href="#about">
-                            My story
-                            <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1 ml-2" />
-                        </a>
-                    </Button>
-                </motion.div>
+          <div className="relative space-y-8 inline-block">
+            <motion.div variants={itemVariants} className='absolute -top-16 -left-4 text-primary font-bold text-8xl font-headline opacity-50'>D</motion.div>
+            <div>
+                <h1 className="text-6xl md:text-8xl font-bold font-headline tracking-tight text-foreground leading-tight">
+                    <motion.span variants={itemVariants} className="block">Dev Kumar</motion.span>
+                    <motion.span variants={itemVariants} className="block">Das.</motion.span>
+                </h1>
+                <motion.div variants={lineVariants} className="h-1 bg-primary mt-4 mx-auto"></motion.div>
+            </div>
+            <motion.div variants={itemVariants} className="flex space-x-4 justify-center">
+              <motion.a href="#" variants={socialIconVariants} whileHover="hover" initial="rest" className="text-foreground/80 hover:text-primary transition-colors"><Dribbble size={20} /></motion.a>
+              <motion.a href="#" variants={socialIconVariants} whileHover="hover" initial="rest" className="text-foreground/80 hover:text-primary transition-colors"><Instagram size={20} /></motion.a>
+              <motion.a href="#" variants={socialIconVariants} whileHover="hover" initial="rest" className="text-foreground/80 hover:text-primary transition-colors"><Linkedin size={20} /></motion.a>
             </motion.div>
           </div>
+
+          <motion.div
+            variants={containerVariants}
+            className="space-y-6 mt-8"
+          >
+            <div>
+              <motion.p variants={itemVariants} className="text-sm text-muted-foreground font-medium mb-2">— INTRODUCTION</motion.p>
+              <motion.h2 variants={itemVariants} className="text-3xl lg:text-4xl font-bold font-headline leading-tight">
+              Full-Stack Developer &<br/>Creative Designer, based in India.
+              </motion.h2>
+            </div>
+            <motion.p variants={itemVariants} className="max-w-md text-muted-foreground leading-relaxed mx-auto">
+            I design and code beautifully simple things, and I love what I do. Just simple like that!
+            </motion.p>
+            <motion.div variants={itemVariants}>
+              <Button asChild variant="link" size="lg" className="font-bold text-primary p-0 text-base group">
+                  <a href="#about">
+                      My story
+                      <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1 ml-2" />
+                  </a>
+              </Button>
+            </motion.div>
+          </motion.div>
         </div>
+      </motion.div>
     </section>
   );
 }

@@ -93,7 +93,7 @@ export function HeroSection() {
                 </motion.div>
             </motion.div>
 
-            <div className="hidden md:flex justify-center items-center">
+            <div className="hidden md:flex justify-end items-center">
                  <motion.div 
                     className="relative w-[500px] h-[600px] z-10"
                     initial={{ opacity: 0, y: 100, scale: 0.8 }}

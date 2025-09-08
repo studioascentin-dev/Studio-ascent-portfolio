@@ -103,7 +103,7 @@ export function ServicesSection() {
                             {service.icon}
                           </div>
                           <CardHeader className="p-0">
-                            <CardTitle className="text-2xl font-bold font-headline">{service.title}</CardTitle>
+                            <CardTitle className="text-2xl font-bold font-headline text-primary">{service.title}</CardTitle>
                           </CardHeader>
                           <CardContent className="p-0 mt-4">
                             <p className="text-muted-foreground">{service.description}</p>

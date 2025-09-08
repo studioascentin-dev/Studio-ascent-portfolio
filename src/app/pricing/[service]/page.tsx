@@ -65,9 +65,9 @@ const pricingData = {
   'video-editing': {
     title: 'Video Editing',
     tiers: [
-      { name: 'Basic', price: '₹3,000', period: '/5 min video', features: ['Up to 5 min video', 'Basic Cuts & Transitions', 'Royalty-Free Music', '1 Round of Revisions'] },
-      { name: 'Intermediate', price: '₹8,000', period: '/10 min video', features: ['Up to 10 min video', 'Advanced Transitions', 'Basic Color Grading', '2 Rounds of Revisions'] },
-      { name: 'Pro', price: '₹20,000', period: '/20 min video', features: ['Up to 20 min video', 'Custom Animations & VFX', 'Advanced Color Grading', '3 Rounds of Revisions'] },
+      { name: 'Basic', price: '₹3,000', period: '', features: ['Basic Cuts & Transitions', 'Royalty-Free Music', '1 Round of Revisions'] },
+      { name: 'Intermediate', price: '₹8,000', period: '', features: ['Advanced Transitions', 'Basic Color Grading', '2 Rounds of Revisions'] },
+      { name: 'Pro', price: '₹20,000', period: '', features: ['Custom Animations & VFX', 'Advanced Color Grading', '3 Rounds of Revisions'] },
     ]
   },
   'ppt-design': {
@@ -143,7 +143,7 @@ export default function ServicePricingPage() {
         setSelectedPlan('package');
         setIsDialogOpen(true);
     } else {
-        const message = `Hello! I'm interested in the ${tier.name} package for ${data.title}. I'd like to discuss a project.`;
+        const message = `Hello! I'm interested in the ${tier.name} package for ${data.title}. I'dlike to discuss a project.`;
         const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
         window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
     }

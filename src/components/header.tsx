@@ -14,7 +14,7 @@ const navItems = [
     { name: "About", href: "/#about" },
     { name: "Services", href: "/#services" },
     { name: "Work", href: "/#work" },
-    { name: "Pricing", href: "/#pricing" },
+    { name: "Pricing", href: "/pricing" },
     { name: "Contact", href: "/#contact" },
 ];
 
@@ -50,6 +50,8 @@ export function Header() {
                 targetElement.scrollIntoView({ behavior: 'smooth' });
             }
             setIsSheetOpen(false); // Close sheet on navigation
+        } else {
+             setIsSheetOpen(false);
         }
     };
     
@@ -68,7 +70,7 @@ export function Header() {
             threshold: 0.5
         });
 
-        const sections = ['about', 'services', 'work', 'pricing', 'contact'];
+        const sections = ['about', 'services', 'work', 'contact'];
         sections.forEach(id => {
             const el = document.getElementById(id);
             if (el) observer.observe(el);

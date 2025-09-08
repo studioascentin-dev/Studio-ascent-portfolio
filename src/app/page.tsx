@@ -9,7 +9,6 @@ import { Footer } from '@/components/footer';
 import * as React from 'react';
 import { HireMeSection } from '@/components/hire-me-section';
 import { AboutSection } from '@/components/about-section';
-import { PricingSection } from '@/components/pricing-section';
 
 export default function Home() {
 
@@ -26,9 +25,6 @@ export default function Home() {
         </div>
         <div id="work" className="pt-20 -mt-20">
           <ProjectsSection />
-        </div>
-        <div id="pricing" className="pt-20 -mt-20">
-          <PricingSection />
         </div>
         <div id="contact" className="pt-20 -mt-20">
           <HireMeSection />

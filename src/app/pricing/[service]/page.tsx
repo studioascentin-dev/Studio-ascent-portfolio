@@ -1,4 +1,5 @@
 
+
 "use client";
 
 import { notFound, useParams } from 'next/navigation';
@@ -265,7 +266,7 @@ export default function ServicePricingPage() {
 
                     <div className="text-center mt-16">
                         <Button asChild variant="outline">
-                            <Link href="/#pricing">
+                            <Link href="/pricing">
                                 <ArrowLeft className="mr-2 h-4 w-4" />
                                 Back to All Services
                             </Link>

@@ -24,16 +24,17 @@ const allWebDevFeatures = [
     { name: 'Next.js Framework', basic: true, intermediate: true, pro: true },
     { name: 'Basic CMS', basic: true, intermediate: false, pro: false },
     { name: 'Advanced CMS', basic: false, intermediate: true, pro: true },
+    { name: 'Simple API Integrations', basic: false, intermediate: true, pro: false },
     { name: 'API Integrations', basic: false, intermediate: false, pro: true },
     { name: 'E-commerce Functionality', basic: false, intermediate: true, pro: true },
-    { name: 'UI/UX Premium Design', basic: false, intermediate: true, pro: true },
-    { name: 'Performance Optimization', basic: false, intermediate: true, pro: true },
+    { name: 'UI/UX Premium Design', basic: false, intermediate: false, pro: true },
+    { name: 'Performance Optimization', basic: false, intermediate: false, pro: true },
     { name: 'Training & Documentation', basic: false, intermediate: false, pro: true },
     { name: 'Custom Admin Dashboard', basic: false, intermediate: false, pro: true },
     { name: 'Advanced Security Setup', basic: false, intermediate: false, pro: true },
     { name: 'AI Features (Chatbot, etc.)', basic: false, intermediate: false, pro: true },
     { name: 'Custom Integrations', basic: false, intermediate: false, pro: true },
-    { name: 'Mobile App (iOS + Android)', basic: false, intermediate: true, pro: true },
+    { name: 'Mobile App (iOS + Android)', basic: false, intermediate: false, pro: true },
     { name: 'Multi-language & Currency', basic: 'hidden', intermediate: 'hidden', pro: true },
     { name: '1 Month Support', basic: true, intermediate: 'hidden', pro: false },
     { name: '2 Months Support', basic: 'hidden', intermediate: true, pro: false },
@@ -105,7 +106,7 @@ const pricingData = {
     title: 'Web Development',
     tiers: [
       { name: 'Basic', price: '₹20,000', period: '', features: allWebDevFeatures.map(f => ({ name: f.name, available: f.basic })) },
-      { name: 'Intermediate', price: '₹60,000', period: '', features: allWebDevFeatures.map(f => ({ name: f.name, available: f.intermediate })) },
+      { name: 'Intermediate', price: '₹75,000', period: '', features: allWebDevFeatures.map(f => ({ name: f.name, available: f.intermediate })) },
       { name: 'Pro', price: '₹1,20,000+', period: '', features: allWebDevFeatures.map(f => ({ name: f.name, available: f.pro })) },
     ]
   }
@@ -265,9 +266,7 @@ export default function ServicePricingPage() {
                                                             ) : (
                                                                 <X className="h-5 w-5 text-red-500 mt-0.5 shrink-0" />
                                                             )}
-                                                            <span className={cn("text-muted-foreground", {
-                                                                
-                                                            })}>{feature.name}</span>
+                                                            <span className="text-muted-foreground">{feature.name}</span>
                                                         </li>
                                                     )
                                                 })

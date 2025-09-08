@@ -45,6 +45,17 @@ const socialIconVariants = {
   hover: { y: -4 },
 };
 
+const XIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 512 512"
+    fill="currentColor"
+    {...props}
+  >
+    <path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8l164.9-188.5L26.8 48h145.6l95.7 132.3L389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" />
+  </svg>
+);
+
 
 export function HeroSection() {
  
@@ -104,6 +115,7 @@ export function HeroSection() {
               <motion.a href="#" variants={socialIconVariants} whileHover="hover" initial="rest" className="text-foreground/80 hover:text-primary transition-colors"><Dribbble size={20} /></motion.a>
               <motion.a href="#" variants={socialIconVariants} whileHover="hover" initial="rest" className="text-foreground/80 hover:text-primary transition-colors"><Instagram size={20} /></motion.a>
               <motion.a href="https://www.linkedin.com/in/deb-kumar-das-46193824a" target="_blank" rel="noopener noreferrer" variants={socialIconVariants} whileHover="hover" initial="rest" className="text-foreground/80 hover:text-primary transition-colors"><Linkedin size={20} /></motion.a>
+              <motion.a href="https://x.com/Dev69910032" target="_blank" rel="noopener noreferrer" variants={socialIconVariants} whileHover="hover" initial="rest" className="text-foreground/80 hover:text-primary transition-colors"><XIcon className="h-5 w-5" /></motion.a>
             </motion.div>
           </div>
 

@@ -1,5 +1,4 @@
 
-
 "use client";
 
 import { notFound, useParams } from 'next/navigation';
@@ -14,6 +13,8 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import * as React from 'react';
 import Image from 'next/image';
+import { Header } from '@/components/header';
+import Link from 'next/link';
 
 const pricingData = {
   'photo-editing': {
@@ -25,7 +26,7 @@ const pricingData = {
         period: '/5 photos', 
         features: ['Basic Retouching', 'Color Correction', '1 Round of Revisions'], 
         single: { price: '₹99', name: 'Single Photo Edit' },
-        images: ['https://placehold.co/400x300.png'],
+        images: ['https://picsum.photos/400/300'],
         dataAiHint: ['basic retouch'],
         whatsapp: {
           package: "Hi! 👋 I'm interested in the Basic Photo Editing Package (₹399 for 5 photos). I'd like basic retouching and color correction. Please let me know how to proceed and where to send the photos. Thanks!",
@@ -38,7 +39,7 @@ const pricingData = {
         period: '/10 photos', 
         features: ['Advanced Retouching', 'Color Grading', 'Background Removal', '2 Rounds of Revisions'], 
         single: { price: '₹199', name: 'Single Photo Edit' },
-        images: ['https://placehold.co/400x300.png'],
+        images: ['https://picsum.photos/400/300'],
         dataAiHint: ['advanced retouch'],
         whatsapp: {
             package: "Hello! I'd like to go ahead with the Intermediate Photo Editing Package (₹999 for 10 photos). I need advanced retouching, color grading, and background removal. Let me know what you need from my side and how to start. 😊",
@@ -51,7 +52,7 @@ const pricingData = {
         period: '/5 photos', 
         features: ['High-End Retouching', 'Complex Manipulations', 'Source Files', '3 Rounds of Revisions'], 
         single: { price: '₹399', name: 'Single Photo Edit' },
-        images: ['https://placehold.co/400x300.png'],
+        images: ['https://picsum.photos/400/300'],
         dataAiHint: ['high-end retouching'],
         whatsapp: {
             package: "Hi there! I'm ready to start with the Pro Photo Editing Package (₹1,999 for 5 photos). I'm looking for high-end retouching and complex manipulations. What's the next step?",
@@ -165,8 +166,9 @@ export default function ServicePricingPage() {
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
-        <main className="flex-1">
-            <section className="py-24 md:py-32">
+        <Header />
+        <main className="flex-1 pt-24">
+            <section className="py-16 md:py-24">
                 <motion.div 
                     className="container mx-auto px-4 md:px-6"
                     initial="hidden"
@@ -263,10 +265,10 @@ export default function ServicePricingPage() {
 
                     <div className="text-center mt-16">
                         <Button asChild variant="outline">
-                            <a href="/#pricing">
+                            <Link href="/#pricing">
                                 <ArrowLeft className="mr-2 h-4 w-4" />
                                 Back to All Services
-                            </a>
+                            </Link>
                         </Button>
                     </div>
                 </motion.div>

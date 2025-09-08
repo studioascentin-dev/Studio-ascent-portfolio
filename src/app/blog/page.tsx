@@ -92,9 +92,9 @@ export default function BlogPage() {
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
       <Header />
-      <main className="flex-1">
+      <main className="flex-1 pt-24">
         <motion.section 
-            className="py-24 md:py-32"
+            className="py-16 md:py-24"
             initial="hidden"
             animate="visible"
             variants={sectionVariants}

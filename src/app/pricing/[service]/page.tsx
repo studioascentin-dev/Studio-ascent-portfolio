@@ -5,7 +5,7 @@
 import { notFound, useParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Check, ArrowLeft } from 'lucide-react';
+import { Check, ArrowLeft, X } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { Footer } from '@/components/footer';
@@ -16,6 +16,29 @@ import * as React from 'react';
 import Image from 'next/image';
 import { Header } from '@/components/header';
 import Link from 'next/link';
+
+const allWebDevFeatures = [
+    { name: '1-3 Page Website', basic: true, intermediate: false, pro: false },
+    { name: 'Up to 6 Page Website', basic: false, intermediate: true, pro: false },
+    { name: '10+ Page Application', basic: false, intermediate: false, pro: true },
+    { name: 'Next.js Framework', basic: true, intermediate: true, pro: true },
+    { name: 'Basic CMS', basic: true, intermediate: false, pro: false },
+    { name: 'Advanced CMS', basic: false, intermediate: true, pro: true },
+    { name: 'API Integrations', basic: false, intermediate: false, pro: true },
+    { name: 'E-commerce Functionality', basic: false, intermediate: false, pro: true },
+    { name: 'UI/UX Premium Design', basic: false, intermediate: true, pro: true },
+    { name: 'Performance Optimization', basic: false, intermediate: true, pro: true },
+    { name: 'Training & Documentation', basic: false, intermediate: false, pro: true },
+    { name: 'Custom Admin Dashboard', basic: false, intermediate: false, pro: true },
+    { name: 'Advanced Security Setup', basic: false, intermediate: false, pro: true },
+    { name: 'AI Features (Chatbot, etc.)', basic: false, intermediate: false, pro: true },
+    { name: 'Custom Integrations', basic: false, intermediate: false, pro: true },
+    { name: 'Mobile App (iOS + Android)', basic: false, intermediate: false, pro: true },
+    { name: 'Multi-language & Currency', basic: false, intermediate: false, pro: true },
+    { name: '1 Month Support', basic: true, intermediate: false, pro: false },
+    { name: '2 Months Support', basic: false, intermediate: true, pro: false },
+    { name: '3+ Months Support', basic: false, intermediate: false, pro: true },
+];
 
 const pricingData = {
   'photo-editing': {
@@ -81,9 +104,9 @@ const pricingData = {
   'web-development': {
     title: 'Web Development',
     tiers: [
-      { name: 'Basic', price: '₹20,000', period: '', features: ['1-3 Page Website', 'Next.js', 'Basic CMS', '1 Month Support'] },
-      { name: 'Intermediate', price: '₹60,000', period: '', features: ['Up to 6 Page Website', 'Advanced CMS', '2 Months Support'] },
-      { name: 'Pro', price: '₹1,20,000+', period: '', features: ['10+ Page Application', 'API Integrations', 'E-commerce Functionality', '3 Months Support'] },
+      { name: 'Basic', price: '₹20,000', period: '', features: allWebDevFeatures.map(f => ({ name: f.name, available: f.basic })) },
+      { name: 'Intermediate', price: '₹60,000', period: '', features: allWebDevFeatures.map(f => ({ name: f.name, available: f.intermediate })) },
+      { name: 'Pro', price: '₹1,20,000+', period: '', features: allWebDevFeatures.map(f => ({ name: f.name, available: f.pro })) },
     ]
   }
 };
@@ -112,7 +135,7 @@ const cardVariants = {
     },
 };
 
-type Tier = (typeof pricingData)['photo-editing']['tiers'][0] | (typeof pricingData)['video-editing']['tiers'][0];
+type Tier = (typeof pricingData)['photo-editing']['tiers'][0] | (typeof pricingData)['video-editing']['tiers'][0] | (typeof pricingData)['web-development']['tiers'][0];
 
 
 export default function ServicePricingPage() {
@@ -122,14 +145,14 @@ export default function ServicePricingPage() {
   const phoneNumber = "919707191619"; 
 
   const [isDialogOpen, setIsDialogOpen] = React.useState(false);
-  const [selectedTier, setSelectedTier] = React.useState<Tier | null>(null);
+  const [selectedTier, setSelectedTier] = React.useState<any | null>(null);
   const [selectedPlan, setSelectedPlan] = React.useState<'package' | 'single'>('package');
 
   if (!data) {
     notFound();
   }
   
-  const handleGetStartedClick = (tier: Tier) => {
+  const handleGetStartedClick = (tier: any) => {
     if (serviceId === 'photo-editing') {
         setSelectedTier(tier);
         setSelectedPlan('package');
@@ -231,12 +254,25 @@ export default function ServicePricingPage() {
                                     </CardHeader>
                                     <CardContent className="flex flex-col flex-grow items-center p-6 pt-0">
                                         <ul className="space-y-4 text-sm w-full flex-grow">
-                                            {tier.features.map((feature, i) => (
-                                            <li key={i} className="flex items-start gap-3">
-                                                <Check className="h-5 w-5 text-green-500 mt-0.5 shrink-0" />
-                                                <span className="text-muted-foreground">{feature}</span>
-                                            </li>
-                                            ))}
+                                            {serviceId === 'web-development' ? (
+                                                (tier.features as {name: string, available: boolean}[]).map((feature, i) => (
+                                                    <li key={i} className="flex items-start gap-3">
+                                                        {feature.available ? (
+                                                            <Check className="h-5 w-5 text-green-500 mt-0.5 shrink-0" />
+                                                        ) : (
+                                                            <X className="h-5 w-5 text-red-500 mt-0.5 shrink-0" />
+                                                        )}
+                                                        <span className={cn("text-muted-foreground", !feature.available && "line-through")}>{feature.name}</span>
+                                                    </li>
+                                                ))
+                                            ) : (
+                                                (tier.features as string[]).map((feature, i) => (
+                                                    <li key={i} className="flex items-start gap-3">
+                                                        <Check className="h-5 w-5 text-green-500 mt-0.5 shrink-0" />
+                                                        <span className="text-muted-foreground">{feature}</span>
+                                                    </li>
+                                                ))
+                                            )}
                                             {singlePhotoFeature(tier) && (
                                                 <li className="flex items-start gap-3">
                                                     <Check className="h-5 w-5 text-green-500 mt-0.5 shrink-0" />

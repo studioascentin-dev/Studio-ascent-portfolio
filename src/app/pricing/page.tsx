@@ -38,6 +38,24 @@ const pricingTiers = [
             { name: "Pro", price: "₹12,000", period: "/deck", features: ["Up to 35 Slides", "Full Custom Design", "Advanced Animations"] },
         ]
     },
+    {
+        service: "UI/UX Design",
+        slug: "ui-ux-design",
+        tiers: [
+            { name: "Basic", price: "₹4000", period: "", features: ["1 Logo Concept", "2 Revisions", "JPG & PNG"] },
+            { name: "Intermediate", price: "₹10,000", period: "", features: ["3 Logo Concepts", "Social Media Kit", "Vector Files"] },
+            { name: "Pro", price: "₹20,000", period: "", features: ["5 Logo Concepts", "Full Brand Guide", "Source Files"] },
+        ]
+    },
+    {
+        service: "Web Development",
+        slug: "web-development",
+        tiers: [
+            { name: "Basic", price: "₹20,000", period: "", features: ["Landing Page", "Next.js", "1 Month Support"] },
+            { name: "Intermediate", price: "₹60,000", period: "", features: ["Full-stack Dev", "Advanced CMS", "2 Months Support"] },
+            { name: "Pro", price: "₹1,20,000+", period: "", features: ["Complex App", "API Integrations", "3 Months Support"] },
+        ]
+    },
 ];
 
 const sectionVariants = {

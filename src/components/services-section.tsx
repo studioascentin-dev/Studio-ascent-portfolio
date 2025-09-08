@@ -64,6 +64,9 @@ const itemVariants = {
 
 
 export function ServicesSection() {
+  const topServices = services.slice(0, 3);
+  const bottomServices = services.slice(3);
+
   return (
     <section id="services" className="bg-background py-24 md:py-32">
         <div className="container mx-auto px-4">
@@ -89,7 +92,7 @@ export function ServicesSection() {
               whileInView="visible"
               viewport={{ once: true, amount: 0.1 }}
             >
-                {services.map((service) => (
+                {topServices.map((service) => (
                     <motion.div key={service.id} variants={itemVariants}>
                       <Link href={service.id === 'something-else' ? '#contact' : `/services/${service.id}`} className="block h-full">
                         <Card className="h-full bg-secondary/80 text-center p-8 hover:-translate-y-2 transition-transform duration-300 hover:bg-primary/10">
@@ -107,6 +110,35 @@ export function ServicesSection() {
                     </motion.div>
                 ))}
             </motion.div>
+
+            <motion.div
+              className="mt-8 flex justify-center"
+              variants={sectionVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.1 }}
+            >
+              <div className="grid sm:grid-cols-2 gap-8 w-full lg:w-2/3">
+                {bottomServices.map((service) => (
+                    <motion.div key={service.id} variants={itemVariants}>
+                      <Link href={service.id === 'something-else' ? '#contact' : `/services/${service.id}`} className="block h-full">
+                        <Card className="h-full bg-secondary/80 text-center p-8 hover:-translate-y-2 transition-transform duration-300 hover:bg-primary/10">
+                          <div className="inline-block p-4 bg-primary/10 rounded-full mb-4">
+                            {service.icon}
+                          </div>
+                          <CardHeader className="p-0">
+                            <CardTitle className="text-2xl font-bold font-headline text-primary">{service.title}</CardTitle>
+                          </CardHeader>
+                          <CardContent className="p-0 mt-4">
+                            <p className="text-muted-foreground">{service.description}</p>
+                          </CardContent>
+                        </Card>
+                      </Link>
+                    </motion.div>
+                ))}
+              </div>
+            </motion.div>
+
         </div>
     </section>
   );

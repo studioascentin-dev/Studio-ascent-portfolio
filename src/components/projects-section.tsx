@@ -95,12 +95,13 @@ export function ProjectsSection() {
 
                 <motion.div
                     variants={sectionVariants}
-                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-center"
+                    className="flex flex-wrap justify-center gap-8"
                 >
                     {projects.map((project: any) => (
                         <motion.div
                             key={project.name}
                             variants={itemVariants}
+                            className="w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.5rem)]"
                         >
                             <Link href={project.href} className="block h-full group">
                                 <Card className="flex flex-col h-full bg-card shadow-lg transition-all duration-300 overflow-hidden relative">

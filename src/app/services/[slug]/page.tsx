@@ -40,19 +40,6 @@ const servicesData = {
         { name: 'Poster & Flyer Design', image: '/poster.png', dataAiHint: 'artistic color' },
     ]
   },
-  'ppt-design': {
-    icon: <Presentation className="h-10 w-10 text-primary" />,
-    title: 'PPT Design',
-    description: 'I create stunning and effective presentations that not only look great but also communicate your message clearly, making sure you stand out in any setting.',
-    projects: [
-        { name: 'School/College Presentation', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4', dataAiHint: 'education presentation' },
-        { name: 'Projects Report in PPT', image: '/project-report.png', pdf: '/project-report.pdf', dataAiHint: 'business report' },
-        { name: 'Webinar Slides', image: '/webinar-slides.png', pdf: '/webinar-slides.pdf', dataAiHint: 'tech webinar' },
-        { name: 'Company Profile PPT', image: '/company-profile.png', pdf: '/company-profile.pdf', dataAiHint: 'corporate deck' },
-        { name: 'Product/Service Portfolio', image: '/product-portfolio.png', pdf: '/product-portfolio.pdf', dataAiHint: 'product portfolio' },
-        { name: 'Educational Lecture', image: '/educational-lecture.png', pdf: '/educational-lecture.pdf', dataAiHint: 'lecture slides' },
-    ]
-  },
   'ui-ux-design': {
     icon: <PenTool className="h-10 w-10 text-primary" />,
     title: 'UI/UX Design',

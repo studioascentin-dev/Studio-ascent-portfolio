@@ -3,7 +3,7 @@
 
 import { motion } from 'framer-motion';
 import { Button } from './ui/button';
-import { ArrowRight, Instagram, Linkedin, Code, PenTool, Camera, Video, Presentation } from 'lucide-react';
+import { ArrowRight, Instagram, Linkedin, Code, PenTool, Camera, Video } from 'lucide-react';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -86,9 +86,6 @@ export function HeroSection() {
           </motion.div>
           <motion.div variants={iconVariants(5, 1.5)} initial="initial" animate="animate" className="absolute bottom-1/3 right-1/2">
               <Video className="h-16 w-16" strokeWidth={1} />
-          </motion.div>
-              <motion.div variants={iconVariants(4.2, 0.8)} initial="initial" animate="animate" className="absolute top-10 right-10">
-              <Presentation className="h-20 w-20" strokeWidth={1} />
           </motion.div>
           <motion.div variants={iconVariants(3.8, 1.8)} initial="initial" animate="animate" className="absolute bottom-10 left-20">
               <Code className="h-16 w-16" strokeWidth={1} />

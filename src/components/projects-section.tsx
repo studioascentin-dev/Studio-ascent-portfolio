@@ -38,13 +38,6 @@ const projects = [
       href: '/services/web-development'
     },
     { 
-      name: 'Startup Pitch Deck', 
-      image: 'https://placehold.co/600x450.png',
-      dataAiHint: 'presentation design',
-      category: 'PPT Design',
-      href: '/services/ppt-design'
-    },
-    { 
       name: 'Social Media Ad', 
       image: 'https://placehold.co/600x450.png',
       dataAiHint: 'social media marketing',

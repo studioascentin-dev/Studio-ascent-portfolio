@@ -21,12 +21,6 @@ const services = [
     description: 'High-quality photo retouching and manipulation to make your images look stunning and professional.',
   },
   {
-    id: 'ppt-design',
-    icon: <Presentation className="h-10 w-10 text-primary" />,
-    title: 'PPT Design',
-    description: 'Stunning and effective presentations that communicate your message clearly and make you stand out.',
-  },
-  {
     id: 'ui-ux-design',
     icon: <PenTool className="h-10 w-10 text-primary" />,
     title: 'UI/UX Design',

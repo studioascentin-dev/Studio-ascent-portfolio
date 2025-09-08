@@ -70,14 +70,6 @@ const pricingData = {
       { name: 'Pro', price: '₹20,000', period: '', features: ['Up to 20 min video', 'Custom Animations & VFX', 'Advanced Color Grading', '3 Rounds of Revisions'] },
     ]
   },
-  'ppt-design': {
-    title: 'PPT Design',
-    tiers: [
-      { name: 'Basic', price: '₹2,500', period: '/deck', features: ['Up to 10 Slides', 'Template-based Design', '2 Rounds of Revisions'] },
-      { name: 'Intermediate', price: '₹6,000', period: '/deck', features: ['Up to 20 Slides', 'Custom Branded Template', 'Infographics & Charts', '3 Rounds of Revisions'] },
-      { name: 'Pro', price: '₹12,000', period: '/deck', features: ['Up to 35 Slides', 'Full Custom Design', 'Advanced Animations', 'Source Files'] },
-    ]
-  },
   'ui-ux-design': {
     title: 'UI/UX Design',
     tiers: [

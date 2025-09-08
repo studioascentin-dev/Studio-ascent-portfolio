@@ -30,15 +30,6 @@ const pricingTiers = [
         ]
     },
     {
-        service: "PPT Design",
-        slug: "ppt-design",
-        tiers: [
-            { name: "Basic", price: "₹2,500", period: "/deck", features: ["Up to 10 Slides", "Template-based", "2 Revisions"] },
-            { name: "Intermediate", price: "₹6,000", period: "/deck", features: ["Up to 20 Slides", "Custom Template", "Infographics"] },
-            { name: "Pro", price: "₹12,000", period: "/deck", features: ["Up to 35 Slides", "Full Custom Design", "Advanced Animations"] },
-        ]
-    },
-    {
         service: "UI/UX Design",
         slug: "ui-ux-design",
         tiers: [

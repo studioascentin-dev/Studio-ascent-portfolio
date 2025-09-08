@@ -18,14 +18,14 @@ import { Header } from '@/components/header';
 import Link from 'next/link';
 
 const allWebDevFeatures = [
-    { name: '1-3 Page Website', basic: true, intermediate: false, pro: false },
+    { name: '1-3 Page Website', basic: true, intermediate: 'hidden', pro: false },
     { name: 'Up to 6 Page Website', basic: 'hidden', intermediate: true, pro: false },
-    { name: '10+ Page Application', basic: 'hidden', intermediate: false, pro: true },
+    { name: '10+ Page Application', basic: 'hidden', intermediate: 'hidden', pro: true },
     { name: 'Next.js Framework', basic: true, intermediate: true, pro: true },
     { name: 'Basic CMS', basic: true, intermediate: false, pro: false },
     { name: 'Advanced CMS', basic: false, intermediate: true, pro: true },
     { name: 'API Integrations', basic: false, intermediate: false, pro: true },
-    { name: 'E-commerce Functionality', basic: false, intermediate: false, pro: true },
+    { name: 'E-commerce Functionality', basic: false, intermediate: true, pro: true },
     { name: 'UI/UX Premium Design', basic: false, intermediate: true, pro: true },
     { name: 'Performance Optimization', basic: false, intermediate: true, pro: true },
     { name: 'Training & Documentation', basic: false, intermediate: false, pro: true },
@@ -33,9 +33,9 @@ const allWebDevFeatures = [
     { name: 'Advanced Security Setup', basic: false, intermediate: false, pro: true },
     { name: 'AI Features (Chatbot, etc.)', basic: false, intermediate: false, pro: true },
     { name: 'Custom Integrations', basic: false, intermediate: false, pro: true },
-    { name: 'Mobile App (iOS + Android)', basic: false, intermediate: false, pro: true },
-    { name: 'Multi-language & Currency', basic: 'hidden', intermediate: false, pro: true },
-    { name: '1 Month Support', basic: true, intermediate: false, pro: false },
+    { name: 'Mobile App (iOS + Android)', basic: false, intermediate: true, pro: true },
+    { name: 'Multi-language & Currency', basic: 'hidden', intermediate: 'hidden', pro: true },
+    { name: '1 Month Support', basic: true, intermediate: 'hidden', pro: false },
     { name: '2 Months Support', basic: 'hidden', intermediate: true, pro: false },
     { name: '3+ Months Support', basic: 'hidden', intermediate: false, pro: true },
 ];
@@ -265,7 +265,9 @@ export default function ServicePricingPage() {
                                                             ) : (
                                                                 <X className="h-5 w-5 text-red-500 mt-0.5 shrink-0" />
                                                             )}
-                                                            <span className="text-muted-foreground">{feature.name}</span>
+                                                            <span className={cn("text-muted-foreground", {
+                                                                
+                                                            })}>{feature.name}</span>
                                                         </li>
                                                     )
                                                 })

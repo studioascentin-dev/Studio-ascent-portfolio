@@ -123,7 +123,7 @@ export function HeroSection() {
             <motion.div variants={itemVariants}>
               <Button asChild variant="link" size="lg" className="font-bold text-primary p-0 text-base group">
                   <a href="#about">
-                      My story
+                      About me
                       <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1 ml-2" />
                   </a>
               </Button>

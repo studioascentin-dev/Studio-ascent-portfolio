@@ -18,7 +18,7 @@ import { Header } from '@/components/header';
 import Link from 'next/link';
 
 const allWebDevFeatures = [
-    { name: '1-3 Page Website', basic: true, intermediate: 'hidden', pro: 'hidden' },
+    { name: '1-3 Page Website', basic: true, intermediate: 'hidden', pro: true },
     { name: 'Up to 6 Page Website', basic: 'hidden', intermediate: true, pro: 'hidden' },
     { name: '10+ Page Application', basic: 'hidden', intermediate: 'hidden', pro: true },
     { name: 'Next.js Framework', basic: true, intermediate: true, pro: true },
@@ -26,7 +26,7 @@ const allWebDevFeatures = [
     { name: 'Advanced CMS', basic: false, intermediate: true, pro: true },
     { name: 'Simple API Integrations', basic: false, intermediate: true, pro: 'hidden' },
     { name: 'API Integrations', basic: false, intermediate: false, pro: true },
-    { name: 'E-commerce Functionality', basic: false, intermediate: true, pro: true },
+    { name: 'E-commerce Functionality', basic: false, intermediate: false, pro: true },
     { name: 'UI/UX Premium Design', basic: false, intermediate: false, pro: true },
     { name: 'Performance Optimization', basic: false, intermediate: false, pro: true },
     { name: 'Training & Documentation', basic: false, intermediate: false, pro: true },
@@ -34,7 +34,7 @@ const allWebDevFeatures = [
     { name: 'Advanced Security Setup', basic: false, intermediate: false, pro: true },
     { name: 'AI Features (Chatbot, etc.)', basic: false, intermediate: false, pro: true },
     { name: 'Custom Integrations', basic: false, intermediate: false, pro: true },
-    { name: 'Mobile App (iOS + Android)', basic: false, intermediate: true, pro: true },
+    { name: 'Mobile App (iOS + Android)', basic: 'hidden', intermediate: false, pro: true },
     { name: 'Multi-language & Currency', basic: 'hidden', intermediate: 'hidden', pro: true },
     { name: '1 Month Support', basic: true, intermediate: 'hidden', pro: 'hidden' },
     { name: '2 Months Support', basic: 'hidden', intermediate: true, pro: 'hidden' },
@@ -107,7 +107,7 @@ const pricingData = {
     tiers: [
       { name: 'Basic', price: '₹20,000', period: '', features: allWebDevFeatures.map(f => ({ name: f.name, available: f.basic })) },
       { name: 'Intermediate', price: '₹75,000', period: '', features: allWebDevFeatures.map(f => ({ name: f.name, available: f.intermediate })) },
-      { name: 'Pro', price: '₹3,50,000+', period: '', features: allWebDevFeatures.map(f => ({ name: f.name, available: f.pro })) },
+      { name: 'Enterprise', price: '₹3,50,000+', period: '', features: allWebDevFeatures.map(f => ({ name: f.name, available: f.pro })) },
     ]
   }
 };
@@ -259,7 +259,7 @@ export default function ServicePricingPage() {
                                                 (tier.features as {name: string, available: boolean | string}[]).map((feature, i) => {
                                                     if(feature.available === 'hidden') return null;
                                                     
-                                                    if (tier.name === 'Pro' && !feature.available) {
+                                                    if (tier.name === 'Enterprise' && !feature.available) {
                                                       return null;
                                                     }
                                                     
@@ -345,3 +345,5 @@ export default function ServicePricingPage() {
     </div>
   );
 }
+
+    

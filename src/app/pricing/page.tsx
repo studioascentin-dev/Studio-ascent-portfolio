@@ -52,7 +52,7 @@ const pricingTiers = [
         slug: "web-development",
         tiers: [
             { name: "Basic", price: "₹20,000", period: "", features: ["1-3 Page Website", "Next.js", "1 Month Support"] },
-            { name: "Intermediate", price: "₹60,000", period: "", features: ["Up to 10 Pages", "Advanced CMS", "2 Months Support"] },
+            { name: "Intermediate", price: "₹60,000", period: "", features: ["Up to 6 Pages", "Advanced CMS", "2 Months Support"] },
             { name: "Pro", price: "₹1,20,000+", period: "", features: ["10+ Page App", "API Integrations", "3 Months Support"] },
         ]
     },

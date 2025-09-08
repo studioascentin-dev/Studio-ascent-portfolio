@@ -90,7 +90,7 @@ const pricingData = {
     title: 'Web Development',
     tiers: [
       { name: 'Basic', price: '₹20,000', period: '', features: ['1-3 Page Website', 'Next.js', 'Basic CMS', '1 Month Support'] },
-      { name: 'Intermediate', price: '₹60,000', period: '', features: ['Up to 10 Page Website', 'Advanced CMS', '2 Months Support'] },
+      { name: 'Intermediate', price: '₹60,000', period: '', features: ['Up to 6 Page Website', 'Advanced CMS', '2 Months Support'] },
       { name: 'Pro', price: '₹1,20,000+', period: '', features: ['10+ Page Application', 'API Integrations', 'E-commerce Functionality', '3 Months Support'] },
     ]
   }

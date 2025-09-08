@@ -118,11 +118,6 @@ export function Header() {
                             </Link>
                         </motion.div>
                     ))}
-                     <motion.div variants={itemVariants}>
-                        <Button asChild>
-                            <Link href="/blog">Blog</Link>
-                        </Button>
-                    </motion.div>
                 </nav>
 
                 {/* Mobile Navigation */}
@@ -161,9 +156,6 @@ export function Header() {
                                             )}
                                         </Link>
                                     ))}
-                                     <Button asChild size="lg" className="w-full mt-4">
-                                        <Link href="/blog" onClick={() => setIsSheetOpen(false)}>Blog</Link>
-                                    </Button>
                                 </nav>
                                 <div className="mt-auto text-center text-muted-foreground text-sm">
                                     <p>&copy; {new Date().getFullYear()} Dev Kumar Das</p>

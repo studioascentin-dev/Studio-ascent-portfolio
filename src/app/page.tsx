@@ -18,20 +18,20 @@ export default function Home() {
       <Header />
       <main className="flex-1">
         <HeroSection />
-        <div id="about">
+        <div id="about" className="pt-20 -mt-20">
           <AboutSection />
         </div>
-        <div id="services">
+        <div id="services" className="pt-20 -mt-20">
           <ServicesSection />
         </div>
-        <div id="work">
+        <div id="work" className="pt-20 -mt-20">
           <ProjectsSection />
         </div>
-        <div id="contact">
+        <div id="contact" className="pt-20 -mt-20">
           <HireMeSection />
         </div>
-        <Footer />
       </main>
+      <Footer />
     </div>
   );
 }

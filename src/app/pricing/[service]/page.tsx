@@ -22,11 +22,11 @@ const allWebDevFeatures = [
     { name: 'Up to 6 Page Website', basic: 'hidden', intermediate: true, pro: 'hidden' },
     { name: '10+ Page Application', basic: 'hidden', intermediate: 'hidden', pro: true },
     { name: 'Next.js Framework', basic: true, intermediate: true, pro: true },
-    { name: 'Basic CMS', basic: true, intermediate: false, pro: false },
+    { name: 'Basic CMS', basic: true, intermediate: false, pro: 'hidden' },
     { name: 'Advanced CMS', basic: false, intermediate: true, pro: true },
     { name: 'Simple API Integrations', basic: false, intermediate: true, pro: 'hidden' },
     { name: 'API Integrations', basic: false, intermediate: false, pro: true },
-    { name: 'E-commerce Functionality', basic: false, intermediate: true, pro: true },
+    { name: 'E-commerce Functionality', basic: false, intermediate: false, pro: true },
     { name: 'UI/UX Premium Design', basic: false, intermediate: false, pro: true },
     { name: 'Performance Optimization', basic: false, intermediate: false, pro: true },
     { name: 'Training & Documentation', basic: false, intermediate: false, pro: true },
@@ -258,6 +258,10 @@ export default function ServicePricingPage() {
                                             {serviceId === 'web-development' ? (
                                                 (tier.features as {name: string, available: boolean | string}[]).map((feature, i) => {
                                                     if(feature.available === 'hidden') return null;
+                                                    
+                                                    if (tier.name === 'Pro' && !feature.available) {
+                                                      return null;
+                                                    }
                                                     
                                                     return (
                                                         <li key={i} className="flex items-start gap-3">

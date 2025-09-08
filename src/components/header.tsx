@@ -3,7 +3,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { cn } from "@/lib/utils";
 import * as React from 'react';
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
@@ -37,19 +37,28 @@ const itemVariants = {
 
 export function Header() {
     const pathname = usePathname();
+    const router = useRouter();
     const [activeSection, setActiveSection] = React.useState('');
     const [isSheetOpen, setIsSheetOpen] = React.useState(false);
 
     const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-        if (href.startsWith("/#")) {
+        const isHomePage = pathname === '/';
+        const isAnchorLink = href.startsWith('/#');
+
+        if (isAnchorLink) {
             e.preventDefault();
             const targetId = href.substring(2);
-            setActiveSection(targetId);
-            const targetElement = document.getElementById(targetId);
-            if (targetElement) {
-                targetElement.scrollIntoView({ behavior: 'smooth' });
+
+            if (isHomePage) {
+                setActiveSection(targetId);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
+            } else {
+                router.push(`/#${targetId}`);
             }
-            setIsSheetOpen(false); // Close sheet on navigation
+             setIsSheetOpen(false);
         } else {
              setIsSheetOpen(false);
         }
@@ -76,14 +85,24 @@ export function Header() {
             if (el) observer.observe(el);
         });
 
+        // Also handle initial hash on load for non-homepage anchors
+        if (window.location.hash) {
+            const targetId = window.location.hash.substring(1);
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                setTimeout(() => targetElement.scrollIntoView({ behavior: 'smooth' }), 100);
+            }
+        }
+
+
         return () => observer.disconnect();
-    }, []);
+    }, [pathname]);
 
     const isLinkActive = (item: {name: string, href: string}) => {
         if (item.href.startsWith("/#")) {
              return activeSection === item.href.substring(2);
         }
-        return pathname === item.href;
+        return pathname.startsWith(item.href);
     };
 
     return (

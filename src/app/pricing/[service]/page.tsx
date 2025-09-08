@@ -19,8 +19,8 @@ import Link from 'next/link';
 
 const allWebDevFeatures = [
     { name: '1-3 Page Website', basic: true, intermediate: false, pro: false },
-    { name: 'Up to 6 Page Website', basic: false, intermediate: true, pro: false },
-    { name: '10+ Page Application', basic: false, intermediate: false, pro: true },
+    { name: 'Up to 6 Page Website', basic: 'hidden', intermediate: true, pro: false },
+    { name: '10+ Page Application', basic: 'hidden', intermediate: false, pro: true },
     { name: 'Next.js Framework', basic: true, intermediate: true, pro: true },
     { name: 'Basic CMS', basic: true, intermediate: false, pro: false },
     { name: 'Advanced CMS', basic: false, intermediate: true, pro: true },
@@ -34,10 +34,10 @@ const allWebDevFeatures = [
     { name: 'AI Features (Chatbot, etc.)', basic: false, intermediate: false, pro: true },
     { name: 'Custom Integrations', basic: false, intermediate: false, pro: true },
     { name: 'Mobile App (iOS + Android)', basic: false, intermediate: false, pro: true },
-    { name: 'Multi-language & Currency', basic: false, intermediate: false, pro: true },
+    { name: 'Multi-language & Currency', basic: 'hidden', intermediate: false, pro: true },
     { name: '1 Month Support', basic: true, intermediate: false, pro: false },
-    { name: '2 Months Support', basic: false, intermediate: true, pro: false },
-    { name: '3+ Months Support', basic: false, intermediate: false, pro: true },
+    { name: '2 Months Support', basic: 'hidden', intermediate: true, pro: false },
+    { name: '3+ Months Support', basic: 'hidden', intermediate: false, pro: true },
 ];
 
 const pricingData = {
@@ -255,16 +255,20 @@ export default function ServicePricingPage() {
                                     <CardContent className="flex flex-col flex-grow items-center p-6 pt-0">
                                         <ul className="space-y-4 text-sm w-full flex-grow">
                                             {serviceId === 'web-development' ? (
-                                                (tier.features as {name: string, available: boolean}[]).map((feature, i) => (
-                                                    <li key={i} className="flex items-start gap-3">
-                                                        {feature.available ? (
-                                                            <Check className="h-5 w-5 text-green-500 mt-0.5 shrink-0" />
-                                                        ) : (
-                                                            <X className="h-5 w-5 text-red-500 mt-0.5 shrink-0" />
-                                                        )}
-                                                        <span className={cn("text-muted-foreground", !feature.available && "line-through")}>{feature.name}</span>
-                                                    </li>
-                                                ))
+                                                (tier.features as {name: string, available: boolean | string}[]).map((feature, i) => {
+                                                    if(feature.available === 'hidden') return null;
+                                                    
+                                                    return (
+                                                        <li key={i} className="flex items-start gap-3">
+                                                            {feature.available ? (
+                                                                <Check className="h-5 w-5 text-green-500 mt-0.5 shrink-0" />
+                                                            ) : (
+                                                                <X className="h-5 w-5 text-red-500 mt-0.5 shrink-0" />
+                                                            )}
+                                                            <span className="text-muted-foreground">{feature.name}</span>
+                                                        </li>
+                                                    )
+                                                })
                                             ) : (
                                                 (tier.features as string[]).map((feature, i) => (
                                                     <li key={i} className="flex items-start gap-3">

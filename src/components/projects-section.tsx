@@ -95,34 +95,36 @@ export function ProjectsSection() {
 
                 <motion.div
                     variants={sectionVariants}
-                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+                    className="flex justify-center"
                 >
-                    {projects.map((project: any) => (
-                        <motion.div
-                            key={project.name}
-                            variants={itemVariants}
-                        >
-                            <Link href={project.href} className="block h-full group">
-                                <Card className="flex flex-col h-full bg-card shadow-lg transition-all duration-300 overflow-hidden relative">
-                                    <CardHeader className="p-0 aspect-[4/3] overflow-hidden">
-                                        <Image
-                                            src={project.image}
-                                            alt={project.name}
-                                            width={600}
-                                            height={450}
-                                            className="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
-                                            data-ai-hint={project.dataAiHint}
-                                        />
-                                    </CardHeader>
-                                    <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center p-6 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                        <h4 className="font-headline text-2xl text-white mb-2">{project.name}</h4>
-                                        <p className="text-sm font-medium text-primary mb-4">{project.category}</p>
-                                        <ExternalLink className="w-8 h-8 text-white"/>
-                                    </div>
-                                </Card>
-                            </Link>
-                        </motion.div>
-                    ))}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {projects.map((project: any) => (
+                            <motion.div
+                                key={project.name}
+                                variants={itemVariants}
+                            >
+                                <Link href={project.href} className="block h-full group">
+                                    <Card className="flex flex-col h-full bg-card shadow-lg transition-all duration-300 overflow-hidden relative">
+                                        <CardHeader className="p-0 aspect-[4/3] overflow-hidden">
+                                            <Image
+                                                src={project.image}
+                                                alt={project.name}
+                                                width={600}
+                                                height={450}
+                                                className="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
+                                                data-ai-hint={project.dataAiHint}
+                                            />
+                                        </CardHeader>
+                                        <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center p-6 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            <h4 className="font-headline text-2xl text-white mb-2">{project.name}</h4>
+                                            <p className="text-sm font-medium text-primary mb-4">{project.category}</p>
+                                            <ExternalLink className="w-8 h-8 text-white"/>
+                                        </div>
+                                    </Card>
+                                </Link>
+                            </motion.div>
+                        ))}
+                    </div>
                 </motion.div>
             </motion.div>
         </section>

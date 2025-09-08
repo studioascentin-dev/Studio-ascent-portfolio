@@ -18,13 +18,13 @@ import { Header } from '@/components/header';
 import Link from 'next/link';
 
 const allWebDevFeatures = [
-    { name: '1-3 Page Website', basic: true, intermediate: 'hidden', pro: false },
-    { name: 'Up to 6 Page Website', basic: 'hidden', intermediate: true, pro: false },
+    { name: '1-3 Page Website', basic: true, intermediate: 'hidden', pro: 'hidden' },
+    { name: 'Up to 6 Page Website', basic: 'hidden', intermediate: true, pro: 'hidden' },
     { name: '10+ Page Application', basic: 'hidden', intermediate: 'hidden', pro: true },
     { name: 'Next.js Framework', basic: true, intermediate: true, pro: true },
     { name: 'Basic CMS', basic: true, intermediate: false, pro: false },
     { name: 'Advanced CMS', basic: false, intermediate: true, pro: true },
-    { name: 'Simple API Integrations', basic: false, intermediate: true, pro: false },
+    { name: 'Simple API Integrations', basic: false, intermediate: true, pro: 'hidden' },
     { name: 'API Integrations', basic: false, intermediate: false, pro: true },
     { name: 'E-commerce Functionality', basic: false, intermediate: true, pro: true },
     { name: 'UI/UX Premium Design', basic: false, intermediate: false, pro: true },
@@ -36,8 +36,8 @@ const allWebDevFeatures = [
     { name: 'Custom Integrations', basic: false, intermediate: false, pro: true },
     { name: 'Mobile App (iOS + Android)', basic: false, intermediate: false, pro: true },
     { name: 'Multi-language & Currency', basic: 'hidden', intermediate: 'hidden', pro: true },
-    { name: '1 Month Support', basic: true, intermediate: 'hidden', pro: false },
-    { name: '2 Months Support', basic: 'hidden', intermediate: true, pro: false },
+    { name: '1 Month Support', basic: true, intermediate: 'hidden', pro: 'hidden' },
+    { name: '2 Months Support', basic: 'hidden', intermediate: true, pro: 'hidden' },
     { name: '3+ Months Support', basic: 'hidden', intermediate: false, pro: true },
 ];
 

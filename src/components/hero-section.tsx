@@ -103,7 +103,7 @@ export function HeroSection() {
             <motion.div variants={itemVariants} className="flex space-x-4 justify-center">
               <motion.a href="#" variants={socialIconVariants} whileHover="hover" initial="rest" className="text-foreground/80 hover:text-primary transition-colors"><Dribbble size={20} /></motion.a>
               <motion.a href="#" variants={socialIconVariants} whileHover="hover" initial="rest" className="text-foreground/80 hover:text-primary transition-colors"><Instagram size={20} /></motion.a>
-              <motion.a href="#" variants={socialIconVariants} whileHover="hover" initial="rest" className="text-foreground/80 hover:text-primary transition-colors"><Linkedin size={20} /></motion.a>
+              <motion.a href="https://www.linkedin.com/in/deb-kumar-das-46193824a" target="_blank" rel="noopener noreferrer" variants={socialIconVariants} whileHover="hover" initial="rest" className="text-foreground/80 hover:text-primary transition-colors"><Linkedin size={20} /></motion.a>
             </motion.div>
           </div>
 

@@ -65,9 +65,9 @@ const pricingData = {
   'video-editing': {
     title: 'Video Editing',
     tiers: [
-      { name: 'Basic', price: '₹3,000', period: '/min', features: ['Up to 1 min video', 'Basic Cuts & Transitions', 'Royalty-Free Music', '1 Round of Revisions'] },
-      { name: 'Intermediate', price: '₹7,500', period: '/min', features: ['Up to 3 min video', 'Advanced Transitions', 'Basic Color Grading', '2 Rounds of Revisions'] },
-      { name: 'Pro', price: '₹15,000', period: '/min', features: ['Up to 5 min video', 'Custom Animations & VFX', 'Advanced Color Grading', '3 Rounds of Revisions'] },
+      { name: 'Basic', price: '₹3,000', period: '/5 min video', features: ['Up to 5 min video', 'Basic Cuts & Transitions', 'Royalty-Free Music', '1 Round of Revisions'] },
+      { name: 'Intermediate', price: '₹8,000', period: '/10 min video', features: ['Up to 10 min video', 'Advanced Transitions', 'Basic Color Grading', '2 Rounds of Revisions'] },
+      { name: 'Pro', price: '₹20,000', period: '/20 min video', features: ['Up to 20 min video', 'Custom Animations & VFX', 'Advanced Color Grading', '3 Rounds of Revisions'] },
     ]
   },
   'ppt-design': {

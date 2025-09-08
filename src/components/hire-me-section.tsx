@@ -96,6 +96,10 @@ export function HireMeSection() {
                     ))}
                 </motion.div>
 
+                <motion.div variants={itemVariants} className="text-center mt-16">
+                    <Button onClick={handleWhatsAppClick} size="lg" className="font-bold">Contact Me</Button>
+                </motion.div>
+
             </motion.div>
         </section>
     );

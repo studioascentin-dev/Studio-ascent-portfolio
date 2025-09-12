@@ -36,12 +36,12 @@ export function AboutSection() {
         {
             icon: <User className="w-8 h-8 text-primary" />,
             title: "About Me",
-            description: "A passionate developer who loves creating beautiful and functional web experiences."
+            description: "A passionate creator who loves bringing ideas to life through code and design."
         },
         {
             icon: <Briefcase className="w-8 h-8 text-primary" />,
             title: "Profession",
-            description: "Junior Full-Stack Developer skilled in React, Next.js, and modern web technologies."
+            description: "A multi-talented creative specializing in Web & AI Development, Video/Photo Editing, and more."
         },
         {
             icon: <MapPin className="w-8 h-8 text-primary" />,
@@ -89,7 +89,7 @@ export function AboutSection() {
                 
                 <motion.div variants={itemVariants} className="text-center mt-16">
                      <p className="text-muted-foreground text-lg max-w-3xl mx-auto mb-8">
-                        My expertise lies in crafting dynamic, engaging interfaces through writing clean and optimized code and utilizing cutting-edge development tools and techniques. I am also a team player who thrives in collaborating with cross-functional teams to produce outstanding web applications.
+                        My expertise lies in crafting dynamic web applications, developing intelligent AI chatbots, and producing compelling visual content through video and photo editing. I thrive on collaborating with clients to bring their digital visions to life.
                     </p>
                     <Button asChild size="lg" className="font-bold">
                         <a href="#contact">Hire Me</a>

@@ -15,9 +15,9 @@ export function Footer() {
   }
 
   return (
-    <footer className="py-12 bg-slate-100">
+    <footer className="py-8 bg-transparent">
       <div className="container mx-auto px-4 text-center">
-        
+        <p className="text-sm text-muted-foreground">&copy; {new Date().getFullYear()} Dev Kumar Das. All Rights Reserved.</p>
       </div>
     </footer>
   );

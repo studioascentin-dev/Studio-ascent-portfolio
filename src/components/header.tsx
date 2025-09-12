@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { usePathname, useRouter } from 'next/navigation';
 import { cn } from "@/lib/utils";
 import * as React from 'react';
-import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "./ui/sheet";
 import { Button } from "./ui/button";
 import { Menu, Code } from "lucide-react";
 
@@ -151,6 +151,9 @@ export function Header() {
                             </Button>
                         </SheetTrigger>
                         <SheetContent side="right" className="w-full max-w-xs bg-background/95 backdrop-blur-md border-l-primary/20">
+                            <SheetHeader className="sr-only">
+                                <SheetTitle>Navigation Menu</SheetTitle>
+                            </SheetHeader>
                             <div className="flex flex-col h-full">
                                 <div className="mb-8 text-center">
                                      <Link href="/" onClick={() => setIsSheetOpen(false)} className="text-3xl font-bold font-headline text-primary">

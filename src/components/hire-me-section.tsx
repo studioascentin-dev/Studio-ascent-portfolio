@@ -4,7 +4,7 @@
 import { motion } from 'framer-motion';
 import { Award, MessageSquare, Target } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
-import { Button } from './ui/button';
+import { ContactForm } from './contact-form';
 
 const sectionVariants = {
     hidden: { opacity: 0 },
@@ -49,13 +49,6 @@ const hiringPoints = [
 ];
 
 export function HireMeSection() {
-    const phoneNumber = "919707191619";
-
-    const handleWhatsAppClick = () => {
-        const message = "Hello! I saw your portfolio and I'm interested in your services. Let's discuss a project.";
-        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-        window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-    }
     
     return (
         <section id="contact" className="py-24 md:py-32 bg-secondary/50">
@@ -71,8 +64,14 @@ export function HireMeSection() {
                         variants={itemVariants}
                         className="text-4xl font-bold font-headline tracking-tighter sm:text-5xl"
                     >
-                        Why <span className="text-primary">Hire Me?</span>
+                        Let's Work <span className="text-primary">Together</span>
                     </motion.h2>
+                     <motion.p 
+                        variants={itemVariants} 
+                        className="mt-4 text-muted-foreground md:text-lg"
+                    >
+                        Have a project in mind? Fill out the form below and I'll get back to you soon!
+                    </motion.p>
                 </div>
                 
                 <motion.div 
@@ -96,8 +95,8 @@ export function HireMeSection() {
                     ))}
                 </motion.div>
 
-                <motion.div variants={itemVariants} className="text-center mt-16">
-                    <Button onClick={handleWhatsAppClick} size="lg" className="font-bold">Contact Me</Button>
+                <motion.div variants={itemVariants} className="mt-16 max-w-3xl mx-auto">
+                    <ContactForm />
                 </motion.div>
 
             </motion.div>

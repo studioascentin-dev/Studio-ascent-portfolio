@@ -106,12 +106,12 @@ export function Header() {
     };
 
     return (
-        <header className="fixed top-0 left-0 right-0 z-50 p-4 md:p-6 bg-background/80 backdrop-blur-md">
+        <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md">
             <motion.div
                 variants={navVariants}
                 initial="hidden"
                 animate="visible"
-                className="container mx-auto flex items-center justify-between"
+                className="flex items-center justify-between px-4 md:px-6 py-4 md:py-6"
             >
                 <Link href="/" className="text-2xl md:text-3xl font-bold font-headline text-primary">
                     Dev.
@@ -151,8 +151,8 @@ export function Header() {
                             </Button>
                         </SheetTrigger>
                         <SheetContent side="right" className="w-full max-w-xs bg-background/95 backdrop-blur-md border-l-primary/20">
-                            <SheetHeader className="sr-only">
-                                <SheetTitle>Navigation Menu</SheetTitle>
+                           <SheetHeader>
+                                <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
                             </SheetHeader>
                             <div className="flex flex-col h-full">
                                 <div className="mb-8 text-center">

@@ -24,9 +24,9 @@ const pricingTiers = [
         service: "Video Editing",
         slug: "video-editing",
         tiers: [
-            { name: "Basic", price: "₹3,000", period: "", features: ["Up to 5 min video", "Basic Cuts & Transitions", "Royalty-Free Music"] },
-            { name: "Intermediate", price: "₹8,000", period: "", features: ["Up to 10 min video", "Advanced Transitions", "Color Grading"] },
-            { name: "Pro", price: "₹20,000", period: "", features: ["Up to 20 min video", "Custom Animations", "Advanced Color"] },
+            { name: "Basic", price: "₹5,000", period: "", features: ["Up to 5 min video", "Basic Cuts & Transitions", "Royalty-Free Music"] },
+            { name: "Intermediate", price: "₹15,000", period: "", features: ["Up to 10 min video", "Advanced Transitions", "Color Grading"] },
+            { name: "Pro", price: "₹50,000", period: "", features: ["Up to 20 min video", "Custom Animations", "Advanced Color"] },
         ]
     },
     {

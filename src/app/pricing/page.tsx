@@ -30,12 +30,12 @@ const pricingTiers = [
         ]
     },
     {
-        service: "UI/UX Design",
-        slug: "ui-ux-design",
+        service: "AI Chatbot",
+        slug: "ai-chatbot",
         tiers: [
-            { name: "Basic", price: "₹4000", period: "", features: ["1 Logo Concept", "2 Revisions", "JPG & PNG"] },
-            { name: "Intermediate", price: "₹10,000", period: "", features: ["3 Logo Concepts", "Social Media Kit", "Vector Files"] },
-            { name: "Pro", price: "₹20,000", period: "", features: ["5 Logo Concepts", "Full Brand Guide", "Source Files"] },
+            { name: "FAQ / Support Bot", price: "₹8,000", period: "", features: ["Handles FAQs", "WhatsApp/Telegram", "High Demand"] },
+            { name: "Booking Bot", price: "₹15,000", period: "", features: ["Order/Booking via Chat", "Google Sheet/Airtable", "Owner Notifications"] },
+            { name: "GPT-Powered Bot", price: "₹25,000", period: "", features: ["Smart, Human-like Replies", "Uses OpenAI Credits", "For Advanced Needs"] },
         ]
     },
     {

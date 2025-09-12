@@ -6,7 +6,7 @@ import { Footer } from '@/components/footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Video, Camera, Presentation, Code, PenTool, ExternalLink } from 'lucide-react';
+import { ArrowLeft, Video, Camera, Bot, Code, PenTool, ExternalLink } from 'lucide-react';
 import { notFound, useParams } from 'next/navigation';
 import * as React from 'react';
 import Image from 'next/image';
@@ -40,17 +40,17 @@ const servicesData = {
         { name: 'Poster & Flyer Design', image: '/poster.png', dataAiHint: 'artistic color' },
     ]
   },
-  'ui-ux-design': {
-    icon: <PenTool className="h-10 w-10 text-primary" />,
-    title: 'UI/UX Design',
-    description: 'I create compelling and beautiful visuals that tell a story, define a brand, and capture attention. From logos to complete brand identities, I craft designs that make an impact.',
+  'ai-chatbot': {
+    icon: <Bot className="h-10 w-10 text-primary" />,
+    title: 'AI Chatbot',
+    description: 'I create intelligent, automated chatbots for WhatsApp and websites to handle support, book appointments, and generate leads, allowing you to focus on your business.',
     projects: [
-        { name: 'Personal Portfolio Website design', image: 'https://placehold.co/600x450.png', dataAiHint: 'modern logo' },
-        { name: 'Business or Startup Landing Page', image: 'https://placehold.co/600x450.png', dataAiHint: 'branding identity' },
-        { name: 'E-commerce Website UI Design', image: 'https://placehold.co/600x450.png', dataAiHint: 'social media' },
-        { name: 'Admin Dashboard Design (UI only)', image: 'https://placehold.co/600x450.png', dataAiHint: 'event poster' },
-        { name: 'Education / Coaching Center Website', image: 'https://placehold.co/600x450.png', dataAiHint: 'product package' },
-        { name: 'Contact Forms & CTA Sections', image: 'https://placehold.co/600x450.png', dataAiHint: 'book cover' },
+        { name: 'FAQ Support Bot', image: 'https://placehold.co/600x450.png', dataAiHint: 'chatbot conversation' },
+        { name: 'Restaurant Booking Bot', image: 'https://placehold.co/600x450.png', dataAiHint: 'booking system' },
+        { name: 'Real Estate Lead Capture', image: 'https://placehold.co/600x450.png', dataAiHint: 'lead generation' },
+        { name: 'GPT-Powered Smart Assistant', image: 'https://placehold.co/600x450.png', dataAiHint: 'ai assistant' },
+        { name: 'E-commerce Order Bot', image: 'https://placehold.co/600x450.png', dataAiHint: 'online shopping' },
+        { name: 'Service Appointment Scheduler', image: 'https://placehold.co/600x450.png', dataAiHint: 'calendar scheduling' },
     ]
   },
   'web-development': {

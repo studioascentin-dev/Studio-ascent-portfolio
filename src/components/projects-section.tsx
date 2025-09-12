@@ -24,11 +24,11 @@ const projects = [
       href: '/services/video-editing'
     },
     { 
-      name: 'Modern Logo Design', 
+      name: 'WhatsApp Support Bot', 
       image: 'https://placehold.co/600x450.png',
-      dataAiHint: 'modern logo',
-      category: 'UI/UX Design',
-      href: '/services/ui-ux-design'
+      dataAiHint: 'chatbot interface',
+      category: 'AI Chatbot',
+      href: '/services/ai-chatbot'
     },
     { 
       name: 'Custom E-commerce Store', 

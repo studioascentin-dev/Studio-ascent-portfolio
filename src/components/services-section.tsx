@@ -1,7 +1,7 @@
 
 "use client";
 
-import { Video, Camera, Presentation, Code, PenTool } from 'lucide-react';
+import { Video, Camera, Bot, Code, PenTool } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -21,10 +21,10 @@ const services = [
     description: 'High-quality photo retouching and manipulation to make your images look stunning and professional.',
   },
   {
-    id: 'ui-ux-design',
-    icon: <PenTool className="h-10 w-10 text-primary" />,
-    title: 'UI/UX Design',
-    description: 'Compelling visuals that tell a story, define a brand, and capture attention, from logos to brand identities.',
+    id: 'ai-chatbot',
+    icon: <Bot className="h-10 w-10 text-primary" />,
+    title: 'AI Chatbot',
+    description: 'Automate your business with intelligent chatbots for WhatsApp and websites, handling support, bookings, and lead generation.',
   },
   {
     id: 'web-development',

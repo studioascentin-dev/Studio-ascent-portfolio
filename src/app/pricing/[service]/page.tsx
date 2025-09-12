@@ -25,8 +25,8 @@ const allWebDevFeatures = [
     { name: 'Basic CMS', basic: true, intermediate: false, pro: 'hidden' },
     { name: 'Advanced CMS', basic: false, intermediate: true, pro: true },
     { name: 'Simple API Integrations', basic: false, intermediate: true, pro: 'hidden' },
-    { name: 'API Integrations', basic: false, intermediate: false, pro: true },
-    { name: 'E-commerce Functionality', basic: false, intermediate: false, pro: true },
+    { name: 'API Integrations', basic: 'hidden', intermediate: 'hidden', pro: true },
+    { name: 'E-commerce Functionality', basic: false, intermediate: 'hidden', pro: true },
     { name: 'UI/UX Premium Design', basic: false, intermediate: false, pro: true },
     { name: 'Performance Optimization', basic: false, intermediate: false, pro: true },
     { name: 'Training & Documentation', basic: false, intermediate: false, pro: true },
@@ -34,7 +34,7 @@ const allWebDevFeatures = [
     { name: 'Advanced Security Setup', basic: false, intermediate: false, pro: true },
     { name: 'AI Features (Chatbot, etc.)', basic: false, intermediate: false, pro: true },
     { name: 'Custom Integrations', basic: false, intermediate: false, pro: true },
-    { name: 'Mobile App (iOS + Android)', basic: 'hidden', intermediate: false, pro: true },
+    { name: 'Mobile App (iOS + Android)', basic: 'hidden', intermediate: false, pro: 'hidden' },
     { name: 'Multi-language & Currency', basic: 'hidden', intermediate: 'hidden', pro: true },
     { name: '1 Month Support', basic: true, intermediate: 'hidden', pro: 'hidden' },
     { name: '2 Months Support', basic: 'hidden', intermediate: true, pro: 'hidden' },
@@ -94,12 +94,13 @@ const pricingData = {
       { name: 'Pro', price: '₹20,000', period: '', features: ['Up to 20 min video', 'Custom Animations & VFX', 'Advanced Color Grading', '3 Rounds of Revisions'] },
     ]
   },
-  'ui-ux-design': {
-    title: 'UI/UX Design',
+  'ai-chatbot': {
+    title: 'AI Chatbot for WhatsApp & Business',
     tiers: [
-      { name: 'Basic', price: '₹4000', period: '', features: ['1 Logo Concept', '2 Rounds of Revisions', 'JPG & PNG Files'] },
-      { name: 'Intermediate', price: '₹10,000', period: '', features: ['3 Logo Concepts', 'Social Media Kit', 'Vector Files', '3 Rounds of Revisions'] },
-      { name: 'Pro', price: '₹20,000', period: '', features: ['5 Logo Concepts', 'Full Brand Style Guide', 'Stationery Designs', 'Source Files (AI, EPS)'] },
+      { name: 'FAQ / Support Bot', price: '₹8,000', period: '', features: ['Handles customer questions (hours, prices, etc.)', 'Works on WhatsApp / Telegram', 'Ideal for shops, restaurants, salons'] },
+      { name: 'Order & Booking Bot', price: '₹15,000', period: '', features: ['Customers place orders or book services via chat', 'Collects info into Google Sheets / Airtable', 'Sends owner a notification upon new order/booking'] },
+      { name: 'Lead Collection Bot', price: '₹12,000', period: '', features: ['Asks for name, phone, and requirements', 'Saves leads into Google Sheets or CRM', 'Perfect for real estate, coaching, and tutors'] },
+      { name: 'AI-Powered GPT Bot', price: '₹25,000', period: '', features: ['Feels like talking to ChatGPT on WhatsApp', 'Provides smart, human-like replies', 'Slightly more costly to run (uses OpenAI credits)'] },
     ]
   },
   'web-development': {
@@ -181,6 +182,8 @@ export default function ServicePricingPage() {
     return null;
   }
 
+  const gridColsClass = serviceId === 'ai-chatbot' ? 'lg:grid-cols-4' : 'lg:grid-cols-3';
+
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
         <Header />
@@ -211,7 +214,7 @@ export default function ServicePricingPage() {
                         initial="hidden"
                         animate="visible"
                         variants={sectionVariants}
-                        className="grid grid-cols-1 lg:grid-cols-3 gap-x-8 gap-y-16 items-start max-w-5xl mx-auto"
+                        className={`grid grid-cols-1 ${gridColsClass} gap-x-8 gap-y-16 items-start max-w-7xl mx-auto`}
                     >
                     {(data.tiers as Tier[]).map((tier, tierIndex) => (
                         <motion.div 

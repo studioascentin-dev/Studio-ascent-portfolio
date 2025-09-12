@@ -34,17 +34,17 @@ export function AboutSection() {
 
     const info = [
         {
-            icon: <User className="w-8 h-8 text-card-foreground group-hover:text-primary-foreground transition-colors duration-300" />,
+            icon: <User className="w-8 h-8 text-primary" />,
             title: "About Me",
             description: "A passionate developer who loves creating beautiful and functional web experiences."
         },
         {
-            icon: <Briefcase className="w-8 h-8 text-card-foreground group-hover:text-primary-foreground transition-colors duration-300" />,
+            icon: <Briefcase className="w-8 h-8 text-primary" />,
             title: "Profession",
             description: "Junior Full-Stack Developer skilled in React, Next.js, and modern web technologies."
         },
         {
-            icon: <MapPin className="w-8 h-8 text-card-foreground group-hover:text-primary-foreground transition-colors duration-300" />,
+            icon: <MapPin className="w-8 h-8 text-primary" />,
             title: "Based In",
             description: "Sonapur, Assam, India"
         }
@@ -72,15 +72,15 @@ export function AboutSection() {
                 >
                     {info.map((item, index) => (
                         <motion.div key={index} variants={itemVariants} className="group">
-                            <Card className="bg-card/80 p-6 text-center h-full hover:-translate-y-2 transition-all duration-300 hover:bg-primary group-hover:text-primary-foreground">
+                            <Card className="bg-secondary/50 backdrop-blur-sm border-white/10 p-6 text-center h-full hover:-translate-y-2 transition-all duration-300 hover:bg-primary/20 hover:border-primary">
                                 <CardHeader className="p-0 items-center mb-4">
-                                    <div className="p-3 bg-primary/10 rounded-full mb-4 inline-block group-hover:bg-primary-foreground/20 transition-colors duration-300">
+                                    <div className="p-3 bg-primary/10 rounded-full mb-4 inline-block">
                                         {item.icon}
                                     </div>
                                     <CardTitle className="font-headline text-2xl">{item.title}</CardTitle>
                                 </CardHeader>
                                 <CardContent className="p-0">
-                                    <p className="text-muted-foreground group-hover:text-primary-foreground/90 transition-colors duration-300">{item.description}</p>
+                                    <p className="text-muted-foreground">{item.description}</p>
                                 </CardContent>
                             </Card>
                         </motion.div>

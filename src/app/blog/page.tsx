@@ -116,7 +116,7 @@ export default function BlogPage() {
               {blogPosts.map((post) => (
                 <motion.div key={post.slug} variants={itemVariants}>
                   <Link href={`/blog/#`} className="block h-full group">
-                    <Card className="flex flex-col h-full bg-card/80 shadow-lg transition-all duration-300 overflow-hidden hover:-translate-y-2 hover:shadow-primary/20">
+                    <Card className="flex flex-col h-full bg-secondary/50 backdrop-blur-sm border-white/10 shadow-lg transition-all duration-300 overflow-hidden hover:-translate-y-2 hover:shadow-primary/20 hover:border-primary">
                       <CardHeader className="p-0 aspect-[4/3] overflow-hidden">
                         <Image
                           src={post.image}

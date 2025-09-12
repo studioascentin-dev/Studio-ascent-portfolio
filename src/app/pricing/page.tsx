@@ -108,7 +108,7 @@ export default function PricingPage() {
                                     </div>
                                     <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
                                         {service.tiers.map(tier => (
-                                            <Card key={tier.name} className="flex flex-col bg-card/80 hover:-translate-y-2 transition-transform duration-300">
+                                            <Card key={tier.name} className="flex flex-col bg-secondary/50 backdrop-blur-sm border-white/10 hover:-translate-y-2 transition-transform duration-300">
                                                 <CardHeader className="text-center">
                                                     <CardTitle className="text-2xl font-headline text-primary">{tier.name}</CardTitle>
                                                     <div className="flex items-baseline justify-center gap-1">

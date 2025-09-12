@@ -32,17 +32,17 @@ const itemVariants = {
 
 const hiringPoints = [
     {
-        icon: <Award className="w-6 h-6 text-card-foreground group-hover:text-primary-foreground transition-colors duration-300" />,
+        icon: <Award className="w-6 h-6 text-primary" />,
         title: "Quality & Experience",
         description: "I deliver high-quality, professional results that align with the latest industry standards."
     },
     {
-        icon: <MessageSquare className="w-6 h-6 text-card-foreground group-hover:text-primary-foreground transition-colors duration-300" />,
+        icon: <MessageSquare className="w-6 h-6 text-primary" />,
         title: "Client-Centric Approach",
         description: "I prioritize clear communication to ensure the final product perfectly aligns with your vision and goals."
     },
     {
-        icon: <Target className="w-6 h-6 text-card-foreground group-hover:text-primary-foreground transition-colors duration-300" />,
+        icon: <Target className="w-6 h-6 text-primary" />,
         title: "Passion for Creativity",
         description: "I bring a creative, solution-oriented mindset to every project, crafting unique and impactful digital experiences."
     }
@@ -80,15 +80,15 @@ export function HireMeSection() {
                 >
                     {hiringPoints.map((point, index) => (
                         <motion.div key={index} variants={itemVariants} className="group">
-                             <Card className="bg-card/80 p-6 text-center h-full hover:-translate-y-2 transition-all duration-300 hover:bg-primary group-hover:text-primary-foreground">
+                             <Card className="bg-secondary/50 backdrop-blur-sm border-white/10 p-6 text-center h-full hover:-translate-y-2 transition-all duration-300 hover:bg-primary/20 hover:border-primary">
                                 <CardHeader className="p-0 items-center mb-4">
-                                    <div className="p-3 bg-card-foreground/10 rounded-full mb-4 inline-block group-hover:bg-primary-foreground/20 transition-colors duration-300">
+                                    <div className="p-3 bg-primary/10 rounded-full mb-4 inline-block">
                                         {point.icon}
                                     </div>
                                     <CardTitle className="font-headline text-xl">{point.title}</CardTitle>
                                 </CardHeader>
                                 <CardContent className="p-0">
-                                    <p className="text-muted-foreground text-sm group-hover:text-primary-foreground/90 transition-colors duration-300">{point.description}</p>
+                                    <p className="text-muted-foreground text-sm">{point.description}</p>
                                 </CardContent>
                             </Card>
                         </motion.div>

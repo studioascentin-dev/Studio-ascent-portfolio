@@ -70,7 +70,7 @@ export function ContactForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 bg-secondary/80 p-8 rounded-lg">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 bg-secondary/50 backdrop-blur-sm border border-white/10 p-8 rounded-lg">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <FormField
             control={form.control}

@@ -246,7 +246,7 @@ export default function ServicePricingPage() {
                                 transition={{ type: 'spring', stiffness: 300 }}
                             >
                                 <Card className={cn(
-                                    "flex flex-col w-full bg-card/80 transition-all duration-300 hover:shadow-lg overflow-hidden",
+                                    "flex flex-col w-full bg-secondary/50 backdrop-blur-sm border-white/10 transition-all duration-300 hover:shadow-lg overflow-hidden",
                                     "hover:border-primary hover:ring-2 hover:ring-primary hover:shadow-primary/20"
                                 )}>
                                     <CardHeader className="text-center pb-4 pt-6">

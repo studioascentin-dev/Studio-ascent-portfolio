@@ -15,7 +15,7 @@ export function Footer() {
   }
 
   return (
-    <footer className="py-12 bg-secondary">
+    <footer className="py-12 bg-slate-100">
       <div className="container mx-auto px-4 text-center">
         
       </div>

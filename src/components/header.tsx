@@ -150,7 +150,7 @@ export function Header() {
                                 <span className="sr-only">Open menu</span>
                             </Button>
                         </SheetTrigger>
-                        <SheetContent side="right" className="w-full max-w-xs bg-secondary/95 backdrop-blur-md border-l-primary/20">
+                        <SheetContent side="right" className="w-full max-w-xs bg-background/95 backdrop-blur-md border-l-primary/20">
                             <div className="flex flex-col h-full">
                                 <div className="mb-8 text-center">
                                      <Link href="/" onClick={() => setIsSheetOpen(false)} className="text-3xl font-bold font-headline text-primary">

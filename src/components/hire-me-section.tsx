@@ -51,7 +51,7 @@ const hiringPoints = [
 export function HireMeSection() {
     
     return (
-        <section id="contact" className="py-24 md:py-32 bg-secondary/50">
+        <section id="contact" className="py-24 md:py-32 bg-slate-50">
             <motion.div
                 className="container mx-auto px-4"
                 initial="hidden"
@@ -80,7 +80,7 @@ export function HireMeSection() {
                 >
                     {hiringPoints.map((point, index) => (
                         <motion.div key={index} variants={itemVariants} className="group">
-                             <Card className="bg-secondary/50 backdrop-blur-sm border-white/10 p-6 text-center h-full hover:-translate-y-2 transition-all duration-300 hover:bg-primary/20 hover:border-primary">
+                             <Card className="bg-background/50 backdrop-blur-sm border p-6 text-center h-full hover:-translate-y-2 transition-all duration-300 hover:bg-primary/5 hover:border-primary">
                                 <CardHeader className="p-0 items-center mb-4">
                                     <div className="p-3 bg-primary/10 rounded-full mb-4 inline-block">
                                         {point.icon}

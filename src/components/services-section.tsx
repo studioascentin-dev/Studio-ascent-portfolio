@@ -68,7 +68,7 @@ export function ServicesSection() {
   const bottomServices = services.slice(3);
 
   return (
-    <section id="services" className="bg-transparent py-24 md:py-32">
+    <section id="services" className="py-24 md:py-32">
         <div className="container mx-auto px-4">
             <motion.div
                 initial="hidden"

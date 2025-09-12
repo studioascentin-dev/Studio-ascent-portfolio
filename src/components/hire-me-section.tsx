@@ -51,7 +51,7 @@ const hiringPoints = [
 export function HireMeSection() {
     
     return (
-        <section id="contact" className="py-24 md:py-32 bg-slate-50">
+        <section id="contact" className="py-24 md:py-32">
             <motion.div
                 className="container mx-auto px-4"
                 initial="hidden"

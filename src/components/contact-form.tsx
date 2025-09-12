@@ -17,7 +17,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { sendEmail } from "@/ai/flows/send-email";
 import { Loader2 } from "lucide-react";
 import * as React from "react";
 
@@ -39,6 +38,7 @@ const formSchema = z.object({
 export function ContactForm() {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const phoneNumber = "919707191619";
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -52,22 +52,20 @@ export function ContactForm() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
-    try {
-      await sendEmail(values);
-      toast({
-        title: "Message Sent!",
-        description: "Thanks for reaching out. I'll get back to you as soon as possible.",
-      });
-      form.reset();
-    } catch (error) {
-      toast({
-        variant: "destructive",
-        title: "Uh oh! Something went wrong.",
-        description: "There was a problem with your request. Please try again.",
-      });
-    } finally {
-        setIsSubmitting(false);
-    }
+    
+    const messageBody = `Hello! I'm interested in your services.\n\n*Name:*\n${values.name}\n\n*Email:*\n${values.email}\n\n*Service of Interest:*\n${values.service}\n\n*Message:*\n${values.message}`;
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(messageBody)}`;
+
+    // Open WhatsApp in a new tab
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    
+    toast({
+        title: "Redirecting to WhatsApp...",
+        description: "Your message is ready to be sent.",
+    });
+
+    form.reset();
+    setIsSubmitting(false);
   }
 
   return (
@@ -144,7 +142,7 @@ export function ContactForm() {
         />
         <Button type="submit" className="w-full font-bold" disabled={isSubmitting}>
           {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-          Send Message
+          Send Message via WhatsApp
         </Button>
       </form>
     </Form>

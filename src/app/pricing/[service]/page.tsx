@@ -60,27 +60,27 @@ const pricingData = {
       },
       { 
         name: 'Intermediate', 
-        price: '₹999', 
-        period: '/10 photos', 
+        price: '₹1,499', 
+        period: '/5 photos', 
         features: ['Advanced Retouching', 'Color Grading', 'Background Removal', '2 Rounds of Revisions'], 
         single: { price: '₹199', name: 'Single Photo Edit' },
         images: ['https://picsum.photos/400/300'],
         dataAiHint: ['advanced retouch'],
         whatsapp: {
-            package: "Hello! I'd like to go ahead with the Intermediate Photo Editing Package (₹999 for 10 photos). I need advanced retouching, color grading, and background removal. Let me know what you need from my side and how to start. 😊",
+            package: "Hello! I'd like to go ahead with the Intermediate Photo Editing Package (₹1,499 for 5 photos). I need advanced retouching, color grading, and background removal. Let me know what you need from my side and how to start. 😊",
             single: "Hi! I’d like to use the Intermediate Plan for a single photo (₹199). I want advanced retouching with background removal. Please share the details!"
         }
       },
       { 
         name: 'Pro', 
-        price: '₹1,999', 
+        price: '₹3,999', 
         period: '/5 photos', 
         features: ['High-End Retouching', 'Complex Manipulations', 'Source Files', '3 Rounds of Revisions'], 
         single: { price: '₹399', name: 'Single Photo Edit' },
         images: ['https://picsum.photos/400/300'],
         dataAiHint: ['high-end retouching'],
         whatsapp: {
-            package: "Hi there! I'm ready to start with the Pro Photo Editing Package (₹1,999 for 5 photos). I'm looking for high-end retouching and complex manipulations. What's the next step?",
+            package: "Hi there! I'm ready to start with the Pro Photo Editing Package (₹3,999 for 5 photos). I'm looking for high-end retouching and complex manipulations. What's the next step?",
             single: "Hey! I’m looking for Pro-level single photo editing (₹399). I need high-end retouching and complex edits. Can you tell me how to proceed?"
         }
       },

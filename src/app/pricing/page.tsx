@@ -16,8 +16,8 @@ const pricingTiers = [
         slug: "photo-editing",
         tiers: [
             { name: "Basic", price: "₹399", period: "/5 photos", features: ["Basic Retouching", "Color Correction", "1 Revision"] },
-            { name: "Intermediate", price: "₹999", period: "/10 photos", features: ["Advanced Retouching", "Color Grading", "Background Removal"] },
-            { name: "Pro", price: "₹1,999", period: "/5 photos", features: ["High-End Retouching", "Complex Manipulations", "Source Files"] },
+            { name: "Intermediate", price: "₹1,499", period: "/5 photos", features: ["Advanced Retouching", "Color Grading", "Background Removal"] },
+            { name: "Pro", price: "₹3,999", period: "/5 photos", features: ["High-End Retouching", "Complex Manipulations", "Source Files"] },
         ]
     },
     {

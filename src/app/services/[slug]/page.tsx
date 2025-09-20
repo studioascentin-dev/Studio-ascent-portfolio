@@ -12,6 +12,7 @@ import * as React from 'react';
 import Image from 'next/image';
 import { ImageCompare } from '@/components/image-compare';
 import Link from 'next/link';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from '@/components/ui/dialog';
 
 const servicesData = {
   'video-editing': {
@@ -45,12 +46,12 @@ const servicesData = {
     title: 'AI Chatbot',
     description: 'I create intelligent, automated chatbots for WhatsApp and websites to handle support, book appointments, and generate leads, allowing you to focus on your business.',
     projects: [
-        { name: 'Telegram Bot', image: 'https://placehold.co/600x450.png', dataAiHint: 'chatbot conversation' },
-        { name: 'Restaurant Booking Bot', image: 'https://placehold.co/600x450.png', dataAiHint: 'booking system' },
-        { name: 'Real Estate Lead Capture', image: 'https://placehold.co/600x450.png', dataAiHint: 'lead generation' },
-        { name: 'GPT-Powered Smart Assistant', image: 'https://placehold.co/600x450.png', dataAiHint: 'ai assistant' },
-        { name: 'E-commerce Order Bot', image: 'https://placehold.co/600x450.png', dataAiHint: 'online shopping' },
-        { name: 'Service Appointment Scheduler', image: 'https://placehold.co/600x450.png', dataAiHint: 'calendar scheduling' },
+        { name: 'Telegram Bot', image: 'https://placehold.co/600x450.png', dataAiHint: 'chatbot conversation', detail: 'A custom Telegram bot to automate tasks and engage with users directly in the app.' },
+        { name: 'Restaurant Booking Bot', image: 'https://placehold.co/600x450.png', dataAiHint: 'booking system', detail: 'An AI-powered bot for WhatsApp that allows customers to book tables, view menus, and get instant confirmations.' },
+        { name: 'Real Estate Lead Capture', image: 'https://placehold.co/600x450.png', dataAiHint: 'lead generation', detail: 'A chatbot for websites and messaging apps that captures potential buyer and seller leads, asking qualifying questions and saving data to a CRM.' },
+        { name: 'GPT-Powered Smart Assistant', image: 'https://placehold.co/600x450.png', dataAiHint: 'ai assistant', detail: 'An advanced assistant integrated with GPT for natural, human-like conversations, capable of handling complex customer service inquiries.' },
+        { name: 'E-commerce Order Bot', image: 'https://placehold.co/600x450.png', dataAiHint: 'online shopping', detail: 'A WhatsApp bot that lets customers browse products, place orders, and make payments directly within the chat.' },
+        { name: 'Service Appointment Scheduler', image: 'https://placehold.co/600x450.png', dataAiHint: 'calendar scheduling', detail: 'An automated scheduler that helps clients book, reschedule, or cancel appointments for services like salons, clinics, and consultations.' },
     ]
   },
   'web-development': {
@@ -95,6 +96,7 @@ export default function ServicePage() {
   const params = useParams();
   const slug = params.slug as string;
   const service = servicesData[slug as keyof typeof servicesData];
+  const [selectedProject, setSelectedProject] = React.useState<any>(null);
 
   if (!service) {
     notFound();
@@ -102,7 +104,7 @@ export default function ServicePage() {
   
   const ProjectCard = ({ project }: { project: any }) => {
     const cardContent = (
-      <Card className="overflow-hidden bg-card/80 backdrop-blur-sm group h-full flex flex-col">
+      <Card className="overflow-hidden bg-card/80 backdrop-blur-sm group h-full flex flex-col cursor-pointer">
           <CardHeader className="p-0 relative aspect-video">
               {project.video ? (
                   <video
@@ -136,6 +138,14 @@ export default function ServicePage() {
           </CardContent>
       </Card>
     );
+
+    if (slug === 'ai-chatbot') {
+        return (
+            <div onClick={() => setSelectedProject(project)}>
+                {cardContent}
+            </div>
+        )
+    }
 
     if (project.link || project.pdf) {
         return (
@@ -173,21 +183,51 @@ export default function ServicePage() {
                         </div>
                     </motion.div>
 
-                    <motion.div
-                      variants={cardContainerVariants}
-                      initial="hidden"
-                      animate="visible"
-                      className="grid grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
-                    >
-                        {service.projects.map((project: any) => (
-                            <motion.div
-                                key={project.name}
-                                variants={cardVariants}
-                            >
-                                <ProjectCard project={project} />
-                            </motion.div>
-                        ))}
-                    </motion.div>
+                    <Dialog open={!!selectedProject} onOpenChange={(isOpen) => !isOpen && setSelectedProject(null)}>
+                        <motion.div
+                        variants={cardContainerVariants}
+                        initial="hidden"
+                        animate="visible"
+                        className="grid grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+                        >
+                            {service.projects.map((project: any) => (
+                                <motion.div
+                                    key={project.name}
+                                    variants={cardVariants}
+                                >
+                                    {slug === 'ai-chatbot' ? (
+                                        <DialogTrigger asChild>
+                                            <ProjectCard project={project} />
+                                        </DialogTrigger>
+                                    ) : (
+                                        <ProjectCard project={project} />
+                                    )}
+                                </motion.div>
+                            ))}
+                        </motion.div>
+
+                        {selectedProject && (
+                            <DialogContent>
+                                <DialogHeader>
+                                    <DialogTitle className="font-headline text-2xl mb-2">{selectedProject.name}</DialogTitle>
+                                    <DialogDescription>
+                                        {selectedProject.detail}
+                                    </DialogDescription>
+                                </DialogHeader>
+                                <div className="mt-4">
+                                    <Image
+                                        src={selectedProject.image}
+                                        alt={selectedProject.name}
+                                        width={600}
+                                        height={450}
+                                        className="w-full h-auto object-cover rounded-md"
+                                        data-ai-hint={selectedProject.dataAiHint}
+                                    />
+                                </div>
+                            </DialogContent>
+                        )}
+                    </Dialog>
+
 
                     <div className="text-center mt-12">
                         <Button asChild variant="outline" size="lg">

@@ -5,14 +5,15 @@
 import { Footer } from '@/components/footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, Video, Camera, Bot, Code, PenTool, ExternalLink } from 'lucide-react';
 import { notFound, useParams } from 'next/navigation';
 import * as React from 'react';
 import Image from 'next/image';
 import { ImageCompare } from '@/components/image-compare';
 import Link from 'next/link';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from '@/components/ui/dialog';
+import { AnimatedDialog } from '@/components/ui/animated-dialog';
+import { DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 
 const servicesData = {
   'video-editing': {
@@ -97,12 +98,13 @@ export default function ServicePage() {
   const slug = params.slug as string;
   const service = servicesData[slug as keyof typeof servicesData];
   const [selectedProject, setSelectedProject] = React.useState<any>(null);
+  const [origin, setOrigin] = React.useState<DOMRect | null>(null);
 
   if (!service) {
     notFound();
   }
   
-  const ProjectCard = ({ project }: { project: any }) => {
+  const ProjectCard = ({ project, cardRef }: { project: any, cardRef?: React.Ref<HTMLDivElement> }) => {
     const cardContent = (
       <Card className="overflow-hidden bg-card/80 backdrop-blur-sm group h-full flex flex-col cursor-pointer">
           <CardHeader className="p-0 relative aspect-video">
@@ -141,7 +143,12 @@ export default function ServicePage() {
 
     if (slug === 'ai-chatbot') {
         return (
-            <div onClick={() => setSelectedProject(project)}>
+            <div ref={cardRef} onClick={() => {
+                if (cardRef && 'current' in cardRef && cardRef.current) {
+                    setOrigin(cardRef.current.getBoundingClientRect());
+                }
+                setSelectedProject(project)
+            }}>
                 {cardContent}
             </div>
         )
@@ -182,32 +189,29 @@ export default function ServicePage() {
                             <p className="text-base md:text-lg text-muted-foreground">{service.description}</p>
                         </div>
                     </motion.div>
-
-                    <Dialog open={!!selectedProject} onOpenChange={(isOpen) => !isOpen && setSelectedProject(null)}>
-                        <motion.div
+                    
+                    <motion.div
                         variants={cardContainerVariants}
                         initial="hidden"
                         animate="visible"
                         className="grid grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
-                        >
-                            {service.projects.map((project: any) => (
+                    >
+                        {service.projects.map((project: any) => {
+                             const cardRef = React.useRef<HTMLDivElement>(null);
+                             return (
                                 <motion.div
                                     key={project.name}
                                     variants={cardVariants}
                                 >
-                                    {slug === 'ai-chatbot' ? (
-                                        <DialogTrigger asChild>
-                                            <ProjectCard project={project} />
-                                        </DialogTrigger>
-                                    ) : (
-                                        <ProjectCard project={project} />
-                                    )}
+                                    <ProjectCard project={project} cardRef={cardRef} />
                                 </motion.div>
-                            ))}
-                        </motion.div>
+                             )
+                        })}
+                    </motion.div>
 
-                        {selectedProject && (
-                            <DialogContent>
+                    <AnimatePresence>
+                        {selectedProject && origin && (
+                           <AnimatedDialog origin={origin} onOpenChange={() => setSelectedProject(null)}>
                                 <DialogHeader>
                                     <DialogTitle className="font-headline text-2xl mb-2">{selectedProject.name}</DialogTitle>
                                     <DialogDescription>
@@ -224,9 +228,9 @@ export default function ServicePage() {
                                         data-ai-hint={selectedProject.dataAiHint}
                                     />
                                 </div>
-                            </DialogContent>
+                           </AnimatedDialog>
                         )}
-                    </Dialog>
+                    </AnimatePresence>
 
 
                     <div className="text-center mt-12">

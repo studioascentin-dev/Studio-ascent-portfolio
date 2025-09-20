@@ -32,12 +32,12 @@ const servicesData = {
     title: 'Photo Editing',
     description: 'With high-quality photo retouching and manipulation, I enhance your images to perfection, ensuring your product shots and portraits look stunning and professional.',
     projects: [
-        { name: 'High-End Retouching', before: '/beforeimg1.png', after: '/afterimg1.png', dataAiHint: 'portrait retouch' },
-        { name: 'Logo Design', image: '/logokit.png', dataAiHint: 'photo manipulation' },
+        { name: 'High-End Retouching', before: '/images/beforeimg1.jpg', after: '/images/afterimg1.png', dataAiHint: 'portrait retouch' },
+        { name: 'Logo Design', image: '/images/logokit.png', dataAiHint: 'photo manipulation' },
         { name: 'Social Media Content Design', image: '/portrait-after.png', dataAiHint: 'professional portrait' },
-        { name: 'Menu or Brochure Design', image: '/menu.png', dataAiHint: 'product photography' },
-        { name: 'Simple Color Grading', before: '/indiandog.jpg', after: '/indiandog.png', dataAiHint: 'artistic color' },
-        { name: 'Poster & Flyer Design', image: '/poster.png', dataAiHint: 'artistic color' },
+        { name: 'Menu or Brochure Design', image: '/images/menu.png', dataAiHint: 'product photography' },
+        { name: 'Simple Color Grading', before: '/images/indiandog.jpg', after: '/images/indiandog.png', dataAiHint: 'artistic color' },
+        { name: 'Poster & Flyer Design', image: '/images/poster.png', dataAiHint: 'artistic color' },
     ]
   },
   'ai-chatbot': {
@@ -45,7 +45,7 @@ const servicesData = {
     title: 'AI Chatbot',
     description: 'I create intelligent, automated chatbots for WhatsApp and websites to handle support, book appointments, and generate leads, allowing you to focus on your business.',
     projects: [
-        { name: 'FAQ Support Bot', image: 'https://placehold.co/600x450.png', dataAiHint: 'chatbot conversation' },
+        { name: 'Telegram Bot', image: 'https://placehold.co/600x450.png', dataAiHint: 'chatbot conversation' },
         { name: 'Restaurant Booking Bot', image: 'https://placehold.co/600x450.png', dataAiHint: 'booking system' },
         { name: 'Real Estate Lead Capture', image: 'https://placehold.co/600x450.png', dataAiHint: 'lead generation' },
         { name: 'GPT-Powered Smart Assistant', image: 'https://placehold.co/600x450.png', dataAiHint: 'ai assistant' },
@@ -61,7 +61,7 @@ const servicesData = {
         { name: 'Food Ordering Website', image: '/sabitas-kitchen.png', dataAiHint: 'food order website', link: 'https://6000-firebase-studio-1755428735571.cluster-zumahodzirciuujpqvsniawo3o.cloudworkstations.dev/' },
         { name: 'Custom E-commerce Store', image: 'https://placehold.co/600x450.png', dataAiHint: 'ecommerce homepage', link: 'https://your-website-link.com' },
         { name: 'Portfolio Website', image: 'https://placehold.co/600x450.png', dataAiHint: 'portfolio website', link: 'https://your-website-link.com' },
-        { name: 'API Integration Project', image: 'https://placehold.co/600x450.png', dataAiHint: 'api integration', link: 'https://your-website-link.com' },
+        { name: 'Admin Dashboard', image: 'https://placehold.co/600x450.png', dataAiHint: 'api integration', link: 'https://your-website-link.com' },
         { name: 'Next.js & Firebase App', image: 'https://placehold.co/600x450.png', dataAiHint: 'web application', link: 'https://your-website-link.com' },
         { name: 'Headless CMS Website', image: 'https://placehold.co/600x450.png', dataAiHint: 'cms website', link: 'https://your-website-link.com' },
     ]
@@ -190,7 +190,7 @@ export default function ServicePage() {
                     </motion.div>
 
                     <div className="text-center mt-12">
-                        <Button asChild className="font-bold text-lg py-4 px-10 bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-lg transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95">
+                        <Button asChild variant="outline" size="lg">
                             <a href="/#services">
                                 <ArrowLeft className="mr-2 h-4 w-4" />
                                 Back to Services

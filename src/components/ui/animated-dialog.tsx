@@ -36,8 +36,10 @@ const AnimatedDialog = ({ children, origin, onOpenChange }: { children: React.Re
             scale: 0.5,
         },
         visible: {
-            x: "50%",
-            y: "50%",
+            x: 0,
+            y: 0,
+            top: "50%",
+            left: "50%",
             translateX: "-50%",
             translateY: "-50%",
             width: "clamp(300px, 90vw, 600px)",

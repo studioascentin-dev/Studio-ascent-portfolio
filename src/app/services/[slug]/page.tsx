@@ -60,10 +60,10 @@ const servicesData = {
     title: 'Web Development',
     description: 'I build robust, scalable, and high-performance websites and applications that are not only fast and reliable but also tailored to your specific business needs.',
     projects: [
-        { name: 'Food Ordering Website', image: '/sabitas-kitchen.png', dataAiHint: 'food order website', link: 'https://6000-firebase-studio-1755428735571.cluster-zumahodzirciuujpqvsniawo3o.cloudworkstations.dev/' },
+        { name: 'Food Ordering Website', image: '/images/Sabitakitchen.png', dataAiHint: 'food order website', link: 'https://6000-firebase-studio-1755428735571.cluster-zumahodzirciuujpqvsniawo3o.cloudworkstations.dev/' },
         { name: 'Custom E-commerce Store', image: 'https://placehold.co/600x450.png', dataAiHint: 'ecommerce homepage', link: 'https://your-website-link.com' },
         { name: 'Portfolio Website', image: 'https://placehold.co/600x450.png', dataAiHint: 'portfolio website', link: 'https://your-website-link.com' },
-        { name: 'Admin Dashboard', image: 'https://placehold.co/600x450.png', dataAiHint: 'api integration', link: 'https://6000-firebase-studio-1758434992699.cluster-y75up3teuvc62qmnwys4deqv6y.cloudworkstations.dev/' },
+        { name: 'Admin Dashboard', image: '/images/admindashboard.png', dataAiHint: 'api integration', link: 'https://6000-firebase-studio-1758434992699.cluster-y75up3teuvc62qmnwys4deqv6y.cloudworkstations.dev/' },
         { name: 'Next.js & Firebase App', image: 'https://placehold.co/600x450.png', dataAiHint: 'web application', link: 'https://your-website-link.com' },
         { name: 'Headless CMS Website', image: 'https://placehold.co/600x450.png', dataAiHint: 'cms website', link: 'https://your-website-link.com' },
     ]

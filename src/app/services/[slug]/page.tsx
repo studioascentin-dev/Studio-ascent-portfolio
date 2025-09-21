@@ -6,7 +6,7 @@ import { Footer } from '@/components/footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, Video, Camera, Bot, Code, PenTool, ExternalLink } from 'lucide-react';
+import { ArrowLeft, Video, Camera, Bot, Code, PenTool, ExternalLink, ArrowRight } from 'lucide-react';
 import { notFound, useParams } from 'next/navigation';
 import * as React from 'react';
 import Image from 'next/image';
@@ -14,6 +14,8 @@ import { ImageCompare } from '@/components/image-compare';
 import Link from 'next/link';
 import { AnimatedDialog } from '@/components/ui/animated-dialog';
 import { DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+import { cn } from '@/lib/utils';
+import { Badge } from '@/components/ui/badge';
 
 const servicesData = {
   'video-editing': {
@@ -60,10 +62,38 @@ const servicesData = {
     title: 'Web Development',
     description: 'I build robust, scalable, and high-performance websites and applications that are not only fast and reliable but also tailored to your specific business needs.',
     projects: [
-        { name: 'Food Ordering Website', image: '/sabitas-kitchen.png', dataAiHint: 'food order website', link: 'https://6000-firebase-studio-1755428735571.cluster-zumahodzirciuujpqvsniawo3o.cloudworkstations.dev/' },
-        { name: 'Custom E-commerce Store', image: 'https://placehold.co/600x450.png', dataAiHint: 'ecommerce homepage', link: 'https://your-website-link.com' },
-        { name: 'Portfolio Website', image: 'https://placehold.co/600x450.png', dataAiHint: 'portfolio website', link: 'https://your-website-link.com' },
-        { name: 'Admin Dashboard', image: '/images/admindashboard.png', dataAiHint: 'api integration', link: 'https://6000-firebase-studio-1758434992699.cluster-y75up3teuvc62qmnwys4deqv6y.cloudworkstations.dev/' },
+        { 
+            name: 'Food Ordering Website', 
+            image: '/sabitas-kitchen.png', 
+            dataAiHint: 'food order website', 
+            link: 'https://6000-firebase-studio-1755428735571.cluster-zumahodzirciuujpqvsniawo3o.cloudworkstations.dev/',
+            description: 'A full-stack food ordering platform built for a local kitchen, featuring a dynamic menu, user authentication, and a simple checkout process.',
+            technologies: ['Next.js', 'React', 'Firebase', 'Tailwind CSS', 'ShadCN UI']
+        },
+        { 
+            name: 'Custom E-commerce Store', 
+            image: 'https://picsum.photos/seed/ecomm/600/450', 
+            dataAiHint: 'ecommerce homepage', 
+            link: 'https://your-website-link.com',
+            description: 'A bespoke e-commerce solution with a custom design, product management, and a secure payment gateway integration for a seamless shopping experience.',
+            technologies: ['Next.js', 'Stripe', 'GraphQL', 'TypeScript', 'PostgreSQL']
+        },
+        { 
+            name: 'Portfolio Website', 
+            image: 'https://picsum.photos/seed/portfolio/600/450', 
+            dataAiHint: 'portfolio website', 
+            link: 'https://your-website-link.com',
+            description: 'A personal portfolio site to showcase creative work, featuring a clean design, smooth animations, and a contact form for inquiries.',
+            technologies: ['React', 'Framer Motion', 'Next.js', 'Tailwind CSS']
+        },
+        { 
+            name: 'Admin Dashboard', 
+            image: '/images/admindashboard.png', 
+            dataAiHint: 'api integration', 
+            link: 'https://6000-firebase-studio-1758434992699.cluster-y75up3teuvc62qmnwys4deqv6y.cloudworkstations.dev/',
+            description: 'A comprehensive admin dashboard for managing users, content, and application data. Includes data visualization, real-time updates, and role-based access control.',
+            technologies: ['Next.js', 'Firebase', 'Recharts', 'Zod', 'React Hook Form']
+        },
     ]
   },
 };
@@ -92,6 +122,14 @@ const cardVariants = {
 
 const ProjectCard = ({ project, slug, onCardClick }: { project: any, slug: string, onCardClick: (project: any, origin: DOMRect) => void }) => {
   const cardRef = React.useRef<HTMLDivElement>(null);
+
+  const handleCardClick = () => {
+    if (cardRef.current) {
+        onCardClick(project, cardRef.current.getBoundingClientRect());
+    }
+  };
+
+  const isInteractive = slug === 'ai-chatbot' || slug === 'video-editing';
 
   const cardContent = (
     <Card className="overflow-hidden bg-card/80 backdrop-blur-sm group h-full flex flex-col cursor-pointer">
@@ -128,33 +166,8 @@ const ProjectCard = ({ project, slug, onCardClick }: { project: any, slug: strin
     </Card>
   );
 
-  const handleCardClick = () => {
-    if (cardRef.current) {
-        onCardClick(project, cardRef.current.getBoundingClientRect());
-    }
-  };
-
-  if (slug === 'ai-chatbot' || slug === 'video-editing') {
-      return (
-          <div ref={cardRef} onClick={handleCardClick}>
-              {cardContent}
-          </div>
-      )
-  }
-
-  if (project.link || project.pdf) {
-      return (
-          <a href={project.link || project.pdf} target="_blank" rel="noopener noreferrer" className="block h-full">
-              {cardContent}
-          </a>
-      );
-  }
-
-  // Default for photo-editing and others that don't have interactive dialogs.
   return (
-      <div ref={cardRef} onClick={() => {
-          // Placeholder for potential future interactions
-      }}>
+      <div ref={cardRef} onClick={isInteractive ? handleCardClick : undefined} className={cn(isInteractive ? "cursor-pointer" : "", "h-full")}>
           {cardContent}
       </div>
   );
@@ -199,21 +212,71 @@ export default function ServicePage() {
                         </div>
                     </motion.div>
                     
-                    <motion.div
-                        variants={cardContainerVariants}
-                        initial="hidden"
-                        animate="visible"
-                        className="grid grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
-                    >
-                        {service.projects.map((project: any) => (
-                             <motion.div
-                                key={project.name}
-                                variants={cardVariants}
-                            >
-                                <ProjectCard project={project} slug={slug} onCardClick={handleCardClick} />
-                            </motion.div>
-                        ))}
-                    </motion.div>
+                    {slug === 'web-development' ? (
+                       <div className="space-y-24 mt-24">
+                            {service.projects.map((project: any, index: number) => (
+                                <motion.div
+                                    key={project.name}
+                                    initial={{ opacity: 0, y: 50 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true, amount: 0.3 }}
+                                    transition={{ duration: 0.6, ease: "easeOut" }}
+                                    className={cn(
+                                        "grid md:grid-cols-2 gap-8 md:gap-12 items-center"
+                                    )}
+                                >
+                                    <div className={cn("relative aspect-video group", index % 2 === 1 && "md:order-2")}>
+                                        <a href={project.link} target="_blank" rel="noopener noreferrer" className="block">
+                                            <Image
+                                                src={project.image}
+                                                alt={project.name}
+                                                width={600}
+                                                height={450}
+                                                className="w-full h-full object-cover rounded-lg shadow-lg transition-transform duration-500 ease-in-out group-hover:scale-105"
+                                                data-ai-hint={project.dataAiHint}
+                                            />
+                                            <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                                                <ExternalLink className="w-10 h-10 text-white" />
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div className={cn("space-y-4", index % 2 === 1 && "md:order-1")}>
+                                        <a href={project.link} target="_blank" rel="noopener noreferrer">
+                                            <h3 className="text-2xl md:text-3xl font-bold font-headline text-primary hover:underline">{project.name}</h3>
+                                        </a>
+                                        <p className="text-muted-foreground">{project.description}</p>
+                                        <div className="flex flex-wrap gap-2">
+                                            {project.technologies.map((tech: string) => (
+                                                <Badge key={tech} variant="secondary" className="backdrop-blur-sm bg-secondary/70">{tech}</Badge>
+                                            ))}
+                                        </div>
+                                        <Button asChild variant="link" className="p-0 font-semibold group">
+                                            <a href={project.link} target="_blank" rel="noopener noreferrer">
+                                                View Live Site
+                                                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                                            </a>
+                                        </Button>
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </div>
+                    ) : (
+                        <motion.div
+                            variants={cardContainerVariants}
+                            initial="hidden"
+                            animate="visible"
+                            className="grid grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+                        >
+                            {service.projects.map((project: any) => (
+                                <motion.div
+                                    key={project.name}
+                                    variants={cardVariants}
+                                >
+                                    <ProjectCard project={project} slug={slug} onCardClick={handleCardClick} />
+                                </motion.div>
+                            ))}
+                        </motion.div>
+                    )}
 
                     <AnimatePresence>
                         {selectedProject && origin && (
@@ -269,7 +332,3 @@ export default function ServicePage() {
     </div>
   );
 }
-
-
-    
-

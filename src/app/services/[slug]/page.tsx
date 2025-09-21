@@ -63,7 +63,7 @@ const servicesData = {
         { name: 'Food Ordering Website', image: '/sabitas-kitchen.png', dataAiHint: 'food order website', link: 'https://6000-firebase-studio-1755428735571.cluster-zumahodzirciuujpqvsniawo3o.cloudworkstations.dev/' },
         { name: 'Custom E-commerce Store', image: 'https://placehold.co/600x450.png', dataAiHint: 'ecommerce homepage', link: 'https://your-website-link.com' },
         { name: 'Portfolio Website', image: 'https://placehold.co/600x450.png', dataAiHint: 'portfolio website', link: 'https://your-website-link.com' },
-        { name: 'Admin Dashboard', image: 'https://placehold.co/600x450.png', dataAiHint: 'api integration', link: 'https://6000-firebase-studio-1758434992699.cluster-y75up3teuvc62qmnwys4deqv6y.cloudworkstations.dev/calls' },
+        { name: 'Admin Dashboard', image: 'https://placehold.co/600x450.png', dataAiHint: 'api integration', link: 'https://6000-firebase-studio-1758434992699.cluster-y75up3teuvc62qmnwys4deqv6y.cloudworkstations.dev/' },
         { name: 'Next.js & Firebase App', image: 'https://placehold.co/600x450.png', dataAiHint: 'web application', link: 'https://your-website-link.com' },
         { name: 'Headless CMS Website', image: 'https://placehold.co/600x450.png', dataAiHint: 'cms website', link: 'https://your-website-link.com' },
     ]
@@ -267,3 +267,5 @@ export default function ServicePage() {
   );
 }
 
+
+    

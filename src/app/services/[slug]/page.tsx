@@ -239,6 +239,7 @@ export default function ServicePage() {
                                     <video
                                         src={selectedProject.video}
                                         controls
+                                        controlsList="nodownload"
                                         autoPlay
                                         className="w-full h-auto object-cover rounded-md"
                                     />

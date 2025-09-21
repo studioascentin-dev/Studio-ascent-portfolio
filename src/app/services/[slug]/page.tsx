@@ -47,12 +47,12 @@ const servicesData = {
     title: 'AI Chatbot',
     description: 'I create intelligent, automated chatbots for WhatsApp and websites to handle support, book appointments, and generate leads, allowing you to focus on your business.',
     projects: [
-        { name: 'Telegram Bot', image: 'https://placehold.co/600x450.png', dataAiHint: 'chatbot conversation', detail: 'A custom Telegram bot to automate tasks and engage with users directly in the app.' },
-        { name: 'Restaurant Booking Bot', image: 'https://placehold.co/600x450.png', dataAiHint: 'booking system', detail: 'An AI-powered bot for WhatsApp that allows customers to book tables, view menus, and get instant confirmations.' },
-        { name: 'Real Estate Lead Capture', image: 'https://placehold.co/600x450.png', dataAiHint: 'lead generation', detail: 'A chatbot for websites and messaging apps that captures potential buyer and seller leads, asking qualifying questions and saving data to a CRM.' },
-        { name: 'GPT-Powered Smart Assistant', image: 'https://placehold.co/600x450.png', dataAiHint: 'ai assistant', detail: 'An advanced assistant integrated with GPT for natural, human-like conversations, capable of handling complex customer service inquiries.' },
-        { name: 'E-commerce Order Bot', image: 'https://placehold.co/600x450.png', dataAiHint: 'online shopping', detail: 'A WhatsApp bot that lets customers browse products, place orders, and make payments directly within the chat.' },
-        { name: 'Service Appointment Scheduler', image: 'https://placehold.co/600x450.png', dataAiHint: 'calendar scheduling', detail: 'An automated scheduler that helps clients book, reschedule, or cancel appointments for services like salons, clinics, and consultations.' },
+        { name: 'Telegram Bot', image: '/images/telegrambot.png', dataAiHint: 'chatbot conversation', detail: 'A custom Telegram bot to automate tasks and engage with users directly in the app.' },
+        { name: 'Restaurant Booking Bot', image: '/images/restaurentbot.png', dataAiHint: 'booking system', detail: 'An AI-powered bot for WhatsApp that allows customers to book tables, view menus, and get instant confirmations.' },
+        { name: 'Instagram Bot', image: '/images/instagrambot.png', dataAiHint: 'lead generation', detail: 'A chatbot for websites and messaging apps that captures potential buyer and seller leads, asking qualifying questions and saving data to a CRM.' },
+        { name: 'Whatsapp Bot', image: '/images/Whatsappbot.png', dataAiHint: 'ai assistant', detail: 'An advanced assistant integrated with GPT for natural, human-like conversations, capable of handling complex customer service inquiries.' },
+        { name: 'E-commerce Order Bot', image: '/images/ecommercebot.png', dataAiHint: 'online shopping', detail: 'A WhatsApp bot that lets customers browse products, place orders, and make payments directly within the chat.' },
+        { name: 'Service Appointment Scheduler', image: '/images/appointmentbot.png', dataAiHint: 'calendar scheduling', detail: 'An automated scheduler that helps clients book, reschedule, or cancel appointments for services like salons, clinics, and consultations.' },
     ]
   },
   'web-development': {
@@ -111,7 +111,6 @@ export default function ServicePage() {
               {project.video ? (
                   <video
                       src={project.video}
-                      autoPlay
                       muted
                       loop
                       playsInline
@@ -141,14 +140,16 @@ export default function ServicePage() {
       </Card>
     );
 
-    if (slug === 'ai-chatbot') {
+    const handleCardClick = () => {
+      if (cardRef && 'current' in cardRef && cardRef.current) {
+        setOrigin(cardRef.current.getBoundingClientRect());
+      }
+      setSelectedProject(project);
+    };
+
+    if (slug === 'ai-chatbot' || slug === 'video-editing') {
         return (
-            <div ref={cardRef} onClick={() => {
-                if (cardRef && 'current' in cardRef && cardRef.current) {
-                    setOrigin(cardRef.current.getBoundingClientRect());
-                }
-                setSelectedProject(project)
-            }}>
+            <div ref={cardRef} onClick={handleCardClick}>
                 {cardContent}
             </div>
         )
@@ -162,10 +163,13 @@ export default function ServicePage() {
         );
     }
 
+    // Default for photo-editing and others that don't have interactive dialogs.
     return (
-        <Link href={`/services/${slug}`} className="block h-full">
+        <div ref={cardRef} onClick={() => {
+            // Placeholder for potential future interactions
+        }}>
             {cardContent}
-        </Link>
+        </div>
     );
 };
 
@@ -214,11 +218,14 @@ export default function ServicePage() {
                            <AnimatedDialog origin={origin} onOpenChange={() => setSelectedProject(null)}>
                                 <DialogHeader>
                                     <DialogTitle className="font-headline text-2xl mb-2">{selectedProject.name}</DialogTitle>
-                                    <DialogDescription>
-                                        {selectedProject.detail}
-                                    </DialogDescription>
+                                    {selectedProject.detail && (
+                                        <DialogDescription>
+                                            {selectedProject.detail}
+                                        </DialogDescription>
+                                    )}
                                 </DialogHeader>
                                 <div className="mt-4">
+                                {selectedProject.image && (
                                     <Image
                                         src={selectedProject.image}
                                         alt={selectedProject.name}
@@ -227,6 +234,15 @@ export default function ServicePage() {
                                         className="w-full h-auto object-cover rounded-md"
                                         data-ai-hint={selectedProject.dataAiHint}
                                     />
+                                )}
+                                {selectedProject.video && (
+                                    <video
+                                        src={selectedProject.video}
+                                        controls
+                                        autoPlay
+                                        className="w-full h-auto object-cover rounded-md"
+                                    />
+                                )}
                                 </div>
                            </AnimatedDialog>
                         )}

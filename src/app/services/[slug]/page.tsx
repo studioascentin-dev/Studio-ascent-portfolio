@@ -90,6 +90,76 @@ const cardVariants = {
     }
 };
 
+const ProjectCard = ({ project, slug, onCardClick }: { project: any, slug: string, onCardClick: (project: any, origin: DOMRect) => void }) => {
+  const cardRef = React.useRef<HTMLDivElement>(null);
+
+  const cardContent = (
+    <Card className="overflow-hidden bg-card/80 backdrop-blur-sm group h-full flex flex-col cursor-pointer">
+        <CardHeader className="p-0 relative aspect-video">
+            {project.video ? (
+                <video
+                    src={project.video}
+                    muted
+                    loop
+                    playsInline
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+            ) : project.before && project.after ? (
+                <ImageCompare
+                    before={project.before}
+                    after={project.after}
+                    alt={project.name}
+                />
+            ) : project.image ? (
+                <Image
+                    src={project.image}
+                    alt={project.name}
+                    width={600}
+                    height={450}
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    data-ai-hint={project.dataAiHint}
+                />
+            ) : null}
+        </CardHeader>
+        <CardContent className="p-4 flex-grow flex items-center justify-between">
+            <h4 className="font-headline text-base md:text-xl">{project.name}</h4>
+            {(project.link || project.pdf) && <ExternalLink className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />}
+        </CardContent>
+    </Card>
+  );
+
+  const handleCardClick = () => {
+    if (cardRef.current) {
+        onCardClick(project, cardRef.current.getBoundingClientRect());
+    }
+  };
+
+  if (slug === 'ai-chatbot' || slug === 'video-editing') {
+      return (
+          <div ref={cardRef} onClick={handleCardClick}>
+              {cardContent}
+          </div>
+      )
+  }
+
+  if (project.link || project.pdf) {
+      return (
+          <a href={project.link || project.pdf} target="_blank" rel="noopener noreferrer" className="block h-full">
+              {cardContent}
+          </a>
+      );
+  }
+
+  // Default for photo-editing and others that don't have interactive dialogs.
+  return (
+      <div ref={cardRef} onClick={() => {
+          // Placeholder for potential future interactions
+      }}>
+          {cardContent}
+      </div>
+  );
+};
+
 
 export default function ServicePage() {
   const params = useParams();
@@ -101,75 +171,12 @@ export default function ServicePage() {
   if (!service) {
     notFound();
   }
+
+  const handleCardClick = (project: any, originRect: DOMRect) => {
+    setSelectedProject(project);
+    setOrigin(originRect);
+  };
   
-  const ProjectCard = ({ project, cardRef }: { project: any, cardRef?: React.Ref<HTMLDivElement> }) => {
-    const cardContent = (
-      <Card className="overflow-hidden bg-card/80 backdrop-blur-sm group h-full flex flex-col cursor-pointer">
-          <CardHeader className="p-0 relative aspect-video">
-              {project.video ? (
-                  <video
-                      src={project.video}
-                      muted
-                      loop
-                      playsInline
-                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                  />
-              ) : project.before && project.after ? (
-                  <ImageCompare
-                      before={project.before}
-                      after={project.after}
-                      alt={project.name}
-                  />
-              ) : project.image ? (
-                  <Image
-                      src={project.image}
-                      alt={project.name}
-                      width={600}
-                      height={450}
-                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                      data-ai-hint={project.dataAiHint}
-                  />
-              ) : null}
-          </CardHeader>
-          <CardContent className="p-4 flex-grow flex items-center justify-between">
-              <h4 className="font-headline text-base md:text-xl">{project.name}</h4>
-              {(project.link || project.pdf) && <ExternalLink className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />}
-          </CardContent>
-      </Card>
-    );
-
-    const handleCardClick = () => {
-      if (cardRef && 'current' in cardRef && cardRef.current) {
-        setOrigin(cardRef.current.getBoundingClientRect());
-      }
-      setSelectedProject(project);
-    };
-
-    if (slug === 'ai-chatbot' || slug === 'video-editing') {
-        return (
-            <div ref={cardRef} onClick={handleCardClick}>
-                {cardContent}
-            </div>
-        )
-    }
-
-    if (project.link || project.pdf) {
-        return (
-            <a href={project.link || project.pdf} target="_blank" rel="noopener noreferrer" className="block h-full">
-                {cardContent}
-            </a>
-        );
-    }
-
-    // Default for photo-editing and others that don't have interactive dialogs.
-    return (
-        <div ref={cardRef} onClick={() => {
-            // Placeholder for potential future interactions
-        }}>
-            {cardContent}
-        </div>
-    );
-};
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
@@ -198,17 +205,14 @@ export default function ServicePage() {
                         animate="visible"
                         className="grid grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
                     >
-                        {service.projects.map((project: any) => {
-                             const cardRef = React.useRef<HTMLDivElement>(null);
-                             return (
-                                <motion.div
-                                    key={project.name}
-                                    variants={cardVariants}
-                                >
-                                    <ProjectCard project={project} cardRef={cardRef} />
-                                </motion.div>
-                             )
-                        })}
+                        {service.projects.map((project: any) => (
+                             <motion.div
+                                key={project.name}
+                                variants={cardVariants}
+                            >
+                                <ProjectCard project={project} slug={slug} onCardClick={handleCardClick} />
+                            </motion.div>
+                        ))}
                     </motion.div>
 
                     <AnimatePresence>
@@ -232,6 +236,7 @@ export default function ServicePage() {
                                         className="w-full h-auto object-cover rounded-md"
                                         data-ai-hint={selectedProject.dataAiHint}
                                     />
+
                                 )}
                                 {selectedProject.video && (
                                     <video
@@ -267,3 +272,4 @@ export default function ServicePage() {
 
 
     
+

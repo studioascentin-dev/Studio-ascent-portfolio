@@ -113,8 +113,12 @@ export function Header() {
                 animate="visible"
                 className="flex items-center justify-between px-4 md:px-6 py-4 md:py-6"
             >
-                <Link href="/" className="text-2xl md:text-3xl font-bold font-headline text-primary">
-                    StudioAscent
+                <Link href="/" className="text-2xl md:text-3xl font-bold font-headline">
+                    <span className="text-primary">S</span>
+                    <span className="text-foreground">tudio</span>
+                    {' '}
+                    <span className="text-primary">A</span>
+                    <span className="text-foreground">scent</span>
                 </Link>
                 
                 {/* Desktop Navigation */}
@@ -156,8 +160,12 @@ export function Header() {
                             </SheetHeader>
                             <div className="flex flex-col h-full">
                                 <div className="mb-8 text-center">
-                                     <Link href="/" onClick={() => setIsSheetOpen(false)} className="text-3xl font-bold font-headline text-primary">
-                                        StudioAscent
+                                     <Link href="/" onClick={() => setIsSheetOpen(false)} className="text-3xl font-bold font-headline">
+                                        <span className="text-primary">S</span>
+                                        <span className="text-foreground">tudio</span>
+                                        {' '}
+                                        <span className="text-primary">A</span>
+                                        <span className="text-foreground">scent</span>
                                     </Link>
                                 </div>
                                 <nav className="flex flex-col items-center gap-8 text-xl">

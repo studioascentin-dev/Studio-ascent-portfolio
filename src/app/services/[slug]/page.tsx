@@ -24,7 +24,7 @@ const servicesData = {
     description: 'From corporate brand films to dynamic social media ads, I bring your vision to life with professional video editing that ancapts and engages your audience.',
     projects: [
       { name: 'YouTube Videos', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4' },
-      { name: 'Instagram Reels', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4' },
+      { name: 'instagram edits', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4' },
       { name: 'Colour Grading', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4' },
       { name: 'Anime AMV edits', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4' },
       { name: 'Educational Videos', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4' },
@@ -132,7 +132,7 @@ const ProjectCard = ({ project, slug, onCardClick }: { project: any, slug: strin
   const isInteractive = slug === 'ai-chatbot' || slug === 'video-editing';
 
   const cardContent = (
-    <Card className="overflow-hidden bg-card/80 backdrop-blur-sm group h-full flex flex-col cursor-pointer">
+    <Card className="overflow-hidden bg-card/80 backdrop-blur-sm group h-full flex flex-col">
         <CardHeader className="p-0 relative aspect-video">
             {project.video ? (
                 <video

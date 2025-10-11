@@ -6,7 +6,7 @@ import { storeItems } from '@/lib/store-data';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { Button } from '@/components/ui/button';
-import { Star, Check, Apple, ArrowLeft, TriangleAlert, Download, Info, MessageSquare, Upload, Wallet } from 'lucide-react';
+import { Star, Check, Apple, ArrowLeft, TriangleAlert, Download, Info, MessageSquare, Upload, Wallet, ShieldCheck } from 'lucide-react';
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -468,6 +468,9 @@ export default function ProductDetailPage() {
                                         <span className="text-xl md:text-2xl text-muted-foreground line-through">₹{item.originalPrice}</span>
                                     </div>
                                     <Button size="lg" className="w-full font-bold text-base md:text-lg py-4 md:py-6">Buy Now</Button>
+                                    <p className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
+                                        <ShieldCheck className="h-4 w-4" /> Secure payment by Razorpay
+                                    </p>
                                 </div>
                             )}
 
@@ -641,3 +644,5 @@ export default function ProductDetailPage() {
         </div>
     );
 }
+
+    

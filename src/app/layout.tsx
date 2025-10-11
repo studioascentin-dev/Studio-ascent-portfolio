@@ -22,33 +22,33 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'Dev Kumar Das | Full-Stack Developer & Creative Designer',
-    template: '%s | Dev Kumar Das',
+    default: 'Studio Ascent | Full-Stack Developer & Creative Designer',
+    template: '%s | Studio Ascent',
   },
-  description: 'Portfolio of Dev Kumar Das, a talented Full-Stack Developer, Video Editor, and Creative Designer specializing in Next.js, AI chatbots, and visual content creation.',
-  keywords: ['Dev Kumar Das', 'Full-Stack Developer', 'Video Editor', 'Creative Designer', 'Next.js Developer', 'AI Chatbot', 'Portfolio', 'Assam', 'India'],
-  authors: [{ name: 'Dev Kumar Das' }],
-  creator: 'Dev Kumar Das',
+  description: 'Portfolio of Studio Ascent, a talented Full-Stack Developer, Video Editor, and Creative Designer specializing in Next.js, AI chatbots, and visual content creation.',
+  keywords: ['Studio Ascent', 'Full-Stack Developer', 'Video Editor', 'Creative Designer', 'Next.js Developer', 'AI Chatbot', 'Portfolio', 'Assam', 'India'],
+  authors: [{ name: 'Studio Ascent' }],
+  creator: 'Studio Ascent',
   
   openGraph: {
     type: 'website',
     locale: 'en_US',
     url: siteUrl,
-    title: 'Dev Kumar Das | Full-Stack Developer & Creative Designer',
+    title: 'Studio Ascent | Full-Stack Developer & Creative Designer',
     description: 'Explore the portfolio of a multi-talented creative specializing in web development, video editing, and AI solutions.',
-    siteName: 'Dev Kumar Das Portfolio',
+    siteName: 'Studio Ascent Portfolio',
     images: [
       {
         url: '/og-image.png', // Update with your actual OG image path
         width: 1200,
         height: 630,
-        alt: 'Dev Kumar Das Portfolio',
+        alt: 'Studio Ascent Portfolio',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Dev Kumar Das | Full-Stack Developer & Creative Designer',
+    title: 'Studio Ascent | Full-Stack Developer & Creative Designer',
     description: 'A passionate creator building beautiful websites, engaging videos, and smart AI chatbots.',
     creator: '@Dev69910032', // Your Twitter handle
     images: ['/twitter-image.png'], // Update with your actual Twitter image path

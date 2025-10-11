@@ -129,9 +129,9 @@ export function Header() {
                     className="flex h-20 items-center justify-between"
                 >
                     <Link href="/" className={cn("text-2xl md:text-3xl font-bold font-headline")}>
-                        <span className="text-primary">Dev</span>
+                        <span className="text-primary">Studio</span>
                         {' '}
-                        <span className={cn("text-foreground")}>Kumar Das</span>
+                        <span className={cn("text-foreground")}>Ascent</span>
                     </Link>
                     
                     <nav className="hidden md:flex items-center justify-end gap-8 md:gap-10">
@@ -172,9 +172,9 @@ export function Header() {
                                 <div className="flex flex-col h-full">
                                     <div className="mb-8 text-center">
                                          <Link href="/" onClick={() => setIsSheetOpen(false)} className="text-3xl font-bold font-headline">
-                                            <span className="text-primary">Dev</span>
+                                            <span className="text-primary">Studio</span>
                                             {' '}
-                                            <span className="text-foreground">Kumar Das</span>
+                                            <span className="text-foreground">Ascent</span>
                                         </Link>
                                     </div>
                                     <nav className="flex flex-col items-center gap-8 text-xl">
@@ -199,7 +199,7 @@ export function Header() {
                                         ))}
                                     </nav>
                                     <div className="mt-auto text-center text-muted-foreground text-sm">
-                                        <p>&copy; {new Date().getFullYear()} Dev Kumar Das</p>
+                                        <p>&copy; {new Date().getFullYear()} Studio Ascent</p>
                                     </div>
                                 </div>
                             </SheetContent>

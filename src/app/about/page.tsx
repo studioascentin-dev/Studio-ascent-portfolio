@@ -4,7 +4,7 @@ import { type Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'About Me',
-  description: 'Learn more about Dev Kumar Das, a passionate and multi-talented creative specializing in Web & AI Development, Video/Photo Editing, and more.',
+  description: 'Learn more about Studio Ascent, a passionate and multi-talented creative specializing in Web & AI Development, Video/Photo Editing, and more.',
 };
 
 export default function AboutPage() {

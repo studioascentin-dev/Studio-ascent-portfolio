@@ -12,7 +12,6 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Separator } from '@/components/ui/separator';
-import { ContactForm } from '@/components/contact-form';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -177,9 +176,9 @@ export default function ProductDetailPage() {
             <Header />
             <main className="flex-1 pt-24">
                 <div className="container mx-auto px-4 md:px-6 py-12">
-                    <div className="grid md:grid-cols-2 gap-8 lg:gap-16">
+                    <div className="grid md:grid-cols-2 gap-8 lg:gap-16 items-start">
                         {/* Left Column: Image/Video */}
-                        <div className="space-y-6">
+                        <div className="space-y-8 sticky top-28">
                             <div className="aspect-video w-full overflow-hidden rounded-lg border">
                                 <Image
                                     src={item.image}
@@ -208,11 +207,11 @@ export default function ProductDetailPage() {
                                      <div className="flex items-center gap-4">
                                         <StarRating rating={item.rating} count={item.reviews} />
                                         <div className="flex items-center gap-2 text-sm">
-                                            {item.platform === 'Mac & Windows' ? <Check className="h-4 w-4 text-green-400" /> : <Apple className="h-4 w-4" />} {item.platform}
+                                            <Apple className="h-4 w-4" /> {item.platform}
                                         </div>
                                      </div>
                                 )}
-                                <p className="text-lg text-muted-foreground">
+                                <p className="text-base text-muted-foreground">
                                     {'longDescription' in item ? item.longDescription : item.description}
                                 </p>
                             </div>
@@ -220,32 +219,27 @@ export default function ProductDetailPage() {
                             {isPlugin && (
                                 <Card className="bg-card/50">
                                     <CardContent className="p-6">
-                                        <div className="flex items-baseline justify-center gap-4 mb-6">
-                                            <span className="text-5xl font-bold text-primary">₹{item.price}</span>
-                                            <div className="flex flex-col">
-                                                <span className="text-xl text-muted-foreground line-through">₹{item.originalPrice}</span>
-                                                <Badge variant="destructive" className="text-sm">{item.discount}</Badge>
-                                            </div>
+                                        <div className="flex items-baseline justify-center gap-2 mb-4">
+                                            <span className="text-4xl font-bold text-primary">₹{item.price}</span>
+                                            <span className="text-lg text-muted-foreground line-through">₹{item.originalPrice}</span>
+                                             <Badge variant="destructive" className="text-xs">{item.discount}</Badge>
                                         </div>
-                                        <Button size="lg" className="w-full font-bold text-lg py-7">Buy Now</Button>
-                                        <p className="text-xs text-muted-foreground mt-3 text-center">Secure payment. Instant download.</p>
+                                        <Button size="lg" className="w-full font-bold">Buy Now</Button>
+                                        <p className="text-xs text-muted-foreground mt-2 text-center">Secure payment. Instant download.</p>
                                     </CardContent>
                                 </Card>
                             )}
 
                             {!isPlugin && (
-                                <Button size="lg" className="w-full font-bold text-lg py-7">Download for Free</Button>
+                                 <Button asChild size="lg" className="w-full font-bold">
+                                    <a href="#support">Contact Support</a>
+                                </Button>
                             )}
-                        </div>
-                    </div>
 
-                    <Separator className="my-12 md:my-16" />
-
-                    {/* Reviews and Support Section */}
-                    <div className="grid md:grid-cols-3 gap-8 lg:gap-16">
-                        <div className="md:col-span-2">
-                             <h2 className="text-3xl font-bold font-headline mb-8">Reviews & Ratings</h2>
+                            <Separator className="my-8" />
+                            
                              <div className="space-y-8">
+                                <h2 className="text-3xl font-bold font-headline">Reviews & Ratings</h2>
                                 {reviews.map(review => (
                                     <div key={review.id}>
                                         <div className="flex items-start gap-4">
@@ -285,9 +279,10 @@ export default function ProductDetailPage() {
                                     </div>
                                 ))}
                              </div>
-                        </div>
-                        <div>
-                            <Card className="sticky top-28">
+                             
+                            <Separator className="my-8" />
+
+                             <Card className="sticky top-28" id="support">
                                 <CardHeader>
                                     <CardTitle className="font-headline text-2xl">Leave a Review</CardTitle>
                                     <CardDescription>Share your experience with others.</CardDescription>
@@ -296,6 +291,7 @@ export default function ProductDetailPage() {
                                     <ReviewForm itemName={item.name} />
                                 </CardContent>
                             </Card>
+
                         </div>
                     </div>
                      <div className="text-center mt-16">

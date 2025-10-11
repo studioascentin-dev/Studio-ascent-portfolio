@@ -5,7 +5,7 @@
 import { notFound, useParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Check, ArrowLeft, X } from 'lucide-react';
+import { Check, ArrowLeft, X, Zap, Database, Cog, Rocket, Shield, Sparkles, Globe, Palette, LayoutDashboard, Puzzle } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { Footer } from '@/components/footer';
@@ -18,27 +18,29 @@ import { Header } from '@/components/header';
 import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 
-const allWebDevFeatures = [
-    { name: '1-3 Page Website', basic: true, intermediate: false, pro: false },
-    { name: 'Next.js Framework', basic: true, intermediate: true, pro: true },
-    { name: 'Basic CMS Integration', basic: true, intermediate: false, pro: false },
-    { name: '1 Month Support', basic: true, intermediate: false, pro: false },
 
-    { name: 'Up to 6 Page Website', basic: false, intermediate: true, pro: false },
-    { name: 'Advanced CMS', basic: false, intermediate: true, pro: false },
-    { name: 'Simple API Integrations', basic: false, intermediate: true, pro: false },
-    { name: '2 Months Support', basic: false, intermediate: true, pro: false },
+const webDevFeatures = [
+    { name: '1-3 Page Website', basic: true, intermediate: false, pro: false, icon: <Check size={18} className="text-green-500" /> },
+    { name: 'Next.js Framework', basic: true, intermediate: true, pro: false, icon: <Zap size={18} className="text-green-500" /> },
+    { name: 'Basic CMS Integration', basic: true, intermediate: false, pro: false, icon: <Database size={18} className="text-green-500" /> },
+    { name: '1 Month Support', basic: true, intermediate: true, pro: true, icon: <Check size={18} className="text-green-500" /> },
+
+    { name: 'Up to 6 Page Website', basic: false, intermediate: true, pro: false, icon: <Check size={18} className="text-green-500" /> },
+    { name: 'Advanced CMS', basic: false, intermediate: true, pro: false, icon: <Database size={18} className="text-green-500" /> },
+    { name: 'Simple API Integrations', basic: false, intermediate: true, pro: false, icon: <Cog size={18} className="text-green-500" /> },
+    { name: '2 Months Support', basic: false, intermediate: true, pro: false, icon: <Check size={18} className="text-green-500" /> },
     
-    { name: '10+ Page Application', basic: false, intermediate: false, pro: true },
-    { name: 'Performance Optimization', basic: false, intermediate: false, pro: true },
-    { name: 'Advanced Security Setup', basic: false, intermediate: false, pro: true },
-    { name: 'AI Feature Integration', basic: false, intermediate: false, pro: true },
-    { name: 'Multi-language Support', basic: false, intermediate: false, pro: true },
-    { name: 'UI/UX Premium Design', basic: false, intermediate: false, pro: true },
-    { name: 'Custom Admin Dashboard', basic: false, intermediate: false, pro: true },
-    { name: 'Custom Integrations', basic: false, intermediate: false, pro: true },
-    { name: '3+ Months Support', basic: false, intermediate: false, pro: true },
+    { name: '10+ Page Application', basic: false, intermediate: false, pro: true, icon: <Check size={18} className="text-green-500" /> },
+    { name: 'Performance Optimization', basic: false, intermediate: false, pro: true, icon: <Rocket size={18} className="text-green-500" /> },
+    { name: 'Advanced Security Setup', basic: false, intermediate: false, pro: true, icon: <Shield size={18} className="text-green-500" /> },
+    { name: 'AI Feature Integration', basic: false, intermediate: false, pro: true, icon: <Sparkles size={18} className="text-green-500" /> },
+    { name: 'Multi-language Support', basic: false, intermediate: false, pro: true, icon: <Globe size={18} className="text-green-500" /> },
+    { name: 'UI/UX Premium Design', basic: false, intermediate: false, pro: true, icon: <Palette size={18} className="text-green-500" /> },
+    { name: 'Custom Admin Dashboard', basic: false, intermediate: false, pro: true, icon: <LayoutDashboard size={18} className="text-green-500" /> },
+    { name: 'Custom Integrations', basic: false, intermediate: false, pro: true, icon: <Puzzle size={18} className="text-green-500" /> },
+    { name: '3+ Months Support', basic: false, intermediate: false, pro: true, icon: <Check size={18} className="text-green-500" /> },
 ];
+
 
 const pricingData = {
   'photo-editing': {
@@ -103,26 +105,34 @@ const pricingData = {
     ]
   },
   'web-development': {
-    title: 'Web Development',
+    title: 'Choose the Right Plan for Your Website',
     description: 'Flexible pricing for Next.js web development, designed to scale with your needs.',
     tiers: [
       { 
-        name: 'Basic',
+        name: 'Basic Web Development',
+        description: 'Perfect for Small Businesses & Personal Sites',
         price: '₹20,000',
         period: 'Starting at',
-        features: ["1-3 Page Website", "Next.js Framework", "1 Month Support"] 
+        buttonText: 'Start Small',
+        features: webDevFeatures.filter(f => f.basic) 
       },
       { 
-        name: 'Intermediate',
+        name: 'Intermediate Web Development',
+        description: 'Best for Growing Startups',
         price: '₹75,000',
         period: 'Starting at',
-        features: ["Up to 6 Page Website", "Advanced CMS", "2 Months Support"] 
+        popular: true,
+        buttonText: 'Grow Your Business',
+        features: webDevFeatures.filter(f => f.intermediate)
       },
       { 
-        name: 'Enterprise',
+        name: 'Enterprise Web Development',
+        description: 'Custom Solutions for Enterprises',
         price: '₹1,50,000+',
         period: 'Starting at',
-        features: ["10+ Page Application", "Performance Optimization", "3+ Months Support"] 
+        periodDescription: 'Custom Pricing Available',
+        buttonText: 'Build Enterprise Solutions',
+        features: webDevFeatures.filter(f => f.pro) 
       },
     ]
   }
@@ -198,6 +208,101 @@ export default function ServicePricingPage() {
   }
 
   const gridColsClass = serviceId === 'ai-chatbot' ? 'lg:grid-cols-4' : 'lg:grid-cols-3';
+
+  if (serviceId === 'web-development') {
+    return (
+        <div className="flex min-h-screen flex-col bg-background text-foreground">
+            <Header />
+            <main className="flex-1 pt-24">
+                <section className="py-16 md:py-24">
+                    <motion.div
+                        className="container mx-auto px-4 md:px-6"
+                        initial="hidden"
+                        animate="visible"
+                        variants={sectionVariants}
+                    >
+                        <div className="text-center max-w-3xl mx-auto mb-16">
+                            <motion.h2
+                                variants={cardVariants}
+                                className="text-4xl font-bold font-headline tracking-tighter sm:text-5xl md:text-6xl"
+                            >
+                                {data.title}
+                            </motion.h2>
+                            <motion.p
+                                variants={cardVariants}
+                                className="mt-4 text-muted-foreground md:text-xl/relaxed"
+                            >
+                                {data.description}
+                            </motion.p>
+                        </div>
+                        <motion.div
+                            initial="hidden"
+                            animate="visible"
+                            variants={sectionVariants}
+                            className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start max-w-7xl mx-auto"
+                        >
+                            {(data.tiers as any[]).map((tier) => (
+                                <motion.div
+                                    key={tier.name}
+                                    variants={cardVariants}
+                                    className="h-full"
+                                >
+                                    <Card className={cn(
+                                        "flex flex-col w-full h-full bg-card backdrop-blur-sm border-white/20 transition-all duration-300 rounded-lg shadow-md",
+                                        tier.popular ? "border-orange-500 ring-2 ring-orange-500" : "border-border"
+                                    )}>
+                                        {tier.popular && (
+                                            <Badge variant="default" className="w-fit mx-auto -mt-4 bg-orange-500 text-white">Most Popular</Badge>
+                                        )}
+                                        <CardHeader className="text-center pt-6 pb-4">
+                                            <CardTitle className="text-xl md:text-2xl font-bold mb-1">{tier.name}</CardTitle>
+                                            <CardDescription>{tier.description}</CardDescription>
+                                        </CardHeader>
+                                        <CardContent className="flex flex-col flex-grow items-center p-6 pt-0">
+                                            <div className="text-center mb-6">
+                                                <p className="text-sm text-muted-foreground">{tier.period}</p>
+                                                <p className="text-4xl font-bold text-orange-500">{tier.price}</p>
+                                                {tier.periodDescription && <p className="text-xs text-muted-foreground mt-1">{tier.periodDescription}</p>}
+                                            </div>
+                                            <ul className="space-y-3 text-sm w-full flex-grow text-left">
+                                                {(tier.features as {name: string, icon: React.ReactNode}[]).map((feature, i) => (
+                                                    <li key={i} className="flex items-center gap-3">
+                                                        {feature.icon}
+                                                        <span className="text-muted-foreground">{feature.name}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </CardContent>
+                                        <CardFooter className="p-6">
+                                            <Button
+                                                size="lg"
+                                                className={cn("w-full font-bold bg-orange-500 hover:bg-orange-600 text-white")}
+                                                onClick={() => handleGetStartedClick(tier)}
+                                            >
+                                                {tier.buttonText}
+                                            </Button>
+                                        </CardFooter>
+                                    </Card>
+                                </motion.div>
+                            ))}
+                        </motion.div>
+
+                        <div className="text-center mt-16">
+                        <Button asChild variant="outline">
+                            <Link href="/pricing">
+                                <ArrowLeft className="mr-2 h-4 w-4" />
+                                Back to All Services
+                            </Link>
+                        </Button>
+                    </div>
+
+                    </motion.div>
+                </section>
+            </main>
+            <Footer />
+        </div>
+    );
+}
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">

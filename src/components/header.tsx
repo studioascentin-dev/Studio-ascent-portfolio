@@ -18,23 +18,6 @@ const navItems = [
     { name: "Contact", href: "/#contact" },
 ];
 
-const navVariants = {
-    hidden: { opacity: 0, y: -20 },
-    visible: {
-        opacity: 1,
-        y: 0,
-        transition: {
-            staggerChildren: 0.1,
-            delayChildren: 0.2,
-        },
-    },
-};
-
-const itemVariants = {
-    hidden: { opacity: 0, y: -20 },
-    visible: { opacity: 1, y: 0 },
-};
-
 const LogoIcon = (props: React.SVGProps<SVGSVGElement>) => (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
         <defs>
@@ -55,7 +38,6 @@ export function Header() {
     const router = useRouter();
     const [activeSection, setActiveSection] = React.useState('');
     const [isSheetOpen, setIsSheetOpen] = React.useState(false);
-    const [isScrolled, setIsScrolled] = React.useState(false);
 
     const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
         const isAnchorLink = href.startsWith('/#');
@@ -109,15 +91,9 @@ export function Header() {
             }
         }
 
-        const checkScroll = () => {
-            setIsScrolled(window.scrollY > 10);
-        };
-
-        window.addEventListener('scroll', checkScroll);
 
         return () => {
             observer.disconnect();
-            window.removeEventListener('scroll', checkScroll);
         };
     }, [pathname]);
 
@@ -133,21 +109,21 @@ export function Header() {
 
     return (
         <header className="fixed top-0 left-0 right-0 z-50">
-            <div className="container mx-auto px-4 md:px-6">
-                <motion.div
-                    initial={{ y: -100 }}
-                    animate={{ y: 0 }}
-                    transition={{ type: "spring", stiffness: 100, damping: 20 }}
-                    className="flex h-24 items-center justify-between"
-                >
+            <motion.div
+                initial={{ y: -100 }}
+                animate={{ y: 0 }}
+                transition={{ type: "spring", stiffness: 100, damping: 20 }}
+                className="container mx-auto px-4 md:px-6"
+            >
+                <div className="flex h-24 items-center justify-between">
                     <Link href="/" className="flex items-center gap-3 px-4 py-2 bg-background/50 backdrop-blur-lg rounded-full border border-white/10 shadow-lg">
-                        <LogoIcon />
-                        <span className="font-bold text-foreground">Studio Ascent</span>
+                        <LogoIcon className="h-6 w-6"/>
+                        <span className="font-bold text-lg text-foreground">Studio Ascent</span>
                     </Link>
                     
                     <nav className="hidden md:flex items-center gap-2 px-3 py-2 bg-background/50 backdrop-blur-lg rounded-full border border-white/10 shadow-lg">
                         {navItems.map((item) => (
-                             <motion.div key={item.name} variants={itemVariants}>
+                             <motion.div key={item.name}>
                                 <Link
                                     href={item.href}
                                     onClick={(e) => handleScroll(e, item.href)}
@@ -184,8 +160,8 @@ export function Header() {
                                 <div className="flex flex-col h-full pt-10">
                                     <div className="mb-10 text-center">
                                          <Link href="/" onClick={() => setIsSheetOpen(false)} className="inline-flex items-center gap-3">
-                                            <LogoIcon />
-                                            <span className="text-xl font-bold font-headline text-foreground">Studio Ascent</span>
+                                            <LogoIcon className="h-8 w-8" />
+                                            <span className="text-2xl font-bold font-headline text-foreground">Studio Ascent</span>
                                         </Link>
                                     </div>
                                     <nav className="flex flex-col items-center gap-6 text-lg">
@@ -216,8 +192,8 @@ export function Header() {
                             </SheetContent>
                         </Sheet>
                     </div>
-                </motion.div>
-            </div>
+                </div>
+            </motion.div>
         </header>
     );
 }

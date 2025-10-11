@@ -6,7 +6,7 @@ import { storeItems } from '@/lib/store-data';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { Button } from '@/components/ui/button';
-import { Star, Check, Apple, ArrowLeft, TriangleAlert, Download, Info, MessageSquare } from 'lucide-react';
+import { Star, Check, Apple, ArrowLeft, TriangleAlert, Download, Info, MessageSquare, Upload } from 'lucide-react';
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -128,6 +128,170 @@ const ReviewForm = ({ itemName }: { itemName: string }) => {
     );
 };
 
+const supportFormSchema = z.object({
+  fullName: z.string().min(2, { message: 'Full name must be at least 2 characters.' }),
+  emailAddress: z.string().email({ message: 'Please enter a valid email address.' }),
+  whatsapp: z.string().optional(),
+  paymentId: z.string().min(1, { message: 'Payment ID is required.' }),
+  paymentScreenshot: z.any().optional(), // In a real app, you'd have more specific validation
+  issue: z.string().min(10, { message: 'Please describe your issue in at least 10 characters.' }),
+});
+
+type SupportFormValues = z.infer<typeof supportFormSchema>;
+
+const SupportForm = () => {
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [fileName, setFileName] = useState('');
+
+  const form = useForm<SupportFormValues>({
+    resolver: zodResolver(supportFormSchema),
+    defaultValues: {
+      fullName: '',
+      emailAddress: '',
+      whatsapp: '',
+      paymentId: '',
+      issue: '',
+    },
+  });
+
+  const onSubmit: (data: SupportFormValues) => void = async (data) => {
+    setIsSubmitting(true);
+    console.log(data);
+
+    // Simulate API call
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+
+    toast({
+      title: 'Support Request Submitted',
+      description: 'We have received your request and will get back to you within 24 hours.',
+    });
+
+    form.reset();
+    setFileName('');
+    setIsSubmitting(false);
+  };
+  
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setFileName(e.target.files[0].name);
+      form.setValue('paymentScreenshot', e.target.files);
+    } else {
+      setFileName('');
+      form.setValue('paymentScreenshot', null);
+    }
+  };
+
+  return (
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <FormField
+          control={form.control}
+          name="fullName"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Full Name</FormLabel>
+              <FormControl>
+                <Input placeholder="John Doe" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <div className="grid sm:grid-cols-2 gap-6">
+          <FormField
+            control={form.control}
+            name="emailAddress"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Email Address</FormLabel>
+                <FormControl>
+                  <Input type="email" placeholder="you@example.com" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="whatsapp"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>WhatsApp (Optional)</FormLabel>
+                <FormControl>
+                  <Input placeholder="+91 12345 67890" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+        <div className="grid sm:grid-cols-2 gap-6">
+          <FormField
+            control={form.control}
+            name="paymentId"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Payment ID</FormLabel>
+                <FormControl>
+                  <Input placeholder="e.g., pay_xxxxxxxxxxxxxx" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+              control={form.control}
+              name="paymentScreenshot"
+              render={({ field }) => (
+                  <FormItem>
+                  <FormLabel>Payment Screenshot</FormLabel>
+                  <FormControl>
+                    <label className="relative flex items-center justify-center h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-muted-foreground ring-offset-background cursor-pointer hover:bg-accent hover:text-accent-foreground">
+                      <Upload className="mr-2 h-4 w-4" />
+                      <span>{fileName || 'Choose file'}</span>
+                      <input 
+                        type="file" 
+                        className="sr-only" 
+                        onChange={handleFileChange}
+                        accept="image/*"
+                      />
+                    </label>
+                  </FormControl>
+                  <FormMessage />
+                  </FormItem>
+              )}
+          />
+        </div>
+        <FormField
+          control={form.control}
+          name="issue"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Describe Your Issue</FormLabel>
+              <FormControl>
+                <Textarea
+                  placeholder="e.g., Payment was successful but I did not receive the download link."
+                  className="min-h-[100px]"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <div className="text-center">
+          <Button type="submit" disabled={isSubmitting} className="w-full bg-[#ff7f00] hover:bg-[#ff7f00]/90 text-white font-bold py-3 text-base">
+              {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              Submit Support Request
+          </Button>
+          <p className="text-xs text-muted-foreground mt-3">We usually reply within 24 hours.</p>
+        </div>
+      </form>
+    </Form>
+  );
+};
+
 
 const reviews = [
     {
@@ -235,8 +399,8 @@ export default function ProductDetailPage() {
                             )}
 
                             {!isPlugin && (
-                                 <Button asChild size="lg" className="w-full font-bold">
-                                    <a href="/payment-support">Contact Support</a>
+                                 <Button asChild size="lg" className="w-full font-bold" href="/#contact">
+                                    <a href="/#contact">Contact For Details</a>
                                 </Button>
                             )}
                         </div>
@@ -290,61 +454,74 @@ export default function ProductDetailPage() {
                             </div>
                         )}
 
-                        <div className="space-y-8 mb-12">
-                            <h2 className="text-3xl font-bold font-headline text-center">Reviews & Ratings</h2>
-                            {reviews.map(review => (
-                                <div key={review.id} className="bg-secondary/30 p-6 rounded-lg border border-border">
-                                    <div className="flex items-start gap-4">
-                                        <Avatar>
-                                            <AvatarImage src={review.avatar} />
-                                            <AvatarFallback>{review.author.charAt(0)}</AvatarFallback>
-                                        </Avatar>
-                                        <div className="flex-1">
-                                            <div className="flex items-center justify-between">
-                                                <div>
-                                                    <p className="font-semibold">{review.author}</p>
-                                                    <p className="text-xs text-muted-foreground">{review.date}</p>
-                                                </div>
-                                                <StarRating rating={review.rating} size="h-4 w-4" />
-                                            </div>
-                                            <p className="mt-2 text-muted-foreground">{review.content}</p>
-                                            <Button variant="ghost" size="sm" className="mt-2 -ml-3 h-auto py-1 px-3 text-xs">
-                                                <MessageSquare className="mr-2 h-3.5 w-3.5" />
-                                                Reply
-                                            </Button>
-                                        </div>
-                                    </div>
-                                    {review.reply && (
-                                        <div className="mt-4 pl-10 ml-4 border-l border-border">
-                                            <div className="flex items-start gap-4 pl-4">
-                                                <Avatar className="w-8 h-8">
-                                                    <AvatarFallback>DKD</AvatarFallback>
-                                                </Avatar>
-                                                <div className="flex-1">
-                                                    <div className="flex items-center justify-between">
-                                                        <div>
-                                                            <p className="font-semibold text-primary">{review.reply.author}</p>
-                                                            <p className="text-xs text-muted-foreground">{review.reply.date}</p>
-                                                        </div>
+                        <div className="grid md:grid-cols-2 gap-12 items-start">
+                            <div className="space-y-8">
+                                <h2 className="text-3xl font-bold font-headline text-center md:text-left">Reviews & Ratings</h2>
+                                {reviews.map(review => (
+                                    <div key={review.id} className="bg-secondary/30 p-6 rounded-lg border border-border">
+                                        <div className="flex items-start gap-4">
+                                            <Avatar>
+                                                <AvatarImage src={review.avatar} />
+                                                <AvatarFallback>{review.author.charAt(0)}</AvatarFallback>
+                                            </Avatar>
+                                            <div className="flex-1">
+                                                <div className="flex items-center justify-between">
+                                                    <div>
+                                                        <p className="font-semibold">{review.author}</p>
+                                                        <p className="text-xs text-muted-foreground">{review.date}</p>
                                                     </div>
-                                                    <p className="mt-2 text-muted-foreground">{review.reply.content}</p>
+                                                    <StarRating rating={review.rating} size="h-4 w-4" />
                                                 </div>
+                                                <p className="mt-2 text-muted-foreground">{review.content}</p>
+                                                <Button variant="ghost" size="sm" className="mt-2 -ml-3 h-auto py-1 px-3 text-xs">
+                                                    <MessageSquare className="mr-2 h-3.5 w-3.5" />
+                                                    Reply
+                                                </Button>
                                             </div>
                                         </div>
-                                    )}
-                                </div>
-                            ))}
+                                        {review.reply && (
+                                            <div className="mt-4 pl-10 ml-4 border-l border-border">
+                                                <div className="flex items-start gap-4 pl-4">
+                                                    <Avatar className="w-8 h-8">
+                                                        <AvatarFallback>DKD</AvatarFallback>
+                                                    </Avatar>
+                                                    <div className="flex-1">
+                                                        <div className="flex items-center justify-between">
+                                                            <div>
+                                                                <p className="font-semibold text-primary">{review.reply.author}</p>
+                                                                <p className="text-xs text-muted-foreground">{review.reply.date}</p>
+                                                            </div>
+                                                        </div>
+                                                        <p className="mt-2 text-muted-foreground">{review.reply.content}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+
+                            <div className="space-y-12 sticky top-28">
+                                <Card className="bg-secondary/30 border-border" id="review">
+                                    <CardHeader>
+                                        <CardTitle className="font-headline text-2xl">Leave a Review</CardTitle>
+                                        <CardDescription>Share your experience with others.</CardDescription>
+                                    </CardHeader>
+                                    <CardContent>
+                                        <ReviewForm itemName={item.name} />
+                                    </CardContent>
+                                </Card>
+                                <Card className="bg-secondary/30 border-border" id="support">
+                                    <CardHeader>
+                                        <CardTitle className="font-headline text-2xl">Contact Support</CardTitle>
+                                        <CardDescription>If you're having issues with your purchase, please fill out the form below.</CardDescription>
+                                    </CardHeader>
+                                    <CardContent>
+                                        <SupportForm />
+                                    </CardContent>
+                                </Card>
+                            </div>
                         </div>
-                        
-                        <Card className="sticky top-28 bg-secondary/30 border-border" id="support">
-                            <CardHeader>
-                                <CardTitle className="font-headline text-2xl">Leave a Review</CardTitle>
-                                <CardDescription>Share your experience with others.</CardDescription>
-                            </CardHeader>
-                            <CardContent>
-                                <ReviewForm itemName={item.name} />
-                            </CardContent>
-                        </Card>
                     </div>
 
                      <div className="text-center mt-16">

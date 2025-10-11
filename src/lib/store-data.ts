@@ -75,6 +75,7 @@ export const storeItems = {
       originalPrice: 1799,
       discount: '94% OFF',
       platform: 'Mac Only',
+      paymentLink: 'https://rzp.io/rzp/twixtor',
       installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
        details: {
         fileSize: '45.1 MB',

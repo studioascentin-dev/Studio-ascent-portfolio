@@ -2,111 +2,69 @@
  * @fileoverview Firestore Security Rules for the portfolio application.
  *
  * Core Philosophy:
- * This ruleset provides public read access to projects and categories,
- * while restricting write access to authorized users (if implemented).
- * Contact and support requests are publicly writable to allow form submissions.
+ * This ruleset enforces a public read-only model for `projects` and `categories` collections.
+ * The `contacts` and `supportRequests` collections are secured, preventing unauthorized access.
  *
  * Data Structure:
- * - /projects/{projectId}: Stores project information. Publicly readable.
- * - /categories/{categoryId}: Stores service categories. Publicly readable.
- * - /contacts/{contactId}: Stores contact form submissions. Publicly writable.
- * - /supportRequests/{supportRequestId}: Stores support requests. Publicly writable.
+ * - /projects/{projectId}: Stores project data, publicly readable.
+ * - /categories/{categoryId}: Stores category data, publicly readable.
+ * - /contacts/{contactId}: Stores contact form submissions, access restricted.
+ * - /supportRequests/{supportRequestId}: Stores support requests, access restricted.
  *
  * Key Security Decisions:
- * - Public read access for projects and categories to showcase portfolio items.
- * - Unrestricted writes for contact and support requests to allow anyone to submit forms.
- * - No user-specific data or ownership enforced in this initial prototype.
- *
- * Denormalization for Authorization:
- * Not applicable in this simplified prototype, as there are no ownership checks or user roles.
- *
- * Structural Segregation:
- * Top-level collections are used for different data types, which simplifies read/write rules.
+ * - Projects and categories are publicly readable to showcase portfolio content.
+ * - Contact form submissions and support requests are only writable, list and get are denied.
  */
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
     /**
-     * @description Allows public read access to project details.  Write access is open for prototyping.
+     * @description Allows anyone to read project data, but restricts modifications.
      * @path /projects/{projectId}
-     * @allow get, list: Any user can read project details to view the portfolio.
-     * @allow create: if false;
-     * @allow update: if false;
-     * @allow delete: if false;
-     * @deny create: No write access granted for this protype.
-     * @deny update: No write access granted for this protype.
-     * @deny delete: No write access granted for this protype.
-     * @principle Allows public read access to showcase portfolio items, but restricts write access.
+     * @allow (get, list) Read access is public.
+     * @deny (create, update, delete) No one can create, update, or delete projects through the client.  These operations should be performed via backend services.
+     * @principle Public read, restricted write.
      */
     match /projects/{projectId} {
       allow get, list: if true;
-      allow create: if false;
-      allow update: if false;
-      allow delete: if false;
+      allow create, update, delete: if false;
     }
 
     /**
-     * @description Allows public read access to service category details. Write access is restricted.
+     * @description Allows anyone to read category data, but restricts modifications.
      * @path /categories/{categoryId}
-     * @allow get, list: Any user can read service category details.
-     * @allow create: if false;
-     * @allow update: if false;
-     * @allow delete: if false;
-     * @deny create: No write access granted for this prototype.
-     * @deny update: No write access granted for this prototype.
-     * @deny delete: No write access granted for this prototype.
-     * @principle Allows public read access to service categories, but restricts write access.
+     * @allow (get, list) Read access is public.
+     * @deny (create, update, delete) No one can create, update, or delete categories through the client. These operations should be performed via backend services.
+     * @principle Public read, restricted write.
      */
     match /categories/{categoryId} {
       allow get, list: if true;
-      allow create: if false;
-      allow update: if false;
-      allow delete: if false;
+      allow create, update, delete: if false;
     }
 
     /**
-     * @description Allows anyone to create contact form submissions. Read, update, and delete are denied.
+     * @description Only allows the creation of contact submissions.
      * @path /contacts/{contactId}
-     * @allow create: Any user can submit a contact form.
-     * @allow get: if false;
-     * @allow list: if false;
-     * @allow update: if false;
-     * @allow delete: if false;
-     * @deny get: No read access granted for this prototype.
-     * @deny list: No read access granted for this prototype.
-     * @deny update: No update access granted for this prototype.
-     * @deny delete: No delete access granted for this prototype.
-     * @principle Allows public contact form submissions while restricting other operations.
+     * @allow (create) Anyone can create a contact submission.
+     * @deny (get, list, update, delete) No one can read, list, update, or delete contact submissions.
+     * @principle Prevents unauthorized access to contact data.
      */
     match /contacts/{contactId} {
       allow create: if true;
-      allow get: if false;
-      allow list: if false;
-      allow update: if false;
-      allow delete: if false;
+      allow get, list, update, delete: if false;
     }
 
     /**
-     * @description Allows anyone to create support requests. Read, update, and delete are denied.
+     * @description Only allows the creation of support requests.
      * @path /supportRequests/{supportRequestId}
-     * @allow create: Any user can submit a support request.
-     * @allow get: if false;
-     * @allow list: if false;
-     * @allow update: if false;
-     * @allow delete: if false;
-     * @deny get: No read access granted for this prototype.
-     * @deny list: No read access granted for this prototype.
-     * @deny update: No update access granted for this prototype.
-     * @deny delete: No delete access granted for this prototype.
-     * @principle Allows public support request submissions while restricting other operations.
+     * @allow (create) Anyone can create a support request.
+     * @deny (get, list, update, delete) No one can read, list, update, or delete support requests.
+     * @principle Prevents unauthorized access to support request data.
      */
     match /supportRequests/{supportRequestId} {
       allow create: if true;
-      allow get: if false;
-      allow list: if false;
-      allow update: if false;
-      allow delete: if false;
+      allow get, list, update, delete: if false;
     }
   }
 }

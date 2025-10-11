@@ -21,6 +21,30 @@ import { Loader2 } from 'lucide-react';
 
 const storeItems = {
   plugins: [
+    { 
+      name: 'Shadow Studio 2', 
+      image: 'https://picsum.photos/seed/shadow-studio-2/600/400', 
+      dataAiHint: '3d text effect',
+      reviews: 82,
+      rating: 5,
+      description: 'Advanced shadow plugin for realistic and customizable shadows in After Effects.',
+      price: 99,
+      originalPrice: 1999,
+      discount: '95% OFF',
+      platform: 'Mac Only'
+    },
+    { 
+      name: 'Sapphire AE Install', 
+      image: 'https://picsum.photos/seed/sapphire/600/400', 
+      dataAiHint: 'vfx plugins',
+      reviews: 105,
+      rating: 5,
+      description: 'A complete suite of powerful visual effects plugins for After Effects.',
+      price: 99,
+      originalPrice: 3499,
+      discount: '97% OFF',
+      platform: 'Mac Only'
+    },
      { 
       name: 'JerryFlow', 
       image: 'https://picsum.photos/seed/jerryflow/600/400', 

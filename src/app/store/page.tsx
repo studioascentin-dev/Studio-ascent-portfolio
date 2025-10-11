@@ -177,7 +177,7 @@ const StoreItemCard = ({ item }: { item: any }) => {
         </CardHeader>
         <CardContent className="p-4 flex flex-col flex-grow">
             <h3 className="text-lg md:text-xl font-bold font-headline mb-2 flex-grow">{item.name}</h3>
-            {isPlugin && (
+            {isPlugin ? (
                 <>
                     <div className="mb-2">
                         <StarRating rating={item.rating} count={item.reviews} />
@@ -191,13 +191,12 @@ const StoreItemCard = ({ item }: { item: any }) => {
                         <Button className="font-semibold" size="sm">Buy Now</Button>
                     </div>
                 </>
-            )}
-            {!isPlugin && (
+            ) : (
                 <>
-                    <p className="text-muted-foreground text-sm flex-grow">{item.description || ''}</p>
-                    <div className="flex gap-2 mt-auto pt-4">
-                        <Button className="w-full font-semibold flex-1">
-                            View Details
+                    <p className="text-muted-foreground text-sm flex-grow mb-4">{item.description || ''}</p>
+                    <div className="flex gap-2 mt-auto">
+                        <Button className="w-full font-semibold flex-1" asChild>
+                            <Link href={`/store/${item.slug}`}>View Details</Link>
                         </Button>
                         <Dialog>
                             <DialogTrigger asChild>
@@ -286,7 +285,7 @@ export default function StorePage() {
               return (
               <motion.div key={category} variants={sectionVariants} className="mb-16 md:mb-20">
                 <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-bold font-headline mb-8 capitalize text-center">
-                  {category.replace(/([A-Z])/g, ' $1')}
+                  {category === 'templates' ? 'Templates' : 'Applications'}
                 </motion.h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                   {items.map((item: any) => (

@@ -38,6 +38,41 @@ const StarRating = ({ rating, count, size = 'h-5 w-5' }: { rating: number, count
     );
 };
 
+const replyFormSchema = z.object({
+  reply: z.string().min(1, { message: "Reply cannot be empty." }),
+});
+
+const ReplyForm = ({ onReply, onCancel }: { onReply: (data: z.infer<typeof replyFormSchema>) => void, onCancel: () => void }) => {
+    const form = useForm<z.infer<typeof replyFormSchema>>({
+        resolver: zodResolver(replyFormSchema),
+        defaultValues: { reply: "" },
+    });
+
+    return (
+        <Form {...form}>
+            <form onSubmit={form.handleSubmit(onReply)} className="mt-4 space-y-4">
+                <FormField
+                    control={form.control}
+                    name="reply"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormControl>
+                                <Textarea placeholder="Write a reply..." {...field} />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+                <div className="flex justify-end gap-2">
+                    <Button type="button" variant="ghost" size="sm" onClick={onCancel}>Cancel</Button>
+                    <Button type="submit" size="sm">Post Reply</Button>
+                </div>
+            </form>
+        </Form>
+    );
+};
+
+
 const ReviewForm = ({ itemName }: { itemName: string }) => {
     const { toast } = useToast();
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -329,6 +364,18 @@ const reviews = [
 export default function ProductDetailPage() {
     const params = useParams();
     const slug = params.slug as string;
+    const { toast } = useToast();
+
+    const [replyingTo, setReplyingTo] = useState<number | null>(null);
+
+    const handleReplySubmit = (reviewId: number, data: z.infer<typeof replyFormSchema>) => {
+        console.log(`Replying to review ${reviewId}:`, data.reply);
+        toast({
+            title: "Reply Posted",
+            description: "Your reply has been submitted for approval.",
+        });
+        setReplyingTo(null); // Close the form
+    };
 
     const allItems = [
         ...storeItems.plugins,
@@ -481,10 +528,17 @@ export default function ProductDetailPage() {
                                                     <StarRating rating={review.rating} size="h-4 w-4" />
                                                 </div>
                                                 <p className="mt-2 text-muted-foreground">{review.content}</p>
-                                                <Button variant="ghost" size="sm" className="mt-2 -ml-3 h-auto py-1 px-3 text-xs">
+                                                <Button variant="ghost" size="sm" className="mt-2 -ml-3 h-auto py-1 px-3 text-xs" onClick={() => setReplyingTo(replyingTo === review.id ? null : review.id)}>
                                                     <MessageSquare className="mr-2 h-3.5 w-3.5" />
                                                     Reply
                                                 </Button>
+
+                                                {replyingTo === review.id && (
+                                                    <ReplyForm 
+                                                        onCancel={() => setReplyingTo(null)}
+                                                        onReply={(data) => handleReplySubmit(review.id, data)}
+                                                    />
+                                                )}
                                             </div>
                                         </div>
                                         {review.reply && (
@@ -569,7 +623,3 @@ export default function ProductDetailPage() {
         </div>
     );
 }
-
-    
-
-    

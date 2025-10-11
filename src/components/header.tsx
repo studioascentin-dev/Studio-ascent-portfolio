@@ -67,7 +67,7 @@ export function Header() {
             threshold: 0.5
         });
 
-        const sections = ['about', 'services', 'contact'];
+        const sections = ['about', 'services', 'contact', 'testimonials'];
         sections.forEach(id => {
             const el = document.getElementById(id);
             if (el) observer.observe(el);
@@ -83,7 +83,10 @@ export function Header() {
 
 
         return () => {
-            observer.disconnect();
+            sections.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) observer.unobserve(el);
+            });
         };
     }, [pathname]);
 
@@ -110,7 +113,7 @@ export function Header() {
                         <Logo />
                     </Link>
                     
-                    <nav className="hidden md:flex items-center gap-2 px-3 py-2 bg-background/50 backdrop-blur-lg rounded-full border border-white/10 shadow-lg">
+                    <nav className="hidden md:flex items-center gap-2 px-3 py-4 bg-background/50 backdrop-blur-lg rounded-full border border-white/10 shadow-lg">
                         {navItems.map((item) => (
                              <motion.div key={item.name}>
                                 <Link

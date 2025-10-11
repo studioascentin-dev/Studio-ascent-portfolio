@@ -23,9 +23,10 @@ import { useToast } from '@/hooks/use-toast';
 import { Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { useFirestore, useStorage, addDocumentNonBlocking } from '@/firebase';
+import { useFirestore, useStorage } from '@/firebase';
 import { collection, serverTimestamp } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { addDocumentNonBlocking } from '@/firebase/non-blocking-updates';
 
 
 const StarRating = ({ rating, count, size = 'h-5 w-5' }: { rating: number, count?: number, size?: string }) => {
@@ -200,6 +201,16 @@ const SupportForm = ({productName}: {productName: string}) => {
 
     const onSubmit = async (data: SupportFormValues) => {
         setIsSubmitting(true);
+        if (!firestore || !storage) {
+            toast({
+                variant: "destructive",
+                title: "Submission Failed",
+                description: "Firebase services are not available. Please try again later.",
+            });
+            setIsSubmitting(false);
+            return;
+        }
+
         try {
             const screenshotFile = data.paymentScreenshot[0];
             const storageRef = ref(storage, `support-screenshots/${Date.now()}_${screenshotFile.name}`);
@@ -212,8 +223,8 @@ const SupportForm = ({productName}: {productName: string}) => {
 
             addDocumentNonBlocking(supportCollection, {
                 ...supportData,
-                screenshotUrl,
                 productName,
+                screenshotUrl,
                 createdAt: serverTimestamp(),
             });
 
@@ -320,7 +331,7 @@ const SupportForm = ({productName}: {productName: string}) => {
                 <FormField
                     control={form.control}
                     name="paymentScreenshot"
-                    render={({ field: { onChange, ...fieldProps }}) => (
+                    render={({ field: { onChange, value, ...fieldProps }}) => (
                         <FormItem>
                         <FormLabel>Payment Screenshot</FormLabel>
                         <FormControl>
@@ -669,5 +680,3 @@ export default function ProductDetailPage() {
         </div>
     );
 }
-
-    

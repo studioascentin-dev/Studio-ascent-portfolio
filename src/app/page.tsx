@@ -3,7 +3,6 @@
 
 import { Header } from '@/components/header';
 import { HeroSection } from '@/components/hero-section';
-import { ProjectsSection } from '@/components/projects-section';
 import { ServicesSection } from '@/components/services-section';
 import { Footer } from '@/components/footer';
 import * as React from 'react';
@@ -22,9 +21,6 @@ export default function Home() {
         </div>
         <div id="services" className="pt-20 -mt-20">
           <ServicesSection />
-        </div>
-        <div id="work" className="pt-20 -mt-20">
-          <ProjectsSection />
         </div>
         <div id="contact" className="pt-20 -mt-20">
           <HireMeSection />

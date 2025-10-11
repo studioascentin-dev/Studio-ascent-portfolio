@@ -125,9 +125,9 @@ export function Header() {
                 variants={navVariants}
                 initial="hidden"
                 animate="visible"
-                className="mx-auto flex h-16 max-w-screen-xl items-center justify-between px-4 md:px-6"
+                className="container mx-auto flex h-20 items-center justify-between px-6 md:px-8"
             >
-                <Link href="/" className={cn("text-2xl font-bold font-headline")}>
+                <Link href="/" className={cn("text-3xl font-bold font-headline")}>
                     <span className="text-primary">S</span>
                     <span className={cn("text-foreground")}>tudio</span>
                     {' '}
@@ -135,14 +135,14 @@ export function Header() {
                     <span className={cn("text-foreground")}>scent</span>
                 </Link>
                 
-                <nav className="hidden md:flex items-center justify-end gap-6 md:gap-8">
+                <nav className="hidden md:flex items-center justify-end gap-8 md:gap-10">
                     {navItems.map((item) => (
                          <motion.div key={item.name} variants={itemVariants}>
                             <Link
                                 href={item.href}
                                 onClick={(e) => handleScroll(e, item.href)}
                                 className={cn(
-                                    "text-sm font-medium text-muted-foreground hover:text-primary transition-colors relative group",
+                                    "text-base font-medium text-muted-foreground hover:text-primary transition-colors relative group",
                                     isLinkActive(item) && "text-primary font-semibold"
                                 )}
                             >

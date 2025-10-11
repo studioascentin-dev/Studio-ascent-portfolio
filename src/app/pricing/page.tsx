@@ -70,41 +70,43 @@ const pricingData = {
     title: 'AI Chatbot',
     tiers: [
       {
-        name: 'Starter Bot',
+        name: 'FAQ/Support Bot',
         price: '₹8,000',
         features: [
-          'Basic FAQ & Answer Bot',
-          'Website Integration',
-          'Basic Lead Capture Form',
-          'Dashboard & Analytics',
+          'Handles FAQs',
+          'WhatsApp/Telegram Integration',
+          'Deployed on chosen platform',
+          '1 Month Free Support',
         ],
-        details: ['Up to 1,000 Interactions/month', 'Standard Support'],
-        buttonText: 'Get Started',
+        details: ['Optional: Maintenance +₹2,000/month'],
+        buttonText: 'Select Plan',
       },
       {
-        name: 'Business Bot',
+        name: 'Booking Bot',
         price: '₹15,000',
         popular: true,
         features: [
-          'Advanced Conversational Flow',
-          'WhatsApp & Messenger Integration',
-          'Appointment Booking',
-          'CRM Integration',
+          'Order/Booking via Chat',
+          'Google Sheet/Airtable Integration',
+          'Owner Notifications',
+          'Supports WhatsApp, Website, Messenger',
+          '1 Month Free Support',
         ],
-        details: ['Up to 5,000 Interactions/month', 'Priority Support'],
-        buttonText: 'Get Started',
+        details: ['Optional: Maintenance +₹3,500/month'],
+        buttonText: 'Select Plan',
       },
       {
-        name: 'Enterprise Bot',
-        price: 'Contact Us',
+        name: 'GPT-Powered Bot',
+        price: '₹25,000',
         features: [
-          'Custom AI Model Integration',
-          'Omnichannel Support',
-          'Payment Gateway Integration',
-          'Dedicated Account Manager',
+          'Smart, Human-like Replies',
+          'Uses OpenAI Credits (*not included in price*)',
+          'Advanced Customization (intents, flows)',
+          'Deployed on Website/WhatsApp/Telegram',
+          '1 Month Free Support',
         ],
-        details: ['Unlimited Interactions', '24/7 Premium Support'],
-        buttonText: 'Contact Us',
+        details: ['Optional: Maintenance +₹5,000/month'],
+        buttonText: 'Select Plan',
       },
     ],
   },
@@ -116,9 +118,9 @@ const pricingData = {
             description: "Perfect for personal sites or small projects.",
             price: '₹12,000',
             features: [
-                { icon: <LayoutTemplate className="w-5 h-5" />, text: 'Up to 5 Pages' },
-                { icon: <Smartphone className="w-5 h-5" />, text: 'Responsive Design' },
-                { icon: <Briefcase className="w-5 h-5" />, text: 'Contact Form' },
+                { icon: <LayoutTemplate className="w-5 h-5 text-primary" />, text: 'Up to 5 Pages' },
+                { icon: <Smartphone className="w-5 h-5 text-primary" />, text: 'Responsive Design' },
+                { icon: <Briefcase className="w-5 h-5 text-primary" />, text: 'Contact Form' },
             ],
             buttonText: 'Start Small'
         },
@@ -128,10 +130,10 @@ const pricingData = {
             price: '₹25,000',
             popular: true,
             features: [
-                { icon: <LayoutTemplate className="w-5 h-5" />, text: 'Up to 10 Pages' },
-                { icon: <Briefcase className="w-5 h-5" />, text: 'CMS Integration' },
-                { icon: <Database className="w-5 h-5" />, text: 'Basic SEO Setup' },
-                { icon: <Cloud className="w-5 h-5" />, text: 'Social Media Integration' },
+                { icon: <LayoutTemplate className="w-5 h-5 text-primary" />, text: 'Up to 10 Pages' },
+                { icon: <Briefcase className="w-5 h-5 text-primary" />, text: 'CMS Integration' },
+                { icon: <Database className="w-5 h-5 text-primary" />, text: 'Basic SEO Setup' },
+                { icon: <Cloud className="w-5 h-5 text-primary" />, text: 'Social Media Integration' },
             ],
             buttonText: 'Grow Your Business'
         },
@@ -140,10 +142,10 @@ const pricingData = {
             description: "For established businesses with custom needs.",
             price: '₹50,000+',
             features: [
-                { icon: <LayoutTemplate className="w-5 h-5" />, text: 'Unlimited Pages' },
-                { icon: <Briefcase className="w-5 h-5" />, text: 'Custom Features' },
-                { icon: <Database className="w-5 h-5" />, text: 'E-commerce Functionality' },
-                { icon: <Cloud className="w-5 h-5" />, text: 'Advanced SEO & Analytics' },
+                { icon: <LayoutTemplate className="w-5 h-5 text-primary" />, text: 'Unlimited Pages' },
+                { icon: <Briefcase className="w-5 h-5 text-primary" />, text: 'Custom Features' },
+                { icon: <Database className="w-5 h-5 text-primary" />, text: 'E-commerce Functionality' },
+                { icon: <Cloud className="w-5 h-5 text-primary" />, text: 'Advanced SEO & Analytics' },
             ],
             buttonText: 'Build Enterprise Solutions'
         },
@@ -180,33 +182,33 @@ const PricingCard = ({ tier, serviceKey }: { tier: any, serviceKey: string }) =>
     
     if(serviceKey === 'web-development') {
         return (
-             <div className={`relative flex flex-col p-6 bg-card rounded-lg shadow-lg ${tier.popular ? 'border-2 border-primary' : 'border border-border'}`}>
+             <div className={`relative flex flex-col p-8 bg-card rounded-lg shadow-lg ${tier.popular ? 'border-2 border-primary' : 'border border-border'}`}>
                 {tier.popular && <div className="absolute top-0 -translate-y-1/2 px-3 py-1 text-sm text-primary-foreground bg-primary rounded-full font-semibold">Most Popular</div>}
-                <h3 className="text-xl font-bold font-headline">{tier.name}</h3>
-                <p className="mt-2 text-muted-foreground text-sm flex-grow">{tier.description}</p>
-                <div className="mt-4 text-4xl font-bold font-headline">{tier.price}</div>
-                <ul className="mt-6 space-y-4 text-sm">
+                <h3 className="text-2xl font-bold font-headline">{tier.name}</h3>
+                <p className="mt-2 text-muted-foreground text-sm flex-grow min-h-[40px]">{tier.description}</p>
+                <div className="mt-4 text-5xl font-bold font-headline text-primary">{tier.price}</div>
+                <ul className="mt-8 space-y-4 text-sm">
                     {tier.features.map((feature: any, index: number) => (
                     <li key={index} className="flex items-center gap-3">
-                        <span className="text-green-500">{feature.icon}</span>
+                        <span className="text-primary">{feature.icon}</span>
                         <span>{feature.text}</span>
                     </li>
                     ))}
                 </ul>
                 <div className="flex-grow"></div>
-                <Button className="w-full mt-8 font-bold">{tier.buttonText}</Button>
+                <Button className="w-full mt-8 font-bold text-lg py-6">{tier.buttonText}</Button>
             </div>
         )
     }
 
     return (
-        <div className={`relative flex flex-col p-6 bg-card rounded-lg shadow-lg ${tier.popular ? 'border-2 border-primary' : 'border border-border'}`}>
+        <div className={`relative flex flex-col p-8 bg-card rounded-lg shadow-lg ${tier.popular ? 'border-2 border-primary' : 'border border-border'}`}>
             {tier.popular && <div className="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 px-3 py-1 text-sm text-primary-foreground bg-primary rounded-full font-semibold">Most Popular</div>}
-            <h3 className="text-xl font-bold font-headline text-center">{tier.name}</h3>
-            <div className="my-4 text-center">
-                <span className="text-4xl font-bold font-headline text-primary">{tier.price}</span>
+            <h3 className="text-2xl font-bold font-headline text-center">{tier.name}</h3>
+            <div className="my-6 text-center">
+                <span className="text-5xl font-bold font-headline text-primary">{tier.price}</span>
             </div>
-            <ul className="space-y-3 text-sm flex-grow">
+            <ul className="space-y-4 text-sm flex-grow">
                 {tier.features.map((feature: string, index: number) => (
                 <li key={index} className="flex items-start gap-3">
                     <CheckCircle className="w-5 h-5 text-green-500 shrink-0 mt-0.5" />
@@ -221,17 +223,19 @@ const PricingCard = ({ tier, serviceKey }: { tier: any, serviceKey: string }) =>
                 ))}
             </div>
 
-            <div className="mt-4 pt-4 border-t border-border text-sm">
-                <p className="font-semibold mb-2">Add-Ons:</p>
-                <ul className="space-y-1 text-muted-foreground">
-                {tier.addOns?.map((addOn: string, index: number) => (
-                    <li key={index}>{addOn}</li>
-                ))}
-                </ul>
-            </div>
+            {tier.addOns && (
+              <div className="mt-4 pt-4 border-t border-border text-sm">
+                  <p className="font-semibold mb-2">Add-Ons:</p>
+                  <ul className="space-y-1 text-muted-foreground">
+                  {tier.addOns?.map((addOn: string, index: number) => (
+                      <li key={index}>{addOn}</li>
+                  ))}
+                  </ul>
+              </div>
+            )}
             
-            <div className="mt-auto pt-6">
-                 <Button className="w-full font-bold">{tier.buttonText}</Button>
+            <div className="mt-auto pt-8">
+                 <Button className="w-full font-bold text-lg py-6">{tier.buttonText}</Button>
             </div>
         </div>
     );
@@ -263,8 +267,8 @@ export default function PricingPage() {
               const service = pricingData[serviceKey as keyof typeof pricingData];
               return (
                 <motion.div key={service.title} variants={itemVariants} className="mb-24">
-                  <div className="flex justify-between items-center mb-8">
-                     <h2 className="text-3xl font-bold font-headline">{service.title}</h2>
+                  <div className="flex justify-between items-center mb-12">
+                     <h2 className="text-3xl md:text-4xl font-bold font-headline">{service.title}</h2>
                      <Link href={`/services/${serviceKey}`} className="flex items-center text-primary hover:underline">
                         View Details <ArrowRight className="ml-2 h-4 w-4" />
                      </Link>

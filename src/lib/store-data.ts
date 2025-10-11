@@ -115,6 +115,7 @@ export const storeItems = {
       originalPrice: 3499,
       discount: '97% OFF',
       platform: 'Mac & Windows',
+      paymentLink: 'https://rzp.io/rzp/shadows3',
       installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4',
        details: {
         fileSize: '78.5 MB',

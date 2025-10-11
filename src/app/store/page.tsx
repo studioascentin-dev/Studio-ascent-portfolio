@@ -339,7 +339,7 @@ export default function StorePage() {
               if (category === 'plugins') return null;
               return (
               <motion.div key={category} variants={sectionVariants} className="mb-20">
-                <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-bold font-headline mb-8 capitalize">
+                <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-bold font-headline mb-8 capitalize text-center">
                   {category.replace(/([A-Z])/g, ' $1')}
                 </motion.h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -356,4 +356,6 @@ export default function StorePage() {
     </div>
   );
 }
+    
+
     

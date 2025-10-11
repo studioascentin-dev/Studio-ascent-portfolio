@@ -29,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className="!scroll-smooth">
+    <html lang="en" suppressHydrationWarning className="!scroll-smooth dark">
       <body className={`${poppins.variable} ${montserrat.variable} font-body antialiased bg-background text-foreground`}>
         {children}
         <Toaster />

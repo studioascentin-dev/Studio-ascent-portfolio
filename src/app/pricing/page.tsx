@@ -5,7 +5,7 @@ import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
-import { Check, ArrowRight, CheckCircle, Smartphone, Bot, LayoutTemplate, Briefcase, Database, Cloud } from 'lucide-react';
+import { Check, ArrowRight, CheckCircle, Smartphone, Bot, LayoutTemplate, Briefcase, Database, Cloud, Zap, Shield, Globe, Palette, Cog, UserCog } from 'lucide-react';
 import Link from 'next/link';
 
 const pricingData = {
@@ -111,43 +111,58 @@ const pricingData = {
     ],
   },
   'web-development': {
-    title: 'Web Development',
+    title: 'Choose the Right Plan for Your Website',
+    description: 'Flexible pricing for Next.js web development, designed to scale with your needs.',
     tiers: [
         {
-            name: 'Basic',
-            description: "Perfect for personal sites or small projects.",
-            price: '₹12,000',
+            name: 'Basic Web Development',
+            description: "Perfect for Small Businesses & Personal Sites",
+            price: '₹20,000',
+            priceSubtitle: 'Starting at',
             features: [
-                { icon: <LayoutTemplate className="w-5 h-5 text-primary" />, text: 'Up to 5 Pages' },
-                { icon: <Smartphone className="w-5 h-5 text-primary" />, text: 'Responsive Design' },
-                { icon: <Briefcase className="w-5 h-5 text-primary" />, text: 'Contact Form' },
+                { icon: <Check className="w-5 h-5 text-primary" />, text: '1-3 Page Website' },
+                { icon: <Zap className="w-5 h-5 text-primary" />, text: 'Next.js Framework' },
+                { icon: <Database className="w-5 h-5 text-primary" />, text: 'Basic CMS Integration' },
+                { icon: <Check className="w-5 h-5 text-primary" />, text: '1 Month Support' },
             ],
-            buttonText: 'Start Small'
+            buttonText: 'Start Small',
+            size: 'small',
         },
         {
-            name: 'Intermediate',
-            description: "Ideal for small businesses and startups.",
-            price: '₹25,000',
+            name: 'Intermediate Web Development',
+            description: "Best for Growing Startups",
+            price: '₹75,000',
+            priceSubtitle: 'Starting at',
             popular: true,
             features: [
-                { icon: <LayoutTemplate className="w-5 h-5 text-primary" />, text: 'Up to 10 Pages' },
-                { icon: <Briefcase className="w-5 h-5 text-primary" />, text: 'CMS Integration' },
-                { icon: <Database className="w-5 h-5 text-primary" />, text: 'Basic SEO Setup' },
-                { icon: <Cloud className="w-5 h-5 text-primary" />, text: 'Social Media Integration' },
+                { icon: <Check className="w-5 h-5 text-primary" />, text: 'Up to 6 Page Website' },
+                { icon: <Zap className="w-5 h-5 text-primary" />, text: 'Next.js Framework' },
+                { icon: <Database className="w-5 h-5 text-primary" />, text: 'Advanced CMS' },
+                { icon: <Cog className="w-5 h-5 text-primary" />, text: 'Simple API Integrations' },
+                { icon: <Check className="w-5 h-5 text-primary" />, text: '2 Months Support' },
             ],
-            buttonText: 'Grow Your Business'
+            buttonText: 'Grow Your Business',
+            size: 'medium',
         },
         {
-            name: 'Enterprise',
-            description: "For established businesses with custom needs.",
-            price: '₹50,000+',
+            name: 'Enterprise Web Development',
+            description: "Custom Solutions for Enterprises",
+            price: '₹1,50,000+',
+            priceSubtitle: 'Starting at',
+            priceSubDescription: 'Custom Pricing Available',
             features: [
-                { icon: <LayoutTemplate className="w-5 h-5 text-primary" />, text: 'Unlimited Pages' },
-                { icon: <Briefcase className="w-5 h-5 text-primary" />, text: 'Custom Features' },
-                { icon: <Database className="w-5 h-5 text-primary" />, text: 'E-commerce Functionality' },
-                { icon: <Cloud className="w-5 h-5 text-primary" />, text: 'Advanced SEO & Analytics' },
+                { icon: <Check className="w-5 h-5 text-primary" />, text: '10+ Page Application' },
+                { icon: <Zap className="w-5 h-5 text-primary" />, text: 'Performance Optimization' },
+                { icon: <Shield className="w-5 h-5 text-primary" />, text: 'Advanced Security Setup' },
+                { icon: <Bot className="w-5 h-5 text-primary" />, text: 'AI Feature Integration' },
+                { icon: <Globe className="w-5 h-5 text-primary" />, text: 'Multi-language Support' },
+                { icon: <Palette className="w-5 h-5 text-primary" />, text: 'UI/UX Premium Design' },
+                { icon: <UserCog className="w-5 h-5 text-primary" />, text: 'Custom Admin Dashboard' },
+                { icon: <Cog className="w-5 h-5 text-primary" />, text: 'Custom Integrations' },
+                { icon: <Check className="w-5 h-5 text-primary" />, text: '3+ Months Support' },
             ],
-            buttonText: 'Build Enterprise Solutions'
+            buttonText: 'Build Enterprise Solutions',
+            size: 'large',
         },
     ]
   },
@@ -181,12 +196,21 @@ const itemVariants = {
 const PricingCard = ({ tier, serviceKey }: { tier: any, serviceKey: string }) => {
     
     if(serviceKey === 'web-development') {
+      const sizeClasses = {
+        small: 'md:col-span-1',
+        medium: 'md:col-span-1',
+        large: 'md:col-span-1',
+      };
         return (
-             <div className={`relative flex flex-col p-8 bg-card rounded-lg shadow-lg ${tier.popular ? 'border-2 border-primary' : 'border border-border'}`}>
-                {tier.popular && <div className="absolute top-0 -translate-y-1/2 px-3 py-1 text-sm text-primary-foreground bg-primary rounded-full font-semibold">Most Popular</div>}
+             <div className={`relative flex flex-col p-8 bg-card rounded-lg shadow-lg ${tier.popular ? 'border-2 border-primary' : 'border border-border'} ${sizeClasses[tier.size as keyof typeof sizeClasses]}`}>
+                {tier.popular && <div className="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 px-3 py-1 text-sm text-primary-foreground bg-primary rounded-full font-semibold">Most Popular</div>}
                 <h3 className="text-2xl font-bold font-headline">{tier.name}</h3>
                 <p className="mt-2 text-muted-foreground text-sm flex-grow min-h-[40px]">{tier.description}</p>
-                <div className="mt-4 text-5xl font-bold font-headline text-primary">{tier.price}</div>
+                <div className="mt-4 text-center">
+                    <p className="text-sm text-muted-foreground">{tier.priceSubtitle}</p>
+                    <div className="text-5xl font-bold font-headline text-primary">{tier.price}</div>
+                    {tier.priceSubDescription && <p className="text-xs text-muted-foreground mt-1">{tier.priceSubDescription}</p>}
+                </div>
                 <ul className="mt-8 space-y-4 text-sm">
                     {tier.features.map((feature: any, index: number) => (
                     <li key={index} className="flex items-center gap-3">
@@ -243,6 +267,8 @@ const PricingCard = ({ tier, serviceKey }: { tier: any, serviceKey: string }) =>
 
 
 export default function PricingPage() {
+  const webDevService = pricingData['web-development'];
+
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
       <Header />
@@ -264,6 +290,7 @@ export default function PricingPage() {
             </motion.div>
             
             {Object.keys(pricingData).map(serviceKey => {
+              if (serviceKey === 'web-development') return null;
               const service = pricingData[serviceKey as keyof typeof pricingData];
               return (
                 <motion.div key={service.title} variants={itemVariants} className="mb-24">
@@ -282,6 +309,19 @@ export default function PricingPage() {
               )
             })}
 
+            {/* Web Development Section */}
+            <motion.div variants={itemVariants} className="mb-24">
+                <div className="text-center max-w-3xl mx-auto mb-16">
+                    <h2 className="text-3xl md:text-4xl font-bold font-headline">{webDevService.title}</h2>
+                    <p className="mt-4 text-muted-foreground md:text-lg">{webDevService.description}</p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+                    {webDevService.tiers.map((tier) => (
+                      <PricingCard key={tier.name} tier={tier} serviceKey="web-development" />
+                    ))}
+                </div>
+            </motion.div>
+
           </div>
         </motion.section>
       </main>
@@ -289,3 +329,5 @@ export default function PricingPage() {
     </div>
   );
 }
+
+    

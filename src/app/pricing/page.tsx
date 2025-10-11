@@ -180,8 +180,8 @@ const PricingCard = ({ tier, serviceKey }: { tier: any, serviceKey: string }) =>
     
     if(serviceKey === 'web-development') {
         return (
-             <div className={`relative flex flex-col p-6 bg-card rounded-lg shadow-lg ${tier.popular ? 'border-2 border-orange-500' : 'border border-border'}`}>
-                {tier.popular && <div className="absolute top-0 -translate-y-1/2 px-3 py-1 text-sm text-white bg-orange-500 rounded-full font-semibold">Most Popular</div>}
+             <div className={`relative flex flex-col p-6 bg-card rounded-lg shadow-lg ${tier.popular ? 'border-2 border-primary' : 'border border-border'}`}>
+                {tier.popular && <div className="absolute top-0 -translate-y-1/2 px-3 py-1 text-sm text-primary-foreground bg-primary rounded-full font-semibold">Most Popular</div>}
                 <h3 className="text-xl font-bold font-headline">{tier.name}</h3>
                 <p className="mt-2 text-muted-foreground text-sm flex-grow">{tier.description}</p>
                 <div className="mt-4 text-4xl font-bold font-headline">{tier.price}</div>
@@ -194,17 +194,17 @@ const PricingCard = ({ tier, serviceKey }: { tier: any, serviceKey: string }) =>
                     ))}
                 </ul>
                 <div className="flex-grow"></div>
-                <Button className="w-full mt-8 bg-orange-500 hover:bg-orange-600 text-white font-bold">{tier.buttonText}</Button>
+                <Button className="w-full mt-8 font-bold">{tier.buttonText}</Button>
             </div>
         )
     }
 
     return (
-        <div className={`relative flex flex-col p-6 bg-card rounded-lg shadow-lg ${tier.popular ? 'border-2 border-orange-500' : 'border border-border'}`}>
-            {tier.popular && <div className="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 px-3 py-1 text-sm text-white bg-orange-500 rounded-full font-semibold">Most Popular</div>}
+        <div className={`relative flex flex-col p-6 bg-card rounded-lg shadow-lg ${tier.popular ? 'border-2 border-primary' : 'border border-border'}`}>
+            {tier.popular && <div className="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 px-3 py-1 text-sm text-primary-foreground bg-primary rounded-full font-semibold">Most Popular</div>}
             <h3 className="text-xl font-bold font-headline text-center">{tier.name}</h3>
             <div className="my-4 text-center">
-                <span className="text-4xl font-bold font-headline text-orange-500">{tier.price}</span>
+                <span className="text-4xl font-bold font-headline text-primary">{tier.price}</span>
             </div>
             <ul className="space-y-3 text-sm flex-grow">
                 {tier.features.map((feature: string, index: number) => (
@@ -231,7 +231,7 @@ const PricingCard = ({ tier, serviceKey }: { tier: any, serviceKey: string }) =>
             </div>
             
             <div className="mt-auto pt-6">
-                 <Button className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold">{tier.buttonText}</Button>
+                 <Button className="w-full font-bold">{tier.buttonText}</Button>
             </div>
         </div>
     );

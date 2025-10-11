@@ -57,6 +57,7 @@ const ReplyForm = ({ onReply, onCancel }: { onReply: (data: z.infer<typeof reply
                     name="reply"
                     render={({ field }) => (
                         <FormItem>
+                            <FormLabel className="sr-only">Reply</FormLabel>
                             <FormControl>
                                 <Textarea placeholder="Write a reply..." {...field} />
                             </FormControl>
@@ -134,6 +135,7 @@ const ReviewForm = ({ itemName }: { itemName: string }) => {
                                     {[1, 2, 3, 4, 5].map((star) => (
                                         <Star
                                             key={star}
+                                            aria-label={`Rate ${star} out of 5 stars`}
                                             className={`h-6 w-6 cursor-pointer ${field.value >= star ? 'text-yellow-400 fill-yellow-400' : 'text-gray-400'}`}
                                             onClick={() => field.onChange(star)}
                                         />
@@ -314,6 +316,7 @@ const SupportForm = ({productName}: {productName: string}) => {
                                 className="sr-only" 
                                 onChange={handleFileChange}
                                 accept="image/*"
+                                aria-label="Upload payment screenshot"
                             />
                             </label>
                         </FormControl>
@@ -430,6 +433,7 @@ export default function ProductDetailPage() {
                                     height={720}
                                     className="w-full h-full object-cover"
                                     data-ai-hint={item.dataAiHint}
+                                    priority
                                 />
                             </div>
                         </div>
@@ -487,8 +491,8 @@ export default function ProductDetailPage() {
                     <Separator className="my-12 md:my-16" />
 
                     {'details' in item && item.details && (
-                        <div className="max-w-4xl mx-auto mb-12 md:mb-16">
-                            <h2 className="text-2xl md:text-3xl font-bold font-headline mb-6 md:mb-8 text-center">Product Details</h2>
+                        <section className="max-w-4xl mx-auto mb-12 md:mb-16" aria-labelledby="product-details-heading">
+                            <h2 id="product-details-heading" className="text-2xl md:text-3xl font-bold font-headline mb-6 md:mb-8 text-center">Product Details</h2>
                             <div className="space-y-4 md:space-y-6">
                                 <Card className="bg-secondary/50 backdrop-blur-sm border-border p-6 md:p-8">
                                     <div className="flex items-start gap-4 md:gap-6">
@@ -518,28 +522,28 @@ export default function ProductDetailPage() {
                                     </div>
                                 </Card>
                             </div>
-                        </div>
+                        </section>
                     )}
 
 
                     <div className="max-w-7xl mx-auto">
                         {item.installVideo && (
-                            <div className="mb-12 md:mb-16">
-                                <h2 className="text-2xl md:text-3xl font-bold font-headline mb-6 md:mb-8 text-center">How to Install</h2>
+                            <section className="mb-12 md:mb-16" aria-labelledby="installation-video-heading">
+                                <h2 id="installation-video-heading" className="text-2xl md:text-3xl font-bold font-headline mb-6 md:mb-8 text-center">How to Install</h2>
                                 <div className="aspect-video max-w-4xl mx-auto w-full overflow-hidden rounded-lg border border-border shadow-lg">
-                                    <video src={item.installVideo} controls className="w-full h-full object-cover" />
+                                    <video src={item.installVideo} controls className="w-full h-full object-cover" title={`Installation video for ${item.name}`} />
                                 </div>
-                            </div>
+                            </section>
                         )}
 
                         <div className="grid md:grid-cols-2 gap-12 items-start">
-                            <div className="space-y-8">
-                                <h2 className="text-2xl md:text-3xl font-bold font-headline">Reviews & Ratings</h2>
+                            <section className="space-y-8" aria-labelledby="reviews-heading">
+                                <h2 id="reviews-heading" className="text-2xl md:text-3xl font-bold font-headline">Reviews & Ratings</h2>
                                 {reviews.map(review => (
-                                    <div key={review.id} className="bg-secondary/30 p-4 md:p-6 rounded-lg border border-border">
+                                    <article key={review.id} className="bg-secondary/30 p-4 md:p-6 rounded-lg border border-border">
                                         <div className="flex items-start gap-4">
                                             <Avatar>
-                                                <AvatarImage src={review.avatar} />
+                                                <AvatarImage src={review.avatar} alt={`${review.author}'s avatar`} />
                                                 <AvatarFallback>{review.author.charAt(0)}</AvatarFallback>
                                             </Avatar>
                                             <div className="flex-1">
@@ -582,27 +586,29 @@ export default function ProductDetailPage() {
                                                 </div>
                                             </div>
                                         )}
-                                    </div>
+                                    </article>
                                 ))}
-                            </div>
+                            </section>
 
                             <div className="space-y-8 sticky top-28">
-                                <Card className="bg-secondary/30 border-border" id="review">
-                                    <CardHeader>
-                                        <CardTitle className="font-headline text-xl md:text-2xl">Leave a Review</CardTitle>
-                                        <CardDescription className="text-sm">Share your experience with others.</CardDescription>
-                                    </CardHeader>
-                                    <CardContent>
-                                        <ReviewForm itemName={item.name} />
-                                    </CardContent>
-                                </Card>
+                                <section aria-labelledby="leave-review-heading">
+                                    <Card className="bg-secondary/30 border-border" id="review">
+                                        <CardHeader>
+                                            <CardTitle id="leave-review-heading" className="font-headline text-xl md:text-2xl">Leave a Review</CardTitle>
+                                            <CardDescription className="text-sm">Share your experience with others.</CardDescription>
+                                        </CardHeader>
+                                        <CardContent>
+                                            <ReviewForm itemName={item.name} />
+                                        </CardContent>
+                                    </Card>
+                                </section>
                             </div>
                         </div>
 
                         <Separator className="my-12 md:my-16" />
 
-                        <div>
-                            <h2 className="text-2xl md:text-3xl font-bold font-headline mb-6 md:mb-8 text-center">Payment & Support</h2>
+                        <section aria-labelledby="payment-support-heading">
+                            <h2 id="payment-support-heading" className="text-2xl md:text-3xl font-bold font-headline mb-6 md:mb-8 text-center">Payment & Support</h2>
                             <div className="grid md:grid-cols-2 gap-8 items-start max-w-7xl mx-auto">
                                 <div className="space-y-8">
                                     <Card className="bg-secondary/30 border-border p-6">
@@ -629,7 +635,7 @@ export default function ProductDetailPage() {
                                     <SupportForm productName={item.name} />
                                 </div>
                             </div>
-                        </div>
+                        </section>
                     </div>
 
                      <div className="text-center mt-16">

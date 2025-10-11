@@ -167,9 +167,9 @@ const ProjectCard = ({ project, slug, onCardClick }: { project: any, slug: strin
   );
 
   return (
-      <div ref={cardRef} onClick={isInteractive ? handleCardClick : undefined} className={cn(isInteractive ? "cursor-pointer" : "", "h-full")}>
+      <article ref={cardRef} onClick={isInteractive ? handleCardClick : undefined} className={cn(isInteractive ? "cursor-pointer" : "", "h-full")}>
           {cardContent}
-      </div>
+      </article>
   );
 };
 
@@ -203,19 +203,19 @@ export default function ServicePage() {
                         transition={{ duration: 0.5 }}
                         className="max-w-3xl mx-auto space-y-4"
                     >
-                        <div className="flex flex-col items-center text-center space-y-4">
+                        <header className="flex flex-col items-center text-center space-y-4">
                             <div className="inline-block p-4 bg-primary/10 rounded-full">
                                 {React.cloneElement(service.icon, { className: 'h-8 w-8 md:h-12 md:w-12 text-primary' })}
                             </div>
                             <h1 className="text-4xl md:text-5xl font-bold font-headline">{service.title}</h1>
                             <p className="text-sm md:text-lg text-muted-foreground">{service.description}</p>
-                        </div>
+                        </header>
                     </motion.div>
                     
                     {slug === 'web-development' ? (
                        <div className="space-y-16 md:space-y-24 mt-16 md:mt-24">
                             {service.projects.map((project: any, index: number) => (
-                                <motion.div
+                                <motion.article
                                     key={project.name}
                                     initial={{ opacity: 0, y: 50 }}
                                     whileInView={{ opacity: 1, y: 0 }}
@@ -226,7 +226,7 @@ export default function ServicePage() {
                                     )}
                                 >
                                     <div className={cn("relative aspect-video group", index % 2 === 1 && "md:order-2")}>
-                                        <a href={project.link} target="_blank" rel="noopener noreferrer" className="block">
+                                        <a href={project.link} target="_blank" rel="noopener noreferrer" aria-label={`View live site for ${project.name}`}>
                                             <Image
                                                 src={project.image}
                                                 alt={project.name}
@@ -257,7 +257,7 @@ export default function ServicePage() {
                                             </a>
                                         </Button>
                                     </div>
-                                </motion.div>
+                                </motion.article>
                             ))}
                         </div>
                     ) : (
@@ -308,6 +308,7 @@ export default function ServicePage() {
                                         controlsList="nodownload"
                                         autoPlay
                                         className="w-full h-auto object-cover rounded-md"
+                                        aria-label={`Video for ${selectedProject.name}`}
                                     />
                                 )}
                                 </div>

@@ -115,28 +115,30 @@ export default function BlogPage() {
             >
               {blogPosts.map((post) => (
                 <motion.div key={post.slug} variants={itemVariants}>
-                  <Link href={`/blog/#`} className="block h-full group">
-                    <Card className="flex flex-col h-full bg-secondary/50 backdrop-blur-sm border-white/10 shadow-lg transition-all duration-300 overflow-hidden hover:-translate-y-2 hover:shadow-primary/20 hover:border-primary">
-                      <CardHeader className="p-0 aspect-[4/3] overflow-hidden">
-                        <Image
-                          src={post.image}
-                          alt={post.title}
-                          width={600}
-                          height={400}
-                          className="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
-                          data-ai-hint={post.dataAiHint}
-                        />
-                      </CardHeader>
-                      <CardContent className="p-4 md:p-6 flex flex-col flex-grow">
-                        <p className="text-xs md:text-sm text-muted-foreground mb-2">{post.date}</p>
-                        <h3 className="text-lg md:text-xl font-bold font-headline mb-3 flex-grow">{post.title}</h3>
-                        <p className="text-muted-foreground mb-4 text-sm">{post.description}</p>
-                        <div className="flex items-center text-primary font-semibold text-sm group-hover:underline">
-                            Read More <ExternalLink className="ml-2 h-4 w-4" />
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </Link>
+                  <article>
+                    <Link href={`/blog/#`} className="block h-full group">
+                      <Card className="flex flex-col h-full bg-secondary/50 backdrop-blur-sm border-white/10 shadow-lg transition-all duration-300 overflow-hidden hover:-translate-y-2 hover:shadow-primary/20 hover:border-primary">
+                        <CardHeader className="p-0 aspect-[4/3] overflow-hidden">
+                          <Image
+                            src={post.image}
+                            alt={post.title}
+                            width={600}
+                            height={400}
+                            className="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
+                            data-ai-hint={post.dataAiHint}
+                          />
+                        </CardHeader>
+                        <CardContent className="p-4 md:p-6 flex flex-col flex-grow">
+                          <p className="text-xs md:text-sm text-muted-foreground mb-2">{post.date}</p>
+                          <h3 className="text-lg md:text-xl font-bold font-headline mb-3 flex-grow">{post.title}</h3>
+                          <p className="text-muted-foreground mb-4 text-sm">{post.description}</p>
+                          <div className="flex items-center text-primary font-semibold text-sm group-hover:underline">
+                              Read More <ExternalLink className="ml-2 h-4 w-4" />
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </Link>
+                  </article>
                 </motion.div>
               ))}
             </motion.div>

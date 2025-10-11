@@ -154,7 +154,7 @@ const StoreItemCard = ({ item }: { item: any }) => {
   const isPlugin = 'price' in item;
 
   return (
-    <motion.div variants={itemVariants} className="h-full">
+    <motion.article variants={itemVariants} className="h-full">
       <Link href={`/store/${item.slug}`} className="block h-full group">
         <Card className="flex flex-col h-full bg-secondary/50 backdrop-blur-sm border-white/10 shadow-lg transition-all duration-300 overflow-hidden group-hover:-translate-y-2 group-hover:shadow-primary/20">
           <CardHeader className="p-0 aspect-video overflow-hidden relative">
@@ -203,7 +203,7 @@ const StoreItemCard = ({ item }: { item: any }) => {
           </CardContent>
         </Card>
       </Link>
-    </motion.div>
+    </motion.article>
   );
 };
 
@@ -233,14 +233,14 @@ export default function StorePage() {
           variants={sectionVariants}
         >
           <div className="container mx-auto px-4 md:px-6">
-            <motion.div variants={itemVariants} className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
+            <motion.header variants={itemVariants} className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
               <h1 className="text-4xl sm:text-5xl font-bold font-headline tracking-tighter">
                 Digital Product Store
               </h1>
               <p className="mt-4 md:mt-6 text-base md:text-xl/relaxed text-muted-foreground">
                 High-quality plugins, templates, and applications to level up your creative projects.
               </p>
-            </motion.div>
+            </motion.header>
 
             <motion.div key="plugins" variants={sectionVariants} className="mb-16 md:mb-20">
                 <motion.h2 variants={itemVariants} className="flex items-center justify-center gap-3 text-3xl md:text-4xl font-bold font-headline mb-8 capitalize">
@@ -257,8 +257,8 @@ export default function StorePage() {
             {Object.entries(storeItems).map(([category, items]) => {
               if (category === 'plugins') return null;
               return (
-              <motion.div key={category} variants={sectionVariants} className="mb-16 md:mb-20">
-                <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-bold font-headline mb-8 capitalize text-center">
+              <motion.section key={category} variants={sectionVariants} className="mb-16 md:mb-20" aria-labelledby={`${category}-heading`}>
+                <motion.h2 variants={itemVariants} id={`${category}-heading`} className="text-3xl md:text-4xl font-bold font-headline mb-8 capitalize text-center">
                   {category === 'templates' ? 'Templates' : 'Applications'}
                 </motion.h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
@@ -266,7 +266,7 @@ export default function StorePage() {
                     <StoreItemCard key={item.slug} item={item} />
                   ))}
                 </div>
-              </motion.div>
+              </motion.section>
             )})}
           </div>
         </motion.section>

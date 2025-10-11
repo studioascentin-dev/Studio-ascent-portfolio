@@ -294,12 +294,12 @@ export default function PricingPage() {
               const service = pricingData[serviceKey as keyof typeof pricingData];
               return (
                 <motion.div key={service.title} variants={itemVariants} className="mb-16 md:mb-24">
-                  <div className="flex justify-between items-center mb-8 md:mb-12">
+                  <header className="flex justify-between items-center mb-8 md:mb-12">
                      <h2 className="text-2xl md:text-4xl font-bold font-headline">{service.title}</h2>
                      <Link href={`/services/${serviceKey}`} className="flex items-center text-primary hover:underline text-sm md:text-base">
                         View Details <ArrowRight className="ml-2 h-4 w-4" />
                      </Link>
-                  </div>
+                  </header>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                     {service.tiers.map((tier) => (
                       <motion.div
@@ -317,10 +317,10 @@ export default function PricingPage() {
 
             {/* Web Development Section */}
             <motion.div variants={itemVariants} className="mb-16 md:mb-24">
-                <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
+                <header className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
                     <h2 className="text-3xl md:text-4xl font-bold font-headline">{webDevService.title}</h2>
                     <p className="mt-4 text-muted-foreground text-base md:text-lg">{webDevService.description}</p>
-                </div>
+                </header>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 items-start">
                     {webDevService.tiers.map((tier) => (
                       <motion.div
@@ -341,5 +341,3 @@ export default function PricingPage() {
     </div>
   );
 }
-
-    

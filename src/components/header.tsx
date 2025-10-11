@@ -121,19 +121,17 @@ export function Header() {
             "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
             isScrolled ? "bg-background/80 backdrop-blur-md" : "bg-transparent"
         )}>
-            <div className="px-6 md:px-8">
+            <div className="w-full px-6 md:px-8">
                 <motion.div
                     variants={navVariants}
                     initial="hidden"
                     animate="visible"
-                    className="flex h-20 w-full items-center justify-between"
+                    className="flex h-20 items-center justify-between"
                 >
                     <Link href="/" className={cn("text-2xl md:text-3xl font-bold font-headline")}>
-                        <span className="text-primary">S</span>
-                        <span className={cn("text-foreground")}>tudio</span>
+                        <span className="text-primary">Dev</span>
                         {' '}
-                        <span className="text-primary">A</span>
-                        <span className={cn("text-foreground")}>scent</span>
+                        <span className={cn("text-foreground")}>Kumar Das</span>
                     </Link>
                     
                     <nav className="hidden md:flex items-center justify-end gap-8 md:gap-10">
@@ -174,11 +172,9 @@ export function Header() {
                                 <div className="flex flex-col h-full">
                                     <div className="mb-8 text-center">
                                          <Link href="/" onClick={() => setIsSheetOpen(false)} className="text-3xl font-bold font-headline">
-                                            <span className="text-primary">S</span>
-                                            <span className="text-foreground">tudio</span>
+                                            <span className="text-primary">Dev</span>
                                             {' '}
-                                            <span className="text-primary">A</span>
-                                            <span className="text-foreground">scent</span>
+                                            <span className="text-foreground">Kumar Das</span>
                                         </Link>
                                     </div>
                                     <nav className="flex flex-col items-center gap-8 text-xl">

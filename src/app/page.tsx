@@ -13,7 +13,7 @@ import { TestimonialsSection } from '@/components/testimonials-section';
 export default function Home() {
 
   return (
-    <div className="flex min-h-screen w-full bg-background flex-col">
+    <div className="flex min-h-screen w-full bg-background flex-col" id="home">
       <Header />
       <main className="flex-1">
         <HeroSection />

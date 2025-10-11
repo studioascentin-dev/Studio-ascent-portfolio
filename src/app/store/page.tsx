@@ -218,10 +218,10 @@ export default function StorePage() {
           <div className="container mx-auto px-4 md:px-6">
             <motion.div variants={itemVariants} className="text-center max-w-3xl mx-auto mb-16">
               <h1 className="text-4xl font-bold font-headline tracking-tighter sm:text-5xl md:text-6xl">
-                My <span className="text-primary">Store</span>
+                Digital Product Store
               </h1>
               <p className="mt-6 text-muted-foreground md:text-xl/relaxed">
-                Download free plugins, templates, and applications for your creative projects.
+                High-quality plugins, templates, and applications to level up your creative projects.
               </p>
             </motion.div>
 

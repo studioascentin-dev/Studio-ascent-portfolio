@@ -153,81 +153,95 @@ const StarRating = ({ rating, count }: { rating: number, count: number }) => {
 const StoreItemCard = ({ item }: { item: any }) => {
   const isPlugin = item.hasOwnProperty('price');
 
+  if (isPlugin) {
+    return (
+      <motion.div variants={itemVariants} className="h-full">
+        <Link href={`/store/${item.slug}`} className="block h-full group">
+          <Card className="flex flex-col h-full bg-secondary/50 backdrop-blur-sm border-white/10 shadow-lg transition-all duration-300 overflow-hidden group-hover:-translate-y-2 group-hover:shadow-primary/20">
+            <CardHeader className="p-0 aspect-video overflow-hidden relative">
+              <Image
+                src={item.image}
+                alt={item.name}
+                width={600}
+                height={400}
+                className="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
+                data-ai-hint={item.dataAiHint}
+              />
+              <div className="absolute top-2 left-2 bg-black/50 text-white text-xs px-2 py-1 rounded-md flex items-center gap-1">
+                {item.platform === 'Mac & Windows' ? <Check className="h-3 w-3 text-green-400" /> : <Apple className="h-3 w-3" />} {item.platform}
+              </div>
+              {item.discount && (
+                <div className="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-md">
+                  {item.discount}
+                </div>
+              )}
+            </CardHeader>
+            <CardContent className="p-4 flex flex-col flex-grow">
+              <h3 className="text-lg font-bold font-headline mb-2 flex-grow group-hover:text-primary transition-colors">{item.name}</h3>
+              <div className="mb-2">
+                <StarRating rating={item.rating} count={item.reviews} />
+              </div>
+              <p className="text-sm text-muted-foreground mb-4 flex-grow">{item.description}</p>
+              <div className="flex items-center justify-between mt-auto">
+                <div className="flex items-baseline gap-2">
+                  <span className="text-2xl font-bold text-primary">₹{item.price}</span>
+                  <span className="text-sm text-muted-foreground line-through">₹{item.originalPrice}</span>
+                </div>
+                <Button className="font-semibold pointer-events-none" size="sm">
+                    Buy Now
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </Link>
+      </motion.div>
+    );
+  }
+
+  // Fallback for non-plugin items
   return (
     <motion.div variants={itemVariants} className="h-full">
       <Card className="flex flex-col h-full bg-secondary/50 backdrop-blur-sm border-white/10 shadow-lg transition-all duration-300 overflow-hidden group">
-          
-            <CardHeader className="p-0 aspect-video overflow-hidden relative">
-                <Image
-                    src={item.image}
-                    alt={item.name}
-                    width={600}
-                    height={400}
-                    className="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
-                    data-ai-hint={item.dataAiHint}
-                />
-                {isPlugin && (
-                    <>
-                        <div className="absolute top-2 left-2 bg-black/50 text-white text-xs px-2 py-1 rounded-md flex items-center gap-1">
-                            {item.platform === 'Mac & Windows' ? <Check className="h-3 w-3 text-green-400" /> : <Apple className="h-3 w-3" />} {item.platform}
-                        </div>
-                        {item.discount && (
-                            <div className="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-md">
-                                {item.discount}
-                            </div>
-                        )}
-                    </>
-                )}
-            </CardHeader>
-          
-          <CardContent className="p-4 flex flex-col flex-grow">
-              <h3 className="text-lg md:text-xl font-bold font-headline mb-2 flex-grow">{item.name}</h3>
-              {isPlugin ? (
-                  <>
-                      <div className="mb-2">
-                          <StarRating rating={item.rating} count={item.reviews} />
-                      </div>
-                      <p className="text-sm text-muted-foreground mb-4 flex-grow">{item.description}</p>
-                      <div className="flex items-center justify-between mt-auto">
-                          <div className="flex items-baseline gap-2">
-                              <span className="text-2xl font-bold text-primary">₹{item.price}</span>
-                              <span className="text-sm text-muted-foreground line-through">₹{item.originalPrice}</span>
-                          </div>
-                          <Button asChild className="font-semibold" size="sm">
-                            <Link href={`/store/${item.slug}`}>Buy Now</Link>
-                          </Button>
-                      </div>
-                  </>
-              ) : (
-                  <>
-                      <p className="text-muted-foreground text-sm flex-grow mb-4">{item.description || ''}</p>
-                      <div className="flex gap-2 mt-auto">
-                          <Button className="w-full font-semibold flex-1" asChild>
-                              <Link href={`/store/${item.slug}`}>View Details</Link>
-                          </Button>
-                          <Dialog>
-                              <DialogTrigger asChild>
-                                  <Button variant="outline" size="icon" className="shrink-0">
-                                      <LifeBuoy className="h-4 w-4"/>
-                                      <span className="sr-only">Report a problem</span>
-                                  </Button>
-                              </DialogTrigger>
-                              <DialogContent className="sm:max-w-[425px]">
-                                  <DialogHeader>
-                                      <DialogTitle>Report an Issue with {item.name}</DialogTitle>
-                                      <DialogDescription>
-                                          If you're having trouble, please describe the issue below.
-                                      </DialogDescription>
-                                  </DialogHeader>
-                                  <div className="py-4">
-                                      <StoreContactForm itemName={item.name} />
-                                  </div>
-                              </DialogContent>
-                          </Dialog>
-                      </div>
-                  </>
-              )}
-          </CardContent>
+        <CardHeader className="p-0 aspect-video overflow-hidden relative">
+          <Link href={`/store/${item.slug}`}>
+            <Image
+                src={item.image}
+                alt={item.name}
+                width={600}
+                height={400}
+                className="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
+                data-ai-hint={item.dataAiHint}
+            />
+          </Link>
+        </CardHeader>
+        <CardContent className="p-4 flex flex-col flex-grow">
+          <h3 className="text-lg md:text-xl font-bold font-headline mb-2 flex-grow">{item.name}</h3>
+          <p className="text-muted-foreground text-sm flex-grow mb-4">{item.description || ''}</p>
+          <div className="flex gap-2 mt-auto">
+            <Button className="w-full font-semibold flex-1" asChild>
+              <Link href={`/store/${item.slug}`}>View Details</Link>
+            </Button>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant="outline" size="icon" className="shrink-0">
+                  <LifeBuoy className="h-4 w-4" />
+                  <span className="sr-only">Report a problem</span>
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-[425px]">
+                <DialogHeader>
+                  <DialogTitle>Report an Issue with {item.name}</DialogTitle>
+                  <DialogDescription>
+                    If you're having trouble, please describe the issue below.
+                  </DialogDescription>
+                </DialogHeader>
+                <div className="py-4">
+                  <StoreContactForm itemName={item.name} />
+                </div>
+              </DialogContent>
+            </Dialog>
+          </div>
+        </CardContent>
       </Card>
     </motion.div>
   );

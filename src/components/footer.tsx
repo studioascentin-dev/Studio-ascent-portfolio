@@ -60,7 +60,7 @@ export function Footer() {
           </div>
 
           <div className="md:col-span-1 lg:col-span-2 flex justify-start md:justify-end">
-              <div className="grid grid-cols-2 gap-8 sm:gap-16">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 sm:gap-16">
                 <div>
                   <h4 className="font-semibold font-headline mb-4">Quick Links</h4>
                   <ul className="space-y-3">
@@ -71,6 +71,11 @@ export function Footer() {
                         </Link>
                       </li>
                     ))}
+                     <li>
+                        <Link href="/admin" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                            Admin
+                        </Link>
+                    </li>
                   </ul>
                 </div>
                 <div>
@@ -85,6 +90,13 @@ export function Footer() {
                             Contact
                         </Link>
                     </li>
+                  </ul>
+                </div>
+                 <div>
+                  <h4 className="font-semibold font-headline mb-4">Legal</h4>
+                  <ul className="space-y-3">
+                    <li><Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">Privacy Policy</Link></li>
+                    <li><Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">Terms of Service</Link></li>
                   </ul>
                 </div>
               </div>

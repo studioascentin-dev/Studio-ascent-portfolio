@@ -34,11 +34,11 @@ function XIcon(props: React.SVGProps<SVGSVGElement>) {
 
 export function Footer() {
   return (
-    <footer className="bg-secondary/20 backdrop-blur-sm border-t border-white/5 pt-16 pb-8 text-foreground">
+    <footer className="bg-secondary/20 backdrop-blur-sm border-t border-white/5 py-12 text-foreground">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           
-          <div className="md:col-span-5 lg:col-span-4 space-y-4">
+          <div className="space-y-4">
             <h3 className="font-headline text-2xl font-bold text-primary">Studio Ascent</h3>
             <p className="text-muted-foreground text-sm">
               Creative full-stack developer and video editor, crafting beautiful digital experiences.
@@ -59,33 +59,35 @@ export function Footer() {
             </div>
           </div>
 
-          <div className="md:col-span-7 lg:col-span-8 grid grid-cols-2 sm:grid-cols-3 gap-8">
-            <div>
-              <h4 className="font-semibold font-headline mb-4">Quick Links</h4>
-              <ul className="space-y-3">
-                {navLinks.map((link) => (
-                  <li key={link.name}>
-                    <Link href={link.href} className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                        {link.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold font-headline mb-4">Services</h4>
-              <ul className="space-y-3">
-                <li><Link href="/services/web-development" className="text-sm text-muted-foreground hover:text-primary transition-colors">Web Development</Link></li>
-                <li><Link href="/services/video-editing" className="text-sm text-muted-foreground hover:text-primary transition-colors">Video Editing</Link></li>
-                <li><Link href="/services/photo-editing" className="text-sm text-muted-foreground hover:text-primary transition-colors">Photo Editing</Link></li>
-                <li><Link href="/services/ai-chatbot" className="text-sm text-muted-foreground hover:text-primary transition-colors">AI Chatbots</Link></li>
-                 <li>
-                    <Link href="/#contact" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                        Contact
-                    </Link>
-                  </li>
-              </ul>
-            </div>
+          <div className="md:col-span-1 lg:col-span-2 flex justify-start md:justify-end">
+              <div className="grid grid-cols-2 gap-8 sm:gap-16">
+                <div>
+                  <h4 className="font-semibold font-headline mb-4">Quick Links</h4>
+                  <ul className="space-y-3">
+                    {navLinks.map((link) => (
+                      <li key={link.name}>
+                        <Link href={link.href} className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                            {link.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="font-semibold font-headline mb-4">Services</h4>
+                  <ul className="space-y-3">
+                    <li><Link href="/services/web-development" className="text-sm text-muted-foreground hover:text-primary transition-colors">Web Development</Link></li>
+                    <li><Link href="/services/video-editing" className="text-sm text-muted-foreground hover:text-primary transition-colors">Video Editing</Link></li>
+                    <li><Link href="/services/photo-editing" className="text-sm text-muted-foreground hover:text-primary transition-colors">Photo Editing</Link></li>
+                    <li><Link href="/services/ai-chatbot" className="text-sm text-muted-foreground hover:text-primary transition-colors">AI Chatbots</Link></li>
+                    <li>
+                        <Link href="/#contact" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                            Contact
+                        </Link>
+                    </li>
+                  </ul>
+                </div>
+              </div>
           </div>
         </div>
 

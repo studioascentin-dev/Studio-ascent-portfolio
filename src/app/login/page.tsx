@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useForm } from 'react-hook-form';
@@ -16,10 +17,9 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { Loader2, Eye, EyeOff } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth, useUser } from '@/firebase';
 import { useRouter } from 'next/navigation';
-import { initiateEmailSignIn } from '@/firebase/non-blocking-login';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 
 const formSchema = z.object({
@@ -43,9 +43,14 @@ export default function LoginPage() {
     },
   });
 
+  useEffect(() => {
+    if (user) {
+      router.push('/admin');
+    }
+  }, [user, router]);
+
   if (user) {
-    router.push('/admin');
-    return null;
+    return null; // or a loading spinner
   }
 
   async function onSubmit(values: z.infer<typeof formSchema>) {

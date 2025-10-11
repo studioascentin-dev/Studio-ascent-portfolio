@@ -26,9 +26,9 @@ const LogoIcon = (props: React.SVGProps<SVGSVGElement>) => (
                 <stop offset="100%" style={{stopColor: '#8338EC', stopOpacity: 1}} />
             </linearGradient>
         </defs>
+        <path d="M2 12L12 17L22 12L12 7L2 12Z" fill="url(#logo-gradient)" opacity="0.6"/>
+        <path d="M2 17L12 22L22 17L12 12L2 17Z" fill="url(#logo-gradient)" opacity="0.3"/>
         <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="url(#logo-gradient)"/>
-        <path d="M2 17L12 22L22 17L12 12L2 17Z" fill="url(#logo-gradient)" opacity="0.6"/>
-        <path d="M2 12L12 17L22 12L12 7L2 12Z" fill="url(#logo-gradient)" opacity="0.3"/>
     </svg>
 );
 

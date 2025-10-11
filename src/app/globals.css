@@ -89,7 +89,7 @@
   .scroller[data-animated="true"] .scroller__inner {
     width: max-content;
     flex-wrap: nowrap;
-    animation: scroll 40s linear infinite;
+    animation: infinite-scroll 40s linear infinite;
   }
   
   .scroller__inner {
@@ -97,7 +97,7 @@
     gap: 1.5rem; /* 24px */
   }
 
-  @keyframes scroll {
+  @keyframes infinite-scroll {
     to {
       transform: translate(calc(-50% - 0.75rem));
     }

@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import * as React from 'react';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "./ui/sheet";
 import { Button } from "./ui/button";
-import { Menu, Code } from "lucide-react";
+import { Menu } from "lucide-react";
 
 const navItems = [
     { name: "About", href: "/#about" },
@@ -35,6 +35,21 @@ const itemVariants = {
     visible: { opacity: 1, y: 0 },
 };
 
+const LogoIcon = (props: React.SVGProps<SVGSVGElement>) => (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+        <defs>
+            <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style={{stopColor: '#F06', stopOpacity: 1}} />
+                <stop offset="100%" style={{stopColor: '#8338EC', stopOpacity: 1}} />
+            </linearGradient>
+        </defs>
+        <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="url(#logo-gradient)"/>
+        <path d="M2 17L12 22L22 17L12 12L2 17Z" fill="url(#logo-gradient)" opacity="0.6"/>
+        <path d="M2 12L12 17L22 12L12 7L2 12Z" fill="url(#logo-gradient)" opacity="0.3"/>
+    </svg>
+);
+
+
 export function Header() {
     const pathname = usePathname();
     const router = useRouter();
@@ -43,14 +58,13 @@ export function Header() {
     const [isScrolled, setIsScrolled] = React.useState(false);
 
     const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-        const isHomePage = pathname === '/';
         const isAnchorLink = href.startsWith('/#');
 
         if (isAnchorLink) {
             e.preventDefault();
             const targetId = href.substring(2);
 
-            if (isHomePage) {
+            if (pathname === '/') {
                 setActiveSection(targetId);
                 const targetElement = document.getElementById(targetId);
                 if (targetElement) {
@@ -61,7 +75,8 @@ export function Header() {
             }
              setIsSheetOpen(false);
         } else {
-             setIsSheetOpen(false);
+            router.push(href);
+            setIsSheetOpen(false);
         }
     };
     
@@ -103,7 +118,7 @@ export function Header() {
         return () => {
             observer.disconnect();
             window.removeEventListener('scroll', checkScroll);
-};
+        };
     }, [pathname]);
 
     const isLinkActive = (item: {name: string, href: string}) => {
@@ -117,39 +132,36 @@ export function Header() {
     };
 
     return (
-        <header className={cn(
-            "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-            isScrolled ? "bg-background/80 backdrop-blur-md" : "bg-transparent"
-        )}>
-            <div className="w-full px-6 md:px-8">
+        <header className="fixed top-0 left-0 right-0 z-50">
+            <div className="container mx-auto px-4 md:px-6">
                 <motion.div
-                    variants={navVariants}
-                    initial="hidden"
-                    animate="visible"
-                    className="flex h-20 items-center justify-between"
+                    initial={{ y: -100 }}
+                    animate={{ y: 0 }}
+                    transition={{ type: "spring", stiffness: 100, damping: 20 }}
+                    className="flex h-24 items-center justify-between"
                 >
-                    <Link href="/" className={cn("text-2xl md:text-3xl font-bold font-headline")}>
-                        <span className="text-primary">Studio</span>
-                        {' '}
-                        <span className={cn("text-foreground")}>Ascent</span>
+                    <Link href="/" className="flex items-center gap-3 px-4 py-2 bg-background/50 backdrop-blur-lg rounded-full border border-white/10 shadow-lg">
+                        <LogoIcon />
+                        <span className="font-bold text-foreground">Studio Ascent</span>
                     </Link>
                     
-                    <nav className="hidden md:flex items-center justify-end gap-8 md:gap-10">
+                    <nav className="hidden md:flex items-center gap-2 px-3 py-2 bg-background/50 backdrop-blur-lg rounded-full border border-white/10 shadow-lg">
                         {navItems.map((item) => (
                              <motion.div key={item.name} variants={itemVariants}>
                                 <Link
                                     href={item.href}
                                     onClick={(e) => handleScroll(e, item.href)}
                                     className={cn(
-                                        "text-base font-medium text-muted-foreground hover:text-primary transition-colors relative group",
-                                        isLinkActive(item) && "text-primary font-semibold"
+                                        "relative px-4 py-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors rounded-full",
+                                        isLinkActive(item) && "text-primary"
                                     )}
                                 >
                                     {item.name}
                                     {isLinkActive(item) && (
                                         <motion.span 
-                                            layoutId="active-dot-desktop"
-                                            className="absolute left-1/2 -translate-x-1/2 -bottom-2 h-1.5 w-1.5 bg-primary rounded-full"
+                                            layoutId="active-nav-highlight"
+                                            className="absolute inset-0 bg-primary/10 rounded-full -z-10"
+                                            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                                         />
                                     )}
                                 </Link>
@@ -160,31 +172,30 @@ export function Header() {
                     <div className="md:hidden">
                         <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
                             <SheetTrigger asChild>
-                                <Button variant="ghost" size="icon">
+                                <Button variant="ghost" size="icon" className="bg-background/50 backdrop-blur-lg border border-white/10">
                                     <Menu className="h-6 w-6" />
                                     <span className="sr-only">Open menu</span>
                                 </Button>
                             </SheetTrigger>
-                            <SheetContent side="right" className="w-full max-w-xs bg-background/95 backdrop-blur-md border-l-primary/20">
+                            <SheetContent side="right" className="w-full max-w-xs bg-background/90 backdrop-blur-xl border-l-primary/20">
                                <SheetHeader>
                                     <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
                                 </SheetHeader>
-                                <div className="flex flex-col h-full">
-                                    <div className="mb-8 text-center">
-                                         <Link href="/" onClick={() => setIsSheetOpen(false)} className="text-3xl font-bold font-headline">
-                                            <span className="text-primary">Studio</span>
-                                            {' '}
-                                            <span className="text-foreground">Ascent</span>
+                                <div className="flex flex-col h-full pt-10">
+                                    <div className="mb-10 text-center">
+                                         <Link href="/" onClick={() => setIsSheetOpen(false)} className="inline-flex items-center gap-3">
+                                            <LogoIcon />
+                                            <span className="text-xl font-bold font-headline text-foreground">Studio Ascent</span>
                                         </Link>
                                     </div>
-                                    <nav className="flex flex-col items-center gap-8 text-xl">
+                                    <nav className="flex flex-col items-center gap-6 text-lg">
                                         {navItems.map((item) => (
                                             <Link
                                                 key={item.name}
                                                 href={item.href}
                                                 onClick={(e) => handleScroll(e, item.href)}
                                                 className={cn(
-                                                    "font-medium text-muted-foreground hover:text-primary transition-colors relative",
+                                                    "font-medium text-muted-foreground hover:text-primary transition-colors py-2 relative",
                                                     isLinkActive(item) && "text-primary font-semibold"
                                                 )}
                                             >

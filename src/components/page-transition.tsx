@@ -22,7 +22,7 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      <LoadingScreen isLoading={isLoading} />
+      {/* <LoadingScreen isLoading={isLoading} /> */}
       <div className={`${isLoading ? 'opacity-0' : 'opacity-100 transition-opacity duration-500'}`}>
         {children}
       </div>

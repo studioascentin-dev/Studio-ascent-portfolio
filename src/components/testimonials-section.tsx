@@ -6,6 +6,8 @@ import { Button } from './ui/button';
 import { Card, CardContent, CardHeader } from './ui/card';
 import { Avatar, AvatarFallback } from './ui/avatar';
 import { Star } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import React from 'react';
 
 const sectionVariants = {
     hidden: { opacity: 0 },
@@ -60,7 +62,7 @@ const testimonials = [
 
 const StarRating = ({ rating, className }: { rating: number, className?: string }) => {
     return (
-        <div className={`flex text-yellow-400 ${className}`}>
+        <div className={cn("flex text-yellow-400", className)}>
             {[...Array(5)].map((_, i) => (
                 <Star key={i} className={`h-5 w-5 ${i < rating ? 'fill-current' : 'text-gray-500'}`} />
             ))}
@@ -68,9 +70,33 @@ const StarRating = ({ rating, className }: { rating: number, className?: string 
     );
 };
 
+const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] }) => (
+    <Card className="bg-background/50 backdrop-blur-sm border p-6 text-center h-full w-[350px] shrink-0">
+        <CardHeader className="p-0 items-center mb-4">
+            <Avatar className="w-16 h-16 mb-4 border-2 border-primary/50">
+                <AvatarFallback className="bg-primary/10 text-primary font-bold text-xl">{testimonial.initial}</AvatarFallback>
+            </Avatar>
+            <h3 className="font-headline text-xl">{testimonial.name}</h3>
+            <StarRating rating={testimonial.rating} className="mt-2" />
+        </CardHeader>
+        <CardContent className="p-0">
+            <p className="text-muted-foreground text-sm italic">"{testimonial.review}"</p>
+        </CardContent>
+    </Card>
+);
+
 export function TestimonialsSection() {
+    const scrollerRef = React.useRef<HTMLDivElement>(null);
+
+    React.useEffect(() => {
+        const scroller = scrollerRef.current;
+        if (scroller) {
+            scroller.setAttribute("data-animated", "true");
+        }
+    }, []);
+
     return (
-        <section className="py-24 md:py-32 bg-secondary/20">
+        <section className="py-24 md:py-32 bg-secondary/20 overflow-hidden">
             <motion.div
                 className="container mx-auto px-4"
                 variants={sectionVariants}
@@ -99,29 +125,19 @@ export function TestimonialsSection() {
                         <a href="#" target="_blank" rel="noopener noreferrer">Rate Us on Google</a>
                     </Button>
                 </motion.div>
-
-                <motion.div
-                    variants={sectionVariants}
-                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8"
-                >
-                    {testimonials.map((testimonial, index) => (
-                        <motion.div key={index} variants={itemVariants}>
-                            <Card className="bg-background/50 backdrop-blur-sm border p-6 text-center h-full hover:-translate-y-2 transition-all duration-300 hover:shadow-primary/20">
-                                <CardHeader className="p-0 items-center mb-4">
-                                    <Avatar className="w-16 h-16 mb-4 border-2 border-primary/50">
-                                        <AvatarFallback className="bg-primary/10 text-primary font-bold text-xl">{testimonial.initial}</AvatarFallback>
-                                    </Avatar>
-                                    <h3 className="font-headline text-xl">{testimonial.name}</h3>
-                                    <StarRating rating={testimonial.rating} className="mt-2" />
-                                </CardHeader>
-                                <CardContent className="p-0">
-                                    <p className="text-muted-foreground text-sm italic">"{testimonial.review}"</p>
-                                </CardContent>
-                            </Card>
-                        </motion.div>
-                    ))}
-                </motion.div>
             </motion.div>
+            
+            <div className="scroller" ref={scrollerRef}>
+                <div className="scroller__inner">
+                    {testimonials.map((testimonial, index) => (
+                        <TestimonialCard key={`testimonial-1-${index}`} testimonial={testimonial} />
+                    ))}
+                    {testimonials.map((testimonial, index) => (
+                        <TestimonialCard key={`testimonial-2-${index}`} testimonial={testimonial} />
+                    ))}
+                </div>
+            </div>
+
         </section>
     );
 }

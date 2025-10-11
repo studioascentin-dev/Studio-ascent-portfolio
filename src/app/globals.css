@@ -69,4 +69,37 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+
+  .scroller {
+    max-width: 100%;
+  }
+
+  .scroller[data-animated="true"] {
+    overflow: hidden;
+    -webkit-mask: linear-gradient(
+      90deg,
+      transparent,
+      white 20%,
+      white 80%,
+      transparent
+    );
+    mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+  }
+
+  .scroller[data-animated="true"] .scroller__inner {
+    width: max-content;
+    flex-wrap: nowrap;
+    animation: scroll 40s linear infinite;
+  }
+  
+  .scroller__inner {
+    display: flex;
+    gap: 1.5rem; /* 24px */
+  }
+
+  @keyframes scroll {
+    to {
+      transform: translate(calc(-50% - 0.75rem));
+    }
+  }
 }

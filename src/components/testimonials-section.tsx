@@ -35,28 +35,28 @@ const itemVariants = {
 
 const testimonials = [
     {
-        initial: 'P',
-        name: 'Priya Mehta',
-        rating: 5,
-        review: 'The photo editing service is top-notch. They transformed my old family photos beautifully. Thank you!',
-    },
-    {
         initial: 'A',
-        name: 'Anil Kumar',
+        name: 'Aarav Sharma',
         rating: 5,
-        review: 'I was struggling with the NSP scholarship form. The team here guided me through every step. Excellent support.',
+        review: 'The AI chatbot developed for my e-commerce site has been a game-changer. Sales are up 20%!',
     },
     {
         initial: 'S',
-        name: 'Sunita Devi',
+        name: 'Sophia Chen',
         rating: 5,
-        review: 'Aadhaar correction was completely hassle-free. The owner is very knowledgeable and helpful. I highly recommend this place.',
+        review: 'Incredible web development work. My new portfolio site is fast, beautiful, and exactly what I envisioned.',
     },
     {
-        initial: 'V',
-        name: 'Vikram Singh',
+        initial: 'R',
+        name: 'Rohan Mehta',
+        rating: 5,
+        review: 'The video editing service is top-notch. They took my raw footage and turned it into a cinematic masterpiece.',
+    },
+    {
+        initial: 'I',
+        name: 'Isabella Rossi',
         rating: 4,
-        review: 'Needed an urgent print and lamination for my documents. Service was great and the price was reasonable.',
+        review: 'High-quality photo retouching that made my product shots look incredibly professional. Will be back for more.',
     },
 ];
 
@@ -71,7 +71,7 @@ const StarRating = ({ rating, className }: { rating: number, className?: string 
 };
 
 const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] }) => (
-    <Card className="bg-background/50 backdrop-blur-sm border p-6 text-center h-full w-[350px] shrink-0">
+    <Card className="bg-background/50 backdrop-blur-sm border p-6 text-center h-full w-[400px] shrink-0">
         <CardHeader className="p-0 items-center mb-4">
             <Avatar className="w-16 h-16 mb-4 border-2 border-primary/50">
                 <AvatarFallback className="bg-primary/10 text-primary font-bold text-xl">{testimonial.initial}</AvatarFallback>

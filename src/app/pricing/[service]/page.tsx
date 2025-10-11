@@ -20,7 +20,7 @@ import { Badge } from '@/components/ui/badge';
 
 const allWebDevFeatures = [
     { name: '1-3 Page Website', basic: true, intermediate: false, pro: false },
-    { name: 'Next.js Framework', basic: true, intermediate: true, pro: false },
+    { name: 'Next.js Framework', basic: true, intermediate: true, pro: true },
     { name: 'Basic CMS Integration', basic: true, intermediate: false, pro: false },
     { name: '1 Month Support', basic: true, intermediate: false, pro: false },
 
@@ -103,33 +103,26 @@ const pricingData = {
     ]
   },
   'web-development': {
-    title: 'Choose the Right Plan for Your Website',
+    title: 'Web Development',
     description: 'Flexible pricing for Next.js web development, designed to scale with your needs.',
     tiers: [
       { 
-        name: 'Basic Web Development',
-        description: 'Perfect for Small Businesses & Personal Sites',
+        name: 'Basic',
         price: '₹20,000',
-        priceDescription: 'Starting at',
-        buttonText: 'Start Small',
-        features: allWebDevFeatures.map(f => ({ name: f.name, available: f.basic })) 
+        period: 'Starting at',
+        features: ["1-3 Page Website", "Next.js Framework", "1 Month Support"] 
       },
       { 
-        name: 'Intermediate Web Development',
-        description: 'Best for Growing Startups',
+        name: 'Intermediate',
         price: '₹75,000',
-        priceDescription: 'Starting at',
-        buttonText: 'Grow Your Business',
-        popular: true,
-        features: allWebDevFeatures.map(f => ({ name: f.name, available: f.intermediate })) 
+        period: 'Starting at',
+        features: ["Up to 6 Page Website", "Advanced CMS", "2 Months Support"] 
       },
       { 
-        name: 'Enterprise Web Development',
-        description: 'Custom Solutions for Enterprises',
+        name: 'Enterprise',
         price: '₹1,50,000+',
-        priceDescription: 'Starting at',
-        buttonText: 'Build Enterprise Solutions',
-        features: allWebDevFeatures.map(f => ({ name: f.name, available: f.pro })) 
+        period: 'Starting at',
+        features: ["10+ Page Application", "Performance Optimization", "3+ Months Support"] 
       },
     ]
   }
@@ -276,37 +269,23 @@ export default function ServicePricingPage() {
                                      tier.popular && "border-orange-500 ring-2 ring-orange-500 shadow-orange-500/20"
                                 )}>
                                     <CardHeader className="text-center pb-4 pt-6">
-                                        <CardTitle className="text-xl md:text-2xl font-headline mb-2">{tier.name}</CardTitle>
+                                        <CardTitle className="text-xl md:text-2xl font-headline mb-2 text-primary">{tier.name}</CardTitle>
                                          {tier.description && <CardDescription>{tier.description}</CardDescription>}
                                          <div className="mt-4">
-                                            {tier.priceDescription && <p className="text-sm text-muted-foreground">{tier.priceDescription}</p>}
+                                            {tier.period && <p className="text-sm text-muted-foreground">{tier.period}</p>}
                                             <div className="flex items-baseline justify-center gap-1">
-                                                <span className="text-4xl font-bold text-orange-500">{tier.price}</span>
-                                                {tier.period && <span className="text-sm text-muted-foreground">{tier.period}</span>}
+                                                <span className="text-4xl font-bold">{tier.price}</span>
                                             </div>
                                          </div>
                                     </CardHeader>
                                     <CardContent className="flex flex-col flex-grow items-center p-6 pt-0">
                                         <ul className="space-y-4 text-sm w-full flex-grow">
-                                            {serviceId === 'web-development' ? (
-                                                (tier.features as {name: string, available: boolean | string}[]).map((feature, i) => {
-                                                    if(!feature.available) return null;
-                                                    
-                                                    return (
-                                                        <li key={i} className="flex items-start gap-3">
-                                                            <Check className="h-5 w-5 text-green-500 mt-0.5 shrink-0" />
-                                                            <span className="text-muted-foreground">{feature.name}</span>
-                                                        </li>
-                                                    )
-                                                })
-                                            ) : (
-                                                (tier.features as string[]).map((feature, i) => (
-                                                    <li key={i} className="flex items-start gap-3">
-                                                        <Check className="h-5 w-5 text-green-500 mt-0.5 shrink-0" />
-                                                        <span className="text-muted-foreground">{feature}</span>
-                                                    </li>
-                                                ))
-                                            )}
+                                            {(tier.features as string[]).map((feature, i) => (
+                                                <li key={i} className="flex items-start gap-3">
+                                                    <Check className="h-5 w-5 text-green-500 mt-0.5 shrink-0" />
+                                                    <span className="text-muted-foreground">{feature}</span>
+                                                </li>
+                                            ))}
                                             {singlePhotoFeature(tier) && (
                                                 <li className="flex items-start gap-3">
                                                     <Check className="h-5 w-5 text-green-500 mt-0.5 shrink-0" />
@@ -321,7 +300,7 @@ export default function ServicePricingPage() {
                                       className={cn("w-full font-bold", tier.popular ? "bg-orange-500 hover:bg-orange-600" : "bg-primary hover:bg-primary/90")}
                                       onClick={() => handleGetStartedClick(tier)}
                                     >
-                                        {tier.buttonText || 'Get Started'}
+                                        {tier.buttonText || 'Select Plan'}
                                     </Button>
                                     </CardFooter>
                                 </Card>

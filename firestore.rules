@@ -1,0 +1,45 @@
+/**
+ * @fileoverview Firestore Security Rules for the portfolio application.
+ *
+ * Core Philosophy:
+ * This ruleset provides public read access to projects and categories
+ * while restricting write access to authorized users. The assumption is that
+ * these collections are for showcasing data and are managed by the application owner.
+ *
+ * Data Structure:
+ * - /projects/{projectId}: Stores individual project details.
+ * - /categories/{categoryId}: Stores service category details.
+ *
+ * Key Security Decisions:
+ * - Public read access is granted to both 'projects' and 'categories' collections.
+ * - Write operations on both 'projects' and 'categories' are disallowed for all users.
+ */
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    /**
+     * @description Grants public read access to projects and restricts write access.
+     * @path /projects/{projectId}
+     * @allow (get, list) Public access to read project details.
+     * @deny (create, update, delete) No one can create, update, or delete projects.
+     * @principle Allows public reads and restricts all writes.
+     */
+    match /projects/{projectId} {
+      allow get, list: if true;
+      allow create, update, delete: if false;
+    }
+
+    /**
+     * @description Grants public read access to categories and restricts write access.
+     * @path /categories/{categoryId}
+     * @allow (get, list) Public access to read category details.
+     * @deny (create, update, delete) No one can create, update, or delete categories.
+     * @principle Allows public reads and restricts all writes.
+     */
+    match /categories/{categoryId} {
+      allow get, list: if true;
+      allow create, update, delete: if false;
+    }
+  }
+}

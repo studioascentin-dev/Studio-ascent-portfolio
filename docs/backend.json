@@ -1,0 +1,127 @@
+{
+  "entities": {
+    "Project": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Project",
+      "type": "object",
+      "description": "Represents a project showcased in the portfolio.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the project."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the project."
+        },
+        "description": {
+          "type": "string",
+          "description": "A detailed description of the project."
+        },
+        "category": {
+          "type": "string",
+          "description": "The category of the project (e.g., video editing, web design)."
+        },
+        "videoUrl": {
+          "type": "string",
+          "description": "URL to the video showcasing the project.",
+          "format": "uri"
+        },
+        "imageUrl": {
+          "type": "string",
+          "description": "URL to the project's image.",
+          "format": "uri"
+        },
+        "order": {
+          "type": "number",
+          "description": "The order in which the project should be displayed."
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description",
+        "category",
+        "order"
+      ]
+    },
+    "Category": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Category",
+      "type": "object",
+      "description": "Represents a service category offered.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the category."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the category (e.g., Video Editing)."
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the services offered in this category."
+        },
+        "price": {
+          "type": "number",
+          "description": "The pricing for this service category."
+        },
+        "iconUrl": {
+          "type": "string",
+          "description": "URL to the icon representing this category.",
+          "format": "uri"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "description",
+        "price"
+      ]
+    }
+  },
+  "auth": {
+    "providers": [
+      "password",
+      "anonymous"
+    ]
+  },
+  "firestore": {
+    "structure": [
+      {
+        "path": "/projects/{projectId}",
+        "definition": {
+          "entityName": "Project",
+          "schema": {
+            "$ref": "#/backend/entities/Project"
+          },
+          "description": "Stores project details. Each document represents a single project.",
+          "params": [
+            {
+              "name": "projectId",
+              "description": "The unique identifier for the project."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/categories/{categoryId}",
+        "definition": {
+          "entityName": "Category",
+          "schema": {
+            "$ref": "#/backend/entities/Category"
+          },
+          "description": "Stores service category details. Each document represents a single category.",
+          "params": [
+            {
+              "name": "categoryId",
+              "description": "The unique identifier for the category."
+            }
+          ]
+        }
+      }
+    ],
+    "reasoning": "The Firestore structure is designed to showcase projects and service categories in a portfolio. It prioritizes simplicity and ease of management. Projects and Categories are stored in top-level collections. This design ensures easy querying and avoids unnecessary complexity. The structure follows structural segregation to make the security rules simple and robust.\n\nAuthorization Independence is not explicitly required as no collaborative features exist in the specification. This allows for straightforward read and write access management without needing denormalized data for authorization.  The design supports required QAPs by ensuring direct and secure access to each entity."
+  }
+}

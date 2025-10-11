@@ -1,3 +1,4 @@
+
 {
   "entities": {
     "Project": {
@@ -106,11 +107,6 @@
         "paymentId": { "type": "string" },
         "productName": { "type": "string" },
         "message": { "type": "string" },
-        "screenshotUrl": {
-          "type": "string",
-          "format": "uri",
-          "description": "URL of the uploaded payment screenshot in Firebase Storage."
-        },
         "createdAt": { "type": "string", "format": "date-time" }
       },
       "required": ["name", "email", "paymentId", "productName", "message", "createdAt"]
@@ -176,3 +172,5 @@
     "reasoning": "The Firestore structure is designed to showcase projects and service categories in a portfolio. It prioritizes simplicity and ease of management. Projects and Categories are stored in top-level collections. This design ensures easy querying and avoids unnecessary complexity. The structure follows structural segregation to make the security rules simple and robust.\n\nAuthorization Independence is not explicitly required as no collaborative features exist in the specification. This allows for straightforward read and write access management without needing denormalized data for authorization.  The design supports required QAPs by ensuring direct and secure access to each entity."
   }
 }
+
+    

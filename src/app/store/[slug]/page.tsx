@@ -6,7 +6,7 @@ import { storeItems } from '@/lib/store-data';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { Button } from '@/components/ui/button';
-import { Star, Check, Apple, ArrowLeft, TriangleAlert, Download, Info, MessageSquare, Upload, Wallet, Lock } from 'lucide-react';
+import { Star, Check, Apple, ArrowLeft, TriangleAlert, Download, Info, MessageSquare, Wallet, Lock } from 'lucide-react';
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -16,16 +16,15 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { useFirestore, useStorage } from '@/firebase';
+import { useFirestore } from '@/firebase';
 import { collection, serverTimestamp } from 'firebase/firestore';
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { addDocumentNonBlocking } from '@/firebase/non-blocking-updates';
 
 
@@ -174,7 +173,6 @@ const supportFormSchema = z.object({
   email: z.string().email({ message: 'Please enter a valid email address.' }),
   whatsapp: z.string().optional(),
   paymentId: z.string().min(1, { message: 'Payment ID is required.' }),
-  paymentScreenshot: z.any().refine(files => files?.length > 0, 'Screenshot is required.'),
   message: z.string().min(10, { message: 'Please describe your issue in at least 10 characters.' }),
 });
 
@@ -183,9 +181,7 @@ type SupportFormValues = z.infer<typeof supportFormSchema>;
 const SupportForm = ({productName}: {productName: string}) => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [fileName, setFileName] = useState('');
   const firestore = useFirestore();
-  const storage = useStorage();
 
   const form = useForm<SupportFormValues>({
     resolver: zodResolver(supportFormSchema),
@@ -195,13 +191,12 @@ const SupportForm = ({productName}: {productName: string}) => {
       whatsapp: '',
       paymentId: '',
       message: '',
-      paymentScreenshot: undefined,
     },
   });
 
     const onSubmit = async (data: SupportFormValues) => {
         setIsSubmitting(true);
-        if (!firestore || !storage) {
+        if (!firestore) {
             toast({
                 variant: "destructive",
                 title: "Submission Failed",
@@ -212,19 +207,11 @@ const SupportForm = ({productName}: {productName: string}) => {
         }
 
         try {
-            const screenshotFile = data.paymentScreenshot[0];
-            const storageRef = ref(storage, `support-screenshots/${Date.now()}_${screenshotFile.name}`);
-            
-            const uploadResult = await uploadBytes(storageRef, screenshotFile);
-            const screenshotUrl = await getDownloadURL(uploadResult.ref);
-
-            const { paymentScreenshot, ...supportData } = data;
             const supportCollection = collection(firestore, 'supportRequests');
 
             addDocumentNonBlocking(supportCollection, {
-                ...supportData,
+                ...data,
                 productName,
-                screenshotUrl,
                 createdAt: serverTimestamp(),
             });
 
@@ -233,36 +220,18 @@ const SupportForm = ({productName}: {productName: string}) => {
                 description: 'We have received your request and will get back to you within 24 hours.',
             });
             form.reset();
-            setFileName('');
         } catch (error: any) {
             console.error("Failed to send support request:", error);
             
-            let description = "Something went wrong. Please try again.";
-            if (error.code === 'storage/unauthorized') {
-                description = "You don't have permission to upload files. Please check storage rules."
-            } else if (error.code === 'storage/canceled') {
-                description = "File upload was canceled."
-            }
-
             toast({
                 variant: "destructive",
                 title: "Submission Failed",
-                description: description,
+                description: "Something went wrong. Please try again.",
             });
         } finally {
             setIsSubmitting(false);
         }
     };
-  
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setFileName(e.target.files[0].name);
-      form.setValue('paymentScreenshot', e.target.files);
-    } else {
-      setFileName('');
-      form.setValue('paymentScreenshot', undefined);
-    }
-  };
 
   return (
     <Card className="bg-secondary/30 border-border" id="support">
@@ -278,7 +247,7 @@ const SupportForm = ({productName}: {productName: string}) => {
                 name="name"
                 render={({ field }) => (
                     <FormItem>
-                    <FormLabel>Full Name</FormLabel>
+                    <FormLabel>Full Name <span className="text-destructive">*</span></FormLabel>
                     <FormControl>
                         <Input placeholder="John Doe" {...field} />
                     </FormControl>
@@ -292,7 +261,7 @@ const SupportForm = ({productName}: {productName: string}) => {
                     name="email"
                     render={({ field }) => (
                     <FormItem>
-                        <FormLabel>Email Address</FormLabel>
+                        <FormLabel>Email Address <span className="text-destructive">*</span></FormLabel>
                         <FormControl>
                         <Input type="email" placeholder="you@example.com" {...field} />
                         </FormControl>
@@ -314,51 +283,26 @@ const SupportForm = ({productName}: {productName: string}) => {
                     )}
                 />
                 </div>
-                <div className="grid sm:grid-cols-2 gap-4 md:gap-6">
                 <FormField
                     control={form.control}
                     name="paymentId"
                     render={({ field }) => (
                     <FormItem>
-                        <FormLabel>Payment ID</FormLabel>
+                        <FormLabel>Payment ID <span className="text-destructive">*</span></FormLabel>
                         <FormControl>
-                        <Input placeholder="e.g., pay_xxxxxxxxxxxxxx" {...field} />
+                        <Input placeholder="pay_xxxxxxxxxxxxxx" {...field} />
                         </FormControl>
+                        <FormDescription className="text-xs">Find this in your Razorpay payment confirmation email. It starts with "pay_".</FormDescription>
                         <FormMessage />
                     </FormItem>
                     )}
                 />
                 <FormField
-                    control={form.control}
-                    name="paymentScreenshot"
-                    render={({ field: { onChange, value, ...fieldProps }}) => (
-                        <FormItem>
-                        <FormLabel>Payment Screenshot</FormLabel>
-                        <FormControl>
-                            <label className="relative flex items-center justify-center h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-muted-foreground ring-offset-background cursor-pointer hover:bg-accent hover:text-accent-foreground">
-                            <Upload className="mr-2 h-4 w-4" />
-                            <span className="truncate">{fileName || 'Choose file'}</span>
-                            <input 
-                                type="file" 
-                                className="sr-only" 
-                                {...fieldProps}
-                                onChange={handleFileChange}
-                                accept="image/*"
-                                aria-label="Upload payment screenshot"
-                            />
-                            </label>
-                        </FormControl>
-                        <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                </div>
-                <FormField
                 control={form.control}
                 name="message"
                 render={({ field }) => (
                     <FormItem>
-                    <FormLabel>Describe Your Issue</FormLabel>
+                    <FormLabel>Describe Your Issue <span className="text-destructive">*</span></FormLabel>
                     <FormControl>
                         <Textarea
                         placeholder="e.g., Payment was successful but I did not receive the download link."
@@ -680,3 +624,5 @@ export default function ProductDetailPage() {
         </div>
     );
 }
+
+    

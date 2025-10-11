@@ -285,15 +285,15 @@ const StoreItemCard = ({ item }: { item: any }) => {
             </div>
           </CardHeader>
           <CardContent className="p-4 flex flex-col flex-grow">
-            <h3 className="text-lg font-bold font-headline mb-2">{item.name}</h3>
+            <h3 className="text-xl font-bold font-headline mb-2">{item.name}</h3>
             <div className="mb-2">
                 <StarRating rating={item.rating} count={item.reviews} />
             </div>
-            <p className="text-sm text-muted-foreground mb-4 flex-grow">{item.description}</p>
+            <p className="text-base text-muted-foreground mb-4 flex-grow">{item.description}</p>
             <div className="flex items-center justify-between mt-auto">
                 <div className="flex items-baseline gap-2">
-                    <span className="text-2xl font-bold text-primary">₹{item.price}</span>
-                    <span className="text-sm text-muted-foreground line-through">₹{item.originalPrice}</span>
+                    <span className="text-3xl font-bold text-primary">₹{item.price}</span>
+                    <span className="text-base text-muted-foreground line-through">₹{item.originalPrice}</span>
                 </div>
                 <Button className="font-semibold">Buy Now</Button>
             </div>

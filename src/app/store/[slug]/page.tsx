@@ -173,7 +173,7 @@ const supportFormSchema = z.object({
   email: z.string().email({ message: 'Please enter a valid email address.' }),
   whatsapp: z.string().optional(),
   paymentId: z.string().min(1, { message: 'Payment ID is required.' }),
-  paymentScreenshot: z.instanceof(FileList).refine(files => files?.length > 0, 'Screenshot is required.'),
+  paymentScreenshot: z.any().refine(files => files instanceof FileList && files?.length > 0, 'Screenshot is required.'),
   message: z.string().min(10, { message: 'Please describe your issue in at least 10 characters.' }),
 });
 
@@ -668,3 +668,5 @@ export default function ProductDetailPage() {
         </div>
     );
 }
+
+    

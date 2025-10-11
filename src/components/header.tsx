@@ -116,13 +116,10 @@ export function Header() {
         return pathname.startsWith(item.href);
     };
 
-    const isStorePage = pathname.startsWith('/store');
-
     return (
         <header className={cn(
             "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-            isScrolled || isStorePage ? "bg-background/80 backdrop-blur-md" : "bg-transparent",
-            isStorePage && "bg-white/80 shadow-sm"
+            isScrolled ? "bg-background/80 backdrop-blur-md" : "bg-transparent"
         )}>
             <motion.div
                 variants={navVariants}
@@ -130,12 +127,12 @@ export function Header() {
                 animate="visible"
                 className="flex items-center justify-between px-4 md:px-6 py-4 md:py-6"
             >
-                <Link href="/" className={cn("text-2xl md:text-3xl font-bold font-headline", isStorePage && "text-slate-900")}>
+                <Link href="/" className={cn("text-2xl md:text-3xl font-bold font-headline")}>
                     <span className="text-primary">S</span>
-                    <span className={cn("text-foreground", isStorePage && "text-slate-900")}>tudio</span>
+                    <span className={cn("text-foreground")}>tudio</span>
                     {' '}
                     <span className="text-primary">A</span>
-                    <span className={cn("text-foreground", isStorePage && "text-slate-900")}>scent</span>
+                    <span className={cn("text-foreground")}>scent</span>
                 </Link>
                 
                 <nav className="hidden md:flex items-center justify-end gap-6 md:gap-8">
@@ -146,8 +143,7 @@ export function Header() {
                                 onClick={(e) => handleScroll(e, item.href)}
                                 className={cn(
                                     "text-base font-medium text-muted-foreground hover:text-primary transition-colors relative group",
-                                    isLinkActive(item) && "text-primary font-semibold",
-                                    isStorePage && "text-slate-500 hover:text-primary"
+                                    isLinkActive(item) && "text-primary font-semibold"
                                 )}
                             >
                                 {item.name}
@@ -165,7 +161,7 @@ export function Header() {
                 <div className="md:hidden">
                     <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
                         <SheetTrigger asChild>
-                            <Button variant="ghost" size="icon" className={cn(isStorePage && "text-slate-900 hover:bg-slate-100")}>
+                            <Button variant="ghost" size="icon">
                                 <Menu className="h-6 w-6" />
                                 <span className="sr-only">Open menu</span>
                             </Button>

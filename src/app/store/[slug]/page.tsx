@@ -173,9 +173,9 @@ export default function ProductDetailPage() {
     const isPlugin = 'price' in item;
 
     return (
-        <div className="flex min-h-screen flex-col bg-slate-50 text-slate-900">
+        <div className="flex min-h-screen flex-col bg-background text-foreground">
             <Header />
-            <main className="flex-1 pt-24 bg-white">
+            <main className="flex-1 pt-24">
                 <div className="container mx-auto px-4 md:px-6 py-12">
                     <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-start">
                         
@@ -200,37 +200,37 @@ export default function ProductDetailPage() {
                         
                         <div className="space-y-6">
                             <div className="space-y-3">
-                                <h1 className="text-4xl lg:text-5xl font-bold font-headline text-slate-800">{item.name}</h1>
+                                <h1 className="text-4xl lg:text-5xl font-bold font-headline">{item.name}</h1>
                                 {isPlugin && (
                                      <div className="flex items-center gap-4 flex-wrap">
-                                         <div className="flex items-center gap-2 text-sm text-slate-600 font-medium">
-                                            {item.platform === 'Mac & Windows' ? <Check className="h-5 w-5 text-green-600" /> : <Apple className="h-4 w-4" />} {item.platform}
+                                         <div className="flex items-center gap-2 text-sm text-muted-foreground font-medium">
+                                            {item.platform === 'Mac & Windows' ? <Check className="h-5 w-5 text-green-500" /> : <Apple className="h-4 w-4" />} {item.platform}
                                         </div>
                                         <StarRating rating={item.rating} count={item.reviews} size="h-5 w-5" />
                                      </div>
                                 )}
-                                <p className="text-base text-slate-600">
+                                <p className="text-base text-muted-foreground">
                                     {'longDescription' in item ? item.longDescription : item.description}
                                 </p>
                             </div>
 
                             {isPlugin && (
-                                <Alert className="bg-amber-50 border-amber-200 text-amber-800">
-                                    <TriangleAlert className="h-4 w-4 !text-amber-500" />
-                                    <AlertTitle className="font-bold !text-amber-900">Important</AlertTitle>
-                                    <AlertDescription className="text-amber-800">
+                                <Alert className="bg-primary/10 border-primary/20 text-foreground">
+                                    <TriangleAlert className="h-4 w-4 !text-primary" />
+                                    <AlertTitle className="font-bold !text-primary-foreground">Important</AlertTitle>
+                                    <AlertDescription className="text-muted-foreground">
                                     If the payment page doesn't load, press Cmd + Shift + R (Mac) or Ctrl + Shift + R (Windows) to force a refresh.
                                     </AlertDescription>
                                 </Alert>
                             )}
 
                             {isPlugin && (
-                                <div className="space-y-4">
+                                <div className="space-y-4 rounded-lg bg-secondary/50 p-6">
                                      <div className="flex items-baseline gap-4">
-                                        <span className="text-5xl font-bold text-slate-800">₹{item.price}</span>
-                                        <span className="text-2xl text-slate-400 line-through">₹{item.originalPrice}</span>
+                                        <span className="text-5xl font-bold text-primary">₹{item.price}</span>
+                                        <span className="text-2xl text-muted-foreground line-through">₹{item.originalPrice}</span>
                                     </div>
-                                    <Button size="lg" className="w-full font-bold bg-orange-500 hover:bg-orange-600 text-white text-lg py-6">Buy Now</Button>
+                                    <Button size="lg" className="w-full font-bold text-lg py-6">Buy Now</Button>
                                 </div>
                             )}
 
@@ -247,17 +247,17 @@ export default function ProductDetailPage() {
                     <div className="max-w-4xl mx-auto">
                         {item.installVideo && (
                             <div className="mb-12">
-                                <h2 className="text-3xl font-bold font-headline mb-6 text-center text-slate-800">How to Install</h2>
-                                <div className="aspect-video w-full overflow-hidden rounded-lg border shadow-lg">
+                                <h2 className="text-3xl font-bold font-headline mb-6 text-center">How to Install</h2>
+                                <div className="aspect-video w-full overflow-hidden rounded-lg border border-border shadow-lg">
                                     <video src={item.installVideo} controls className="w-full h-full object-cover" />
                                 </div>
                             </div>
                         )}
 
                         <div className="space-y-8 mb-12">
-                            <h2 className="text-3xl font-bold font-headline text-center text-slate-800">Reviews & Ratings</h2>
+                            <h2 className="text-3xl font-bold font-headline text-center">Reviews & Ratings</h2>
                             {reviews.map(review => (
-                                <div key={review.id} className="bg-white p-6 rounded-lg border">
+                                <div key={review.id} className="bg-secondary/30 p-6 rounded-lg border border-border">
                                     <div className="flex items-start gap-4">
                                         <Avatar>
                                             <AvatarImage src={review.avatar} />
@@ -266,16 +266,16 @@ export default function ProductDetailPage() {
                                         <div className="flex-1">
                                             <div className="flex items-center justify-between">
                                                 <div>
-                                                    <p className="font-semibold text-slate-800">{review.author}</p>
-                                                    <p className="text-xs text-slate-500">{review.date}</p>
+                                                    <p className="font-semibold">{review.author}</p>
+                                                    <p className="text-xs text-muted-foreground">{review.date}</p>
                                                 </div>
                                                 <StarRating rating={review.rating} size="h-4 w-4" />
                                             </div>
-                                            <p className="mt-2 text-slate-600">{review.content}</p>
+                                            <p className="mt-2 text-muted-foreground">{review.content}</p>
                                         </div>
                                     </div>
                                     {review.reply && (
-                                        <div className="mt-4 pl-10 ml-4 border-l border-slate-200">
+                                        <div className="mt-4 pl-10 ml-4 border-l border-border">
                                             <div className="flex items-start gap-4 pl-4">
                                                 <Avatar className="w-8 h-8">
                                                     <AvatarFallback>DKD</AvatarFallback>
@@ -284,10 +284,10 @@ export default function ProductDetailPage() {
                                                     <div className="flex items-center justify-between">
                                                         <div>
                                                             <p className="font-semibold text-primary">{review.reply.author}</p>
-                                                            <p className="text-xs text-slate-500">{review.reply.date}</p>
+                                                            <p className="text-xs text-muted-foreground">{review.reply.date}</p>
                                                         </div>
                                                     </div>
-                                                    <p className="mt-2 text-slate-600">{review.reply.content}</p>
+                                                    <p className="mt-2 text-muted-foreground">{review.reply.content}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -296,9 +296,9 @@ export default function ProductDetailPage() {
                             ))}
                         </div>
                         
-                        <Card className="sticky top-28 bg-white" id="support">
+                        <Card className="sticky top-28 bg-secondary/30 border-border" id="support">
                             <CardHeader>
-                                <CardTitle className="font-headline text-2xl text-slate-800">Leave a Review</CardTitle>
+                                <CardTitle className="font-headline text-2xl">Leave a Review</CardTitle>
                                 <CardDescription>Share your experience with others.</CardDescription>
                             </CardHeader>
                             <CardContent>

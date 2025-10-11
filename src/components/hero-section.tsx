@@ -122,7 +122,7 @@ export function HeroSection() {
             <div>
               <motion.p variants={itemVariants} className="text-sm text-muted-foreground font-medium mb-2">— INTRODUCTION</motion.p>
               <motion.h2 variants={itemVariants} className="text-3xl lg:text-4xl font-bold font-headline leading-tight">
-              Full-Stack Developer &<br/>Creative Designer, based in India.
+              Full-Stack Developer &<br/>Video Editor, based in India.
               </motion.h2>
             </div>
             <motion.p variants={itemVariants} className="max-w-md text-muted-foreground leading-relaxed mx-auto">

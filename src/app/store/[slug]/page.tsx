@@ -444,11 +444,11 @@ export default function ProductDetailPage() {
                     )}
 
 
-                    <div className="max-w-4xl mx-auto">
+                    <div className="max-w-7xl mx-auto">
                         {item.installVideo && (
-                            <div className="mb-12">
+                            <div className="mb-16">
                                 <h2 className="text-3xl font-bold font-headline mb-6 text-center">How to Install</h2>
-                                <div className="aspect-video w-full overflow-hidden rounded-lg border border-border shadow-lg">
+                                <div className="aspect-video max-w-4xl mx-auto w-full overflow-hidden rounded-lg border border-border shadow-lg">
                                     <video src={item.installVideo} controls className="w-full h-full object-cover" />
                                 </div>
                             </div>
@@ -456,7 +456,7 @@ export default function ProductDetailPage() {
 
                         <div className="grid md:grid-cols-2 gap-12 items-start">
                             <div className="space-y-8">
-                                <h2 className="text-3xl font-bold font-headline text-center md:text-left">Reviews & Ratings</h2>
+                                <h2 className="text-3xl font-bold font-headline">Reviews & Ratings</h2>
                                 {reviews.map(review => (
                                     <div key={review.id} className="bg-secondary/30 p-6 rounded-lg border border-border">
                                         <div className="flex items-start gap-4">
@@ -538,3 +538,5 @@ export default function ProductDetailPage() {
         </div>
     );
 }
+
+    

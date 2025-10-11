@@ -2,28 +2,31 @@
  * @fileoverview Firestore Security Rules for the portfolio application.
  *
  * Core Philosophy:
- * This ruleset provides public read access to projects and categories
- * while restricting write access to authorized users. The assumption is that
- * these collections are for showcasing data and are managed by the application owner.
+ * This ruleset provides public read access to projects and categories,
+ * while restricting write access to prevent unauthorized data modification.
+ * Contact and Support Request submissions are allowed from any source.
  *
  * Data Structure:
- * - /projects/{projectId}: Stores individual project details.
- * - /categories/{categoryId}: Stores service category details.
+ * - /projects/{projectId}: Stores project information. Publicly readable.
+ * - /categories/{categoryId}: Stores category information. Publicly readable.
+ * - /contacts/{contactId}: Stores contact form submissions. Publicly writable.
+ * - /supportRequests/{supportRequestId}: Stores support requests. Publicly writable.
  *
  * Key Security Decisions:
- * - Public read access is granted to both 'projects' and 'categories' collections.
- * - Write operations on both 'projects' and 'categories' are disallowed for all users.
+ * - Projects and Categories: Publicly readable to showcase portfolio items.
+ * - Contacts and Support Requests: Publicly writable to allow form submissions.
+ * - No user authentication or ownership is enforced in this version.
  */
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
     /**
-     * @description Grants public read access to projects and restricts write access.
+     * @description Allows public read access to project details. Only admins can modify project data.
      * @path /projects/{projectId}
-     * @allow (get, list) Public access to read project details.
-     * @deny (create, update, delete) No one can create, update, or delete projects.
-     * @principle Allows public reads and restricts all writes.
+     * @allow get, list: Anyone can read project data.
+     * @deny create, update, delete: No one can create, update, or delete project data.
+     * @principle Allows public read access while restricting write access.
      */
     match /projects/{projectId} {
       allow get, list: if true;
@@ -31,15 +34,39 @@ service cloud.firestore {
     }
 
     /**
-     * @description Grants public read access to categories and restricts write access.
+     * @description Allows public read access to service category details. Only admins can modify category data.
      * @path /categories/{categoryId}
-     * @allow (get, list) Public access to read category details.
-     * @deny (create, update, delete) No one can create, update, or delete categories.
-     * @principle Allows public reads and restricts all writes.
+     * @allow get, list: Anyone can read category data.
+     * @deny create, update, delete: No one can create, update, or delete category data.
+     * @principle Allows public read access while restricting write access.
      */
     match /categories/{categoryId} {
       allow get, list: if true;
       allow create, update, delete: if false;
+    }
+
+    /**
+     * @description Allows anyone to submit a contact form.
+     * @path /contacts/{contactId}
+     * @allow create: Anyone can submit a contact form.
+     * @deny get, list, update, delete: Not allowed.
+     * @principle Allows open write access for contact form submissions.
+     */
+    match /contacts/{contactId} {
+      allow create: if true;
+      allow get, list, update, delete: if false;
+    }
+
+    /**
+     * @description Allows anyone to submit a support request.
+     * @path /supportRequests/{supportRequestId}
+     * @allow create: Anyone can submit a support request.
+     * @deny get, list, update, delete: Not allowed.
+     * @principle Allows open write access for support requests.
+     */
+    match /supportRequests/{supportRequestId} {
+      allow create: if true;
+      allow get, list, update, delete: if false;
     }
   }
 }

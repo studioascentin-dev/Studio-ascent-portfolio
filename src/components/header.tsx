@@ -14,6 +14,7 @@ const navItems = [
     { name: "About", href: "/#about" },
     { name: "Services", href: "/#services" },
     { name: "Work", href: "/#work" },
+    { name: "Pricing", href: "/pricing" },
     { name: "Contact", href: "/#contact" },
 ];
 
@@ -99,7 +100,10 @@ export function Header() {
 
     const isLinkActive = (item: {name: string, href: string}) => {
         if (item.href.startsWith("/#")) {
-             return activeSection === item.href.substring(2);
+            if (pathname === '/') {
+                return activeSection === item.href.substring(2);
+            }
+            return false;
         }
         return pathname.startsWith(item.href);
     };

@@ -6,7 +6,7 @@ import { storeItems } from '@/lib/store-data';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { Button } from '@/components/ui/button';
-import { Star, Check, Apple, ArrowLeft, TriangleAlert, Download, Info } from 'lucide-react';
+import { Star, Check, Apple, ArrowLeft, TriangleAlert, Download, Info, MessageSquare } from 'lucide-react';
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -236,7 +236,7 @@ export default function ProductDetailPage() {
 
                             {!isPlugin && (
                                  <Button asChild size="lg" className="w-full font-bold">
-                                    <a href="#support">Contact Support</a>
+                                    <a href="/payment-support">Contact Support</a>
                                 </Button>
                             )}
                         </div>
@@ -308,6 +308,10 @@ export default function ProductDetailPage() {
                                                 <StarRating rating={review.rating} size="h-4 w-4" />
                                             </div>
                                             <p className="mt-2 text-muted-foreground">{review.content}</p>
+                                            <Button variant="ghost" size="sm" className="mt-2 -ml-3 h-auto py-1 px-3 text-xs">
+                                                <MessageSquare className="mr-2 h-3.5 w-3.5" />
+                                                Reply
+                                            </Button>
                                         </div>
                                     </div>
                                     {review.reply && (

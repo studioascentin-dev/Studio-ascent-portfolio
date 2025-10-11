@@ -6,7 +6,7 @@ import { storeItems } from '@/lib/store-data';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { Button } from '@/components/ui/button';
-import { Star, Check, Apple, ArrowLeft, TriangleAlert, Download, Info, MessageSquare, Upload } from 'lucide-react';
+import { Star, Check, Apple, ArrowLeft, TriangleAlert, Download, Info, MessageSquare, Upload, Wallet } from 'lucide-react';
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -183,112 +183,120 @@ const SupportForm = () => {
   };
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        <FormField
-          control={form.control}
-          name="fullName"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Full Name</FormLabel>
-              <FormControl>
-                <Input placeholder="John Doe" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <div className="grid sm:grid-cols-2 gap-6">
-          <FormField
-            control={form.control}
-            name="emailAddress"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email Address</FormLabel>
-                <FormControl>
-                  <Input type="email" placeholder="you@example.com" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="whatsapp"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>WhatsApp (Optional)</FormLabel>
-                <FormControl>
-                  <Input placeholder="+91 12345 67890" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-        <div className="grid sm:grid-cols-2 gap-6">
-          <FormField
-            control={form.control}
-            name="paymentId"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Payment ID</FormLabel>
-                <FormControl>
-                  <Input placeholder="e.g., pay_xxxxxxxxxxxxxx" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-              control={form.control}
-              name="paymentScreenshot"
-              render={({ field }) => (
-                  <FormItem>
-                  <FormLabel>Payment Screenshot</FormLabel>
-                  <FormControl>
-                    <label className="relative flex items-center justify-center h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-muted-foreground ring-offset-background cursor-pointer hover:bg-accent hover:text-accent-foreground">
-                      <Upload className="mr-2 h-4 w-4" />
-                      <span>{fileName || 'Choose file'}</span>
-                      <input 
-                        type="file" 
-                        className="sr-only" 
-                        onChange={handleFileChange}
-                        accept="image/*"
-                      />
-                    </label>
-                  </FormControl>
-                  <FormMessage />
-                  </FormItem>
-              )}
-          />
-        </div>
-        <FormField
-          control={form.control}
-          name="issue"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Describe Your Issue</FormLabel>
-              <FormControl>
-                <Textarea
-                  placeholder="e.g., Payment was successful but I did not receive the download link."
-                  className="min-h-[100px]"
-                  {...field}
+    <Card className="bg-secondary/30 border-border" id="support">
+        <CardHeader>
+            <CardTitle className="font-headline text-2xl">Contact Support</CardTitle>
+            <CardDescription>If you paid for the product but did not receive the download link, please fill out the form below. We will send the link to your email or WhatsApp after verification.</CardDescription>
+        </CardHeader>
+        <CardContent>
+            <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <FormField
+                control={form.control}
+                name="fullName"
+                render={({ field }) => (
+                    <FormItem>
+                    <FormLabel>Full Name</FormLabel>
+                    <FormControl>
+                        <Input placeholder="John Doe" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                    </FormItem>
+                )}
                 />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <div className="text-center">
-          <Button type="submit" disabled={isSubmitting} className="w-full bg-[#ff7f00] hover:bg-[#ff7f00]/90 text-white font-bold py-3 text-base">
-              {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              Submit Support Request
-          </Button>
-          <p className="text-xs text-muted-foreground mt-3">We usually reply within 24 hours.</p>
-        </div>
-      </form>
-    </Form>
+                <div className="grid sm:grid-cols-2 gap-6">
+                <FormField
+                    control={form.control}
+                    name="emailAddress"
+                    render={({ field }) => (
+                    <FormItem>
+                        <FormLabel>Email Address</FormLabel>
+                        <FormControl>
+                        <Input type="email" placeholder="you@example.com" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                    </FormItem>
+                    )}
+                />
+                <FormField
+                    control={form.control}
+                    name="whatsapp"
+                    render={({ field }) => (
+                    <FormItem>
+                        <FormLabel>WhatsApp (Optional)</FormLabel>
+                        <FormControl>
+                        <Input placeholder="+91 12345 67890" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                    </FormItem>
+                    )}
+                />
+                </div>
+                <div className="grid sm:grid-cols-2 gap-6">
+                <FormField
+                    control={form.control}
+                    name="paymentId"
+                    render={({ field }) => (
+                    <FormItem>
+                        <FormLabel>Payment ID</FormLabel>
+                        <FormControl>
+                        <Input placeholder="e.g., pay_xxxxxxxxxxxxxx" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                    </FormItem>
+                    )}
+                />
+                <FormField
+                    control={form.control}
+                    name="paymentScreenshot"
+                    render={({ field }) => (
+                        <FormItem>
+                        <FormLabel>Payment Screenshot</FormLabel>
+                        <FormControl>
+                            <label className="relative flex items-center justify-center h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-muted-foreground ring-offset-background cursor-pointer hover:bg-accent hover:text-accent-foreground">
+                            <Upload className="mr-2 h-4 w-4" />
+                            <span>{fileName || 'Choose file'}</span>
+                            <input 
+                                type="file" 
+                                className="sr-only" 
+                                onChange={handleFileChange}
+                                accept="image/*"
+                            />
+                            </label>
+                        </FormControl>
+                        <FormMessage />
+                        </FormItem>
+                    )}
+                />
+                </div>
+                <FormField
+                control={form.control}
+                name="issue"
+                render={({ field }) => (
+                    <FormItem>
+                    <FormLabel>Describe Your Issue</FormLabel>
+                    <FormControl>
+                        <Textarea
+                        placeholder="e.g., Payment was successful but I did not receive the download link."
+                        className="min-h-[100px]"
+                        {...field}
+                        />
+                    </FormControl>
+                    <FormMessage />
+                    </FormItem>
+                )}
+                />
+                <div className="text-center">
+                <Button type="submit" disabled={isSubmitting} className="w-full font-bold py-3 text-base">
+                    {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                    Submit Support Request
+                </Button>
+                <p className="text-xs text-muted-foreground mt-3">We usually reply within 24 hours.</p>
+                </div>
+            </form>
+            </Form>
+        </CardContent>
+    </Card>
   );
 };
 
@@ -341,7 +349,7 @@ export default function ProductDetailPage() {
             <Header />
             <main className="flex-1 pt-24">
                 <div className="container mx-auto px-4 md:px-6 py-12">
-                    <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-start">
+                    <div className="grid md:grid-cols-2 gap-8 lg:gap-16 items-start">
                         
                         <div className="space-y-4 sticky top-28">
                              <div className="relative aspect-video w-full overflow-hidden rounded-lg shadow-lg">
@@ -406,35 +414,35 @@ export default function ProductDetailPage() {
                         </div>
                     </div>
                      
-                    <Separator className="my-12" />
+                    <Separator className="my-12 md:my-16" />
 
                     {'details' in item && item.details && (
                         <div className="max-w-4xl mx-auto mb-16">
                             <h2 className="text-3xl font-bold font-headline mb-8 text-center">Product Details</h2>
                             <div className="space-y-6">
-                                <Card className="bg-secondary/50 backdrop-blur-sm border-border p-6">
-                                    <div className="flex items-start gap-5">
-                                        <Download className="h-8 w-8 text-primary mt-1" />
+                                <Card className="bg-secondary/50 backdrop-blur-sm border-border p-8">
+                                    <div className="flex items-start gap-6">
+                                        <Download className="h-10 w-10 text-primary mt-1 flex-shrink-0" />
                                         <div>
-                                            <h3 className="font-bold text-xl">File Size</h3>
+                                            <h3 className="font-bold text-xl mb-1">File Size</h3>
                                             <p className="text-muted-foreground text-base">{item.details.fileSize}</p>
                                         </div>
                                     </div>
                                 </Card>
-                                <Card className="bg-secondary/50 backdrop-blur-sm border-border p-6">
-                                    <div className="flex items-start gap-5">
-                                        <Info className="h-8 w-8 text-primary mt-1" />
+                                <Card className="bg-secondary/50 backdrop-blur-sm border-border p-8">
+                                    <div className="flex items-start gap-6">
+                                        <Info className="h-10 w-10 text-primary mt-1 flex-shrink-0" />
                                         <div>
-                                            <h3 className="font-bold text-xl">Installation</h3>
+                                            <h3 className="font-bold text-xl mb-1">Installation</h3>
                                             <p className="text-muted-foreground text-base">{item.details.installation}</p>
                                         </div>
                                     </div>
                                 </Card>
-                                <Card className="bg-secondary/50 backdrop-blur-sm border-border p-6">
-                                    <div className="flex items-start gap-5">
-                                        <TriangleAlert className="h-8 w-8 text-yellow-500 mt-1" />
+                                <Card className="bg-secondary/50 backdrop-blur-sm border-border p-8">
+                                    <div className="flex items-start gap-6">
+                                        <TriangleAlert className="h-10 w-10 text-yellow-500 mt-1 flex-shrink-0" />
                                         <div>
-                                            <h3 className="font-bold text-xl">Important Notes</h3>
+                                            <h3 className="font-bold text-xl mb-1">Important Notes</h3>
                                             <p className="text-muted-foreground text-base">{item.details.importantNotes}</p>
                                         </div>
                                     </div>
@@ -447,7 +455,7 @@ export default function ProductDetailPage() {
                     <div className="max-w-7xl mx-auto">
                         {item.installVideo && (
                             <div className="mb-16">
-                                <h2 className="text-3xl font-bold font-headline mb-6 text-center">How to Install</h2>
+                                <h2 className="text-3xl font-bold font-headline mb-8 text-center">How to Install</h2>
                                 <div className="aspect-video max-w-4xl mx-auto w-full overflow-hidden rounded-lg border border-border shadow-lg">
                                     <video src={item.installVideo} controls className="w-full h-full object-cover" />
                                 </div>
@@ -501,7 +509,7 @@ export default function ProductDetailPage() {
                                 ))}
                             </div>
 
-                            <div className="space-y-12 sticky top-28">
+                            <div className="space-y-8 sticky top-28">
                                 <Card className="bg-secondary/30 border-border" id="review">
                                     <CardHeader>
                                         <CardTitle className="font-headline text-2xl">Leave a Review</CardTitle>
@@ -511,15 +519,38 @@ export default function ProductDetailPage() {
                                         <ReviewForm itemName={item.name} />
                                     </CardContent>
                                 </Card>
-                                <Card className="bg-secondary/30 border-border" id="support">
-                                    <CardHeader>
-                                        <CardTitle className="font-headline text-2xl">Contact Support</CardTitle>
-                                        <CardDescription>If you're having issues with your purchase, please fill out the form below.</CardDescription>
-                                    </CardHeader>
-                                    <CardContent>
-                                        <SupportForm />
-                                    </CardContent>
-                                </Card>
+                            </div>
+                        </div>
+
+                        <Separator className="my-12 md:my-16" />
+
+                        <div>
+                            <h2 className="text-3xl font-bold font-headline mb-8 text-center">Payment & Support</h2>
+                            <div className="grid md:grid-cols-2 gap-8 items-start max-w-7xl mx-auto">
+                                <div className="space-y-8">
+                                    <Card className="bg-secondary/30 border-border p-6">
+                                        <div className="flex items-start gap-4">
+                                            <Wallet className="h-8 w-8 text-primary flex-shrink-0" />
+                                            <div>
+                                                <h3 className="text-xl font-bold mb-2">Payment Info</h3>
+                                                <p className="text-muted-foreground">We accept payments through Razorpay, which supports UPI, Credit/Debit Cards, Net Banking, and various wallets. All transactions are secure and encrypted.</p>
+                                            </div>
+                                        </div>
+                                    </Card>
+                                    <Alert variant="destructive" className="bg-destructive/10 border-destructive/20 text-destructive-foreground">
+                                        <TriangleAlert className="h-6 w-6 text-destructive" />
+                                        <AlertTitle className="text-xl font-bold text-destructive-foreground">Important Notice</AlertTitle>
+                                        <div className="mt-4 space-y-2 text-destructive-foreground/80">
+                                            <p className="font-semibold text-destructive-foreground/90">No Refund Policy</p>
+                                            <p>Due to the digital nature of our products, all sales are final. We do not offer refunds or exchanges once a purchase is complete.</p>
+                                            <p className="font-semibold mt-4 text-destructive-foreground/90">I paid for a digital product but did not receive the download link. What should I do?</p>
+                                            <p>If you encounter any issues after payment, please use the contact form below. Attach a screenshot of your payment, and we will send the download link to your email or WhatsApp after verification.</p>
+                                        </div>
+                                    </Alert>
+                                </div>
+                                <div className="sticky top-28">
+                                    <SupportForm />
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -538,5 +569,7 @@ export default function ProductDetailPage() {
         </div>
     );
 }
+
+    
 
     

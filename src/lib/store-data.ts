@@ -156,6 +156,7 @@ export const storeItems = {
       originalPrice: 2999,
       discount: '97% OFF',
       platform: 'Mac Only',
+      paymentLink: 'https://rzp.io/rzp/element3d',
       installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4',
        details: {
         fileSize: '250 MB',

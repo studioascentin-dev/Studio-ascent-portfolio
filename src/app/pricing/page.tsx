@@ -119,8 +119,8 @@ export default function PricingPage() {
                                                 <CardContent className="flex-grow">
                                                     <ul className="space-y-3 text-sm">
                                                         {tier.features.map(feature => (
-                                                            <li key={feature} className="flex items-center gap-3">
-                                                                <Check className="h-5 w-5 text-green-500" />
+                                                            <li key={feature} className="flex items-start gap-3">
+                                                                <Check className="h-5 w-5 text-green-500 mt-0.5 shrink-0" />
                                                                 <span className="text-muted-foreground">{feature}</span>
                                                             </li>
                                                         ))}
@@ -152,5 +152,3 @@ export default function PricingPage() {
         </div>
     );
 }
-
-    

@@ -111,7 +111,7 @@ const ReviewForm = ({ itemName }: { itemName: string }) => {
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 md:space-y-6">
                 <FormField
                     control={form.control}
                     name="name"
@@ -238,12 +238,12 @@ const SupportForm = ({productName}: {productName: string}) => {
   return (
     <Card className="bg-secondary/30 border-border" id="support">
         <CardHeader>
-            <CardTitle className="font-headline text-2xl">Contact Support</CardTitle>
-            <CardDescription>If you paid for the product but did not receive the download link, please fill out the form below. We will send the link to your email or WhatsApp after verification.</CardDescription>
+            <CardTitle className="font-headline text-xl md:text-2xl">Contact Support</CardTitle>
+            <CardDescription className="text-sm">If you paid for the product but did not receive the download link, please fill out the form below. We will send the link to your email or WhatsApp after verification.</CardDescription>
         </CardHeader>
         <CardContent>
             <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 md:space-y-6">
                 <FormField
                 control={form.control}
                 name="name"
@@ -257,7 +257,7 @@ const SupportForm = ({productName}: {productName: string}) => {
                     </FormItem>
                 )}
                 />
-                <div className="grid sm:grid-cols-2 gap-6">
+                <div className="grid sm:grid-cols-2 gap-4 md:gap-6">
                 <FormField
                     control={form.control}
                     name="email"
@@ -285,7 +285,7 @@ const SupportForm = ({productName}: {productName: string}) => {
                     )}
                 />
                 </div>
-                <div className="grid sm:grid-cols-2 gap-6">
+                <div className="grid sm:grid-cols-2 gap-4 md:gap-6">
                 <FormField
                     control={form.control}
                     name="paymentId"
@@ -308,7 +308,7 @@ const SupportForm = ({productName}: {productName: string}) => {
                         <FormControl>
                             <label className="relative flex items-center justify-center h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-muted-foreground ring-offset-background cursor-pointer hover:bg-accent hover:text-accent-foreground">
                             <Upload className="mr-2 h-4 w-4" />
-                            <span>{fileName || 'Choose file'}</span>
+                            <span className="truncate">{fileName || 'Choose file'}</span>
                             <input 
                                 type="file" 
                                 className="sr-only" 
@@ -413,13 +413,13 @@ export default function ProductDetailPage() {
         <div className="flex min-h-screen flex-col bg-background text-foreground">
             <Header />
             <main className="flex-1 pt-24">
-                <div className="container mx-auto px-4 md:px-6 py-12">
-                    <div className="grid md:grid-cols-2 gap-8 lg:gap-16 items-start">
+                <div className="container mx-auto px-4 md:px-6 py-8 md:py-12">
+                    <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-start">
                         
                         <div className="space-y-4 sticky top-28">
                              <div className="relative aspect-video w-full overflow-hidden rounded-lg shadow-lg">
                                  {isPlugin && item.discount && (
-                                     <Badge variant="destructive" className="absolute top-4 right-4 z-10 text-base">
+                                     <Badge variant="destructive" className="absolute top-2 right-2 md:top-4 md:right-4 z-10 text-sm md:text-base">
                                          {item.discount}
                                      </Badge>
                                  )}
@@ -435,9 +435,9 @@ export default function ProductDetailPage() {
                         </div>
 
                         
-                        <div className="space-y-6">
-                            <div className="space-y-3">
-                                <h1 className="text-4xl lg:text-5xl font-bold font-headline">{item.name}</h1>
+                        <div className="space-y-4 md:space-y-6">
+                            <div className="space-y-2 md:space-y-3">
+                                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold font-headline">{item.name}</h1>
                                 {isPlugin && (
                                      <div className="flex items-center gap-4 flex-wrap">
                                          <div className="flex items-center gap-2 text-sm text-muted-foreground font-medium">
@@ -446,7 +446,7 @@ export default function ProductDetailPage() {
                                         <StarRating rating={item.rating} count={item.reviews} size="h-5 w-5" />
                                      </div>
                                 )}
-                                <p className="text-base text-muted-foreground">
+                                <p className="text-sm md:text-base text-muted-foreground">
                                     {'longDescription' in item ? item.longDescription : item.description}
                                 </p>
                             </div>
@@ -455,19 +455,19 @@ export default function ProductDetailPage() {
                                 <Alert className="bg-primary/10 border-primary/20 text-foreground">
                                     <TriangleAlert className="h-4 w-4 !text-primary" />
                                     <AlertTitle className="font-bold !text-primary-foreground">Important</AlertTitle>
-                                    <AlertDescription className="text-muted-foreground">
+                                    <AlertDescription className="text-muted-foreground text-sm">
                                     If the payment page doesn't load, press Cmd + Shift + R (Mac) or Ctrl + Shift + R (Windows) to force a refresh.
                                     </AlertDescription>
                                 </Alert>
                             )}
 
                             {isPlugin && (
-                                <div className="space-y-4 rounded-lg bg-secondary/50 p-6">
-                                     <div className="flex items-baseline gap-4">
-                                        <span className="text-5xl font-bold text-primary">₹{item.price}</span>
-                                        <span className="text-2xl text-muted-foreground line-through">₹{item.originalPrice}</span>
+                                <div className="space-y-4 rounded-lg bg-secondary/50 p-4 md:p-6">
+                                     <div className="flex items-baseline gap-2 md:gap-4">
+                                        <span className="text-4xl md:text-5xl font-bold text-primary">₹{item.price}</span>
+                                        <span className="text-xl md:text-2xl text-muted-foreground line-through">₹{item.originalPrice}</span>
                                     </div>
-                                    <Button size="lg" className="w-full font-bold text-lg py-6">Buy Now</Button>
+                                    <Button size="lg" className="w-full font-bold text-base md:text-lg py-4 md:py-6">Buy Now</Button>
                                 </div>
                             )}
 
@@ -482,33 +482,33 @@ export default function ProductDetailPage() {
                     <Separator className="my-12 md:my-16" />
 
                     {'details' in item && item.details && (
-                        <div className="max-w-4xl mx-auto mb-16">
-                            <h2 className="text-3xl font-bold font-headline mb-8 text-center">Product Details</h2>
-                            <div className="space-y-6">
-                                <Card className="bg-secondary/50 backdrop-blur-sm border-border p-8">
-                                    <div className="flex items-start gap-6">
-                                        <Download className="h-10 w-10 text-primary mt-1 flex-shrink-0" />
+                        <div className="max-w-4xl mx-auto mb-12 md:mb-16">
+                            <h2 className="text-2xl md:text-3xl font-bold font-headline mb-6 md:mb-8 text-center">Product Details</h2>
+                            <div className="space-y-4 md:space-y-6">
+                                <Card className="bg-secondary/50 backdrop-blur-sm border-border p-6 md:p-8">
+                                    <div className="flex items-start gap-4 md:gap-6">
+                                        <Download className="h-8 w-8 md:h-10 md:w-10 text-primary mt-1 flex-shrink-0" />
                                         <div>
-                                            <h3 className="font-bold text-xl mb-1">File Size</h3>
-                                            <p className="text-muted-foreground text-base">{item.details.fileSize}</p>
+                                            <h3 className="font-bold text-lg md:text-xl mb-1">File Size</h3>
+                                            <p className="text-muted-foreground text-sm md:text-base">{item.details.fileSize}</p>
                                         </div>
                                     </div>
                                 </Card>
-                                <Card className="bg-secondary/50 backdrop-blur-sm border-border p-8">
-                                    <div className="flex items-start gap-6">
-                                        <Info className="h-10 w-10 text-primary mt-1 flex-shrink-0" />
+                                <Card className="bg-secondary/50 backdrop-blur-sm border-border p-6 md:p-8">
+                                    <div className="flex items-start gap-4 md:gap-6">
+                                        <Info className="h-8 w-8 md:h-10 md:w-10 text-primary mt-1 flex-shrink-0" />
                                         <div>
-                                            <h3 className="font-bold text-xl mb-1">Installation</h3>
-                                            <p className="text-muted-foreground text-base">{item.details.installation}</p>
+                                            <h3 className="font-bold text-lg md:text-xl mb-1">Installation</h3>
+                                            <p className="text-muted-foreground text-sm md:text-base">{item.details.installation}</p>
                                         </div>
                                     </div>
                                 </Card>
-                                <Card className="bg-secondary/50 backdrop-blur-sm border-border p-8">
-                                    <div className="flex items-start gap-6">
-                                        <TriangleAlert className="h-10 w-10 text-yellow-500 mt-1 flex-shrink-0" />
+                                <Card className="bg-secondary/50 backdrop-blur-sm border-border p-6 md:p-8">
+                                    <div className="flex items-start gap-4 md:gap-6">
+                                        <TriangleAlert className="h-8 w-8 md:h-10 md:w-10 text-yellow-500 mt-1 flex-shrink-0" />
                                         <div>
-                                            <h3 className="font-bold text-xl mb-1">Important Notes</h3>
-                                            <p className="text-muted-foreground text-base">{item.details.importantNotes}</p>
+                                            <h3 className="font-bold text-lg md:text-xl mb-1">Important Notes</h3>
+                                            <p className="text-muted-foreground text-sm md:text-base">{item.details.importantNotes}</p>
                                         </div>
                                     </div>
                                 </Card>
@@ -519,8 +519,8 @@ export default function ProductDetailPage() {
 
                     <div className="max-w-7xl mx-auto">
                         {item.installVideo && (
-                            <div className="mb-16">
-                                <h2 className="text-3xl font-bold font-headline mb-8 text-center">How to Install</h2>
+                            <div className="mb-12 md:mb-16">
+                                <h2 className="text-2xl md:text-3xl font-bold font-headline mb-6 md:mb-8 text-center">How to Install</h2>
                                 <div className="aspect-video max-w-4xl mx-auto w-full overflow-hidden rounded-lg border border-border shadow-lg">
                                     <video src={item.installVideo} controls className="w-full h-full object-cover" />
                                 </div>
@@ -529,9 +529,9 @@ export default function ProductDetailPage() {
 
                         <div className="grid md:grid-cols-2 gap-12 items-start">
                             <div className="space-y-8">
-                                <h2 className="text-3xl font-bold font-headline">Reviews & Ratings</h2>
+                                <h2 className="text-2xl md:text-3xl font-bold font-headline">Reviews & Ratings</h2>
                                 {reviews.map(review => (
-                                    <div key={review.id} className="bg-secondary/30 p-6 rounded-lg border border-border">
+                                    <div key={review.id} className="bg-secondary/30 p-4 md:p-6 rounded-lg border border-border">
                                         <div className="flex items-start gap-4">
                                             <Avatar>
                                                 <AvatarImage src={review.avatar} />
@@ -540,12 +540,12 @@ export default function ProductDetailPage() {
                                             <div className="flex-1">
                                                 <div className="flex items-center justify-between">
                                                     <div>
-                                                        <p className="font-semibold">{review.author}</p>
+                                                        <p className="font-semibold text-sm md:text-base">{review.author}</p>
                                                         <p className="text-xs text-muted-foreground">{review.date}</p>
                                                     </div>
                                                     <StarRating rating={review.rating} size="h-4 w-4" />
                                                 </div>
-                                                <p className="mt-2 text-muted-foreground">{review.content}</p>
+                                                <p className="mt-2 text-muted-foreground text-sm">{review.content}</p>
                                                 <Button variant="ghost" size="sm" className="mt-2 -ml-3 h-auto py-1 px-3 text-xs" onClick={() => setReplyingTo(replyingTo === review.id ? null : review.id)}>
                                                     <MessageSquare className="mr-2 h-3.5 w-3.5" />
                                                     Reply
@@ -560,7 +560,7 @@ export default function ProductDetailPage() {
                                             </div>
                                         </div>
                                         {review.reply && (
-                                            <div className="mt-4 pl-10 ml-4 border-l border-border">
+                                            <div className="mt-4 pl-8 ml-4 border-l border-border md:pl-10">
                                                 <div className="flex items-start gap-4 pl-4">
                                                     <Avatar className="w-8 h-8">
                                                         <AvatarFallback>DKD</AvatarFallback>
@@ -568,11 +568,11 @@ export default function ProductDetailPage() {
                                                     <div className="flex-1">
                                                         <div className="flex items-center justify-between">
                                                             <div>
-                                                                <p className="font-semibold text-primary">{review.reply.author}</p>
+                                                                <p className="font-semibold text-primary text-sm md:text-base">{review.reply.author}</p>
                                                                 <p className="text-xs text-muted-foreground">{review.reply.date}</p>
                                                             </div>
                                                         </div>
-                                                        <p className="mt-2 text-muted-foreground">{review.reply.content}</p>
+                                                        <p className="mt-2 text-muted-foreground text-sm">{review.reply.content}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -584,8 +584,8 @@ export default function ProductDetailPage() {
                             <div className="space-y-8 sticky top-28">
                                 <Card className="bg-secondary/30 border-border" id="review">
                                     <CardHeader>
-                                        <CardTitle className="font-headline text-2xl">Leave a Review</CardTitle>
-                                        <CardDescription>Share your experience with others.</CardDescription>
+                                        <CardTitle className="font-headline text-xl md:text-2xl">Leave a Review</CardTitle>
+                                        <CardDescription className="text-sm">Share your experience with others.</CardDescription>
                                     </CardHeader>
                                     <CardContent>
                                         <ReviewForm itemName={item.name} />
@@ -597,22 +597,22 @@ export default function ProductDetailPage() {
                         <Separator className="my-12 md:my-16" />
 
                         <div>
-                            <h2 className="text-3xl font-bold font-headline mb-8 text-center">Payment & Support</h2>
+                            <h2 className="text-2xl md:text-3xl font-bold font-headline mb-6 md:mb-8 text-center">Payment & Support</h2>
                             <div className="grid md:grid-cols-2 gap-8 items-start max-w-7xl mx-auto">
                                 <div className="space-y-8">
                                     <Card className="bg-secondary/30 border-border p-6">
                                         <div className="flex items-start gap-4">
-                                            <Wallet className="h-8 w-8 text-primary flex-shrink-0" />
+                                            <Wallet className="h-6 w-6 md:h-8 md:w-8 text-primary flex-shrink-0" />
                                             <div>
-                                                <h3 className="text-xl font-bold mb-2">Payment Info</h3>
-                                                <p className="text-muted-foreground">We accept payments through Razorpay, which supports UPI, Credit/Debit Cards, Net Banking, and various wallets. All transactions are secure and encrypted.</p>
+                                                <h3 className="text-lg md:text-xl font-bold mb-2">Payment Info</h3>
+                                                <p className="text-muted-foreground text-sm">We accept payments through Razorpay, which supports UPI, Credit/Debit Cards, Net Banking, and various wallets. All transactions are secure and encrypted.</p>
                                             </div>
                                         </div>
                                     </Card>
                                     <Alert variant="destructive" className="bg-destructive/10 border-destructive/20 text-destructive-foreground">
-                                        <TriangleAlert className="h-6 w-6 text-destructive" />
-                                        <AlertTitle className="text-xl font-bold text-destructive-foreground">Important Notice</AlertTitle>
-                                        <div className="mt-4 space-y-2 text-destructive-foreground/80">
+                                        <TriangleAlert className="h-5 w-5 md:h-6 md:w-6 text-destructive" />
+                                        <AlertTitle className="text-lg md:text-xl font-bold text-destructive-foreground">Important Notice</AlertTitle>
+                                        <div className="mt-4 space-y-2 text-sm text-destructive-foreground/80">
                                             <p className="font-semibold text-destructive-foreground/90">No Refund Policy</p>
                                             <p>Due to the digital nature of our products, all sales are final. We do not offer refunds or exchanges once a purchase is complete.</p>
                                             <p className="font-semibold mt-4 text-destructive-foreground/90">I paid for a digital product but did not receive the download link. What should I do?</p>

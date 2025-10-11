@@ -100,17 +100,17 @@ export default function BlogPage() {
             variants={sectionVariants}
         >
           <div className="container mx-auto px-4 md:px-6">
-            <motion.div variants={itemVariants} className="text-center max-w-3xl mx-auto mb-16">
-              <h1 className="text-4xl font-bold font-headline tracking-tighter sm:text-5xl md:text-6xl">
+            <motion.div variants={itemVariants} className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold font-headline tracking-tighter">
                 From the <span className="text-primary">Blog</span>
               </h1>
-              <p className="mt-6 text-muted-foreground md:text-xl/relaxed">
+              <p className="mt-4 md:mt-6 text-base md:text-xl/relaxed text-muted-foreground">
                 Thoughts on design, development, and the digital world.
               </p>
             </motion.div>
 
             <motion.div 
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
                 variants={sectionVariants}
             >
               {blogPosts.map((post) => (
@@ -127,9 +127,9 @@ export default function BlogPage() {
                           data-ai-hint={post.dataAiHint}
                         />
                       </CardHeader>
-                      <CardContent className="p-6 flex flex-col flex-grow">
-                        <p className="text-sm text-muted-foreground mb-2">{post.date}</p>
-                        <h3 className="text-xl font-bold font-headline mb-3 flex-grow">{post.title}</h3>
+                      <CardContent className="p-4 md:p-6 flex flex-col flex-grow">
+                        <p className="text-xs md:text-sm text-muted-foreground mb-2">{post.date}</p>
+                        <h3 className="text-lg md:text-xl font-bold font-headline mb-3 flex-grow">{post.title}</h3>
                         <p className="text-muted-foreground mb-4 text-sm">{post.description}</p>
                         <div className="flex items-center text-primary font-semibold text-sm group-hover:underline">
                             Read More <ExternalLink className="ml-2 h-4 w-4" />
@@ -141,7 +141,7 @@ export default function BlogPage() {
               ))}
             </motion.div>
 
-            <motion.div variants={itemVariants} className="text-center mt-16">
+            <motion.div variants={itemVariants} className="text-center mt-12 md:mt-16">
                 <Button asChild variant="outline">
                     <Link href="/">
                         <ArrowLeft className="mr-2 h-4 w-4" />

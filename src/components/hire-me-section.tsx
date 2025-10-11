@@ -62,7 +62,7 @@ export function HireMeSection() {
                 <div className="text-center max-w-3xl mx-auto">
                     <motion.h2
                         variants={itemVariants}
-                        className="text-4xl font-bold font-headline tracking-tighter sm:text-5xl"
+                        className="text-4xl sm:text-5xl font-bold font-headline tracking-tighter"
                     >
                         Let's Work <span className="text-primary">Together</span>
                     </motion.h2>
@@ -76,7 +76,7 @@ export function HireMeSection() {
                 
                 <motion.div 
                     variants={sectionVariants} 
-                    className="mt-16 grid md:grid-cols-3 gap-8 max-w-5xl mx-auto"
+                    className="mt-12 md:mt-16 grid md:grid-cols-3 gap-6 md:gap-8 max-w-5xl mx-auto"
                 >
                     {hiringPoints.map((point, index) => (
                         <motion.div key={index} variants={itemVariants} className="group">
@@ -85,7 +85,7 @@ export function HireMeSection() {
                                     <div className="p-3 bg-primary/10 rounded-full mb-4 inline-block">
                                         {point.icon}
                                     </div>
-                                    <CardTitle className="font-headline text-xl">{point.title}</CardTitle>
+                                    <CardTitle className="font-headline text-lg md:text-xl">{point.title}</CardTitle>
                                 </CardHeader>
                                 <CardContent className="p-0">
                                     <p className="text-muted-foreground text-sm">{point.description}</p>
@@ -95,7 +95,7 @@ export function HireMeSection() {
                     ))}
                 </motion.div>
 
-                <motion.div variants={itemVariants} className="mt-16 max-w-3xl mx-auto">
+                <motion.div variants={itemVariants} className="mt-12 md:mt-16 max-w-3xl mx-auto">
                     <ContactForm />
                 </motion.div>
 

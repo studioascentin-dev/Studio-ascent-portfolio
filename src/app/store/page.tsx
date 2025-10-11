@@ -176,19 +176,19 @@ const StoreItemCard = ({ item }: { item: any }) => {
             )}
         </CardHeader>
         <CardContent className="p-4 flex flex-col flex-grow">
-            <h3 className="text-xl font-bold font-headline mb-2">{item.name}</h3>
+            <h3 className="text-lg md:text-xl font-bold font-headline mb-2 flex-grow">{item.name}</h3>
             {isPlugin && (
                 <>
                     <div className="mb-2">
                         <StarRating rating={item.rating} count={item.reviews} />
                     </div>
-                    <p className="text-base text-muted-foreground mb-4 flex-grow">{item.description}</p>
+                    <p className="text-sm text-muted-foreground mb-4 flex-grow">{item.description}</p>
                     <div className="flex items-center justify-between mt-auto">
                         <div className="flex items-baseline gap-2">
-                            <span className="text-3xl font-bold text-primary">₹{item.price}</span>
-                            <span className="text-base text-muted-foreground line-through">₹{item.originalPrice}</span>
+                            <span className="text-2xl md:text-3xl font-bold text-primary">₹{item.price}</span>
+                            <span className="text-sm md:text-base text-muted-foreground line-through">₹{item.originalPrice}</span>
                         </div>
-                        <Button className="font-semibold">Buy Now</Button>
+                        <Button className="font-semibold" size="sm">Buy Now</Button>
                     </div>
                 </>
             )}
@@ -260,21 +260,21 @@ export default function StorePage() {
           variants={sectionVariants}
         >
           <div className="container mx-auto px-4 md:px-6">
-            <motion.div variants={itemVariants} className="text-center max-w-3xl mx-auto mb-16">
-              <h1 className="text-4xl font-bold font-headline tracking-tighter sm:text-5xl md:text-6xl">
+            <motion.div variants={itemVariants} className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold font-headline tracking-tighter">
                 Digital Product Store
               </h1>
-              <p className="mt-6 text-muted-foreground md:text-xl/relaxed">
+              <p className="mt-4 md:mt-6 text-base md:text-xl/relaxed text-muted-foreground">
                 High-quality plugins, templates, and applications to level up your creative projects.
               </p>
             </motion.div>
 
-            <motion.div key="plugins" variants={sectionVariants} className="mb-20">
+            <motion.div key="plugins" variants={sectionVariants} className="mb-16 md:mb-20">
                 <motion.h2 variants={itemVariants} className="flex items-center justify-center gap-3 text-3xl md:text-4xl font-bold font-headline mb-8 capitalize">
-                  <AfterEffectsIcon />
+                  <AfterEffectsIcon className="w-8 h-8 md:w-9 md:h-9" />
                   After Effects Plugins
                 </motion.h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                   {storeItems.plugins.map((item) => (
                     <StoreItemCard key={item.name} item={item} />
                   ))}
@@ -284,11 +284,11 @@ export default function StorePage() {
             {Object.entries(storeItems).map(([category, items]) => {
               if (category === 'plugins') return null;
               return (
-              <motion.div key={category} variants={sectionVariants} className="mb-20">
+              <motion.div key={category} variants={sectionVariants} className="mb-16 md:mb-20">
                 <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-bold font-headline mb-8 capitalize text-center">
                   {category.replace(/([A-Z])/g, ' $1')}
                 </motion.h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                   {items.map((item: any) => (
                     <StoreItemCard key={item.name} item={item} />
                   ))}

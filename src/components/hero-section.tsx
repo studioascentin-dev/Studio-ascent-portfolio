@@ -73,22 +73,22 @@ export function HeroSection() {
   });
 
   return (
-    <section id="home" className="relative w-full min-h-screen overflow-hidden flex items-center justify-center">
+    <section id="home" className="relative w-full min-h-screen overflow-hidden flex items-center justify-center py-20">
       <div className="absolute inset-0 z-0 text-primary/10 filter blur-sm">
           <motion.div variants={iconVariants(3, 0.5)} initial="initial" animate="animate" className="absolute top-20 left-10">
-              <Code className="h-24 w-24" strokeWidth={1} />
+              <Code className="h-16 w-16 md:h-24 md:w-24" strokeWidth={1} />
           </motion.div>
           <motion.div variants={iconVariants(4, 1)} initial="initial" animate="animate" className="absolute top-1/2 left-1/4 -translate-y-1/2">
-              <PenTool className="h-20 w-20" strokeWidth={1} />
+              <PenTool className="h-12 w-12 md:h-20 md:w-20" strokeWidth={1} />
           </motion.div>
           <motion.div variants={iconVariants(3.5, 0)} initial="initial" animate="animate" className="absolute bottom-24 right-20">
-              <Camera className="h-28 w-28" strokeWidth={1} />
+              <Camera className="h-20 w-20 md:h-28 md:w-28" strokeWidth={1} />
           </motion.div>
           <motion.div variants={iconVariants(5, 1.5)} initial="initial" animate="animate" className="absolute bottom-1/3 right-1/2">
-              <Video className="h-16 w-16" strokeWidth={1} />
+              <Video className="h-10 w-10 md:h-16 md:w-16" strokeWidth={1} />
           </motion.div>
           <motion.div variants={iconVariants(3.8, 1.8)} initial="initial" animate="animate" className="absolute bottom-10 left-20">
-              <Code className="h-16 w-16" strokeWidth={1} />
+              <Code className="h-10 w-10 md:h-16 md:w-16" strokeWidth={1} />
           </motion.div>
       </div>
 
@@ -99,7 +99,7 @@ export function HeroSection() {
         className="container mx-auto px-4 z-10"
       >
         <div className="flex flex-col justify-center text-center">
-          <div className="relative space-y-8 inline-block">
+          <div className="relative space-y-6 md:space-y-8 inline-block">
             
             <div>
                 <h1 className="text-5xl md:text-7xl font-bold font-headline tracking-tight text-foreground leading-tight">
@@ -122,11 +122,11 @@ export function HeroSection() {
           >
             <div>
               <motion.p variants={itemVariants} className="text-sm text-muted-foreground font-medium mb-2">— INTRODUCTION</motion.p>
-              <motion.h2 variants={itemVariants} className="text-3xl lg:text-4xl font-bold font-headline leading-tight">
+              <motion.h2 variants={itemVariants} className="text-2xl md:text-4xl font-bold font-headline leading-tight">
               Full-Stack Developer &<br/>Video Editor, based in India.
               </motion.h2>
             </div>
-            <motion.p variants={itemVariants} className="max-w-md text-muted-foreground leading-relaxed mx-auto">
+            <motion.p variants={itemVariants} className="max-w-md text-muted-foreground leading-relaxed mx-auto text-sm md:text-base">
             I design and code beautifully simple things, and I love what I do. Just simple like that!
             </motion.p>
             <motion.div variants={itemVariants}>

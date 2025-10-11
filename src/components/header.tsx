@@ -125,7 +125,7 @@ export function Header() {
                 variants={navVariants}
                 initial="hidden"
                 animate="visible"
-                className="flex items-center justify-between px-4 md:px-6 py-4 md:py-6"
+                className="container flex items-center justify-between px-4 md:px-6 py-4"
             >
                 <Link href="/" className={cn("text-2xl md:text-3xl font-bold font-headline")}>
                     <span className="text-primary">S</span>

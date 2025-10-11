@@ -10,31 +10,31 @@ import Link from 'next/link';
 const services = [
   {
     id: 'video-editing',
-    icon: <Video className="h-10 w-10 text-primary" />,
+    icon: <Video className="h-8 w-8 md:h-10 md:w-10 text-primary" />,
     title: 'Video Editing',
     description: 'Professional video editing for brand films, social media ads, and more to engage your audience.',
   },
   {
     id: 'photo-editing',
-    icon: <Camera className="h-10 w-10 text-primary" />,
+    icon: <Camera className="h-8 w-8 md:h-10 md:w-10 text-primary" />,
     title: 'Photo Editing',
     description: 'High-quality photo retouching and manipulation to make your images look stunning and professional.',
   },
   {
     id: 'ai-chatbot',
-    icon: <Bot className="h-10 w-10 text-primary" />,
+    icon: <Bot className="h-8 w-8 md:h-10 md:w-10 text-primary" />,
     title: 'AI Chatbot',
     description: 'Automate your business with intelligent chatbots for WhatsApp and websites, handling support, bookings, and lead generation.',
   },
   {
     id: 'web-development',
-    icon: <Code className="h-10 w-10 text-primary" />,
+    icon: <Code className="h-8 w-8 md:h-10 md:w-10 text-primary" />,
     title: 'Web Development',
     description: 'Robust, scalable, and high-performance websites and applications tailored to your business needs.',
   },
   {
     id: 'something-else',
-    icon: <PenTool className="h-10 w-10 text-primary" />,
+    icon: <PenTool className="h-8 w-8 md:h-10 md:w-10 text-primary" />,
     title: 'Something Else?',
     description: 'Have a different creative or technical need? Reach out and let\'s see how I can help you.',
   },
@@ -75,18 +75,18 @@ export function ServicesSection() {
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.2 }}
                 variants={sectionVariants}
-                className="text-center max-w-3xl mx-auto mb-16"
+                className="text-center max-w-3xl mx-auto mb-12 md:mb-16"
             >
-                <motion.h2 variants={itemVariants} className="text-4xl font-bold font-headline tracking-tighter sm:text-5xl">
+                <motion.h2 variants={itemVariants} className="text-4xl sm:text-5xl font-bold font-headline tracking-tighter">
                     My <span className="text-primary">Services</span>
                 </motion.h2>
-                <motion.p variants={itemVariants} className="text-muted-foreground md:text-xl/relaxed mt-6">
+                <motion.p variants={itemVariants} className="text-muted-foreground text-base md:text-xl/relaxed mt-4 md:mt-6">
                     I provide a wide range of digital services to bring your vision to life.
                 </motion.p>
             </motion.div>
             
             <motion.div 
-              className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"
+              className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
               variants={sectionVariants}
               initial="hidden"
               whileInView="visible"
@@ -95,15 +95,15 @@ export function ServicesSection() {
                 {topServices.map((service) => (
                     <motion.div key={service.id} variants={itemVariants}>
                       <Link href={service.id === 'something-else' ? '#contact' : `/services/${service.id}`} className="block h-full group">
-                        <Card className="h-full bg-secondary/50 backdrop-blur-sm border-white/10 text-center p-8 hover:-translate-y-2 transition-transform duration-300 hover:bg-primary/20 hover:border-primary">
-                          <div className="inline-block p-4 bg-primary/10 rounded-full mb-4">
+                        <Card className="h-full bg-secondary/50 backdrop-blur-sm border-white/10 text-center p-6 md:p-8 hover:-translate-y-2 transition-transform duration-300 hover:bg-primary/20 hover:border-primary">
+                          <div className="inline-block p-3 md:p-4 bg-primary/10 rounded-full mb-4">
                             {service.icon}
                           </div>
                           <CardHeader className="p-0">
-                            <CardTitle className="text-2xl font-bold font-headline">{service.title}</CardTitle>
+                            <CardTitle className="text-xl md:text-2xl font-bold font-headline">{service.title}</CardTitle>
                           </CardHeader>
                           <CardContent className="p-0 mt-4">
-                            <p className="text-muted-foreground group-hover:text-foreground/80">{service.description}</p>
+                            <p className="text-muted-foreground group-hover:text-foreground/80 text-sm md:text-base">{service.description}</p>
                           </CardContent>
                         </Card>
                       </Link>
@@ -112,25 +112,25 @@ export function ServicesSection() {
             </motion.div>
 
             <motion.div
-              className="mt-8 flex justify-center"
+              className="mt-6 md:mt-8 flex justify-center"
               variants={sectionVariants}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.1 }}
             >
-              <div className="grid sm:grid-cols-2 gap-8 w-full lg:w-2/3">
+              <div className="grid sm:grid-cols-2 gap-6 md:gap-8 w-full lg:w-2/3">
                 {bottomServices.map((service) => (
                     <motion.div key={service.id} variants={itemVariants}>
                       <Link href={service.id === 'something-else' ? '#contact' : `/services/${service.id}`} className="block h-full group">
-                        <Card className="h-full bg-secondary/50 backdrop-blur-sm border-white/10 text-center p-8 hover:-translate-y-2 transition-transform duration-300 hover:bg-primary/20 hover:border-primary">
-                          <div className="inline-block p-4 bg-primary/10 rounded-full mb-4">
+                        <Card className="h-full bg-secondary/50 backdrop-blur-sm border-white/10 text-center p-6 md:p-8 hover:-translate-y-2 transition-transform duration-300 hover:bg-primary/20 hover:border-primary">
+                          <div className="inline-block p-3 md:p-4 bg-primary/10 rounded-full mb-4">
                             {service.icon}
                           </div>
                           <CardHeader className="p-0">
-                            <CardTitle className="text-2xl font-bold font-headline">{service.title}</CardTitle>
+                            <CardTitle className="text-xl md:text-2xl font-bold font-headline">{service.title}</CardTitle>
                           </CardHeader>
                           <CardContent className="p-0 mt-4">
-                            <p className="text-muted-foreground group-hover:text-foreground/80">{service.description}</p>
+                            <p className="text-muted-foreground group-hover:text-foreground/80 text-sm md:text-base">{service.description}</p>
                           </CardContent>
                         </Card>
                       </Link>

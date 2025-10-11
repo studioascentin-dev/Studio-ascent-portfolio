@@ -160,7 +160,7 @@ const ProjectCard = ({ project, slug, onCardClick }: { project: any, slug: strin
             ) : null}
         </CardHeader>
         <CardContent className="p-4 flex-grow flex items-center justify-between">
-            <h4 className="font-headline text-base md:text-xl">{project.name}</h4>
+            <h4 className="font-headline text-base md:text-lg">{project.name}</h4>
             {(project.link || project.pdf) && <ExternalLink className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />}
         </CardContent>
     </Card>
@@ -205,15 +205,15 @@ export default function ServicePage() {
                     >
                         <div className="flex flex-col items-center text-center space-y-4">
                             <div className="inline-block p-4 bg-primary/10 rounded-full">
-                                {React.cloneElement(service.icon, { className: 'h-10 w-10 md:h-12 md:w-12 text-primary' })}
+                                {React.cloneElement(service.icon, { className: 'h-8 w-8 md:h-12 md:w-12 text-primary' })}
                             </div>
-                            <h1 className="text-4xl md:text-6xl font-bold font-headline">{service.title}</h1>
-                            <p className="text-base md:text-lg text-muted-foreground">{service.description}</p>
+                            <h1 className="text-4xl md:text-5xl font-bold font-headline">{service.title}</h1>
+                            <p className="text-sm md:text-lg text-muted-foreground">{service.description}</p>
                         </div>
                     </motion.div>
                     
                     {slug === 'web-development' ? (
-                       <div className="space-y-24 mt-24">
+                       <div className="space-y-16 md:space-y-24 mt-16 md:mt-24">
                             {service.projects.map((project: any, index: number) => (
                                 <motion.div
                                     key={project.name}
@@ -222,7 +222,7 @@ export default function ServicePage() {
                                     viewport={{ once: true, amount: 0.3 }}
                                     transition={{ duration: 0.6, ease: "easeOut" }}
                                     className={cn(
-                                        "grid md:grid-cols-2 gap-8 md:gap-12 items-center"
+                                        "grid md:grid-cols-2 gap-6 md:gap-12 items-center"
                                     )}
                                 >
                                     <div className={cn("relative aspect-video group", index % 2 === 1 && "md:order-2")}>
@@ -236,15 +236,15 @@ export default function ServicePage() {
                                                 data-ai-hint={project.dataAiHint}
                                             />
                                             <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
-                                                <ExternalLink className="w-10 h-10 text-white" />
+                                                <ExternalLink className="w-8 h-8 text-white" />
                                             </div>
                                         </a>
                                     </div>
-                                    <div className={cn("space-y-4", index % 2 === 1 && "md:order-1")}>
+                                    <div className={cn("space-y-3 md:space-y-4", index % 2 === 1 && "md:order-1")}>
                                         <a href={project.link} target="_blank" rel="noopener noreferrer">
                                             <h3 className="text-2xl md:text-3xl font-bold font-headline text-primary hover:underline">{project.name}</h3>
                                         </a>
-                                        <p className="text-muted-foreground">{project.description}</p>
+                                        <p className="text-muted-foreground text-sm md:text-base">{project.description}</p>
                                         <div className="flex flex-wrap gap-2">
                                             {project.technologies.map((tech: string) => (
                                                 <Badge key={tech} variant="secondary" className="backdrop-blur-sm bg-secondary/70">{tech}</Badge>
@@ -265,7 +265,7 @@ export default function ServicePage() {
                             variants={cardContainerVariants}
                             initial="hidden"
                             animate="visible"
-                            className="grid grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+                            className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8"
                         >
                             {service.projects.map((project: any) => (
                                 <motion.div
@@ -282,9 +282,9 @@ export default function ServicePage() {
                         {selectedProject && origin && (
                            <AnimatedDialog origin={origin} onOpenChange={() => setSelectedProject(null)}>
                                 <DialogHeader>
-                                    <DialogTitle className="font-headline text-2xl mb-2">{selectedProject.name}</DialogTitle>
+                                    <DialogTitle className="font-headline text-xl md:text-2xl mb-2">{selectedProject.name}</DialogTitle>
                                     {selectedProject.detail && (
-                                        <DialogDescription>
+                                        <DialogDescription className="text-sm md:text-base">
                                             {selectedProject.detail}
                                         </DialogDescription>
                                     )}
@@ -316,7 +316,7 @@ export default function ServicePage() {
                     </AnimatePresence>
 
 
-                    <div className="text-center mt-12">
+                    <div className="text-center mt-8 md:mt-12">
                         <Button asChild variant="outline" size="lg">
                             <a href="/#services">
                                 <ArrowLeft className="mr-2 h-4 w-4" />

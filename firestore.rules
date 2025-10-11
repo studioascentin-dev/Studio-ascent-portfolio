@@ -1,54 +1,54 @@
 /**
- * @file Firestore Security Rules
- * @description This ruleset enforces public read access for 'projects' and 'categories' while restricting write access to authorized users (not implemented in this version).
- * 'contacts' and 'supportRequests' collections are write-only.
+ * @fileoverview Firestore Security Rules for the portfolio application.
+ *
+ * Core Philosophy:
+ * This ruleset enforces a public read-only model for `projects` and `categories` collections.
+ * The `contacts` and `supportRequests` collections are secured, preventing unauthorized access.
  *
  * Data Structure:
- * - /projects/{projectId}: Stores project details. Publicly readable.
- * - /categories/{categoryId}: Stores service category details. Publicly readable.
- * - /contacts/{contactId}: Stores contact form submissions. Write-only.
- * - /supportRequests/{supportRequestId}: Stores support requests. Write-only.
+ * - /projects/{projectId}: Stores project data, publicly readable.
+ * - /categories/{categoryId}: Stores category data, publicly readable.
+ * - /contacts/{contactId}: Stores contact form submissions, access restricted.
+ * - /supportRequests/{supportRequestId}: Stores support requests, access restricted.
  *
  * Key Security Decisions:
- * - Projects and categories are publicly readable to showcase portfolio items and services.
- * - Contacts and support requests are write-only to accept user submissions without exposing data.
- * - No user authentication or authorization is implemented in this prototype. Write rules are set to 'false' as a placeholder for future implementation.
- * - List operations are generally disabled for submission collections like contacts and supportRequests.
+ * - Projects and categories are publicly readable to showcase portfolio content.
+ * - Contact form submissions and support requests are only writable, list and get are denied.
  */
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
     /**
-     * @description Allows anyone to read project details. Write access is denied in this prototype.
+     * @description Allows anyone to read project data, but restricts modifications.
      * @path /projects/{projectId}
-     * @allow get, list: Anyone can read project details.
-     * @deny create, update, delete: No one can modify project details in this prototype.
-     * @principle Allows public read access to projects while restricting write access.
+     * @allow (get, list) Read access is public.
+     * @deny (create, update, delete) No one can create, update, or delete projects through the client.  These operations should be performed via backend services.
+     * @principle Public read, restricted write.
      */
     match /projects/{projectId} {
       allow get, list: if true;
-      allow create, update, delete: if false; // TODO: Add authorization for project management
+      allow create, update, delete: if false;
     }
 
     /**
-     * @description Allows anyone to read category details. Write access is denied in this prototype.
+     * @description Allows anyone to read category data, but restricts modifications.
      * @path /categories/{categoryId}
-     * @allow get, list: Anyone can read category details.
-     * @deny create, update, delete: No one can modify category details in this prototype.
-     * @principle Allows public read access to categories while restricting write access.
+     * @allow (get, list) Read access is public.
+     * @deny (create, update, delete) No one can create, update, or delete categories through the client. These operations should be performed via backend services.
+     * @principle Public read, restricted write.
      */
     match /categories/{categoryId} {
       allow get, list: if true;
-      allow create, update, delete: if false; // TODO: Add authorization for category management
+      allow create, update, delete: if false;
     }
 
     /**
-     * @description Allows anyone to create contact submissions. Read and other write access is denied.
+     * @description Only allows the creation of contact submissions.
      * @path /contacts/{contactId}
-     * @allow create: Anyone can submit a contact form.
-     * @deny get, list, update, delete: No one can read, update, or delete contact submissions.
-     * @principle Allows write-only access for contact form submissions.
+     * @allow (create) Anyone can create a contact submission.
+     * @deny (get, list, update, delete) No one can read, list, update, or delete contact submissions.
+     * @principle Prevents unauthorized access to contact data.
      */
     match /contacts/{contactId} {
       allow create: if true;
@@ -56,11 +56,11 @@ service cloud.firestore {
     }
 
     /**
-     * @description Allows anyone to create support requests. Read and other write access is denied.
+     * @description Only allows the creation of support requests.
      * @path /supportRequests/{supportRequestId}
-     * @allow create: Anyone can submit a support request.
-     * @deny get, list, update, delete: No one can read, update, or delete support requests.
-     * @principle Allows write-only access for support requests.
+     * @allow (create) Anyone can create a support request.
+     * @deny (get, list, update, delete) No one can read, list, update, or delete support requests.
+     * @principle Prevents unauthorized access to support request data.
      */
     match /supportRequests/{supportRequestId} {
       allow create: if true;

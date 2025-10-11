@@ -125,9 +125,9 @@ export function Header() {
                 variants={navVariants}
                 initial="hidden"
                 animate="visible"
-                className="container flex items-center justify-between px-4 md:px-6 py-4"
+                className="mx-auto flex h-16 max-w-screen-xl items-center justify-between px-4 md:px-6"
             >
-                <Link href="/" className={cn("text-2xl md:text-3xl font-bold font-headline")}>
+                <Link href="/" className={cn("text-2xl font-bold font-headline")}>
                     <span className="text-primary">S</span>
                     <span className={cn("text-foreground")}>tudio</span>
                     {' '}
@@ -142,7 +142,7 @@ export function Header() {
                                 href={item.href}
                                 onClick={(e) => handleScroll(e, item.href)}
                                 className={cn(
-                                    "text-base font-medium text-muted-foreground hover:text-primary transition-colors relative group",
+                                    "text-sm font-medium text-muted-foreground hover:text-primary transition-colors relative group",
                                     isLinkActive(item) && "text-primary font-semibold"
                                 )}
                             >

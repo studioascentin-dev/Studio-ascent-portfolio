@@ -23,6 +23,7 @@ import { useToast } from '@/hooks/use-toast';
 import { Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { sendEmail } from '@/ai/flows/send-email';
 
 
 const StarRating = ({ rating, count, size = 'h-5 w-5' }: { rating: number, count?: number, size?: string }) => {
@@ -164,17 +165,17 @@ const ReviewForm = ({ itemName }: { itemName: string }) => {
 };
 
 const supportFormSchema = z.object({
-  fullName: z.string().min(2, { message: 'Full name must be at least 2 characters.' }),
-  emailAddress: z.string().email({ message: 'Please enter a valid email address.' }),
+  name: z.string().min(2, { message: 'Full name must be at least 2 characters.' }),
+  email: z.string().email({ message: 'Please enter a valid email address.' }),
   whatsapp: z.string().optional(),
   paymentId: z.string().min(1, { message: 'Payment ID is required.' }),
   paymentScreenshot: z.any().optional(), // In a real app, you'd have more specific validation
-  issue: z.string().min(10, { message: 'Please describe your issue in at least 10 characters.' }),
+  message: z.string().min(10, { message: 'Please describe your issue in at least 10 characters.' }),
 });
 
 type SupportFormValues = z.infer<typeof supportFormSchema>;
 
-const SupportForm = () => {
+const SupportForm = ({productName}: {productName: string}) => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [fileName, setFileName] = useState('');
@@ -182,29 +183,46 @@ const SupportForm = () => {
   const form = useForm<SupportFormValues>({
     resolver: zodResolver(supportFormSchema),
     defaultValues: {
-      fullName: '',
-      emailAddress: '',
+      name: '',
+      email: '',
       whatsapp: '',
       paymentId: '',
-      issue: '',
+      message: '',
     },
   });
 
   const onSubmit: (data: SupportFormValues) => void = async (data) => {
     setIsSubmitting(true);
-    console.log(data);
+    
+    try {
+      // We don't handle file uploads yet, so we omit paymentScreenshot
+      const { paymentScreenshot, ...emailData } = data;
+      
+      const result = await sendEmail({
+        ...emailData,
+        service: `Support Request: ${productName}`,
+      });
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-
-    toast({
-      title: 'Support Request Submitted',
-      description: 'We have received your request and will get back to you within 24 hours.',
-    });
-
-    form.reset();
-    setFileName('');
-    setIsSubmitting(false);
+      if (result.success) {
+        toast({
+          title: 'Support Request Submitted',
+          description: 'We have received your request and will get back to you within 24 hours.',
+        });
+        form.reset();
+        setFileName('');
+      } else {
+        throw new Error('Failed to send email.');
+      }
+    } catch (error) {
+      console.error("Failed to send support email:", error);
+      toast({
+        variant: "destructive",
+        title: "Submission Failed",
+        description: "Something went wrong. Please try again.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
   
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -228,7 +246,7 @@ const SupportForm = () => {
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                 <FormField
                 control={form.control}
-                name="fullName"
+                name="name"
                 render={({ field }) => (
                     <FormItem>
                     <FormLabel>Full Name</FormLabel>
@@ -242,7 +260,7 @@ const SupportForm = () => {
                 <div className="grid sm:grid-cols-2 gap-6">
                 <FormField
                     control={form.control}
-                    name="emailAddress"
+                    name="email"
                     render={({ field }) => (
                     <FormItem>
                         <FormLabel>Email Address</FormLabel>
@@ -306,7 +324,7 @@ const SupportForm = () => {
                 </div>
                 <FormField
                 control={form.control}
-                name="issue"
+                name="message"
                 render={({ field }) => (
                     <FormItem>
                     <FormLabel>Describe Your Issue</FormLabel>
@@ -603,7 +621,7 @@ export default function ProductDetailPage() {
                                     </Alert>
                                 </div>
                                 <div className="sticky top-28">
-                                    <SupportForm />
+                                    <SupportForm productName={item.name} />
                                 </div>
                             </div>
                         </div>

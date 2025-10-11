@@ -12,6 +12,8 @@ const EmailSchema = z.object({
   email: z.string().email(),
   service: z.string(),
   message: z.string(),
+  whatsapp: z.string().optional(),
+  paymentId: z.string().optional(),
 });
 
 type EmailData = z.infer<typeof EmailSchema>;

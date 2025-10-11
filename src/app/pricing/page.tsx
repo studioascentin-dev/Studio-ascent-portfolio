@@ -42,9 +42,9 @@ const pricingTiers = [
         service: "Web Development",
         slug: "web-development",
         tiers: [
-            { name: "Basic", price: "₹20,000", period: "", features: ["1-3 Page Website", "Next.js", "1 Month Support"] },
-            { name: "Intermediate", price: "₹75,000", period: "", features: ["Up to 6 Pages", "Advanced CMS", "2 Months Support"] },
-            { name: "Enterprise", price: "₹3,50,000+", period: "", features: ["10+ Page App", "API Integrations", "3+ Months Support"] },
+            { name: "Basic", price: "₹20,000", period: "Starting at", features: ["1-3 Page Website", "Next.js Framework", "1 Month Support"] },
+            { name: "Intermediate", price: "₹75,000", period: "Starting at", features: ["Up to 6 Page Website", "Advanced CMS", "2 Months Support"] },
+            { name: "Enterprise", price: "₹1,50,000+", period: "Starting at", features: ["10+ Page Application", "Performance Optimization", "3+ Months Support"] },
         ]
     },
 ];
@@ -111,9 +111,9 @@ export default function PricingPage() {
                                             <Card key={tier.name} className="flex flex-col bg-secondary/50 backdrop-blur-sm border-white/10 hover:-translate-y-2 transition-transform duration-300">
                                                 <CardHeader className="text-center">
                                                     <CardTitle className="text-2xl font-headline text-primary">{tier.name}</CardTitle>
+                                                     <p className="text-sm text-muted-foreground">{tier.period}</p>
                                                     <div className="flex items-baseline justify-center gap-1">
                                                         <span className="text-4xl font-bold">{tier.price}</span>
-                                                        <span className="text-sm text-muted-foreground">{tier.period}</span>
                                                     </div>
                                                 </CardHeader>
                                                 <CardContent className="flex-grow">

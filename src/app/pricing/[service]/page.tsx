@@ -4,41 +4,40 @@
 
 import { notFound, useParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Check, ArrowLeft, X } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { Footer } from '@/components/footer';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription as DialogDescriptionComponent, DialogFooter } from '@/components/ui/dialog';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import * as React from 'react';
 import Image from 'next/image';
 import { Header } from '@/components/header';
 import Link from 'next/link';
+import { Badge } from '@/components/ui/badge';
 
 const allWebDevFeatures = [
-    { name: '1-3 Page Website', basic: true, intermediate: 'hidden', pro: true },
-    { name: 'Up to 6 Page Website', basic: 'hidden', intermediate: true, pro: 'hidden' },
-    { name: '10+ Page Application', basic: 'hidden', intermediate: 'hidden', pro: true },
-    { name: 'Next.js Framework', basic: true, intermediate: true, pro: true },
-    { name: 'Basic CMS', basic: true, intermediate: false, pro: 'hidden' },
-    { name: 'Advanced CMS', basic: false, intermediate: true, pro: true },
-    { name: 'Simple API Integrations', basic: false, intermediate: true, pro: 'hidden' },
-    { name: 'API Integrations', basic: 'hidden', intermediate: 'hidden', pro: true },
-    { name: 'E-commerce Functionality', basic: false, intermediate: 'hidden', pro: true },
-    { name: 'UI/UX Premium Design', basic: false, intermediate: false, pro: true },
+    { name: '1-3 Page Website', basic: true, intermediate: false, pro: false },
+    { name: 'Next.js Framework', basic: true, intermediate: true, pro: false },
+    { name: 'Basic CMS Integration', basic: true, intermediate: false, pro: false },
+    { name: '1 Month Support', basic: true, intermediate: false, pro: false },
+
+    { name: 'Up to 6 Page Website', basic: false, intermediate: true, pro: false },
+    { name: 'Advanced CMS', basic: false, intermediate: true, pro: false },
+    { name: 'Simple API Integrations', basic: false, intermediate: true, pro: false },
+    { name: '2 Months Support', basic: false, intermediate: true, pro: false },
+    
+    { name: '10+ Page Application', basic: false, intermediate: false, pro: true },
     { name: 'Performance Optimization', basic: false, intermediate: false, pro: true },
-    { name: 'Training & Documentation', basic: false, intermediate: false, pro: true },
-    { name: 'Custom Admin Dashboard', basic: false, intermediate: false, pro: true },
     { name: 'Advanced Security Setup', basic: false, intermediate: false, pro: true },
-    { name: 'AI Features (Chatbot, etc.)', basic: false, intermediate: false, pro: true },
+    { name: 'AI Feature Integration', basic: false, intermediate: false, pro: true },
+    { name: 'Multi-language Support', basic: false, intermediate: false, pro: true },
+    { name: 'UI/UX Premium Design', basic: false, intermediate: false, pro: true },
+    { name: 'Custom Admin Dashboard', basic: false, intermediate: false, pro: true },
     { name: 'Custom Integrations', basic: false, intermediate: false, pro: true },
-    { name: 'Mobile App (iOS + Android)', basic: 'hidden', intermediate: false, pro: 'hidden' },
-    { name: 'Multi-language & Currency', basic: 'hidden', intermediate: 'hidden', pro: true },
-    { name: '1 Month Support', basic: true, intermediate: 'hidden', pro: 'hidden' },
-    { name: '2 Months Support', basic: 'hidden', intermediate: true, pro: 'hidden' },
-    { name: '3+ Months Support', basic: 'hidden', intermediate: false, pro: true },
+    { name: '3+ Months Support', basic: false, intermediate: false, pro: true },
 ];
 
 const pricingData = {
@@ -104,11 +103,34 @@ const pricingData = {
     ]
   },
   'web-development': {
-    title: 'Web Development',
+    title: 'Choose the Right Plan for Your Website',
+    description: 'Flexible pricing for Next.js web development, designed to scale with your needs.',
     tiers: [
-      { name: 'Basic', price: '₹20,000', period: '', features: allWebDevFeatures.map(f => ({ name: f.name, available: f.basic })) },
-      { name: 'Intermediate', price: '₹75,000', period: '', features: allWebDevFeatures.map(f => ({ name: f.name, available: f.intermediate })) },
-      { name: 'Enterprise', price: '₹3,50,000+', period: '', features: allWebDevFeatures.map(f => ({ name: f.name, available: f.pro })) },
+      { 
+        name: 'Basic Web Development',
+        description: 'Perfect for Small Businesses & Personal Sites',
+        price: '₹20,000',
+        priceDescription: 'Starting at',
+        buttonText: 'Start Small',
+        features: allWebDevFeatures.map(f => ({ name: f.name, available: f.basic })) 
+      },
+      { 
+        name: 'Intermediate Web Development',
+        description: 'Best for Growing Startups',
+        price: '₹75,000',
+        priceDescription: 'Starting at',
+        buttonText: 'Grow Your Business',
+        popular: true,
+        features: allWebDevFeatures.map(f => ({ name: f.name, available: f.intermediate })) 
+      },
+      { 
+        name: 'Enterprise Web Development',
+        description: 'Custom Solutions for Enterprises',
+        price: '₹1,50,000+',
+        priceDescription: 'Starting at',
+        buttonText: 'Build Enterprise Solutions',
+        features: allWebDevFeatures.map(f => ({ name: f.name, available: f.pro })) 
+      },
     ]
   }
 };
@@ -200,13 +222,13 @@ export default function ServicePricingPage() {
                             variants={cardVariants}
                             className="text-4xl font-bold font-headline tracking-tighter sm:text-5xl md:text-6xl"
                         >
-                            {data.title} Pricing
+                            {data.title}
                         </motion.h2>
                         <motion.p 
                             variants={cardVariants}
                             className="mt-6 text-muted-foreground md:text-xl/relaxed"
                         >
-                            Choose the perfect plan for your needs. All prices are negotiable.
+                            {data.description || 'Choose the perfect plan for your needs. All prices are negotiable.'}
                         </motion.p>
                     </div>
 
@@ -216,12 +238,15 @@ export default function ServicePricingPage() {
                         variants={sectionVariants}
                         className={`grid grid-cols-1 ${gridColsClass} gap-x-8 gap-y-16 items-start max-w-7xl mx-auto`}
                     >
-                    {(data.tiers as Tier[]).map((tier, tierIndex) => (
+                    {(data.tiers as any[]).map((tier, tierIndex) => (
                         <motion.div 
                             key={tier.name} 
                             variants={cardVariants} 
-                            className="flex flex-col h-full"
+                            className="flex flex-col h-full relative"
                         >
+                             {tier.popular && (
+                                <Badge variant="default" className="absolute -top-4 left-1/2 -translate-x-1/2 z-10 bg-orange-500 text-white">Most Popular</Badge>
+                            )}
                             {'images' in tier && (
                                 <div className="mb-8">
                                     <h3 className="text-2xl font-headline text-center mb-4">{tier.name} Example</h3>
@@ -242,37 +267,34 @@ export default function ServicePricingPage() {
                             )}
                             <motion.div
                                 className="flex h-full"
-                                whileHover={{ y: -8, scale: 1.03 }}
+                                whileHover={{ y: -8 }}
                                 transition={{ type: 'spring', stiffness: 300 }}
                             >
                                 <Card className={cn(
-                                    "flex flex-col w-full bg-secondary/50 backdrop-blur-sm border-white/10 transition-all duration-300 hover:shadow-lg overflow-hidden",
-                                    "hover:border-primary hover:ring-2 hover:ring-primary hover:shadow-primary/20"
+                                    "flex flex-col w-full bg-card backdrop-blur-sm border-white/20 transition-all duration-300 overflow-hidden",
+                                    "hover:shadow-lg hover:border-primary/50",
+                                     tier.popular && "border-orange-500 ring-2 ring-orange-500 shadow-orange-500/20"
                                 )}>
                                     <CardHeader className="text-center pb-4 pt-6">
-                                        <CardTitle className="text-2xl md:text-3xl font-headline mb-2">{tier.name}</CardTitle>
-                                        <div className="flex items-baseline justify-center gap-1">
-                                            <span className="text-4xl font-bold">{tier.price}</span>
-                                            <span className="text-sm text-muted-foreground">{tier.period}</span>
-                                        </div>
+                                        <CardTitle className="text-xl md:text-2xl font-headline mb-2">{tier.name}</CardTitle>
+                                         {tier.description && <CardDescription>{tier.description}</CardDescription>}
+                                         <div className="mt-4">
+                                            {tier.priceDescription && <p className="text-sm text-muted-foreground">{tier.priceDescription}</p>}
+                                            <div className="flex items-baseline justify-center gap-1">
+                                                <span className="text-4xl font-bold text-orange-500">{tier.price}</span>
+                                                {tier.period && <span className="text-sm text-muted-foreground">{tier.period}</span>}
+                                            </div>
+                                         </div>
                                     </CardHeader>
                                     <CardContent className="flex flex-col flex-grow items-center p-6 pt-0">
                                         <ul className="space-y-4 text-sm w-full flex-grow">
                                             {serviceId === 'web-development' ? (
                                                 (tier.features as {name: string, available: boolean | string}[]).map((feature, i) => {
-                                                    if(feature.available === 'hidden') return null;
-                                                    
-                                                    if (tier.name === 'Enterprise' && !feature.available) {
-                                                      return null;
-                                                    }
+                                                    if(!feature.available) return null;
                                                     
                                                     return (
                                                         <li key={i} className="flex items-start gap-3">
-                                                            {feature.available ? (
-                                                                <Check className="h-5 w-5 text-green-500 mt-0.5 shrink-0" />
-                                                            ) : (
-                                                                <X className="h-5 w-5 text-red-500 mt-0.5 shrink-0" />
-                                                            )}
+                                                            <Check className="h-5 w-5 text-green-500 mt-0.5 shrink-0" />
                                                             <span className="text-muted-foreground">{feature.name}</span>
                                                         </li>
                                                     )
@@ -294,8 +316,12 @@ export default function ServicePricingPage() {
                                         </ul>
                                     </CardContent>
                                     <CardFooter>
-                                    <Button size="lg" className="w-full font-bold" onClick={() => handleGetStartedClick(tier)}>
-                                        Get Started
+                                    <Button 
+                                      size="lg" 
+                                      className={cn("w-full font-bold", tier.popular ? "bg-orange-500 hover:bg-orange-600" : "bg-primary hover:bg-primary/90")}
+                                      onClick={() => handleGetStartedClick(tier)}
+                                    >
+                                        {tier.buttonText || 'Get Started'}
                                     </Button>
                                     </CardFooter>
                                 </Card>
@@ -320,9 +346,9 @@ export default function ServicePricingPage() {
                 <DialogContent className="sm:max-w-[425px]">
                     <DialogHeader>
                         <DialogTitle>Choose Your Plan</DialogTitle>
-                        <DialogDescription>
+                        <DialogDescriptionComponent>
                            Select the option that best fits your needs for the {selectedTier.name} plan.
-                        </DialogDescription>
+                        </DialogDescriptionComponent>
                     </DialogHeader>
                     <div className="py-4">
                         <RadioGroup defaultValue={selectedPlan} onValueChange={(val) => setSelectedPlan(val as 'package' | 'single')}>
@@ -348,5 +374,7 @@ export default function ServicePricingPage() {
     </div>
   );
 }
+
+    
 
     

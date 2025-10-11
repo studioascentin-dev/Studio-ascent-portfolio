@@ -121,94 +121,96 @@ export function Header() {
             "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
             isScrolled ? "bg-background/80 backdrop-blur-md" : "bg-transparent"
         )}>
-            <motion.div
-                variants={navVariants}
-                initial="hidden"
-                animate="visible"
-                className="container mx-auto flex h-20 items-center justify-between px-6 md:px-8"
-            >
-                <Link href="/" className={cn("text-3xl font-bold font-headline")}>
-                    <span className="text-primary">S</span>
-                    <span className={cn("text-foreground")}>tudio</span>
-                    {' '}
-                    <span className="text-primary">A</span>
-                    <span className={cn("text-foreground")}>scent</span>
-                </Link>
-                
-                <nav className="hidden md:flex items-center justify-end gap-8 md:gap-10">
-                    {navItems.map((item) => (
-                         <motion.div key={item.name} variants={itemVariants}>
-                            <Link
-                                href={item.href}
-                                onClick={(e) => handleScroll(e, item.href)}
-                                className={cn(
-                                    "text-base font-medium text-muted-foreground hover:text-primary transition-colors relative group",
-                                    isLinkActive(item) && "text-primary font-semibold"
-                                )}
-                            >
-                                {item.name}
-                                {isLinkActive(item) && (
-                                    <motion.span 
-                                        layoutId="active-dot-desktop"
-                                        className="absolute left-1/2 -translate-x-1/2 -bottom-2 h-1.5 w-1.5 bg-primary rounded-full"
-                                    />
-                                )}
-                            </Link>
-                        </motion.div>
-                    ))}
-                </nav>
+            <div className="container mx-auto px-4 md:px-6">
+                <motion.div
+                    variants={navVariants}
+                    initial="hidden"
+                    animate="visible"
+                    className="flex h-20 w-full items-center justify-between"
+                >
+                    <Link href="/" className={cn("text-4xl font-bold font-headline")}>
+                        <span className="text-primary">S</span>
+                        <span className={cn("text-foreground")}>tudio</span>
+                        {' '}
+                        <span className="text-primary">A</span>
+                        <span className={cn("text-foreground")}>scent</span>
+                    </Link>
+                    
+                    <nav className="hidden md:flex items-center justify-end gap-8 md:gap-10">
+                        {navItems.map((item) => (
+                             <motion.div key={item.name} variants={itemVariants}>
+                                <Link
+                                    href={item.href}
+                                    onClick={(e) => handleScroll(e, item.href)}
+                                    className={cn(
+                                        "text-base font-medium text-muted-foreground hover:text-primary transition-colors relative group",
+                                        isLinkActive(item) && "text-primary font-semibold"
+                                    )}
+                                >
+                                    {item.name}
+                                    {isLinkActive(item) && (
+                                        <motion.span 
+                                            layoutId="active-dot-desktop"
+                                            className="absolute left-1/2 -translate-x-1/2 -bottom-2 h-1.5 w-1.5 bg-primary rounded-full"
+                                        />
+                                    )}
+                                </Link>
+                            </motion.div>
+                        ))}
+                    </nav>
 
-                <div className="md:hidden">
-                    <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
-                        <SheetTrigger asChild>
-                            <Button variant="ghost" size="icon">
-                                <Menu className="h-6 w-6" />
-                                <span className="sr-only">Open menu</span>
-                            </Button>
-                        </SheetTrigger>
-                        <SheetContent side="right" className="w-full max-w-xs bg-background/95 backdrop-blur-md border-l-primary/20">
-                           <SheetHeader>
-                                <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
-                            </SheetHeader>
-                            <div className="flex flex-col h-full">
-                                <div className="mb-8 text-center">
-                                     <Link href="/" onClick={() => setIsSheetOpen(false)} className="text-3xl font-bold font-headline">
-                                        <span className="text-primary">S</span>
-                                        <span className="text-foreground">tudio</span>
-                                        {' '}
-                                        <span className="text-primary">A</span>
-                                        <span className="text-foreground">scent</span>
-                                    </Link>
-                                </div>
-                                <nav className="flex flex-col items-center gap-8 text-xl">
-                                    {navItems.map((item) => (
-                                        <Link
-                                            key={item.name}
-                                            href={item.href}
-                                            onClick={(e) => handleScroll(e, item.href)}
-                                            className={cn(
-                                                "font-medium text-muted-foreground hover:text-primary transition-colors relative",
-                                                isLinkActive(item) && "text-primary font-semibold"
-                                            )}
-                                        >
-                                            {item.name}
-                                            {isLinkActive(item) && (
-                                                <motion.span 
-                                                    layoutId="active-dot-mobile"
-                                                    className="absolute -bottom-1 left-0 right-0 h-1 bg-primary rounded-full"
-                                                />
-                                            )}
+                    <div className="md:hidden">
+                        <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
+                            <SheetTrigger asChild>
+                                <Button variant="ghost" size="icon">
+                                    <Menu className="h-6 w-6" />
+                                    <span className="sr-only">Open menu</span>
+                                </Button>
+                            </SheetTrigger>
+                            <SheetContent side="right" className="w-full max-w-xs bg-background/95 backdrop-blur-md border-l-primary/20">
+                               <SheetHeader>
+                                    <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
+                                </SheetHeader>
+                                <div className="flex flex-col h-full">
+                                    <div className="mb-8 text-center">
+                                         <Link href="/" onClick={() => setIsSheetOpen(false)} className="text-3xl font-bold font-headline">
+                                            <span className="text-primary">S</span>
+                                            <span className="text-foreground">tudio</span>
+                                            {' '}
+                                            <span className="text-primary">A</span>
+                                            <span className="text-foreground">scent</span>
                                         </Link>
-                                    ))}
-                                </nav>
-                                <div className="mt-auto text-center text-muted-foreground text-sm">
-                                    <p>&copy; {new Date().getFullYear()} Dev Kumar Das</p>
+                                    </div>
+                                    <nav className="flex flex-col items-center gap-8 text-xl">
+                                        {navItems.map((item) => (
+                                            <Link
+                                                key={item.name}
+                                                href={item.href}
+                                                onClick={(e) => handleScroll(e, item.href)}
+                                                className={cn(
+                                                    "font-medium text-muted-foreground hover:text-primary transition-colors relative",
+                                                    isLinkActive(item) && "text-primary font-semibold"
+                                                )}
+                                            >
+                                                {item.name}
+                                                {isLinkActive(item) && (
+                                                    <motion.span 
+                                                        layoutId="active-dot-mobile"
+                                                        className="absolute -bottom-1 left-0 right-0 h-1 bg-primary rounded-full"
+                                                    />
+                                                )}
+                                            </Link>
+                                        ))}
+                                    </nav>
+                                    <div className="mt-auto text-center text-muted-foreground text-sm">
+                                        <p>&copy; {new Date().getFullYear()} Dev Kumar Das</p>
+                                    </div>
                                 </div>
-                            </div>
-                        </SheetContent>
-                    </Sheet>
-                </div>
-            </motion.div>
+                            </SheetContent>
+                        </Sheet>
+                    </div>
+                </motion.div>
+            </div>
         </header>
     );
 }

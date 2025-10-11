@@ -9,7 +9,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from '@/components/ui/dialog';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { LifeBuoy, Apple, Star } from 'lucide-react';
+import { LifeBuoy, Apple, Star, Check } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -21,28 +21,64 @@ import { Loader2 } from 'lucide-react';
 
 const storeItems = {
   plugins: [
-    { 
-      name: 'Shadow Studio 2', 
-      image: 'https://picsum.photos/seed/shadow-studio/600/400', 
-      dataAiHint: '3d text effect',
-      reviews: 82,
+     { 
+      name: 'JerryFlow', 
+      image: 'https://picsum.photos/seed/jerryflow/600/400', 
+      dataAiHint: 'animation curves',
+      reviews: 34,
       rating: 5,
-      description: 'Advanced shadow plugin for realistic and customizable shadows in After Effects.',
+      description: 'A workflow enhancement tool for After Effects to streamline your animation process.',
       price: 99,
-      originalPrice: 1999,
-      discount: '95% OFF',
+      originalPrice: 999,
+      discount: '90% OFF',
       platform: 'Mac Only'
     },
     { 
-      name: 'Sapphire AE Install', 
-      image: 'https://picsum.photos/seed/sapphire/600/400', 
-      dataAiHint: 'visual effects suite',
-      reviews: 105,
+      name: 'Twixtor Pro', 
+      image: 'https://picsum.photos/seed/twixtor/600/400', 
+      dataAiHint: 'slow motion effect',
+      reviews: 78,
+      rating: 4,
+      description: 'Intelligently slow down or speed up your image sequences with visually stunning results.',
+      price: 99,
+      originalPrice: 1799,
+      discount: '94% OFF',
+      platform: 'Mac Only'
+    },
+    { 
+      name: 'Gaussian Splatting', 
+      image: 'https://picsum.photos/seed/splatting/600/400', 
+      dataAiHint: '3d rendering plugin',
+      reviews: 12,
       rating: 5,
-      description: 'A complete suite of powerful visual effects plugins for After Effects.',
+      description: 'Real-time radiance field rendering plugin for creating photorealistic scenes.',
+      price: 99,
+      originalPrice: 3999,
+      discount: '98% OFF',
+      platform: 'Mac Only'
+    },
+    { 
+      name: 'Shadow Studio 3', 
+      image: 'https://picsum.photos/seed/shadow-studio-3/600/400', 
+      dataAiHint: '3d text effect',
+      reviews: 41,
+      rating: 5,
+      description: 'The latest version with improved performance and more shadow types.',
       price: 99,
       originalPrice: 3499,
       discount: '97% OFF',
+      platform: 'Mac & Windows'
+    },
+    { 
+      name: 'Deep Glow 2', 
+      image: 'https://picsum.photos/seed/deepglow2/600/400', 
+      dataAiHint: 'neon glow effect',
+      reviews: 66,
+      rating: 4,
+      description: 'Physically accurate and high-quality glow effects for After Effects.',
+      price: 99,
+      originalPrice: 1299,
+      discount: '92% OFF',
       platform: 'Mac Only'
     },
     { 
@@ -218,7 +254,7 @@ const StoreItemCard = ({ item }: { item: any }) => {
               data-ai-hint={item.dataAiHint}
             />
             <div className="absolute top-2 left-2 bg-black/50 text-white text-xs px-2 py-1 rounded-md flex items-center gap-1">
-                <Apple className="h-3 w-3" /> {item.platform}
+                {item.platform === 'Mac & Windows' ? <Check className="h-3 w-3 text-green-400" /> : <Apple className="h-3 w-3" />} {item.platform}
             </div>
              <div className="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-md">
                 {item.discount}
@@ -356,6 +392,8 @@ export default function StorePage() {
     </div>
   );
 }
+    
+
     
 
     

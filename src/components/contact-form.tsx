@@ -19,6 +19,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useToast } from "@/hooks/use-toast";
 import { Loader2 } from "lucide-react";
 import * as React from "react";
+import { useFirestore } from "@/firebase";
+import { collection, serverTimestamp } from "firebase/firestore";
+import { addDocumentNonBlocking } from "@/firebase";
+
 
 const services = [
     "Photo Editing",
@@ -38,7 +42,7 @@ const formSchema = z.object({
 export function ContactForm() {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = React.useState(false);
-  const phoneNumber = "919707191619";
+  const firestore = useFirestore();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -53,19 +57,29 @@ export function ContactForm() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
     
-    const messageBody = `Hello! I'm interested in your services.\n\n*Name:*\n${values.name}\n\n*Email:*\n${values.email}\n\n*Service of Interest:*\n${values.service}\n\n*Message:*\n${values.message}`;
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(messageBody)}`;
+    try {
+        const contactsCollection = collection(firestore, 'contacts');
+        addDocumentNonBlocking(contactsCollection, {
+            ...values,
+            createdAt: serverTimestamp(),
+        });
 
-    // Open WhatsApp in a new tab
-    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-    
-    toast({
-        title: "Redirecting to WhatsApp...",
-        description: "Your message is ready to be sent.",
-    });
+        toast({
+            title: "Message Sent!",
+            description: "Thanks for reaching out. I'll get back to you soon.",
+        });
 
-    form.reset();
-    setIsSubmitting(false);
+        form.reset();
+    } catch (error) {
+        console.error("Error submitting form to Firestore:", error);
+        toast({
+            variant: "destructive",
+            title: "Uh oh! Something went wrong.",
+            description: "There was a problem sending your message. Please try again.",
+        });
+    } finally {
+        setIsSubmitting(false);
+    }
   }
 
   return (
@@ -142,7 +156,7 @@ export function ContactForm() {
         />
         <Button type="submit" className="w-full font-bold" disabled={isSubmitting}>
           {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-          Send Message via WhatsApp
+          Send Message
         </Button>
       </form>
     </Form>

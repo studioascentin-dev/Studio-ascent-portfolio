@@ -79,6 +79,36 @@
         "description",
         "price"
       ]
+    },
+    "Contact": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Contact",
+      "type": "object",
+      "description": "Represents a contact form submission from the homepage.",
+      "properties": {
+        "name": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "service": { "type": "string" },
+        "message": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "email", "service", "message", "createdAt"]
+    },
+    "SupportRequest": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Support Request",
+      "type": "object",
+      "description": "Represents a support request for a payment issue.",
+      "properties": {
+        "name": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "whatsapp": { "type": "string" },
+        "paymentId": { "type": "string" },
+        "productName": { "type": "string" },
+        "message": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "email", "paymentId", "productName", "message", "createdAt"]
     }
   },
   "auth": {
@@ -119,6 +149,22 @@
               "description": "The unique identifier for the category."
             }
           ]
+        }
+      },
+      {
+        "path": "/contacts/{contactId}",
+        "definition": {
+          "entityName": "Contact",
+          "schema": { "$ref": "#/backend/entities/Contact" },
+          "description": "Stores contact form submissions from the homepage."
+        }
+      },
+      {
+        "path": "/supportRequests/{supportRequestId}",
+        "definition": {
+          "entityName": "SupportRequest",
+          "schema": { "$ref": "#/backend/entities/SupportRequest" },
+          "description": "Stores support requests for payment issues from the store."
         }
       }
     ],

@@ -43,6 +43,7 @@ const sendEmailFlow = ai.defineFlow(
     await new Promise(resolve => setTimeout(resolve, 1000));
 
     // For now, we'll just log it and return success.
+    // This flow is no longer used for the support form, but kept for reference.
     return { success: true };
   }
 );

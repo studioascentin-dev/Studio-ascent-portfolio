@@ -6,7 +6,7 @@ import { storeItems } from '@/lib/store-data';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { Button } from '@/components/ui/button';
-import { Star, Check, Apple, ArrowLeft, TriangleAlert, Download, Info, MessageSquare, Upload, Wallet, ShieldCheck, Lock } from 'lucide-react';
+import { Star, Check, Apple, ArrowLeft, TriangleAlert, Download, Info, MessageSquare, Upload, Wallet, Lock } from 'lucide-react';
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -23,7 +23,8 @@ import { useToast } from '@/hooks/use-toast';
 import { Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { sendEmail } from '@/ai/flows/send-email';
+import { useFirestore, addDocumentNonBlocking } from '@/firebase';
+import { collection, serverTimestamp } from 'firebase/firestore';
 
 
 const StarRating = ({ rating, count, size = 'h-5 w-5' }: { rating: number, count?: number, size?: string }) => {
@@ -181,6 +182,7 @@ const SupportForm = ({productName}: {productName: string}) => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [fileName, setFileName] = useState('');
+  const firestore = useFirestore();
 
   const form = useForm<SupportFormValues>({
     resolver: zodResolver(supportFormSchema),
@@ -198,25 +200,23 @@ const SupportForm = ({productName}: {productName: string}) => {
     
     try {
       // We don't handle file uploads yet, so we omit paymentScreenshot
-      const { paymentScreenshot, ...emailData } = data;
-      
-      const result = await sendEmail({
-        ...emailData,
-        service: `Support Request: ${productName}`,
+      const { paymentScreenshot, ...supportData } = data;
+      const supportCollection = collection(firestore, 'supportRequests');
+
+      addDocumentNonBlocking(supportCollection, {
+        ...supportData,
+        productName,
+        createdAt: serverTimestamp(),
       });
 
-      if (result.success) {
-        toast({
-          title: 'Support Request Submitted',
-          description: 'We have received your request and will get back to you within 24 hours.',
-        });
-        form.reset();
-        setFileName('');
-      } else {
-        throw new Error('Failed to send email.');
-      }
+      toast({
+        title: 'Support Request Submitted',
+        description: 'We have received your request and will get back to you within 24 hours.',
+      });
+      form.reset();
+      setFileName('');
     } catch (error) {
-      console.error("Failed to send support email:", error);
+      console.error("Failed to send support request:", error);
       toast({
         variant: "destructive",
         title: "Submission Failed",
@@ -652,5 +652,3 @@ export default function ProductDetailPage() {
         </div>
     );
 }
-
-    

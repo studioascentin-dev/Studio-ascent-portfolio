@@ -245,33 +245,33 @@ export default function ProductDetailPage() {
                     <Separator className="my-12" />
 
                     {'details' in item && item.details && (
-                        <div className="max-w-4xl mx-auto mb-12">
-                            <h2 className="text-3xl font-bold font-headline mb-6 text-center">Product Details</h2>
-                            <div className="space-y-4">
-                                <Card className="bg-secondary/30 border-border p-4">
-                                    <div className="flex items-start gap-4">
-                                        <Download className="h-6 w-6 text-primary mt-1" />
+                        <div className="max-w-4xl mx-auto mb-16">
+                            <h2 className="text-3xl font-bold font-headline mb-8 text-center">Product Details</h2>
+                            <div className="space-y-6">
+                                <Card className="bg-secondary/50 backdrop-blur-sm border-border p-6">
+                                    <div className="flex items-start gap-5">
+                                        <Download className="h-8 w-8 text-primary mt-1" />
                                         <div>
-                                            <h3 className="font-bold text-lg">File Size</h3>
-                                            <p className="text-muted-foreground">{item.details.fileSize}</p>
+                                            <h3 className="font-bold text-xl">File Size</h3>
+                                            <p className="text-muted-foreground text-base">{item.details.fileSize}</p>
                                         </div>
                                     </div>
                                 </Card>
-                                <Card className="bg-secondary/30 border-border p-4">
-                                    <div className="flex items-start gap-4">
-                                        <Info className="h-6 w-6 text-primary mt-1" />
+                                <Card className="bg-secondary/50 backdrop-blur-sm border-border p-6">
+                                    <div className="flex items-start gap-5">
+                                        <Info className="h-8 w-8 text-primary mt-1" />
                                         <div>
-                                            <h3 className="font-bold text-lg">Installation</h3>
-                                            <p className="text-muted-foreground">{item.details.installation}</p>
+                                            <h3 className="font-bold text-xl">Installation</h3>
+                                            <p className="text-muted-foreground text-base">{item.details.installation}</p>
                                         </div>
                                     </div>
                                 </Card>
-                                <Card className="bg-secondary/30 border-border p-4">
-                                    <div className="flex items-start gap-4">
-                                        <TriangleAlert className="h-6 w-6 text-yellow-500 mt-1" />
+                                <Card className="bg-secondary/50 backdrop-blur-sm border-border p-6">
+                                    <div className="flex items-start gap-5">
+                                        <TriangleAlert className="h-8 w-8 text-yellow-500 mt-1" />
                                         <div>
-                                            <h3 className="font-bold text-lg">Important Notes</h3>
-                                            <p className="text-muted-foreground">{item.details.importantNotes}</p>
+                                            <h3 className="font-bold text-xl">Important Notes</h3>
+                                            <p className="text-muted-foreground text-base">{item.details.importantNotes}</p>
                                         </div>
                                     </div>
                                 </Card>

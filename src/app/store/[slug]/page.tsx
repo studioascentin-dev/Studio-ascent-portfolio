@@ -6,7 +6,7 @@ import { storeItems } from '@/lib/store-data';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { Button } from '@/components/ui/button';
-import { Star, Check, Apple, ArrowLeft, TriangleAlert, Download, Info, MessageSquare, Upload, Wallet, ShieldCheck } from 'lucide-react';
+import { Star, Check, Apple, ArrowLeft, TriangleAlert, Download, Info, MessageSquare, Upload, Wallet, ShieldCheck, Lock } from 'lucide-react';
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -467,15 +467,17 @@ export default function ProductDetailPage() {
                                         <span className="text-4xl md:text-5xl font-bold text-primary">₹{item.price}</span>
                                         <span className="text-xl md:text-2xl text-muted-foreground line-through">₹{item.originalPrice}</span>
                                     </div>
-                                    <Button size="lg" className="w-full font-bold text-base md:text-lg py-4 md:py-6">Buy Now</Button>
+                                    <Button asChild size="lg" className="w-full font-bold text-base md:text-lg py-4 md:py-6">
+                                        <Link href={item.paymentLink || '#'} target="_blank" rel="noopener noreferrer">Buy Now</Link>
+                                    </Button>
                                     <p className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
-                                        <ShieldCheck className="h-4 w-4" /> Secure payment by Razorpay
+                                        <Lock className="h-4 w-4" /> Secured by Razorpay
                                     </p>
                                 </div>
                             )}
 
                             {!isPlugin && (
-                                 <Button asChild size="lg" className="w-full font-bold" href="/#contact">
+                                 <Button asChild size="lg" className="w-full font-bold">
                                     <a href="/#contact">Contact For Details</a>
                                 </Button>
                             )}

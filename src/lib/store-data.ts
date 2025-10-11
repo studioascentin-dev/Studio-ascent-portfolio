@@ -54,6 +54,7 @@ export const storeItems = {
       originalPrice: 999,
       discount: '90% OFF',
       platform: 'Mac Only',
+      paymentLink: 'https://rzp.io/rzp/jerryflow',
       installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
        details: {
         fileSize: '15.8 MB',

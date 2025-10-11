@@ -302,7 +302,13 @@ export default function PricingPage() {
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {service.tiers.map((tier) => (
-                      <PricingCard key={tier.name} tier={tier} serviceKey={serviceKey} />
+                      <motion.div
+                        key={tier.name}
+                        whileHover={{ y: -8, scale: 1.03 }}
+                        transition={{ type: 'spring', stiffness: 300 }}
+                      >
+                        <PricingCard tier={tier} serviceKey={serviceKey} />
+                      </motion.div>
                     ))}
                   </div>
                 </motion.div>
@@ -317,7 +323,13 @@ export default function PricingPage() {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
                     {webDevService.tiers.map((tier) => (
-                      <PricingCard key={tier.name} tier={tier} serviceKey="web-development" />
+                      <motion.div
+                        key={tier.name}
+                        whileHover={{ y: -8, scale: 1.03 }}
+                        transition={{ type: 'spring', stiffness: 300 }}
+                      >
+                        <PricingCard tier={tier} serviceKey="web-development" />
+                      </motion.div>
                     ))}
                 </div>
             </motion.div>

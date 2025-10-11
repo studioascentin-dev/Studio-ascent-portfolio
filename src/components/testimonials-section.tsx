@@ -122,7 +122,7 @@ export function TestimonialsSection() {
                         asChild
                         className="mt-6 font-bold bg-orange-500 text-white hover:bg-orange-600"
                     >
-                        <a href="#" target="_blank" rel="noopener noreferrer">Rate Us on Google</a>
+                        <a href="https://maps.app.goo.gl/dhkMzLEB5KPMcCjK9" target="_blank" rel="noopener noreferrer">Rate Us on Google</a>
                     </Button>
                 </motion.div>
             </motion.div>

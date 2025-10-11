@@ -1,109 +1,70 @@
 /**
- * @file Firebase Security Rules for Firestore (Prototyping Mode)
+ * @fileoverview Firestore Security Rules for the portfolio application.
  *
- * @core_philosophy This ruleset prioritizes security by strictly controlling write access to all collections.
- *  Read access is generally public, but write access is heavily restricted. All `create`, `update`, and `delete`
- *  operations require authentication and often additional checks. This approach favors rapid iteration
- *  by allowing flexible data shapes while enforcing a secure authorization model.
+ * Core Philosophy:
+ * This ruleset enforces a public read-only model for `projects` and `categories` collections.
+ * The `contacts` and `supportRequests` collections are secured, preventing unauthorized access.
  *
- * @data_structure The database consists of four top-level collections: `projects`, `categories`, `contacts`, and
- *  `supportRequests`. Each collection stores documents representing the corresponding entity.
+ * Data Structure:
+ * - /projects/{projectId}: Stores project data, publicly readable.
+ * - /categories/{categoryId}: Stores category data, publicly readable.
+ * - /contacts/{contactId}: Stores contact form submissions, access restricted.
+ * - /supportRequests/{supportRequestId}: Stores support requests, access restricted.
  *
- * @key_security_decisions
- *  - Public Read Access: `projects` and `categories` are publicly readable, allowing anyone to retrieve project and category data.
- *  - Protected Write Access: All write operations (`create`, `update`, `delete`) are protected, requiring authentication.
- *  - Contact and Support Request Handling: `contacts` and `supportRequests` are only writable by authenticated users, likely to prevent abuse.
- *  - No User Listing: User listing is not supported.
- *
- * @denormalization_for_authorization Not applicable. The current design does not require denormalization for authorization,
- *  as no complex ownership or role-based access control is defined.
- *
- * @structural_segregation The top-level collections represent structural segregation.  Each entity type has its own collection,
- *  simplifying security rules and queries.
+ * Key Security Decisions:
+ * - Projects and categories are publicly readable to showcase portfolio content.
+ * - Contact form submissions and support requests are only writable, list and get are denied.
  */
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
     /**
-     * @description Grants public read access to projects, while restricting write access to authenticated users.
+     * @description Allows anyone to read project data, but restricts modifications.
      * @path /projects/{projectId}
-     * @allow get, list: if true;
-     * @allow create: if isSignedIn();
-     * @allow update: if isSignedIn() && resource != null;
-     * @allow delete: if isSignedIn() && resource != null;
-     * @deny create: if !isSignedIn();
-     * @deny update: if !isSignedIn();
-     * @deny delete: if !isSignedIn();
-     * @principle Allows public access to projects while ensuring only authenticated users can modify them.
+     * @allow (get, list) Read access is public.
+     * @deny (create, update, delete) No one can create, update, or delete projects through the client.  These operations should be performed via backend services.
+     * @principle Public read, restricted write.
      */
     match /projects/{projectId} {
       allow get, list: if true;
-      allow create: if isSignedIn();
-      allow update: if isSignedIn() && resource != null;
-      allow delete: if isSignedIn() && resource != null;
+      allow create, update, delete: if false;
     }
 
     /**
-     * @description Grants public read access to categories, while restricting write access to authenticated users.
+     * @description Allows anyone to read category data, but restricts modifications.
      * @path /categories/{categoryId}
-     * @allow get, list: if true;
-     * @allow create: if isSignedIn();
-     * @allow update: if isSignedIn() && resource != null;
-     * @allow delete: if isSignedIn() && resource != null;
-     * @deny create: if !isSignedIn();
-     * @deny update: if !isSignedIn();
-     * @deny delete: if !isSignedIn();
-     * @principle Allows public access to categories while ensuring only authenticated users can modify them.
+     * @allow (get, list) Read access is public.
+     * @deny (create, update, delete) No one can create, update, or delete categories through the client. These operations should be performed via backend services.
+     * @principle Public read, restricted write.
      */
     match /categories/{categoryId} {
       allow get, list: if true;
-      allow create: if isSignedIn();
-      allow update: if isSignedIn() && resource != null;
-      allow delete: if isSignedIn() && resource != null;
+      allow create, update, delete: if false;
     }
 
     /**
-     * @description Restricts write access to contacts to authenticated users only.
+     * @description Only allows the creation of contact submissions.
      * @path /contacts/{contactId}
-     * @allow get, list: if false;
-     * @allow create: if isSignedIn();
-     * @allow update: if false;
-     * @allow delete: if false;
-     * @deny get, list: if true;
-     * @deny update: if true;
-     * @deny delete: if true;
-     * @principle Ensures that only authenticated users can submit contact forms, preventing anonymous spam.
+     * @allow (create) Anyone can create a contact submission.
+     * @deny (get, list, update, delete) No one can read, list, update, or delete contact submissions.
+     * @principle Prevents unauthorized access to contact data.
      */
     match /contacts/{contactId} {
-      allow get, list: if false;
-      allow create: if isSignedIn();
-      allow update: if false;
-      allow delete: if false;
+      allow create: if true;
+      allow get, list, update, delete: if false;
     }
 
     /**
-     * @description Restricts write access to support requests to authenticated users only.
+     * @description Only allows the creation of support requests.
      * @path /supportRequests/{supportRequestId}
-     * @allow get, list: if false;
-     * @allow create: if isSignedIn();
-     * @allow update: if false;
-     * @allow delete: if false;
-     * @deny get, list: if true;
-     * @deny update: if true;
-     * @deny delete: if true;
-     * @principle Ensures that only authenticated users can submit support requests, preventing anonymous spam.
+     * @allow (create) Anyone can create a support request.
+     * @deny (get, list, update, delete) No one can read, list, update, or delete support requests.
+     * @principle Prevents unauthorized access to support request data.
      */
     match /supportRequests/{supportRequestId} {
-      allow get, list: if false;
-      allow create: if isSignedIn();
-      allow update: if false;
-      allow delete: if false;
-    }
-
-    // Helper function to determine if a user is signed in
-    function isSignedIn() {
-      return request.auth != null;
+      allow create: if true;
+      allow get, list, update, delete: if false;
     }
   }
 }

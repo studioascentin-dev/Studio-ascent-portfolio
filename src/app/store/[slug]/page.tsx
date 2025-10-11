@@ -6,7 +6,7 @@ import { storeItems } from '@/lib/store-data';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { Button } from '@/components/ui/button';
-import { Star, Check, Apple, ArrowLeft, TriangleAlert } from 'lucide-react';
+import { Star, Check, Apple, ArrowLeft, TriangleAlert, Download, Info } from 'lucide-react';
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -244,6 +244,42 @@ export default function ProductDetailPage() {
                      
                     <Separator className="my-12" />
 
+                    {'details' in item && item.details && (
+                        <div className="max-w-4xl mx-auto mb-12">
+                            <h2 className="text-3xl font-bold font-headline mb-6 text-center">Product Details</h2>
+                            <div className="space-y-4">
+                                <Card className="bg-secondary/30 border-border p-4">
+                                    <div className="flex items-start gap-4">
+                                        <Download className="h-6 w-6 text-primary mt-1" />
+                                        <div>
+                                            <h3 className="font-bold text-lg">File Size</h3>
+                                            <p className="text-muted-foreground">{item.details.fileSize}</p>
+                                        </div>
+                                    </div>
+                                </Card>
+                                <Card className="bg-secondary/30 border-border p-4">
+                                    <div className="flex items-start gap-4">
+                                        <Info className="h-6 w-6 text-primary mt-1" />
+                                        <div>
+                                            <h3 className="font-bold text-lg">Installation</h3>
+                                            <p className="text-muted-foreground">{item.details.installation}</p>
+                                        </div>
+                                    </div>
+                                </Card>
+                                <Card className="bg-secondary/30 border-border p-4">
+                                    <div className="flex items-start gap-4">
+                                        <TriangleAlert className="h-6 w-6 text-yellow-500 mt-1" />
+                                        <div>
+                                            <h3 className="font-bold text-lg">Important Notes</h3>
+                                            <p className="text-muted-foreground">{item.details.importantNotes}</p>
+                                        </div>
+                                    </div>
+                                </Card>
+                            </div>
+                        </div>
+                    )}
+
+
                     <div className="max-w-4xl mx-auto">
                         {item.installVideo && (
                             <div className="mb-12">
@@ -321,5 +357,3 @@ export default function ProductDetailPage() {
         </div>
     );
 }
-
-    

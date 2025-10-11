@@ -14,7 +14,12 @@ export const storeItems = {
       originalPrice: 1999,
       discount: '95% OFF',
       platform: 'Mac Only',
-      installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'
+      installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+      details: {
+        fileSize: '57.2 MB',
+        installation: 'The dedicated installation video is already below. Make sure to follow the instruction carefully.',
+        importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.'
+      }
     },
     { 
       slug: 'sapphire-ae-install',
@@ -29,7 +34,12 @@ export const storeItems = {
       originalPrice: 3499,
       discount: '97% OFF',
       platform: 'Mac Only',
-      installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4'
+      installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+      details: {
+        fileSize: '1.2 GB',
+        installation: 'The dedicated installation video is already below. Make sure to follow the instruction carefully.',
+        importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.'
+      }
     },
     { 
       slug: 'jerryflow',
@@ -44,7 +54,12 @@ export const storeItems = {
       originalPrice: 999,
       discount: '90% OFF',
       platform: 'Mac Only',
-      installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4'
+      installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+       details: {
+        fileSize: '15.8 MB',
+        installation: 'The dedicated installation video is already below. Make sure to follow the instruction carefully.',
+        importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.'
+      }
     },
     { 
       slug: 'twixtor-pro',
@@ -59,7 +74,12 @@ export const storeItems = {
       originalPrice: 1799,
       discount: '94% OFF',
       platform: 'Mac Only',
-      installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4'
+      installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
+       details: {
+        fileSize: '45.1 MB',
+        installation: 'The dedicated installation video is already below. Make sure to follow the instruction carefully.',
+        importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.'
+      }
     },
     { 
       slug: 'gaussian-splatting',
@@ -74,7 +94,12 @@ export const storeItems = {
       originalPrice: 3999,
       discount: '98% OFF',
       platform: 'Mac Only',
-      installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4'
+      installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
+       details: {
+        fileSize: '128 MB',
+        installation: 'The dedicated installation video is already below. Make sure to follow the instruction carefully.',
+        importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.'
+      }
     },
     { 
       slug: 'shadow-studio-3',
@@ -89,7 +114,12 @@ export const storeItems = {
       originalPrice: 3499,
       discount: '97% OFF',
       platform: 'Mac & Windows',
-      installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4'
+      installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4',
+       details: {
+        fileSize: '78.5 MB',
+        installation: 'The dedicated installation video is already below. Make sure to follow the instruction carefully.',
+        importantNotes: 'This plugin is for both Mac and Windows. The installation tutorial below is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.'
+      }
     },
     { 
       slug: 'deep-glow-2',
@@ -104,7 +134,12 @@ export const storeItems = {
       originalPrice: 1299,
       discount: '92% OFF',
       platform: 'Mac Only',
-      installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4'
+      installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4',
+       details: {
+        fileSize: '33.9 MB',
+        installation: 'The dedicated installation video is already below. Make sure to follow the instruction carefully.',
+        importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.'
+      }
     },
     { 
       slug: 'element-3d',
@@ -119,7 +154,12 @@ export const storeItems = {
       originalPrice: 2999,
       discount: '97% OFF',
       platform: 'Mac Only',
-      installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4'
+      installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4',
+       details: {
+        fileSize: '250 MB',
+        installation: 'The dedicated installation video is already below. Make sure to follow the instruction carefully.',
+        importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.'
+      }
     },
   ],
   templates: [
@@ -187,5 +227,3 @@ export const storeItems = {
     },
   ],
 };
-
-    

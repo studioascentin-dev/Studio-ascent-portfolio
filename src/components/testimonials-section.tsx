@@ -38,25 +38,25 @@ const testimonials = [
         initial: 'A',
         name: 'Aarav Sharma',
         rating: 5,
-        review: 'The AI chatbot developed for my e-commerce site has been a game-changer. Sales are up 20%!',
+        review: 'The AI chatbot developed for my e-commerce site has been a game-changer. It handles customer queries 24/7, and our sales have increased by 20%!',
     },
     {
         initial: 'S',
         name: 'Sophia Chen',
         rating: 5,
-        review: 'Incredible web development work. My new portfolio site is fast, beautiful, and exactly what I envisioned.',
+        review: 'Incredible web development work. My new portfolio site is not only beautiful and fast, but it perfectly captures my brand. The process was seamless.',
     },
     {
         initial: 'R',
         name: 'Rohan Mehta',
         rating: 5,
-        review: 'The video editing service is top-notch. They took my raw footage and turned it into a cinematic masterpiece.',
+        review: 'The video editing service is absolutely top-notch. They took my raw footage and transformed it into a cinematic masterpiece that exceeded all my expectations.',
     },
     {
         initial: 'I',
         name: 'Isabella Rossi',
-        rating: 4,
-        review: 'High-quality photo retouching that made my product shots look incredibly professional. Will be back for more.',
+        rating: 5,
+        review: 'The high-quality photo retouching made my product shots look incredibly professional and ready for a magazine cover. I will definitely be back for more.',
     },
 ];
 

@@ -40,6 +40,7 @@ export function Header() {
     const router = useRouter();
     const [activeSection, setActiveSection] = React.useState('');
     const [isSheetOpen, setIsSheetOpen] = React.useState(false);
+    const [isScrolled, setIsScrolled] = React.useState(false);
 
     const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
         const isHomePage = pathname === '/';
@@ -85,7 +86,6 @@ export function Header() {
             if (el) observer.observe(el);
         });
 
-        // Also handle initial hash on load for non-homepage anchors
         if (window.location.hash) {
             const targetId = window.location.hash.substring(1);
             const targetElement = document.getElementById(targetId);
@@ -94,8 +94,16 @@ export function Header() {
             }
         }
 
+        const checkScroll = () => {
+            setIsScrolled(window.scrollY > 10);
+        };
 
-        return () => observer.disconnect();
+        window.addEventListener('scroll', checkScroll);
+
+        return () => {
+            observer.disconnect();
+            window.removeEventListener('scroll', checkScroll);
+        };
     }, [pathname]);
 
     const isLinkActive = (item: {name: string, href: string}) => {
@@ -108,23 +116,28 @@ export function Header() {
         return pathname.startsWith(item.href);
     };
 
+    const isStorePage = pathname.startsWith('/store');
+
     return (
-        <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md">
+        <header className={cn(
+            "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+            isScrolled || isStorePage ? "bg-background/80 backdrop-blur-md" : "bg-transparent",
+            isStorePage && "bg-white/80 shadow-sm"
+        )}>
             <motion.div
                 variants={navVariants}
                 initial="hidden"
                 animate="visible"
                 className="flex items-center justify-between px-4 md:px-6 py-4 md:py-6"
             >
-                <Link href="/" className="text-2xl md:text-3xl font-bold font-headline">
+                <Link href="/" className={cn("text-2xl md:text-3xl font-bold font-headline", isStorePage && "text-slate-900")}>
                     <span className="text-primary">S</span>
-                    <span className="text-foreground">tudio</span>
+                    <span className={cn("text-foreground", isStorePage && "text-slate-900")}>tudio</span>
                     {' '}
                     <span className="text-primary">A</span>
-                    <span className="text-foreground">scent</span>
+                    <span className={cn("text-foreground", isStorePage && "text-slate-900")}>scent</span>
                 </Link>
                 
-                {/* Desktop Navigation */}
                 <nav className="hidden md:flex items-center justify-end gap-6 md:gap-8">
                     {navItems.map((item) => (
                          <motion.div key={item.name} variants={itemVariants}>
@@ -133,7 +146,8 @@ export function Header() {
                                 onClick={(e) => handleScroll(e, item.href)}
                                 className={cn(
                                     "text-base font-medium text-muted-foreground hover:text-primary transition-colors relative group",
-                                    isLinkActive(item) && "text-primary font-semibold"
+                                    isLinkActive(item) && "text-primary font-semibold",
+                                    isStorePage && "text-slate-500 hover:text-primary"
                                 )}
                             >
                                 {item.name}
@@ -148,11 +162,10 @@ export function Header() {
                     ))}
                 </nav>
 
-                {/* Mobile Navigation */}
                 <div className="md:hidden">
                     <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
                         <SheetTrigger asChild>
-                            <Button variant="ghost" size="icon">
+                            <Button variant="ghost" size="icon" className={cn(isStorePage && "text-slate-900 hover:bg-slate-100")}>
                                 <Menu className="h-6 w-6" />
                                 <span className="sr-only">Open menu</span>
                             </Button>
@@ -203,3 +216,5 @@ export function Header() {
         </header>
     );
 }
+
+    

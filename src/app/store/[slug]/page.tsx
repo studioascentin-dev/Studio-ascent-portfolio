@@ -6,7 +6,7 @@ import { storeItems } from '@/lib/store-data';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { Button } from '@/components/ui/button';
-import { Star, Check, Apple, ArrowLeft } from 'lucide-react';
+import { Star, Check, Apple, ArrowLeft, TriangleAlert } from 'lucide-react';
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -22,6 +22,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { Loader2 } from 'lucide-react';
 import Link from 'next/link';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 
 const StarRating = ({ rating, count, size = 'h-5 w-5' }: { rating: number, count?: number, size?: string }) => {
@@ -29,7 +30,7 @@ const StarRating = ({ rating, count, size = 'h-5 w-5' }: { rating: number, count
         <div className="flex items-center gap-2">
             <div className="flex text-yellow-400">
                 {[...Array(5)].map((_, i) => (
-                    <Star key={i} className={`${size} ${i < rating ? 'fill-current' : 'text-gray-300'}`} />
+                    <Star key={i} className={`${size} ${i < rating ? 'fill-current' : 'text-gray-500'}`} />
                 ))}
             </div>
             {count && <span className="text-sm text-muted-foreground">({count} reviews)</span>}
@@ -97,7 +98,7 @@ const ReviewForm = ({ itemName }: { itemName: string }) => {
                                     {[1, 2, 3, 4, 5].map((star) => (
                                         <Star
                                             key={star}
-                                            className={`h-6 w-6 cursor-pointer ${field.value >= star ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'}`}
+                                            className={`h-6 w-6 cursor-pointer ${field.value >= star ? 'text-yellow-400 fill-yellow-400' : 'text-gray-400'}`}
                                             onClick={() => field.onChange(star)}
                                         />
                                     ))}
@@ -172,14 +173,19 @@ export default function ProductDetailPage() {
     const isPlugin = 'price' in item;
 
     return (
-        <div className="flex min-h-screen flex-col bg-background text-foreground">
+        <div className="flex min-h-screen flex-col bg-slate-50 text-slate-900">
             <Header />
-            <main className="flex-1 pt-24">
+            <main className="flex-1 pt-24 bg-white">
                 <div className="container mx-auto px-4 md:px-6 py-12">
-                    <div className="grid md:grid-cols-2 gap-8 lg:gap-16 items-start">
-                        {/* Left Column: Image/Video */}
-                        <div className="space-y-8 sticky top-28">
-                            <div className="aspect-video w-full overflow-hidden rounded-lg border">
+                    <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-start">
+                        
+                        <div className="space-y-4 sticky top-28">
+                             <div className="relative aspect-video w-full overflow-hidden rounded-lg shadow-lg">
+                                 {isPlugin && item.discount && (
+                                     <Badge variant="destructive" className="absolute top-4 right-4 z-10 text-base">
+                                         {item.discount}
+                                     </Badge>
+                                 )}
                                 <Image
                                     src={item.image}
                                     alt={item.name}
@@ -189,45 +195,43 @@ export default function ProductDetailPage() {
                                     data-ai-hint={item.dataAiHint}
                                 />
                             </div>
-                            {item.installVideo && (
-                                <div>
-                                    <h2 className="text-2xl font-bold font-headline mb-4">How to Install</h2>
-                                    <div className="aspect-video w-full overflow-hidden rounded-lg border">
-                                        <video src={item.installVideo} controls className="w-full h-full object-cover" />
-                                    </div>
-                                </div>
-                            )}
                         </div>
 
-                        {/* Right Column: Details */}
+                        
                         <div className="space-y-6">
                             <div className="space-y-3">
-                                <h1 className="text-4xl lg:text-5xl font-bold font-headline text-primary">{item.name}</h1>
+                                <h1 className="text-4xl lg:text-5xl font-bold font-headline text-slate-800">{item.name}</h1>
                                 {isPlugin && (
-                                     <div className="flex items-center gap-4">
-                                        <StarRating rating={item.rating} count={item.reviews} />
-                                        <div className="flex items-center gap-2 text-sm">
-                                            <Apple className="h-4 w-4" /> {item.platform}
+                                     <div className="flex items-center gap-4 flex-wrap">
+                                         <div className="flex items-center gap-2 text-sm text-slate-600 font-medium">
+                                            {item.platform === 'Mac & Windows' ? <Check className="h-5 w-5 text-green-600" /> : <Apple className="h-4 w-4" />} {item.platform}
                                         </div>
+                                        <StarRating rating={item.rating} count={item.reviews} size="h-5 w-5" />
                                      </div>
                                 )}
-                                <p className="text-base text-muted-foreground">
+                                <p className="text-base text-slate-600">
                                     {'longDescription' in item ? item.longDescription : item.description}
                                 </p>
                             </div>
 
                             {isPlugin && (
-                                <Card className="bg-card/50">
-                                    <CardContent className="p-6">
-                                        <div className="flex items-baseline justify-center gap-2 mb-4">
-                                            <span className="text-4xl font-bold text-primary">₹{item.price}</span>
-                                            <span className="text-lg text-muted-foreground line-through">₹{item.originalPrice}</span>
-                                             <Badge variant="destructive" className="text-xs">{item.discount}</Badge>
-                                        </div>
-                                        <Button size="lg" className="w-full font-bold">Buy Now</Button>
-                                        <p className="text-xs text-muted-foreground mt-2 text-center">Secure payment. Instant download.</p>
-                                    </CardContent>
-                                </Card>
+                                <Alert className="bg-amber-50 border-amber-200 text-amber-800">
+                                    <TriangleAlert className="h-4 w-4 !text-amber-500" />
+                                    <AlertTitle className="font-bold !text-amber-900">Important</AlertTitle>
+                                    <AlertDescription className="text-amber-800">
+                                    If the payment page doesn't load, press Cmd + Shift + R (Mac) or Ctrl + Shift + R (Windows) to force a refresh.
+                                    </AlertDescription>
+                                </Alert>
+                            )}
+
+                            {isPlugin && (
+                                <div className="space-y-4">
+                                     <div className="flex items-baseline gap-4">
+                                        <span className="text-5xl font-bold text-slate-800">₹{item.price}</span>
+                                        <span className="text-2xl text-slate-400 line-through">₹{item.originalPrice}</span>
+                                    </div>
+                                    <Button size="lg" className="w-full font-bold bg-orange-500 hover:bg-orange-600 text-white text-lg py-6">Buy Now</Button>
+                                </div>
                             )}
 
                             {!isPlugin && (
@@ -235,65 +239,74 @@ export default function ProductDetailPage() {
                                     <a href="#support">Contact Support</a>
                                 </Button>
                             )}
-
-                            <Separator className="my-8" />
-                            
-                             <div className="space-y-8">
-                                <h2 className="text-3xl font-bold font-headline">Reviews & Ratings</h2>
-                                {reviews.map(review => (
-                                    <div key={review.id}>
-                                        <div className="flex items-start gap-4">
-                                            <Avatar>
-                                                <AvatarImage src={review.avatar} />
-                                                <AvatarFallback>{review.author.charAt(0)}</AvatarFallback>
-                                            </Avatar>
-                                            <div className="flex-1">
-                                                <div className="flex items-center justify-between">
-                                                    <div>
-                                                        <p className="font-semibold">{review.author}</p>
-                                                        <p className="text-xs text-muted-foreground">{review.date}</p>
-                                                    </div>
-                                                    <StarRating rating={review.rating} size="h-4 w-4" />
-                                                </div>
-                                                <p className="mt-2 text-muted-foreground">{review.content}</p>
-                                            </div>
-                                        </div>
-                                        {review.reply && (
-                                            <div className="mt-4 pl-10 ml-4 border-l border-border">
-                                                <div className="flex items-start gap-4 pl-4">
-                                                    <Avatar className="w-8 h-8">
-                                                        <AvatarFallback>DKD</AvatarFallback>
-                                                    </Avatar>
-                                                    <div className="flex-1">
-                                                        <div className="flex items-center justify-between">
-                                                            <div>
-                                                                <p className="font-semibold text-primary">{review.reply.author}</p>
-                                                                <p className="text-xs text-muted-foreground">{review.reply.date}</p>
-                                                            </div>
-                                                        </div>
-                                                        <p className="mt-2 text-muted-foreground">{review.reply.content}</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        )}
-                                    </div>
-                                ))}
-                             </div>
-                             
-                            <Separator className="my-8" />
-
-                             <Card className="sticky top-28" id="support">
-                                <CardHeader>
-                                    <CardTitle className="font-headline text-2xl">Leave a Review</CardTitle>
-                                    <CardDescription>Share your experience with others.</CardDescription>
-                                </CardHeader>
-                                <CardContent>
-                                    <ReviewForm itemName={item.name} />
-                                </CardContent>
-                            </Card>
-
                         </div>
                     </div>
+                     
+                    <Separator className="my-12" />
+
+                    <div className="max-w-4xl mx-auto">
+                        {item.installVideo && (
+                            <div className="mb-12">
+                                <h2 className="text-3xl font-bold font-headline mb-6 text-center text-slate-800">How to Install</h2>
+                                <div className="aspect-video w-full overflow-hidden rounded-lg border shadow-lg">
+                                    <video src={item.installVideo} controls className="w-full h-full object-cover" />
+                                </div>
+                            </div>
+                        )}
+
+                        <div className="space-y-8 mb-12">
+                            <h2 className="text-3xl font-bold font-headline text-center text-slate-800">Reviews & Ratings</h2>
+                            {reviews.map(review => (
+                                <div key={review.id} className="bg-white p-6 rounded-lg border">
+                                    <div className="flex items-start gap-4">
+                                        <Avatar>
+                                            <AvatarImage src={review.avatar} />
+                                            <AvatarFallback>{review.author.charAt(0)}</AvatarFallback>
+                                        </Avatar>
+                                        <div className="flex-1">
+                                            <div className="flex items-center justify-between">
+                                                <div>
+                                                    <p className="font-semibold text-slate-800">{review.author}</p>
+                                                    <p className="text-xs text-slate-500">{review.date}</p>
+                                                </div>
+                                                <StarRating rating={review.rating} size="h-4 w-4" />
+                                            </div>
+                                            <p className="mt-2 text-slate-600">{review.content}</p>
+                                        </div>
+                                    </div>
+                                    {review.reply && (
+                                        <div className="mt-4 pl-10 ml-4 border-l border-slate-200">
+                                            <div className="flex items-start gap-4 pl-4">
+                                                <Avatar className="w-8 h-8">
+                                                    <AvatarFallback>DKD</AvatarFallback>
+                                                </Avatar>
+                                                <div className="flex-1">
+                                                    <div className="flex items-center justify-between">
+                                                        <div>
+                                                            <p className="font-semibold text-primary">{review.reply.author}</p>
+                                                            <p className="text-xs text-slate-500">{review.reply.date}</p>
+                                                        </div>
+                                                    </div>
+                                                    <p className="mt-2 text-slate-600">{review.reply.content}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+                        
+                        <Card className="sticky top-28 bg-white" id="support">
+                            <CardHeader>
+                                <CardTitle className="font-headline text-2xl text-slate-800">Leave a Review</CardTitle>
+                                <CardDescription>Share your experience with others.</CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                                <ReviewForm itemName={item.name} />
+                            </CardContent>
+                        </Card>
+                    </div>
+
                      <div className="text-center mt-16">
                         <Button asChild variant="outline" size="lg">
                             <Link href="/store">

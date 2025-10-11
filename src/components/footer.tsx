@@ -16,7 +16,6 @@ const navLinks = [
     { name: "Services", href: "/#services" },
     { name: "Store", href: "/store" },
     { name: "Pricing", href: "/pricing" },
-    { name: "Contact", href: "/#contact" },
 ];
 
 
@@ -80,16 +79,11 @@ export function Footer() {
                 <li><Link href="/services/video-editing" className="text-sm text-muted-foreground hover:text-primary transition-colors">Video Editing</Link></li>
                 <li><Link href="/services/photo-editing" className="text-sm text-muted-foreground hover:text-primary transition-colors">Photo Editing</Link></li>
                 <li><Link href="/services/ai-chatbot" className="text-sm text-muted-foreground hover:text-primary transition-colors">AI Chatbots</Link></li>
-              </ul>
-            </div>
-             <div>
-              <h4 className="font-semibold font-headline mb-4">Contact</h4>
-              <ul className="space-y-3">
-                <li>
-                  <a href="mailto:dkd04522@gmail.com" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    dkd04522@gmail.com
-                  </a>
-                </li>
+                 <li>
+                    <Link href="/#contact" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                        Contact
+                    </Link>
+                  </li>
               </ul>
             </div>
           </div>

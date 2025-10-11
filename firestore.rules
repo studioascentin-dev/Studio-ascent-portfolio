@@ -1,32 +1,30 @@
 /**
- * @fileoverview Firestore Security Rules for the portfolio application.
- *
- * Core Philosophy:
- * This ruleset provides public read access to projects and categories,
- * while restricting write access to prevent unauthorized data modification.
- * Contact and Support Request submissions are allowed from any source.
+ * @file Firestore Security Rules
+ * @description This ruleset enforces a public read-only model for 'projects' and 'categories',
+ * allowing anyone to read project and category details. Writes to 'projects' and 'categories' are not allowed.
+ * 'contacts' and 'supportRequests' collections only allows create operation.
  *
  * Data Structure:
- * - /projects/{projectId}: Stores project information. Publicly readable.
- * - /categories/{categoryId}: Stores category information. Publicly readable.
- * - /contacts/{contactId}: Stores contact form submissions. Publicly writable.
- * - /supportRequests/{supportRequestId}: Stores support requests. Publicly writable.
+ * - /projects/{projectId}: Stores project details.
+ * - /categories/{categoryId}: Stores service category details.
+ * - /contacts/{contactId}: Stores contact form submissions from the homepage.
+ * - /supportRequests/{supportRequestId}: Stores support requests for payment issues.
  *
  * Key Security Decisions:
- * - Projects and Categories: Publicly readable to showcase portfolio items.
- * - Contacts and Support Requests: Publicly writable to allow form submissions.
- * - No user authentication or ownership is enforced in this version.
+ * - No user authentication or ownership is enforced in this initial prototype.
+ * - Listing of 'contacts' and 'supportRequests' is explicitly denied.
+ * - The ruleset prioritizes simplicity and assumes no user-specific data segregation.
  */
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
     /**
-     * @description Allows public read access to project details. Only admins can modify project data.
+     * @description Allows anyone to read project details, but restricts all write operations.
      * @path /projects/{projectId}
-     * @allow get, list: Anyone can read project data.
-     * @deny create, update, delete: No one can create, update, or delete project data.
-     * @principle Allows public read access while restricting write access.
+     * @allow (get, list) - Any user can read project details.
+     * @deny (create, update, delete) - No one can create, update, or delete projects.
+     * @principle Public read, no writes allowed.
      */
     match /projects/{projectId} {
       allow get, list: if true;
@@ -34,11 +32,11 @@ service cloud.firestore {
     }
 
     /**
-     * @description Allows public read access to service category details. Only admins can modify category data.
+     * @description Allows anyone to read service category details, but restricts all write operations.
      * @path /categories/{categoryId}
-     * @allow get, list: Anyone can read category data.
-     * @deny create, update, delete: No one can create, update, or delete category data.
-     * @principle Allows public read access while restricting write access.
+     * @allow (get, list) - Any user can read category details.
+     * @deny (create, update, delete) - No one can create, update, or delete categories.
+     * @principle Public read, no writes allowed.
      */
     match /categories/{categoryId} {
       allow get, list: if true;
@@ -46,11 +44,11 @@ service cloud.firestore {
     }
 
     /**
-     * @description Allows anyone to submit a contact form.
+     * @description Allows anyone to create a contact form submission, but restricts all read, update, and delete operations.
      * @path /contacts/{contactId}
-     * @allow create: Anyone can submit a contact form.
-     * @deny get, list, update, delete: Not allowed.
-     * @principle Allows open write access for contact form submissions.
+     * @allow (create) - Any user can submit a contact form.
+     * @deny (get, list, update, delete) - No one can read, list, update, or delete contact submissions.
+     * @principle Public create, no read, update, or delete access.
      */
     match /contacts/{contactId} {
       allow create: if true;
@@ -58,11 +56,11 @@ service cloud.firestore {
     }
 
     /**
-     * @description Allows anyone to submit a support request.
+     * @description Allows anyone to create a support request, but restricts all read, update, and delete operations.
      * @path /supportRequests/{supportRequestId}
-     * @allow create: Anyone can submit a support request.
-     * @deny get, list, update, delete: Not allowed.
-     * @principle Allows open write access for support requests.
+     * @allow (create) - Any user can submit a support request.
+     * @deny (get, list, update, delete) - No one can read, list, update, or delete support requests.
+     * @principle Public create, no read, update, or delete access.
      */
     match /supportRequests/{supportRequestId} {
       allow create: if true;

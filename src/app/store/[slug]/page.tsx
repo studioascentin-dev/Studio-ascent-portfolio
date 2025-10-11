@@ -23,8 +23,9 @@ import { useToast } from '@/hooks/use-toast';
 import { Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { useFirestore, addDocumentNonBlocking } from '@/firebase';
+import { useFirestore, useStorage, addDocumentNonBlocking } from '@/firebase';
 import { collection, serverTimestamp } from 'firebase/firestore';
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 
 const StarRating = ({ rating, count, size = 'h-5 w-5' }: { rating: number, count?: number, size?: string }) => {
@@ -172,7 +173,7 @@ const supportFormSchema = z.object({
   email: z.string().email({ message: 'Please enter a valid email address.' }),
   whatsapp: z.string().optional(),
   paymentId: z.string().min(1, { message: 'Payment ID is required.' }),
-  paymentScreenshot: z.any().optional(), // In a real app, you'd have more specific validation
+  paymentScreenshot: z.instanceof(FileList).refine(files => files?.length > 0, 'Screenshot is required.'),
   message: z.string().min(10, { message: 'Please describe your issue in at least 10 characters.' }),
 });
 
@@ -183,6 +184,7 @@ const SupportForm = ({productName}: {productName: string}) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [fileName, setFileName] = useState('');
   const firestore = useFirestore();
+  const storage = useStorage();
 
   const form = useForm<SupportFormValues>({
     resolver: zodResolver(supportFormSchema),
@@ -195,37 +197,50 @@ const SupportForm = ({productName}: {productName: string}) => {
     },
   });
 
-  const onSubmit: (data: SupportFormValues) => void = async (data) => {
-    setIsSubmitting(true);
-    
-    try {
-      // We don't handle file uploads yet, so we omit paymentScreenshot
-      const { paymentScreenshot, ...supportData } = data;
-      const supportCollection = collection(firestore, 'supportRequests');
+    const onSubmit = async (data: SupportFormValues) => {
+        setIsSubmitting(true);
+        try {
+            const screenshotFile = data.paymentScreenshot[0];
+            const storageRef = ref(storage, `support-screenshots/${Date.now()}_${screenshotFile.name}`);
+            
+            const uploadResult = await uploadBytes(storageRef, screenshotFile);
+            const screenshotUrl = await getDownloadURL(uploadResult.ref);
 
-      addDocumentNonBlocking(supportCollection, {
-        ...supportData,
-        productName,
-        createdAt: serverTimestamp(),
-      });
+            const { paymentScreenshot, ...supportData } = data;
+            const supportCollection = collection(firestore, 'supportRequests');
 
-      toast({
-        title: 'Support Request Submitted',
-        description: 'We have received your request and will get back to you within 24 hours.',
-      });
-      form.reset();
-      setFileName('');
-    } catch (error) {
-      console.error("Failed to send support request:", error);
-      toast({
-        variant: "destructive",
-        title: "Submission Failed",
-        description: "Something went wrong. Please try again.",
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+            addDocumentNonBlocking(supportCollection, {
+                ...supportData,
+                screenshotUrl,
+                productName,
+                createdAt: serverTimestamp(),
+            });
+
+            toast({
+                title: 'Support Request Submitted',
+                description: 'We have received your request and will get back to you within 24 hours.',
+            });
+            form.reset();
+            setFileName('');
+        } catch (error: any) {
+            console.error("Failed to send support request:", error);
+            
+            let description = "Something went wrong. Please try again.";
+            if (error.code === 'storage/unauthorized') {
+                description = "You don't have permission to upload files. Please check storage rules."
+            } else if (error.code === 'storage/canceled') {
+                description = "File upload was canceled."
+            }
+
+            toast({
+                variant: "destructive",
+                title: "Submission Failed",
+                description: description,
+            });
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
   
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -233,7 +248,7 @@ const SupportForm = ({productName}: {productName: string}) => {
       form.setValue('paymentScreenshot', e.target.files);
     } else {
       setFileName('');
-      form.setValue('paymentScreenshot', null);
+      form.setValue('paymentScreenshot', undefined);
     }
   };
 
@@ -304,7 +319,7 @@ const SupportForm = ({productName}: {productName: string}) => {
                 <FormField
                     control={form.control}
                     name="paymentScreenshot"
-                    render={({ field }) => (
+                    render={({ field: { onChange, ...fieldProps }}) => (
                         <FormItem>
                         <FormLabel>Payment Screenshot</FormLabel>
                         <FormControl>
@@ -314,6 +329,7 @@ const SupportForm = ({productName}: {productName: string}) => {
                             <input 
                                 type="file" 
                                 className="sr-only" 
+                                {...fieldProps}
                                 onChange={handleFileChange}
                                 accept="image/*"
                                 aria-label="Upload payment screenshot"

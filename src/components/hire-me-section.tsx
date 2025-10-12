@@ -2,7 +2,7 @@
 "use client";
 
 import { motion } from 'framer-motion';
-import { Award, MessageSquare, Target } from 'lucide-react';
+import { Award, MessageSquare, Target, Clock } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { ContactForm } from './contact-form';
 
@@ -75,27 +75,18 @@ export function HireMeSection() {
                 </div>
                 
                 <motion.div 
-                    variants={sectionVariants} 
-                    className="mt-12 md:mt-16 grid md:grid-cols-3 gap-6 md:gap-8 max-w-5xl mx-auto"
+                    variants={itemVariants} 
+                    className="mt-12 md:mt-16 max-w-3xl mx-auto"
                 >
-                    {hiringPoints.map((point, index) => (
-                        <motion.div key={index} variants={itemVariants} className="group">
-                             <Card className="bg-background/50 backdrop-blur-sm border p-6 text-center h-full hover:-translate-y-2 transition-all duration-300 hover:bg-primary/5 hover:border-primary">
-                                <CardHeader className="p-0 items-center mb-4">
-                                    <div className="p-3 bg-primary/10 rounded-full mb-4 inline-block">
-                                        {point.icon}
-                                    </div>
-                                    <CardTitle className="font-headline text-lg md:text-xl">{point.title}</CardTitle>
-                                </CardHeader>
-                                <CardContent className="p-0">
-                                    <p className="text-muted-foreground text-sm">{point.description}</p>
-                                </CardContent>
-                            </Card>
-                        </motion.div>
-                    ))}
-                </motion.div>
-
-                <motion.div variants={itemVariants} className="mt-12 md:mt-16 max-w-3xl mx-auto">
+                    <div className="bg-background/50 backdrop-blur-sm border p-6 rounded-lg mb-8 text-center">
+                        <div className="flex items-center justify-center gap-2 mb-3">
+                            <Clock className="w-5 h-5 text-primary" />
+                            <h4 className="font-headline text-lg font-semibold text-foreground">Opening Hours</h4>
+                        </div>
+                        <p className="text-muted-foreground text-sm">Mon - Sat: 8:00 AM to 9:00 PM</p>
+                        <p className="text-muted-foreground text-sm">Sunday: 10:00 AM to 6:00 PM</p>
+                        <p className="text-primary text-xs mt-2 font-medium">For a faster reply, please message during opening hours.</p>
+                    </div>
                     <ContactForm />
                 </motion.div>
 

@@ -36,9 +36,9 @@ const sendEmailFlow = ai.defineFlow(
         const resend = new Resend(process.env.RESEND_API_KEY);
         
         await resend.emails.send({
-          from: 'onboarding@resend.dev', // Must be a verified domain on Resend
-          to: 'your-email@example.com', // Your email address to receive notifications
-          subject: `New Contact Form Submission - ${data.service}`,
+          from: 'Studio Ascent Contact <onboarding@resend.dev>', // Must be a verified domain on Resend
+          to: 'your-email@example.com', // <--- IMPORTANT: Change this to your actual email address
+          subject: `New Inquiry via Contact Form: ${data.service}`,
           react: ContactFormEmail({ 
               name: data.name, 
               email: data.email, 

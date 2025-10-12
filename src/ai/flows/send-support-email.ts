@@ -38,8 +38,8 @@ const sendSupportEmailFlow = ai.defineFlow(
         const resend = new Resend(process.env.RESEND_API_KEY);
         
         await resend.emails.send({
-          from: 'onboarding@resend.dev', // Must be a verified domain on Resend
-          to: 'your-email@example.com',   // Your email address to receive notifications
+          from: 'Studio Ascent Support <onboarding@resend.dev>', // Must be a verified domain on Resend
+          to: 'your-email@example.com',   // <--- IMPORTANT: Change this to your actual email address
           subject: `Payment Support Request - ${data.productName}`,
           react: SupportRequestEmail({ ...data }),
         });

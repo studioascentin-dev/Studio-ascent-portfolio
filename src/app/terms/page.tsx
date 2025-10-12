@@ -4,8 +4,8 @@ import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 
 export const metadata: Metadata = {
-  title: 'Terms of Service',
-  description: 'Read the Terms of Service for using the Studio Ascent website and services.',
+  title: 'Terms and Conditions',
+  description: 'Read the Terms and Conditions for using the Studio Ascent website and services.',
 };
 
 const LegalPageLayout = ({ title, children }: { title: string, children: React.ReactNode }) => (
@@ -25,12 +25,12 @@ const LegalPageLayout = ({ title, children }: { title: string, children: React.R
 
 export default function TermsPage() {
   return (
-    <LegalPageLayout title="Terms of Service">
+    <LegalPageLayout title="Terms and Conditions">
         <p>Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
         
         <h2>1. Introduction</h2>
         <p>
-            Welcome to Studio Ascent ("we," "our," "us"). These Terms of Service ("Terms") govern your use of our website located at [Your Website URL] (the "Site") and the services and products we provide. By accessing or using our Site, you agree to be bound by these Terms.
+            Welcome to Studio Ascent ("we," "our," "us"). These Terms and Conditions ("Terms") govern your use of our website located at [Your Website URL] (the "Site") and the services and products we provide. By accessing or using our Site, you agree to be bound by these Terms.
         </p>
 
         <h2>2. Services and Products</h2>
@@ -75,4 +75,3 @@ export default function TermsPage() {
     </LegalPageLayout>
   );
 }
-

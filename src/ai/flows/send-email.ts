@@ -33,7 +33,6 @@ const sendEmailFlow = ai.defineFlow(
           // and use an email from that domain here. e.g., 'contact@yourdomain.com'
           from: 'Studio Ascent Contact <onboarding@resend.dev>',
           // IMPORTANT: This MUST be the primary email you signed up to Resend with.
-          // Gmail aliases with '+' might not work on the free plan.
           to: 'studioascent.in+payment@gmail.com',
           subject: `[Contact Form] New Inquiry from ${data.name}`,
           react: ContactFormEmail({ 

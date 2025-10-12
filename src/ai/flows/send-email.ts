@@ -29,7 +29,7 @@ const sendEmailFlow = ai.defineFlow(
         
         await resend.emails.send({
           from: 'Studio Ascent Contact <onboarding@resend.dev>', // Must be a verified domain on Resend
-          to: 'your-email@example.com', // <--- IMPORTANT: Change this to your actual email address
+          to: 'CHANGE_THIS_TO_YOUR_EMAIL@example.com', // <--- IMPORTANT: Change this to your actual email address
           subject: `New Inquiry via Contact Form: ${data.service}`,
           react: ContactFormEmail({ 
               name: data.name, 

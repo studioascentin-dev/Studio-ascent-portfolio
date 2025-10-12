@@ -208,7 +208,7 @@ const SupportForm = ({productName}: {productName: string}) => {
         }
 
         try {
-            // 1. Save the request to Firestore
+            // 1. Save the request to Firestore (non-blocking)
             const supportCollection = collection(firestore, 'supportRequests');
             addDocumentNonBlocking(supportCollection, {
                 ...data,
@@ -216,24 +216,29 @@ const SupportForm = ({productName}: {productName: string}) => {
                 createdAt: serverTimestamp(),
             });
 
-            // 2. Send the email notification via the Genkit flow
-            await sendSupportEmail({
+            // 2. Send the email notification and wait for the result
+            const emailResult = await sendSupportEmail({
                 ...data,
                 productName,
             });
 
-            toast({
-                title: 'Support Request Submitted',
-                description: 'We have received your request and will get back to you within 24 hours.',
-            });
-            form.reset();
+            if (emailResult.success) {
+                toast({
+                    title: 'Support Request Submitted',
+                    description: 'We have received your request and will get back to you within 24 hours.',
+                });
+                form.reset();
+            } else {
+                 throw new Error(emailResult.error || 'Failed to send email.');
+            }
+
         } catch (error: any) {
             console.error("Failed to send support request:", error);
             
             toast({
                 variant: "destructive",
                 title: "Submission Failed",
-                description: "Something went wrong. Please try again.",
+                description: "Something went wrong sending the email. Please check the configuration and try again.",
             });
         } finally {
             setIsSubmitting(false);
@@ -631,5 +636,3 @@ export default function ProductDetailPage() {
         </div>
     );
 }
-
-    

@@ -29,7 +29,9 @@ const sendEmailFlow = ai.defineFlow(
         const resend = new Resend(process.env.RESEND_API_KEY);
         
         await resend.emails.send({
-          from: 'Studio Ascent Contact <onboarding@resend.dev>', // Must be a verified domain on Resend
+          // IMPORTANT: To prevent emails from going to spam, you must verify your own domain in Resend
+          // and use an email from that domain here. e.g., 'contact@yourdomain.com'
+          from: 'Studio Ascent Contact <onboarding@resend.dev>',
           to: 'studioascent.in@gmail.com', // <--- IMPORTANT: Change this to your actual email address
           subject: `New Inquiry from ${data.name}`,
           react: ContactFormEmail({ 

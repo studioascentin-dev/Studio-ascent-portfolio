@@ -1,31 +1,33 @@
 /**
- * @file Firebase Security Rules for the portfolio application.
+ * @fileoverview Firestore Security Rules for the portfolio application.
  *
  * Core Philosophy:
- * This ruleset provides open read access to projects and categories,
- * but restricts write access to prevent unauthorized modifications.
- * Contact and support request submissions are unrestricted, assuming basic spam filtering is implemented elsewhere.
+ * This ruleset provides public read access to projects and categories,
+ * while restricting write access to these collections. Contact and support
+ * requests are publicly accessible for both read and write to allow anonymous
+ * users to submit the forms.
  *
  * Data Structure:
- * - /projects/{projectId}: Stores individual project details.
- * - /categories/{categoryId}: Stores service categories.
- * - /contacts/{contactId}: Stores contact form submissions.
- * - /supportRequests/{supportRequestId}: Stores support requests.
+ * The database contains top-level collections for 'projects', 'categories',
+ * 'contacts', and 'supportRequests'.
  *
  * Key Security Decisions:
- * - Public read access for "projects" and "categories".
- * - Unrestricted access to "contacts" and "supportRequests" is allowed, because the application doesn't have any authentication.
+ * - Projects and categories are publicly readable, but writes are denied.
+ * - Contacts and support requests are publicly readable and writable.
+ *
+ * Authorization Independence: No data denormalization is needed because no
+ * collaborative features that need authorization exist.
  */
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
     /**
-     * @description Allows public read access to projects, but restricts writes.
+     * @description Grants public read access to projects while denying all writes.
      * @path /projects/{projectId}
-     * @allow get, list: Anyone can read project data.
-     * @deny create, update, delete: No one can create, update, or delete projects.
-     * @principle Grants public read access while restricting write operations.
+     * @allow (get, list): Any user can read project data.
+     * @deny (create, update, delete): No user can create, update, or delete project data.
+     * @principle Allows public read access for showcasing projects, but prevents unauthorized modifications.
      */
     match /projects/{projectId} {
       allow get, list: if true;
@@ -33,11 +35,11 @@ service cloud.firestore {
     }
 
     /**
-     * @description Allows public read access to categories, but restricts writes.
+     * @description Grants public read access to categories while denying all writes.
      * @path /categories/{categoryId}
-     * @allow get, list: Anyone can read category data.
-     * @deny create, update, delete: No one can create, update, or delete categories.
-     * @principle Grants public read access while restricting write operations.
+     * @allow (get, list): Any user can read category data.
+     * @deny (create, update, delete): No user can create, update, or delete category data.
+     * @principle Allows public read access for showcasing categories, but prevents unauthorized modifications.
      */
     match /categories/{categoryId} {
       allow get, list: if true;
@@ -45,27 +47,23 @@ service cloud.firestore {
     }
 
     /**
-     * @description Allows anyone to create contact submissions.
+     * @description Grants public read and write access to contacts.
      * @path /contacts/{contactId}
-     * @allow create: Anyone can create a contact submission.
-     * @deny get, list, update, delete: No one can read, list, update, or delete contact submissions.
-     * @principle Grants public create access while restricting other operations.
+     * @allow (get, list, create, update, delete): Any user can read, create, update, and delete contact data.
+     * @principle Allows public read and write access for contact form submissions.
      */
     match /contacts/{contactId} {
-      allow create: if true;
-      allow get, list, update, delete: if false;
+      allow get, list, create, update, delete: if true;
     }
 
     /**
-     * @description Allows anyone to create support requests.
+     * @description Grants public read and write access to support requests.
      * @path /supportRequests/{supportRequestId}
-     * @allow create: Anyone can create a support request.
-     * @deny get, list, update, delete: No one can read, list, update, or delete support requests.
-     * @principle Grants public create access while restricting other operations.
+     * @allow (get, list, create, update, delete): Any user can read, create, update, and delete support request data.
+     * @principle Allows public read and write access for support request submissions.
      */
     match /supportRequests/{supportRequestId} {
-      allow create: if true;
-      allow get, list, update, delete: if false;
+      allow get, list, create, update, delete: if true;
     }
   }
 }

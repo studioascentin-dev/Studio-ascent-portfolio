@@ -1,53 +1,62 @@
 
 'use server';
 /**
- * @fileOverview A Genkit flow for sending an email.
+ * @fileOverview A Genkit flow for sending a contact form email.
  */
 
 import { ai } from '@/ai/genkit';
 import { z } from 'genkit';
+import { Resend } from 'resend';
+import { ContactFormEmail } from '@/emails/contact-form-email';
 
-const EmailSchema = z.object({
+const ContactEmailSchema = z.object({
   name: z.string(),
   email: z.string().email(),
   service: z.string(),
   message: z.string(),
-  whatsapp: z.string().optional(),
-  paymentId: z.string().optional(),
 });
 
-type EmailData = z.infer<typeof EmailSchema>;
+type ContactEmailData = z.infer<typeof ContactEmailSchema>;
 
-// This is a placeholder flow. In a real application, you would use a service
-// like Resend, SendGrid, or Nodemailer to actually send the email.
+
 const sendEmailFlow = ai.defineFlow(
   {
-    name: 'sendEmailFlow',
-    inputSchema: EmailSchema,
-    outputSchema: z.object({ success: z.boolean() }),
+    name: 'sendContactEmailFlow',
+    inputSchema: ContactEmailSchema,
+    outputSchema: z.object({ success: z.boolean(), error: z.string().optional() }),
   },
-  async (data: EmailData) => {
-    console.log('Received email data:', data);
-
-    // TODO: Implement actual email sending logic here.
-    // Example with Resend:
-    // const resend = new Resend(process.env.RESEND_API_KEY);
-    // await resend.emails.send({
-    //   from: 'onboarding@resend.dev',
-    //   to: 'your-email@example.com',
-    //   subject: `New Contact Form Submission - ${data.service}`,
-    //   react: EmailTemplate({ name: data.name, email: data.email, message: data.message }),
-    // });
+  async (data: ContactEmailData) => {
     
-    // Simulate a network delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    if (!process.env.RESEND_API_KEY) {
+        console.error("Resend API key is not set. Cannot send email.");
+        return { success: false, error: "Server configuration error." };
+    }
 
-    // For now, we'll just log it and return success.
-    // This flow is no longer used for the support form, but kept for reference.
-    return { success: true };
+    try {
+        const resend = new Resend(process.env.RESEND_API_KEY);
+        
+        await resend.emails.send({
+          from: 'onboarding@resend.dev', // Must be a verified domain on Resend
+          to: 'your-email@example.com', // Your email address to receive notifications
+          subject: `New Contact Form Submission - ${data.service}`,
+          react: ContactFormEmail({ 
+              name: data.name, 
+              email: data.email, 
+              service: data.service, 
+              message: data.message 
+          }),
+        });
+
+        return { success: true };
+
+    } catch (error: any) {
+        console.error("Error sending email with Resend:", error);
+        return { success: false, error: error.message || "Failed to send email." };
+    }
   }
 );
 
-export async function sendEmail(data: EmailData): Promise<{ success: boolean }> {
-  return sendEmailFlow(data);
+export async function sendEmail(data: ContactEmailData): Promise<{ success: boolean }> {
+    const result = await sendEmailFlow(data);
+    return { success: result.success };
 }

@@ -22,6 +22,7 @@ import * as React from "react";
 import { useFirestore } from "@/firebase";
 import { collection, serverTimestamp } from "firebase/firestore";
 import { addDocumentNonBlocking } from "@/firebase";
+import { sendEmail } from "@/ai/flows/send-email";
 
 
 const services = [
@@ -58,10 +59,19 @@ export function ContactForm() {
     setIsSubmitting(true);
     
     try {
+        // Save to Firestore non-blockingly
         const contactsCollection = collection(firestore, 'contacts');
         addDocumentNonBlocking(contactsCollection, {
             ...values,
             createdAt: serverTimestamp(),
+        });
+        
+        // Asynchronously send email without blocking the UI
+        sendEmail(values).then(result => {
+          if (!result.success) {
+            // Optionally, you could log this to a monitoring service
+            console.error("Failed to send contact email silently.");
+          }
         });
 
         toast({
@@ -71,7 +81,7 @@ export function ContactForm() {
 
         form.reset();
     } catch (error) {
-        console.error("Error submitting form to Firestore:", error);
+        console.error("Error submitting form:", error);
         toast({
             variant: "destructive",
             title: "Uh oh! Something went wrong.",

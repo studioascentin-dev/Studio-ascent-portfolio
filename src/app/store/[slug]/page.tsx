@@ -26,6 +26,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { useFirestore } from '@/firebase';
 import { collection, serverTimestamp } from 'firebase/firestore';
 import { addDocumentNonBlocking } from '@/firebase/non-blocking-updates';
+import { sendSupportEmail } from '@/ai/flows/send-support-email';
 
 
 const StarRating = ({ rating, count, size = 'h-5 w-5' }: { rating: number, count?: number, size?: string }) => {
@@ -207,12 +208,18 @@ const SupportForm = ({productName}: {productName: string}) => {
         }
 
         try {
+            // 1. Save the request to Firestore
             const supportCollection = collection(firestore, 'supportRequests');
-
             addDocumentNonBlocking(supportCollection, {
                 ...data,
                 productName,
                 createdAt: serverTimestamp(),
+            });
+
+            // 2. Send the email notification via the Genkit flow
+            await sendSupportEmail({
+                ...data,
+                productName,
             });
 
             toast({

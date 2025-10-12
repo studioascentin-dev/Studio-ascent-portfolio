@@ -19,9 +19,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useToast } from "@/hooks/use-toast";
 import { Loader2 } from "lucide-react";
 import * as React from "react";
-import { useFirestore } from "@/firebase";
-import { collection, serverTimestamp } from "firebase/firestore";
-import { addDocumentNonBlocking } from "@/firebase";
 import { sendEmail } from "@/ai/flows/send-email";
 
 
@@ -43,7 +40,6 @@ const formSchema = z.object({
 export function ContactForm() {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = React.useState(false);
-  const firestore = useFirestore();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -59,16 +55,6 @@ export function ContactForm() {
     setIsSubmitting(true);
     
     try {
-        // Save to Firestore non-blockingly, but don't show toast for this.
-        if (firestore) {
-            const contactsCollection = collection(firestore, 'contacts');
-            addDocumentNonBlocking(contactsCollection, {
-                ...values,
-                createdAt: serverTimestamp(),
-            });
-        }
-        
-        // Asynchronously send email and wait for the result
         const emailResult = await sendEmail(values);
         
         if (emailResult.success) {
@@ -86,7 +72,7 @@ export function ContactForm() {
         toast({
             variant: "destructive",
             title: "Uh oh! Something went wrong.",
-            description: "There was a problem sending your message. Please try again or check the server configuration.",
+            description: error.message || "There was a problem sending your message.",
         });
     } finally {
         setIsSubmitting(false);

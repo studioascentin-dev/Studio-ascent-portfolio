@@ -23,9 +23,6 @@ import { useToast } from '@/hooks/use-toast';
 import { Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { useFirestore } from '@/firebase';
-import { collection, serverTimestamp } from 'firebase/firestore';
-import { addDocumentNonBlocking } from '@/firebase/non-blocking-updates';
 import { sendSupportEmail } from '@/ai/flows/send-support-email';
 
 
@@ -182,7 +179,6 @@ type SupportFormValues = z.infer<typeof supportFormSchema>;
 const SupportForm = ({productName}: {productName: string}) => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const firestore = useFirestore();
 
   const form = useForm<SupportFormValues>({
     resolver: zodResolver(supportFormSchema),
@@ -197,26 +193,7 @@ const SupportForm = ({productName}: {productName: string}) => {
 
     const onSubmit = async (data: SupportFormValues) => {
         setIsSubmitting(true);
-        if (!firestore) {
-            toast({
-                variant: "destructive",
-                title: "Submission Failed",
-                description: "Firebase services are not available. Please try again later.",
-            });
-            setIsSubmitting(false);
-            return;
-        }
-
         try {
-            // 1. Save the request to Firestore (non-blocking)
-            const supportCollection = collection(firestore, 'supportRequests');
-            addDocumentNonBlocking(supportCollection, {
-                ...data,
-                productName,
-                createdAt: serverTimestamp(),
-            });
-
-            // 2. Send the email notification and wait for the result
             const emailResult = await sendSupportEmail({
                 ...data,
                 productName,
@@ -238,7 +215,7 @@ const SupportForm = ({productName}: {productName: string}) => {
             toast({
                 variant: "destructive",
                 title: "Submission Failed",
-                description: "Something went wrong sending the email. Please check the configuration and try again.",
+                description: error.message || "Something went wrong. Please try again.",
             });
         } finally {
             setIsSubmitting(false);

@@ -32,8 +32,9 @@ const sendEmailFlow = ai.defineFlow(
           // IMPORTANT: To prevent emails from going to spam, you must verify your own domain in Resend
           // and use an email from that domain here. e.g., 'contact@yourdomain.com'
           from: 'Studio Ascent Contact <onboarding@resend.dev>',
-          // IMPORTANT: Change this to the email you signed up for Resend with.
-          to: 'studioascent.in+contact@gmail.com', // <--- IMPORTANT: This MUST be the email you signed up to Resend with.
+          // IMPORTANT: This MUST be the primary email you signed up to Resend with.
+          // Gmail aliases with '+' might not work on the free plan.
+          to: 'studioascent.in+payment@gmail.com',
           subject: `[Contact Form] New Inquiry from ${data.name}`,
           react: ContactFormEmail({ 
               name: data.name, 

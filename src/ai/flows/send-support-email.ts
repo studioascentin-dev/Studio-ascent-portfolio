@@ -19,32 +19,4 @@ const sendSupportEmailFlow = ai.defineFlow(
   },
   async (data: SupportEmailData) => {
     
-    if (!process.env.RESEND_API_KEY) {
-        const errorMsg = "Resend API key is not set. Cannot send email.";
-        console.error(errorMsg);
-        return { success: false, error: "Server configuration error." };
-    }
-
-    try {
-        const resend = new Resend(process.env.RESEND_API_KEY);
-        
-        await resend.emails.send({
-          from: 'Studio Ascent Support <onboarding@resend.dev>', // Must be a verified domain on Resend
-          // IMPORTANT: This MUST be the primary email you signed up to Resend with.
-          to: 'studioascent.in+payment@gmail.com',
-          subject: `[Payment Support] Request for ${data.productName}`,
-          react: SupportRequestEmail({ ...data }),
-        });
-
-        return { success: true };
-
-    } catch (error: any) {
-        console.error("Error sending support email with Resend:", error);
-        return { success: false, error: error.message || "Failed to send email." };
-    }
-  }
-);
-
-export async function sendSupportEmail(data: SupportEmailData): Promise<{ success: boolean; error?: string }> {
-  return sendSupportEmailFlow(data);
-}
+    if (!process.env.RESEND_API_KEY)

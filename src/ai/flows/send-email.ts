@@ -1,4 +1,3 @@
-
 'use server';
 /**
  * @fileOverview A Genkit flow for sending a contact form email.
@@ -33,7 +32,7 @@ const sendEmailFlow = ai.defineFlow(
           // and use an email from that domain here. e.g., 'contact@yourdomain.com'
           from: 'Studio Ascent Contact <onboarding@resend.dev>',
           // IMPORTANT: This MUST be the primary email you signed up to Resend with.
-          to: 'studioascent.in+payment@gmail.com',
+          to: 'studioascent.in@gmail.com',
           subject: `[Contact Form] New Inquiry from ${data.name}`,
           react: ContactFormEmail({ 
               name: data.name, 

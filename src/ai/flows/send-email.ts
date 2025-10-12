@@ -8,15 +8,7 @@ import { ai } from '@/ai/genkit';
 import { z } from 'genkit';
 import { Resend } from 'resend';
 import { ContactFormEmail } from '@/emails/contact-form-email';
-
-const ContactEmailSchema = z.object({
-  name: z.string(),
-  email: z.string().email(),
-  service: z.string(),
-  message: z.string(),
-});
-
-type ContactEmailData = z.infer<typeof ContactEmailSchema>;
+import { ContactEmailSchema, type ContactEmailData } from '@/ai/flows/types';
 
 
 const sendEmailFlow = ai.defineFlow(

@@ -8,17 +8,8 @@ import { ai } from '@/ai/genkit';
 import { z } from 'genkit';
 import { Resend } from 'resend';
 import { SupportRequestEmail } from '@/emails/support-request-email';
+import { SupportEmailSchema, type SupportEmailData } from '@/ai/flows/types';
 
-export const SupportEmailSchema = z.object({
-  name: z.string(),
-  email: z.string().email(),
-  whatsapp: z.string().optional(),
-  paymentId: z.string(),
-  productName: z.string(),
-  message: z.string(),
-});
-
-export type SupportEmailData = z.infer<typeof SupportEmailSchema>;
 
 const sendSupportEmailFlow = ai.defineFlow(
   {

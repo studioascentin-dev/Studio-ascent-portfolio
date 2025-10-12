@@ -59,33 +59,34 @@ export function ContactForm() {
     setIsSubmitting(true);
     
     try {
-        // Save to Firestore non-blockingly
-        const contactsCollection = collection(firestore, 'contacts');
-        addDocumentNonBlocking(contactsCollection, {
-            ...values,
-            createdAt: serverTimestamp(),
-        });
+        // Save to Firestore non-blockingly, but don't show toast for this.
+        if (firestore) {
+            const contactsCollection = collection(firestore, 'contacts');
+            addDocumentNonBlocking(contactsCollection, {
+                ...values,
+                createdAt: serverTimestamp(),
+            });
+        }
         
-        // Asynchronously send email without blocking the UI
-        sendEmail(values).then(result => {
-          if (!result.success) {
-            // Optionally, you could log this to a monitoring service
-            console.error("Failed to send contact email silently.");
-          }
-        });
+        // Asynchronously send email and wait for the result
+        const emailResult = await sendEmail(values);
+        
+        if (emailResult.success) {
+            toast({
+                title: "Message Sent!",
+                description: "Thanks for reaching out. I'll get back to you soon.",
+            });
+            form.reset();
+        } else {
+            throw new Error(emailResult.error || "Failed to send email.");
+        }
 
-        toast({
-            title: "Message Sent!",
-            description: "Thanks for reaching out. I'll get back to you soon.",
-        });
-
-        form.reset();
-    } catch (error) {
+    } catch (error: any) {
         console.error("Error submitting form:", error);
         toast({
             variant: "destructive",
             title: "Uh oh! Something went wrong.",
-            description: "There was a problem sending your message. Please try again.",
+            description: "There was a problem sending your message. Please try again or check the server configuration.",
         });
     } finally {
         setIsSubmitting(false);

@@ -5,7 +5,7 @@
  */
 
 import { ai } from '@/ai/genkit';
-import { z } from 'genkit';
+import { z } from 'zod';
 import { Resend } from 'resend';
 import { ContactFormEmail } from '@/emails/contact-form-email';
 import { ContactEmailSchema, type ContactEmailData } from '@/ai/flows/types';
@@ -20,7 +20,8 @@ const sendEmailFlow = ai.defineFlow(
   async (data: ContactEmailData) => {
     
     if (!process.env.RESEND_API_KEY) {
-        console.error("Resend API key is not set. Cannot send email.");
+        const errorMsg = "Resend API key is not set. Cannot send email.";
+        console.error(errorMsg);
         return { success: false, error: "Server configuration error." };
     }
 
@@ -29,8 +30,8 @@ const sendEmailFlow = ai.defineFlow(
         
         await resend.emails.send({
           from: 'Studio Ascent Contact <onboarding@resend.dev>', // Must be a verified domain on Resend
-          to: 'CHANGE_THIS_TO_YOUR_EMAIL@example.com', // <--- IMPORTANT: Change this to your actual email address
-          subject: `New Inquiry via Contact Form: ${data.service}`,
+          to: 'studioascent.in@gmail.com', // <--- IMPORTANT: Change this to your actual email address
+          subject: `New Inquiry from ${data.name}`,
           react: ContactFormEmail({ 
               name: data.name, 
               email: data.email, 
@@ -48,7 +49,6 @@ const sendEmailFlow = ai.defineFlow(
   }
 );
 
-export async function sendEmail(data: ContactEmailData): Promise<{ success: boolean }> {
-    const result = await sendEmailFlow(data);
-    return { success: result.success };
+export async function sendEmail(data: ContactEmailData): Promise<{ success: boolean; error?: string }> {
+    return sendEmailFlow(data);
 }

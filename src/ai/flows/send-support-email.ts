@@ -5,7 +5,7 @@
  */
 
 import { ai } from '@/ai/genkit';
-import { z } from 'genkit';
+import { z } from 'zod';
 import { Resend } from 'resend';
 import { SupportRequestEmail } from '@/emails/support-request-email';
 import { SupportEmailSchema, type SupportEmailData } from '@/ai/flows/types';
@@ -30,7 +30,7 @@ const sendSupportEmailFlow = ai.defineFlow(
         
         await resend.emails.send({
           from: 'Studio Ascent Support <onboarding@resend.dev>', // Must be a verified domain on Resend
-          to: 'CHANGE_THIS_TO_YOUR_EMAIL@example.com',   // <--- IMPORTANT: Change this to your actual email address
+          to: 'studioascent.in@gmail.com',   // <--- IMPORTANT: Change this to your actual email address
           subject: `Payment Support Request - ${data.productName}`,
           react: SupportRequestEmail({ ...data }),
         });

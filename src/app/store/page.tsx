@@ -247,7 +247,7 @@ export default function StorePage() {
                   <AfterEffectsIcon className="w-8 h-8 md:w-9 md:h-9" />
                   After Effects Plugins
                 </motion.h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                   {storeItems.plugins.map((item) => (
                     <StoreItemCard key={item.slug} item={item} />
                   ))}
@@ -261,7 +261,7 @@ export default function StorePage() {
                 <motion.h2 variants={itemVariants} id={`${category}-heading`} className="text-3xl md:text-4xl font-bold font-headline mb-8 capitalize text-center">
                   {category === 'templates' ? 'Templates' : 'Applications'}
                 </motion.h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                   {items.map((item: any) => (
                     <StoreItemCard key={item.slug} item={item} />
                   ))}

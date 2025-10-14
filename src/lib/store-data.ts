@@ -55,7 +55,7 @@ export const storeItems = {
       discount: '90% OFF',
       platform: 'Mac Only',
       paymentLink: 'https://rzp.io/rzp/jerryflow',
-      installVideo: '/videos/installation of jerry flow.mp4',
+      installVideo: '/videos/installation of jerryflow.mp4',
        details: {
         fileSize: '15.8 MB',
         installation: 'The dedicated installation video is already below. Make sure to follow the instruction carefully.',

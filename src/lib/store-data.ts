@@ -34,7 +34,7 @@ export const storeItems = {
       originalPrice: 3499,
       discount: '97% OFF',
       platform: 'Mac Only',
-      installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+      installVideo: '/videos/installation of Sapphire.mp4',
       details: {
         fileSize: '1.2 GB',
         installation: 'The dedicated installation video is already below. Make sure to follow the instruction carefully.',

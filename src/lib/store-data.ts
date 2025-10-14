@@ -4,7 +4,7 @@ export const storeItems = {
     { 
       slug: 'shadow-studio-2',
       name: 'Shadow Studio 2', 
-      image: 'https://picsum.photos/seed/shadow-studio-2/600/400', 
+      image: '/images/shadows2.png', 
       dataAiHint: '3d text effect',
       reviews: 82,
       rating: 5,
@@ -24,7 +24,7 @@ export const storeItems = {
     { 
       slug: 'sapphire-ae-install',
       name: 'Sapphire AE Install', 
-      image: 'https://picsum.photos/seed/sapphire/600/400', 
+      image: '/images/saffire.png', 
       dataAiHint: 'vfx plugins',
       reviews: 105,
       rating: 5,
@@ -44,7 +44,7 @@ export const storeItems = {
     { 
       slug: 'jerryflow',
       name: 'JerryFlow', 
-      image: 'https://picsum.photos/seed/jerryflow/600/400', 
+      image: '/images/jerryflow.png', 
       dataAiHint: 'animation curves',
       reviews: 34,
       rating: 5,
@@ -65,7 +65,7 @@ export const storeItems = {
     { 
       slug: 'twixtor-pro',
       name: 'Twixtor Pro', 
-      image: 'https://picsum.photos/seed/twixtor/600/400', 
+      image: '/images/twixtor.png', 
       dataAiHint: 'slow motion effect',
       reviews: 78,
       rating: 4,
@@ -86,7 +86,7 @@ export const storeItems = {
     { 
       slug: 'gaussian-splatting',
       name: 'Gaussian Splatting', 
-      image: 'https://picsum.photos/seed/splatting/600/400', 
+      image: '/images/gaussiansplatting.png', 
       dataAiHint: '3d rendering plugin',
       reviews: 12,
       rating: 5,
@@ -106,7 +106,7 @@ export const storeItems = {
     { 
       slug: 'shadow-studio-3',
       name: 'Shadow Studio 3', 
-      image: 'https://picsum.photos/seed/shadow-studio-3/600/400', 
+      image: '/images/shadows3.png', 
       dataAiHint: '3d text effect',
       reviews: 41,
       rating: 5,
@@ -127,7 +127,7 @@ export const storeItems = {
     { 
       slug: 'deep-glow-2',
       name: 'Deep Glow 2', 
-      image: 'https://picsum.photos/seed/deepglow2/600/400', 
+      image: '/images/deepglow2.png', 
       dataAiHint: 'neon glow effect',
       reviews: 66,
       rating: 4,
@@ -147,7 +147,7 @@ export const storeItems = {
     { 
       slug: 'element-3d',
       name: 'Element 3D', 
-      image: 'https://picsum.photos/seed/element3d/600/400', 
+      image: '/images/element3d.png', 
       dataAiHint: '3d model engine',
       reviews: 95,
       rating: 4,

@@ -6,7 +6,7 @@ import { storeItems } from '@/lib/store-data';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { Button } from '@/components/ui/button';
-import { Star, Check, Apple, ArrowLeft, TriangleAlert, Download, Info, MessageSquare, Wallet, Lock } from 'lucide-react';
+import { Star, Check, Apple, ArrowLeft, TriangleAlert, Download, Info, MessageSquare, Wallet, Lock, Trash2 } from 'lucide-react';
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -74,19 +74,20 @@ const ReplyForm = ({ onReply, onCancel }: { onReply: (data: z.infer<typeof reply
     );
 };
 
+const reviewFormSchema = z.object({
+    name: z.string().min(2, { message: "Name must be at least 2 characters." }),
+    rating: z.coerce.number().min(1, { message: "Please select a rating." }).max(5),
+    review: z.string().min(10, { message: "Review must be at least 10 characters." }),
+});
 
-const ReviewForm = ({ itemName }: { itemName: string }) => {
+type ReviewFormValues = z.infer<typeof reviewFormSchema>;
+
+const ReviewForm = ({ itemName, onReviewSubmit }: { itemName: string, onReviewSubmit: (data: ReviewFormValues) => void }) => {
     const { toast } = useToast();
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const formSchema = z.object({
-        name: z.string().min(2, { message: "Name must be at least 2 characters." }),
-        rating: z.coerce.number().min(1, { message: "Please select a rating." }).max(5),
-        review: z.string().min(10, { message: "Review must be at least 10 characters." }),
-    });
-
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
+    const form = useForm<ReviewFormValues>({
+        resolver: zodResolver(reviewFormSchema),
         defaultValues: {
             name: "",
             rating: 0,
@@ -94,13 +95,12 @@ const ReviewForm = ({ itemName }: { itemName: string }) => {
         },
     });
 
-    async function onSubmit(values: z.infer<typeof formSchema>) {
+    async function onSubmit(values: ReviewFormValues) {
         setIsSubmitting(true);
-        // In a real app, you would submit this data to a backend.
-        console.log({ ...values, item: itemName });
+        await new Promise(resolve => setTimeout(resolve, 500));
         
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        
+        onReviewSubmit(values);
+
         toast({
             title: "Review Submitted!",
             description: "Thank you for your feedback.",
@@ -317,8 +317,7 @@ const SupportForm = ({productName}: {productName: string}) => {
   );
 };
 
-
-const reviews = [
+const initialReviews = [
     {
       id: 1,
       author: 'Alex Johnson',
@@ -348,6 +347,7 @@ export default function ProductDetailPage() {
     const slug = params.slug as string;
     const { toast } = useToast();
 
+    const [reviews, setReviews] = useState(initialReviews);
     const [replyingTo, setReplyingTo] = useState<number | null>(null);
 
     const handleReplySubmit = (reviewId: number, data: z.infer<typeof replyFormSchema>) => {
@@ -357,6 +357,27 @@ export default function ProductDetailPage() {
             description: "Your reply has been submitted for approval.",
         });
         setReplyingTo(null); // Close the form
+    };
+
+    const handleReviewSubmit = (data: ReviewFormValues) => {
+        const newReview = {
+            id: Date.now(),
+            author: data.name,
+            avatar: `https://i.pravatar.cc/150?u=${data.name}`,
+            rating: data.rating,
+            date: 'Just now',
+            content: data.review,
+            reply: null,
+        };
+        setReviews(prevReviews => [newReview, ...prevReviews]);
+    };
+
+    const handleDeleteReview = (reviewId: number) => {
+        setReviews(prevReviews => prevReviews.filter(r => r.id !== reviewId));
+        toast({
+            title: "Review Deleted",
+            description: "The review has been removed.",
+        });
     };
 
     const allItems = [
@@ -381,32 +402,22 @@ export default function ProductDetailPage() {
                     <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-start">
                         
                         <div className="space-y-6 md:sticky md:top-28">
-                             <div className="relative aspect-video w-full overflow-hidden rounded-lg shadow-lg">
-                                 {isPlugin && item.discount && (
-                                     <Badge variant="destructive" className="absolute top-2 right-2 md:top-4 md:right-4 z-10 text-sm md:text-base">
-                                         {item.discount}
-                                     </Badge>
-                                 )}
-                                <Image
-                                    src={item.image}
-                                    alt={item.name}
-                                    width={1280}
-                                    height={720}
-                                    className="w-full h-full object-cover"
-                                    data-ai-hint={item.dataAiHint}
-                                    priority
-                                />
+                            <div className="relative aspect-video w-full overflow-hidden rounded-lg shadow-lg">
+                                {isPlugin && item.discount && (
+                                    <Badge variant="destructive" className="absolute top-2 right-2 md:top-4 md:right-4 z-10 text-sm md:text-base">
+                                        {item.discount}
+                                    </Badge>
+                                )}
+                            <Image
+                                src={item.image}
+                                alt={item.name}
+                                width={1280}
+                                height={720}
+                                className="w-full h-full object-cover"
+                                data-ai-hint={item.dataAiHint}
+                                priority
+                            />
                             </div>
-                            
-                            {isPlugin && (
-                                <Alert className="bg-primary/10 border-primary/20 text-foreground">
-                                    <TriangleAlert className="h-4 w-4 !text-primary" />
-                                    <AlertTitle className="font-bold !text-primary-foreground">Important</AlertTitle>
-                                    <AlertDescription className="text-muted-foreground text-sm">
-                                    If the payment page doesn't load, press Cmd + Shift + R (Mac) or Ctrl + Shift + R (Windows) to force a refresh.
-                                    </AlertDescription>
-                                </Alert>
-                            )}
                         </div>
 
                         
@@ -439,6 +450,16 @@ export default function ProductDetailPage() {
                                         <Lock className="h-4 w-4" /> Secured by Razorpay
                                     </p>
                                 </div>
+                            )}
+
+                             {isPlugin && (
+                                <Alert className="bg-primary/10 border-primary/20 text-foreground">
+                                    <TriangleAlert className="h-4 w-4 !text-primary" />
+                                    <AlertTitle className="font-bold !text-primary-foreground">Important</AlertTitle>
+                                    <AlertDescription className="text-muted-foreground text-sm">
+                                    If the payment page doesn't load, press Cmd + Shift + R (Mac) or Ctrl + Shift + R (Windows) to force a refresh.
+                                    </AlertDescription>
+                                </Alert>
                             )}
 
                             {!isPlugin && (
@@ -500,7 +521,8 @@ export default function ProductDetailPage() {
                         <div className="grid md:grid-cols-2 gap-12 items-start">
                             <section className="space-y-8" aria-labelledby="reviews-heading">
                                 <h2 id="reviews-heading" className="text-2xl md:text-3xl font-bold font-headline">Reviews & Ratings</h2>
-                                {reviews.map(review => (
+                                {reviews.length > 0 ? (
+                                    reviews.map(review => (
                                     <article key={review.id} className="bg-secondary/30 p-4 md:p-6 rounded-lg border border-border">
                                         <div className="flex items-start gap-4">
                                             <Avatar>
@@ -516,10 +538,16 @@ export default function ProductDetailPage() {
                                                     <StarRating rating={review.rating} size="h-4 w-4" />
                                                 </div>
                                                 <p className="mt-2 text-muted-foreground text-sm">{review.content}</p>
-                                                <Button variant="ghost" size="sm" className="mt-2 -ml-3 h-auto py-1 px-3 text-xs" onClick={() => setReplyingTo(replyingTo === review.id ? null : review.id)}>
-                                                    <MessageSquare className="mr-2 h-3.5 w-3.5" />
-                                                    Reply
-                                                </Button>
+                                                <div className="flex items-center gap-2 mt-2">
+                                                    <Button variant="ghost" size="sm" className="-ml-3 h-auto py-1 px-3 text-xs" onClick={() => setReplyingTo(replyingTo === review.id ? null : review.id)}>
+                                                        <MessageSquare className="mr-2 h-3.5 w-3.5" />
+                                                        Reply
+                                                    </Button>
+                                                     <Button variant="ghost" size="sm" className="h-auto py-1 px-3 text-xs text-destructive/70 hover:text-destructive hover:bg-destructive/10" onClick={() => handleDeleteReview(review.id)}>
+                                                        <Trash2 className="mr-2 h-3.5 w-3.5" />
+                                                        Delete
+                                                    </Button>
+                                                </div>
 
                                                 {replyingTo === review.id && (
                                                     <ReplyForm 
@@ -548,7 +576,10 @@ export default function ProductDetailPage() {
                                             </div>
                                         )}
                                     </article>
-                                ))}
+                                ))
+                                ) : (
+                                    <p className="text-muted-foreground text-sm">No reviews yet. Be the first to leave one!</p>
+                                )}
                             </section>
 
                             <div className="space-y-8 sticky top-28">
@@ -559,7 +590,7 @@ export default function ProductDetailPage() {
                                             <CardDescription className="text-sm">Share your experience with others.</CardDescription>
                                         </CardHeader>
                                         <CardContent>
-                                            <ReviewForm itemName={item.name} />
+                                            <ReviewForm itemName={item.name} onReviewSubmit={handleReviewSubmit} />
                                         </CardContent>
                                     </Card>
                                 </section>

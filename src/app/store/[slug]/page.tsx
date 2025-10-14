@@ -380,7 +380,7 @@ export default function ProductDetailPage() {
                 <div className="container mx-auto px-4 md:px-6 py-8 md:py-12">
                     <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-start">
                         
-                        <div className="space-y-4 sticky top-28">
+                        <div className="space-y-6 md:sticky md:top-28">
                              <div className="relative aspect-video w-full overflow-hidden rounded-lg shadow-lg">
                                  {isPlugin && item.discount && (
                                      <Badge variant="destructive" className="absolute top-2 right-2 md:top-4 md:right-4 z-10 text-sm md:text-base">
@@ -397,6 +397,16 @@ export default function ProductDetailPage() {
                                     priority
                                 />
                             </div>
+                            
+                            {isPlugin && (
+                                <Alert className="bg-primary/10 border-primary/20 text-foreground">
+                                    <TriangleAlert className="h-4 w-4 !text-primary" />
+                                    <AlertTitle className="font-bold !text-primary-foreground">Important</AlertTitle>
+                                    <AlertDescription className="text-muted-foreground text-sm">
+                                    If the payment page doesn't load, press Cmd + Shift + R (Mac) or Ctrl + Shift + R (Windows) to force a refresh.
+                                    </AlertDescription>
+                                </Alert>
+                            )}
                         </div>
 
                         
@@ -415,16 +425,6 @@ export default function ProductDetailPage() {
                                     {'longDescription' in item ? item.longDescription : item.description}
                                 </p>
                             </div>
-
-                            {isPlugin && (
-                                <Alert className="bg-primary/10 border-primary/20 text-foreground">
-                                    <TriangleAlert className="h-4 w-4 !text-primary" />
-                                    <AlertTitle className="font-bold !text-primary-foreground">Important</AlertTitle>
-                                    <AlertDescription className="text-muted-foreground text-sm">
-                                    If the payment page doesn't load, press Cmd + Shift + R (Mac) or Ctrl + Shift + R (Windows) to force a refresh.
-                                    </AlertDescription>
-                                </Alert>
-                            )}
 
                             {isPlugin && (
                                 <div className="space-y-4 rounded-lg bg-secondary/50 p-4 md:p-6">

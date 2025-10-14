@@ -55,7 +55,7 @@ export const storeItems = {
       discount: '90% OFF',
       platform: 'Mac Only',
       paymentLink: 'https://rzp.io/rzp/jerryflow',
-      installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+      installVideo: '/videos/installation of jerry flow.mp4',
        details: {
         fileSize: '15.8 MB',
         installation: 'The dedicated installation video is already below. Make sure to follow the instruction carefully.',
@@ -76,7 +76,7 @@ export const storeItems = {
       discount: '94% OFF',
       platform: 'Mac Only',
       paymentLink: 'https://rzp.io/rzp/twixtor',
-      installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
+      installVideo: '/videos/twixtor setup installation.mp4',
        details: {
         fileSize: '45.1 MB',
         installation: 'The dedicated installation video is already below. Make sure to follow the instruction carefully.',
@@ -96,7 +96,7 @@ export const storeItems = {
       originalPrice: 3999,
       discount: '98% OFF',
       platform: 'Mac Only',
-      installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
+      installVideo: '/videos/Gaussian splatting installation.mp4',
        details: {
         fileSize: '128 MB',
         installation: 'The dedicated installation video is already below. Make sure to follow the instruction carefully.',
@@ -117,7 +117,7 @@ export const storeItems = {
       discount: '97% OFF',
       platform: 'Mac & Windows',
       paymentLink: 'https://rzp.io/rzp/shadows3',
-      installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4',
+      installVideo: '/videos/shadow studio 3 installation .mp4',
        details: {
         fileSize: '78.5 MB',
         installation: 'The dedicated installation video is already below. Make sure to follow the instruction carefully.',
@@ -158,7 +158,7 @@ export const storeItems = {
       discount: '97% OFF',
       platform: 'Mac Only',
       paymentLink: 'https://rzp.io/rzp/element3d',
-      installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4',
+      installVideo: '/videos/installation of 3d element.mp4',
        details: {
         fileSize: '250 MB',
         installation: 'The dedicated installation video is already below. Make sure to follow the instruction carefully.',

@@ -14,7 +14,8 @@ export const storeItems = {
       originalPrice: 3499,
       discount: '97% OFF',
       platform: 'Mac Only',
-      installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
+      paymentLink: 'https://rzp.io/l/sapphire-ae',
+      installVideo: 'https://www.youtube.com/embed/g3mSMa34kKM',
       details: {
         fileSize: '1.2 GB',
         importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
@@ -37,8 +38,8 @@ export const storeItems = {
       originalPrice: 999,
       discount: '90% OFF',
       platform: 'Mac Only',
-      paymentLink: 'https://rzp.io/rzp/jerryflow',
-      installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4',
+      paymentLink: 'https://rzp.io/l/jerryflow',
+      installVideo: 'https://www.youtube.com/embed/fMFZf_iGFgA',
        details: {
         fileSize: '15.8 MB',
         importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
@@ -61,8 +62,8 @@ export const storeItems = {
       originalPrice: 1799,
       discount: '94% OFF',
       platform: 'Mac Only',
-      paymentLink: 'https://rzp.io/rzp/twixtor',
-      installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4',
+      paymentLink: 'https://rzp.io/l/twixtor-pro',
+      installVideo: 'https://www.youtube.com/embed/G2y_-rgQisg',
        details: {
         fileSize: '45.1 MB',
         importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
@@ -85,7 +86,7 @@ export const storeItems = {
       originalPrice: 3999,
       discount: '98% OFF',
       platform: 'Mac Only',
-      installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4',
+      installVideo: 'https://www.youtube.com/embed/A82uV45w-v4',
        details: {
         fileSize: '128 MB',
         importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
@@ -108,8 +109,8 @@ export const storeItems = {
       originalPrice: 3499,
       discount: '97% OFF',
       platform: 'Mac & Windows',
-      paymentLink: 'https://rzp.io/rzp/shadows3',
-      installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4',
+      paymentLink: 'https://rzp.io/l/shadow-studio-3',
+      installVideo: 'https://www.youtube.com/embed/5DGMg320p-0',
        details: {
         fileSize: '78.5 MB',
         importantNotes: 'This plugin is for both Mac and Windows. The installation tutorial below is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
@@ -132,7 +133,7 @@ export const storeItems = {
       originalPrice: 1299,
       discount: '92% OFF',
       platform: 'Mac Only',
-      installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4',
+      installVideo: 'https://www.youtube.com/embed/YvJVv_dU2eU',
        details: {
         fileSize: '33.9 MB',
         importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
@@ -155,8 +156,8 @@ export const storeItems = {
       originalPrice: 2999,
       discount: '97% OFF',
       platform: 'Mac Only',
-      paymentLink: 'https://rzp.io/rzp/element3d',
-      installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4',
+      paymentLink: 'https://rzp.io/l/element-3d',
+      installVideo: 'https://www.youtube.com/embed/xLh1X4jF47I',
        details: {
         fileSize: '250 MB',
         importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',

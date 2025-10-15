@@ -17,18 +17,33 @@ import { DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/di
 import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
 
+const getEmbedUrl = (url: string) => {
+    if (!url) return '';
+    let videoId = '';
+    if (url.includes('youtu.be/')) {
+        videoId = url.split('youtu.be/')[1].split('?')[0];
+    } else if (url.includes('youtube.com/watch?v=')) {
+        videoId = url.split('watch?v=')[1].split('&')[0];
+    } else if (url.includes('youtube.com/shorts/')) {
+        videoId = url.split('shorts/')[1].split('?')[0];
+    } else if (url.includes('youtube.com/embed/')) {
+        return url;
+    }
+    return videoId ? `https://www.youtube.com/embed/${videoId}` : '';
+};
+
 const servicesData = {
   'video-editing': {
     icon: <Video className="h-10 w-10 text-primary" />,
     title: 'Video Editing',
     description: 'From corporate brand films to dynamic social media ads, I bring your vision to life with professional video editing that ancapts and engages your audience.',
     projects: [
-      { name: 'YouTube Videos', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4' },
-      { name: 'instagram edits', video: '/videos/instagramedit.mp4' },
-      { name: 'Colour Grading', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4' },
-      { name: 'Anime AMV edits', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4' },
-      { name: 'Educational Videos', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4' },
-      { name: 'Social Media Ad', video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4' },
+      { name: 'YouTube Videos', video: getEmbedUrl('https://www.youtube.com/watch?v=LXb3EKWsInQ') },
+      { name: 'Instagram Edits', video: getEmbedUrl('https://youtube.com/shorts/LgVIhHj-VPA') },
+      { name: 'Colour Grading', video: getEmbedUrl('https://www.youtube.com/watch?v=Yp92s_3yI5A') },
+      { name: 'Anime AMV edits', video: getEmbedUrl('https://www.youtube.com/watch?v=sfA3Ie2vo_8') },
+      { name: 'Educational Videos', video: getEmbedUrl('https://www.youtube.com/watch?v=LraNcH3fe1c') },
+      { name: 'Social Media Ad', video: getEmbedUrl('https://www.youtube.com/watch?v=u31_KnwS_M8') },
     ]
   },
   'photo-editing': {
@@ -90,7 +105,7 @@ const servicesData = {
             name: 'Admin Dashboard', 
             image: '/images/admindashboard.png', 
             dataAiHint: 'api integration', 
-            link: 'https://6000-firebase-studio-1758434992699.cluster-y75up3teuvc62qmnwys4deqv6y.cloudworkstations.dev/',
+            link: '/admin',
             description: 'A comprehensive admin dashboard for managing users, content, and application data. Includes data visualization, real-time updates, and role-based access control.',
             technologies: ['Next.js', 'Firebase', 'Recharts', 'Zod', 'React Hook Form']
         },
@@ -135,13 +150,16 @@ const ProjectCard = ({ project, slug, onCardClick }: { project: any, slug: strin
     <Card className="overflow-hidden bg-card/80 backdrop-blur-sm group h-full flex flex-col">
         <CardHeader className="p-0 relative aspect-video">
             {project.video ? (
-                <video
-                    src={project.video}
-                    muted
-                    loop
-                    playsInline
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                />
+                <div className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+                     <iframe
+                        src={project.video}
+                        title={`Preview video for ${project.name}`}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="w-full h-full"
+                    ></iframe>
+                </div>
             ) : project.before && project.after ? (
                 <ImageCompare
                     before={project.before}
@@ -226,7 +244,7 @@ export default function ServicePage() {
                                     )}
                                 >
                                     <div className={cn("relative aspect-video group", index % 2 === 1 && "md:order-2")}>
-                                        <a href={project.link} target="_blank" rel="noopener noreferrer" aria-label={`View live site for ${project.name}`}>
+                                        <Link href={project.link} target={project.link.startsWith('http') ? '_blank' : '_self'} rel="noopener noreferrer" aria-label={`View live site for ${project.name}`}>
                                             <Image
                                                 src={project.image}
                                                 alt={project.name}
@@ -238,12 +256,12 @@ export default function ServicePage() {
                                             <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
                                                 <ExternalLink className="w-8 h-8 text-white" />
                                             </div>
-                                        </a>
+                                        </Link>
                                     </div>
                                     <div className={cn("space-y-3 md:space-y-4", index % 2 === 1 && "md:order-1")}>
-                                        <a href={project.link} target="_blank" rel="noopener noreferrer">
+                                        <Link href={project.link} target={project.link.startsWith('http') ? '_blank' : '_self'} rel="noopener noreferrer">
                                             <h3 className="text-2xl md:text-3xl font-bold font-headline text-primary hover:underline">{project.name}</h3>
-                                        </a>
+                                        </Link>
                                         <p className="text-muted-foreground text-sm md:text-base">{project.description}</p>
                                         <div className="flex flex-wrap gap-2">
                                             {project.technologies.map((tech: string) => (
@@ -251,10 +269,10 @@ export default function ServicePage() {
                                             ))}
                                         </div>
                                         <Button asChild variant="link" className="p-0 font-semibold group">
-                                            <a href={project.link} target="_blank" rel="noopener noreferrer">
+                                            <Link href={project.link} target={project.link.startsWith('http') ? '_blank' : '_self'} rel="noopener noreferrer">
                                                 View Live Site
                                                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                                            </a>
+                                            </Link>
                                         </Button>
                                     </div>
                                 </motion.article>
@@ -302,14 +320,16 @@ export default function ServicePage() {
 
                                 )}
                                 {selectedProject.video && (
-                                    <video
-                                        src={selectedProject.video}
-                                        controls
-                                        controlsList="nodownload"
-                                        autoPlay
-                                        className="w-full h-auto object-cover rounded-md"
-                                        aria-label={`Video for ${selectedProject.name}`}
-                                    />
+                                    <div className="aspect-video">
+                                        <iframe
+                                            src={selectedProject.video}
+                                            title={`Preview video for ${selectedProject.name}`}
+                                            frameBorder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowFullScreen
+                                            className="w-full h-full rounded-md"
+                                        ></iframe>
+                                    </div>
                                 )}
                                 </div>
                            </AnimatedDialog>

@@ -2,7 +2,7 @@
 "use client";
 
 import Link from "next/link";
-import { Instagram, Linkedin, Youtube } from 'lucide-react';
+import { Instagram, Linkedin, Youtube, PanelsTopLeft } from 'lucide-react';
 
 const socialLinks = [
   { name: 'Instagram', href: 'https://www.instagram.com/_.d_k_d/', icon: <Instagram className="h-5 w-5" /> },
@@ -94,6 +94,11 @@ export function Footer() {
                     <li><Link href="/privacy" className="text-sm text-muted-foreground hover:text-primary transition-colors">Privacy Policy</Link></li>
                     <li><Link href="/terms" className="text-sm text-muted-foreground hover:text-primary transition-colors">Terms and Conditions</Link></li>
                     <li><Link href="/refund-policy" className="text-sm text-muted-foreground hover:text-primary transition-colors">Refund Policy</Link></li>
+                    <li>
+                        <Link href="/admin" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
+                            <PanelsTopLeft className="h-4 w-4" /> Admin
+                        </Link>
+                    </li>
                   </ul>
                 </div>
               </div>

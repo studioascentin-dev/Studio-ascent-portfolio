@@ -197,9 +197,9 @@ export const storeItems = {
       image: 'https://picsum.photos/seed/ytpack/600/400',
       dataAiHint: 'anime music video',
       description: 'A dynamic edit pack for creating high-energy anime music videos.',
-      price: 199,
+      price: 299,
       originalPrice: 499,
-      discount: '60% OFF',
+      discount: '40% OFF',
       reviews: 25,
       rating: 5,
       platform: 'Alight Motion',
@@ -250,7 +250,7 @@ export const storeItems = {
       installVideo: 'https://youtube.com/shorts/1jJzYyR9UcE?si=nywTRbadhQzIqNb6',
        details: {
         fileSize: '5 MB',
-        importantNotes: 'Works with any video editor that supports LUTs.',
+        importantNotes: 'Requires Alight Motion.',
         youtube: {
           channelName: 'D3V edits',
           channelUrl: 'https://www.youtube.com/@D3Vedits'
@@ -263,9 +263,9 @@ export const storeItems = {
       image: 'https://picsum.photos/seed/retro/600/400',
       dataAiHint: 'retro title card',
       description: 'Retro and synthwave-style title animations.',
-      price: 299,
+      price: 199,
       originalPrice: 599,
-      discount: '50% OFF',
+      discount: '67% OFF',
       reviews: 18,
       rating: 4,
       platform: 'Alight Motion',

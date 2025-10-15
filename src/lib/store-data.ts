@@ -17,7 +17,6 @@ export const storeItems = {
       installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
       details: {
         fileSize: '57.2 MB',
-        installation: 'The dedicated installation video is already below. Make sure to follow the instruction carefully.',
         importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
         youtube: {
           channelName: 'D3V edits',
@@ -41,7 +40,6 @@ export const storeItems = {
       installVideo: '/videos/installation of Sapphire.mp4',
       details: {
         fileSize: '1.2 GB',
-        installation: 'The dedicated installation video is already below. Make sure to follow the instruction carefully.',
         importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
          youtube: {
           channelName: 'D3V edits',
@@ -66,7 +64,6 @@ export const storeItems = {
       installVideo: '/videos/installation of jerryflow.mp4',
        details: {
         fileSize: '15.8 MB',
-        installation: 'The dedicated installation video is already below. Make sure to follow the instruction carefully.',
         importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
          youtube: {
           channelName: 'D3V edits',
@@ -91,7 +88,6 @@ export const storeItems = {
       installVideo: '/videos/twixtor setup installation.mp4',
        details: {
         fileSize: '45.1 MB',
-        installation: 'The dedicated installation video is already below. Make sure to follow the instruction carefully.',
         importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
          youtube: {
           channelName: 'D3V edits',
@@ -115,7 +111,6 @@ export const storeItems = {
       installVideo: '/videos/Gaussian splatting installation.mp4',
        details: {
         fileSize: '128 MB',
-        installation: 'The dedicated installation video is already below. Make sure to follow the instruction carefully.',
         importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
          youtube: {
           channelName: 'D3V edits',
@@ -140,7 +135,6 @@ export const storeItems = {
       installVideo: '/videos/shadow studio 3 installation .mp4',
        details: {
         fileSize: '78.5 MB',
-        installation: 'The dedicated installation video is already below. Make sure to follow the instruction carefully.',
         importantNotes: 'This plugin is for both Mac and Windows. The installation tutorial below is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
          youtube: {
           channelName: 'D3V edits',
@@ -164,7 +158,6 @@ export const storeItems = {
       installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4',
        details: {
         fileSize: '33.9 MB',
-        installation: 'The dedicated installation video is already below. Make sure to follow the instruction carefully.',
         importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
          youtube: {
           channelName: 'D3V edits',
@@ -189,7 +182,6 @@ export const storeItems = {
       installVideo: '/videos/installation of 3d element.mp4',
        details: {
         fileSize: '250 MB',
-        installation: 'The dedicated installation video is already below. Make sure to follow the instruction carefully.',
         importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
          youtube: {
           channelName: 'D3V edits',
@@ -266,8 +258,8 @@ export const storeItems = {
       }
     },
     {
-      slug: '80s-retro-titles',
-      name: '80s Retro Titles',
+      slug: 'nami-edit',
+      name: 'Nami edit',
       image: 'https://picsum.photos/seed/retro/600/400',
       dataAiHint: 'retro title card',
       description: 'Retro and synthwave-style title animations.',
@@ -277,7 +269,7 @@ export const storeItems = {
       reviews: 18,
       rating: 4,
       platform: 'Alight Motion',
-      installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4',
+      installVideo: 'https://youtu.be/SUP97P-L5V0?si=T9VKLoU-22q4tPX5',
        details: {
         fileSize: '15 MB',
         importantNotes: 'Requires Alight Motion.',

@@ -2,29 +2,6 @@
 export const storeItems = {
   plugins: [
     { 
-      slug: 'shadow-studio-2',
-      name: 'Shadow Studio 2', 
-      image: '/images/shadows2.png', 
-      dataAiHint: '3d text effect',
-      reviews: 82,
-      rating: 5,
-      description: 'Advanced shadow plugin for realistic and customizable shadows in After Effects.',
-      longDescription: 'Shadow Studio 2 is the ultimate tool for creating realistic, high-quality shadows in After Effects. Go beyond the standard drop shadow with features like soft shadows, inner shadows, and complex gradients. Perfect for motion graphics artists and animators who want to add depth and realism to their work.',
-      price: 99,
-      originalPrice: 1999,
-      discount: '95% OFF',
-      platform: 'Mac Only',
-      installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-      details: {
-        fileSize: '57.2 MB',
-        importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
-        youtube: {
-          channelName: 'D3V edits',
-          channelUrl: 'https://www.youtube.com/@D3Vedits'
-        }
-      }
-    },
-    { 
       slug: 'sapphire-ae-install',
       name: 'Sapphire AE Install', 
       image: '/images/saffire.png', 
@@ -192,7 +169,7 @@ export const storeItems = {
   ],
   projectFiles: [
     {
-      slug: 'kaguya-edit',
+      slug: 'kaguya-edit-shoko-remake-by-d3v',
       name: 'kaguya edit shoko remake by D3V',
       image: 'https://picsum.photos/seed/ytpack/600/400',
       dataAiHint: 'anime music video',
@@ -311,3 +288,5 @@ export const storeItems = {
     },
   ],
 };
+
+    

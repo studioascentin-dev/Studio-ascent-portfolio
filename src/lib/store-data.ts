@@ -204,7 +204,7 @@ export const storeItems = {
     { 
       slug: 'after-effects',
       name: 'After Effects', 
-      image: 'https://picsum.photos/seed/aftereffects/600/400', _
+      image: 'https://picsum.photos/seed/aftereffects/600/400',
       dataAiHint: 'motion graphics',
       description: 'The industry-standard motion graphics and visual effects software.'
     },

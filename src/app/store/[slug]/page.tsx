@@ -490,6 +490,7 @@ export default function ProductDetailPage() {
                                         </div>
                                     </div>
                                 </Card>
+                                {isPlugin && (
                                 <Card className="bg-secondary/50 backdrop-blur-sm border-border p-6 md:p-8">
                                     <div className="flex items-start gap-4 md:gap-6">
                                         <Info className="h-8 w-8 md:h-10 md:w-10 text-primary mt-1 flex-shrink-0" />
@@ -499,6 +500,7 @@ export default function ProductDetailPage() {
                                         </div>
                                     </div>
                                 </Card>
+                                )}
                                 <Card className="bg-secondary/50 backdrop-blur-sm border-border p-6 md:p-8">
                                     <div className="flex items-start gap-4 md:gap-6">
                                         <TriangleAlert className="h-8 w-8 md:h-10 md:w-10 text-yellow-500 mt-1 flex-shrink-0" />

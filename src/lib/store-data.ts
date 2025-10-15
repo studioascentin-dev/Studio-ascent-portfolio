@@ -62,7 +62,7 @@ export const storeItems = {
         importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.'
       }
     },
-    { 
+    { _
       slug: 'twixtor-pro',
       name: 'Twixtor Pro', 
       image: '/images/twixtor.png', 
@@ -168,11 +168,17 @@ export const storeItems = {
   ],
   projectFiles: [
     { 
-      slug: 'youtube-essentials-pack',
-      name: 'YouTube Essentials Pack', 
+      slug: 'kaguya-edit',
+      name: 'kaguya edit shoko remake by D3V', 
       image: 'https://picsum.photos/seed/ytpack/600/400', 
-      dataAiHint: 'youtube editing',
-      description: 'Intro, outro, lower thirds, and transition project files for After Effects.',
+      dataAiHint: 'anime music video',
+      description: 'A dynamic edit pack for creating high-energy anime music videos.',
+      price: 199,
+      originalPrice: 499,
+      discount: '60% OFF',
+      reviews: 25,
+      rating: 5,
+      platform: 'Mac & Windows',
       installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4'
     },
     { 
@@ -181,6 +187,12 @@ export const storeItems = {
       image: 'https://picsum.photos/seed/igstory/600/400', 
       dataAiHint: 'instagram story',
       description: 'Animated story templates for After Effects to make your content pop.',
+      price: 199,
+      originalPrice: 599,
+      discount: '67% OFF',
+      reviews: 30,
+      rating: 4,
+      platform: 'Mac & Windows',
       installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4'
     },
     { 
@@ -189,6 +201,12 @@ export const storeItems = {
       image: 'https://picsum.photos/seed/luts/600/400', 
       dataAiHint: 'color grading film',
       description: 'A pack of professional color grading LUTs for Premiere Pro and Final Cut.',
+      price: 199,
+      originalPrice: 799,
+      discount: '75% OFF',
+      reviews: 50,
+      rating: 5,
+      platform: 'Mac & Windows',
       installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4'
     },
     { 
@@ -197,6 +215,12 @@ export const storeItems = {
       image: 'https://picsum.photos/seed/retro/600/400', 
       dataAiHint: 'retro title card',
       description: 'Retro and synthwave-style title animations for your YouTube videos.',
+      price: 199,
+      originalPrice: 399,
+      discount: '50% OFF',
+      reviews: 18,
+      rating: 4,
+      platform: 'Mac & Windows',
       installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4'
     },
   ],

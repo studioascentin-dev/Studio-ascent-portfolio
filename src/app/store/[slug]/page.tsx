@@ -318,6 +318,22 @@ const SupportForm = ({productName}: {productName: string}) => {
   );
 };
 
+const getEmbedUrl = (url: string) => {
+    if (!url) return '';
+    
+    let videoId = '';
+    if (url.includes('youtu.be/')) {
+        videoId = url.split('youtu.be/')[1].split('?')[0];
+    } else if (url.includes('youtube.com/watch?v=')) {
+        videoId = url.split('watch?v=')[1].split('&')[0];
+    } else if (url.includes('youtube.com/shorts/')) {
+        videoId = url.split('shorts/')[1].split('?')[0];
+    } else if (url.includes('youtube.com/embed/')) {
+        return url;
+    }
+
+    return videoId ? `https://www.youtube.com/embed/${videoId}` : url;
+};
 
 export default function ProductDetailPage() {
     const params = useParams();
@@ -379,23 +395,6 @@ export default function ProductDetailPage() {
     const isPlugin = 'price' in item && 'originalPrice' in item && storeItems.plugins.some(p => p.slug === item.slug);
     const isProjectFile = 'price' in item && 'originalPrice' in item && storeItems.projectFiles.some(p => p.slug === item.slug);
     const isPricedItem = isPlugin || isProjectFile;
-    
-    const getEmbedUrl = (url: string) => {
-        if (!url) return '';
-        
-        let videoId = '';
-        if (url.includes('youtu.be/')) {
-            videoId = url.split('youtu.be/')[1].split('?')[0];
-        } else if (url.includes('youtube.com/watch?v=')) {
-            videoId = url.split('watch?v=')[1].split('&')[0];
-        } else if (url.includes('youtube.com/shorts/')) {
-            videoId = url.split('shorts/')[1].split('?')[0];
-        } else if (url.includes('youtube.com/embed/')) {
-            return url;
-        }
-
-        return videoId ? `https://www.youtube.com/embed/${videoId}` : url;
-    };
 
 
     return (

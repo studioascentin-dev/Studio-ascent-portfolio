@@ -171,7 +171,7 @@ export const storeItems = {
     {
       slug: 'kaguya-edit-shoko-remake-by-d3v',
       name: 'kaguya edit shoko remake by D3V',
-      image: 'https://picsum.photos/seed/kaguya/600/400',
+      image: '/images/kaguyaedit.png',
       dataAiHint: 'anime battle',
       description: 'A dynamic edit pack for creating high-energy anime music videos.',
       price: 299,
@@ -180,7 +180,7 @@ export const storeItems = {
       reviews: 25,
       rating: 5,
       platform: 'Alight Motion',
-      installVideo: 'https://youtu.be/v_bqH80FjN4?si=qXt9G_mB189pYi4g',
+      installVideo: 'https://www.youtube.com/embed/v_bqH80FjN4',
       details: {
         fileSize: '25 MB',
         importantNotes: 'Requires Alight Motion.',
@@ -193,7 +193,7 @@ export const storeItems = {
     {
       slug: 'komi-san-edit',
       name: 'Komi-san edit | shoko remake',
-      image: 'https://picsum.photos/seed/komi/600/400',
+      image: '/images/komiedit.png',
       dataAiHint: 'cute anime girl',
       description: 'Animated story templates to make your content pop.',
       price: 199,
@@ -202,7 +202,7 @@ export const storeItems = {
       reviews: 30,
       rating: 4,
       platform: 'Alight Motion',
-      installVideo: 'https://youtube.com/shorts/DlbaRFqhSYE?si=BQSfkr8z98lbdZ-O',
+      installVideo: 'https://www.youtube.com/embed/DlbaRFqhSYE',
       details: {
         fileSize: '30 MB',
         importantNotes: 'Requires Alight Motion.',
@@ -215,7 +215,7 @@ export const storeItems = {
     {
       slug: 'mahito-edit',
       name: 'Mahito edit | Shoko remake',
-      image: 'https://picsum.photos/seed/mahito/600/400',
+      image: '/images/mahitoedit.png',
       dataAiHint: 'dark anime character',
       description: 'A dynamic edit pack featuring the character Mahito.',
       price: 199,
@@ -224,7 +224,7 @@ export const storeItems = {
       reviews: 50,
       rating: 5,
       platform: 'Alight Motion',
-      installVideo: 'https://youtube.com/shorts/1jJzYyR9UcE?si=nywTRbadhQzIqNb6',
+      installVideo: 'https://www.youtube.com/embed/1jJzYyR9UcE',
        details: {
         fileSize: '5 MB',
         importantNotes: 'Requires Alight Motion.',
@@ -237,7 +237,7 @@ export const storeItems = {
     {
       slug: 'nami-edit',
       name: 'Nami edit',
-      image: 'https://picsum.photos/seed/nami/600/400',
+      image: '/images/namiedit.png',
       dataAiHint: 'one piece nami',
       description: 'Retro and synthwave-style title animations.',
       price: 199,
@@ -246,7 +246,7 @@ export const storeItems = {
       reviews: 18,
       rating: 4,
       platform: 'Alight Motion',
-      installVideo: 'https://youtu.be/SUP97P-L5V0?si=T9VKLoU-22q4tPX5',
+      installVideo: 'https://www.youtube.com/embed/SUP97P-L5V0',
        details: {
         fileSize: '15 MB',
         importantNotes: 'Requires Alight Motion.',

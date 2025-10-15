@@ -101,14 +101,6 @@ const servicesData = {
             description: 'A personal portfolio site to showcase creative work, featuring a clean design, smooth animations, and a contact form for inquiries.',
             technologies: ['React', 'Framer Motion', 'Next.js', 'Tailwind CSS']
         },
-        { 
-            name: 'Admin Dashboard', 
-            image: '/images/admindashboard.png', 
-            dataAiHint: 'api integration', 
-            link: '/admin',
-            description: 'A comprehensive admin dashboard for managing users, content, and application data. Includes data visualization, real-time updates, and role-based access control.',
-            technologies: ['Next.js', 'Firebase', 'Recharts', 'Zod', 'React Hook Form']
-        },
     ]
   },
 };

@@ -35,9 +35,9 @@ function XIcon(props: React.SVGProps<SVGSVGElement>) {
 
 export function Footer() {
   return (
-    <footer className="bg-secondary/20 backdrop-blur-sm border-t border-white/5 py-12 text-foreground px-4 md:px-6">
-      <div className="container mx-auto">
-        <div className="flex flex-wrap justify-between items-start gap-8">
+    <footer className="bg-secondary/20 backdrop-blur-sm border-t border-white/5 py-12 text-foreground">
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="flex flex-col md:flex-row justify-between items-start gap-10 md:gap-8">
           
           <div className="space-y-4 max-w-xs">
             <h3 className="font-headline text-2xl font-bold text-primary">Studio Ascent</h3>
@@ -60,7 +60,7 @@ export function Footer() {
             </div>
           </div>
 
-          <div className="flex justify-start md:justify-end">
+          <div className="flex-grow flex justify-center md:justify-end">
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 sm:gap-16">
                 <div>
                   <h4 className="font-semibold font-headline mb-4">Quick Links</h4>

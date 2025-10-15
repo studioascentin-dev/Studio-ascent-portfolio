@@ -36,7 +36,7 @@ function XIcon(props: React.SVGProps<SVGSVGElement>) {
 export function Footer() {
   return (
     <footer className="bg-secondary/20 backdrop-blur-sm border-t border-white/5 py-12 text-foreground">
-      <div className="mx-auto px-4 md:px-6">
+      <div className="mx-auto px-4 sm:px-8">
         <div className="flex flex-col md:flex-row justify-between items-start gap-10 md:gap-8">
           
           <div className="space-y-4 max-w-xs">

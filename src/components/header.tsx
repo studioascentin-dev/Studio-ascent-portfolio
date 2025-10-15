@@ -106,6 +106,7 @@ export function Header() {
                 initial={{ y: -100 }}
                 animate={{ y: 0 }}
                 transition={{ type: "spring", stiffness: 100, damping: 20 }}
+                className="px-4 sm:px-8"
             >
                 <div className="flex h-24 items-center justify-between">
                     <Link href="/" className="flex items-center gap-3 px-6 py-3 bg-background/50 backdrop-blur-lg rounded-full border border-white/10 shadow-lg">
@@ -136,7 +137,7 @@ export function Header() {
                         ))}
                     </nav>
 
-                    <div className="md:hidden pr-4">
+                    <div className="md:hidden">
                          <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
                             <SheetTrigger asChild>
                                 <Button variant="ghost" size="icon" className="bg-background/50 backdrop-blur-lg border border-white/10">

@@ -197,7 +197,7 @@ const StoreItemCard = ({ item }: { item: any }) => {
                 <div></div> 
               )}
               <Button className="font-semibold pointer-events-none" size="sm">
-                {isPlugin ? 'Buy Now' : 'View Details'}
+                View Details
               </Button>
             </div>
           </CardContent>

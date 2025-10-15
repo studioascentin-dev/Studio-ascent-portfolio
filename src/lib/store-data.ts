@@ -14,7 +14,7 @@ export const storeItems = {
       originalPrice: 3499,
       discount: '97% OFF',
       platform: 'Mac Only',
-      installVideo: '/videos/installation of Sapphire.mp4',
+      installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
       details: {
         fileSize: '1.2 GB',
         importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
@@ -38,7 +38,7 @@ export const storeItems = {
       discount: '90% OFF',
       platform: 'Mac Only',
       paymentLink: 'https://rzp.io/rzp/jerryflow',
-      installVideo: '/videos/installation of jerryflow.mp4',
+      installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4',
        details: {
         fileSize: '15.8 MB',
         importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
@@ -62,7 +62,7 @@ export const storeItems = {
       discount: '94% OFF',
       platform: 'Mac Only',
       paymentLink: 'https://rzp.io/rzp/twixtor',
-      installVideo: '/videos/twixtor setup installation.mp4',
+      installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4',
        details: {
         fileSize: '45.1 MB',
         importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
@@ -85,7 +85,7 @@ export const storeItems = {
       originalPrice: 3999,
       discount: '98% OFF',
       platform: 'Mac Only',
-      installVideo: '/videos/Gaussian splatting installation.mp4',
+      installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4',
        details: {
         fileSize: '128 MB',
         importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
@@ -109,7 +109,7 @@ export const storeItems = {
       discount: '97% OFF',
       platform: 'Mac & Windows',
       paymentLink: 'https://rzp.io/rzp/shadows3',
-      installVideo: '/videos/shadow studio 3 installation .mp4',
+      installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4',
        details: {
         fileSize: '78.5 MB',
         importantNotes: 'This plugin is for both Mac and Windows. The installation tutorial below is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
@@ -156,7 +156,7 @@ export const storeItems = {
       discount: '97% OFF',
       platform: 'Mac Only',
       paymentLink: 'https://rzp.io/rzp/element3d',
-      installVideo: '/videos/installation of 3d element.mp4',
+      installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4',
        details: {
         fileSize: '250 MB',
         importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
@@ -171,8 +171,8 @@ export const storeItems = {
     {
       slug: 'kaguya-edit-shoko-remake-by-d3v',
       name: 'kaguya edit shoko remake by D3V',
-      image: 'https://picsum.photos/seed/ytpack/600/400',
-      dataAiHint: 'anime music video',
+      image: 'https://picsum.photos/seed/kaguya/600/400',
+      dataAiHint: 'anime battle',
       description: 'A dynamic edit pack for creating high-energy anime music videos.',
       price: 299,
       originalPrice: 499,
@@ -193,8 +193,8 @@ export const storeItems = {
     {
       slug: 'komi-san-edit',
       name: 'Komi-san edit | shoko remake',
-      image: 'https://picsum.photos/seed/igstory/600/400',
-      dataAiHint: 'instagram story',
+      image: 'https://picsum.photos/seed/komi/600/400',
+      dataAiHint: 'cute anime girl',
       description: 'Animated story templates to make your content pop.',
       price: 199,
       originalPrice: 599,
@@ -215,8 +215,8 @@ export const storeItems = {
     {
       slug: 'mahito-edit',
       name: 'Mahito edit | Shoko remake',
-      image: 'https://picsum.photos/seed/luts/600/400',
-      dataAiHint: 'anime edit',
+      image: 'https://picsum.photos/seed/mahito/600/400',
+      dataAiHint: 'dark anime character',
       description: 'A dynamic edit pack featuring the character Mahito.',
       price: 199,
       originalPrice: 799,
@@ -237,8 +237,8 @@ export const storeItems = {
     {
       slug: 'nami-edit',
       name: 'Nami edit',
-      image: 'https://picsum.photos/seed/retro/600/400',
-      dataAiHint: 'retro title card',
+      image: 'https://picsum.photos/seed/nami/600/400',
+      dataAiHint: 'one piece nami',
       description: 'Retro and synthwave-style title animations.',
       price: 199,
       originalPrice: 599,
@@ -288,5 +288,3 @@ export const storeItems = {
     },
   ],
 };
-
-    

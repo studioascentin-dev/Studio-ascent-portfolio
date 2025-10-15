@@ -456,7 +456,7 @@ export default function ProductDetailPage() {
                                 {isPricedItem && (
                                      <div className="flex items-center gap-4 flex-wrap">
                                          <div className="flex items-center gap-2 text-sm text-muted-foreground font-medium">
-                                            {'platform' in item && item.platform === 'Mac & Windows' ? <Check className="h-5 w-5 text-green-500" /> : <Apple className="h-4 w-4" />} 
+                                            {'platform' in item && item.platform === 'Mac & Windows' ? <Check className="h-5 w-5 text-green-500" /> : 'platform' in item && item.platform === 'Alight Motion' ? <Check className="h-5 w-5 text-green-500" /> : <Apple className="h-4 w-4" />} 
                                             {'platform' in item && item.platform}
                                         </div>
                                         {'rating' in item && 'reviews' in item && <StarRating rating={item.rating} count={item.reviews} size="h-5 w-5" />}
@@ -681,7 +681,7 @@ export default function ProductDetailPage() {
                                             <p className="font-semibold text-destructive-foreground/90">No Refund Policy</p>
                                             <p>Due to the digital nature of our products, all sales are final. We do not offer refunds or exchanges once a purchase is complete.</p>
                                             <p className="font-semibold mt-4 text-destructive-foreground/90">I paid for a digital product but did not receive the download link. What should I do?</p>
-                                            <p>If you encounter any issues after payment, please use the contact form below. Attach a screenshot of your payment, and we will send the download link to your email or WhatsApp after verification.</p>
+                                            <p>If you encounter any issues after payment, please use the support form below. Provide your Payment ID, and we will send the download link to your email or WhatsApp after verification.</p>
                                         </div>
                                     </Alert>
                                 </div>
@@ -706,3 +706,5 @@ export default function ProductDetailPage() {
         </div>
     );
 }
+
+    

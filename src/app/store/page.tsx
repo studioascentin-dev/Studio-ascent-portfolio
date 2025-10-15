@@ -222,6 +222,21 @@ const AfterEffectsIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 
 export default function StorePage() {
+  const storeCategories = {
+    plugins: {
+      title: 'After Effects Plugins',
+      items: storeItems.plugins,
+    },
+    projectFiles: {
+      title: 'Project files [Youtube and Instagram]',
+      items: storeItems.projectFiles,
+    },
+    applications: {
+      title: 'Applications',
+      items: storeItems.applications,
+    },
+  };
+
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
       <Header />
@@ -242,32 +257,22 @@ export default function StorePage() {
               </p>
             </motion.header>
 
-            <motion.div key="plugins" variants={sectionVariants} className="mb-16 md:mb-20">
-                <motion.h2 variants={itemVariants} className="flex items-center justify-center gap-3 text-3xl md:text-4xl font-bold font-headline mb-8 capitalize">
-                  <AfterEffectsIcon className="w-8 h-8 md:w-9 md:h-9" />
-                  After Effects Plugins
-                </motion.h2>
-                <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-                  {storeItems.plugins.map((item) => (
-                    <StoreItemCard key={item.slug} item={item} />
-                  ))}
-                </div>
-              </motion.div>
-
-            {Object.entries(storeItems).map(([category, items]) => {
-              if (category === 'plugins') return null;
+            {Object.entries(storeCategories).map(([key, category]) => {
+              if (!category.items || category.items.length === 0) return null;
               return (
-              <motion.section key={category} variants={sectionVariants} className="mb-16 md:mb-20" aria-labelledby={`${category}-heading`}>
-                <motion.h2 variants={itemVariants} id={`${category}-heading`} className="text-3xl md:text-4xl font-bold font-headline mb-8 capitalize text-center">
-                  {category === 'templates' ? 'Templates' : 'Applications'}
-                </motion.h2>
-                <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-                  {items.map((item: any) => (
-                    <StoreItemCard key={item.slug} item={item} />
-                  ))}
-                </div>
-              </motion.section>
-            )})}
+                <motion.section key={key} variants={sectionVariants} className="mb-16 md:mb-20" aria-labelledby={`${key}-heading`}>
+                  <motion.h2 variants={itemVariants} id={`${key}-heading`} className="flex items-center justify-center gap-3 text-3xl md:text-4xl font-bold font-headline mb-8 capitalize">
+                    {key === 'plugins' && <AfterEffectsIcon className="w-8 h-8 md:w-9 md:h-9" />}
+                    {category.title}
+                  </motion.h2>
+                  <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                    {category.items.map((item: any) => (
+                      <StoreItemCard key={item.slug} item={item} />
+                    ))}
+                  </div>
+                </motion.section>
+              )
+            })}
           </div>
         </motion.section>
       </main>

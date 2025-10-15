@@ -166,37 +166,37 @@ export const storeItems = {
       }
     },
   ],
-  templates: [
+  projectFiles: [
     { 
-      slug: 'logo-intro',
-      name: 'Logo Intro', 
-      image: 'https://picsum.photos/seed/logointro/600/400', 
-      dataAiHint: 'logo animation',
-      description: 'A collection of 10 modern and dynamic logo intros for After Effects.',
+      slug: 'youtube-essentials-pack',
+      name: 'YouTube Essentials Pack', 
+      image: 'https://picsum.photos/seed/ytpack/600/400', 
+      dataAiHint: 'youtube editing',
+      description: 'Intro, outro, lower thirds, and transition project files for After Effects.',
       installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4'
     },
     { 
-      slug: 'slideshow',
-      name: 'Slideshow', 
-      image: 'https://picsum.photos/seed/slideshow/600/400', 
-      dataAiHint: 'photo gallery',
-      description: 'An elegant and cinematic slideshow template, perfect for weddings, events, or portfolios.',
+      slug: 'instagram-story-kit',
+      name: 'Instagram Story Kit', 
+      image: 'https://picsum.photos/seed/igstory/600/400', 
+      dataAiHint: 'instagram story',
+      description: 'Animated story templates for After Effects to make your content pop.',
       installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4'
     },
     { 
-      slug: 'typography-pack',
-      name: 'Typography Pack', 
-      image: 'https://picsum.photos/seed/typography/600/400', 
-      dataAiHint: 'animated text',
-      description: 'Over 50 animated typography titles and lower thirds to enhance your videos.',
+      slug: 'cinematic-luts',
+      name: 'Cinematic LUTs Pack', 
+      image: 'https://picsum.photos/seed/luts/600/400', 
+      dataAiHint: 'color grading film',
+      description: 'A pack of professional color grading LUTs for Premiere Pro and Final Cut.',
       installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4'
     },
     { 
-      slug: 'lower-thirds',
-      name: 'Lower Thirds', 
-      image: 'https://picsum.photos/seed/lowerthird/600/400', 
-      dataAiHint: 'video overlay',
-      description: 'A clean and professional pack of lower thirds for corporate videos and interviews.',
+      slug: '80s-retro-titles',
+      name: '80s Retro Titles', 
+      image: 'https://picsum.photos/seed/retro/600/400', 
+      dataAiHint: 'retro title card',
+      description: 'Retro and synthwave-style title animations for your YouTube videos.',
       installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4'
     },
   ],
@@ -204,7 +204,7 @@ export const storeItems = {
     { 
       slug: 'after-effects',
       name: 'After Effects', 
-      image: 'https://picsum.photos/seed/aftereffects/600/400', 
+      image: 'https://picsum.photos/seed/aftereffects/600/400', _
       dataAiHint: 'motion graphics',
       description: 'The industry-standard motion graphics and visual effects software.'
     },

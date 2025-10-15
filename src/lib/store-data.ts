@@ -244,18 +244,18 @@ export const storeItems = {
       }
     },
     {
-      slug: 'cinematic-luts',
-      name: 'Cinematic LUTs Pack',
+      slug: 'mahito-edit',
+      name: 'Mahito edit | Shoko remake',
       image: 'https://picsum.photos/seed/luts/600/400',
-      dataAiHint: 'color grading film',
-      description: 'A pack of professional color grading LUTs.',
+      dataAiHint: 'anime edit',
+      description: 'A dynamic edit pack featuring the character Mahito.',
       price: 199,
       originalPrice: 799,
       discount: '75% OFF',
       reviews: 50,
       rating: 5,
       platform: 'Alight Motion',
-      installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4',
+      installVideo: 'https://youtube.com/shorts/1jJzYyR9UcE?si=nywTRbadhQzIqNb6',
        details: {
         fileSize: '5 MB',
         importantNotes: 'Works with any video editor that supports LUTs.',

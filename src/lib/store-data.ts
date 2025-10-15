@@ -18,7 +18,11 @@ export const storeItems = {
       details: {
         fileSize: '57.2 MB',
         installation: 'The dedicated installation video is already below. Make sure to follow the instruction carefully.',
-        importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.'
+        importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
+        youtube: {
+          channelName: 'D3V edits',
+          channelUrl: 'https://www.youtube.com/@D3Vedits'
+        }
       }
     },
     { 
@@ -38,7 +42,11 @@ export const storeItems = {
       details: {
         fileSize: '1.2 GB',
         installation: 'The dedicated installation video is already below. Make sure to follow the instruction carefully.',
-        importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.'
+        importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
+         youtube: {
+          channelName: 'D3V edits',
+          channelUrl: 'https://www.youtube.com/@D3Vedits'
+        }
       }
     },
     { 
@@ -59,7 +67,11 @@ export const storeItems = {
        details: {
         fileSize: '15.8 MB',
         installation: 'The dedicated installation video is already below. Make sure to follow the instruction carefully.',
-        importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.'
+        importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
+         youtube: {
+          channelName: 'D3V edits',
+          channelUrl: 'https://www.youtube.com/@D3Vedits'
+        }
       }
     },
     {
@@ -80,7 +92,11 @@ export const storeItems = {
        details: {
         fileSize: '45.1 MB',
         installation: 'The dedicated installation video is already below. Make sure to follow the instruction carefully.',
-        importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.'
+        importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
+         youtube: {
+          channelName: 'D3V edits',
+          channelUrl: 'https://www.youtube.com/@D3Vedits'
+        }
       }
     },
     { 
@@ -100,7 +116,11 @@ export const storeItems = {
        details: {
         fileSize: '128 MB',
         installation: 'The dedicated installation video is already below. Make sure to follow the instruction carefully.',
-        importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.'
+        importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
+         youtube: {
+          channelName: 'D3V edits',
+          channelUrl: 'https://www.youtube.com/@D3Vedits'
+        }
       }
     },
     { 
@@ -121,7 +141,11 @@ export const storeItems = {
        details: {
         fileSize: '78.5 MB',
         installation: 'The dedicated installation video is already below. Make sure to follow the instruction carefully.',
-        importantNotes: 'This plugin is for both Mac and Windows. The installation tutorial below is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.'
+        importantNotes: 'This plugin is for both Mac and Windows. The installation tutorial below is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
+         youtube: {
+          channelName: 'D3V edits',
+          channelUrl: 'https://www.youtube.com/@D3Vedits'
+        }
       }
     },
     { 
@@ -141,7 +165,11 @@ export const storeItems = {
        details: {
         fileSize: '33.9 MB',
         installation: 'The dedicated installation video is already below. Make sure to follow the instruction carefully.',
-        importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.'
+        importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
+         youtube: {
+          channelName: 'D3V edits',
+          channelUrl: 'https://www.youtube.com/@D3Vedits'
+        }
       }
     },
     { 
@@ -162,7 +190,11 @@ export const storeItems = {
        details: {
         fileSize: '250 MB',
         installation: 'The dedicated installation video is already below. Make sure to follow the instruction carefully.',
-        importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.'
+        importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
+         youtube: {
+          channelName: 'D3V edits',
+          channelUrl: 'https://www.youtube.com/@D3Vedits'
+        }
       }
     },
   ],
@@ -182,8 +214,11 @@ export const storeItems = {
       installVideo: 'https://youtu.be/v_bqH80FjN4?si=qXt9G_mB189pYi4g',
       details: {
         fileSize: '25 MB',
-        installation: 'Check the video preview for how to use the project file.',
-        importantNotes: 'Requires Alight Motion. Please subscribe to my YouTube channel for more content!'
+        importantNotes: 'Requires Alight Motion.',
+         youtube: {
+          channelName: 'D3V edits',
+          channelUrl: 'https://www.youtube.com/@D3Vedits'
+        }
       }
     },
     {
@@ -201,8 +236,11 @@ export const storeItems = {
       installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4',
       details: {
         fileSize: '30 MB',
-        installation: 'Check the video preview for how to use the project file.',
-        importantNotes: 'Requires Alight Motion. Please subscribe to my YouTube channel for more content!'
+        importantNotes: 'Requires Alight Motion.',
+         youtube: {
+          channelName: 'D3V edits',
+          channelUrl: 'https://www.youtube.com/@D3Vedits'
+        }
       }
     },
     {
@@ -220,8 +258,11 @@ export const storeItems = {
       installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4',
        details: {
         fileSize: '5 MB',
-        installation: 'Check the video preview for how to use the project file.',
-        importantNotes: 'Works with any video editor that supports LUTs. Please subscribe to my YouTube channel for more content!'
+        importantNotes: 'Works with any video editor that supports LUTs.',
+         youtube: {
+          channelName: 'D3V edits',
+          channelUrl: 'https://www.youtube.com/@D3Vedits'
+        }
       }
     },
     {
@@ -239,8 +280,11 @@ export const storeItems = {
       installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4',
        details: {
         fileSize: '15 MB',
-        installation: 'Check the video preview for how to use the project file.',
-        importantNotes: 'Requires Alight Motion. Please subscribe to my YouTube channel for more content!'
+        importantNotes: 'Requires Alight Motion.',
+         youtube: {
+          channelName: 'D3V edits',
+          channelUrl: 'https://www.youtube.com/@D3Vedits'
+        }
       }
     },
   ],

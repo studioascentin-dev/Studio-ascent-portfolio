@@ -7,7 +7,7 @@ import { storeItems } from '@/lib/store-data';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { Button } from '@/components/ui/button';
-import { Star, Check, Apple, ArrowLeft, TriangleAlert, Download, Info, MessageSquare, Wallet, Lock, Trash2 } from 'lucide-react';
+import { Star, Check, Apple, ArrowLeft, TriangleAlert, Download, Info, MessageSquare, Wallet, Lock, Trash2, Youtube } from 'lucide-react';
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -403,8 +403,7 @@ export default function ProductDetailPage() {
             <Header />
             <main className="flex-1 pt-24">
                 <div className="container mx-auto px-4 md:px-6 py-8 md:py-12">
-                    <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-start">
-                        
+                     <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-start">
                         <div className="space-y-6 md:sticky md:top-28">
                             <div className="relative aspect-video w-full overflow-hidden rounded-lg shadow-lg">
                                 {isPricedItem && item.discount && (
@@ -422,6 +421,15 @@ export default function ProductDetailPage() {
                                 priority
                             />
                             </div>
+                             {isPricedItem && (
+                                <Alert className="bg-primary/10 border-primary/20 text-foreground md:hidden">
+                                    <TriangleAlert className="h-4 w-4 !text-primary" />
+                                    <AlertTitle className="font-bold !text-primary-foreground">Important</AlertTitle>
+                                    <AlertDescription className="text-muted-foreground text-sm">
+                                    If the payment page doesn't load, press Cmd + Shift + R (Mac) or Ctrl + Shift + R (Windows) to force a refresh.
+                                    </AlertDescription>
+                                </Alert>
+                            )}
                         </div>
 
                         
@@ -458,7 +466,7 @@ export default function ProductDetailPage() {
                             )}
 
                              {isPricedItem && (
-                                <Alert className="bg-primary/10 border-primary/20 text-foreground">
+                                <Alert className="bg-primary/10 border-primary/20 text-foreground hidden md:block">
                                     <TriangleAlert className="h-4 w-4 !text-primary" />
                                     <AlertTitle className="font-bold !text-primary-foreground">Important</AlertTitle>
                                     <AlertDescription className="text-muted-foreground text-sm">
@@ -500,6 +508,27 @@ export default function ProductDetailPage() {
                                         </div>
                                     </div>
                                 </Card>
+                                )}
+                                {'youtube' in item.details && item.details.youtube && (
+                                     <Card className="bg-secondary/50 backdrop-blur-sm border-border p-6 md:p-8">
+                                        <div className="flex items-start gap-4 md:gap-6">
+                                            <Youtube className="h-8 w-8 md:h-10 md:w-10 text-red-500 mt-1 flex-shrink-0" />
+                                            <div>
+                                                <h3 className="font-bold text-lg md:text-xl mb-1">YouTube Channel</h3>
+                                                <p className="text-muted-foreground text-sm md:text-base">
+                                                    For more content and tutorials, check out{' '}
+                                                    <a 
+                                                        href={item.details.youtube.channelUrl} 
+                                                        target="_blank" 
+                                                        rel="noopener noreferrer" 
+                                                        className="text-primary hover:underline"
+                                                    >
+                                                        {item.details.youtube.channelName}
+                                                    </a>.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </Card>
                                 )}
                                 <Card className="bg-secondary/50 backdrop-blur-sm border-border p-6 md:p-8">
                                     <div className="flex items-start gap-4 md:gap-6">

@@ -396,6 +396,23 @@ export default function ProductDetailPage() {
     const isPlugin = 'price' in item && 'originalPrice' in item && storeItems.plugins.some(p => p.slug === item.slug);
     const isProjectFile = 'price' in item && 'originalPrice' in item && storeItems.projectFiles.some(p => p.slug === item.slug);
     const isPricedItem = isPlugin || isProjectFile;
+    
+    const getEmbedUrl = (url: string) => {
+        if (!url) return '';
+        
+        let videoId = '';
+        if (url.includes('youtu.be/')) {
+            videoId = url.split('youtu.be/')[1].split('?')[0];
+        } else if (url.includes('youtube.com/watch?v=')) {
+            videoId = url.split('watch?v=')[1].split('&')[0];
+        } else if (url.includes('youtube.com/shorts/')) {
+            videoId = url.split('shorts/')[1].split('?')[0];
+        } else if (url.includes('youtube.com/embed/')) {
+            return url;
+        }
+
+        return videoId ? `https://www.youtube.com/embed/${videoId}` : url;
+    };
 
 
     return (
@@ -498,7 +515,7 @@ export default function ProductDetailPage() {
                                         </div>
                                     </div>
                                 </Card>
-                                {isPlugin && (
+                                {isPlugin && 'installation' in item.details && item.details.installation && (
                                 <Card className="bg-secondary/50 backdrop-blur-sm border-border p-6 md:p-8">
                                     <div className="flex items-start gap-4 md:gap-6">
                                         <Info className="h-8 w-8 md:h-10 md:w-10 text-primary mt-1 flex-shrink-0" />
@@ -552,7 +569,7 @@ export default function ProductDetailPage() {
                                 </h2>
                                 <div className="aspect-video max-w-4xl mx-auto w-full overflow-hidden rounded-lg border border-border shadow-lg">
                                     <iframe
-                                        src={item.installVideo.replace("youtu.be/", "youtube.com/embed/").split('?')[0]}
+                                        src={getEmbedUrl(item.installVideo)}
                                         title={`Preview video for ${item.name}`}
                                         frameBorder="0"
                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

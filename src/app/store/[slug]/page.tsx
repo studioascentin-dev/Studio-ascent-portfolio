@@ -382,7 +382,7 @@ export default function ProductDetailPage() {
 
     const allItems = [
         ...storeItems.plugins,
-        ...storeItems.templates,
+        ...storeItems.projectFiles,
         ...storeItems.applications,
     ];
     
@@ -644,3 +644,5 @@ export default function ProductDetailPage() {
         </div>
     );
 }
+
+    

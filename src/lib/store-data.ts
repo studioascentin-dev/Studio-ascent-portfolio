@@ -62,7 +62,7 @@ export const storeItems = {
         importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.'
       }
     },
-    { _
+    {
       slug: 'twixtor-pro',
       name: 'Twixtor Pro', 
       image: '/images/twixtor.png', 
@@ -169,7 +169,7 @@ export const storeItems = {
   projectFiles: [
     { 
       slug: 'kaguya-edit',
-      name: 'kaguya edit shoko remake by D3V', 
+      name: 'kaguya edit shoko remake by D3V',
       image: 'https://picsum.photos/seed/ytpack/600/400', 
       dataAiHint: 'anime music video',
       description: 'A dynamic edit pack for creating high-energy anime music videos.',

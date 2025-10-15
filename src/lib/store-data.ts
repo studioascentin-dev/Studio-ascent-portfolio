@@ -167,10 +167,10 @@ export const storeItems = {
     },
   ],
   projectFiles: [
-    { 
+    {
       slug: 'kaguya-edit',
       name: 'kaguya edit shoko remake by D3V',
-      image: 'https://picsum.photos/seed/ytpack/600/400', 
+      image: 'https://picsum.photos/seed/ytpack/600/400',
       dataAiHint: 'anime music video',
       description: 'A dynamic edit pack for creating high-energy anime music videos.',
       price: 199,
@@ -178,78 +178,98 @@ export const storeItems = {
       discount: '60% OFF',
       reviews: 25,
       rating: 5,
-      platform: 'Mac & Windows',
-      installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4'
+      platform: 'Alight Motion',
+      installVideo: 'https://youtu.be/v_bqH80FjN4?si=qXt9G_mB189pYi4g',
+      details: {
+        fileSize: '25 MB',
+        installation: 'Check the video preview for how to use the project file.',
+        importantNotes: 'Requires Alight Motion. Please subscribe to my YouTube channel for more content!'
+      }
     },
-    { 
+    {
       slug: 'instagram-story-kit',
-      name: 'Instagram Story Kit', 
-      image: 'https://picsum.photos/seed/igstory/600/400', 
+      name: 'Instagram Story Kit',
+      image: 'https://picsum.photos/seed/igstory/600/400',
       dataAiHint: 'instagram story',
-      description: 'Animated story templates for After Effects to make your content pop.',
+      description: 'Animated story templates to make your content pop.',
       price: 199,
       originalPrice: 599,
       discount: '67% OFF',
       reviews: 30,
       rating: 4,
-      platform: 'Mac & Windows',
-      installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4'
+      platform: 'Alight Motion',
+      installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4',
+      details: {
+        fileSize: '30 MB',
+        installation: 'Check the video preview for how to use the project file.',
+        importantNotes: 'Requires Alight Motion. Please subscribe to my YouTube channel for more content!'
+      }
     },
-    { 
+    {
       slug: 'cinematic-luts',
-      name: 'Cinematic LUTs Pack', 
-      image: 'https://picsum.photos/seed/luts/600/400', 
+      name: 'Cinematic LUTs Pack',
+      image: 'https://picsum.photos/seed/luts/600/400',
       dataAiHint: 'color grading film',
-      description: 'A pack of professional color grading LUTs for Premiere Pro and Final Cut.',
+      description: 'A pack of professional color grading LUTs.',
       price: 199,
       originalPrice: 799,
       discount: '75% OFF',
       reviews: 50,
       rating: 5,
-      platform: 'Mac & Windows',
-      installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4'
+      platform: 'Alight Motion',
+      installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4',
+       details: {
+        fileSize: '5 MB',
+        installation: 'Check the video preview for how to use the project file.',
+        importantNotes: 'Works with any video editor that supports LUTs. Please subscribe to my YouTube channel for more content!'
+      }
     },
-    { 
+    {
       slug: '80s-retro-titles',
-      name: '80s Retro Titles', 
-      image: 'https://picsum.photos/seed/retro/600/400', 
+      name: '80s Retro Titles',
+      image: 'https://picsum.photos/seed/retro/600/400',
       dataAiHint: 'retro title card',
-      description: 'Retro and synthwave-style title animations for your YouTube videos.',
+      description: 'Retro and synthwave-style title animations.',
       price: 199,
       originalPrice: 399,
       discount: '50% OFF',
       reviews: 18,
       rating: 4,
-      platform: 'Mac & Windows',
-      installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4'
+      platform: 'Alight Motion',
+      installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4',
+       details: {
+        fileSize: '15 MB',
+        installation: 'Check the video preview for how to use the project file.',
+        importantNotes: 'Requires Alight Motion. Please subscribe to my YouTube channel for more content!'
+      }
     },
   ],
   applications: [
-    { 
+    {
       slug: 'after-effects',
-      name: 'After Effects', 
+      name: 'After Effects',
       image: 'https://picsum.photos/seed/aftereffects/600/400',
       dataAiHint: 'motion graphics',
       description: 'The industry-standard motion graphics and visual effects software.'
     },
-    { 
+    {
       slug: 'premiere-pro',
-      name: 'Premiere Pro', 
-      image: 'https://picsum.photos/seed/premiere/600/400', 
+      name: 'Premiere Pro',
+      image: 'https://picsum.photos/seed/premiere/600/400',
       dataAiHint: 'video editing software',
       description: 'Professional video editing software for film, TV, and the web.'
     },
-    { 
+    {
       slug: 'final-cut-pro',
-      name: 'Final Cut Pro', 
-      image: 'https://picsum.photos/seed/finalcut/600/400', 
+      name: 'Final Cut Pro',
+      image: 'https://picsum.photos/seed/finalcut/600/400',
       dataAiHint: 'apple software',
       description: 'Revolutionary video editing for Mac with powerful features and an intuitive design.'
     },
-    { 
+    {
       slug: 'davinci-resolve',
-      name: 'DaVinci Resolve', 
-      image: 'https://picsum.photos/seed/davinci/600/400', 
+      name: 'DaVinci Resolve',
+      image: 'https://picsum.photos/seed/davinci/600/400',
       dataAiHint: 'color grading',
       description: 'The only solution that combines editing, color correction, visual effects, motion graphics, and audio post-production all in one software tool.'
     },

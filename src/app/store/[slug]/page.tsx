@@ -1,4 +1,5 @@
 
+
 "use client";
 
 import { notFound, useParams } from 'next/navigation';
@@ -392,7 +393,10 @@ export default function ProductDetailPage() {
         notFound();
     }
 
-    const isPlugin = 'price' in item;
+    const isPlugin = 'price' in item && 'originalPrice' in item && storeItems.plugins.some(p => p.slug === item.slug);
+    const isProjectFile = 'price' in item && 'originalPrice' in item && storeItems.projectFiles.some(p => p.slug === item.slug);
+    const isPricedItem = isPlugin || isProjectFile;
+
 
     return (
         <div className="flex min-h-screen flex-col bg-background text-foreground">
@@ -403,7 +407,7 @@ export default function ProductDetailPage() {
                         
                         <div className="space-y-6 md:sticky md:top-28">
                             <div className="relative aspect-video w-full overflow-hidden rounded-lg shadow-lg">
-                                {isPlugin && item.discount && (
+                                {isPricedItem && item.discount && (
                                     <Badge variant="destructive" className="absolute top-2 right-2 md:top-4 md:right-4 z-10 text-sm md:text-base">
                                         {item.discount}
                                     </Badge>
@@ -424,12 +428,13 @@ export default function ProductDetailPage() {
                         <div className="space-y-4 md:space-y-6">
                             <div className="space-y-2 md:space-y-3">
                                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold font-headline">{item.name}</h1>
-                                {isPlugin && (
+                                {isPricedItem && (
                                      <div className="flex items-center gap-4 flex-wrap">
                                          <div className="flex items-center gap-2 text-sm text-muted-foreground font-medium">
-                                            {item.platform === 'Mac & Windows' ? <Check className="h-5 w-5 text-green-500" /> : <Apple className="h-4 w-4" />} {item.platform}
+                                            {'platform' in item && item.platform === 'Mac & Windows' ? <Check className="h-5 w-5 text-green-500" /> : <Apple className="h-4 w-4" />} 
+                                            {'platform' in item && item.platform}
                                         </div>
-                                        <StarRating rating={item.rating} count={item.reviews} size="h-5 w-5" />
+                                        {'rating' in item && 'reviews' in item && <StarRating rating={item.rating} count={item.reviews} size="h-5 w-5" />}
                                      </div>
                                 )}
                                 <p className="text-sm md:text-base text-muted-foreground">
@@ -437,14 +442,14 @@ export default function ProductDetailPage() {
                                 </p>
                             </div>
 
-                            {isPlugin && (
+                            {isPricedItem && (
                                 <div className="space-y-4 rounded-lg bg-secondary/50 p-4 md:p-6">
                                      <div className="flex items-baseline gap-2 md:gap-4">
                                         <span className="text-4xl md:text-5xl font-bold text-primary">₹{item.price}</span>
                                         <span className="text-xl md:text-2xl text-muted-foreground line-through">₹{item.originalPrice}</span>
                                     </div>
                                     <Button asChild size="lg" className="w-full font-bold text-base md:text-lg py-4 md:py-6">
-                                        <Link href={item.paymentLink || '#'} target="_blank" rel="noopener noreferrer">Buy Now</Link>
+                                        <Link href={'paymentLink' in item ? item.paymentLink || '#' : '#'} target="_blank" rel="noopener noreferrer">Buy Now</Link>
                                     </Button>
                                     <p className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
                                         <Lock className="h-4 w-4" /> Secured by Razorpay
@@ -452,7 +457,7 @@ export default function ProductDetailPage() {
                                 </div>
                             )}
 
-                             {isPlugin && (
+                             {isPricedItem && (
                                 <Alert className="bg-primary/10 border-primary/20 text-foreground">
                                     <TriangleAlert className="h-4 w-4 !text-primary" />
                                     <AlertTitle className="font-bold !text-primary-foreground">Important</AlertTitle>
@@ -462,7 +467,7 @@ export default function ProductDetailPage() {
                                 </Alert>
                             )}
 
-                            {!isPlugin && (
+                            {!isPricedItem && (
                                  <Button asChild size="lg" className="w-full font-bold">
                                     <a href="/#contact">Contact For Details</a>
                                 </Button>
@@ -509,11 +514,20 @@ export default function ProductDetailPage() {
 
 
                     <div className="max-w-7xl mx-auto">
-                        {item.installVideo && (
-                            <section className="mb-12 md:mb-16" aria-labelledby="installation-video-heading">
-                                <h2 id="installation-video-heading" className="text-2xl md:text-3xl font-bold font-headline mb-6 md:mb-8 text-center">How to Install</h2>
+                        {'installVideo' in item && item.installVideo && (
+                             <section className="mb-12 md:mb-16" aria-labelledby="installation-video-heading">
+                                <h2 id="installation-video-heading" className="text-2xl md:text-3xl font-bold font-headline mb-6 md:mb-8 text-center">
+                                    {isProjectFile ? "Preview" : "How to Install"}
+                                </h2>
                                 <div className="aspect-video max-w-4xl mx-auto w-full overflow-hidden rounded-lg border border-border shadow-lg">
-                                    <video src={item.installVideo} controls className="w-full h-full object-cover" title={`Installation video for ${item.name}`} />
+                                    <iframe
+                                        src={item.installVideo.replace("youtu.be/", "youtube.com/embed/").split('?')[0]}
+                                        title={`Preview video for ${item.name}`}
+                                        frameBorder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowFullScreen
+                                        className="w-full h-full object-cover"
+                                    ></iframe>
                                 </div>
                             </section>
                         )}
@@ -644,5 +658,3 @@ export default function ProductDetailPage() {
         </div>
     );
 }
-
-    

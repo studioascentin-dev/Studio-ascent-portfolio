@@ -215,15 +215,15 @@ export const storeItems = {
       details: {
         fileSize: '25 MB',
         importantNotes: 'Requires Alight Motion.',
-         youtube: {
+        youtube: {
           channelName: 'D3V edits',
           channelUrl: 'https://www.youtube.com/@D3Vedits'
         }
       }
     },
     {
-      slug: 'instagram-story-kit',
-      name: 'Instagram Story Kit',
+      slug: 'komi-san-edit',
+      name: 'Komi-san edit | shoko remake',
       image: 'https://picsum.photos/seed/igstory/600/400',
       dataAiHint: 'instagram story',
       description: 'Animated story templates to make your content pop.',
@@ -233,11 +233,11 @@ export const storeItems = {
       reviews: 30,
       rating: 4,
       platform: 'Alight Motion',
-      installVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4',
+      installVideo: 'https://youtube.com/shorts/DlbaRFqhSYE?si=BQSfkr8z98lbdZ-O',
       details: {
         fileSize: '30 MB',
         importantNotes: 'Requires Alight Motion.',
-         youtube: {
+        youtube: {
           channelName: 'D3V edits',
           channelUrl: 'https://www.youtube.com/@D3Vedits'
         }
@@ -259,7 +259,7 @@ export const storeItems = {
        details: {
         fileSize: '5 MB',
         importantNotes: 'Works with any video editor that supports LUTs.',
-         youtube: {
+        youtube: {
           channelName: 'D3V edits',
           channelUrl: 'https://www.youtube.com/@D3Vedits'
         }
@@ -281,7 +281,7 @@ export const storeItems = {
        details: {
         fileSize: '15 MB',
         importantNotes: 'Requires Alight Motion.',
-         youtube: {
+        youtube: {
           channelName: 'D3V edits',
           channelUrl: 'https://www.youtube.com/@D3Vedits'
         }

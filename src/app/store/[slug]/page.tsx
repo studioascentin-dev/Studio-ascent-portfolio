@@ -13,7 +13,7 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Separator } from '@/components/ui/separator';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -318,38 +318,29 @@ const SupportForm = ({productName}: {productName: string}) => {
   );
 };
 
-const initialReviews = [
-    {
-      id: 1,
-      author: 'Alex Johnson',
-      avatar: 'https://i.pravatar.cc/150?u=a042581f4e29026704d',
-      rating: 5,
-      date: '2 weeks ago',
-      content: 'This plugin is a game-changer! The shadows are incredibly realistic and easy to control. Saved me hours of work on my last project. Highly recommended!',
-      reply: {
-        author: 'Dev Kumar Das',
-        date: '1 week ago',
-        content: "Thanks Alex! So glad to hear you're finding it useful. Let me know if you have any feature requests!"
-      }
-    },
-    {
-      id: 2,
-      author: 'Samantha Lee',
-      avatar: 'https://i.pravatar.cc/150?u=a042581f4e29026705d',
-      rating: 4,
-      date: '1 month ago',
-      content: "Really powerful tool. There's a bit of a learning curve with all the settings, but the results are worth it. The installation video was super helpful.",
-      reply: null
-    }
-];
 
 export default function ProductDetailPage() {
     const params = useParams();
     const slug = params.slug as string;
     const { toast } = useToast();
 
-    const [reviews, setReviews] = useState(initialReviews);
+    const allItems = [
+        ...storeItems.plugins,
+        ...storeItems.projectFiles,
+        ...storeItems.applications,
+    ];
+    
+    const item = allItems.find(item => item.slug === slug) as any;
+
+    const [reviews, setReviews] = useState(item?.reviewsData || []);
     const [replyingTo, setReplyingTo] = useState<number | null>(null);
+
+    useEffect(() => {
+      if (item?.reviewsData) {
+        setReviews(item.reviewsData);
+      }
+    }, [item]);
+
 
     const handleReplySubmit = (reviewId: number, data: z.infer<typeof replyFormSchema>) => {
         console.log(`Replying to review ${reviewId}:`, data.reply);
@@ -364,7 +355,7 @@ export default function ProductDetailPage() {
         const newReview = {
             id: Date.now(),
             author: data.name,
-            avatar: `https://i.pravatar.cc/150?u=${data.name}`,
+            avatar: `https://i.pravatar.cc/150?u=${data.name.split(' ').join('')}`,
             rating: data.rating,
             date: 'Just now',
             content: data.review,
@@ -380,14 +371,6 @@ export default function ProductDetailPage() {
             description: "The review has been removed.",
         });
     };
-
-    const allItems = [
-        ...storeItems.plugins,
-        ...storeItems.projectFiles,
-        ...storeItems.applications,
-    ];
-    
-    const item = allItems.find(item => item.slug === slug);
 
     if (!item) {
         notFound();
@@ -584,7 +567,7 @@ export default function ProductDetailPage() {
                             <section className="space-y-8" aria-labelledby="reviews-heading">
                                 <h2 id="reviews-heading" className="text-2xl md:text-3xl font-bold font-headline">Reviews & Ratings</h2>
                                 {reviews.length > 0 ? (
-                                    reviews.map(review => (
+                                    reviews.map((review: any) => (
                                     <article key={review.id} className="bg-secondary/30 p-4 md:p-6 rounded-lg border border-border">
                                         <div className="flex items-start gap-4">
                                             <Avatar>

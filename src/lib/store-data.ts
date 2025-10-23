@@ -15,7 +15,7 @@ export const storeItems = {
       discount: '97% OFF',
       platform: 'Mac Only',
       paymentLink: 'https://rzp.io/l/sapphire-ae',
-      installVideo: 'https://www.youtube.com/embed/g3mSMa34kKM',
+      installVideo: '/videos/installation of sapphire.mp4',
       details: {
         fileSize: '1.2 GB',
         importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
@@ -59,7 +59,7 @@ export const storeItems = {
       discount: '90% OFF',
       platform: 'Mac Only',
       paymentLink: 'https://rzp.io/l/jerryflow',
-      installVideo: 'https://www.youtube.com/embed/fMFZf_iGFgA',
+      installVideo: '/videos/installation of jerryflow.mp4',
        details: {
         fileSize: '15.8 MB',
         importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
@@ -94,7 +94,7 @@ export const storeItems = {
       discount: '94% OFF',
       platform: 'Mac Only',
       paymentLink: 'https://rzp.io/l/twixtor-pro',
-      installVideo: 'https://www.youtube.com/embed/G2y_-rgQisg',
+      installVideo: '/videos/twixtor setup installation.mp4',
        details: {
         fileSize: '45.1 MB',
         importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
@@ -128,7 +128,7 @@ export const storeItems = {
       originalPrice: 3999,
       discount: '98% OFF',
       platform: 'Mac Only',
-      installVideo: 'https://www.youtube.com/embed/A82uV45w-v4',
+      installVideo: '/videos/Gaussian splatting installation.mp4',
        details: {
         fileSize: '128 MB',
         importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
@@ -153,7 +153,7 @@ export const storeItems = {
       discount: '97% OFF',
       platform: 'Mac & Windows',
       paymentLink: 'https://rzp.io/l/shadow-studio-3',
-      installVideo: 'https://www.youtube.com/embed/5DGMg320p-0',
+      installVideo: '/videos/shadow studio 3 installation.mp4',
        details: {
         fileSize: '78.5 MB',
         importantNotes: 'This plugin is for both Mac and Windows. The installation tutorial below is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
@@ -222,7 +222,7 @@ export const storeItems = {
       discount: '97% OFF',
       platform: 'Mac Only',
       paymentLink: 'https://rzp.io/l/element-3d',
-      installVideo: 'https://www.youtube.com/embed/xLh1X4jF47I',
+      installVideo: '/videos/installation of 3d element.mp4',
        details: {
         fileSize: '250 MB',
         importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',

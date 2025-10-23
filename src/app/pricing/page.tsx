@@ -220,7 +220,9 @@ const PricingCard = ({ tier, serviceKey }: { tier: any, serviceKey: string }) =>
                     ))}
                 </ul>
                 <div className="flex-grow"></div>
-                <Button className="w-full mt-6 md:mt-8 font-bold text-base md:text-lg py-3 md:py-6">{tier.buttonText}</Button>
+                <Button asChild className="w-full mt-6 md:mt-8 font-bold text-base md:text-lg py-3 md:py-6">
+                    <Link href="/#contact">{tier.buttonText}</Link>
+                </Button>
             </div>
         )
     }
@@ -259,7 +261,9 @@ const PricingCard = ({ tier, serviceKey }: { tier: any, serviceKey: string }) =>
             )}
             
             <div className="mt-auto pt-8">
-                 <Button className="w-full font-bold text-base md:text-lg py-3 md:py-6">{tier.buttonText}</Button>
+                 <Button asChild className="w-full font-bold text-base md:text-lg py-3 md:py-6">
+                    <Link href="/#contact">{tier.buttonText}</Link>
+                 </Button>
             </div>
         </div>
     );

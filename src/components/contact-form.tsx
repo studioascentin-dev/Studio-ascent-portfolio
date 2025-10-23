@@ -23,13 +23,7 @@ import { sendEmail } from "@/ai/flows/send-email";
 import { useSearchParams } from "next/navigation";
 import { pricingData } from "@/lib/pricing-data";
 
-const serviceMap = {
-    "Video Editing": pricingData["video-editing"].tiers.map(tier => ({ name: tier.name, price: tier.price })),
-    "AI Chatbot": pricingData["ai-chatbot"].tiers.map(tier => ({ name: tier.name, price: tier.price })),
-    "Web Development": pricingData["web-development"].tiers.map(tier => ({ name: tier.name, price: tier.price })),
-};
-
-const services = Object.keys(serviceMap);
+const services = Object.values(pricingData).map(s => s.title);
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -51,21 +45,20 @@ export function ContactForm() {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const searchParams = useSearchParams();
-  const serviceParam = searchParams.get('service');
+  const planParam = searchParams.get('service');
   
   let initialService = "";
   let initialPlan = "";
 
-  if(serviceParam) {
-    for (const [service, plans] of Object.entries(serviceMap)) {
-      if (plans.some(plan => plan.name === serviceParam)) {
-        initialService = service;
-        initialPlan = serviceParam;
+  if(planParam) {
+    for (const service of Object.values(pricingData)) {
+      if (service.tiers.some(tier => tier.name === planParam)) {
+        initialService = service.title;
+        initialPlan = planParam;
         break;
       }
     }
   }
-
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -78,16 +71,19 @@ export function ContactForm() {
     },
   });
 
-  const selectedService = useWatch({
+  const selectedServiceTitle = useWatch({
     control: form.control,
     name: 'service',
   });
 
   React.useEffect(() => {
-    if (form.getValues('servicePlan') && !serviceMap[selectedService as keyof typeof serviceMap]?.some(p => p.name === form.getValues('servicePlan'))) {
+    const currentServiceData = Object.values(pricingData).find(s => s.title === selectedServiceTitle);
+    const availablePlans = currentServiceData ? currentServiceData.tiers : [];
+    
+    if (form.getValues('servicePlan') && !availablePlans.some(p => p.name === form.getValues('servicePlan'))) {
        form.resetField('servicePlan', { defaultValue: '' });
     }
-  }, [selectedService, form]);
+  }, [selectedServiceTitle, form]);
   
   React.useEffect(() => {
     if (initialService && initialPlan) {
@@ -100,8 +96,9 @@ export function ContactForm() {
   const onSubmit = async (data: FormValues) => {
     setIsSubmitting(true);
     try {
-        const planPrice = serviceMap[data.service as keyof typeof serviceMap]?.find(p => p.name === data.servicePlan)?.price;
-        const serviceText = `${data.servicePlan} (${planPrice})`;
+        const currentServiceData = Object.values(pricingData).find(s => s.title === data.service);
+        const planPrice = currentServiceData?.tiers.find(p => p.name === data.servicePlan)?.price;
+        const serviceText = `${data.servicePlan} (${planPrice || 'Price not found'})`;
 
         const emailResult = await sendEmail({
             ...data,
@@ -134,8 +131,9 @@ export function ContactForm() {
         setIsSubmitting(false);
     }
   };
-
-  const availablePlans = selectedService ? serviceMap[selectedService as keyof typeof serviceMap] : [];
+  
+  const selectedServiceData = Object.values(pricingData).find(s => s.title === selectedServiceTitle);
+  const availablePlans = selectedServiceData ? selectedServiceData.tiers : [];
 
   return (
     <Form {...form}>
@@ -176,7 +174,7 @@ export function ContactForm() {
                 render={({ field }) => (
                 <FormItem>
                     <FormLabel>Service</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <Select onValueChange={field.onChange} value={field.value || ""}>
                     <FormControl>
                         <SelectTrigger>
                             <SelectValue placeholder="Select a service" />
@@ -200,7 +198,7 @@ export function ContactForm() {
                 render={({ field }) => (
                 <FormItem>
                     <FormLabel>Service Plan</FormLabel>
-                    <Select onValueChange={field.onChange} value={field.value || ""} disabled={!selectedService}>
+                    <Select onValueChange={field.onChange} value={field.value || ""} disabled={!selectedServiceTitle}>
                     <FormControl>
                         <SelectTrigger>
                         <SelectValue placeholder="Select a plan" />

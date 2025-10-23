@@ -17,7 +17,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2 } from "lucide-react";
+import { Loader2, PartyPopper } from "lucide-react";
 import * as React from "react";
 import { sendEmail } from "@/ai/flows/send-email";
 import { useSearchParams } from "next/navigation";
@@ -105,8 +105,19 @@ export function ContactForm() {
 
         if (emailResult.success) {
             toast({
-                title: 'Message Sent!',
-                description: 'Thanks for reaching out. I\'ll get back to you shortly.',
+                title: (
+                  <div className="flex items-center gap-3">
+                    <PartyPopper className="h-6 w-6 text-primary animate-bounce" />
+                    <span className="text-lg font-bold">Message Sent!</span>
+                  </div>
+                ),
+                description: (
+                  <div className="mt-2 text-base">
+                    <p>Thanks for reaching out! I'll get back to you shortly.</p>
+                    <p className="font-semibold mt-2">Please check your email (and spam folder) regularly for my reply.</p>
+                  </div>
+                ),
+                duration: 8000, 
             });
             form.reset({
                 name: "",

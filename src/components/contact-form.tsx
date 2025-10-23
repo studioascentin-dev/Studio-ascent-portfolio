@@ -20,6 +20,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Loader2 } from "lucide-react";
 import * as React from "react";
 import { sendEmail } from "@/ai/flows/send-email";
+import { useSearchParams } from "next/navigation";
 
 
 const services = [
@@ -27,6 +28,15 @@ const services = [
     "Video Editing",
     "AI Chatbot",
     "Web Development",
+    "Basic Video Editing",
+    "Intermediate Video Editing",
+    "Pro Video Editing",
+    "FAQ/Support Bot",
+    "Booking Bot",
+    "GPT-Powered Bot",
+    "Basic Web Development",
+    "Intermediate Web Development",
+    "Enterprise Web Development",
     "Something Else",
 ];
 
@@ -37,7 +47,7 @@ const formSchema = z.object({
   message: z.string().min(10, { message: "Message must be at least 10 characters." }),
 });
 
-export function ContactForm() {
+function ContactFormComponent() {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = React.useState(false);
 
@@ -50,6 +60,23 @@ export function ContactForm() {
       message: "",
     },
   });
+
+  const searchParams = useSearchParams();
+  const serviceQuery = searchParams.get('service');
+
+  React.useEffect(() => {
+    if (serviceQuery) {
+      const decodedService = decodeURIComponent(serviceQuery);
+      if (services.includes(decodedService)) {
+        form.setValue("service", decodedService);
+      } else {
+        // If the service is not in the predefined list, you might want to handle it.
+        // For now, we just set it. The Select component might not show it as selected if not in the list.
+        // A better approach would be to dynamically add it to the services list if not present.
+        form.setValue("service", decodedService);
+      }
+    }
+  }, [serviceQuery, form]);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
@@ -117,7 +144,7 @@ export function ContactForm() {
             render={({ field }) => (
                 <FormItem>
                     <FormLabel>Service</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <Select onValueChange={field.onChange} value={field.value} defaultValue={field.value}>
                         <FormControl>
                         <SelectTrigger>
                             <SelectValue placeholder="Select a service you're interested in" />
@@ -159,3 +186,13 @@ export function ContactForm() {
     </Form>
   );
 }
+
+export function ContactForm() {
+    return (
+        <React.Suspense fallback={<div>Loading...</div>}>
+            <ContactFormComponent />
+        </React.Suspense>
+    )
+}
+
+    

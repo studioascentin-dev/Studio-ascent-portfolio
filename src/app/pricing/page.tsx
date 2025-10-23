@@ -7,167 +7,7 @@ import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import { Check, ArrowRight, CheckCircle, Smartphone, Bot, LayoutTemplate, Briefcase, Database, Cloud, Zap, Shield, Globe, Palette, Cog, UserCog } from 'lucide-react';
 import Link from 'next/link';
-
-const pricingData = {
-  'video-editing': {
-    title: 'Video Editing',
-    tiers: [
-      {
-        name: 'Basic Video Editing',
-        price: '₹2,000',
-        features: [
-          'Simple Cuts & Transitions',
-          'Up to 5 Mins (1080p export)',
-          'Royalty-Free Music',
-          'Max File Size: 5GB',
-        ],
-        details: ['2 Revisions included', 'Delivery: 2-3 Days'],
-        addOns: [
-          'Extra minute @ ₹500/min',
-          'Express delivery +₹1,000',
-          'Extra per GB @ ₹100',
-        ],
-        buttonText: 'Select Plan',
-      },
-      {
-        name: 'Intermediate Video Editing',
-        price: '₹5,000',
-        popular: true,
-        features: [
-          'Color Grading & Sound Design',
-          'Up to 10 Mins (1080p export)',
-          'Basic Motion Graphics',
-          'Max File Size: 10GB-20GB',
-        ],
-        details: ['3 Revisions included', 'Delivery: 4-5 Days'],
-        addOns: [
-          'Extra minute @ ₹700/min',
-          'Express delivery +₹1,500',
-          'Extra per GB @ ₹100',
-        ],
-        buttonText: 'Select Plan',
-      },
-      {
-        name: 'Pro Video Editing',
-        price: '₹10,000',
-        features: [
-          'Advanced Effects & VFX',
-          'Up to 20 Mins (1080p/4K export)',
-          'Custom Animations',
-          'Max File Size: 50GB-80GB',
-        ],
-        details: ['Unlimited Revisions', 'Delivery: 7-10 Days'],
-        addOns: [
-          'Extra minute @ ₹1,000/min',
-          'Express delivery +₹2,000',
-          'Extra per GB @ ₹100',
-        ],
-        buttonText: 'Select Plan',
-      },
-    ],
-  },
-  'ai-chatbot': {
-    title: 'AI Chatbot',
-    tiers: [
-      {
-        name: 'FAQ/Support Bot',
-        price: '₹8,000',
-        features: [
-          'Handles FAQs',
-          'WhatsApp/Telegram Integration',
-          'Deployed on chosen platform',
-          '1 Month Free Support',
-        ],
-        details: ['Optional: Maintenance +₹2,000/month'],
-        buttonText: 'Select Plan',
-      },
-      {
-        name: 'Booking Bot',
-        price: '₹15,000',
-        popular: true,
-        features: [
-          'Order/Booking via Chat',
-          'Google Sheet/Airtable Integration',
-          'Owner Notifications',
-          'Supports WhatsApp, Website, Messenger',
-          '1 Month Free Support',
-        ],
-        details: ['Optional: Maintenance +₹3,500/month'],
-        buttonText: 'Select Plan',
-      },
-      {
-        name: 'GPT-Powered Bot',
-        price: '₹25,000',
-        features: [
-          'Smart, Human-like Replies',
-          'Uses OpenAI Credits (*not included in price*)',
-          'Advanced Customization (intents, flows)',
-          'Deployed on Website/WhatsApp/Telegram',
-          '1 Month Free Support',
-        ],
-        details: ['Optional: Maintenance +₹5,000/month'],
-        buttonText: 'Select Plan',
-      },
-    ],
-  },
-  'web-development': {
-    title: 'Choose the Right Plan for Your Website',
-    description: 'Flexible pricing for Next.js web development, designed to scale with your needs.',
-    tiers: [
-        {
-            name: 'Basic Web Development',
-            description: "Perfect for Small Businesses & Personal Sites",
-            price: '₹20,000',
-            priceSubtitle: 'Starting at',
-            features: [
-                { icon: <Check className="w-5 h-5 text-primary" />, text: '1-3 Page Website' },
-                { icon: <Zap className="w-5 h-5 text-primary" />, text: 'Next.js Framework' },
-                { icon: <Database className="w-5 h-5 text-primary" />, text: 'Basic CMS Integration' },
-                { icon: <Check className="w-5 h-5 text-primary" />, text: '1 Month Support' },
-            ],
-            buttonText: 'Start Small',
-            size: 'small',
-        },
-        {
-            name: 'Intermediate Web Development',
-            description: "Best for Growing Startups",
-            price: '₹75,000',
-            priceSubtitle: 'Starting at',
-            popular: true,
-            features: [
-                { icon: <Check className="w-5 h-5 text-primary" />, text: 'Up to 6 Page Website' },
-                { icon: <Zap className="w-5 h-5 text-primary" />, text: 'Next.js Framework' },
-                { icon: <Database className="w-5 h-5 text-primary" />, text: 'Advanced CMS' },
-                { icon: <Cog className="w-5 h-5 text-primary" />, text: 'Simple API Integrations' },
-                { icon: <Check className="w-5 h-5 text-primary" />, text: '2 Months Support' },
-            ],
-            buttonText: 'Grow Your Business',
-            size: 'medium',
-        },
-        {
-            name: 'Enterprise Web Development',
-            description: "Custom Solutions for Enterprises",
-            price: '₹1,50,000+',
-            priceSubtitle: 'Starting at',
-            priceSubDescription: 'Custom Pricing Available',
-            features: [
-                { icon: <Check className="w-5 h-5 text-primary" />, text: '10+ Page Application' },
-                { icon: <Zap className="w-5 h-5 text-primary" />, text: 'Performance Optimization' },
-                { icon: <Shield className="w-5 h-5 text-primary" />, text: 'Advanced Security Setup' },
-                { icon: <Bot className="w-5 h-5 text-primary" />, text: 'AI Feature Integration' },
-                { icon: <Globe className="w-5 h-5 text-primary" />, text: 'Multi-language Support' },
-                { icon: <Palette className="w-5 h-5 text-primary" />, text: 'UI/UX Premium Design' },
-                { icon: <UserCog className="w-5 h-5 text-primary" />, text: 'Custom Admin Dashboard' },
-                { icon: <Cog className="w-5 h-5 text-primary" />, text: 'Custom Integrations' },
-                { icon: <Check className="w-5 h-5 text-primary" />, text: '3+ Months Support' },
-            ],
-            buttonText: 'Build Enterprise Solutions',
-            size: 'large',
-        },
-    ]
-  },
-};
-
+import { pricingData } from '@/lib/pricing-data';
 
 const sectionVariants = {
   hidden: { opacity: 0 },
@@ -214,7 +54,7 @@ const PricingCard = ({ tier, serviceKey }: { tier: any, serviceKey: string }) =>
                 <ul className="mt-6 md:mt-8 space-y-3 md:space-y-4 text-sm">
                     {tier.features.map((feature: any, index: number) => (
                     <li key={index} className="flex items-center gap-3">
-                        <span className="text-primary">{feature.icon}</span>
+                        <span className="text-primary"><feature.icon className="w-5 h-5" /></span>
                         <span>{feature.text}</span>
                     </li>
                     ))}
@@ -293,14 +133,13 @@ export default function PricingPage() {
               </p>
             </motion.div>
             
-            {Object.keys(pricingData).map(serviceKey => {
-              if (serviceKey === 'web-development') return null;
-              const service = pricingData[serviceKey as keyof typeof pricingData];
+            {Object.values(pricingData).map(service => {
+              if (service.key === 'web-development') return null;
               return (
                 <motion.div key={service.title} variants={itemVariants} className="mb-16 md:mb-24">
                   <header className="flex justify-between items-center mb-8 md:mb-12">
                      <h2 className="text-2xl md:text-4xl font-bold font-headline">{service.title}</h2>
-                     <Link href={`/services/${serviceKey}`} className="flex items-center text-primary hover:underline text-sm md:text-base">
+                     <Link href={`/services/${service.key}`} className="flex items-center text-primary hover:underline text-sm md:text-base">
                         View Details <ArrowRight className="ml-2 h-4 w-4" />
                      </Link>
                   </header>
@@ -311,7 +150,7 @@ export default function PricingPage() {
                         whileHover={{ y: -8, scale: 1.03 }}
                         transition={{ type: 'spring', stiffness: 300 }}
                       >
-                        <PricingCard tier={tier} serviceKey={serviceKey} />
+                        <PricingCard tier={tier} serviceKey={service.key} />
                       </motion.div>
                     ))}
                   </div>
@@ -345,5 +184,3 @@ export default function PricingPage() {
     </div>
   );
 }
-
-    

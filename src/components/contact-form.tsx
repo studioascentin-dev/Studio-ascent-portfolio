@@ -15,33 +15,21 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2 } from "lucide-react";
 import * as React from "react";
 import { sendEmail } from "@/ai/flows/send-email";
 import { useSearchParams } from "next/navigation";
-import { cn } from "@/lib/utils";
+import { pricingData } from "@/lib/pricing-data";
 
-const servicePlanMap = {
-    "Video Editing": [
-        "Basic Video Editing",
-        "Intermediate Video Editing",
-        "Pro Video Editing",
-    ],
-    "AI Chatbot": [
-        "FAQ/Support Bot",
-        "Booking Bot",
-        "GPT-Powered Bot",
-    ],
-    "Web Development": [
-        "Basic Web Development",
-        "Intermediate Web Development",
-        "Enterprise Web Development",
-    ],
+const serviceMap = {
+    "Video Editing": pricingData["video-editing"].tiers.map(tier => ({ name: tier.name, price: tier.price })),
+    "AI Chatbot": pricingData["ai-chatbot"].tiers.map(tier => ({ name: tier.name, price: tier.price })),
+    "Web Development": pricingData["web-development"].tiers.map(tier => ({ name: tier.name, price: tier.price })),
 };
 
-const services = Object.keys(servicePlanMap);
+const services = Object.keys(serviceMap);
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -69,8 +57,8 @@ export function ContactForm() {
   let initialPlan = "";
 
   if(serviceParam) {
-    for (const [service, plans] of Object.entries(servicePlanMap)) {
-      if (plans.includes(serviceParam)) {
+    for (const [service, plans] of Object.entries(serviceMap)) {
+      if (plans.some(plan => plan.name === serviceParam)) {
         initialService = service;
         initialPlan = serviceParam;
         break;
@@ -96,9 +84,8 @@ export function ContactForm() {
   });
 
   React.useEffect(() => {
-    // Reset servicePlan when service changes, unless it's the initial load with a valid plan
-    if (form.getValues('servicePlan') && !servicePlanMap[selectedService as keyof typeof servicePlanMap]?.includes(form.getValues('servicePlan'))) {
-       form.resetField('servicePlan');
+    if (form.getValues('servicePlan') && !serviceMap[selectedService as keyof typeof serviceMap]?.some(p => p.name === form.getValues('servicePlan'))) {
+       form.resetField('servicePlan', { defaultValue: '' });
     }
   }, [selectedService, form]);
   
@@ -113,9 +100,12 @@ export function ContactForm() {
   const onSubmit = async (data: FormValues) => {
     setIsSubmitting(true);
     try {
+        const planPrice = serviceMap[data.service as keyof typeof serviceMap]?.find(p => p.name === data.servicePlan)?.price;
+        const serviceText = `${data.servicePlan} (${planPrice})`;
+
         const emailResult = await sendEmail({
             ...data,
-            service: `${data.service} - ${data.servicePlan}`, // Combine for email
+            service: serviceText,
         });
 
         if (emailResult.success) {
@@ -145,7 +135,7 @@ export function ContactForm() {
     }
   };
 
-  const availablePlans = selectedService ? servicePlanMap[selectedService as keyof typeof servicePlanMap] : [];
+  const availablePlans = selectedService ? serviceMap[selectedService as keyof typeof serviceMap] : [];
 
   return (
     <Form {...form}>
@@ -210,7 +200,7 @@ export function ContactForm() {
                 render={({ field }) => (
                 <FormItem>
                     <FormLabel>Service Plan</FormLabel>
-                    <Select onValueChange={field.onChange} value={field.value} disabled={!selectedService}>
+                    <Select onValueChange={field.onChange} value={field.value || ""} disabled={!selectedService}>
                     <FormControl>
                         <SelectTrigger>
                         <SelectValue placeholder="Select a plan" />
@@ -218,8 +208,8 @@ export function ContactForm() {
                     </FormControl>
                     <SelectContent>
                         {availablePlans.map((plan) => (
-                            <SelectItem key={plan} value={plan}>
-                                {plan}
+                            <SelectItem key={plan.name} value={plan.name}>
+                                {plan.name} - {plan.price}
                             </SelectItem>
                         ))}
                     </SelectContent>

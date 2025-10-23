@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2 } from "lucide-react";
 import * as React from "react";
@@ -23,22 +23,49 @@ import { sendEmail } from "@/ai/flows/send-email";
 import { useSearchParams } from "next/navigation";
 
 
-const services = [
-    "Photo Editing",
-    "Video Editing",
-    "AI Chatbot",
-    "Web Development",
-    "Basic Video Editing",
-    "Intermediate Video Editing",
-    "Pro Video Editing",
-    "FAQ/Support Bot",
-    "Booking Bot",
-    "GPT-Powered Bot",
-    "Basic Web Development",
-    "Intermediate Web Development",
-    "Enterprise Web Development",
-    "Something Else",
+const serviceOptions = [
+    {
+        label: "General Services",
+        options: [
+            "Photo Editing",
+            "Video Editing",
+            "AI Chatbot",
+            "Web Development",
+        ]
+    },
+    {
+        label: "Video Editing Plans",
+        options: [
+            "Basic Video Editing",
+            "Intermediate Video Editing",
+            "Pro Video Editing",
+        ]
+    },
+    {
+        label: "AI Chatbot Plans",
+        options: [
+            "FAQ/Support Bot",
+            "Booking Bot",
+            "GPT-Powered Bot",
+        ]
+    },
+    {
+        label: "Web Development Plans",
+        options: [
+            "Basic Web Development",
+            "Intermediate Web Development",
+            "Enterprise Web Development",
+        ]
+    },
+     {
+        label: "Other",
+        options: [
+            "Something Else",
+        ]
+    }
 ];
+
+const allServices = serviceOptions.flatMap(group => group.options);
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -67,12 +94,7 @@ function ContactFormComponent() {
   React.useEffect(() => {
     if (serviceQuery) {
       const decodedService = decodeURIComponent(serviceQuery);
-      if (services.includes(decodedService)) {
-        form.setValue("service", decodedService);
-      } else {
-        // If the service is not in the predefined list, you might want to handle it.
-        // For now, we just set it. The Select component might not show it as selected if not in the list.
-        // A better approach would be to dynamically add it to the services list if not present.
+      if (allServices.includes(decodedService)) {
         form.setValue("service", decodedService);
       }
     }
@@ -151,8 +173,13 @@ function ContactFormComponent() {
                         </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                            {services.map(service => (
-                                <SelectItem key={service} value={service}>{service}</SelectItem>
+                            {serviceOptions.map(group => (
+                                <SelectGroup key={group.label}>
+                                    <SelectLabel>{group.label}</SelectLabel>
+                                    {group.options.map(option => (
+                                        <SelectItem key={option} value={option}>{option}</SelectItem>
+                                    ))}
+                                </SelectGroup>
                             ))}
                         </SelectContent>
                     </Select>
@@ -194,5 +221,3 @@ export function ContactForm() {
         </React.Suspense>
     )
 }
-
-    

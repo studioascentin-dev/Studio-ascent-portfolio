@@ -61,7 +61,7 @@ const PricingCard = ({ tier, serviceKey }: { tier: any, serviceKey: string }) =>
                 </ul>
                 <div className="flex-grow"></div>
                 <Button asChild className="w-full mt-6 md:mt-8 font-bold text-base md:text-lg py-3 md:py-6">
-                    <Link href={`/#contact?service=${encodeURIComponent(tier.name)}`}>{tier.buttonText}</Link>
+                    <Link href={`/?contact=true&service=${encodeURIComponent(tier.name)}#contact`}>{tier.buttonText}</Link>
                 </Button>
             </div>
         )
@@ -102,7 +102,7 @@ const PricingCard = ({ tier, serviceKey }: { tier: any, serviceKey: string }) =>
             
             <div className="mt-auto pt-8">
                  <Button asChild className="w-full font-bold text-base md:text-lg py-3 md:py-6">
-                    <Link href={`/#contact?service=${encodeURIComponent(tier.name)}`}>{tier.buttonText}</Link>
+                    <Link href={`/?contact=true&service=${encodeURIComponent(tier.name)}#contact`}>{tier.buttonText}</Link>
                  </Button>
             </div>
         </div>

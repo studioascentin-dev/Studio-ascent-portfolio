@@ -107,8 +107,8 @@ export function ContactForm() {
             toast({
                 title: (
                   <div className="flex items-center gap-3">
-                    <PartyPopper className="h-6 w-6 text-primary animate-bounce" />
-                    <span className="text-lg font-bold">Message Sent!</span>
+                    <PartyPopper className="h-8 w-8 text-primary animate-bounce" />
+                    <span className="text-xl font-bold">Message Sent!</span>
                   </div>
                 ),
                 description: (

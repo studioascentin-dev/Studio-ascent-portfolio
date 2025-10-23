@@ -23,8 +23,6 @@ import { sendEmail } from "@/ai/flows/send-email";
 import { useSearchParams } from "next/navigation";
 import { pricingData } from "@/lib/pricing-data";
 
-const services = Object.values(pricingData).map(s => s.title);
-
 const formSchema = z.object({
   name: z.string().min(2, {
     message: "Name must be at least 2 characters.",
@@ -118,7 +116,11 @@ export function ContactForm() {
                 message: "",
             });
         } else {
-            throw new Error(emailResult.error || 'Failed to send email.');
+             toast({
+                variant: "destructive",
+                title: "Uh oh! Something went wrong.",
+                description: emailResult.error || "There was a problem with your request.",
+            });
         }
     } catch (error: any) {
         console.error("Failed to send message:", error);
@@ -181,9 +183,9 @@ export function ContactForm() {
                         </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                        {services.map((service) => (
-                            <SelectItem key={service} value={service}>
-                                {service}
+                        {Object.values(pricingData).map((service) => (
+                            <SelectItem key={service.key} value={service.title}>
+                                {service.title}
                             </SelectItem>
                         ))}
                     </SelectContent>

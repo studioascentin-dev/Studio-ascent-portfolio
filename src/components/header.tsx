@@ -18,31 +18,51 @@ const navItems = [
     { name: "Contact", href: "/#contact" },
 ];
 
-const Logo = () => (
-    <div className="flex items-center gap-2.5 font-headline text-lg font-bold text-foreground transition-colors hover:text-primary">
-        <div className="relative h-6 w-6">
-            <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="text-primary"
-            >
-                <path
-                d="M12 2L2 22H22L12 2Z"
-                fill="currentColor"
-                fillOpacity="0.2"
-                />
-                <path
-                d="M12 10L7 20H17L12 10Z"
-                fill="currentColor"
-                />
-            </svg>
-        </div>
-        <span>Studio Ascent</span>
-    </div>
-);
+const Logo = () => {
+    const text = "Studio Ascent";
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.08,
+            },
+        },
+    };
+
+    const charVariants = {
+        hidden: { opacity: 0, y: 10 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                type: 'spring',
+                stiffness: 300,
+                damping: 20
+            }
+        },
+    };
+
+    return (
+        <motion.div
+            className="flex items-center font-headline text-lg font-bold text-foreground transition-colors hover:text-primary"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            aria-label={text}
+        >
+            {text.split("").map((char, index) => (
+                <motion.span
+                    key={`${char}-${index}`}
+                    variants={charVariants}
+                    style={{ display: 'inline-block', whiteSpace: 'pre' }}
+                >
+                    {char}
+                </motion.span>
+            ))}
+        </motion.div>
+    );
+};
 
 
 export function Header() {

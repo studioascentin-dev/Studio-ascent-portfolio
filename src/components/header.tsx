@@ -19,7 +19,29 @@ const navItems = [
 ];
 
 const Logo = () => (
-    <div className="font-headline text-lg font-bold">Studio Ascent</div>
+    <div className="flex items-center gap-2.5 font-headline text-lg font-bold text-foreground transition-colors hover:text-primary">
+        <div className="relative h-6 w-6">
+            <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="text-primary"
+            >
+                <path
+                d="M12 2L2 22H22L12 2Z"
+                fill="currentColor"
+                fillOpacity="0.2"
+                />
+                <path
+                d="M12 10L7 20H17L12 10Z"
+                fill="currentColor"
+                />
+            </svg>
+        </div>
+        <span>Studio Ascent</span>
+    </div>
 );
 
 

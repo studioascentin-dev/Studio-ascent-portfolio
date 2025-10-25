@@ -19,55 +19,12 @@ const navItems = [
 ];
 
 const Logo = () => {
-    const text = "Studio Ascent";
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.08,
-            },
-        },
-    };
-
-    const charVariants = {
-        hidden: { opacity: 0, y: 10 },
-        visible: {
-            opacity: 1,
-            y: 0,
-            transition: {
-                type: 'spring',
-                stiffness: 300,
-                damping: 20
-            }
-        },
-    };
-
     return (
-        <motion.div
-            className="flex items-center font-headline text-lg font-bold text-foreground"
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            aria-label={text}
-        >
-            {text.split("").map((char, index) => {
-                 const isFirstS = index === 0;
-                 const isFirstA = index === text.indexOf('A');
-                return (
-                    <motion.span
-                        key={`${char}-${index}`}
-                        variants={charVariants}
-                        style={{ display: 'inline-block', whiteSpace: 'pre' }}
-                        className={cn(
-                           (isFirstS || isFirstA) && 'text-primary'
-                        )}
-                    >
-                        {char}
-                    </motion.span>
-                )
-            })}
-        </motion.div>
+        <div className="font-headline text-lg font-bold">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-300 to-primary animate-shimmer bg-[length:200%_auto]">
+                Studio Ascent
+            </span>
+        </div>
     );
 };
 

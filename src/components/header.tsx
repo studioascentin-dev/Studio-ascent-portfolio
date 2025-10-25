@@ -45,21 +45,28 @@ const Logo = () => {
 
     return (
         <motion.div
-            className="flex items-center font-headline text-lg font-bold text-foreground transition-colors hover:text-primary"
+            className="flex items-center font-headline text-lg font-bold text-foreground"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
             aria-label={text}
         >
-            {text.split("").map((char, index) => (
-                <motion.span
-                    key={`${char}-${index}`}
-                    variants={charVariants}
-                    style={{ display: 'inline-block', whiteSpace: 'pre' }}
-                >
-                    {char}
-                </motion.span>
-            ))}
+            {text.split("").map((char, index) => {
+                 const isFirstS = index === 0;
+                 const isFirstA = index === text.indexOf('A');
+                return (
+                    <motion.span
+                        key={`${char}-${index}`}
+                        variants={charVariants}
+                        style={{ display: 'inline-block', whiteSpace: 'pre' }}
+                        className={cn(
+                           (isFirstS || isFirstA) && 'text-primary'
+                        )}
+                    >
+                        {char}
+                    </motion.span>
+                )
+            })}
         </motion.div>
     );
 };

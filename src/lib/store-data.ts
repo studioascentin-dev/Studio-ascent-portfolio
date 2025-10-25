@@ -382,34 +382,5 @@ export const storeItems = {
       ]
     },
   ],
-  applications: [
-    {
-      slug: 'after-effects',
-      name: 'After Effects',
-      image: 'https://picsum.photos/seed/aftereffects/600/400',
-      dataAiHint: 'motion graphics',
-      description: 'The industry-standard motion graphics and visual effects software.'
-    },
-    {
-      slug: 'premiere-pro',
-      name: 'Premiere Pro',
-      image: 'https://picsum.photos/seed/premiere/600/400',
-      dataAiHint: 'video editing software',
-      description: 'Professional video editing software for film, TV, and the web.'
-    },
-    {
-      slug: 'final-cut-pro',
-      name: 'Final Cut Pro',
-      image: 'https://picsum.photos/seed/finalcut/600/400',
-      dataAiHint: 'apple software',
-      description: 'Revolutionary video editing for Mac with powerful features and an intuitive design.'
-    },
-    {
-      slug: 'davinci-resolve',
-      name: 'DaVinci Resolve',
-      image: 'https://picsum.photos/seed/davinci/600/400',
-      dataAiHint: 'color grading',
-      description: 'The only solution that combines editing, color correction, visual effects, motion graphics, and audio post-production all in one software tool.'
-    },
-  ],
+  applications: [],
 };

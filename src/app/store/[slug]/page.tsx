@@ -343,7 +343,6 @@ export default function ProductDetailPage() {
     const allItems = [
         ...storeItems.plugins,
         ...storeItems.projectFiles,
-        ...storeItems.applications,
     ];
     
     const item = allItems.find(item => item.slug === slug) as any;

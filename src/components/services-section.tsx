@@ -1,36 +1,35 @@
 
 "use client";
 
-import { Video, Camera, Bot, Code, PenTool } from 'lucide-react';
+import { Video, Bot, Code, PenTool, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Link from 'next/link';
+import { cn } from '@/lib/utils';
 
 const services = [
   {
     id: 'video-editing',
-    icon: <Video className="h-8 w-8 md:h-10 md:w-10 text-primary" />,
+    icon: <Video className="h-8 w-8 text-primary" />,
     title: 'Video Editing',
-    description: 'Professional video editing for brand films, social media ads, and more to engage your audience.',
+    description: 'Engaging edits for brands and creators.',
   },
   {
     id: 'ai-chatbot',
-    icon: <Bot className="h-8 w-8 md:h-10 md:w-10 text-primary" />,
+    icon: <Bot className="h-8 w-8 text-primary" />,
     title: 'AI Chatbot',
-    description: 'Automate your business with intelligent chatbots for WhatsApp and websites, handling support, bookings, and lead generation.',
+    description: 'Smart bots that grow your business.',
   },
   {
     id: 'web-development',
-    icon: <Code className="h-8 w-8 md:h-10 md:w-10 text-primary" />,
+    icon: <Code className="h-8 w-8 text-primary" />,
     title: 'Web Development',
-    description: 'Robust, scalable, and high-performance websites and applications tailored to your business needs.',
+    description: 'Modern, scalable, and fast websites.',
   },
   {
     id: 'something-else',
-    icon: <PenTool className="h-8 w-8 md:h-10 md:w-10 text-primary" />,
+    icon: <PenTool className="h-8 w-8 text-primary" />,
     title: 'Something Else?',
-    description: 'Have a different creative or technical need? Reach out and let\'s see how I can help you.',
+    description: "Have an idea? Let's build it together.",
   },
 ];
 
@@ -84,19 +83,36 @@ export function ServicesSection() {
               viewport={{ once: true, amount: 0.1 }}
             >
                 {services.map((service) => (
-                    <motion.div key={service.id} variants={itemVariants}>
-                      <Link href={service.id === 'something-else' ? '#contact' : `/services/${service.id}`} className="block h-full group">
-                        <Card className="h-full bg-secondary/50 backdrop-blur-sm border-white/10 text-center p-6 md:p-8 hover:-translate-y-2 transition-transform duration-300 hover:bg-primary/20 hover:border-primary">
-                          <div className="inline-block p-3 md:p-4 bg-primary/10 rounded-full mb-4">
-                            {service.icon}
-                          </div>
-                          <CardHeader className="p-0">
-                            <CardTitle className="text-xl md:text-2xl font-bold font-headline">{service.title}</CardTitle>
-                          </CardHeader>
-                          <CardContent className="p-0 mt-4">
-                            <p className="text-muted-foreground group-hover:text-foreground/80 text-sm md:text-base">{service.description}</p>
-                          </CardContent>
-                        </Card>
+                    <motion.div key={service.id} variants={itemVariants} className="group">
+                      <Link href={service.id === 'something-else' ? '#contact' : `/services/${service.id}`} className="block h-full">
+                        <div className={cn(
+                          "relative h-full p-6 text-center bg-secondary/40 rounded-lg overflow-hidden",
+                          "transition-all duration-300 ease-in-out",
+                          "hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/20"
+                        )}>
+                            <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div 
+                              className={cn(
+                                "absolute -inset-[1px] rounded-lg z-0",
+                                "bg-gradient-to-br from-primary/50 via-transparent to-blue-500/50",
+                                "opacity-50 group-hover:opacity-100 transition-opacity duration-300"
+                              )}
+                             />
+                             <div className="relative z-10 flex flex-col items-center justify-center h-full">
+                                <div className="relative inline-block p-4 bg-background/50 rounded-full mb-4">
+                                  <div className="absolute inset-0 rounded-full bg-primary/20 blur-lg opacity-75"></div>
+                                  <div className="relative">
+                                    {service.icon}
+                                  </div>
+                                </div>
+                                <h3 className="text-xl md:text-2xl font-bold font-headline text-foreground">{service.title}</h3>
+                                <p className="text-muted-foreground text-sm md:text-base mt-2 flex-grow">{service.description}</p>
+                                <div className="flex items-center text-sm font-semibold text-primary mt-6 group-hover:underline">
+                                    Learn More
+                                    <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                                </div>
+                              </div>
+                        </div>
                       </Link>
                     </motion.div>
                 ))}

@@ -127,7 +127,7 @@ export default function VideoPortfolioPage() {
                   <motion.h2 variants={itemVariants} className="text-2xl md:text-3xl font-bold font-headline mb-8 text-center text-white">
                     {category.title}
                   </motion.h2>
-                  <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                     {category.videos.map((video) => (
                       <VideoCard key={video.id} video={video} />
                     ))}

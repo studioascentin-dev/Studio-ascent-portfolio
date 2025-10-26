@@ -15,6 +15,7 @@ const navItems = [
     { name: "Services", href: "/#services" },
     { name: "Store", href: "/store" },
     { name: "Pricing", href: "/pricing" },
+    { name: "Reel Pricing", href: "/reel-pricing" },
     { name: "Contact", href: "/#contact" },
 ];
 
@@ -22,7 +23,7 @@ const Logo = () => {
     return (
         <div className="font-headline text-lg font-bold">
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-300 to-primary animate-shimmer bg-[length:200%_auto]">
-                Studio Ascent
+                <span className="text-primary">S</span>tudio <span className="text-primary">A</span>scent
             </span>
         </div>
     );

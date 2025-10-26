@@ -84,6 +84,7 @@ export const pricingData = {
   'ai-chatbot': {
     title: 'AI Chatbot',
     key: 'ai-chatbot',
+    description: 'Automate your customer interactions with intelligent, custom-built chatbots.',
     tiers: [
       {
         name: 'FAQ/Support Bot',

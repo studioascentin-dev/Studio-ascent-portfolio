@@ -191,10 +191,10 @@ export default function PricingPage() {
             
             {/* Reel Editing Section */}
             {reelService && (
-              <motion.div variants={itemVariants} className="mb-16 md:mb-24 -mx-8">
-                  <div style={{ backgroundColor: '#0F0F0F', padding: '4rem 2rem', borderRadius: '1.5rem' }}>
+              <motion.div variants={itemVariants} className="mb-16 md:mb-24">
+                  <div className="bg-[#0F0F0F] p-8 md:p-16 rounded-3xl -mx-4 md:-mx-8">
                     <header className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
-                        <h2 className="text-3xl md:text-4xl font-bold font-headline">{reelService.title}</h2>
+                        <h2 className="text-3xl md:text-4xl font-bold font-headline text-white">{reelService.title}</h2>
                         <p className="mt-4 text-muted-foreground text-base md:text-lg">{reelService.description}</p>
                     </header>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 items-stretch">
@@ -217,11 +217,11 @@ export default function PricingPage() {
               if (service.key === 'web-development' || service.key === 'reel-editing') return null;
               return (
                 <motion.div key={service.title} variants={itemVariants} className="mb-16 md:mb-24">
-                  <header className="flex justify-between items-center mb-8 md:mb-12">
-                     <h2 className="text-2xl md:text-4xl font-bold font-headline">{service.title}</h2>
-                     <Link href={`/services/${service.key}`} className="flex items-center text-primary hover:underline text-sm md:text-base">
-                        View Details <ArrowRight className="ml-2 h-4 w-4" />
-                     </Link>
+                  <header className="text-center max-w-3xl mx-auto mb-12 md:mb-12">
+                     <h2 className="text-3xl md:text-4xl font-bold font-headline">{service.title}</h2>
+                     {service.description && (
+                        <p className="mt-4 text-muted-foreground text-base md:text-lg">{service.description}</p>
+                     )}
                   </header>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                     {service.tiers.map((tier) => (

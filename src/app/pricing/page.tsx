@@ -5,9 +5,11 @@ import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
-import { Check, ArrowRight, CheckCircle, Smartphone, Bot, LayoutTemplate, Briefcase, Database, Cloud, Zap, Shield, Globe, Palette, Cog, UserCog } from 'lucide-react';
+import { Check, ArrowRight, CheckCircle, Smartphone, Bot, LayoutTemplate, Briefcase, Database, Cloud, Zap, Shield, Globe, Palette, Cog, UserCog, Clock, Star } from 'lucide-react';
 import Link from 'next/link';
 import { pricingData } from '@/lib/pricing-data';
+import { Badge } from '@/components/ui/badge';
+import { cn } from '@/lib/utils';
 
 const sectionVariants = {
   hidden: { opacity: 0 },
@@ -31,6 +33,59 @@ const itemVariants = {
       ease: 'easeOut',
     },
   },
+};
+
+const cardColors: { [key: string]: string } = {
+  pink: "shadow-pink-500/20 hover:border-pink-500/80",
+  purple: "shadow-primary/20 hover:border-primary/80",
+  green: "shadow-green-500/20 hover:border-green-500/80",
+  yellow: "shadow-yellow-500/20 hover:border-yellow-500/80",
+};
+
+const ReelPricingCard = ({ tier }: { tier: any }) => {
+  return (
+    <div className={cn(
+      "relative flex flex-col h-full rounded-2xl bg-black/50 border border-white/10 p-6 transition-all duration-300 shadow-lg hover:shadow-2xl",
+      cardColors[tier.color as keyof typeof cardColors]
+    )}>
+      {tier.popular && (
+        <Badge variant="default" className="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-primary text-white">
+          Most Popular
+        </Badge>
+      )}
+      <div className="flex-grow">
+        <h3 className="text-xl font-bold font-headline text-white mb-2">{tier.name}</h3>
+        <p className="text-3xl font-semibold text-white mb-6">{tier.price}</p>
+        
+        <ul className="space-y-3 text-sm text-[#E0E0E0]">
+          {tier.features.map((feature: string, index: number) => (
+            <li key={index} className="flex items-center gap-3">
+              <Check className="h-4 w-4 text-primary" />
+              <span>{feature}</span>
+            </li>
+          ))}
+        </ul>
+        
+        <div className="flex items-center gap-3 mt-4 text-sm text-[#E0E0E0]">
+           <Clock className="h-4 w-4 text-primary" />
+           <span>Delivery: {tier.delivery}</span>
+        </div>
+
+        <div className="mt-6 text-sm text-[#E0E0E0]/80">
+            <p className="font-semibold text-white/90 mb-2">Add-Ons:</p>
+            <ul className="list-disc list-inside space-y-1">
+                {tier.addOns.map((addOn: string, i: number) => <li key={i}>{addOn}</li>)}
+            </ul>
+        </div>
+      </div>
+
+      <div className="mt-8">
+        <Button asChild className="w-full font-bold bg-primary text-white hover:bg-primary/80">
+           <Link href={`/?contact=true&service=${encodeURIComponent(tier.name)}#contact`}>{tier.buttonText}</Link>
+        </Button>
+      </div>
+    </div>
+  );
 };
 
 const PricingCard = ({ tier, serviceKey }: { tier: any, serviceKey: string }) => {
@@ -112,6 +167,7 @@ const PricingCard = ({ tier, serviceKey }: { tier: any, serviceKey: string }) =>
 
 export default function PricingPage() {
   const webDevService = pricingData['web-development'];
+  const reelService = pricingData['reel-editing'];
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
@@ -133,8 +189,30 @@ export default function PricingPage() {
               </p>
             </motion.div>
             
+            {/* Reel Editing Section */}
+            {reelService && (
+              <motion.div variants={itemVariants} className="mb-16 md:mb-24" style={{ backgroundColor: '#0F0F0F', padding: '4rem 2rem', borderRadius: '1.5rem', margin: '-2rem' }}>
+                  <header className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
+                      <h2 className="text-3xl md:text-4xl font-bold font-headline">{reelService.title}</h2>
+                      <p className="mt-4 text-muted-foreground text-base md:text-lg">{reelService.description}</p>
+                  </header>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 items-stretch">
+                      {reelService.tiers.map((tier) => (
+                        <motion.div
+                          key={tier.name}
+                          whileHover={{ y: -8, scale: 1.03 }}
+                          transition={{ type: 'spring', stiffness: 300 }}
+                          className="h-full"
+                        >
+                          <ReelPricingCard tier={tier} />
+                        </motion.div>
+                      ))}
+                  </div>
+              </motion.div>
+            )}
+
             {Object.values(pricingData).map(service => {
-              if (service.key === 'web-development') return null;
+              if (service.key === 'web-development' || service.key === 'reel-editing') return null;
               return (
                 <motion.div key={service.title} variants={itemVariants} className="mb-16 md:mb-24">
                   <header className="flex justify-between items-center mb-8 md:mb-12">

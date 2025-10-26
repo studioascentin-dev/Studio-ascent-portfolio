@@ -58,9 +58,6 @@ const itemVariants = {
 
 
 export function ServicesSection() {
-  const topServices = services.slice(0, 3);
-  const bottomServices = services.slice(3);
-
   return (
     <section id="services" className="py-24 md:py-32">
         <div className="container mx-auto px-4">
@@ -80,13 +77,13 @@ export function ServicesSection() {
             </motion.div>
             
             <motion.div 
-              className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+              className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto"
               variants={sectionVariants}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.1 }}
             >
-                {topServices.map((service) => (
+                {services.map((service) => (
                     <motion.div key={service.id} variants={itemVariants}>
                       <Link href={service.id === 'something-else' ? '#contact' : `/services/${service.id}`} className="block h-full group">
                         <Card className="h-full bg-secondary/50 backdrop-blur-sm border-white/10 text-center p-6 md:p-8 hover:-translate-y-2 transition-transform duration-300 hover:bg-primary/20 hover:border-primary">
@@ -104,35 +101,6 @@ export function ServicesSection() {
                     </motion.div>
                 ))}
             </motion.div>
-
-            <motion.div
-              className="mt-6 md:mt-8 flex justify-center"
-              variants={sectionVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.1 }}
-            >
-              <div className="grid sm:grid-cols-2 gap-6 md:gap-8 w-full lg:w-2/3">
-                {bottomServices.map((service) => (
-                    <motion.div key={service.id} variants={itemVariants}>
-                      <Link href={service.id === 'something-else' ? '#contact' : `/services/${service.id}`} className="block h-full group">
-                        <Card className="h-full bg-secondary/50 backdrop-blur-sm border-white/10 text-center p-6 md:p-8 hover:-translate-y-2 transition-transform duration-300 hover:bg-primary/20 hover:border-primary">
-                          <div className="inline-block p-3 md:p-4 bg-primary/10 rounded-full mb-4">
-                            {service.icon}
-                          </div>
-                          <CardHeader className="p-0">
-                            <CardTitle className="text-xl md:text-2xl font-bold font-headline">{service.title}</CardTitle>
-                          </CardHeader>
-                          <CardContent className="p-0 mt-4">
-                            <p className="text-muted-foreground group-hover:text-foreground/80 text-sm md:text-base">{service.description}</p>
-                          </CardContent>
-                        </Card>
-                      </Link>
-                    </motion.div>
-                ))}
-              </div>
-            </motion.div>
-
         </div>
     </section>
   );

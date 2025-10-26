@@ -3,7 +3,7 @@ import { Check, Bot, Zap, Database, Cog, Shield, Globe, Palette, UserCog } from 
 
 export const pricingData = {
   'reel-editing': {
-    title: 'Reel Editing Packages',
+    title: 'Video Editing Packages',
     key: 'reel-editing',
     description: 'Choose your edit style — crafted to match your vibe.',
     tiers: [
@@ -16,10 +16,11 @@ export const pricingData = {
           "Up to 45 sec (1080p export)",
           "1 free revision",
         ],
-        delivery: "2–3 Days",
+        delivery: "1-2 days depends on the complexity",
         addOns: [
           "Extra 10 sec @ ₹150",
           "Express Delivery +₹300",
+          "Custom thumbnail @ ₹150",
         ],
         popular: false,
         color: "pink",
@@ -34,10 +35,11 @@ export const pricingData = {
           "Emotional color tone",
           "1–2 revisions",
         ],
-        delivery: "3–4 Days",
+        delivery: "1-2 days depends on the complexity",
         addOns: [
             "Extra 10 sec @ ₹200",
             "Express Delivery +₹400",
+            "Custom thumbnail @ ₹150",
         ],
         popular: true,
         color: "purple",
@@ -52,10 +54,11 @@ export const pricingData = {
           "Perfect for dance or anime",
           "2 revisions",
         ],
-        delivery: "4–5 Days",
+        delivery: "2-3 days",
         addOns: [
           "Extra 10 sec @ ₹200",
           "Express Delivery +₹500",
+          "Custom thumbnail @ ₹150",
         ],
         popular: false,
         color: "green",
@@ -74,6 +77,7 @@ export const pricingData = {
         addOns: [
           "Extra 10 sec @ ₹100",
           "Express Delivery +₹300",
+          "Custom thumbnail @ ₹150",
         ],
         popular: false,
         color: "yellow",

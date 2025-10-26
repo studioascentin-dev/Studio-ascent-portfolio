@@ -165,11 +165,11 @@ export function HeroSection() {
             <div>
               <motion.p variants={itemVariants} className="text-sm text-muted-foreground font-medium mb-2">— INTRODUCTION</motion.p>
               <motion.h2 variants={itemVariants} className="text-2xl md:text-4xl font-bold font-headline leading-tight">
-              Full-Stack Developer &<br/>Video Editor, based in India.
+              Full-Stack Developer &<br/>Creative Video Editor
               </motion.h2>
             </div>
             <motion.p variants={itemVariants} className="max-w-md text-muted-foreground leading-relaxed mx-auto text-sm md:text-base">
-            I design and code beautifully simple things, and I love what I do. Just simple like that!
+            I craft stunning digital experiences and bring stories to life through code and motion.
             </motion.p>
             <motion.div variants={itemVariants}>
               <Button asChild variant="link" size="lg" className="font-bold text-primary p-0 text-base group">

@@ -3,8 +3,8 @@
 
 import { Footer } from '@/components/footer';
 import { Button } from '@/components/ui/button';
-import { motion } from 'framer-motion';
-import { ArrowLeft, Youtube } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowLeft, Youtube, ArrowRight, Code, PenTool, Camera, Video, Bot, ExternalLink } from 'lucide-react';
 import { notFound, useParams } from 'next/navigation';
 import * as React from 'react';
 import Link from 'next/link';
@@ -16,7 +16,6 @@ import { AnimatedDialog } from '@/components/ui/animated-dialog';
 import { DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { ArrowRight, Code, PenTool, Camera, Video, Bot } from 'lucide-react';
 
 
 const portfolioData = {
@@ -466,3 +465,5 @@ export default function ServicePage() {
     </div>
   );
 }
+
+    

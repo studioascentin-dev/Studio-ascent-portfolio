@@ -15,12 +15,6 @@ const services = [
     description: 'Professional video editing for brand films, social media ads, and more to engage your audience.',
   },
   {
-    id: 'photo-editing',
-    icon: <Camera className="h-8 w-8 md:h-10 md:w-10 text-primary" />,
-    title: 'Photo Editing',
-    description: 'High-quality photo retouching and manipulation to make your images look stunning and professional.',
-  },
-  {
     id: 'ai-chatbot',
     icon: <Bot className="h-8 w-8 md:h-10 md:w-10 text-primary" />,
     title: 'AI Chatbot',

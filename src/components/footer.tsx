@@ -79,7 +79,6 @@ export function Footer() {
                   <ul className="space-y-3">
                     <li><Link href="/services/web-development" className="text-sm text-muted-foreground hover:text-primary transition-colors">Web Development</Link></li>
                     <li><Link href="/services/video-editing" className="text-sm text-muted-foreground hover:text-primary transition-colors">Video Editing</Link></li>
-                    <li><Link href="/services/photo-editing" className="text-sm text-muted-foreground hover:text-primary transition-colors">Photo Editing</Link></li>
                     <li><Link href="/services/ai-chatbot" className="text-sm text-muted-foreground hover:text-primary transition-colors">AI Chatbots</Link></li>
                     <li>
                         <Link href="/#contact" className="text-sm text-muted-foreground hover:text-primary transition-colors">

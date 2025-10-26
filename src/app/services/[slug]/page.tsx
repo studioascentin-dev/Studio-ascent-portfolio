@@ -69,19 +69,6 @@ const servicesData = {
     description: 'From corporate brand films to dynamic social media ads, I bring your vision to life with professional video editing that ancapts and engages your audience.',
     isPortfolio: true,
   },
-  'photo-editing': {
-    icon: <Camera className="h-10 w-10 text-primary" />,
-    title: 'Photo Editing',
-    description: 'With high-quality photo retouching and manipulation, I enhance your images to perfection, ensuring your product shots and portraits look stunning and professional.',
-    projects: [
-        { name: 'High-End Retouching', before: '/images/beforeimg1.jpg', after: '/images/afterimg1.png', dataAiHint: 'portrait retouch' },
-        { name: 'Logo Design', image: '/images/logokit.png', dataAiHint: 'photo manipulation' },
-        { name: 'Social Media Content Design', image: '/portrait-after.png', dataAiHint: 'professional portrait' },
-        { name: 'Menu or Brochure Design', image: '/images/menu.png', dataAiHint: 'product photography' },
-        { name: 'Simple Color Grading', before: '/images/indiandog.jpg', after: '/images/indiandog.png', dataAiHint: 'artistic color' },
-        { name: 'Poster & Flyer Design', image: '/images/poster.png', dataAiHint: 'artistic color' },
-    ]
-  },
   'ai-chatbot': {
     icon: <Bot className="h-10 w-10 text-primary" />,
     title: 'AI Chatbot',

@@ -82,7 +82,7 @@ const VideoCard = ({ video }: { video: { id: string, title: string } }) => {
   return (
     <motion.div
       variants={itemVariants}
-      className="group relative aspect-video w-full overflow-hidden rounded-xl shadow-md transition-all duration-300"
+      className="group relative aspect-video w-full overflow-hidden rounded-xl shadow-lg transition-all duration-300 hover:shadow-primary/20"
       whileHover={{ y: -8, scale: 1.03 }}
     >
       <iframe
@@ -93,7 +93,7 @@ const VideoCard = ({ video }: { video: { id: string, title: string } }) => {
         allowFullScreen
         className="absolute inset-0 h-full w-full"
       />
-       <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+       <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
         <Youtube className="w-12 h-12 text-white/80" />
       </div>
     </motion.div>
@@ -133,7 +133,7 @@ export default function VideoPortfolioPage() {
                     ))}
                   </div>
                   <motion.div variants={itemVariants} className="text-center mt-12">
-                    <Button asChild variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white transition-colors">
+                    <Button asChild variant="outline" className="border-primary text-primary bg-transparent hover:bg-primary hover:text-white transition-colors">
                       <Link href="#">
                         View More {category.title}
                       </Link>
@@ -143,7 +143,7 @@ export default function VideoPortfolioPage() {
               ))}
             </div>
              <motion.div variants={itemVariants} className="text-center mt-16 md:mt-24">
-                <Button asChild variant="outline">
+                <Button asChild variant="outline" className="bg-transparent hover:bg-white/10">
                     <Link href="/">
                         <ArrowLeft className="mr-2 h-4 w-4" />
                         Back to Home

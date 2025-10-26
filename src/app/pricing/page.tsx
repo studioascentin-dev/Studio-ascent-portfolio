@@ -191,22 +191,24 @@ export default function PricingPage() {
             
             {/* Reel Editing Section */}
             {reelService && (
-              <motion.div variants={itemVariants} className="mb-16 md:mb-24" style={{ backgroundColor: '#0F0F0F', padding: '4rem 2rem', borderRadius: '1.5rem', margin: '-2rem' }}>
-                  <header className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
-                      <h2 className="text-3xl md:text-4xl font-bold font-headline">{reelService.title}</h2>
-                      <p className="mt-4 text-muted-foreground text-base md:text-lg">{reelService.description}</p>
-                  </header>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 items-stretch">
-                      {reelService.tiers.map((tier) => (
-                        <motion.div
-                          key={tier.name}
-                          whileHover={{ y: -8, scale: 1.03 }}
-                          transition={{ type: 'spring', stiffness: 300 }}
-                          className="h-full"
-                        >
-                          <ReelPricingCard tier={tier} />
-                        </motion.div>
-                      ))}
+              <motion.div variants={itemVariants} className="mb-16 md:mb-24 -mx-8">
+                  <div style={{ backgroundColor: '#0F0F0F', padding: '4rem 2rem', borderRadius: '1.5rem' }}>
+                    <header className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
+                        <h2 className="text-3xl md:text-4xl font-bold font-headline">{reelService.title}</h2>
+                        <p className="mt-4 text-muted-foreground text-base md:text-lg">{reelService.description}</p>
+                    </header>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 items-stretch">
+                        {reelService.tiers.map((tier) => (
+                          <motion.div
+                            key={tier.name}
+                            whileHover={{ y: -8, scale: 1.03 }}
+                            transition={{ type: 'spring', stiffness: 300 }}
+                            className="h-full"
+                          >
+                            <ReelPricingCard tier={tier} />
+                          </motion.div>
+                        ))}
+                    </div>
                   </div>
               </motion.div>
             )}

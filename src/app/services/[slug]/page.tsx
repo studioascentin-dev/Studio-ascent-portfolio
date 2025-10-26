@@ -1,35 +1,65 @@
 
-
 "use client";
 
 import { Footer } from '@/components/footer';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, Video, Camera, Bot, Code, PenTool, ExternalLink, ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { ArrowLeft, Youtube } from 'lucide-react';
 import { notFound, useParams } from 'next/navigation';
 import * as React from 'react';
+import Link from 'next/link';
+import { Header } from '@/components/header';
+import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import { ImageCompare } from '@/components/image-compare';
-import Link from 'next/link';
 import { AnimatedDialog } from '@/components/ui/animated-dialog';
 import { DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
-import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { ArrowRight, Code, PenTool, Camera, Video, Bot } from 'lucide-react';
 
-const getEmbedUrl = (url: string) => {
-    if (!url) return '';
-    let videoId = '';
-    if (url.includes('youtu.be/')) {
-        videoId = url.split('youtu.be/')[1].split('?')[0];
-    } else if (url.includes('youtube.com/watch?v=')) {
-        videoId = url.split('watch?v=')[1].split('&')[0];
-    } else if (url.includes('youtube.com/shorts/')) {
-        videoId = url.split('shorts/')[1].split('?')[0];
-    } else if (url.includes('youtube.com/embed/')) {
-        return url;
+
+const portfolioData = {
+  title: "Video Editing Portfolio",
+  subtitle: "Explore my editing styles — from smooth velocity to candy-color vibes.",
+  categories: [
+    {
+      title: "Candy Style Edits",
+      videos: [
+        { id: "LXb3EKWsInQ", title: "Corporate Brand Film" },
+        { id: "sfA3Ie2vo_8", title: "Anime AMV" },
+        { id: "LgVIhHj-VPA", title: "Instagram Reel" },
+        { id: "Yp92s_3yI5A", title: "Color Grading Showcase" },
+      ]
+    },
+    {
+      title: "Slo-Mo / Velocity Edits",
+      videos: [
+        { id: "u31_KnwS_M8", title: "Social Media Ad" },
+        { id: "LraNcH3fe1c", title: "Educational Video" },
+        { id: "sfA3Ie2vo_8", title: "Dynamic Product Demo" },
+        { id: "Yp92s_3yI5A", title: "Cinematic Slow Motion" },
+      ]
+    },
+    {
+      title: "Glitch / Sync Edits",
+      videos: [
+        { id: "LgVIhHj-VPA", title: "Music Video FX" },
+        { id: "LXb3EKWsInQ", title: "Gaming Montage" },
+        { id: "u31_KnwS_M8", title: "Tech Product Ad" },
+        { id: "LraNcH3fe1c", title: "Event Promo" },
+      ]
+    },
+    {
+      title: "Trendy Reels",
+      videos: [
+        { id: "Yp92s_3yI5A", title: "Fashion Lookbook" },
+        { id: "sfA3Ie2vo_8", title: "Travel Diary" },
+        { id: "LXb3EKWsInQ", title: "Food Recipe" },
+        { id: "u31_KnwS_M8", title: "Fitness Challenge" },
+      ]
     }
-    return videoId ? `https://www.youtube.com/embed/${videoId}` : '';
+  ]
 };
 
 const servicesData = {
@@ -37,14 +67,7 @@ const servicesData = {
     icon: <Video className="h-10 w-10 text-primary" />,
     title: 'Video Editing',
     description: 'From corporate brand films to dynamic social media ads, I bring your vision to life with professional video editing that ancapts and engages your audience.',
-    projects: [
-      { name: 'YouTube Videos', video: getEmbedUrl('https://www.youtube.com/watch?v=LXb3EKWsInQ') },
-      { name: 'Instagram Edits', video: getEmbedUrl('https://youtube.com/shorts/LgVIhHj-VPA') },
-      { name: 'Colour Grading', video: getEmbedUrl('https://www.youtube.com/watch?v=Yp92s_3yI5A') },
-      { name: 'Anime AMV edits', video: getEmbedUrl('https://www.youtube.com/watch?v=sfA3Ie2vo_8') },
-      { name: 'Educational Videos', video: getEmbedUrl('https://www.youtube.com/watch?v=LraNcH3fe1c') },
-      { name: 'Social Media Ad', video: getEmbedUrl('https://www.youtube.com/watch?v=u31_KnwS_M8') },
-    ]
+    isPortfolio: true,
   },
   'photo-editing': {
     icon: <Camera className="h-10 w-10 text-primary" />,
@@ -105,6 +128,112 @@ const servicesData = {
   },
 };
 
+const getEmbedUrl = (id: string) => `https://www.youtube.com/embed/${id}`;
+
+const sectionVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+      ease: 'easeOut',
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: 'easeOut',
+    },
+  },
+};
+
+
+const VideoPortfolio = () => (
+    <div className="flex min-h-screen flex-col bg-[#0F0F0F] text-white">
+      <Header />
+      <main className="flex-1 pt-24">
+        <motion.section
+          className="py-20 md:py-24"
+          initial="hidden"
+          animate="visible"
+          variants={sectionVariants}
+        >
+          <div className="container mx-auto px-4 md:px-6">
+            <motion.header variants={itemVariants} className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold font-headline tracking-tighter text-white">
+                {portfolioData.title}
+              </h1>
+              <p className="mt-4 md:mt-6 text-base md:text-lg/relaxed text-gray-300">
+                {portfolioData.subtitle}
+              </p>
+            </motion.header>
+
+            <div className="space-y-16 md:space-y-20">
+              {portfolioData.categories.map((category) => (
+                <motion.div key={category.title} variants={sectionVariants}>
+                  <motion.h2 variants={itemVariants} className="text-2xl md:text-3xl font-bold font-headline mb-8 text-center text-white">
+                    {category.title}
+                  </motion.h2>
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                    {category.videos.map((video) => (
+                      <VideoCard key={video.id} video={video} />
+                    ))}
+                  </div>
+                  <motion.div variants={itemVariants} className="text-center mt-12">
+                    <Button asChild variant="outline" className="border-primary text-primary bg-transparent hover:bg-primary hover:text-white transition-colors">
+                      <Link href="#">
+                        View More {category.title}
+                      </Link>
+                    </Button>
+                  </motion.div>
+                </motion.div>
+              ))}
+            </div>
+             <motion.div variants={itemVariants} className="text-center mt-16 md:mt-24">
+                <Button asChild variant="outline" className="bg-transparent hover:bg-white/10">
+                    <Link href="/#services">
+                        <ArrowLeft className="mr-2 h-4 w-4" />
+                        Back to Services
+                    </Link>
+                </Button>
+            </motion.div>
+          </div>
+        </motion.section>
+      </main>
+      <Footer />
+    </div>
+);
+
+const VideoCard = ({ video }: { video: { id: string, title: string } }) => {
+  return (
+    <motion.div
+      variants={itemVariants}
+      className="group relative aspect-video w-full overflow-hidden rounded-xl shadow-lg transition-all duration-300 hover:shadow-primary/20"
+      whileHover={{ y: -8, scale: 1.03 }}
+    >
+      <iframe
+        src={getEmbedUrl(video.id)}
+        title={video.title}
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+        className="absolute inset-0 h-full w-full"
+      />
+       <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+        <Youtube className="w-12 h-12 text-white/80" />
+      </div>
+    </motion.div>
+  );
+};
+
+
 const cardContainerVariants = {
     hidden: {},
     visible: {
@@ -136,7 +265,7 @@ const ProjectCard = ({ project, slug, onCardClick }: { project: any, slug: strin
     }
   };
 
-  const isInteractive = slug === 'ai-chatbot' || slug === 'video-editing';
+  const isInteractive = slug === 'ai-chatbot' || slug === 'video-editing-non-portfolio'; // Keep dialog for AI bot
 
   const cardContent = (
     <Card className="overflow-hidden bg-card/80 backdrop-blur-sm group h-full flex flex-col">
@@ -144,7 +273,7 @@ const ProjectCard = ({ project, slug, onCardClick }: { project: any, slug: strin
             {project.video ? (
                 <div className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
                      <iframe
-                        src={project.video}
+                        src={getEmbedUrl(project.video)}
                         title={`Preview video for ${project.name}`}
                         frameBorder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -195,6 +324,10 @@ export default function ServicePage() {
     notFound();
   }
 
+  if (slug === 'video-editing') {
+    return <VideoPortfolio />;
+  }
+
   const handleCardClick = (project: any, originRect: DOMRect) => {
     setSelectedProject(project);
     setOrigin(originRect);
@@ -203,6 +336,7 @@ export default function ServicePage() {
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
+      <Header />
       <main className="flex-1">
         <section className="py-16 md:py-24 lg:py-32">
             <div className="container mx-auto px-4 md:px-6">
@@ -222,7 +356,7 @@ export default function ServicePage() {
                         </header>
                     </motion.div>
                     
-                    {slug === 'web-development' ? (
+                    {slug === 'web-development' && 'projects' in service ? (
                        <div className="space-y-16 md:space-y-24 mt-16 md:mt-24">
                             {service.projects.map((project: any, index: number) => (
                                 <motion.article
@@ -270,7 +404,7 @@ export default function ServicePage() {
                                 </motion.article>
                             ))}
                         </div>
-                    ) : (
+                    ) : 'projects' in service && (
                         <motion.div
                             variants={cardContainerVariants}
                             initial="hidden"
@@ -314,7 +448,7 @@ export default function ServicePage() {
                                 {selectedProject.video && (
                                     <div className="aspect-video">
                                         <iframe
-                                            src={selectedProject.video}
+                                            src={getEmbedUrl(selectedProject.video)}
                                             title={`Preview video for ${selectedProject.name}`}
                                             frameBorder="0"
                                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

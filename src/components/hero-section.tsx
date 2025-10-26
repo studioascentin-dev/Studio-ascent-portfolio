@@ -10,7 +10,7 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.2,
+      staggerChildren: 0.1,
       delayChildren: 0.3,
     },
   },
@@ -28,6 +28,26 @@ const itemVariants = {
   },
 };
 
+const sentenceVariants = {
+  hidden: { opacity: 1 },
+  visible: {
+    opacity: 1,
+    transition: {
+      delay: 0.5,
+      staggerChildren: 0.04,
+    },
+  },
+};
+
+const letterVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+  },
+};
+
+
 const lineVariants = {
   hidden: { width: 0 },
   visible: {
@@ -35,7 +55,7 @@ const lineVariants = {
     transition: {
       duration: 0.5,
       ease: "easeOut",
-      delay: 0.8,
+      delay: 1.2,
     },
   },
 };
@@ -72,6 +92,9 @@ export function HeroSection() {
     },
   });
 
+  const greeting = "Hi, I'm";
+  const name = "Dev Kumar Das.";
+
   return (
     <section id="home" className="relative w-full min-h-screen overflow-hidden flex items-center justify-center py-20">
       <div className="absolute inset-0 z-0 text-primary/10 filter blur-sm">
@@ -103,13 +126,25 @@ export function HeroSection() {
             
             <div>
                 <h1 className="text-5xl md:text-7xl font-bold font-headline tracking-tight text-foreground leading-tight">
-                    <motion.span variants={itemVariants} className="block text-4xl md:text-6xl font-semibold">Hi, I'm</motion.span>
+                    <motion.span variants={sentenceVariants} initial="hidden" animate="visible" className="block text-4xl md:text-6xl font-semibold">
+                      {greeting.split("").map((char, index) => (
+                        <motion.span key={char + "-" + index} variants={letterVariants}>
+                          {char}
+                        </motion.span>
+                      ))}
+                    </motion.span>
                     <motion.span 
-                        variants={itemVariants} 
+                        variants={sentenceVariants} 
+                        initial="hidden"
+                        animate="visible"
                         className="block uppercase text-6xl md:text-8xl"
                     >
                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-300 to-primary animate-shimmer bg-[length:200%_auto]">
-                           Dev Kumar Das.
+                           {name.split("").map((char, index) => (
+                              <motion.span key={char + "-" + index} variants={letterVariants}>
+                                {char}
+                              </motion.span>
+                           ))}
                         </span>
                     </motion.span>
                 </h1>
@@ -150,4 +185,3 @@ export function HeroSection() {
     </section>
   );
 }
-

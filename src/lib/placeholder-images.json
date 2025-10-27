@@ -1,0 +1,42 @@
+{
+  "blog": {
+    "minimalist": {
+      "url": "https://picsum.photos/seed/minimalist/600/400",
+      "hint": "minimalist design"
+    },
+    "nextjs": {
+      "url": "https://picsum.photos/seed/nextjs/600/400",
+      "hint": "code editor"
+    },
+    "color": {
+      "url": "https://picsum.photos/seed/color/600/400",
+      "hint": "color palette"
+    },
+    "retouching": {
+      "url": "https://picsum.photos/seed/retouch/600/400",
+      "hint": "photo retouching"
+    },
+    "storytelling": {
+      "url": "https://picsum.photos/seed/story/600/400",
+      "hint": "video editing"
+    },
+    "ppt": {
+      "url": "https://picsum.photos/seed/ppt/600/400",
+      "hint": "presentation slide"
+    }
+  },
+  "webProjects": {
+    "food": {
+      "url": "https://picsum.photos/seed/sabitas/600/450",
+      "hint": "food order website"
+    },
+    "ecommerce": {
+      "url": "https://picsum.photos/seed/ecomm/600/450",
+      "hint": "ecommerce homepage"
+    },
+    "portfolio": {
+      "url": "https://picsum.photos/seed/portfolio/600/450",
+      "hint": "portfolio website"
+    }
+  }
+}

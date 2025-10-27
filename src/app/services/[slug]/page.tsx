@@ -16,6 +16,7 @@ import { AnimatedDialog } from '@/components/ui/animated-dialog';
 import { DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import placeholderImages from '@/lib/placeholder-images.json';
 
 
 const portfolioData = {
@@ -88,25 +89,25 @@ const servicesData = {
     projects: [
         { 
             name: 'Food Ordering Website', 
-            image: '/sabitas-kitchen.png', 
-            dataAiHint: 'food order website', 
-            link: 'https://6000-firebase-studio-1755428735571.cluster-zumahodzirciuujpqvsniawo3o.cloudworkstations.dev/',
+            image: placeholderImages.webProjects.food.url, 
+            dataAiHint: placeholderImages.webProjects.food.hint, 
+            link: '/',
             description: 'A full-stack food ordering platform built for a local kitchen, featuring a dynamic menu, user authentication, and a simple checkout process.',
             technologies: ['Next.js', 'React', 'Firebase', 'Tailwind CSS', 'ShadCN UI']
         },
         { 
             name: 'Custom E-commerce Store', 
-            image: 'https://picsum.photos/seed/ecomm/600/450', 
-            dataAiHint: 'ecommerce homepage', 
-            link: 'https://your-website-link.com',
+            image: placeholderImages.webProjects.ecommerce.url,
+            dataAiHint: placeholderImages.webProjects.ecommerce.hint,
+            link: '#',
             description: 'A bespoke e-commerce solution with a custom design, product management, and a secure payment gateway integration for a seamless shopping experience.',
             technologies: ['Next.js', 'Stripe', 'GraphQL', 'TypeScript', 'PostgreSQL']
         },
         { 
             name: 'Portfolio Website', 
-            image: 'https://picsum.photos/seed/portfolio/600/450', 
-            dataAiHint: 'portfolio website', 
-            link: 'https://your-website-link.com',
+            image: placeholderImages.webProjects.portfolio.url, 
+            dataAiHint: placeholderImages.webProjects.portfolio.hint,
+            link: '#',
             description: 'A personal portfolio site to showcase creative work, featuring a clean design, smooth animations, and a contact form for inquiries.',
             technologies: ['React', 'Framer Motion', 'Next.js', 'Tailwind CSS']
         },
@@ -251,7 +252,7 @@ const ProjectCard = ({ project, slug, onCardClick }: { project: any, slug: strin
     }
   };
 
-  const isInteractive = slug === 'ai-chatbot' || slug === 'video-editing-non-portfolio'; // Keep dialog for AI bot
+  const isInteractive = slug === 'ai-chatbot';
 
   const cardContent = (
     <Card className="overflow-hidden bg-card/80 backdrop-blur-sm group h-full flex flex-col">
@@ -465,5 +466,7 @@ export default function ServicePage() {
     </div>
   );
 }
+
+    
 
     

@@ -10,6 +10,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import * as React from 'react';
+import placeholderImages from '@/lib/placeholder-images.json';
 
 
 const blogPosts = [
@@ -18,48 +19,48 @@ const blogPosts = [
     title: 'The Art of Minimalist Web Design',
     description: 'Discover how stripping back the non-essentials can lead to more impactful and user-friendly websites.',
     date: 'July 26, 2024',
-    image: 'https://picsum.photos/600/400',
-    dataAiHint: 'minimalist design',
+    image: placeholderImages.blog.minimalist.url,
+    dataAiHint: placeholderImages.blog.minimalist.hint,
   },
   {
     slug: 'second-post',
     title: '5 Reasons to Choose Next.js for Your Next Project',
     description: 'A deep dive into the powerful features of Next.js that make it a top choice for modern web development.',
     date: 'July 22, 2024',
-    image: 'https://picsum.photos/600/400',
-    dataAiHint: 'code editor',
+    image: placeholderImages.blog.nextjs.url,
+    dataAiHint: placeholderImages.blog.nextjs.hint,
   },
   {
     slug: 'third-post',
     title: 'Mastering Color Theory in UI/UX',
     description: 'Learn the fundamentals of color theory and how to apply them to create visually stunning and effective user interfaces.',
     date: 'July 18, 2024',
-    image: 'https://picsum.photos/600/400',
-    dataAiHint: 'color palette',
+    image: placeholderImages.blog.color.url,
+    dataAiHint: placeholderImages.blog.color.hint,
   },
    {
     slug: 'fourth-post',
     title: 'A Guide to High-End Photo Retouching',
     description: 'Techniques and tips for achieving professional, high-end results in your photo editing workflow.',
     date: 'July 15, 2024',
-    image: 'https://picsum.photos/600/400',
-    dataAiHint: 'photo retouching',
+    image: placeholderImages.blog.retouching.url,
+    dataAiHint: placeholderImages.blog.retouching.hint,
   },
   {
     slug: 'fifth-post',
     title: 'The Power of Storytelling in Video Editing',
     description: 'Explore how narrative techniques can transform your video content from simple clips to compelling stories.',
     date: 'July 11, 2024',
-    image: 'https://picsum.photos/600/400',
-    dataAiHint: 'video editing',
+    image: placeholderImages.blog.storytelling.url,
+    dataAiHint: placeholderImages.blog.storytelling.hint,
   },
   {
     slug: 'sixth-post',
     title: 'Creating Engaging Presentations with PPT Design',
     description: 'Move beyond bullet points. Tips for designing presentations that captivate and persuade your audience.',
     date: 'July 07, 2024',
-    image: 'https://picsum.photos/600/400',
-    dataAiHint: 'presentation slide',
+    image: placeholderImages.blog.ppt.url,
+    dataAiHint: placeholderImages.blog.ppt.hint,
   },
 ];
 
@@ -159,3 +160,5 @@ export default function BlogPage() {
     </div>
   );
 }
+
+    

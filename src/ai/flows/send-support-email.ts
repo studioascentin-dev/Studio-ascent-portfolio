@@ -31,7 +31,7 @@ const sendSupportEmailFlow = ai.defineFlow(
         await resend.emails.send({
           // IMPORTANT: To prevent emails from going to spam, you must verify your own domain in Resend
           // and use an email from that domain here. e.g., 'contact@yourdomain.com'
-          from: 'Studio Ascent Support <onboarding@resend.dev>',
+          from: 'Studio Ascent Support <contact@yourdomain.com>',
           // IMPORTANT: This MUST be the primary email you signed up to Resend with.
           to: 'studioascent.in@gmail.com',
           subject: `[Payment Support] Request for ${data.productName}`,

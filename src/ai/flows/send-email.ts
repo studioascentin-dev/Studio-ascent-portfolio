@@ -31,7 +31,7 @@ const sendEmailFlow = ai.defineFlow(
         await resend.emails.send({
           // IMPORTANT: To prevent emails from going to spam, you must verify your own domain in Resend
           // and use an email from that domain here. e.g., 'contact@yourdomain.com'
-          from: 'Studio Ascent Contact <onboarding@resend.dev>',
+          from: 'Studio Ascent Contact <contact@yourdomain.com>',
           // IMPORTANT: This MUST be the primary email you signed up to Resend with.
           to: 'studioascent.in@gmail.com',
           subject: `[Contact Form] New Inquiry from ${data.name}`,

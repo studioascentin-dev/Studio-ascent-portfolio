@@ -152,7 +152,7 @@ export const storeItems = {
       originalPrice: 3499,
       discount: '97% OFF',
       platform: 'Mac & Windows',
-      paymentLink: 'https://rzp.io/l/shadow-studio-3',
+      paymentLink: 'pl_RaUhnyHX4SprxG',
       installVideo: '/videos/shadow studio 3 installation.mp4',
        details: {
         fileSize: '78.5 MB',
@@ -229,7 +229,7 @@ export const storeItems = {
         importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
          youtube: {
           channelName: 'D3V edits',
-          channelUrl: 'https://www.youtube.com/@D3Vedits'
+          channelUrl: 'https://www⚫youtube.com/@D3Vedits'
         }
       },
       reviewsData: [

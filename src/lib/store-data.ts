@@ -58,7 +58,7 @@ export const storeItems = {
       originalPrice: 999,
       discount: '90% OFF',
       platform: 'Mac Only',
-      paymentLink: 'https://rzp.io/l/jerryflow',
+      paymentLink: 'pl_RaUv9x5EuHJY2V',
       installVideo: '/videos/installation of jerryflow.mp4',
        details: {
         fileSize: '15.8 MB',
@@ -229,7 +229,7 @@ export const storeItems = {
         importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
          youtube: {
           channelName: 'D3V edits',
-          channelUrl: 'https://www⚫youtube.com/@D3Vedits'
+          channelUrl: 'https://www.youtube.com/@D3Vedits'
         }
       },
       reviewsData: [

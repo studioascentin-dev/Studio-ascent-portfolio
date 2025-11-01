@@ -6,18 +6,9 @@ import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from '@/components/ui/dialog';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { LifeBuoy, Apple, Star, Check } from 'lucide-react';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { useToast } from '@/hooks/use-toast';
-import { Loader2 } from 'lucide-react';
 import { storeItems } from '@/lib/store-data';
 import Link from 'next/link';
 
@@ -45,110 +36,6 @@ const itemVariants = {
   },
 };
 
-const StoreContactForm = ({ itemName }: { itemName: string }) => {
-    const { toast } = useToast();
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const phoneNumber = "919707191619";
-
-    const formSchema = z.object({
-        name: z.string().min(2, { message: "Name must be at least 2 characters." }),
-        email: z.string().email({ message: "Please enter a valid email." }),
-        issue: z.string().min(10, { message: "Please describe the issue in at least 10 characters." }),
-    });
-
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
-        defaultValues: {
-            name: "",
-            email: "",
-            issue: "",
-        },
-    });
-
-    async function onSubmit(values: z.infer<typeof formSchema>) {
-        setIsSubmitting(true);
-        
-        const messageBody = `Hello! I'm having an issue with the store item: *${itemName}*.\n\n*Name:*\n${values.name}\n\n*Email:*\n${values.email}\n\n*Issue Description:*\n${values.issue}`;
-        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(messageBody)}`;
-
-        window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-        
-        toast({
-            title: "Redirecting to WhatsApp...",
-            description: "Your support message is ready to be sent.",
-        });
-
-        form.reset();
-        setIsSubmitting(false);
-    }
-
-    return (
-         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                <FormField
-                    control={form.control}
-                    name="name"
-                    render={({ field }) => (
-                        <FormItem>
-                        <FormLabel>Name</FormLabel>
-                        <FormControl>
-                            <Input placeholder="Your Name" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                        <FormItem>
-                        <FormLabel>Email</FormLabel>
-                        <FormControl>
-                            <Input placeholder="your.email@example.com" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="issue"
-                    render={({ field }) => (
-                        <FormItem>
-                        <FormLabel>Problem Description</FormLabel>
-                        <FormControl>
-                            <Textarea
-                            placeholder="Please describe the problem you're experiencing."
-                            className="resize-none"
-                            {...field}
-                            />
-                        </FormControl>
-                        <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <Button type="submit" className="w-full font-bold" disabled={isSubmitting}>
-                    {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                    Send via WhatsApp
-                </Button>
-            </form>
-        </Form>
-    )
-}
-
-const StarRating = ({ rating, count }: { rating: number, count: number }) => {
-    return (
-        <div className="flex items-center gap-1 text-sm text-muted-foreground">
-            <div className="flex text-yellow-400">
-                {[...Array(5)].map((_, i) => (
-                    <Star key={i} className={`h-4 w-4 ${i < rating ? 'fill-current' : 'text-gray-300'}`} />
-                ))}
-            </div>
-            <span>({count} reviews)</span>
-        </div>
-    )
-}
 
 const StoreItemCard = ({ item }: { item: any }) => {
   const isPlugin = 'price' in item;
@@ -174,7 +61,7 @@ const StoreItemCard = ({ item }: { item: any }) => {
             )}
             
           </CardHeader>
-          <CardContent className="p-3 flex flex-col flex-grow">
+          <CardContent className="p-4 flex flex-col flex-grow">
             <h3 className="text-base font-bold font-headline mb-2 flex-grow group-hover:text-primary transition-colors">{item.name}</h3>
 
             <div className="mt-auto space-y-3">
@@ -184,19 +71,18 @@ const StoreItemCard = ({ item }: { item: any }) => {
                 </div>
               )}
 
-              <div className="flex items-center justify-between">
-                {isPlugin ? (
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-xl font-bold text-primary">₹{item.price}</span>
-                    <span className="text-xs text-muted-foreground line-through">₹{item.originalPrice}</span>
-                  </div>
-                ) : (
-                  <div></div> 
-                )}
-                <Button className="font-semibold pointer-events-none text-xs px-3 h-8" size="sm">
-                  View Details
-                </Button>
-              </div>
+              {isPlugin ? (
+                <div className="flex items-baseline gap-1">
+                  <span className="text-xl font-bold text-primary">₹{item.price}</span>
+                  <span className="text-xs text-muted-foreground line-through">₹{item.originalPrice}</span>
+                </div>
+              ) : (
+                <div></div> 
+              )}
+
+              <Button className="w-full font-semibold pointer-events-none text-xs px-3 h-8 mt-2" size="sm">
+                View Details
+              </Button>
             </div>
           </CardContent>
         </Card>

@@ -187,6 +187,7 @@ export const storeItems = {
       originalPrice: 1299,
       discount: '92% OFF',
       platform: 'Mac Only',
+      paymentLink: 'pl_RaUBZG6HYdMCyQ',
       installVideo: 'https://www.youtube.com/embed/YvJVv_dU2eU',
        details: {
         fileSize: '33.9 MB',

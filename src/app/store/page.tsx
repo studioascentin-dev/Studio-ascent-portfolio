@@ -166,39 +166,40 @@ const StoreItemCard = ({ item }: { item: any }) => {
               className="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
               data-ai-hint={item.dataAiHint}
             />
-            {isPlugin && (
-              <>
-                <div className="absolute top-2 left-2 bg-black/50 text-white text-xs px-2 py-1 rounded-md flex items-center gap-1">
-                  {item.platform === 'Mac & Windows' ? <Check className="h-3 w-3 text-green-400" /> : <Apple className="h-3 w-3" />} {item.platform}
-                </div>
-                {item.discount && (
-                  <div className="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-md">
-                    {item.discount}
-                  </div>
-                )}
-              </>
-            )}
-          </CardHeader>
-          <CardContent className="p-3 md:p-4 flex flex-col flex-grow">
-            <h3 className="text-base md:text-lg font-bold font-headline mb-2 flex-grow group-hover:text-primary transition-colors">{item.name}</h3>
-            {isPlugin && item.reviews && (
-              <div className="mb-2 hidden sm:block">
-                <StarRating rating={item.rating} count={item.reviews} />
+            
+            {item.discount && isPlugin && (
+              <div className="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-md">
+                {item.discount}
               </div>
             )}
-            <p className="text-xs md:text-sm text-muted-foreground mb-4 flex-grow">{item.description}</p>
-            <div className="flex items-center justify-between mt-auto">
-              {isPlugin ? (
-                <div className="flex items-baseline gap-1 md:gap-2">
-                  <span className="text-xl md:text-2xl font-bold text-primary">₹{item.price}</span>
-                  <span className="text-xs md:text-sm text-muted-foreground line-through">₹{item.originalPrice}</span>
+            
+          </CardHeader>
+          <CardContent className="p-3 flex flex-col flex-grow">
+            <h3 className="text-base font-bold font-headline mb-2 flex-grow group-hover:text-primary transition-colors">{item.name}</h3>
+
+            <div className="mt-auto space-y-3">
+              {isPlugin && (
+                <div className='flex items-center justify-between'>
+                  <div className="bg-black/50 text-white text-xs px-2 py-1 rounded-md flex items-center gap-1">
+                    {item.platform === 'Mac & Windows' ? <Check className="h-3 w-3 text-green-400" /> : <Apple className="h-3 w-3" />} {item.platform}
+                  </div>
+                   {item.reviews > 0 && <StarRating rating={item.rating} count={item.reviews} />}
                 </div>
-              ) : (
-                <div></div> 
               )}
-              <Button className="font-semibold pointer-events-none text-xs px-2 h-8" size="sm">
-                View Details
-              </Button>
+
+              <div className="flex items-center justify-between">
+                {isPlugin ? (
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-xl font-bold text-primary">₹{item.price}</span>
+                    <span className="text-xs text-muted-foreground line-through">₹{item.originalPrice}</span>
+                  </div>
+                ) : (
+                  <div></div> 
+                )}
+                <Button className="font-semibold pointer-events-none text-xs px-3 h-8" size="sm">
+                  View Details
+                </Button>
+              </div>
             </div>
           </CardContent>
         </Card>

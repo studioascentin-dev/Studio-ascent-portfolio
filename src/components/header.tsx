@@ -9,6 +9,7 @@ import * as React from 'react';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "./ui/sheet";
 import { Button } from "./ui/button";
 import { Menu } from "lucide-react";
+import Image from "next/image";
 
 const navItems = [
     { name: "About", href: "/#about" },
@@ -20,11 +21,13 @@ const navItems = [
 
 const Logo = () => {
     return (
-        <div className="font-headline text-lg font-bold">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-300 to-primary animate-shimmer bg-[length:200%_auto]">
-                <span className="text-primary">S</span>tudio <span className="text-primary">A</span>scent
-            </span>
-        </div>
+        <Image 
+            src="/logo.png" 
+            alt="Studio Ascent Logo" 
+            width={140} 
+            height={40} 
+            priority
+        />
     );
 };
 
@@ -115,7 +118,7 @@ export function Header() {
                 className="px-4 sm:px-8"
             >
                 <div className="flex h-24 items-center justify-between">
-                    <Link href="/" className="flex items-center gap-3 px-6 py-3 bg-background/50 backdrop-blur-lg rounded-full border border-white/10 shadow-lg">
+                    <Link href="/" className="flex items-center gap-3 px-4 py-2 bg-background/50 backdrop-blur-lg rounded-full border border-white/10 shadow-lg">
                         <Logo />
                     </Link>
                     

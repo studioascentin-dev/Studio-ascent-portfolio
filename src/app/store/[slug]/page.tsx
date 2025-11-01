@@ -457,7 +457,7 @@ export default function ProductDetailPage() {
                                         <span className="text-xl md:text-2xl text-muted-foreground line-through">₹{item.originalPrice}</span>
                                     </div>
                                     {isRazorpayButton ? (
-                                        <div className="w-full">
+                                        <div className="w-full scale-[1.15] origin-left">
                                             <RazorpayButton buttonId={item.paymentLink} />
                                         </div>
                                     ) : (
@@ -465,7 +465,7 @@ export default function ProductDetailPage() {
                                             <Link href={'paymentLink' in item ? item.paymentLink || '#' : '#'} target="_blank" rel="noopener noreferrer">Buy Now</Link>
                                         </Button>
                                     )}
-                                    <p className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
+                                    <p className="flex items-center justify-center gap-2 text-xs text-muted-foreground pt-2">
                                         <Lock className="h-4 w-4" /> Secured by Razorpay
                                     </p>
                                 </div>

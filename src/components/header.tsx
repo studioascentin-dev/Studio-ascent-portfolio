@@ -22,14 +22,16 @@ const navItems = [
 const Logo = () => {
     return (
         <>
-            <Image 
-                src="/logo.png" 
-                alt="Studio Ascent Logo" 
-                width={32} 
-                height={32}
-                className="rounded-full"
-                priority
-            />
+            <div className="relative h-8 w-8 flex-shrink-0">
+                <Image 
+                    src="/logo.png" 
+                    alt="Studio Ascent Logo" 
+                    fill
+                    sizes="32px"
+                    className="rounded-full object-cover"
+                    priority
+                />
+            </div>
             <span className="font-headline text-lg font-bold text-primary">Studio Ascent</span>
         </>
     );

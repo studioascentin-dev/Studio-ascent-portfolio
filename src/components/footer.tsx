@@ -2,7 +2,13 @@
 "use client";
 
 import Link from "next/link";
-import { Instagram, Linkedin, Youtube, PanelsTopLeft } from 'lucide-react';
+import { Instagram, Linkedin, Youtube } from 'lucide-react';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
 
 const socialLinks = [
   { name: 'Instagram', href: 'https://www.instagram.com/_.d_k_d/', icon: <Instagram className="h-5 w-5" /> },
@@ -11,12 +17,34 @@ const socialLinks = [
   { name: 'X', href: 'https://x.com/Dev69910032', icon: <XIcon className="h-5 w-5" /> },
 ];
 
-const navLinks = [
-    { name: "About", href: "/#about" },
-    { name: "Services", href: "/#services" },
-    { name: "Store", href: "/store" },
-    { name: "Pricing", href: "/pricing" },
-    { name: "FAQ", href: "/faq" },
+const footerLinkGroups = [
+  {
+    title: "Quick Links",
+    links: [
+      { name: "About", href: "/#about" },
+      { name: "Services", href: "/#services" },
+      { name: "Store", href: "/store" },
+      { name: "Pricing", href: "/pricing" },
+      { name: "FAQ", href: "/faq" },
+    ]
+  },
+  {
+    title: "Services",
+    links: [
+      { name: "Web Development", href: "/services/web-development"},
+      { name: "Video Editing", href: "/services/video-editing"},
+      { name: "AI Chatbots", href: "/services/ai-chatbot"},
+      { name: "Contact", href: "/#contact" },
+    ]
+  },
+  {
+    title: "Legal",
+    links: [
+      { name: "Privacy Policy", href: "/privacy" },
+      { name: "Terms and Conditions", href: "/terms" },
+      { name: "Refund Policy", href: "/refund-policy" },
+    ]
+  }
 ];
 
 
@@ -39,7 +67,7 @@ export function Footer() {
       <div className="mx-auto px-4 sm:px-8">
         <div className="flex flex-col md:flex-row justify-between items-start gap-10 md:gap-8">
           
-          <div className="space-y-4 max-w-xs">
+          <div className="space-y-4 max-w-xs w-full">
             <h3 className="font-headline text-2xl font-bold text-primary">Studio Ascent</h3>
             <p className="text-muted-foreground text-sm">
               Creative full-stack developer and video editor, crafting beautiful digital experiences.
@@ -60,41 +88,45 @@ export function Footer() {
             </div>
           </div>
 
-          <div className="flex-grow flex justify-center md:justify-end">
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 sm:gap-16">
-                <div>
-                  <h4 className="font-semibold font-headline mb-4">Quick Links</h4>
-                  <ul className="space-y-3">
-                    {navLinks.map((link) => (
-                      <li key={link.name}>
-                        <Link href={link.href} className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                            {link.name}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="font-semibold font-headline mb-4">Services</h4>
-                  <ul className="space-y-3">
-                    <li><Link href="/services/web-development" className="text-sm text-muted-foreground hover:text-primary transition-colors">Web Development</Link></li>
-                    <li><Link href="/services/video-editing" className="text-sm text-muted-foreground hover:text-primary transition-colors">Video Editing</Link></li>
-                    <li><Link href="/services/ai-chatbot" className="text-sm text-muted-foreground hover:text-primary transition-colors">AI Chatbots</Link></li>
-                    <li>
-                        <Link href="/#contact" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                            Contact
-                        </Link>
-                    </li>
-                  </ul>
-                </div>
-                 <div>
-                  <h4 className="font-semibold font-headline mb-4">Legal</h4>
-                  <ul className="space-y-3">
-                    <li><Link href="/privacy" className="text-sm text-muted-foreground hover:text-primary transition-colors">Privacy Policy</Link></li>
-                    <li><Link href="/terms" className="text-sm text-muted-foreground hover:text-primary transition-colors">Terms and Conditions</Link></li>
-                    <li><Link href="/refund-policy" className="text-sm text-muted-foreground hover:text-primary transition-colors">Refund Policy</Link></li>
-                  </ul>
-                </div>
+          <div className="flex-grow w-full md:flex justify-center md:justify-end">
+              {/* Desktop View: Grid */}
+              <div className="hidden md:grid grid-cols-2 sm:grid-cols-3 gap-8 sm:gap-16">
+                {footerLinkGroups.map(group => (
+                    <div key={group.title}>
+                        <h4 className="font-semibold font-headline mb-4">{group.title}</h4>
+                        <ul className="space-y-3">
+                            {group.links.map((link) => (
+                            <li key={link.name}>
+                                <Link href={link.href} className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                                    {link.name}
+                                </Link>
+                            </li>
+                            ))}
+                        </ul>
+                    </div>
+                ))}
+              </div>
+
+              {/* Mobile View: Accordion */}
+              <div className="w-full md:hidden">
+                <Accordion type="single" collapsible className="w-full">
+                  {footerLinkGroups.map(group => (
+                    <AccordionItem value={group.title} key={group.title} className="border-b border-white/10">
+                      <AccordionTrigger className="py-4 font-semibold font-headline text-base hover:no-underline">{group.title}</AccordionTrigger>
+                      <AccordionContent>
+                        <ul className="space-y-3 pl-2">
+                           {group.links.map((link) => (
+                            <li key={link.name}>
+                                <Link href={link.href} className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                                    {link.name}
+                                </Link>
+                            </li>
+                            ))}
+                        </ul>
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
               </div>
           </div>
         </div>

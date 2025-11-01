@@ -465,9 +465,6 @@ export default function ProductDetailPage() {
                                             <Link href={'paymentLink' in item ? item.paymentLink || '#' : '#'} target="_blank" rel="noopener noreferrer">Buy Now</Link>
                                         </Button>
                                     )}
-                                    <p className="flex items-center justify-center gap-2 text-xs text-muted-foreground pt-2">
-                                        <Lock className="h-4 w-4" /> Secured by Razorpay
-                                    </p>
                                 </div>
                             )}
 

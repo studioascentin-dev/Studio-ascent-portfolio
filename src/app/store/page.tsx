@@ -72,17 +72,20 @@ const StoreItemCard = ({ item }: { item: any }) => {
               )}
 
               {isPlugin ? (
-                <div className="flex items-baseline gap-1">
-                  <span className="text-xl font-bold text-primary">₹{item.price}</span>
-                  <span className="text-xs text-muted-foreground line-through">₹{item.originalPrice}</span>
+                 <div className="flex flex-col md:flex-row md:items-baseline md:justify-between">
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-xl font-bold text-primary">₹{item.price}</span>
+                      <span className="text-xs text-muted-foreground line-through">₹{item.originalPrice}</span>
+                    </div>
+                    <Button className="w-full md:w-auto font-semibold pointer-events-none text-xs px-3 h-8 mt-2 md:mt-0" size="sm">
+                        View Details
+                    </Button>
                 </div>
               ) : (
-                <div></div> 
+                <Button className="w-full font-semibold pointer-events-none text-xs px-3 h-8 mt-2" size="sm">
+                    View Details
+                </Button>
               )}
-
-              <Button className="w-full font-semibold pointer-events-none text-xs px-3 h-8 mt-2" size="sm">
-                View Details
-              </Button>
             </div>
           </CardContent>
         </Card>

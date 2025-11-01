@@ -179,24 +179,24 @@ const StoreItemCard = ({ item }: { item: any }) => {
               </>
             )}
           </CardHeader>
-          <CardContent className="p-4 flex flex-col flex-grow">
-            <h3 className="text-lg font-bold font-headline mb-2 flex-grow group-hover:text-primary transition-colors">{item.name}</h3>
+          <CardContent className="p-3 md:p-4 flex flex-col flex-grow">
+            <h3 className="text-base md:text-lg font-bold font-headline mb-2 flex-grow group-hover:text-primary transition-colors">{item.name}</h3>
             {isPlugin && item.reviews && (
-              <div className="mb-2">
+              <div className="mb-2 hidden sm:block">
                 <StarRating rating={item.rating} count={item.reviews} />
               </div>
             )}
-            <p className="text-sm text-muted-foreground mb-4 flex-grow">{item.description}</p>
+            <p className="text-xs md:text-sm text-muted-foreground mb-4 flex-grow">{item.description}</p>
             <div className="flex items-center justify-between mt-auto">
               {isPlugin ? (
-                <div className="flex items-baseline gap-2">
-                  <span className="text-2xl font-bold text-primary">₹{item.price}</span>
-                  <span className="text-sm text-muted-foreground line-through">₹{item.originalPrice}</span>
+                <div className="flex items-baseline gap-1 md:gap-2">
+                  <span className="text-xl md:text-2xl font-bold text-primary">₹{item.price}</span>
+                  <span className="text-xs md:text-sm text-muted-foreground line-through">₹{item.originalPrice}</span>
                 </div>
               ) : (
                 <div></div> 
               )}
-              <Button className="font-semibold pointer-events-none" size="sm">
+              <Button className="font-semibold pointer-events-none text-xs px-2 h-8" size="sm">
                 View Details
               </Button>
             </div>
@@ -265,7 +265,7 @@ export default function StorePage() {
                     {key === 'plugins' && <AfterEffectsIcon className="w-8 h-8 md:w-9 md:h-9" />}
                     {category.title}
                   </motion.h2>
-                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
                     {category.items.map((item: any) => (
                       <StoreItemCard key={item.slug} item={item} />
                     ))}

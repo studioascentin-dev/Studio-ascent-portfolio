@@ -73,11 +73,11 @@ const StoreItemCard = ({ item }: { item: any }) => {
             
           </CardHeader>
           <CardContent className="p-4 flex flex-col flex-grow">
-            <h3 className="text-base font-bold font-headline mb-2 flex-grow group-hover:text-primary transition-colors">{item.name}</h3>
+            <h3 className="text-base md:text-lg font-bold font-headline mb-2 flex-grow group-hover:text-primary transition-colors">{item.name}</h3>
 
             {/* Desktop View: Full details */}
             <div className="hidden md:block mt-auto space-y-3">
-              <p className="text-xs text-muted-foreground flex-grow mb-2 min-h-[30px]">{item.description}</p>
+              <p className="text-sm text-muted-foreground flex-grow mb-2 min-h-[30px]">{item.description}</p>
               {isPlugin && item.reviews > 0 && <StarRating rating={item.rating} count={item.reviews} />}
               <div className="bg-black/50 text-white text-xs px-2 py-1 rounded-md flex items-center gap-1 w-fit">
                   {item.platform === 'Mac & Windows' ? <Check className="h-3 w-3 text-green-400" /> : <Apple className="h-3 w-3" />} {item.platform}
@@ -98,9 +98,9 @@ const StoreItemCard = ({ item }: { item: any }) => {
                 <div className="bg-black/50 text-white text-xs px-2 py-1 rounded-md flex items-center gap-1 w-fit">
                     {item.platform === 'Mac & Windows' ? <Check className="h-3 w-3 text-green-400" /> : <Apple className="h-3 w-3" />} {item.platform}
                 </div>
-                <div className="flex items-baseline gap-1">
-                  <span className="text-xl font-bold text-primary">₹{item.price}</span>
-                  <span className="text-xs text-muted-foreground line-through">₹{item.originalPrice}</span>
+                <div>
+                    <span className="text-xl font-bold text-primary">₹{item.price}</span>
+                    <span className="text-xs text-muted-foreground line-through ml-1">₹{item.originalPrice}</span>
                 </div>
                 <Button className="w-full font-semibold pointer-events-none text-xs px-3 h-8 mt-2" size="sm">
                     View Details

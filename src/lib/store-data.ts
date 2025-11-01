@@ -222,7 +222,7 @@ export const storeItems = {
       originalPrice: 2999,
       discount: '97% OFF',
       platform: 'Mac Only',
-      paymentLink: 'https://rzp.io/l/element-3d',
+      paymentLink: 'pl_RaUrGxMtVF8nqO',
       installVideo: '/videos/installation of 3d element.mp4',
        details: {
         fileSize: '250 MB',

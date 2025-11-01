@@ -25,8 +25,9 @@ const Logo = () => {
             <Image 
                 src="/logo.png" 
                 alt="Studio Ascent Logo" 
-                width={40} 
-                height={40} 
+                width={32} 
+                height={32}
+                className="rounded-full"
                 priority
             />
             <span className="font-headline text-lg font-bold text-primary">Studio Ascent</span>

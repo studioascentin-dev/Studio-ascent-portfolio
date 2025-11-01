@@ -360,7 +360,7 @@ export const storeItems = {
       reviews: 21,
       rating: 4,
       platform: 'Alight Motion',
-      paymentLink: 'https://rzp.io/l/nami-edit',
+      paymentLink: 'pl_RaV9kl1JjNNy6e',
       installVideo: 'https://www.youtube.com/embed/SUP97P-L5V0',
        details: {
         fileSize: '15 MB',

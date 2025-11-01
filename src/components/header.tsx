@@ -24,7 +24,7 @@ const Logo = () => {
         <>
             <div className="relative h-8 w-8 flex-shrink-0">
                 <Image 
-                    src="/logo.png" 
+                    src="/images/My Logo.png" 
                     alt="Studio Ascent Logo" 
                     fill
                     sizes="32px"
@@ -32,7 +32,11 @@ const Logo = () => {
                     priority
                 />
             </div>
-            <span className="font-headline text-lg font-bold text-primary">Studio Ascent</span>
+            <span className="font-headline text-lg font-bold">
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-300 to-primary animate-shimmer bg-[length:200%_auto]">
+                    Studio Ascent
+                </span>
+            </span>
         </>
     );
 };

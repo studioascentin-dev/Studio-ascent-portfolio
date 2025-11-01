@@ -14,7 +14,7 @@ export const storeItems = {
       originalPrice: 3499,
       discount: '97% OFF',
       platform: 'Mac Only',
-      paymentLink: 'https://rzp.io/i/yZ5kdfb',
+      paymentLink: 'pl_RaTwMcaPmaCnTI',
       installVideo: '/videos/installation of sapphire.mp4',
       details: {
         fileSize: '1.2 GB',

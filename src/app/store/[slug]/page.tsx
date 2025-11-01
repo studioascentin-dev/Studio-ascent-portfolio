@@ -25,6 +25,7 @@ import { Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { sendSupportEmail } from '@/ai/flows/send-support-email';
+import { RazorpayButton } from '@/components/razorpay-button';
 
 
 const StarRating = ({ rating, count, size = 'h-5 w-5' }: { rating: number, count?: number, size?: string }) => {
@@ -394,6 +395,7 @@ export default function ProductDetailPage() {
     const isPlugin = 'price' in item && 'originalPrice' in item && storeItems.plugins.some(p => p.slug === item.slug);
     const isProjectFile = 'price' in item && 'originalPrice' in item && storeItems.projectFiles.some(p => p.slug === item.slug);
     const isPricedItem = isPlugin || isProjectFile;
+    const isRazorpayButton = 'paymentLink' in item && item.paymentLink.startsWith('pl_');
 
 
     return (
@@ -454,9 +456,15 @@ export default function ProductDetailPage() {
                                         <span className="text-4xl md:text-5xl font-bold text-primary">₹{item.price}</span>
                                         <span className="text-xl md:text-2xl text-muted-foreground line-through">₹{item.originalPrice}</span>
                                     </div>
-                                    <Button asChild size="lg" className="w-full font-bold text-base md:text-lg py-4 md:py-6">
-                                        <Link href={'paymentLink' in item ? item.paymentLink || '#' : '#'} target="_blank" rel="noopener noreferrer">Buy Now</Link>
-                                    </Button>
+                                    {isRazorpayButton ? (
+                                        <div className="w-full">
+                                            <RazorpayButton buttonId={item.paymentLink} />
+                                        </div>
+                                    ) : (
+                                        <Button asChild size="lg" className="w-full font-bold text-base md:text-lg py-4 md:py-6">
+                                            <Link href={'paymentLink' in item ? item.paymentLink || '#' : '#'} target="_blank" rel="noopener noreferrer">Buy Now</Link>
+                                        </Button>
+                                    )}
                                     <p className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
                                         <Lock className="h-4 w-4" /> Secured by Razorpay
                                     </p>

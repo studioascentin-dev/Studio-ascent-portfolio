@@ -179,11 +179,8 @@ const StoreItemCard = ({ item }: { item: any }) => {
 
             <div className="mt-auto space-y-3">
               {isPlugin && (
-                <div className='flex items-center justify-between'>
-                  <div className="bg-black/50 text-white text-xs px-2 py-1 rounded-md flex items-center gap-1">
+                <div className="bg-black/50 text-white text-xs px-2 py-1 rounded-md flex items-center gap-1 w-fit">
                     {item.platform === 'Mac & Windows' ? <Check className="h-3 w-3 text-green-400" /> : <Apple className="h-3 w-3" />} {item.platform}
-                  </div>
-                   {item.reviews > 0 && <StarRating rating={item.rating} count={item.reviews} />}
                 </div>
               )}
 

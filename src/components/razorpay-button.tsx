@@ -49,7 +49,7 @@ export const RazorpayButton: React.FC<RazorpayButtonProps> = ({ buttonId, classN
   }, [buttonId]);
 
   return (
-    <div className={cn("w-full", className)} {...props}>
+    <div className={cn("w-full transform scale-[1.3] origin-top-left", className)} {...props}>
       <form id={`razorpay-form-${buttonId}`}>
         {/* The script will inject the button here */}
       </form>

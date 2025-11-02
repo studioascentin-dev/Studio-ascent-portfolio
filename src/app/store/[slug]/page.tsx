@@ -451,13 +451,13 @@ export default function ProductDetailPage() {
                             </div>
 
                             {isPricedItem && (
-                                <div className="space-y-4 rounded-lg bg-secondary/50 p-4 md:p-6">
+                                <div className="space-y-2 rounded-lg bg-secondary/50 p-4 md:p-6">
                                      <div className="flex items-baseline gap-2 md:gap-4">
                                         <span className="text-4xl md:text-5xl font-bold text-primary">₹{item.price}</span>
                                         <span className="text-xl md:text-2xl text-muted-foreground line-through">₹{item.originalPrice}</span>
                                     </div>
                                     {isRazorpayButton ? (
-                                        <div className="w-full scale-[1.15] origin-left">
+                                        <div className="h-[52px] -mt-2 -ml-2">
                                             <RazorpayButton buttonId={item.paymentLink} />
                                         </div>
                                     ) : (

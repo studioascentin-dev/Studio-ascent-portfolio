@@ -93,7 +93,7 @@ export const storeItems = {
       originalPrice: 1799,
       discount: '94% OFF',
       platform: 'Mac Only',
-      paymentLink: 'https://rzp.io/l/twixtor-pro',
+      paymentLink: 'pl_RaqjZJEe5lr3Lx',
       installVideo: '/videos/twixtor setup installation.mp4',
        details: {
         fileSize: '45.1 MB',

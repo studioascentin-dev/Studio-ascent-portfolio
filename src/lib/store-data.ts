@@ -361,7 +361,7 @@ export const storeItems = {
       reviews: 21,
       rating: 4,
       platform: 'Alight Motion',
-      paymentLink: 'pl_RaV9kl1JjNNy6e',
+      paymentLink: 'pl_Ras4Md8OnxuYHY',
       installVideo: 'https://www.youtube.com/embed/SUP97P-L5V0',
        details: {
         fileSize: '15 MB',

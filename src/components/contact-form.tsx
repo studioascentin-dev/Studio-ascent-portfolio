@@ -31,7 +31,7 @@ const formSchema = z.object({
     message: "Please enter a valid email.",
   }),
   service: z.string().min(1, { message: "Please select a service." }),
-  servicePlan: z.string().min(1, { message: "Please select a plan." }),
+  servicePlan: z.string().optional(),
   message: z.string().min(10, {
     message: "Message must be at least 10 characters.",
   }),
@@ -49,12 +49,16 @@ export function ContactForm() {
   let initialPlan = "";
 
   if(planParam) {
-    for (const service of Object.values(pricingData)) {
-      if (service.tiers.some(tier => tier.name === planParam)) {
-        initialService = service.title;
-        initialPlan = planParam;
-        break;
-      }
+    if (planParam === "Something Else?") {
+      initialService = "Something Else?";
+    } else {
+        for (const service of Object.values(pricingData)) {
+            if (service.tiers.some(tier => tier.name === planParam)) {
+                initialService = service.title;
+                initialPlan = planParam;
+                break;
+            }
+        }
     }
   }
 
@@ -73,6 +77,9 @@ export function ContactForm() {
     control: form.control,
     name: 'service',
   });
+  
+  const isSomethingElseSelected = selectedServiceTitle === "Something Else?";
+
 
   React.useEffect(() => {
     const currentServiceData = Object.values(pricingData).find(s => s.title === selectedServiceTitle);
@@ -84,9 +91,11 @@ export function ContactForm() {
   }, [selectedServiceTitle, form]);
   
   React.useEffect(() => {
-    if (initialService && initialPlan) {
+    if (initialService) {
       form.setValue('service', initialService);
-      form.setValue('servicePlan', initialPlan);
+      if (initialPlan) {
+        form.setValue('servicePlan', initialPlan);
+      }
     }
   }, [initialService, initialPlan, form]);
 
@@ -94,9 +103,12 @@ export function ContactForm() {
   const onSubmit = async (data: FormValues) => {
     setIsSubmitting(true);
     try {
-        const currentServiceData = Object.values(pricingData).find(s => s.title === data.service);
-        const planPrice = currentServiceData?.tiers.find(p => p.name === data.servicePlan)?.price;
-        const serviceText = `${data.servicePlan} (${planPrice || 'Price not found'})`;
+        let serviceText = data.service;
+        if (data.service !== "Something Else?" && data.servicePlan) {
+            const currentServiceData = Object.values(pricingData).find(s => s.title === data.service);
+            const planPrice = currentServiceData?.tiers.find(p => p.name === data.servicePlan)?.price;
+            serviceText = `${data.servicePlan} (${planPrice || 'Price not found'})`;
+        }
 
         const emailResult = await sendEmail({
             ...data,
@@ -199,36 +211,39 @@ export function ContactForm() {
                                 {service.title}
                             </SelectItem>
                         ))}
+                        <SelectItem value="Something Else?">Something Else?</SelectItem>
                     </SelectContent>
                     </Select>
                     <FormMessage />
                 </FormItem>
                 )}
             />
-            <FormField
-                control={form.control}
-                name="servicePlan"
-                render={({ field }) => (
-                <FormItem>
-                    <FormLabel>Service Plan</FormLabel>
-                    <Select onValueChange={field.onChange} value={field.value || ""} disabled={!selectedServiceTitle}>
-                    <FormControl>
-                        <SelectTrigger>
-                        <SelectValue placeholder="Select a plan" />
-                        </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                        {availablePlans.map((plan) => (
-                            <SelectItem key={plan.name} value={plan.name}>
-                                {plan.name} - {plan.price}
-                            </SelectItem>
-                        ))}
-                    </SelectContent>
-                    </Select>
-                    <FormMessage />
-                </FormItem>
-                )}
-            />
+            {!isSomethingElseSelected && (
+                <FormField
+                    control={form.control}
+                    name="servicePlan"
+                    render={({ field }) => (
+                    <FormItem>
+                        <FormLabel>Service Plan</FormLabel>
+                        <Select onValueChange={field.onChange} value={field.value || ""} disabled={!selectedServiceTitle}>
+                        <FormControl>
+                            <SelectTrigger>
+                            <SelectValue placeholder="Select a plan" />
+                            </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                            {availablePlans.map((plan) => (
+                                <SelectItem key={plan.name} value={plan.name}>
+                                    {plan.name} - {plan.price}
+                                </SelectItem>
+                            ))}
+                        </SelectContent>
+                        </Select>
+                        <FormMessage />
+                    </FormItem>
+                    )}
+                />
+            )}
         </div>
 
         <FormField

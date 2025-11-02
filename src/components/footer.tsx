@@ -34,7 +34,6 @@ const footerLinkGroups = [
       { name: "Web Development", href: "/services/web-development"},
       { name: "Video Editing", href: "/services/video-editing"},
       { name: "AI Chatbots", href: "/services/ai-chatbot"},
-      { name: "Contact", href: "/#contact" },
     ]
   },
   {

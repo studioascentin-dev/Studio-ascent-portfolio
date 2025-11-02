@@ -327,7 +327,7 @@ export const storeItems = {
       reviews: 55,
       rating: 5,
       platform: 'Alight Motion',
-      paymentLink: 'https://rzp.io/l/mahito-edit',
+      paymentLink: 'pl_Ras2kgA2mBBh8A',
       installVideo: 'https://www.youtube.com/embed/1jJzYyR9UcE',
        details: {
         fileSize: '5 MB',

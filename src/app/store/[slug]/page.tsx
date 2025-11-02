@@ -457,9 +457,7 @@ export default function ProductDetailPage() {
                                         <span className="text-xl md:text-2xl text-muted-foreground line-through">₹{item.originalPrice}</span>
                                     </div>
                                     {isRazorpayButton ? (
-                                        <div className="h-[52px] -mt-2 -ml-2">
-                                            <RazorpayButton buttonId={item.paymentLink} />
-                                        </div>
+                                        <RazorpayButton buttonId={item.paymentLink} />
                                     ) : (
                                         <Button asChild size="lg" className="w-full font-bold text-base md:text-lg py-4 md:py-6">
                                             <Link href={'paymentLink' in item ? item.paymentLink || '#' : '#'} target="_blank" rel="noopener noreferrer">Buy Now</Link>

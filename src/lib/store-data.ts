@@ -128,6 +128,7 @@ export const storeItems = {
       originalPrice: 3999,
       discount: '98% OFF',
       platform: 'Mac Only',
+      paymentLink: 'pl_RaqeXPF63RSMnZ',
       installVideo: '/videos/Gaussian splatting installation.mp4',
        details: {
         fileSize: '128 MB',

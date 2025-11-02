@@ -293,7 +293,7 @@ export const storeItems = {
       reviews: 33,
       rating: 4,
       platform: 'Alight Motion',
-      paymentLink: 'https://rzp.io/l/komi-edit',
+      paymentLink: 'pl_RarzTCdMlEtx40',
       installVideo: 'https://www.youtube.com/embed/DlbaRFqhSYE',
       details: {
         fileSize: '30 MB',

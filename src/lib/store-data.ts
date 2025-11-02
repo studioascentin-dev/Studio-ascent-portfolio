@@ -259,7 +259,7 @@ export const storeItems = {
       reviews: 28,
       rating: 5,
       platform: 'Alight Motion',
-      paymentLink: 'https://rzp.io/l/kaguya-edit',
+      paymentLink: 'pl_RarxPu20jRPKiV',
       installVideo: 'https://www.youtube.com/embed/v_bqH80FjN4',
       details: {
         fileSize: '25 MB',

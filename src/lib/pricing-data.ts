@@ -9,15 +9,16 @@ export const pricingData = {
     tiers: [
       {
         name: "Candy Style Edit",
-        price: "₹700 – ₹2,000",
+        price: "₹1400",
         features: [
           "Soft pastel color grading",
           "Dreamy transitions & beat sync",
-          "Up to 45 sec (1080p export)",
+          "Up to 30s (1080p export)",
           "1 free revision",
         ],
         delivery: "1-2 days depends on the complexity",
         addOns: [
+          "4k Export @ ₹200",
           "Extra 10 sec @ ₹150",
           "Express Delivery +₹300",
           "Custom thumbnail @ ₹150",
@@ -28,15 +29,16 @@ export const pricingData = {
       },
       {
         name: "Slo-Mo / Velocity Edit",
-        price: "₹1,000 – ₹2,800",
+        price: "₹1700",
         features: [
           "Smooth slow motion (Twixtor-style)",
           "Beat-perfect velocity transitions",
-          "Emotional color tone",
+          "Up to 30s (1080p export)",
           "1–2 revisions",
         ],
         delivery: "1-2 days depends on the complexity",
         addOns: [
+            "4k Export @ ₹200",
             "Extra 10 sec @ ₹200",
             "Express Delivery +₹400",
             "Custom thumbnail @ ₹150",
@@ -47,15 +49,16 @@ export const pricingData = {
       },
       {
         name: "Glitch & Sync Edit",
-        price: "₹900 – ₹2,500",
+        price: "₹2500",
         features: [
           "Advanced beat sync effects",
           "Glitch overlays & motion text",
-          "Perfect for dance or anime",
+          "Up to 30s (1080p export)",
           "2 revisions",
         ],
         delivery: "2-3 days",
         addOns: [
+          "4k Export @ ₹200",
           "Extra 10 sec @ ₹200",
           "Express Delivery +₹500",
           "Custom thumbnail @ ₹150",
@@ -66,15 +69,16 @@ export const pricingData = {
       },
       {
         name: "Trendy Reel Edit",
-        price: "₹500 – ₹1,800",
+        price: "₹1800",
         features: [
           "Trend audio & captions",
           "Modern transitions",
-          "Optimized for Instagram Reels",
+          "Up to 30s (1080p export)",
           "1 revision",
         ],
         delivery: "2 Days",
         addOns: [
+          "4k Export @ ₹200",
           "Extra 10 sec @ ₹100",
           "Express Delivery +₹300",
           "Custom thumbnail @ ₹150",

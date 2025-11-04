@@ -1,5 +1,4 @@
 
-
 "use client";
 
 import { notFound, useParams } from 'next/navigation';
@@ -26,7 +25,7 @@ import Link from 'next/link';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { RazorpayButton } from '@/components/razorpay-button';
 import { useCollection, useFirestore, useMemoFirebase } from '@/firebase';
-import { collection, query, where, addDoc, serverTimestamp } from 'firebase/firestore';
+import { collection, query, addDoc, serverTimestamp } from 'firebase/firestore';
 
 
 const StarRating = ({ rating, count, size = 'h-5 w-5' }: { rating: number, count?: number, size?: string }) => {
@@ -295,7 +294,6 @@ const getEmbedUrl = (url: string) => {
 export default function ProductDetailPage() {
     const params = useParams();
     const slug = params.slug as string;
-    const { toast } = useToast();
     const firestore = useFirestore();
 
     const allItems = [
@@ -306,11 +304,16 @@ export default function ProductDetailPage() {
     const item = allItems.find(item => item.slug === slug) as any;
 
     const reviewsQuery = useMemoFirebase(() => {
-      if (!firestore || !slug) return null;
-      return query(collection(firestore, 'reviews'), where('productSlug', '==', slug));
-    }, [firestore, slug]);
+      if (!firestore) return null;
+      return query(collection(firestore, 'reviews'));
+    }, [firestore]);
   
-    const { data: reviews, isLoading: reviewsLoading } = useCollection(reviewsQuery);
+    const { data: allReviews, isLoading: reviewsLoading } = useCollection(reviewsQuery);
+    
+    const reviews = useMemo(() => {
+        if (!allReviews) return [];
+        return allReviews.filter(review => review.productSlug === slug);
+    }, [allReviews, slug]);
 
 
     const handleReviewSubmit = async (data: ReviewFormValues) => {
@@ -340,7 +343,7 @@ export default function ProductDetailPage() {
     const totalReviews = reviews?.length || 0;
     const averageRating = reviews && totalReviews > 0
         ? reviews.reduce((acc, review) => acc + (review.rating || 0), 0) / totalReviews
-        : item.rating;
+        : 0;
 
 
     return (
@@ -617,5 +620,7 @@ export default function ProductDetailPage() {
         </div>
     );
 }
+
+    
 
     

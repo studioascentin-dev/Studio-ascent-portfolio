@@ -71,10 +71,10 @@ service cloud.firestore {
     /**
      * @description Rule for reading multiple reviews (collection query).
      * @path /reviews
-     * @principle Allows anyone to list reviews, which is necessary for querying the collection.
+     * @principle Allows anyone to list and get reviews, which is necessary for querying the collection.
      */
     match /reviews {
-        allow list: if true;
+      allow get, list: if true;
     }
 
     /**
@@ -88,3 +88,5 @@ service cloud.firestore {
     }
   }
 }
+
+    

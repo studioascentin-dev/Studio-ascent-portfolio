@@ -244,6 +244,7 @@ export default function ProductDetailPage() {
   const firestore = useFirestore();
   const { toast } = useToast();
   const [isRatingPending, setIsRatingPending] = useState(false);
+  const [hasRated, setHasRated] = useState(false);
 
   const staticItem = [...storeItems.plugins, ...storeItems.projectFiles].find((item) => item.slug === slug) as any;
 
@@ -271,6 +272,16 @@ export default function ProductDetailPage() {
     }
   }, [isProductLoading, productData, staticItem, firestore, slug]);
 
+
+  useEffect(() => {
+    // This code now runs only on the client, after the component has mounted.
+    if (slug) {
+      const alreadyRated = localStorage.getItem(`rated_${slug}`);
+      if (alreadyRated) {
+        setHasRated(true);
+      }
+    }
+  }, [slug]);
 
   const handleRate = async (rating: number) => {
     if (!productRef) return;
@@ -303,6 +314,7 @@ export default function ProductDetailPage() {
             });
         });
         localStorage.setItem(`rated_${slug}`, 'true');
+        setHasRated(true);
         toast({
             title: "Thank You!",
             description: "Your rating has been submitted successfully.",
@@ -450,7 +462,7 @@ export default function ProductDetailPage() {
                         <StarRating rating={averageRating} size="h-8 w-8" onRate={handleRate} isPending={isRatingPending} />
                         {isRatingPending && <Loader2 className="h-5 w-5 animate-spin" />}
                         <p className="text-sm text-muted-foreground">
-                            {localStorage.getItem(`rated_${slug}`) ? "Thanks for your rating!" : "Click a star to rate."}
+                            {hasRated ? "Thanks for your rating!" : "Click a star to rate."}
                         </p>
                     </div>
                 </CardContent>

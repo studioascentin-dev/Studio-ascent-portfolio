@@ -25,7 +25,7 @@ import Link from 'next/link';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { RazorpayButton } from '@/components/razorpay-button';
 import { useCollection, useFirestore, useMemoFirebase } from '@/firebase';
-import { collection, query, addDoc, serverTimestamp } from 'firebase/firestore';
+import { collection, query, where, addDoc, serverTimestamp, orderBy } from 'firebase/firestore';
 
 
 const StarRating = ({ rating, count, size = 'h-5 w-5' }: { rating: number, count?: number, size?: string }) => {
@@ -304,16 +304,11 @@ export default function ProductDetailPage() {
     const item = allItems.find(item => item.slug === slug) as any;
 
     const reviewsQuery = useMemoFirebase(() => {
-      if (!firestore) return null;
-      return query(collection(firestore, 'reviews'));
-    }, [firestore]);
+      if (!firestore || !slug) return null;
+      return query(collection(firestore, 'reviews'), where('productSlug', '==', slug), orderBy('createdAt', 'desc'));
+    }, [firestore, slug]);
   
-    const { data: allReviews, isLoading: reviewsLoading } = useCollection(reviewsQuery);
-    
-    const reviews = useMemo(() => {
-        if (!allReviews) return [];
-        return allReviews.filter(review => review.productSlug === slug);
-    }, [allReviews, slug]);
+    const { data: reviews, isLoading: reviewsLoading } = useCollection(reviewsQuery);
 
 
     const handleReviewSubmit = async (data: ReviewFormValues) => {
@@ -533,7 +528,7 @@ export default function ProductDetailPage() {
                                     </div>
                                 )}
                                 {reviews && reviews.length > 0 ? (
-                                    reviews.sort((a, b) => b.createdAt?.toMillis() - a.createdAt?.toMillis()).map((review: any) => (
+                                    reviews.map((review: any) => (
                                     <article key={review.id} className="bg-secondary/30 p-4 md:p-6 rounded-lg border border-border">
                                         <div className="flex items-start gap-4">
                                             <Avatar>
@@ -620,7 +615,5 @@ export default function ProductDetailPage() {
         </div>
     );
 }
-
-    
 
     

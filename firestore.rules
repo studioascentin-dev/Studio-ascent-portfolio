@@ -6,14 +6,15 @@
  * This ruleset provides public read access to projects and categories,
  * while restricting write access to these collections. Contact and support
  * requests are publicly accessible for both read and write to allow anonymous
- * users to submit the forms.
+ * users to submit the forms. Product ratings can be updated by anyone,
+ * but only specific fields can be changed.
  */
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
     /**
-     * @description Grants public read access to projects while denying all writes.
+     * @description Grants public read access to projects and categories while denying all writes.
      * @path /projects/{projectId}
      */
     match /projects/{projectId} {
@@ -44,6 +45,19 @@ service cloud.firestore {
      */
     match /supportRequests/{supportRequestId} {
       allow read, write: if true;
+    }
+
+    /**
+     * @description Handles product ratings.
+     * - Anyone can read products.
+     * - Anyone can create a new product document (for initial rating).
+     * - Anyone can update ONLY the 'ratingCount' and 'totalStars' fields.
+     */
+    match /products/{productId} {
+      allow read: if true;
+      allow create: if true;
+      allow update: if request.resource.data.diff(resource.data).affectedKeys().hasOnly(['ratingCount', 'totalStars']);
+      allow delete: if false;
     }
   }
 }

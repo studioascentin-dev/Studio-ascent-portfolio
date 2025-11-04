@@ -11,7 +11,7 @@ import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -23,7 +23,6 @@ import { Loader2, Youtube } from 'lucide-react';
 import Link from 'next/link';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { RazorpayButton } from '@/components/razorpay-button';
-import Script from 'next/script';
 
 
 const supportFormSchema = z.object({
@@ -201,6 +200,31 @@ export default function ProductDetailPage() {
 
   const staticItem = [...storeItems.plugins, ...storeItems.projectFiles].find((item) => item.slug === slug) as any;
 
+  const tutorialIsTelegram = 'tutorialLink' in staticItem && staticItem.tutorialLink?.includes('t.me/');
+  const telegramPostId = tutorialIsTelegram ? getTelegramPostId(staticItem.tutorialLink) : null;
+
+  useEffect(() => {
+    if (tutorialIsTelegram) {
+      const script = document.createElement('script');
+      script.src = 'https://telegram.org/js/telegram-widget.js?22';
+      script.async = true;
+      script.setAttribute('data-telegram-post', telegramPostId || '');
+      script.setAttribute('data-width', '100%');
+      
+      const widgetContainer = document.getElementById(`telegram-widget-${telegramPostId}`);
+      if (widgetContainer) {
+        widgetContainer.appendChild(script);
+      }
+
+      return () => {
+        if (widgetContainer && script.parentNode === widgetContainer) {
+          widgetContainer.removeChild(script);
+        }
+      };
+    }
+  }, [tutorialIsTelegram, telegramPostId]);
+
+
   if (!staticItem) {
     notFound();
   }
@@ -213,8 +237,6 @@ export default function ProductDetailPage() {
   const isRazorpayButton = 'paymentLink' in staticItem && staticItem.paymentLink.startsWith('pl_');
 
   const tutorialIsYouTube = 'tutorialLink' in staticItem && staticItem.tutorialLink.includes('youtube.com');
-  const tutorialIsTelegram = 'tutorialLink' in staticItem && staticItem.tutorialLink.includes('t.me/');
-  const telegramPostId = tutorialIsTelegram ? getTelegramPostId(staticItem.tutorialLink) : null;
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
@@ -387,7 +409,7 @@ export default function ProductDetailPage() {
                       ></iframe>
                     </div>
                   ) : tutorialIsTelegram && telegramPostId ? (
-                    <>
+                    <div id={`telegram-widget-${telegramPostId}`}>
                       <blockquote 
                         className="telegram-post" 
                         data-post={telegramPostId}
@@ -397,8 +419,7 @@ export default function ProductDetailPage() {
                             View on Telegram
                          </a>
                       </blockquote>
-                      <Script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-post={telegramPostId} data-width="100%"></Script>
-                    </>
+                    </div>
                   ) : (
                     <Button asChild size="lg">
                       <Link href={staticItem.tutorialLink} target="_blank" rel="noopener noreferrer">
@@ -472,4 +493,5 @@ export default function ProductDetailPage() {
       <Footer />
     </div>
   );
-}
+
+    

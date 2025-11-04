@@ -3,10 +3,9 @@
  * @fileoverview Firestore Security Rules for the portfolio application.
  *
  * Core Philosophy:
- * This ruleset provides public read access to projects and categories,
- * while restricting write access to these collections. Contact and support
- * requests are publicly accessible for both read and write to allow anonymous
- * users to submit the forms. Product ratings can be updated by anyone,
+ * This ruleset provides public read access to projects, categories, and products,
+ * while restricting write access. Contact and support requests are publicly
+ * accessible for both read and write. Product ratings can be updated by anyone,
  * but only specific fields can be changed.
  */
 rules_version = '2';
@@ -14,7 +13,7 @@ service cloud.firestore {
   match /databases/{database}/documents {
 
     /**
-     * @description Grants public read access to projects and categories while denying all writes.
+     * @description Grants public read access to projects while denying all writes.
      * @path /projects/{projectId}
      */
     match /projects/{projectId} {
@@ -49,9 +48,9 @@ service cloud.firestore {
 
     /**
      * @description Handles product ratings.
+     * - Anyone can read product documents.
      * - Anyone can create a new product document (for initial rating).
      * - Anyone can update ONLY the 'ratingCount' and 'totalStars' fields.
-     * - Reading is allowed by anyone to get live rating updates.
      */
     match /products/{productId} {
       allow read: if true;

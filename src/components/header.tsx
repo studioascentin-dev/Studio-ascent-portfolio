@@ -10,6 +10,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "./ui
 import { Button } from "./ui/button";
 import { Menu } from "lucide-react";
 import Image from "next/image";
+import LogoImage from '../../public/images/My Logo.png';
 
 const navItems = [
     { name: "About", href: "/#about" },
@@ -24,7 +25,7 @@ const Logo = () => {
         <>
             <div className="relative h-8 w-8 flex-shrink-0">
                 <Image 
-                    src="/images/My Logo.png" 
+                    src={LogoImage} 
                     alt="Studio Ascent Logo" 
                     fill
                     sizes="32px"

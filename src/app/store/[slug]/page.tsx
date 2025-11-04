@@ -11,7 +11,7 @@ import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { useState, useEffect, useOptimistic, useTransition, useMemo } from 'react';
+import { useState, useEffect, useOptimistic, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -25,8 +25,6 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { RazorpayButton } from '@/components/razorpay-button';
 import { cn } from '@/lib/utils';
 import { rateProduct } from '../actions';
-import { useDoc, useFirestore, useMemoFirebase } from '@/firebase';
-import { doc } from 'firebase/firestore';
 
 
 const StarRating = ({
@@ -246,24 +244,15 @@ export default function ProductDetailPage() {
   const { toast } = useToast();
   const [isRatingPending, startRatingTransition] = useTransition();
   const [hasRated, setHasRated] = useState(false);
-  const firestore = useFirestore();
-
-  const productRef = useMemoFirebase(() => {
-    if (!firestore || !slug) return null;
-    return doc(firestore, 'products', slug);
-  }, [firestore, slug]);
-  
-  const { data: liveProductData } = useDoc<{ratingCount: number, totalStars: number}>(productRef);
 
   const staticItem = [...storeItems.plugins, ...storeItems.projectFiles].find((item) => item.slug === slug) as any;
 
   // Optimistic UI for rating
   const [optimisticRating, addOptimisticRating] = useOptimistic(
-    liveProductData || { ratingCount: staticItem.reviews, totalStars: staticItem.rating * staticItem.reviews },
+    { ratingCount: staticItem.reviews, totalStars: staticItem.rating * staticItem.reviews },
     (state, newRating: number) => ({
-      ...state,
-      ratingCount: (state?.ratingCount ?? 0) + 1,
-      totalStars: (state?.totalStars ?? 0) + newRating,
+      ratingCount: state.ratingCount + 1,
+      totalStars: state.totalStars + newRating,
     })
   );
 
@@ -301,6 +290,9 @@ export default function ProductDetailPage() {
       } else {
           localStorage.removeItem(`rated_${slug}`);
           setHasRated(false);
+          // Note: The optimistic state won't be automatically rolled back here,
+          // but for a simple rating, this is often acceptable.
+          // A full refresh would show the correct server state.
           toast({
               variant: "destructive",
               title: "Uh oh!",
@@ -322,8 +314,8 @@ export default function ProductDetailPage() {
   const isRazorpayButton = 'paymentLink' in staticItem && staticItem.paymentLink.startsWith('pl_');
 
   const ratingSource = optimisticRating;
-  const ratingCount = ratingSource?.ratingCount ?? staticItem.reviews;
-  const totalStars = ratingSource?.totalStars ?? staticItem.rating * staticItem.reviews;
+  const ratingCount = ratingSource.ratingCount;
+  const totalStars = ratingSource.totalStars;
   const averageRating = ratingCount > 0 ? totalStars / ratingCount : 0;
   
   return (

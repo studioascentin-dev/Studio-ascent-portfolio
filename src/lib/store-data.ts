@@ -93,7 +93,7 @@ export const storeItems = {
         fileSize: '128 MB',
         importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
          youtube: {
-          channelName: 'D3V edits',
+          channelName: 'Studio Ascent Tutorials',
           channelUrl: 'https://www.youtube.com/@D3Vedits'
         }
       }

@@ -110,19 +110,6 @@
         "createdAt": { "type": "string", "format": "date-time" }
       },
       "required": ["name", "email", "paymentId", "productName", "message", "createdAt"]
-    },
-    "Review": {
-      "$schema": "http://json-schema.org/draft-07/schema#",
-      "title": "Review",
-      "type": "object",
-      "description": "Represents a product review.",
-      "properties": {
-        "author": { "type": "string" },
-        "rating": { "type": "number" },
-        "content": { "type": "string" },
-        "createdAt": { "type": "string", "format": "date-time" }
-      },
-      "required": ["author", "rating", "content", "createdAt"]
     }
   },
   "auth": {
@@ -164,28 +151,8 @@
             }
           ]
         }
-      },
-      {
-        "path": "/products/{productId}/reviews/{reviewId}",
-        "definition": {
-            "entityName": "Review",
-            "schema": {
-                "$ref": "#/backend/entities/Review"
-            },
-            "description": "Stores reviews for a specific product. Each document is a single review.",
-            "params": [
-                {
-                    "name": "productId",
-                    "description": "The unique identifier for the product (matches the store item slug)."
-                },
-                {
-                    "name": "reviewId",
-                    "description": "The unique identifier for the review."
-                }
-            ]
-        }
       }
     ],
-    "reasoning": "The Firestore structure is designed to showcase projects and service categories in a portfolio. It prioritizes simplicity and ease of management. Projects and Categories are stored in top-level collections. Reviews are stored in a sub-collection under each product to allow for direct fetching without complex queries. This design ensures easy querying and avoids unnecessary complexity. The structure follows structural segregation to make the security rules simple and robust.\n\nAuthorization Independence is not explicitly required as no collaborative features exist in the specification. This allows for straightforward read and write access management without needing denormalized data for authorization.  The design supports required QAPs by ensuring direct and secure access to each entity."
+    "reasoning": "The Firestore structure is designed to showcase projects and service categories in a portfolio. It prioritizes simplicity and ease of management. Projects and Categories are stored in top-level collections. This design ensures easy querying and avoids unnecessary complexity. The structure follows structural segregation to make the security rules simple and robust.\n\nAuthorization Independence is not explicitly required as no collaborative features exist in the specification. This allows for straightforward read and write access management without needing denormalized data for authorization.  The design supports required QAPs by ensuring direct and secure access to each entity."
   }
 }

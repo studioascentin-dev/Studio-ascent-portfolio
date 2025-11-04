@@ -13,6 +13,8 @@ export const storeItems = {
       originalPrice: 3499,
       discount: '97% OFF',
       platform: 'Mac Only',
+      rating: 5,
+      reviews: 28,
       paymentLink: 'pl_RaTwMcaPmaCnTI',
       tutorialLink: 'https://t.me/your_telegram_channel_link',
       details: {
@@ -35,6 +37,8 @@ export const storeItems = {
       originalPrice: 999,
       discount: '90% OFF',
       platform: 'Mac Only',
+      rating: 4,
+      reviews: 15,
       paymentLink: 'pl_Rarj6Wovdkf6Kx',
       tutorialLink: 'https://t.me/your_telegram_channel_link',
        details: {
@@ -57,6 +61,8 @@ export const storeItems = {
       originalPrice: 1799,
       discount: '94% OFF',
       platform: 'Mac Only',
+      rating: 5,
+      reviews: 42,
       paymentLink: 'pl_RaqjZJEe5lr3Lx',
       tutorialLink: 'https://t.me/your_telegram_channel_link',
        details: {
@@ -79,6 +85,8 @@ export const storeItems = {
       originalPrice: 3999,
       discount: '98% OFF',
       platform: 'Mac Only',
+      rating: 5,
+      reviews: 18,
       paymentLink: 'pl_RaqeXPF63RSMnZ',
       tutorialLink: 'https://t.me/your_telegram_channel_link',
        details: {
@@ -101,6 +109,8 @@ export const storeItems = {
       originalPrice: 3499,
       discount: '97% OFF',
       platform: 'Mac & Windows',
+      rating: 5,
+      reviews: 33,
       paymentLink: 'pl_RaUhnyHX4SprxG',
       tutorialLink: 'https://t.me/your_telegram_channel_link',
        details: {
@@ -123,6 +133,8 @@ export const storeItems = {
       originalPrice: 1299,
       discount: '92% OFF',
       platform: 'Mac Only',
+      rating: 5,
+      reviews: 25,
       paymentLink: 'pl_RaUBZG6HYdMCyQ',
       tutorialLink: 'https://t.me/your_telegram_channel_link',
        details: {
@@ -145,6 +157,8 @@ export const storeItems = {
       originalPrice: 2999,
       discount: '97% OFF',
       platform: 'Mac Only',
+      rating: 5,
+      reviews: 50,
       paymentLink: 'pl_RaUrGxMtVF8nqO',
       tutorialLink: 'https://t.me/your_telegram_channel_link',
        details: {
@@ -168,6 +182,8 @@ export const storeItems = {
       originalPrice: 499,
       discount: '40% OFF',
       platform: 'Alight Motion',
+      rating: 5,
+      reviews: 12,
       paymentLink: 'pl_RarxPu20jRPKiV',
       tutorialLink: 'https://www.youtube.com/embed/v_bqH80FjN4',
       details: {
@@ -189,6 +205,8 @@ export const storeItems = {
       originalPrice: 599,
       discount: '67% OFF',
       platform: 'Alight Motion',
+      rating: 4,
+      reviews: 9,
       paymentLink: 'pl_RarzTCdMlEtx40',
       tutorialLink: 'https://www.youtube.com/embed/DlbaRFqhSYE',
       details: {
@@ -210,6 +228,8 @@ export const storeItems = {
       originalPrice: 799,
       discount: '75% OFF',
       platform: 'Alight Motion',
+      rating: 5,
+      reviews: 22,
       paymentLink: 'pl_Ras2kgA2mBBh8A',
       tutorialLink: 'https://www.youtube.com/embed/1jJzYyR9UcE',
        details: {
@@ -231,6 +251,8 @@ export const storeItems = {
       originalPrice: 599,
       discount: '67% OFF',
       platform: 'Alight Motion',
+      rating: 4,
+      reviews: 17,
       paymentLink: 'pl_Ras4Md8OnxuYHY',
       tutorialLink: 'https://www.youtube.com/embed/SUP97P-L5V0',
        details: {
@@ -245,5 +267,3 @@ export const storeItems = {
   ],
   applications: [],
 };
-
-    

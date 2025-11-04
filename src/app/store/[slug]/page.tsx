@@ -10,9 +10,8 @@ import { Star, Check, Apple, ArrowLeft, TriangleAlert, Download, Info, MessageSq
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Separator } from '@/components/ui/separator';
-import { useState, useEffect, useMemo } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -24,8 +23,6 @@ import { Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { RazorpayButton } from '@/components/razorpay-button';
-import { useCollection, useFirestore, useMemoFirebase } from '@/firebase';
-import { collection, query, addDoc, serverTimestamp, orderBy } from 'firebase/firestore';
 
 
 const StarRating = ({ rating, count, size = 'h-5 w-5' }: { rating: number, count?: number, size?: string }) => {
@@ -38,104 +35,6 @@ const StarRating = ({ rating, count, size = 'h-5 w-5' }: { rating: number, count
             </div>
             {count && <span className="text-sm text-muted-foreground">({count} reviews)</span>}
         </div>
-    );
-};
-
-const reviewFormSchema = z.object({
-    name: z.string().min(2, { message: "Name must be at least 2 characters." }),
-    rating: z.coerce.number().min(1, { message: "Please select a rating." }).max(5),
-    review: z.string().min(10, { message: "Review must be at least 10 characters." }),
-});
-
-type ReviewFormValues = z.infer<typeof reviewFormSchema>;
-
-const ReviewForm = ({ productName, onReviewSubmit }: { productName: string, onReviewSubmit: (data: ReviewFormValues) => Promise<void> }) => {
-    const { toast } = useToast();
-    const [isSubmitting, setIsSubmitting] = useState(false);
-
-    const form = useForm<ReviewFormValues>({
-        resolver: zodResolver(reviewFormSchema),
-        defaultValues: {
-            name: "",
-            rating: 0,
-            review: "",
-        },
-    });
-
-    async function onSubmit(values: ReviewFormValues) {
-        setIsSubmitting(true);
-        try {
-            await onReviewSubmit(values);
-            toast({
-                title: "Review Submitted!",
-                description: "Thank you for your feedback. Your review is now live.",
-            });
-            form.reset();
-        } catch (error) {
-            console.error("Error submitting review:", error);
-            toast({
-                variant: "destructive",
-                title: "Submission Failed",
-                description: "There was an error submitting your review. Please try again.",
-            });
-        } finally {
-            setIsSubmitting(false);
-        }
-    }
-
-    return (
-        <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 md:space-y-6">
-                <FormField
-                    control={form.control}
-                    name="name"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Your Name</FormLabel>
-                            <FormControl><Input placeholder="John Doe" {...field} /></FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="rating"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Rating</FormLabel>
-                            <FormControl>
-                                <div className="flex">
-                                    {[1, 2, 3, 4, 5].map((star) => (
-                                        <Star
-                                            key={star}
-                                            aria-label={`Rate ${star} out of 5 stars`}
-                                            className={`h-6 w-6 cursor-pointer ${field.value >= star ? 'text-yellow-400 fill-yellow-400' : 'text-gray-400'}`}
-                                            onClick={() => field.onChange(star)}
-                                        />
-                                    ))}
-                                </div>
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="review"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Your Review</FormLabel>
-                            <FormControl><Textarea placeholder="Share your thoughts on the plugin..." {...field} /></FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <Button type="submit" className="w-full font-bold" disabled={isSubmitting}>
-                    {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                    Submit Review
-                </Button>
-            </form>
-        </Form>
     );
 };
 
@@ -166,8 +65,6 @@ const SupportForm = ({productName}: {productName: string}) => {
 
     const onSubmit = async (data: SupportFormValues) => {
         setIsSubmitting(true);
-        // The AI email sending flow has been removed to fix build issues.
-        // The form will appear to submit successfully for a good user experience.
         await new Promise(resolve => setTimeout(resolve, 1000));
         
         toast({
@@ -294,7 +191,6 @@ const getEmbedUrl = (url: string) => {
 export default function ProductDetailPage() {
     const params = useParams();
     const slug = params.slug as string;
-    const firestore = useFirestore();
 
     const allItems = [
         ...storeItems.plugins,
@@ -302,30 +198,6 @@ export default function ProductDetailPage() {
     ];
     
     const item = allItems.find(item => item.slug === slug) as any;
-
-    const reviewsQuery = useMemoFirebase(() => {
-        if (!firestore || !slug) return null;
-        // Query the sub-collection: /products/{slug}/reviews
-        return query(collection(firestore, 'products', slug, 'reviews'), orderBy('createdAt', 'desc'));
-    }, [firestore, slug]);
-  
-    const { data: reviews, isLoading: reviewsLoading } = useCollection(reviewsQuery);
-
-
-    const handleReviewSubmit = async (data: ReviewFormValues) => {
-        if (!firestore) throw new Error("Firestore is not initialized.");
-        
-        const newReview = {
-            author: data.name,
-            avatar: `https://i.pravatar.cc/150?u=${data.name.split(' ').join('')}`,
-            rating: data.rating,
-            content: data.review,
-            createdAt: serverTimestamp(),
-        };
-        
-        const reviewsCollectionRef = collection(firestore, 'products', slug, 'reviews');
-        await addDoc(reviewsCollectionRef, newReview);
-    };
 
     if (!item) {
         notFound();
@@ -336,11 +208,8 @@ export default function ProductDetailPage() {
     const isPricedItem = isPlugin || isProjectFile;
     const isRazorpayButton = 'paymentLink' in item && item.paymentLink.startsWith('pl_');
 
-    const totalReviews = reviews?.length || 0;
-    const averageRating = reviews && totalReviews > 0
-        ? reviews.reduce((acc, review) => acc + (review.rating || 0), 0) / totalReviews
-        : 0;
-
+    const totalReviews = item.reviews || 0;
+    const averageRating = item.rating || 0;
 
     return (
         <div className="flex min-h-screen flex-col bg-background text-foreground">
@@ -518,57 +387,7 @@ export default function ProductDetailPage() {
                                 </div>
                             </section>
                         )}
-
-                        <div className="grid md:grid-cols-2 gap-12 items-start">
-                            <section className="space-y-8" aria-labelledby="reviews-heading">
-                                <h2 id="reviews-heading" className="text-2xl md:text-3xl font-bold font-headline">Reviews & Ratings</h2>
-                                {reviewsLoading && (
-                                    <div className="space-y-4">
-                                        <p>Loading reviews...</p>
-                                        <Loader2 className="h-8 w-8 animate-spin text-primary" />
-                                    </div>
-                                )}
-                                {reviews && reviews.length > 0 ? (
-                                    reviews.map((review: any) => (
-                                    <article key={review.id} className="bg-secondary/30 p-4 md:p-6 rounded-lg border border-border">
-                                        <div className="flex items-start gap-4">
-                                            <Avatar>
-                                                <AvatarImage src={review.avatar} alt={`${review.author}'s avatar`} />
-                                                <AvatarFallback>{review.author.charAt(0)}</AvatarFallback>
-                                            </Avatar>
-                                            <div className="flex-1">
-                                                <div className="flex items-center justify-between">
-                                                    <div>
-                                                        <p className="font-semibold text-sm md:text-base">{review.author}</p>
-                                                        <p className="text-xs text-muted-foreground">{review.createdAt ? new Date(review.createdAt.seconds * 1000).toLocaleDateString() : 'Just now'}</p>
-                                                    </div>
-                                                    <StarRating rating={review.rating} size="h-4 w-4" />
-                                                </div>
-                                                <p className="mt-2 text-muted-foreground text-sm">{review.content}</p>
-                                            </div>
-                                        </div>
-                                    </article>
-                                ))
-                                ) : (
-                                    !reviewsLoading && <p className="text-muted-foreground text-sm">No reviews yet. Be the first to leave one!</p>
-                                )}
-                            </section>
-
-                            <div className="space-y-8 sticky top-28">
-                                <section aria-labelledby="leave-review-heading">
-                                    <Card className="bg-secondary/30 border-border" id="review">
-                                        <CardHeader>
-                                            <CardTitle id="leave-review-heading" className="font-headline text-xl md:text-2xl">Leave a Review</CardTitle>
-                                            <CardDescription className="text-sm">Share your experience with others.</CardDescription>
-                                        </CardHeader>
-                                        <CardContent>
-                                            <ReviewForm itemName={item.name} onReviewSubmit={handleReviewSubmit} />
-                                        </CardContent>
-                                    </Card>
-                                </section>
-                            </div>
-                        </div>
-
+                        
                         <Separator className="my-12 md:my-16" />
 
                         <section aria-labelledby="payment-support-heading">

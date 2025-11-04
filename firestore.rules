@@ -6,8 +6,7 @@
  * This ruleset provides public read access to projects and categories,
  * while restricting write access to these collections. Contact and support
  * requests are publicly accessible for both read and write to allow anonymous
- * users to submit the forms. Product reviews are stored in a sub-collection
- * and can be read and created by anyone, but not modified or deleted.
+ * users to submit the forms.
  */
 rules_version = '2';
 service cloud.firestore {
@@ -45,18 +44,6 @@ service cloud.firestore {
      */
     match /supportRequests/{supportRequestId} {
       allow read, write: if true;
-    }
-    
-    /**
-     * @description Rule for the 'reviews' sub-collection under any product.
-     * @path /products/{productId}/reviews/{reviewId}
-     * @principle Allows anyone to read (list and get) reviews for any product, 
-     * and to create new reviews. Prevents tampering with existing reviews by
-     * denying updates and deletes.
-     */
-    match /products/{productId}/reviews/{reviewId} {
-      allow read, create: if true;
-      allow update, delete: if false;
     }
   }
 }

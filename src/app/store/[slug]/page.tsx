@@ -7,7 +7,7 @@ import { storeItems } from '@/lib/store-data';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { Button } from '@/components/ui/button';
-import { Star, Check, Apple, ArrowLeft, TriangleAlert, Download, Info, MessageSquare, Wallet, Lock, Trash2, Youtube } from 'lucide-react';
+import { Star, Check, Apple, ArrowLeft, TriangleAlert, Download, Info, MessageSquare, Wallet, Lock, Trash2, Youtube, Send } from 'lucide-react';
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -546,20 +546,31 @@ export default function ProductDetailPage() {
 
 
                     <div className="max-w-7xl mx-auto">
-                        {'installVideo' in item && item.installVideo && (
+                        {'tutorialLink' in item && item.tutorialLink && (
                              <section className="mb-12 md:mb-16" aria-labelledby="installation-video-heading">
                                 <h2 id="installation-video-heading" className="text-2xl md:text-3xl font-bold font-headline mb-6 md:mb-8 text-center">
-                                    {isProjectFile ? "Preview" : "How to Install"}
+                                    {isProjectFile ? "Preview" : "Installation Guide"}
                                 </h2>
-                                <div className="aspect-video max-w-4xl mx-auto w-full overflow-hidden rounded-lg border border-border shadow-lg">
-                                    <iframe
-                                        src={getEmbedUrl(item.installVideo)}
-                                        title={`Preview video for ${item.name}`}
-                                        frameBorder="0"
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                        allowFullScreen
-                                        className="w-full h-full object-cover"
-                                    ></iframe>
+                                <div className="text-center">
+                                     { item.tutorialLink.includes('youtube.com') ? (
+                                        <div className="aspect-video max-w-4xl mx-auto w-full overflow-hidden rounded-lg border border-border shadow-lg">
+                                            <iframe
+                                                src={getEmbedUrl(item.tutorialLink)}
+                                                title={`Tutorial video for ${item.name}`}
+                                                frameBorder="0"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                allowFullScreen
+                                                className="w-full h-full object-cover"
+                                            ></iframe>
+                                        </div>
+                                     ) : (
+                                        <Button asChild size="lg">
+                                            <Link href={item.tutorialLink} target="_blank" rel="noopener noreferrer">
+                                                <Send className="mr-2 h-4 w-4" />
+                                                View Tutorial on Telegram
+                                            </Link>
+                                        </Button>
+                                     )}
                                 </div>
                             </section>
                         )}
@@ -690,3 +701,5 @@ export default function ProductDetailPage() {
         </div>
     );
 }
+
+    

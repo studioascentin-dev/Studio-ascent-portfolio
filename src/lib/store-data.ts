@@ -1,4 +1,5 @@
 
+
 export const storeItems = {
   plugins: [
     { 
@@ -15,7 +16,7 @@ export const storeItems = {
       discount: '97% OFF',
       platform: 'Mac Only',
       paymentLink: 'pl_RaTwMcaPmaCnTI',
-      installVideo: 'https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-video.mp4',
+      tutorialLink: 'https://t.me/your_telegram_channel_link', // Updated
       details: {
         fileSize: '1.2 GB',
         importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
@@ -59,7 +60,7 @@ export const storeItems = {
       discount: '90% OFF',
       platform: 'Mac Only',
       paymentLink: 'pl_Rarj6Wovdkf6Kx',
-      installVideo: 'https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-video.mp4',
+      tutorialLink: 'https://t.me/your_telegram_channel_link', // Updated
        details: {
         fileSize: '15.8 MB',
         importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
@@ -94,7 +95,7 @@ export const storeItems = {
       discount: '94% OFF',
       platform: 'Mac Only',
       paymentLink: 'pl_RaqjZJEe5lr3Lx',
-      installVideo: 'https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-video.mp4',
+      tutorialLink: 'https://t.me/your_telegram_channel_link', // Updated
        details: {
         fileSize: '45.1 MB',
         importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
@@ -129,7 +130,7 @@ export const storeItems = {
       discount: '98% OFF',
       platform: 'Mac Only',
       paymentLink: 'pl_RaqeXPF63RSMnZ',
-      installVideo: 'https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-video.mp4',
+      tutorialLink: 'https://t.me/your_telegram_channel_link', // Updated
        details: {
         fileSize: '128 MB',
         importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
@@ -154,7 +155,7 @@ export const storeItems = {
       discount: '97% OFF',
       platform: 'Mac & Windows',
       paymentLink: 'pl_RaUhnyHX4SprxG',
-      installVideo: 'https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-video.mp4',
+      tutorialLink: 'https://t.me/your_telegram_channel_link', // Updated
        details: {
         fileSize: '78.5 MB',
         importantNotes: 'This plugin is for both Mac and Windows. The installation tutorial below is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
@@ -189,7 +190,7 @@ export const storeItems = {
       discount: '92% OFF',
       platform: 'Mac Only',
       paymentLink: 'pl_RaUBZG6HYdMCyQ',
-      installVideo: 'https://www.youtube.com/embed/YvJVv_dU2eU',
+      tutorialLink: 'https://t.me/your_telegram_channel_link', // Updated
        details: {
         fileSize: '33.9 MB',
         importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
@@ -224,7 +225,7 @@ export const storeItems = {
       discount: '97% OFF',
       platform: 'Mac Only',
       paymentLink: 'pl_RaUrGxMtVF8nqO',
-      installVideo: 'https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-video.mp4',
+      tutorialLink: 'https://t.me/your_telegram_channel_link', // Updated
        details: {
         fileSize: '250 MB',
         importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
@@ -260,7 +261,7 @@ export const storeItems = {
       rating: 5,
       platform: 'Alight Motion',
       paymentLink: 'pl_RarxPu20jRPKiV',
-      installVideo: 'https://www.youtube.com/embed/v_bqH80FjN4',
+      tutorialLink: 'https://www.youtube.com/embed/v_bqH80FjN4',
       details: {
         fileSize: '25 MB',
         importantNotes: 'Requires Alight Motion.',
@@ -294,7 +295,7 @@ export const storeItems = {
       rating: 4,
       platform: 'Alight Motion',
       paymentLink: 'pl_RarzTCdMlEtx40',
-      installVideo: 'https://www.youtube.com/embed/DlbaRFqhSYE',
+      tutorialLink: 'https://www.youtube.com/embed/DlbaRFqhSYE',
       details: {
         fileSize: '30 MB',
         importantNotes: 'Requires Alight Motion.',
@@ -328,7 +329,7 @@ export const storeItems = {
       rating: 5,
       platform: 'Alight Motion',
       paymentLink: 'pl_Ras2kgA2mBBh8A',
-      installVideo: 'https://www.youtube.com/embed/1jJzYyR9UcE',
+      tutorialLink: 'https://www.youtube.com/embed/1jJzYyR9UcE',
        details: {
         fileSize: '5 MB',
         importantNotes: 'Requires Alight Motion.',
@@ -362,7 +363,7 @@ export const storeItems = {
       rating: 4,
       platform: 'Alight Motion',
       paymentLink: 'pl_Ras4Md8OnxuYHY',
-      installVideo: 'https://www.youtube.com/embed/SUP97P-L5V0',
+      tutorialLink: 'https://www.youtube.com/embed/SUP97P-L5V0',
        details: {
         fileSize: '15 MB',
         importantNotes: 'Requires Alight Motion.',
@@ -386,3 +387,5 @@ export const storeItems = {
   ],
   applications: [],
 };
+
+    

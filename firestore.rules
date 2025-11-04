@@ -49,15 +49,17 @@ service cloud.firestore {
 
     /**
      * @description Handles product ratings.
-     * - Anyone can read products.
      * - Anyone can create a new product document (for initial rating).
      * - Anyone can update ONLY the 'ratingCount' and 'totalStars' fields.
+     * - Reading is denied from the client to force using Server Actions.
      */
     match /products/{productId} {
-      allow read: if true;
+      allow read: if false; // Deny client-side reads
       allow create: if true;
       allow update: if request.resource.data.diff(resource.data).affectedKeys().hasOnly(['ratingCount', 'totalStars']);
       allow delete: if false;
     }
   }
 }
+
+    

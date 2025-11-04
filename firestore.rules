@@ -73,8 +73,11 @@ service cloud.firestore {
      * @principle Allows anyone to submit a review and view all reviews, but prevents tampering with existing reviews.
      */
     match /reviews/{reviewId} {
-      allow get, list, create: if true;
-      allow update, delete: if false;
+      allow get, create: if true;
+      allow list, update, delete: if false;
+    }
+    match /reviews {
+      allow list: if true;
     }
   }
 }

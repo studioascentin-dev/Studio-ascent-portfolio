@@ -15,7 +15,7 @@ export const storeItems = {
       discount: '97% OFF',
       platform: 'Mac Only',
       paymentLink: 'pl_RaTwMcaPmaCnTI',
-      installVideo: '/videos/installation of sapphire.mp4',
+      installVideo: 'https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-video.mp4',
       details: {
         fileSize: '1.2 GB',
         importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
@@ -59,7 +59,7 @@ export const storeItems = {
       discount: '90% OFF',
       platform: 'Mac Only',
       paymentLink: 'pl_Rarj6Wovdkf6Kx',
-      installVideo: '/videos/installation of jerryflow.mp4',
+      installVideo: 'https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-video.mp4',
        details: {
         fileSize: '15.8 MB',
         importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
@@ -94,7 +94,7 @@ export const storeItems = {
       discount: '94% OFF',
       platform: 'Mac Only',
       paymentLink: 'pl_RaqjZJEe5lr3Lx',
-      installVideo: '/videos/twixtor setup installation.mp4',
+      installVideo: 'https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-video.mp4',
        details: {
         fileSize: '45.1 MB',
         importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
@@ -129,7 +129,7 @@ export const storeItems = {
       discount: '98% OFF',
       platform: 'Mac Only',
       paymentLink: 'pl_RaqeXPF63RSMnZ',
-      installVideo: '/videos/Gaussian splatting installation.mp4',
+      installVideo: 'https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-video.mp4',
        details: {
         fileSize: '128 MB',
         importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
@@ -154,7 +154,7 @@ export const storeItems = {
       discount: '97% OFF',
       platform: 'Mac & Windows',
       paymentLink: 'pl_RaUhnyHX4SprxG',
-      installVideo: '/videos/shadow studio 3 installation.mp4',
+      installVideo: 'https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-video.mp4',
        details: {
         fileSize: '78.5 MB',
         importantNotes: 'This plugin is for both Mac and Windows. The installation tutorial below is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
@@ -224,7 +224,7 @@ export const storeItems = {
       discount: '97% OFF',
       platform: 'Mac Only',
       paymentLink: 'pl_RaUrGxMtVF8nqO',
-      installVideo: '/videos/installation of 3d element.mp4',
+      installVideo: 'https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-video.mp4',
        details: {
         fileSize: '250 MB',
         importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',

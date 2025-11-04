@@ -11,7 +11,7 @@ import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { useState, useEffect, useOptimistic, useTransition } from 'react';
+import { useState, useEffect, useOptimistic, useTransition, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -25,6 +25,8 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { RazorpayButton } from '@/components/razorpay-button';
 import { cn } from '@/lib/utils';
 import { rateProduct } from '../actions';
+import { useDoc, useFirestore, useMemoFirebase } from '@/firebase';
+import { doc } from 'firebase/firestore';
 
 
 const StarRating = ({
@@ -244,18 +246,24 @@ export default function ProductDetailPage() {
   const { toast } = useToast();
   const [isRatingPending, startRatingTransition] = useTransition();
   const [hasRated, setHasRated] = useState(false);
+  const firestore = useFirestore();
+
+  const productRef = useMemoFirebase(() => {
+    if (!firestore || !slug) return null;
+    return doc(firestore, 'products', slug);
+  }, [firestore, slug]);
   
+  const { data: liveProductData } = useDoc<{ratingCount: number, totalStars: number}>(productRef);
+
   const staticItem = [...storeItems.plugins, ...storeItems.projectFiles].find((item) => item.slug === slug) as any;
 
   // Optimistic UI for rating
   const [optimisticRating, addOptimisticRating] = useOptimistic(
-    { 
-      ratingCount: staticItem.reviews, 
-      totalStars: staticItem.rating * staticItem.reviews
-    },
+    liveProductData || { ratingCount: staticItem.reviews, totalStars: staticItem.rating * staticItem.reviews },
     (state, newRating: number) => ({
-      ratingCount: state.ratingCount + 1,
-      totalStars: state.totalStars + newRating,
+      ...state,
+      ratingCount: (state?.ratingCount ?? 0) + 1,
+      totalStars: (state?.totalStars ?? 0) + newRating,
     })
   );
 
@@ -313,9 +321,11 @@ export default function ProductDetailPage() {
   const isPricedItem = isPlugin || isProjectFile;
   const isRazorpayButton = 'paymentLink' in staticItem && staticItem.paymentLink.startsWith('pl_');
 
-  const { ratingCount, totalStars } = optimisticRating;
+  const ratingSource = optimisticRating;
+  const ratingCount = ratingSource?.ratingCount ?? staticItem.reviews;
+  const totalStars = ratingSource?.totalStars ?? staticItem.rating * staticItem.reviews;
   const averageRating = ratingCount > 0 ? totalStars / ratingCount : 0;
-
+  
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
       <Header />
@@ -427,7 +437,7 @@ export default function ProductDetailPage() {
                     <div className="flex flex-col items-center gap-4">
                         <StarRating rating={averageRating} size="h-8 w-8" onRate={handleRate} isPending={isRatingPending} />
                         {isRatingPending && <Loader2 className="h-5 w-5 animate-spin" />}
-                        <p className="text-sm text-muted-foreground">
+                         <p className="text-sm text-muted-foreground">
                             {hasRated ? "Thanks for your rating!" : "Click a star to rate."}
                         </p>
                     </div>

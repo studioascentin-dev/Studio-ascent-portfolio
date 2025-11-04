@@ -13,7 +13,7 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Separator } from '@/components/ui/separator';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -25,6 +25,8 @@ import { Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { RazorpayButton } from '@/components/razorpay-button';
+import { useCollection, useFirestore, useMemoFirebase } from '@/firebase';
+import { collection, query, where, addDoc, serverTimestamp } from 'firebase/firestore';
 
 
 const StarRating = ({ rating, count, size = 'h-5 w-5' }: { rating: number, count?: number, size?: string }) => {
@@ -40,41 +42,6 @@ const StarRating = ({ rating, count, size = 'h-5 w-5' }: { rating: number, count
     );
 };
 
-const replyFormSchema = z.object({
-  reply: z.string().min(1, { message: "Reply cannot be empty." }),
-});
-
-const ReplyForm = ({ onReply, onCancel }: { onReply: (data: z.infer<typeof replyFormSchema>) => void, onCancel: () => void }) => {
-    const form = useForm<z.infer<typeof replyFormSchema>>({
-        resolver: zodResolver(replyFormSchema),
-        defaultValues: { reply: "" },
-    });
-
-    return (
-        <Form {...form}>
-            <form onSubmit={form.handleSubmit(onReply)} className="mt-4 space-y-4">
-                <FormField
-                    control={form.control}
-                    name="reply"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel className="sr-only">Reply</FormLabel>
-                            <FormControl>
-                                <Textarea placeholder="Write a reply..." {...field} />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <div className="flex justify-end gap-2">
-                    <Button type="button" variant="ghost" size="sm" onClick={onCancel}>Cancel</Button>
-                    <Button type="submit" size="sm">Post Reply</Button>
-                </div>
-            </form>
-        </Form>
-    );
-};
-
 const reviewFormSchema = z.object({
     name: z.string().min(2, { message: "Name must be at least 2 characters." }),
     rating: z.coerce.number().min(1, { message: "Please select a rating." }).max(5),
@@ -83,7 +50,7 @@ const reviewFormSchema = z.object({
 
 type ReviewFormValues = z.infer<typeof reviewFormSchema>;
 
-const ReviewForm = ({ itemName, onReviewSubmit }: { itemName: string, onReviewSubmit: (data: ReviewFormValues) => void }) => {
+const ReviewForm = ({ itemName, onReviewSubmit }: { itemName: string, onReviewSubmit: (data: ReviewFormValues) => Promise<void> }) => {
     const { toast } = useToast();
     const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -98,17 +65,23 @@ const ReviewForm = ({ itemName, onReviewSubmit }: { itemName: string, onReviewSu
 
     async function onSubmit(values: ReviewFormValues) {
         setIsSubmitting(true);
-        await new Promise(resolve => setTimeout(resolve, 500));
-        
-        onReviewSubmit(values);
-
-        toast({
-            title: "Review Submitted!",
-            description: "Thank you for your feedback.",
-        });
-
-        form.reset();
-        setIsSubmitting(false);
+        try {
+            await onReviewSubmit(values);
+            toast({
+                title: "Review Submitted!",
+                description: "Thank you for your feedback. Your review is now live.",
+            });
+            form.reset();
+        } catch (error) {
+            console.error("Error submitting review:", error);
+            toast({
+                variant: "destructive",
+                title: "Submission Failed",
+                description: "There was an error submitting your review. Please try again.",
+            });
+        } finally {
+            setIsSubmitting(false);
+        }
     }
 
     return (
@@ -323,6 +296,7 @@ export default function ProductDetailPage() {
     const params = useParams();
     const slug = params.slug as string;
     const { toast } = useToast();
+    const firestore = useFirestore();
 
     const allItems = [
         ...storeItems.plugins,
@@ -331,44 +305,27 @@ export default function ProductDetailPage() {
     
     const item = allItems.find(item => item.slug === slug) as any;
 
-    const [reviews, setReviews] = useState(item?.reviewsData || []);
-    const [replyingTo, setReplyingTo] = useState<number | null>(null);
-
-    useEffect(() => {
-      if (item?.reviewsData) {
-        setReviews(item.reviewsData);
-      }
-    }, [item]);
+    const reviewsQuery = useMemoFirebase(() => {
+      if (!firestore || !slug) return null;
+      return query(collection(firestore, 'reviews'), where('productSlug', '==', slug));
+    }, [firestore, slug]);
+  
+    const { data: reviews, isLoading: reviewsLoading } = useCollection(reviewsQuery);
 
 
-    const handleReplySubmit = (reviewId: number, data: z.infer<typeof replyFormSchema>) => {
-        console.log(`Replying to review ${reviewId}:`, data.reply);
-        toast({
-            title: "Reply Posted",
-            description: "Your reply has been submitted for approval.",
-        });
-        setReplyingTo(null); // Close the form
-    };
-
-    const handleReviewSubmit = (data: ReviewFormValues) => {
+    const handleReviewSubmit = async (data: ReviewFormValues) => {
+        if (!firestore) throw new Error("Firestore is not initialized.");
+        
         const newReview = {
-            id: Date.now(),
+            productSlug: slug,
             author: data.name,
             avatar: `https://i.pravatar.cc/150?u=${data.name.split(' ').join('')}`,
             rating: data.rating,
-            date: 'Just now',
             content: data.review,
-            reply: null,
+            createdAt: serverTimestamp(),
         };
-        setReviews(prevReviews => [newReview, ...prevReviews]);
-    };
-
-    const handleDeleteReview = (reviewId: number) => {
-        setReviews(prevReviews => prevReviews.filter(r => r.id !== reviewId));
-        toast({
-            title: "Review Deleted",
-            description: "The review has been removed.",
-        });
+        
+        await addDoc(collection(firestore, 'reviews'), newReview);
     };
 
     if (!item) {
@@ -379,6 +336,11 @@ export default function ProductDetailPage() {
     const isProjectFile = 'price' in item && 'originalPrice' in item && storeItems.projectFiles.some(p => p.slug === item.slug);
     const isPricedItem = isPlugin || isProjectFile;
     const isRazorpayButton = 'paymentLink' in item && item.paymentLink.startsWith('pl_');
+
+    const totalReviews = reviews?.length || 0;
+    const averageRating = reviews && totalReviews > 0
+        ? reviews.reduce((acc, review) => acc + (review.rating || 0), 0) / totalReviews
+        : item.rating;
 
 
     return (
@@ -425,7 +387,7 @@ export default function ProductDetailPage() {
                                             {'platform' in item && item.platform === 'Mac & Windows' ? <Check className="h-5 w-5 text-green-500" /> : 'platform' in item && item.platform === 'Alight Motion' ? <Check className="h-5 w-5 text-green-500" /> : <Apple className="h-4 w-4" />} 
                                             {'platform' in item && item.platform}
                                         </div>
-                                        {'rating' in item && 'reviews' in item && <StarRating rating={item.rating} count={item.reviews} size="h-5 w-5" />}
+                                        <StarRating rating={averageRating} count={totalReviews} size="h-5 w-5" />
                                      </div>
                                 )}
                                 <p className="text-sm md:text-base text-muted-foreground">
@@ -561,8 +523,14 @@ export default function ProductDetailPage() {
                         <div className="grid md:grid-cols-2 gap-12 items-start">
                             <section className="space-y-8" aria-labelledby="reviews-heading">
                                 <h2 id="reviews-heading" className="text-2xl md:text-3xl font-bold font-headline">Reviews & Ratings</h2>
-                                {reviews.length > 0 ? (
-                                    reviews.map((review: any) => (
+                                {reviewsLoading && (
+                                    <div className="space-y-4">
+                                        <p>Loading reviews...</p>
+                                        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+                                    </div>
+                                )}
+                                {reviews && reviews.length > 0 ? (
+                                    reviews.sort((a, b) => b.createdAt?.toMillis() - a.createdAt?.toMillis()).map((review: any) => (
                                     <article key={review.id} className="bg-secondary/30 p-4 md:p-6 rounded-lg border border-border">
                                         <div className="flex items-start gap-4">
                                             <Avatar>
@@ -573,52 +541,17 @@ export default function ProductDetailPage() {
                                                 <div className="flex items-center justify-between">
                                                     <div>
                                                         <p className="font-semibold text-sm md:text-base">{review.author}</p>
-                                                        <p className="text-xs text-muted-foreground">{review.date}</p>
+                                                        <p className="text-xs text-muted-foreground">{review.createdAt ? new Date(review.createdAt.seconds * 1000).toLocaleDateString() : 'Just now'}</p>
                                                     </div>
                                                     <StarRating rating={review.rating} size="h-4 w-4" />
                                                 </div>
                                                 <p className="mt-2 text-muted-foreground text-sm">{review.content}</p>
-                                                <div className="flex items-center gap-2 mt-2">
-                                                    <Button variant="ghost" size="sm" className="-ml-3 h-auto py-1 px-3 text-xs" onClick={() => setReplyingTo(replyingTo === review.id ? null : review.id)}>
-                                                        <MessageSquare className="mr-2 h-3.5 w-3.5" />
-                                                        Reply
-                                                    </Button>
-                                                     <Button variant="ghost" size="sm" className="h-auto py-1 px-3 text-xs text-destructive/70 hover:text-destructive hover:bg-destructive/10" onClick={() => handleDeleteReview(review.id)}>
-                                                        <Trash2 className="mr-2 h-3.5 w-3.5" />
-                                                        Delete
-                                                    </Button>
-                                                </div>
-
-                                                {replyingTo === review.id && (
-                                                    <ReplyForm 
-                                                        onCancel={() => setReplyingTo(null)}
-                                                        onReply={(data) => handleReplySubmit(review.id, data)}
-                                                    />
-                                                )}
                                             </div>
                                         </div>
-                                        {review.reply && (
-                                            <div className="mt-4 pl-8 ml-4 border-l border-border md:pl-10">
-                                                <div className="flex items-start gap-4 pl-4">
-                                                    <Avatar className="w-8 h-8">
-                                                        <AvatarFallback>DKD</AvatarFallback>
-                                                    </Avatar>
-                                                    <div className="flex-1">
-                                                        <div className="flex items-center justify-between">
-                                                            <div>
-                                                                <p className="font-semibold text-primary text-sm md:text-base">{review.reply.author}</p>
-                                                                <p className="text-xs text-muted-foreground">{review.reply.date}</p>
-                                                            </div>
-                                                        </div>
-                                                        <p className="mt-2 text-muted-foreground text-sm">{review.reply.content}</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        )}
                                     </article>
                                 ))
                                 ) : (
-                                    <p className="text-muted-foreground text-sm">No reviews yet. Be the first to leave one!</p>
+                                    !reviewsLoading && <p className="text-muted-foreground text-sm">No reviews yet. Be the first to leave one!</p>
                                 )}
                             </section>
 
@@ -686,3 +619,4 @@ export default function ProductDetailPage() {
 }
 
     
+

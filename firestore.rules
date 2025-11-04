@@ -65,5 +65,15 @@ service cloud.firestore {
     match /supportRequests/{supportRequestId} {
       allow get, list, create, update, delete: if true;
     }
+
+    /**
+     * @description Grants public read and create access to reviews, but denies updates and deletes.
+     * @path /reviews/{reviewId}
+     * @principle Allows anyone to submit a review and view all reviews, but prevents tampering with existing reviews.
+     */
+    match /reviews/{reviewId} {
+      allow get, list, create: if true;
+      allow update, delete: if false;
+    }
   }
 }

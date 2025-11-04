@@ -205,24 +205,36 @@ export default function ProductDetailPage() {
 
   useEffect(() => {
     if (tutorialIsTelegram) {
+      const scriptId = 'telegram-widget-script';
+      
+      // Check if the script is already added to the page
+      if (document.getElementById(scriptId)) {
+        // If the script exists, it might need to re-scan the DOM for new widgets.
+        // Telegram's widget script has a method for this if it's available on the window object.
+        if (window.Telegram && typeof window.Telegram.Post === 'function') {
+          // This is a potential way to re-init, but might not be officially supported.
+          // The safer bet is that the script itself handles this.
+        }
+        return; 
+      }
+      
       const script = document.createElement('script');
+      script.id = scriptId;
       script.src = 'https://telegram.org/js/telegram-widget.js?22';
       script.async = true;
-      script.setAttribute('data-telegram-post', telegramPostId || '');
-      script.setAttribute('data-width', '100%');
       
-      const widgetContainer = document.getElementById(`telegram-widget-${telegramPostId}`);
-      if (widgetContainer) {
-        widgetContainer.appendChild(script);
-      }
+      document.head.appendChild(script);
 
       return () => {
-        if (widgetContainer && script.parentNode === widgetContainer) {
-          widgetContainer.removeChild(script);
+        // Optional: Clean up the script tag when the component unmounts,
+        // though for a global widget script it's often fine to leave it.
+        const existingScript = document.getElementById(scriptId);
+        if (existingScript) {
+          // document.head.removeChild(existingScript);
         }
       };
     }
-  }, [tutorialIsTelegram, telegramPostId]);
+  }, [tutorialIsTelegram]);
 
 
   if (!staticItem) {
@@ -409,7 +421,7 @@ export default function ProductDetailPage() {
                       ></iframe>
                     </div>
                   ) : tutorialIsTelegram && telegramPostId ? (
-                    <div id={`telegram-widget-${telegramPostId}`}>
+                    <div>
                       <blockquote 
                         className="telegram-post" 
                         data-post={telegramPostId}

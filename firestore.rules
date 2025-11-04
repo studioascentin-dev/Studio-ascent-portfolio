@@ -5,8 +5,7 @@
  * Core Philosophy:
  * This ruleset provides public read access to projects and categories, while
  * restricting write access. Contact and support requests are publicly accessible
- * for both read and write. Product ratings can be updated by anyone, but only
- * specific fields can be changed.
+ * for both read and write. Product ratings have been removed.
  */
 rules_version = '2';
 service cloud.firestore {
@@ -44,19 +43,6 @@ service cloud.firestore {
      */
     match /supportRequests/{supportRequestId} {
       allow read, write: if true;
-    }
-
-    /**
-     * @description Handles product ratings.
-     * - DENIES public reads to prevent client-side listeners.
-     * - Allows anyone to create a new product document (for initial rating).
-     * - Allows anyone to update ONLY the 'ratingCount' and 'totalStars' fields.
-     */
-    match /products/{productId} {
-      allow read: if false; 
-      allow create: if true;
-      allow update: if request.resource.data.diff(resource.data).affectedKeys().hasOnly(['ratingCount', 'totalStars']);
-      allow delete: if false;
     }
   }
 }

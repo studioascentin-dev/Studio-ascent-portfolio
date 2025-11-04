@@ -11,7 +11,7 @@ import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { useState, useEffect, useTransition } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -23,57 +23,7 @@ import { Loader2, Youtube } from 'lucide-react';
 import Link from 'next/link';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { RazorpayButton } from '@/components/razorpay-button';
-import { cn } from '@/lib/utils';
-import { rateProduct } from '../actions';
 
-
-const StarRating = ({
-  rating,
-  count,
-  size = 'h-5 w-5',
-  onRate,
-  isPending,
-}: {
-  rating: number;
-  count?: number;
-  size?: string;
-  onRate?: (rating: number) => void;
-  isPending?: boolean;
-}) => {
-  const [hoverRating, setHoverRating] = useState(0);
-
-  return (
-    <div className="flex items-center gap-2">
-      <div
-        className={cn('flex text-yellow-400', {
-          'cursor-pointer': !!onRate,
-          'opacity-50 pointer-events-none': isPending,
-        })}
-        onMouseLeave={() => setHoverRating(0)}
-      >
-        {[...Array(5)].map((_, i) => {
-          const starValue = i + 1;
-          return (
-            <Star
-              key={i}
-              className={cn(size, {
-                'fill-current': starValue <= (hoverRating || rating),
-                'text-gray-500': starValue > (hoverRating || rating),
-              })}
-              onMouseEnter={() => onRate && setHoverRating(starValue)}
-              onClick={() => onRate && onRate(starValue)}
-            />
-          );
-        })}
-      </div>
-      {count !== undefined && (
-        <span className="text-sm text-muted-foreground">
-          ({count} review{count === 1 ? '' : 's'})
-        </span>
-      )}
-    </div>
-  );
-};
 
 const supportFormSchema = z.object({
   name: z.string().min(2, { message: 'Full name must be at least 2 characters.' }),
@@ -241,53 +191,8 @@ const getEmbedUrl = (url: string) => {
 export default function ProductDetailPage() {
   const params = useParams();
   const slug = params.slug as string;
-  const { toast } = useToast();
-  const [isRatingPending, startRatingTransition] = useTransition();
-  const [hasRated, setHasRated] = useState(false);
 
   const staticItem = [...storeItems.plugins, ...storeItems.projectFiles].find((item) => item.slug === slug) as any;
-
-  useEffect(() => {
-    if (slug) {
-      const alreadyRated = localStorage.getItem(`rated_${slug}`);
-      if (alreadyRated) {
-        setHasRated(true);
-      }
-    }
-  }, [slug]);
-
-  const handleRate = async (rating: number) => {
-    if (hasRated) {
-        toast({
-            variant: 'destructive',
-            title: "Already Rated",
-            description: "You've already submitted a rating for this product.",
-        });
-        return;
-    }
-
-    startRatingTransition(async () => {
-      localStorage.setItem(`rated_${slug}`, 'true');
-      setHasRated(true);
-
-      const result = await rateProduct(slug, rating);
-      
-      if (result?.success) {
-          toast({
-              title: "Thank You!",
-              description: "Your rating has been submitted successfully.",
-          });
-      } else {
-          localStorage.removeItem(`rated_${slug}`);
-          setHasRated(false);
-          toast({
-              variant: "destructive",
-              title: "Uh oh!",
-              description: result?.error || "Could not submit your rating."
-          });
-      }
-    });
-  };
 
   if (!staticItem) {
     notFound();
@@ -300,10 +205,6 @@ export default function ProductDetailPage() {
   const isPricedItem = isPlugin || isProjectFile;
   const isRazorpayButton = 'paymentLink' in staticItem && staticItem.paymentLink.startsWith('pl_');
 
-  // Display static rating from store-data.ts
-  const ratingCount = staticItem.reviews;
-  const averageRating = staticItem.rating;
-  
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
       <Header />
@@ -354,11 +255,6 @@ export default function ProductDetailPage() {
                       )}
                       {'platform' in staticItem && staticItem.platform}
                     </div>
-                     <StarRating 
-                        rating={averageRating} 
-                        count={ratingCount} 
-                        size="h-5 w-5" 
-                     />
                   </div>
                 )}
                 <p className="text-sm md:text-base text-muted-foreground">
@@ -404,25 +300,6 @@ export default function ProductDetailPage() {
           </div>
 
           <Separator className="my-12 md:my-16" />
-          
-          <section className="max-w-4xl mx-auto space-y-8">
-            <Card>
-                <CardHeader>
-                    <CardTitle className="font-headline">Rate This Product</CardTitle>
-                    <CardDescription>Let others know what you think. Your rating helps the community.</CardDescription>
-                </CardHeader>
-                <CardContent>
-                    <div className="flex flex-col items-center gap-4">
-                        <StarRating rating={averageRating} size="h-8 w-8" onRate={handleRate} isPending={isRatingPending} />
-                        {isRatingPending && <Loader2 className="h-5 w-5 animate-spin" />}
-                         <p className="text-sm text-muted-foreground">
-                            {hasRated ? "Thanks for your rating!" : "Click a star to rate."}
-                        </p>
-                    </div>
-                </CardContent>
-            </Card>
-          </section>
-
 
           {'details' in staticItem && staticItem.details && (
             <section className="max-w-4xl mx-auto my-12 md:my-16" aria-labelledby="product-details-heading">

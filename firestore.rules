@@ -10,11 +10,12 @@
  *
  * Data Structure:
  * The database contains top-level collections for 'projects', 'categories',
- * 'contacts', and 'supportRequests'.
+ * 'contacts', 'supportRequests', and 'reviews'.
  *
  * Key Security Decisions:
  * - Projects and categories are publicly readable, but writes are denied.
  * - Contacts and support requests are publicly readable and writable.
+ * - Reviews are publicly readable and creatable, but cannot be updated or deleted.
  *
  * Authorization Independence: No data denormalization is needed because no
  * collaborative features that need authorization exist.
@@ -66,18 +67,24 @@ service cloud.firestore {
     match /supportRequests/{supportRequestId} {
       allow get, list, create, update, delete: if true;
     }
+    
+    /**
+     * @description Rule for reading multiple reviews (collection query).
+     * @path /reviews
+     * @principle Allows anyone to list reviews, which is necessary for querying the collection.
+     */
+    match /reviews {
+        allow list: if true;
+    }
 
     /**
-     * @description Grants public read and create access to reviews, but denies updates and deletes.
+     * @description Rule for individual review documents.
      * @path /reviews/{reviewId}
-     * @principle Allows anyone to submit a review and view all reviews, but prevents tampering with existing reviews.
+     * @principle Allows anyone to read a single review or create a new one, but prevents tampering with existing reviews.
      */
     match /reviews/{reviewId} {
       allow get, create: if true;
-      allow list, update, delete: if false;
-    }
-    match /reviews {
-      allow list: if true;
+      allow update, delete: if false;
     }
   }
 }

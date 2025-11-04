@@ -1,34 +1,40 @@
 
 'use server';
 
-import { initializeFirebase } from '@/firebase';
-import { doc, runTransaction } from 'firebase/firestore';
+import { initializeApp, getApps, App } from 'firebase-admin/app';
+import { getFirestore } from 'firebase-admin/firestore';
+import { credential } from 'firebase-admin';
 
 // Server action to update the rating
 export async function rateProduct(slug: string, rating: number) {
   try {
-    const { firestore } = initializeFirebase();
-    const productRef = doc(firestore, 'products', slug);
+    // Server-side Firebase initialization
+    const agetAuthdminApp = !getApps().length
+      ? initializeApp({
+          credential: credential.applicationDefault(),
+        })
+      : getApps()[0];
 
-    await runTransaction(firestore, async (transaction) => {
+    const firestore = getFirestore(adminApp);
+    const productRef = firestore.collection('products').doc(slug);
+
+    await firestore.runTransaction(async (transaction) => {
       const productDoc = await transaction.get(productRef);
 
-      if (!productDoc.exists()) {
-        // If doc doesn't exist, create it with the first rating
+      if (!productDoc.exists) {
         const newProductData = {
-            ratingCount: 1,
-            totalStars: rating,
+          ratingCount: 1,
+          totalStars: rating,
         };
         transaction.set(productRef, newProductData);
       } else {
-        // If doc exists, update the rating
-        const currentRatingCount = productDoc.data().ratingCount || 0;
-        const currentTotalStars = productDoc.data().totalStars || 0;
+        const currentRatingCount = productDoc.data()?.ratingCount || 0;
+        const currentTotalStars = productDoc.data()?.totalStars || 0;
         const newRatingCount = currentRatingCount + 1;
         const newTotalStars = currentTotalStars + rating;
         transaction.update(productRef, {
-            ratingCount: newRatingCount,
-            totalStars: newTotalStars
+          ratingCount: newRatingCount,
+          totalStars: newTotalStars,
         });
       }
     });

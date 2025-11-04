@@ -53,7 +53,7 @@ service cloud.firestore {
      * - Allows anyone to update ONLY the 'ratingCount' and 'totalStars' fields.
      */
     match /products/{productId} {
-      allow read: if false; // Deny client-side reads
+      allow read: if false; 
       allow create: if true;
       allow update: if request.resource.data.diff(resource.data).affectedKeys().hasOnly(['ratingCount', 'totalStars']);
       allow delete: if false;

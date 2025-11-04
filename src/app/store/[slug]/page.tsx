@@ -11,7 +11,7 @@ import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { useState, useEffect, useOptimistic, useTransition } from 'react';
+import { useState, useEffect, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -247,15 +247,6 @@ export default function ProductDetailPage() {
 
   const staticItem = [...storeItems.plugins, ...storeItems.projectFiles].find((item) => item.slug === slug) as any;
 
-  // Optimistic UI for rating
-  const [optimisticRating, addOptimisticRating] = useOptimistic(
-    { ratingCount: staticItem.reviews, totalStars: staticItem.rating * staticItem.reviews },
-    (state, newRating: number) => ({
-      ratingCount: state.ratingCount + 1,
-      totalStars: state.totalStars + newRating,
-    })
-  );
-
   useEffect(() => {
     if (slug) {
       const alreadyRated = localStorage.getItem(`rated_${slug}`);
@@ -276,7 +267,6 @@ export default function ProductDetailPage() {
     }
 
     startRatingTransition(async () => {
-      addOptimisticRating(rating);
       localStorage.setItem(`rated_${slug}`, 'true');
       setHasRated(true);
 
@@ -290,9 +280,6 @@ export default function ProductDetailPage() {
       } else {
           localStorage.removeItem(`rated_${slug}`);
           setHasRated(false);
-          // Note: The optimistic state won't be automatically rolled back here,
-          // but for a simple rating, this is often acceptable.
-          // A full refresh would show the correct server state.
           toast({
               variant: "destructive",
               title: "Uh oh!",
@@ -313,10 +300,9 @@ export default function ProductDetailPage() {
   const isPricedItem = isPlugin || isProjectFile;
   const isRazorpayButton = 'paymentLink' in staticItem && staticItem.paymentLink.startsWith('pl_');
 
-  const ratingSource = optimisticRating;
-  const ratingCount = ratingSource.ratingCount;
-  const totalStars = ratingSource.totalStars;
-  const averageRating = ratingCount > 0 ? totalStars / ratingCount : 0;
+  // Display static rating from store-data.ts
+  const ratingCount = staticItem.reviews;
+  const averageRating = staticItem.rating;
   
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">

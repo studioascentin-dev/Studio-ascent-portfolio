@@ -16,12 +16,12 @@ export const storeItems = {
       rating: 5,
       reviews: 28,
       paymentLink: 'pl_RaTwMcaPmaCnTI',
-      tutorialLink: 'https://t.me/your_telegram_channel_link',
+      tutorialLink: 'https://t.me/StudioAscentTutorials',
       details: {
         fileSize: '1.2 GB',
         importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
          youtube: {
-          channelName: 'Studio Ascent Tutorials',
+          channelName: 'D3V edits',
           channelUrl: 'https://www.youtube.com/@D3Vedits'
         }
       }
@@ -40,12 +40,12 @@ export const storeItems = {
       rating: 4,
       reviews: 15,
       paymentLink: 'pl_Rarj6Wovdkf6Kx',
-      tutorialLink: 'https://t.me/your_telegram_channel_link',
+      tutorialLink: 'https://t.me/StudioAscentTutorials',
        details: {
         fileSize: '15.8 MB',
         importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
          youtube: {
-          channelName: 'Studio Ascent Tutorials',
+          channelName: 'D3V edits',
           channelUrl: 'https://www.youtube.com/@D3Vedits'
         }
       }
@@ -64,12 +64,12 @@ export const storeItems = {
       rating: 5,
       reviews: 42,
       paymentLink: 'pl_RaqjZJEe5lr3Lx',
-      tutorialLink: 'https://t.me/your_telegram_channel_link',
+      tutorialLink: 'https://t.me/StudioAscentTutorials',
        details: {
         fileSize: '45.1 MB',
         importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
          youtube: {
-          channelName: 'Studio Ascent Tutorials',
+          channelName: 'D3V edits',
           channelUrl: 'https://www.youtube.com/@D3Vedits'
         }
       }
@@ -88,12 +88,12 @@ export const storeItems = {
       rating: 5,
       reviews: 18,
       paymentLink: 'pl_RaqeXPF63RSMnZ',
-      tutorialLink: 'https://t.me/your_telegram_channel_link',
+      tutorialLink: 'https://t.me/StudioAscentTutorials',
        details: {
         fileSize: '128 MB',
         importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
          youtube: {
-          channelName: 'Studio Ascent Tutorials',
+          channelName: 'D3V edits',
           channelUrl: 'https://www.youtube.com/@D3Vedits'
         }
       }
@@ -112,12 +112,12 @@ export const storeItems = {
       rating: 5,
       reviews: 33,
       paymentLink: 'pl_RaUhnyHX4SprxG',
-      tutorialLink: 'https://t.me/your_telegram_channel_link',
+      tutorialLink: 'https://t.me/StudioAscentTutorials',
        details: {
         fileSize: '78.5 MB',
         importantNotes: 'This plugin is for both Mac and Windows. The installation tutorial below is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
          youtube: {
-          channelName: 'Studio Ascent Tutorials',
+          channelName: 'D3V edits',
           channelUrl: 'https://www.youtube.com/@D3Vedits'
         }
       }
@@ -136,12 +136,12 @@ export const storeItems = {
       rating: 5,
       reviews: 25,
       paymentLink: 'pl_RaUBZG6HYdMCyQ',
-      tutorialLink: 'https://t.me/your_telegram_channel_link',
+      tutorialLink: 'https://t.me/StudioAscentTutorials',
        details: {
         fileSize: '33.9 MB',
         importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
          youtube: {
-          channelName: 'Studio Ascent Tutorials',
+          channelName: 'D3V edits',
           channelUrl: 'https://www.youtube.com/@D3Vedits'
         }
       }
@@ -160,12 +160,12 @@ export const storeItems = {
       rating: 5,
       reviews: 50,
       paymentLink: 'pl_RaUrGxMtVF8nqO',
-      tutorialLink: 'https://t.me/your_telegram_channel_link',
+      tutorialLink: 'https://t.me/StudioAscentTutorials',
        details: {
         fileSize: '250 MB',
         importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',
          youtube: {
-          channelName: 'Studio Ascent Tutorials',
+          channelName: 'D3V edits',
           channelUrl: 'https://www.youtube.com/@D3Vedits'
         }
       }
@@ -190,7 +190,7 @@ export const storeItems = {
         fileSize: '25 MB',
         importantNotes: 'Requires Alight Motion.',
         youtube: {
-          channelName: 'Studio Ascent Tutorials',
+          channelName: 'D3V edits',
           channelUrl: 'https://www.youtube.com/@D3Vedits'
         }
       }
@@ -213,7 +213,7 @@ export const storeItems = {
         fileSize: '30 MB',
         importantNotes: 'Requires Alight Motion.',
         youtube: {
-          channelName: 'Studio Ascent Tutorials',
+          channelName: 'D3V edits',
           channelUrl: 'https://www.youtube.com/@D3Vedits'
         }
       }
@@ -236,7 +236,7 @@ export const storeItems = {
         fileSize: '5 MB',
         importantNotes: 'Requires Alight Motion.',
         youtube: {
-          channelName: 'Studio Ascent Tutorials',
+          channelName: 'D3V edits',
           channelUrl: 'https://www.youtube.com/@D3Vedits'
         }
       }
@@ -259,7 +259,7 @@ export const storeItems = {
         fileSize: '15 MB',
         importantNotes: 'Requires Alight Motion.',
         youtube: {
-          channelName: 'Studio Ascent Tutorials',
+          channelName: 'D3V edits',
           channelUrl: 'https://www.youtube.com/@D3Vedits'
         }
       }
@@ -267,3 +267,5 @@ export const storeItems = {
   ],
   applications: [],
 };
+
+    

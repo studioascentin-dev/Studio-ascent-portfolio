@@ -24,44 +24,7 @@ import Link from 'next/link';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { RazorpayButton } from '@/components/razorpay-button';
 import { cn } from '@/lib/utils';
-import { runTransaction, doc, getDoc, setDoc } from 'firebase/firestore';
-import { initializeFirebase } from '@/firebase';
-
-// Server action to update the rating
-async function rateProduct(slug: string, rating: number) {
-  'use server';
-  try {
-    const { firestore } = initializeFirebase();
-    const productRef = doc(firestore, 'products', slug);
-
-    await runTransaction(firestore, async (transaction) => {
-      const productDoc = await transaction.get(productRef);
-
-      if (!productDoc.exists()) {
-        // If doc doesn't exist, create it with the first rating
-        const newProductData = {
-            ratingCount: 1,
-            totalStars: rating,
-        };
-        transaction.set(productRef, newProductData);
-      } else {
-        // If doc exists, update the rating
-        const currentRatingCount = productDoc.data().ratingCount || 0;
-        const currentTotalStars = productDoc.data().totalStars || 0;
-        const newRatingCount = currentRatingCount + 1;
-        const newTotalStars = currentTotalStars + rating;
-        transaction.update(productRef, {
-            ratingCount: newRatingCount,
-            totalStars: newTotalStars
-        });
-      }
-    });
-    return { success: true };
-  } catch (e: any) {
-    console.error('Rating transaction failed:', e);
-    return { success: false, error: e.message || 'Could not submit your rating.' };
-  }
-}
+import { rateProduct } from './actions';
 
 
 const StarRating = ({
@@ -279,15 +242,16 @@ export default function ProductDetailPage() {
   const params = useParams();
   const slug = params.slug as string;
   const { toast } = useToast();
-  const [isPending, startTransition] = useTransition();
+  const [isRatingPending, startRatingTransition] = useTransition();
   const [hasRated, setHasRated] = useState(false);
   
   const staticItem = [...storeItems.plugins, ...storeItems.projectFiles].find((item) => item.slug === slug) as any;
 
+  // Optimistic UI for rating
   const [optimisticRating, addOptimisticRating] = useOptimistic(
     { 
-      ratingCount: staticItem.reviews ?? 0, 
-      totalStars: (staticItem.rating ?? 0) * (staticItem.reviews ?? 0)
+      ratingCount: staticItem.reviews, 
+      totalStars: staticItem.rating * staticItem.reviews
     },
     (state, newRating: number) => ({
       ratingCount: state.ratingCount + 1,
@@ -314,21 +278,25 @@ export default function ProductDetailPage() {
         return;
     }
 
-    startTransition(async () => {
+    startRatingTransition(async () => {
       addOptimisticRating(rating);
+      localStorage.setItem(`rated_${slug}`, 'true');
+      setHasRated(true);
+
       const result = await rateProduct(slug, rating);
-      if (result.success) {
-          localStorage.setItem(`rated_${slug}`, 'true');
-          setHasRated(true);
+      
+      if (result?.success) {
           toast({
               title: "Thank You!",
               description: "Your rating has been submitted successfully.",
           });
       } else {
+          localStorage.removeItem(`rated_${slug}`);
+          setHasRated(false);
           toast({
               variant: "destructive",
               title: "Uh oh!",
-              description: result.error || "Could not submit your rating."
+              description: result?.error || "Could not submit your rating."
           });
       }
     });
@@ -457,8 +425,8 @@ export default function ProductDetailPage() {
                 </CardHeader>
                 <CardContent>
                     <div className="flex flex-col items-center gap-4">
-                        <StarRating rating={averageRating} size="h-8 w-8" onRate={handleRate} isPending={isPending} />
-                        {isPending && <Loader2 className="h-5 w-5 animate-spin" />}
+                        <StarRating rating={averageRating} size="h-8 w-8" onRate={handleRate} isPending={isRatingPending} />
+                        {isRatingPending && <Loader2 className="h-5 w-5 animate-spin" />}
                         <p className="text-sm text-muted-foreground">
                             {hasRated ? "Thanks for your rating!" : "Click a star to rate."}
                         </p>
@@ -621,5 +589,3 @@ export default function ProductDetailPage() {
     </div>
   );
 }
-
-    

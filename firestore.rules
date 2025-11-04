@@ -6,20 +6,8 @@
  * This ruleset provides public read access to projects and categories,
  * while restricting write access to these collections. Contact and support
  * requests are publicly accessible for both read and write to allow anonymous
- * users to submit the forms.
- *
- * Data Structure:
- * The database contains top-level collections for 'projects', 'categories',
- * 'contacts', and 'supportRequests'. Product reviews are stored in a 
- * sub-collection named 'reviews' under each product document in the 'products' collection.
- *
- * Key Security Decisions:
- * - Projects and categories are publicly readable, but writes are denied.
- * - Contacts and support requests are publicly readable and writable.
- * - Reviews are publicly readable and creatable, but cannot be updated or deleted by users.
- *
- * Authorization Independence: No data denormalization is needed because no
- * collaborative features that need authorization exist.
+ * users to submit the forms. Product reviews are stored in a sub-collection
+ * and can be read and created by anyone, but not modified or deleted.
  */
 rules_version = '2';
 service cloud.firestore {
@@ -28,9 +16,6 @@ service cloud.firestore {
     /**
      * @description Grants public read access to projects while denying all writes.
      * @path /projects/{projectId}
-     * @allow (get, list): Any user can read project data.
-     * @deny (create, update, delete): No user can create, update, or delete project data.
-     * @principle Allows public read access for showcasing projects, but prevents unauthorized modifications.
      */
     match /projects/{projectId} {
       allow get, list: if true;
@@ -40,9 +25,6 @@ service cloud.firestore {
     /**
      * @description Grants public read access to categories while denying all writes.
      * @path /categories/{categoryId}
-     * @allow (get, list): Any user can read category data.
-     * @deny (create, update, delete): No user can create, update, or delete category data.
-     * @principle Allows public read access for showcasing categories, but prevents unauthorized modifications.
      */
     match /categories/{categoryId} {
       allow get, list: if true;
@@ -52,30 +34,28 @@ service cloud.firestore {
     /**
      * @description Grants public read and write access to contacts.
      * @path /contacts/{contactId}
-     * @allow (get, list, create, update, delete): Any user can read, create, update, and delete contact data.
-     * @principle Allows public read and write access for contact form submissions.
      */
     match /contacts/{contactId} {
-      allow get, list, create, update, delete: if true;
+      allow read, write: if true;
     }
 
     /**
      * @description Grants public read and write access to support requests.
      * @path /supportRequests/{supportRequestId}
-     * @allow (get, list, create, update, delete): Any user can read, create, update, and delete support request data.
-     * @principle Allows public read and write access for support request submissions.
      */
     match /supportRequests/{supportRequestId} {
-      allow get, list, create, update, delete: if true;
+      allow read, write: if true;
     }
     
     /**
-     * @description Rule for reviews, stored as a subcollection under a 'products' collection.
+     * @description Rule for the 'reviews' sub-collection under any product.
      * @path /products/{productId}/reviews/{reviewId}
-     * @principle Allows anyone to read reviews for any product, and create new reviews. Prevents tampering with existing reviews.
+     * @principle Allows anyone to read (list and get) reviews for any product, 
+     * and to create new reviews. Prevents tampering with existing reviews by
+     * denying updates and deletes.
      */
     match /products/{productId}/reviews/{reviewId} {
-      allow get, list, create: if true;
+      allow read, create: if true;
       allow update, delete: if false;
     }
   }

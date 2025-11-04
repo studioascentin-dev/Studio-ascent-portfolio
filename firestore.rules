@@ -11,7 +11,7 @@
  * Data Structure:
  * The database contains top-level collections for 'projects', 'categories',
  * 'contacts', and 'supportRequests'. Product reviews are stored in a 
- * sub-collection named 'reviews' under each product document in a (future) 'products' collection.
+ * sub-collection named 'reviews' under each product document in the 'products' collection.
  *
  * Key Security Decisions:
  * - Projects and categories are publicly readable, but writes are denied.

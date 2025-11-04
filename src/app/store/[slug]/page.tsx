@@ -12,7 +12,7 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm } from 'react';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
@@ -23,6 +23,7 @@ import { Loader2, Youtube } from 'lucide-react';
 import Link from 'next/link';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { RazorpayButton } from '@/components/razorpay-button';
+import Script from 'next/script';
 
 
 const supportFormSchema = z.object({
@@ -188,6 +189,12 @@ const getEmbedUrl = (url: string) => {
   return videoId ? `https://www.youtube.com/embed/${videoId}` : url;
 };
 
+const getTelegramPostId = (url: string) => {
+  if (!url || !url.includes('t.me/')) return null;
+  const parts = url.split('t.me/')[1];
+  return parts.split('?')[0]; // Remove query params if any
+}
+
 export default function ProductDetailPage() {
   const params = useParams();
   const slug = params.slug as string;
@@ -204,6 +211,10 @@ export default function ProductDetailPage() {
     'price' in staticItem && 'originalPrice' in staticItem && storeItems.projectFiles.some((p) => p.slug === staticItem.slug);
   const isPricedItem = isPlugin || isProjectFile;
   const isRazorpayButton = 'paymentLink' in staticItem && staticItem.paymentLink.startsWith('pl_');
+
+  const tutorialIsYouTube = 'tutorialLink' in staticItem && staticItem.tutorialLink.includes('youtube.com');
+  const tutorialIsTelegram = 'tutorialLink' in staticItem && staticItem.tutorialLink.includes('t.me/');
+  const telegramPostId = tutorialIsTelegram ? getTelegramPostId(staticItem.tutorialLink) : null;
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
@@ -243,20 +254,6 @@ export default function ProductDetailPage() {
             <div className="space-y-4 md:space-y-6">
               <div className="space-y-2 md:space-y-3">
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold font-headline">{staticItem.name}</h1>
-                {isPricedItem && (
-                  <div className="flex items-center gap-4 flex-wrap">
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground font-medium">
-                      {'platform' in staticItem && staticItem.platform === 'Mac & Windows' ? (
-                        <Check className="h-5 w-5 text-green-500" />
-                      ) : 'platform' in staticItem && staticItem.platform === 'Alight Motion' ? (
-                        <Check className="h-5 w-5 text-green-500" />
-                      ) : (
-                        <Apple className="h-4 w-4" />
-                      )}
-                      {'platform' in staticItem && staticItem.platform}
-                    </div>
-                  </div>
-                )}
                 <p className="text-sm md:text-base text-muted-foreground">
                   {'longDescription' in staticItem ? staticItem.longDescription : staticItem.description}
                 </p>
@@ -307,6 +304,15 @@ export default function ProductDetailPage() {
                 Product Details
               </h2>
               <div className="space-y-4 md:space-y-6">
+                <Card className="bg-secondary/50 backdrop-blur-sm border-border p-6 md:p-8">
+                  <div className="flex items-start gap-4 md:gap-6">
+                    <Apple className="h-8 w-8 md:h-10 md:w-10 text-primary mt-1 flex-shrink-0" />
+                    <div>
+                      <h3 className="font-bold text-lg md:text-xl mb-1">Platform</h3>
+                      <p className="text-muted-foreground text-sm md:text-base">{staticItem.platform}</p>
+                    </div>
+                  </div>
+                </Card>
                 <Card className="bg-secondary/50 backdrop-blur-sm border-border p-6 md:p-8">
                   <div className="flex items-start gap-4 md:gap-6">
                     <Download className="h-8 w-8 md:h-10 md:w-10 text-primary mt-1 flex-shrink-0" />
@@ -368,9 +374,9 @@ export default function ProductDetailPage() {
                 <h2 id="installation-video-heading" className="text-2xl md:text-3xl font-bold font-headline mb-6 md:mb-8 text-center">
                   {isProjectFile ? 'Preview' : 'Installation Guide'}
                 </h2>
-                <div className="text-center">
-                  {staticItem.tutorialLink.includes('youtube.com') ? (
-                    <div className="aspect-video max-w-4xl mx-auto w-full overflow-hidden rounded-lg border border-border shadow-lg">
+                <div className="text-center max-w-4xl mx-auto">
+                  {tutorialIsYouTube ? (
+                    <div className="aspect-video w-full overflow-hidden rounded-lg border border-border shadow-lg">
                       <iframe
                         src={getEmbedUrl(staticItem.tutorialLink)}
                         title={`Tutorial video for ${staticItem.name}`}
@@ -380,11 +386,24 @@ export default function ProductDetailPage() {
                         className="w-full h-full object-cover"
                       ></iframe>
                     </div>
+                  ) : tutorialIsTelegram && telegramPostId ? (
+                    <>
+                      <blockquote 
+                        className="telegram-post" 
+                        data-post={telegramPostId}
+                        data-width="100%"
+                      >
+                         <a href={staticItem.tutorialLink} target="_blank" rel="noopener noreferrer">
+                            View on Telegram
+                         </a>
+                      </blockquote>
+                      <Script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-post={telegramPostId} data-width="100%"></Script>
+                    </>
                   ) : (
                     <Button asChild size="lg">
                       <Link href={staticItem.tutorialLink} target="_blank" rel="noopener noreferrer">
                         <Send className="mr-2 h-4 w-4" />
-                        View Tutorial on Telegram
+                        View Tutorial
                       </Link>
                     </Button>
                   )}
@@ -396,7 +415,7 @@ export default function ProductDetailPage() {
 
             <section aria-labelledby="payment-support-heading">
               <h2 id="payment-support-heading" className="text-2xl md:text-3xl font-bold font-headline mb-6 md:mb-8 text-center">
-                Payment & Support
+                Payment &amp; Support
               </h2>
               <div className="grid md:grid-cols-2 gap-8 items-start max-w-7xl mx-auto">
                 <div className="space-y-8">
@@ -454,3 +473,5 @@ export default function ProductDetailPage() {
     </div>
   );
 }
+
+    

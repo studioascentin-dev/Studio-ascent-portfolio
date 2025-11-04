@@ -24,7 +24,7 @@ import Link from 'next/link';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { RazorpayButton } from '@/components/razorpay-button';
 import { cn } from '@/lib/utils';
-import { rateProduct } from './actions';
+import { rateProduct } from '../actions';
 
 
 const StarRating = ({

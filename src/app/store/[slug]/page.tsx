@@ -25,7 +25,7 @@ import Link from 'next/link';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { RazorpayButton } from '@/components/razorpay-button';
 import { useCollection, useFirestore, useMemoFirebase } from '@/firebase';
-import { collection, query, where, addDoc, serverTimestamp, orderBy } from 'firebase/firestore';
+import { collection, query, addDoc, serverTimestamp, orderBy } from 'firebase/firestore';
 
 
 const StarRating = ({ rating, count, size = 'h-5 w-5' }: { rating: number, count?: number, size?: string }) => {
@@ -49,7 +49,7 @@ const reviewFormSchema = z.object({
 
 type ReviewFormValues = z.infer<typeof reviewFormSchema>;
 
-const ReviewForm = ({ itemName, onReviewSubmit }: { itemName: string, onReviewSubmit: (data: ReviewFormValues) => Promise<void> }) => {
+const ReviewForm = ({ productName, onReviewSubmit }: { productName: string, onReviewSubmit: (data: ReviewFormValues) => Promise<void> }) => {
     const { toast } = useToast();
     const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -304,8 +304,9 @@ export default function ProductDetailPage() {
     const item = allItems.find(item => item.slug === slug) as any;
 
     const reviewsQuery = useMemoFirebase(() => {
-      if (!firestore || !slug) return null;
-      return query(collection(firestore, 'reviews'), where('productSlug', '==', slug), orderBy('createdAt', 'desc'));
+        if (!firestore || !slug) return null;
+        // Query the sub-collection: /products/{slug}/reviews
+        return query(collection(firestore, 'products', slug, 'reviews'), orderBy('createdAt', 'desc'));
     }, [firestore, slug]);
   
     const { data: reviews, isLoading: reviewsLoading } = useCollection(reviewsQuery);
@@ -315,7 +316,6 @@ export default function ProductDetailPage() {
         if (!firestore) throw new Error("Firestore is not initialized.");
         
         const newReview = {
-            productSlug: slug,
             author: data.name,
             avatar: `https://i.pravatar.cc/150?u=${data.name.split(' ').join('')}`,
             rating: data.rating,
@@ -323,7 +323,8 @@ export default function ProductDetailPage() {
             createdAt: serverTimestamp(),
         };
         
-        await addDoc(collection(firestore, 'reviews'), newReview);
+        const reviewsCollectionRef = collection(firestore, 'products', slug, 'reviews');
+        await addDoc(reviewsCollectionRef, newReview);
     };
 
     if (!item) {
@@ -615,5 +616,3 @@ export default function ProductDetailPage() {
         </div>
     );
 }
-
-    

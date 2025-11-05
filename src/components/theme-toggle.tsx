@@ -4,7 +4,9 @@
 import * as React from "react"
 import { Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
-import { Switch } from "@/components/ui/switch"
+
+import { Button } from "@/components/ui/button"
+import { motion, AnimatePresence } from "framer-motion"
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme()
@@ -14,28 +16,43 @@ export function ThemeToggle() {
     setMounted(true)
   }, [])
 
-  const handleCheckedChange = (checked: boolean) => {
-    setTheme(checked ? 'dark' : 'light')
+  const toggleTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark")
   }
 
   if (!mounted) {
-    return null
+    return (
+        <div className="fixed bottom-4 right-4 z-50">
+            <div className="h-10 w-10 rounded-full bg-secondary"></div>
+        </div>
+    )
   }
-
-  const isDark = theme === "dark"
 
   return (
     <div className="fixed bottom-4 right-4 z-50">
-      <div className="flex items-center space-x-2 rounded-full bg-background/50 p-2 backdrop-blur-lg border shadow-lg">
-        <Sun className={`h-5 w-5 transition-colors ${isDark ? 'text-muted-foreground' : 'text-primary'}`} />
-        <Switch
-          id="theme-toggle"
-          checked={isDark}
-          onCheckedChange={handleCheckedChange}
-          aria-label="Toggle theme"
-        />
-        <Moon className={`h-5 w-5 transition-colors ${isDark ? 'text-primary' : 'text-muted-foreground'}`} />
-      </div>
+        <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+                key={theme}
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: -20, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+            >
+                <Button 
+                    variant="outline" 
+                    size="icon" 
+                    onClick={toggleTheme} 
+                    className="rounded-full shadow-lg bg-background/50 backdrop-blur-lg"
+                    aria-label="Toggle theme"
+                >
+                    {theme === "dark" ? (
+                        <Sun className="h-[1.2rem] w-[1.2rem] text-primary" />
+                    ) : (
+                        <Moon className="h-[1.2rem] w-[1.2rem] text-primary" />
+                    )}
+                </Button>
+            </motion.div>
+        </AnimatePresence>
     </div>
   )
 }

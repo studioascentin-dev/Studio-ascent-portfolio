@@ -18,7 +18,6 @@ const sendEmailFlow = ai.defineFlow(
     name: 'sendContactEmailFlow',
     inputSchema: ContactEmailSchema,
     outputSchema: z.object({ success: z.boolean(), error: z.string().optional() }),
-    model: 'googleai/gemini-2.0-flash',
   },
   async (data: ContactEmailData) => {
     
@@ -32,7 +31,7 @@ const sendEmailFlow = ai.defineFlow(
         const resend = new Resend(process.env.RESEND_API_KEY);
         
         await resend.emails.send({
-          from: 'Studio Ascent Contact <contact@yourdomain.com>',
+          from: 'Studio Ascent Contact <onboarding@resend.dev>',
           to: 'studioascent.in@gmail.com',
           subject: `[Contact Form] New Inquiry from ${data.name}`,
           react: ContactFormEmail({ 
@@ -64,7 +63,6 @@ const sendSupportEmailFlow = ai.defineFlow(
     name: 'sendSupportEmailFlow',
     inputSchema: SupportEmailSchema,
     outputSchema: z.object({ success: z.boolean(), error: z.string().optional() }),
-    model: 'googleai/gemini-2.0-flash',
   },
   async (data: SupportEmailData) => {
     
@@ -78,7 +76,7 @@ const sendSupportEmailFlow = ai.defineFlow(
         const resend = new Resend(process.env.RESEND_API_KEY);
         
         await resend.emails.send({
-          from: 'Studio Ascent Support <contact@yourdomain.com>',
+          from: 'Studio Ascent Support <onboarding@resend.dev>',
           to: 'studioascent.in@gmail.com',
           subject: `[Payment Support] Request for ${data.productName}`,
           react: SupportRequestEmail({ 

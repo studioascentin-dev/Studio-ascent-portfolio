@@ -247,7 +247,7 @@ export default function ProductDetailPage() {
               {isPricedItem && (
                 <Alert className="bg-primary/10 border-primary/20 text-foreground md:hidden">
                   <TriangleAlert className="h-4 w-4 !text-primary" />
-                  <AlertTitle className="font-bold !text-primary-foreground">Important</AlertTitle>
+                  <AlertTitle className="font-bold text-destructive">Important</AlertTitle>
                   <AlertDescription className="text-muted-foreground text-sm">
                     If the payment page doesn't load, press Cmd + Shift + R (Mac) or Ctrl + Shift + R (Windows) to force a
                     refresh.
@@ -285,7 +285,7 @@ export default function ProductDetailPage() {
               {isPricedItem && (
                 <Alert className="bg-primary/10 border-primary/20 text-foreground hidden md:block">
                   <TriangleAlert className="h-4 w-4 !text-primary" />
-                  <AlertTitle className="font-bold !text-primary-foreground">Important</AlertTitle>
+                  <AlertTitle className="font-bold text-destructive">Important</AlertTitle>
                   <AlertDescription className="text-muted-foreground text-sm">
                     If the payment page doesn't load, press Cmd + Shift + R (Mac) or Ctrl + Shift + R (Windows) to force a
                     refresh.

@@ -21,7 +21,7 @@ const sendEmailFlow = ai.defineFlow(
   async (data: ContactEmailData) => {
     
     if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === "your_resend_api_key_here") {
-        const errorMsg = "Resend API key is not set. Please add it to your .env.local file.";
+        const errorMsg = "Resend API key is not set. Please add it to your .env file.";
         console.error(errorMsg);
         return { success: false, error: "Server configuration error: Email API key is missing." };
     }
@@ -65,10 +65,10 @@ const sendSupportEmailFlow = ai.defineFlow(
   },
   async (data: SupportEmailData) => {
     
-    if (!process.env.RESEND_API_KEY) {
+    if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === "your_resend_api_key_here") {
         const errorMsg = "Resend API key is not set. Cannot send email.";
         console.error(errorMsg);
-        return { success: false, error: "Server configuration error." };
+        return { success: false, error: "Server configuration error: Email API key is missing." };
     }
 
     try {

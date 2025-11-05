@@ -10,14 +10,22 @@ const TABS = ["Light", "Dark"];
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme()
   const [activeTab, setActiveTab] = React.useState(theme);
+  const [mounted, setMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setMounted(true)
+  }, [])
 
   React.useEffect(() => {
     setActiveTab(theme)
   }, [theme])
 
-
   const handleTabClick = (tab: string) => {
     setTheme(tab.toLowerCase())
+  }
+  
+  if (!mounted) {
+    return null;
   }
 
   return (

@@ -3,7 +3,7 @@
 
 import { motion } from 'framer-motion';
 import { Button } from './ui/button';
-import { ArrowRight, Instagram, Linkedin, Code, PenTool, Camera, Video, Youtube } from 'lucide-react';
+import { ArrowRight, Instagram, Linkedin, Code, PenTool, Camera, Video, Youtube, Send } from 'lucide-react';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -152,7 +152,7 @@ export function HeroSection() {
             </div>
             <motion.div variants={itemVariants} className="flex space-x-4 justify-center">
               <motion.a href="https://www.instagram.com/_.d_k_d/" target="_blank" rel="noopener noreferrer" variants={socialIconVariants} whileHover="hover" initial="rest" className="text-foreground/80 hover:text-primary transition-colors"><Instagram size={20} /></motion.a>
-              <motion.a href="https://www.linkedin.com/in/deb-kumar-das-46193824a" target="_blank" rel="noopener noreferrer" variants={socialIconVariants} whileHover="hover" initial="rest" className="text-foreground/80 hover:text-primary transition-colors"><Linkedin size={20} /></motion.a>
+              <motion.a href="https://t.me/studioascent" target="_blank" rel="noopener noreferrer" variants={socialIconVariants} whileHover="hover" initial="rest" className="text-foreground/80 hover:text-primary transition-colors"><Send size={20} /></motion.a>
               <motion.a href="https://www.youtube.com/@D3Vedits" target="_blank" rel="noopener noreferrer" variants={socialIconVariants} whileHover="hover" initial="rest" className="text-foreground/80 hover:text-primary transition-colors"><Youtube size={20} /></motion.a>
               <motion.a href="https://x.com/Dev69910032" target="_blank" rel="noopener noreferrer" variants={socialIconVariants} whileHover="hover" initial="rest" className="text-foreground/80 hover:text-primary transition-colors"><XIcon className="h-5 w-5" /></motion.a>
             </motion.div>

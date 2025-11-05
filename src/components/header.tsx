@@ -11,7 +11,6 @@ import { Button } from "./ui/button";
 import { Menu } from "lucide-react";
 import Image from "next/image";
 import LogoImage from '../../public/images/My Logo.png';
-import { ThemeToggle } from "./theme-toggle";
 
 const navItems = [
     { name: "About", href: "/#about" },
@@ -158,16 +157,10 @@ export function Header() {
                                 </motion.div>
                             ))}
                         </nav>
-                        <div className="hidden md:block bg-background/50 backdrop-blur-lg rounded-full border border-border shadow-lg p-1">
-                           <ThemeToggle />
-                        </div>
                     </div>
 
 
                     <div className="md:hidden flex items-center gap-2">
-                        <div className="bg-background/50 backdrop-blur-lg border border-border rounded-full p-1">
-                          <ThemeToggle />
-                        </div>
                          <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
                             <SheetTrigger asChild>
                                 <Button variant="ghost" size="icon" className="bg-background/50 backdrop-blur-lg border border-border">

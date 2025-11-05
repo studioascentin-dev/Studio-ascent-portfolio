@@ -62,7 +62,7 @@ function XIcon(props: React.SVGProps<SVGSVGElement>) {
 
 export function Footer() {
   return (
-    <footer className="bg-secondary/20 backdrop-blur-sm border-t border-white/5 py-12 text-foreground">
+    <footer className="bg-secondary/20 backdrop-blur-sm border-t border-border py-12 text-foreground">
       <div className="mx-auto px-4 sm:px-8">
         <div className="flex flex-col md:flex-row justify-between items-start gap-10 md:gap-8">
           
@@ -110,7 +110,7 @@ export function Footer() {
               <div className="w-full md:hidden">
                 <Accordion type="single" collapsible className="w-full">
                   {footerLinkGroups.map(group => (
-                    <AccordionItem value={group.title} key={group.title} className="border-b border-white/10">
+                    <AccordionItem value={group.title} key={group.title} className="border-b border-border">
                       <AccordionTrigger className="py-4 font-semibold font-headline text-base hover:no-underline">{group.title}</AccordionTrigger>
                       <AccordionContent>
                         <ul className="space-y-3 pl-2">
@@ -130,7 +130,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 md:mt-16 pt-8 border-t border-white/5 text-center">
+        <div className="mt-12 md:mt-16 pt-8 border-t border-border text-center">
           <p className="text-sm text-muted-foreground">&copy; {new Date().getFullYear()} Studio Ascent. All Rights Reserved.</p>
         </div>
       </div>

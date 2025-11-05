@@ -97,7 +97,7 @@ export function HeroSection() {
 
   return (
     <section id="home" className="relative w-full min-h-screen overflow-hidden flex items-center justify-center py-20">
-      <div className="absolute inset-0 z-0 text-primary/10 filter blur-sm">
+      <div className="absolute inset-0 z-0 text-primary/10 dark:text-primary/10 text-primary/5 filter blur-sm">
           <motion.div variants={iconVariants(3, 0.5)} initial="initial" animate="animate" className="absolute top-20 left-10">
               <Code className="h-16 w-16 md:h-24 md:w-24" strokeWidth={1} />
           </motion.div>
@@ -151,10 +151,10 @@ export function HeroSection() {
                 <motion.div variants={lineVariants} className="h-1 bg-primary mt-4 mx-auto"></motion.div>
             </div>
             <motion.div variants={itemVariants} className="flex space-x-4 justify-center">
-              <motion.a href="https://www.instagram.com/_.d_k_d/" target="_blank" rel="noopener noreferrer" variants={socialIconVariants} whileHover="hover" initial="rest" className="text-foreground/80 hover:text-primary transition-colors"><Instagram size={20} /></motion.a>
-              <motion.a href="https://t.me/studioascent" target="_blank" rel="noopener noreferrer" variants={socialIconVariants} whileHover="hover" initial="rest" className="text-foreground/80 hover:text-primary transition-colors"><Send size={20} /></motion.a>
-              <motion.a href="https://www.youtube.com/@D3Vedits" target="_blank" rel="noopener noreferrer" variants={socialIconVariants} whileHover="hover" initial="rest" className="text-foreground/80 hover:text-primary transition-colors"><Youtube size={20} /></motion.a>
-              <motion.a href="https://x.com/Dev69910032" target="_blank" rel="noopener noreferrer" variants={socialIconVariants} whileHover="hover" initial="rest" className="text-foreground/80 hover:text-primary transition-colors"><XIcon className="h-5 w-5" /></motion.a>
+              <motion.a href="https://www.instagram.com/_.d_k_d/" target="_blank" rel="noopener noreferrer" variants={socialIconVariants} whileHover="hover" initial="rest" className="text-muted-foreground hover:text-primary transition-colors"><Instagram size={20} /></motion.a>
+              <motion.a href="https://t.me/studioascent" target="_blank" rel="noopener noreferrer" variants={socialIconVariants} whileHover="hover" initial="rest" className="text-muted-foreground hover:text-primary transition-colors"><Send size={20} /></motion.a>
+              <motion.a href="https://www.youtube.com/@D3Vedits" target="_blank" rel="noopener noreferrer" variants={socialIconVariants} whileHover="hover" initial="rest" className="text-muted-foreground hover:text-primary transition-colors"><Youtube size={20} /></motion.a>
+              <motion.a href="https://x.com/Dev69910032" target="_blank" rel="noopener noreferrer" variants={socialIconVariants} whileHover="hover" initial="rest" className="text-muted-foreground hover:text-primary transition-colors"><XIcon className="h-5 w-5" /></motion.a>
             </motion.div>
           </div>
 

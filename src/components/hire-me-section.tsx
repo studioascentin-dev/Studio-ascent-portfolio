@@ -65,7 +65,7 @@ export function HireMeSection() {
                         variants={itemVariants}
                         className="text-4xl sm:text-5xl font-bold font-headline tracking-tighter"
                     >
-                        Let's Work <span className="text-primary">Together</span>
+                        Let's Work <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-300 to-primary animate-shimmer bg-[length:200%_auto]">Together</span>
                     </motion.h2>
                      <motion.p 
                         variants={itemVariants} 
@@ -81,8 +81,7 @@ export function HireMeSection() {
                 >
                     <div className={cn(
                         "relative p-6 rounded-lg mb-8 text-center border overflow-hidden",
-                        "dark:bg-secondary/40",
-                        "light:bg-gray-800 light:text-white"
+                        "dark:bg-secondary/40 light:bg-gray-800 light:text-white"
                     )}>
                          <div className={cn(
                             "absolute -inset-[1px] rounded-lg z-0",
@@ -95,19 +94,16 @@ export function HireMeSection() {
                                 <Clock className="w-5 h-5 text-primary" />
                                 <h4 className={cn(
                                     "font-headline text-lg font-semibold",
-                                    "dark:text-foreground",
-                                    "light:text-white"
+                                    "dark:text-foreground light:text-white"
                                 )}>Opening Hours</h4>
                             </div>
                             <p className={cn(
                                 "text-sm",
-                                "dark:text-muted-foreground",
-                                "light:text-gray-300"
+                                "dark:text-muted-foreground light:text-gray-300"
                             )}>Mon - Sat: 8:00 AM to 9:00 PM</p>
                             <p className={cn(
                                 "text-sm",
-                                "dark:text-muted-foreground",
-                                "light:text-gray-300"
+                                "dark:text-muted-foreground light:text-gray-300"
                             )}>Sunday: 10:00 AM to 6:00 PM</p>
                             <p className="text-primary text-xs mt-2 font-medium">For a faster reply, please message during opening hours.</p>
                         </div>

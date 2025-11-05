@@ -68,7 +68,7 @@ export function ServicesSection() {
                 className="text-center max-w-3xl mx-auto mb-12 md:mb-16"
             >
                 <motion.h2 variants={itemVariants} className="text-4xl sm:text-5xl font-bold font-headline tracking-tighter">
-                    My <span className="text-primary">Services</span>
+                    My <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-300 to-primary animate-shimmer bg-[length:200%_auto]">Services</span>
                 </motion.h2>
                 <motion.p variants={itemVariants} className="text-muted-foreground text-base md:text-xl/relaxed mt-4 md:mt-6">
                     I provide a wide range of digital services to bring your vision to life.

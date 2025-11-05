@@ -63,7 +63,7 @@ export function AboutSection() {
                     variants={itemVariants}
                     className="text-4xl sm:text-5xl md:text-6xl font-bold font-headline text-center mb-12 md:mb-16"
                 >
-                    About <span className="text-primary">Me</span>
+                    About <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-300 to-primary animate-shimmer bg-[length:200%_auto]">Me</span>
                 </motion.h2>
 
                 <motion.div

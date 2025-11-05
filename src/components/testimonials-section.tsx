@@ -91,7 +91,11 @@ export function TestimonialsSection() {
     React.useEffect(() => {
         const scroller = scrollerRef.current;
         if (scroller) {
-            scroller.setAttribute("data-animated", "true");
+            // Check if user prefers reduced motion
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (!prefersReducedMotion) {
+                scroller.setAttribute("data-animated", "true");
+            }
         }
     }, []);
 

@@ -200,11 +200,15 @@ export default function ProductDetailPage() {
 
   const staticItem = [...storeItems.plugins, ...storeItems.projectFiles].find((item) => item.slug === slug);
 
+  if (!staticItem) {
+    notFound();
+  }
+
   const tutorialIsTelegram = 'tutorialLink' in staticItem && staticItem.tutorialLink?.includes('t.me/');
   const telegramPostId = tutorialIsTelegram ? getTelegramPostId(staticItem.tutorialLink) : null;
 
   useEffect(() => {
-    if (tutorialIsTelegram && 'Telegram' in window) {
+    if (tutorialIsTelegram) {
       const scriptId = 'telegram-widget-script';
       if (!document.getElementById(scriptId)) {
         const script = document.createElement('script');
@@ -217,10 +221,6 @@ export default function ProductDetailPage() {
   }, [tutorialIsTelegram, slug]);
 
 
-  if (!staticItem) {
-    notFound();
-  }
-
   const isPlugin =
     'price' in staticItem && 'originalPrice' in staticItem && storeItems.plugins.some((p) => p.slug === staticItem.slug);
   const isProjectFile =
@@ -228,7 +228,7 @@ export default function ProductDetailPage() {
   const isPricedItem = isPlugin || isProjectFile;
   const isRazorpayButton = 'paymentLink' in staticItem && staticItem.paymentLink.startsWith('pl_');
 
-  const tutorialIsYouTube = 'tutorialLink' in staticItem && staticItem.tutorialLink.includes('youtube.com');
+  const tutorialIsYouTube = 'tutorialLink' in staticItem && staticItem.tutorialLink && staticItem.tutorialLink.includes('youtube.com');
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
@@ -485,11 +485,4 @@ export default function ProductDetailPage() {
       <Footer />
     </div>
   );
-
-    
-
-
-
-
-
-    
+}

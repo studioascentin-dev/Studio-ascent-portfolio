@@ -1,4 +1,3 @@
-
 "use client"
 
 import * as React from "react"
@@ -15,7 +14,7 @@ export function ThemeToggle() {
   }, [])
 
   if (!mounted) {
-    // Render a placeholder to prevent layout shift
+    // Render a placeholder to prevent layout shift and hydration errors
     return (
         <div className="fixed bottom-4 right-4 z-50">
             <div className="h-10 w-20 rounded-full bg-secondary"></div>

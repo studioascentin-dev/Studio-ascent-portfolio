@@ -1,8 +1,30 @@
+
+'use client';
+
+import { AboutSection } from '@/components/about-section';
+import { BlogSection } from '@/components/blog-section';
+import { Footer } from '@/components/footer';
+import { Header } from '@/components/header';
+import { HeroSection } from '@/components/hero-section';
+import { HireMeSection } from '@/components/hire-me-section';
+import { PageTransition } from '@/components/page-transition';
+import { ServicesSection } from '@/components/services-section';
+import { TestimonialsSection } from '@/components/testimonials-section';
+
 export default function Home() {
   return (
-    <div className="flex min-h-screen w-full bg-background flex-col items-center justify-center">
-      <h1 className="text-4xl font-bold">Hello World</h1>
-      <p className="text-muted-foreground">The app is now rendering.</p>
-    </div>
+    <PageTransition>
+      <div className="flex min-h-screen flex-col bg-background text-foreground">
+        <Header />
+        <main className="flex-1">
+          <HeroSection />
+          <ServicesSection />
+          <AboutSection />
+          <TestimonialsSection />
+          <HireMeSection />
+        </main>
+        <Footer />
+      </div>
+    </PageTransition>
   );
 }

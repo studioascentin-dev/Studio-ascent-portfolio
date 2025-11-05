@@ -1,6 +1,7 @@
+
 'use client';
 
-import { useUser } from '@/firebase';
+import { useUser } from '@/firebase'; // Correctly import from the central barrel file
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { Loader2 } from 'lucide-react';
@@ -11,11 +12,13 @@ const withAuth = <P extends object>(WrappedComponent: React.ComponentType<P>) =>
     const router = useRouter();
 
     useEffect(() => {
+      // If loading is finished and there is still no user, then redirect.
       if (!isUserLoading && !user) {
         router.replace('/#contact'); // Redirect to a login/contact form if not logged in
       }
     }, [user, isUserLoading, router]);
 
+    // While loading, show a spinner. This prevents a flash of the protected content.
     if (isUserLoading || !user) {
       return (
         <div className="flex h-screen w-full items-center justify-center bg-background">
@@ -24,6 +27,7 @@ const withAuth = <P extends object>(WrappedComponent: React.ComponentType<P>) =>
       );
     }
 
+    // If loading is finished and there is a user, render the component.
     return <WrappedComponent {...props} />;
   };
 

@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { DependencyList, createContext, useContext, ReactNode, useMemo, useState, useEffect } from 'react';
@@ -17,10 +18,10 @@ interface FirebaseProviderProps {
 
 // Combined state for the Firebase context
 export interface FirebaseContextState {
-  firebaseApp: FirebaseApp | null;
-  firestore: Firestore | null;
-  auth: Auth | null; 
-  storage: FirebaseStorage | null;
+  firebaseApp: FirebaseApp;
+  firestore: Firestore;
+  auth: Auth; 
+  storage: FirebaseStorage;
   user: User | null;
   isUserLoading: boolean; 
 }
@@ -79,28 +80,24 @@ function useFirebaseContext() {
 /** Hook to access Firebase Auth instance. */
 export const useAuth = (): Auth => {
   const { auth } = useFirebaseContext();
-  if (!auth) throw new Error("Auth service not available.");
   return auth;
 };
 
 /** Hook to access Firestore instance. */
 export const useFirestore = (): Firestore => {
   const { firestore } = useFirebaseContext();
-   if (!firestore) throw new Error("Firestore service not available.");
   return firestore;
 };
 
 /** Hook to access Firebase Storage instance. */
 export const useStorage = (): FirebaseStorage => {
     const { storage } = useFirebaseContext();
-    if (!storage) throw new Error("Storage service not available.");
     return storage;
 };
 
 /** Hook to access Firebase App instance. */
 export const useFirebaseApp = (): FirebaseApp => {
   const { firebaseApp } = useFirebaseContext();
-  if (!firebaseApp) throw new Error("Firebase App not available.");
   return firebaseApp;
 };
 
@@ -120,5 +117,5 @@ export function useMemoFirebase<T>(factory: () => T, deps: DependencyList): T | 
  */
 export const useUser = () => {
   const { user, isUserLoading } = useFirebaseContext();
-  return { user, isUserLoading, userError: null };
+  return { user, isUserLoading };
 };

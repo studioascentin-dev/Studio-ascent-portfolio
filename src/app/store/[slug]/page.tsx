@@ -207,13 +207,11 @@ export default function ProductDetailPage() {
     if (tutorialIsTelegram) {
       const scriptId = 'telegram-widget-script';
       
-      // Check if the script is already added to the page
       if (document.getElementById(scriptId)) {
-        // If the script exists, it might need to re-scan the DOM for new widgets.
-        // Telegram's widget script has a method for this if it's available on the window object.
+        // If the script already exists, try to re-scan the DOM for new widgets.
+        // This is not officially documented but can work.
         if (window.Telegram && typeof window.Telegram.Post === 'function') {
-          // This is a potential way to re-init, but might not be officially supported.
-          // The safer bet is that the script itself handles this.
+           // The safer bet is that the script itself handles this on its own.
         }
         return; 
       }
@@ -507,3 +505,4 @@ export default function ProductDetailPage() {
   );
 
     
+

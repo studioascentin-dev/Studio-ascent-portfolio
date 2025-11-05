@@ -204,23 +204,15 @@ export default function ProductDetailPage() {
   const telegramPostId = tutorialIsTelegram ? getTelegramPostId(staticItem.tutorialLink) : null;
 
   useEffect(() => {
-    if (tutorialIsTelegram) {
+    if (tutorialIsTelegram && 'Telegram' in window) {
       const scriptId = 'telegram-widget-script';
-      
-      if (document.getElementById(scriptId)) {
-        if (window.Telegram && window.Telegram.Post) {
-            window.Telegram.Post.init();
-        }
-        return; 
+      if (!document.getElementById(scriptId)) {
+        const script = document.createElement('script');
+        script.id = scriptId;
+        script.src = 'https://telegram.org/js/telegram-widget.js?22';
+        script.async = true;
+        document.head.appendChild(script);
       }
-      
-      const script = document.createElement('script');
-      script.id = scriptId;
-      script.src = 'https://telegram.org/js/telegram-widget.js?22';
-      script.async = true;
-      
-      document.head.appendChild(script);
-
     }
   }, [tutorialIsTelegram, slug]);
 

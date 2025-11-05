@@ -11,7 +11,7 @@ import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -188,11 +188,6 @@ const getEmbedUrl = (url: string) => {
   return videoId ? `https://www.youtube.com/embed/${videoId}` : url;
 };
 
-const getTelegramPostId = (url: string) => {
-  if (!url || !url.includes('t.me/')) return null;
-  const parts = url.split('t.me/')[1];
-  return parts.split('?')[0]; // Remove query params if any
-}
 
 export default function ProductDetailPage() {
   const params = useParams();
@@ -203,32 +198,7 @@ export default function ProductDetailPage() {
   if (!staticItem) {
     notFound();
   }
-
-  const tutorialIsTelegram = 'tutorialLink' in staticItem && staticItem.tutorialLink?.includes('t.me/');
-  const telegramPostId = tutorialIsTelegram ? getTelegramPostId(staticItem.tutorialLink) : null;
-
-  useEffect(() => {
-    if (tutorialIsTelegram) {
-      const scriptId = 'telegram-widget-script';
-      if (!document.getElementById(scriptId)) {
-        const script = document.createElement('script');
-        script.id = scriptId;
-        script.src = 'https://telegram.org/js/telegram-widget.js?22';
-        script.async = true;
-        document.head.appendChild(script);
-
-        // Optional: clean up the script when the component unmounts
-        return () => {
-          const scriptElement = document.getElementById(scriptId);
-          if (scriptElement) {
-            scriptElement.remove();
-          }
-        };
-      }
-    }
-  }, [tutorialIsTelegram]);
-
-
+  
   const isPlugin =
     'price' in staticItem && 'originalPrice' in staticItem && storeItems.plugins.some((p) => p.slug === staticItem.slug);
   const isProjectFile =
@@ -237,6 +207,7 @@ export default function ProductDetailPage() {
   const isRazorpayButton = 'paymentLink' in staticItem && staticItem.paymentLink.startsWith('pl_');
 
   const tutorialIsYouTube = 'tutorialLink' in staticItem && staticItem.tutorialLink && staticItem.tutorialLink.includes('youtube.com');
+  const tutorialIsTelegram = 'tutorialLink' in staticItem && staticItem.tutorialLink?.includes('t.me/');
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
@@ -408,22 +379,21 @@ export default function ProductDetailPage() {
                         className="w-full h-full object-cover"
                       ></iframe>
                     </div>
-                  ) : tutorialIsTelegram && telegramPostId ? (
-                    <div>
-                      <blockquote 
-                        className="telegram-post" 
-                        data-post={telegramPostId}
-                        data-width="100%"
-                      >
-                         <a href={staticItem.tutorialLink} target="_blank" rel="noopener noreferrer">
-                            View on Telegram
-                         </a>
-                      </blockquote>
+                  ) : tutorialIsTelegram ? (
+                    <div className="bg-secondary/50 backdrop-blur-sm border rounded-lg p-6 md:p-8 flex flex-col items-center gap-4">
+                      <h3 className="font-bold text-lg">Join our Telegram for the installation video.</h3>
+                      <p className="text-muted-foreground text-sm">You'll find the installation guide and other resources in our official channel.</p>
+                      <Button asChild size="lg">
+                        <Link href={staticItem.tutorialLink} target="_blank" rel="noopener noreferrer">
+                          <Send className="mr-2 h-4 w-4" />
+                          Join Telegram Channel
+                        </Link>
+                      </Button>
                     </div>
                   ) : (
                     <Button asChild size="lg">
                       <Link href={staticItem.tutorialLink} target="_blank" rel="noopener noreferrer">
-                        <Send className="mr-2 h-4 w-4" />
+                        <Youtube className="mr-2 h-4 w-4" />
                         View Tutorial
                       </Link>
                     </Button>

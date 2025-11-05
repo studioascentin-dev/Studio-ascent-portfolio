@@ -2,6 +2,7 @@ import type {Metadata} from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 import { Montserrat, Poppins } from 'next/font/google';
+import { FirebaseClientProvider } from '@/firebase/client-provider';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -63,8 +64,10 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className="!scroll-smooth dark">
       <body className={`${poppins.variable} ${montserrat.variable} font-body antialiased bg-background text-foreground`}>
-        {children}
-        <Toaster />
+        <FirebaseClientProvider>
+          {children}
+          <Toaster />
+        </FirebaseClientProvider>
       </body>
     </html>
   );

@@ -208,7 +208,7 @@ export default function ProductDetailPage() {
   const telegramPostId = tutorialIsTelegram ? getTelegramPostId(staticItem.tutorialLink) : null;
 
   useEffect(() => {
-    if (tutorialIsTelegram && 'Telegram' in window) {
+    if (tutorialIsTelegram) {
       const scriptId = 'telegram-widget-script';
       if (!document.getElementById(scriptId)) {
         const script = document.createElement('script');
@@ -216,9 +216,17 @@ export default function ProductDetailPage() {
         script.src = 'https://telegram.org/js/telegram-widget.js?22';
         script.async = true;
         document.head.appendChild(script);
+
+        // Optional: clean up the script when the component unmounts
+        return () => {
+          const scriptElement = document.getElementById(scriptId);
+          if (scriptElement) {
+            scriptElement.remove();
+          }
+        };
       }
     }
-  }, [tutorialIsTelegram, slug]);
+  }, [tutorialIsTelegram]);
 
 
   const isPlugin =

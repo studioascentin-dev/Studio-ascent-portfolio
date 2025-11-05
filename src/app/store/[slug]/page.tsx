@@ -198,7 +198,7 @@ export default function ProductDetailPage() {
   const params = useParams();
   const slug = params.slug as string;
 
-  const staticItem = [...storeItems.plugins, ...storeItems.projectFiles].find((item) => item.slug === slug) as any;
+  const staticItem = [...storeItems.plugins, ...storeItems.projectFiles].find((item) => item.slug === slug);
 
   const tutorialIsTelegram = 'tutorialLink' in staticItem && staticItem.tutorialLink?.includes('t.me/');
   const telegramPostId = tutorialIsTelegram ? getTelegramPostId(staticItem.tutorialLink) : null;
@@ -208,6 +208,9 @@ export default function ProductDetailPage() {
       const scriptId = 'telegram-widget-script';
       
       if (document.getElementById(scriptId)) {
+        if (window.Telegram && window.Telegram.Post) {
+            window.Telegram.Post.init();
+        }
         return; 
       }
       
@@ -218,16 +221,8 @@ export default function ProductDetailPage() {
       
       document.head.appendChild(script);
 
-      return () => {
-        // Optional: Clean up the script tag when the component unmounts,
-        // though for a global widget script it's often fine to leave it.
-        const existingScript = document.getElementById(scriptId);
-        if (existingScript) {
-          // document.head.removeChild(existingScript);
-        }
-      };
     }
-  }, [tutorialIsTelegram]);
+  }, [tutorialIsTelegram, slug]);
 
 
   if (!staticItem) {
@@ -502,3 +497,7 @@ export default function ProductDetailPage() {
     
 
 
+
+
+
+    

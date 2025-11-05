@@ -208,11 +208,6 @@ export default function ProductDetailPage() {
       const scriptId = 'telegram-widget-script';
       
       if (document.getElementById(scriptId)) {
-        // If the script already exists, try to re-scan the DOM for new widgets.
-        // This is not officially documented but can work.
-        if (window.Telegram && typeof window.Telegram.Post === 'function') {
-           // The safer bet is that the script itself handles this on its own.
-        }
         return; 
       }
       
@@ -505,4 +500,5 @@ export default function ProductDetailPage() {
   );
 
     
+
 

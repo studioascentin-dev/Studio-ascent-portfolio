@@ -16,7 +16,7 @@ export const storeItems = {
       rating: 5,
       reviews: 28,
       paymentLink: 'pl_RaTwMcaPmaCnTI',
-      tutorialLink: 'https://t.me/studioascent/4',
+      tutorialLink: 'https://t.me/studioascent/7',
       details: {
         fileSize: '1.2 GB',
         importantNotes: 'This plugin is for Mac only. All plugins are tested on the latest After Effects 2025 with a Mac mini M4 for guaranteed performance.',

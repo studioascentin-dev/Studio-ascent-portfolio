@@ -5,3 +5,10 @@ runConfig:
   # Increase this value if you'd like to automatically spin up
   # more instances in response to increased traffic.
   maxInstances: 1
+  # Add secrets that can be accessed by your app as environment variables.
+  # Secrets are stored in Google Cloud Secret Manager.
+  secrets:
+    - secret: RESEND_API_KEY
+      # Expose the secret as an environment variable.
+      # The name of the env var will be RESEND_API_KEY.
+      env: RESEND_API_KEY

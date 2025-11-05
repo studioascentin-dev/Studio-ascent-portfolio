@@ -248,7 +248,7 @@ export default function ProductDetailPage() {
               <div className="space-y-2 md:space-y-3">
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold font-headline">{staticItem.name}</h1>
                 <p className="text-sm md:text-base text-muted-foreground">
-                  {'longDescription' in staticItem ? staticItem.longDescription : staticItem.description}
+                  {'longDescription' in staticItem && staticItem.longDescription ? staticItem.longDescription : staticItem.description}
                 </p>
               </div>
 

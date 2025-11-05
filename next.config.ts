@@ -31,12 +31,6 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  // Exclude the Genkit dev file from the build
-  exclude: ['src/ai/dev.ts'],
 };
 
 export default nextConfig;
-
-
-
-

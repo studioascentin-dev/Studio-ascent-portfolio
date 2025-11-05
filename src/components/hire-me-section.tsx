@@ -4,7 +4,7 @@
 import { motion } from 'framer-motion';
 import { Award, MessageSquare, Target, Clock } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
-import { ContactForm } from './contact-form';
+import { ContactFormWrapper } from './contact-form-wrapper';
 
 const sectionVariants = {
     hidden: { opacity: 0 },
@@ -87,7 +87,7 @@ export function HireMeSection() {
                         <p className="text-muted-foreground text-sm">Sunday: 10:00 AM to 6:00 PM</p>
                         <p className="text-primary text-xs mt-2 font-medium">For a faster reply, please message during opening hours.</p>
                     </div>
-                    <ContactForm />
+                    <ContactFormWrapper />
                 </motion.div>
 
             </motion.div>

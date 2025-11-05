@@ -208,7 +208,7 @@ export default function ProductDetailPage() {
   const telegramPostId = tutorialIsTelegram ? getTelegramPostId(staticItem.tutorialLink) : null;
 
   useEffect(() => {
-    if (tutorialIsTelegram) {
+    if (tutorialIsTelegram && 'Telegram' in window) {
       const scriptId = 'telegram-widget-script';
       if (!document.getElementById(scriptId)) {
         const script = document.createElement('script');

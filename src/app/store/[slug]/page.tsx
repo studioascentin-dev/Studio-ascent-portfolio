@@ -23,6 +23,8 @@ import { Loader2, Youtube } from 'lucide-react';
 import Link from 'next/link';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { RazorpayButton } from '@/components/razorpay-button';
+import { sendSupportEmail } from '@/app/actions/actions';
+import type { SupportEmailData } from '@/ai/flows/types';
 
 
 const supportFormSchema = z.object({
@@ -52,13 +54,23 @@ const SupportForm = ({ productName }: { productName: string }) => {
 
   const onSubmit = async (data: SupportFormValues) => {
     setIsSubmitting(true);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    
+    const supportData: SupportEmailData = { ...data, productName };
+    const result = await sendSupportEmail(supportData);
 
-    toast({
-      title: 'Support Request Submitted',
-      description: 'We have received your request and will get back to you within 24 hours.',
-    });
-    form.reset();
+    if(result.success) {
+        toast({
+          title: 'Support Request Submitted',
+          description: 'We have received your request and will get back to you within 24 hours.',
+        });
+        form.reset();
+    } else {
+        toast({
+            variant: "destructive",
+            title: "Submission Failed",
+            description: result.error || "Could not send your request. Please try again later.",
+        });
+    }
 
     setIsSubmitting(false);
   };

@@ -21,6 +21,9 @@ import { Loader2, PartyPopper } from "lucide-react";
 import * as React from "react";
 import { useSearchParams } from "next/navigation";
 import { pricingData } from "@/lib/pricing-data";
+import { sendEmail } from "@/app/actions/actions";
+import type { ContactEmailData } from "@/ai/flows/types";
+
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -101,32 +104,41 @@ export function ContactForm() {
 
   const onSubmit = async (data: FormValues) => {
     setIsSubmitting(true);
-    // The AI email sending flow has been removed to fix build issues.
-    // The form will appear to submit successfully for a good user experience.
-    await new Promise(resolve => setTimeout(resolve, 1000));
     
-    toast({
-        title: (
-          <div className="flex items-center gap-3">
-            <PartyPopper className="h-8 w-8 text-primary animate-bounce" />
-            <span className="text-xl font-bold">Message Sent!</span>
-          </div>
-        ),
-        description: (
-          <div className="mt-2 text-base">
-            <p>Thanks for reaching out! I'll get back to you shortly.</p>
-            <p className="font-semibold mt-2">Please check your email (and spam folder) regularly for my reply.</p>
-          </div>
-        ),
-        duration: 8000, 
-    });
-    form.reset({
-        name: "",
-        email: "",
-        service: "",
-        servicePlan: "",
-        message: "",
-    });
+    const finalService = data.servicePlan ? `${data.service} - ${data.servicePlan}` : data.service;
+    const emailData: ContactEmailData = { ...data, service: finalService };
+    const result = await sendEmail(emailData);
+
+    if (result.success) {
+        toast({
+            title: (
+              <div className="flex items-center gap-3">
+                <PartyPopper className="h-8 w-8 text-primary animate-bounce" />
+                <span className="text-xl font-bold">Message Sent!</span>
+              </div>
+            ),
+            description: (
+              <div className="mt-2 text-base">
+                <p>Thanks for reaching out! I'll get back to you shortly.</p>
+                <p className="font-semibold mt-2">Please check your email (and spam folder) regularly for my reply.</p>
+              </div>
+            ),
+            duration: 8000, 
+        });
+        form.reset({
+            name: "",
+            email: "",
+            service: "",
+            servicePlan: "",
+            message: "",
+        });
+    } else {
+        toast({
+            variant: "destructive",
+            title: "Message Failed",
+            description: result.error || "Could not send your message. Please try again later.",
+        });
+    }
 
     setIsSubmitting(false);
   };

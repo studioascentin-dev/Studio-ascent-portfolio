@@ -2,7 +2,7 @@
 "use client";
 
 import Link from "next/link";
-import { Instagram, Linkedin, Youtube } from 'lucide-react';
+import { Instagram, Youtube, Send } from 'lucide-react';
 import {
   Accordion,
   AccordionContent,
@@ -12,7 +12,7 @@ import {
 
 const socialLinks = [
   { name: 'Instagram', href: 'https://www.instagram.com/_.d_k_d/', icon: <Instagram className="h-5 w-5" /> },
-  { name: 'LinkedIn', href: 'https://www.linkedin.com/in/deb-kumar-das-46193824a', icon: <Linkedin className="h-5 w-5" /> },
+  { name: 'Telegram', href: 'https://t.me/studioascent', icon: <Send className="h-5 w-5" /> },
   { name: 'YouTube', href: 'https://www.youtube.com/@D3Vedits', icon: <Youtube className="h-5 w-5" /> },
   { name: 'X', href: 'https://x.com/Dev69910032', icon: <XIcon className="h-5 w-5" /> },
 ];

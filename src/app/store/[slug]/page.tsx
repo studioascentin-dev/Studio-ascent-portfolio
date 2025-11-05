@@ -315,17 +315,7 @@ export default function ProductDetailPage() {
                     </div>
                   </div>
                 </Card>
-                {isPlugin && 'installation' in staticItem.details && staticItem.details.installation && (
-                  <Card className="bg-secondary/50 backdrop-blur-sm border-border p-6 md:p-8">
-                    <div className="flex items-start gap-4 md:gap-6">
-                      <Info className="h-8 w-8 md:h-10 md:w-10 text-primary mt-1 flex-shrink-0" />
-                      <div>
-                        <h3 className="font-bold text-lg md:text-xl mb-1">Installation</h3>
-                        <p className="text-muted-foreground text-sm md:text-base">{staticItem.details.installation}</p>
-                      </div>
-                    </div>
-                  </Card>
-                )}
+                
                 {'youtube' in staticItem.details && staticItem.details.youtube && (
                   <Card className="bg-secondary/50 backdrop-blur-sm border-border p-6 md:p-8">
                     <div className="flex items-start gap-4 md:gap-6">

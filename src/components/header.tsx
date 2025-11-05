@@ -11,6 +11,7 @@ import { Button } from "./ui/button";
 import { Menu } from "lucide-react";
 import Image from "next/image";
 import LogoImage from '../../public/images/My Logo.png';
+import { ThemeToggle } from "./theme-toggle";
 
 const navItems = [
     { name: "About", href: "/#about" },
@@ -129,43 +130,52 @@ export function Header() {
                 className="px-4 sm:px-8"
             >
                 <div className="flex h-24 items-center justify-between">
-                    <Link href="/" className="flex items-center gap-3 px-4 py-2 bg-background/50 backdrop-blur-lg rounded-full border border-white/10 shadow-lg">
+                    <Link href="/" className="flex items-center gap-3 px-4 py-2 bg-background/50 backdrop-blur-lg rounded-full border border-border shadow-lg">
                         <Logo />
                     </Link>
                     
-                    <nav className="hidden md:flex items-center gap-2 px-3 py-4 bg-background/50 backdrop-blur-lg rounded-full border border-white/10 shadow-lg">
-                        {navItems.map((item) => (
-                             <motion.div key={item.name}>
-                                <Link
-                                    href={item.href}
-                                    onClick={(e) => handleScroll(e, item.href)}
-                                    className={cn(
-                                        "relative px-4 py-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors rounded-full",
-                                        isLinkActive(item) && "text-primary"
-                                    )}
-                                >
-                                    {item.name}
-                                    {isLinkActive(item) && (
-                                        <motion.span 
-                                            layoutId="active-nav-highlight"
-                                            className="absolute inset-0 bg-primary/10 rounded-full -z-10"
-                                            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                                        />
-                                    )}
-                                </Link>
-                            </motion.div>
-                        ))}
-                    </nav>
+                    <div className="flex items-center gap-2">
+                        <nav className="hidden md:flex items-center gap-2 px-3 py-4 bg-background/50 backdrop-blur-lg rounded-full border border-border shadow-lg">
+                            {navItems.map((item) => (
+                                 <motion.div key={item.name}>
+                                    <Link
+                                        href={item.href}
+                                        onClick={(e) => handleScroll(e, item.href)}
+                                        className={cn(
+                                            "relative px-4 py-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors rounded-full",
+                                            isLinkActive(item) && "text-primary"
+                                        )}
+                                    >
+                                        {item.name}
+                                        {isLinkActive(item) && (
+                                            <motion.span 
+                                                layoutId="active-nav-highlight"
+                                                className="absolute inset-0 bg-primary/10 rounded-full -z-10"
+                                                transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                                            />
+                                        )}
+                                    </Link>
+                                </motion.div>
+                            ))}
+                        </nav>
+                        <div className="hidden md:block bg-background/50 backdrop-blur-lg rounded-full border border-border shadow-lg p-1">
+                           <ThemeToggle />
+                        </div>
+                    </div>
 
-                    <div className="md:hidden">
+
+                    <div className="md:hidden flex items-center gap-2">
+                        <div className="bg-background/50 backdrop-blur-lg border border-border rounded-full p-1">
+                          <ThemeToggle />
+                        </div>
                          <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
                             <SheetTrigger asChild>
-                                <Button variant="ghost" size="icon" className="bg-background/50 backdrop-blur-lg border border-white/10">
+                                <Button variant="ghost" size="icon" className="bg-background/50 backdrop-blur-lg border border-border">
                                     <Menu className="h-6 w-6" />
                                     <span className="sr-only">Open menu</span>
                                 </Button>
                             </SheetTrigger>
-                            <SheetContent side="right" className="w-full max-w-xs bg-background/90 backdrop-blur-xl border-l-primary/20">
+                            <SheetContent side="right" className="w-full max-w-xs bg-background/90 backdrop-blur-xl border-l-border">
                                <SheetHeader>
                                     <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
                                 </SheetHeader>

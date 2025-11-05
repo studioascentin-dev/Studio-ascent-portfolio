@@ -424,18 +424,18 @@ export default function ProductDetailPage() {
                       </div>
                     </div>
                   </Card>
-                  <Alert variant="destructive" className="bg-destructive/10 border-destructive/20 text-destructive-foreground">
+                  <Alert variant="destructive" className="bg-destructive/10 border-destructive/20 text-destructive">
                     <TriangleAlert className="h-5 w-5 md:h-6 md:w-6 text-destructive" />
-                    <AlertTitle className="text-lg md:text-xl font-bold text-destructive-foreground">
+                    <AlertTitle className="text-lg md:text-xl font-bold text-destructive">
                       Important Notice
                     </AlertTitle>
-                    <div className="mt-4 space-y-2 text-sm text-destructive-foreground/80">
-                      <p className="font-semibold text-destructive-foreground/90">No Refund Policy</p>
+                    <div className="mt-4 space-y-2 text-sm text-destructive/90">
+                      <p className="font-semibold text-destructive">No Refund Policy</p>
                       <p>
                         Due to the digital nature of our products, all sales are final. We do not offer refunds or exchanges
                         once a purchase is complete.
                       </p>
-                      <p className="font-semibold mt-4 text-destructive-foreground/90">
+                      <p className="font-semibold mt-4 text-destructive">
                         I paid for a digital product but did not receive the download link. What should I do?
                       </p>
                       <p>

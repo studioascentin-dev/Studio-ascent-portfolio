@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useUser } from '@/firebase';
@@ -13,7 +12,7 @@ const withAuth = <P extends object>(WrappedComponent: React.ComponentType<P>) =>
 
     useEffect(() => {
       if (!isUserLoading && !user) {
-        router.replace('/login');
+        router.replace('/#contact'); // Redirect to a login/contact form if not logged in
       }
     }, [user, isUserLoading, router]);
 
@@ -28,7 +27,7 @@ const withAuth = <P extends object>(WrappedComponent: React.ComponentType<P>) =>
     return <WrappedComponent {...props} />;
   };
 
-  WithAuthComponent.displayName = `WithAuth(${WrappedComponent.displayName || WrappedComponent.name || 'Component'})`;
+  WithAuthComponent.displayName = `WithAuth(${(WrappedComponent.displayName || WrappedComponent.name || 'Component')})`;
 
   return WithAuthComponent;
 };

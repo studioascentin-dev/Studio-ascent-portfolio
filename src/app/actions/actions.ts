@@ -18,6 +18,7 @@ const sendEmailFlow = ai.defineFlow(
     name: 'sendContactEmailFlow',
     inputSchema: ContactEmailSchema,
     outputSchema: z.object({ success: z.boolean(), error: z.string().optional() }),
+    model: 'googleai/gemini-2.0-flash',
   },
   async (data: ContactEmailData) => {
     
@@ -63,6 +64,7 @@ const sendSupportEmailFlow = ai.defineFlow(
     name: 'sendSupportEmailFlow',
     inputSchema: SupportEmailSchema,
     outputSchema: z.object({ success: z.boolean(), error: z.string().optional() }),
+    model: 'googleai/gemini-2.0-flash',
   },
   async (data: SupportEmailData) => {
     

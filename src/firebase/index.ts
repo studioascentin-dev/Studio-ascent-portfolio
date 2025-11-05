@@ -1,4 +1,3 @@
-
 'use client';
 
 // This is a barrel file. It re-exports modules from other files.
@@ -8,7 +7,5 @@ export * from './provider';
 export * from './client-provider';
 export * from './firestore/use-collection';
 export * from './firestore/use-doc';
-export * from './non-blocking-updates';
-export * from './non-blocking-login';
 export * from './errors';
 export * from './error-emitter';

@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useUser } from '@/firebase'; // Correctly import from the central barrel file

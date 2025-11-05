@@ -2,7 +2,6 @@
 'use client';
 
 import { AboutSection } from '@/components/about-section';
-import { BlogSection } from '@/components/blog-section';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { HeroSection } from '@/components/hero-section';

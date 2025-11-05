@@ -23,6 +23,7 @@ import { useSearchParams } from "next/navigation";
 import { pricingData } from "@/lib/pricing-data";
 import { sendEmail } from "@/app/actions/actions";
 import type { ContactEmailData } from "@/ai/flows/types";
+import { cn } from "@/lib/utils";
 
 
 const formSchema = z.object({
@@ -120,7 +121,7 @@ export function ContactForm() {
             description: (
               <div className="mt-2 text-base">
                 <p>Thanks for reaching out! I'll get back to you shortly.</p>
-                <p className="font-semibold mt-2">Please check your email (and spam folder) regularly for my reply.</p>
+                <p className="font-semibold mt-2">Please check your email (and spam folder) for my reply.</p>
               </div>
             ),
             duration: 8000, 
@@ -157,7 +158,7 @@ export function ContactForm() {
               <FormItem>
                 <FormLabel>Name</FormLabel>
                 <FormControl>
-                  <Input placeholder="Your Name" {...field} />
+                  <Input placeholder="Your Name" {...field} className="light:shadow-sm" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -170,7 +171,7 @@ export function ContactForm() {
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input placeholder="your.email@example.com" {...field} />
+                  <Input placeholder="your.email@example.com" {...field} className="light:shadow-sm" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -187,7 +188,7 @@ export function ContactForm() {
                     <FormLabel>Service</FormLabel>
                     <Select onValueChange={field.onChange} value={field.value || ""}>
                     <FormControl>
-                        <SelectTrigger>
+                        <SelectTrigger className="light:shadow-sm">
                             <SelectValue placeholder="Select a service" />
                         </SelectTrigger>
                     </FormControl>
@@ -213,7 +214,7 @@ export function ContactForm() {
                         <FormLabel>Service Plan</FormLabel>
                         <Select onValueChange={field.onChange} value={field.value || ""} disabled={!selectedServiceTitle}>
                         <FormControl>
-                            <SelectTrigger>
+                            <SelectTrigger className="light:shadow-sm">
                             <SelectValue placeholder="Select a plan" />
                             </SelectTrigger>
                         </FormControl>
@@ -241,7 +242,7 @@ export function ContactForm() {
               <FormControl>
                 <Textarea
                   placeholder="Tell me a little bit about your project"
-                  className="resize-none"
+                  className="resize-none light:shadow-sm"
                   {...field}
                 />
               </FormControl>

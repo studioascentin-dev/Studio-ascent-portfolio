@@ -1,5 +1,5 @@
 
-import { Check, Bot, Zap, Database, Cog, Shield, Globe, Palette, UserCog } from 'lucide-react';
+import { Check, Bot, Zap, Database, Cog, Shield, Globe, Palette, UserCog, Briefcase, LayoutTemplate, Smartphone, Cloud, Star, Clock } from 'lucide-react';
 
 export const pricingData = {
   'reel-editing': {
@@ -146,10 +146,10 @@ export const pricingData = {
             price: '₹20,000',
             priceSubtitle: 'Starting at',
             features: [
-                { icon: Check, text: '1-3 Page Website' },
+                { icon: LayoutTemplate, text: '1-3 Page Website' },
                 { icon: Zap, text: 'Next.js Framework' },
                 { icon: Database, text: 'Basic CMS Integration' },
-                { icon: Check, text: '1 Month Support' },
+                { icon: Clock, text: '1 Month Support' },
             ],
             buttonText: 'Start Small',
             size: 'small',
@@ -161,11 +161,11 @@ export const pricingData = {
             priceSubtitle: 'Starting at',
             popular: true,
             features: [
-                { icon: Check, text: 'Up to 6 Page Website' },
+                { icon: Briefcase, text: 'Up to 6 Page Website' },
                 { icon: Zap, text: 'Next.js Framework' },
                 { icon: Database, text: 'Advanced CMS' },
                 { icon: Cog, text: 'Simple API Integrations' },
-                { icon: Check, text: '2 Months Support' },
+                { icon: Clock, text: '2 Months Support' },
             ],
             buttonText: 'Grow Your Business',
             size: 'medium',
@@ -177,15 +177,15 @@ export const pricingData = {
             priceSubtitle: 'Starting at',
             priceSubDescription: 'Custom Pricing Available',
             features: [
-                { icon: Check, text: '10+ Page Application' },
-                { icon: Zap, text: 'Performance Optimization' },
+                { icon: Globe, text: '10+ Page Application' },
+                { icon: Star, text: 'Performance Optimization' },
                 { icon: Shield, text: 'Advanced Security Setup' },
                 { icon: Bot, text: 'AI Feature Integration' },
-                { icon: Globe, text: 'Multi-language Support' },
+                { icon: Cloud, text: 'Multi-language Support' },
                 { icon: Palette, text: 'UI/UX Premium Design' },
                 { icon: UserCog, text: 'Custom Admin Dashboard' },
                 { icon: Cog, text: 'Custom Integrations' },
-                { icon: Check, text: '3+ Months Support' },
+                { icon: Clock, text: '3+ Months Support' },
             ],
             buttonText: 'Build Enterprise Solutions',
             size: 'large',

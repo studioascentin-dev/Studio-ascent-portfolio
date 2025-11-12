@@ -143,7 +143,7 @@ export const pricingData = {
         {
             name: 'Basic Web Development',
             description: "Perfect for Small Businesses & Personal Sites",
-            price: '₹3,050/mo',
+            price: '₹1,800/mo',
             priceSubtitle: 'For 12 months',
             priceSubDescription: "Maintenance included. Contact for details.",
             features: [
@@ -158,7 +158,7 @@ export const pricingData = {
         {
             name: 'Intermediate Web Development',
             description: "Best for Growing Startups",
-            price: '₹8,500/mo',
+            price: '₹3,500/mo',
             priceSubtitle: 'For 12 months',
             priceSubDescription: "Maintenance included. Contact for details.",
             popular: true,
@@ -175,7 +175,7 @@ export const pricingData = {
         {
             name: 'Enterprise Web Development',
             description: "Custom Solutions for Enterprises",
-            price: '₹16,000/mo',
+            price: '₹9,500/mo',
             priceSubtitle: 'For 12 months',
             priceSubDescription: "Maintenance included. Contact for details.",
             features: [

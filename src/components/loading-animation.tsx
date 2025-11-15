@@ -13,7 +13,15 @@ export function LoadingAnimation() {
       transition={{ duration: 0.5, delay: 0.8 }}
       className="fixed inset-0 z-[100] flex items-center justify-center bg-background"
     >
-      <motion.div layoutId="logo">
+      <motion.div 
+        layoutId="logo"
+        animate={{ y: [0, -15, 0] }}
+        transition={{
+          duration: 1.5,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        }}
+      >
         <div className="relative h-16 w-16">
           <Image 
             src={LogoImage} 

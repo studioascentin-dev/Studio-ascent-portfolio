@@ -9,6 +9,7 @@ import { HireMeSection } from '@/components/hire-me-section';
 import { PageTransition } from '@/components/page-transition';
 import { ServicesSection } from '@/components/services-section';
 import { TestimonialsSection } from '@/components/testimonials-section';
+import { YouTubeChannelSection } from '@/components/youtube-channel-section';
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
           <AboutSection />
           <ServicesSection />
           <TestimonialsSection />
+          <YouTubeChannelSection />
           <HireMeSection />
         </main>
         <Footer />

@@ -48,8 +48,10 @@ export function YouTubeChannelSection() {
                     variants={itemVariants}
                     className="text-center max-w-3xl mx-auto mb-12 md:mb-16"
                 >
-                    <h2 className="text-4xl sm:text-5xl font-bold font-headline tracking-tighter">
-                        Check Out My <span className="bg-clip-text text-transparent bg-gradient-to-r from-red-600 via-red-500 to-red-600">YouTube</span> Channel
+                    <h2 className="text-4xl sm:text-5xl font-bold font-headline tracking-tighter flex items-center justify-center gap-4">
+                        Check Out My 
+                        <Image src="/images/youtube-logo.png" alt="YouTube Logo" width={160} height={40} className="inline-block" data-ai-hint="youtube logo" />
+                         Channel
                     </h2>
                     <p className="mt-4 md:mt-6 text-muted-foreground md:text-lg">
                         Dive into tutorials, creative edits, and behind-the-scenes content.
@@ -59,17 +61,19 @@ export function YouTubeChannelSection() {
                 <motion.div variants={itemVariants} className="max-w-4xl mx-auto">
                     <Card className="overflow-hidden group shadow-lg border-border hover:border-primary transition-all duration-300">
                         <div className="relative aspect-video">
-                            <Image
-                                src="/images/youtubechannel.png"
-                                alt="YouTube Channel Preview"
-                                width={1280}
-                                height={720}
-                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                data-ai-hint="youtube channel screenshot"
-                            />
-                            <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                                <Youtube className="w-16 h-16 text-white" />
-                            </div>
+                             <a href={YOUTUBE_CHANNEL_URL} target="_blank" rel="noopener noreferrer" aria-label="YouTube Channel Preview">
+                                <Image
+                                    src="/images/youtubechannel.png"
+                                    alt="YouTube Channel Preview"
+                                    width={1280}
+                                    height={720}
+                                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                    data-ai-hint="youtube channel screenshot"
+                                />
+                                <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <Youtube className="w-16 h-16 text-white" />
+                                </div>
+                             </a>
                         </div>
                     </Card>
                 </motion.div>

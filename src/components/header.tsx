@@ -22,8 +22,8 @@ const navItems = [
 
 const Logo = () => {
     return (
-        <motion.div layoutId="logo" className="flex items-center gap-3">
-            <div className="relative h-8 w-8 flex-shrink-0">
+        <div className="flex items-center gap-3">
+             <motion.div layoutId="logo" className="relative h-8 w-8 flex-shrink-0">
                 <Image 
                     src={LogoImage} 
                     alt="Studio Ascent Logo" 
@@ -32,11 +32,11 @@ const Logo = () => {
                     className="rounded-full object-cover"
                     priority
                 />
-            </div>
+            </motion.div>
             <motion.div 
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 1, duration: 0.5, ease: "easeOut" }}
+                transition={{ delay: 1.8, duration: 0.5, ease: "easeOut" }}
             >
                 <span className="font-headline text-lg font-bold">
                     <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-300 to-primary animate-shimmer bg-[length:200%_auto]">
@@ -44,7 +44,7 @@ const Logo = () => {
                     </span>
                 </span>
             </motion.div>
-        </motion.div>
+        </div>
     );
 };
 
@@ -131,7 +131,7 @@ export function Header() {
             <motion.div
                 initial={{ y: -100 }}
                 animate={{ y: 0 }}
-                transition={{ type: "spring", stiffness: 100, damping: 20 }}
+                transition={{ type: "spring", stiffness: 100, damping: 20, delay: 1.5 }}
                 className="px-4 sm:px-8"
             >
                 <div className="flex h-16 md:h-24 items-center justify-between">

@@ -33,16 +33,19 @@ export default function RootLayout({
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    // Set a timer to hide the loading animation
     const timer = setTimeout(() => {
       setIsLoading(false);
-      // Optional: Prevent scrolling on the body while loading
-      document.body.style.overflow = 'auto';
-    }, 2000); // Adjust time to match your animation needs
+    }, 2500); // This duration should be slightly longer than the logo animation delay
 
+    // Prevent scrolling while the loading animation is active
     if (isLoading) {
       document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
     }
 
+    // Cleanup function to clear the timer and restore scrolling
     return () => {
       clearTimeout(timer);
       document.body.style.overflow = 'auto';
@@ -54,7 +57,7 @@ export default function RootLayout({
       <body className={`${poppins.variable} ${montserrat.variable} font-body antialiased bg-background text-foreground`}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >

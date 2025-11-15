@@ -10,11 +10,12 @@ export function LoadingAnimation() {
     <motion.div
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.5, delay: 0.8 }}
+      transition={{ duration: 0.5, delay: 1.2 }}
       className="fixed inset-0 z-[100] flex items-center justify-center bg-background"
     >
-      <motion.div 
+      <motion.div
         layoutId="logo"
+        className="relative h-16 w-16"
         animate={{ y: [0, -15, 0] }}
         transition={{
           duration: 1.5,
@@ -22,7 +23,6 @@ export function LoadingAnimation() {
           ease: 'easeInOut',
         }}
       >
-        <div className="relative h-16 w-16">
           <Image 
             src={LogoImage} 
             alt="Studio Ascent Logo" 
@@ -31,7 +31,6 @@ export function LoadingAnimation() {
             className="rounded-full object-cover"
             priority
           />
-        </div>
       </motion.div>
     </motion.div>
   );

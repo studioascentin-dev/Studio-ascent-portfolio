@@ -58,21 +58,19 @@ export function YouTubeChannelSection() {
 
                 <motion.div variants={itemVariants} className="max-w-4xl mx-auto">
                     <Card className="overflow-hidden group shadow-lg border-border hover:border-primary transition-all duration-300">
-                        <Link href={YOUTUBE_CHANNEL_URL} target="_blank" rel="noopener noreferrer">
-                            <div className="relative aspect-video">
-                                <Image
-                                    src="/images/youtubechannel.png"
-                                    alt="YouTube Channel Preview"
-                                    width={1280}
-                                    height={720}
-                                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                    data-ai-hint="youtube channel screenshot"
-                                />
-                                <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                    <Youtube className="w-16 h-16 text-white" />
-                                </div>
+                        <div className="relative aspect-video">
+                            <Image
+                                src="https://picsum.photos/seed/youtube/1280/720"
+                                alt="YouTube Channel Preview"
+                                width={1280}
+                                height={720}
+                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                data-ai-hint="youtube channel screenshot"
+                            />
+                            <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                                <Youtube className="w-16 h-16 text-white" />
                             </div>
-                        </Link>
+                        </div>
                     </Card>
                 </motion.div>
                 

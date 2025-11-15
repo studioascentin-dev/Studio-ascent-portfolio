@@ -93,6 +93,12 @@ export default {
         'shimmer': 'shimmer 5s linear infinite',
         'shimmer-bg': 'shimmer-bg 3s linear infinite',
       },
+      backgroundSize: {
+        '100-200': '100% 200%',
+      },
+      backgroundPosition: {
+        '100-100': '100% 100%',
+      },
     },
   },
   plugins: [

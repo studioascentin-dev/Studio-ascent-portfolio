@@ -174,11 +174,24 @@ export default function PricingPage() {
   const [customPurpose, setCustomPurpose] = useState('');
 
   const handleSelectPlan = (tier: Tier) => {
-    setSelectedPlan(tier);
-    setSelectedAddons([]); 
-    setSelectedPurpose('');
-    setCustomPurpose('');
-    setDialogStep('addons');
+    const serviceKey = Object.keys(pricingData).find(key => 
+        pricingData[key as keyof typeof pricingData].tiers.some(t => t.name === tier.name)
+    );
+
+    if (serviceKey === 'reel-editing') {
+      const message = `Hi, I'm interested in the "${tier.name}" plan. Please let me know the next steps.`;
+      const query = new URLSearchParams({
+        service: tier.name,
+        message: message,
+      }).toString();
+      router.push(`/?contact=true&${query}#contact`);
+    } else {
+      setSelectedPlan(tier);
+      setSelectedAddons([]); 
+      setSelectedPurpose('');
+      setCustomPurpose('');
+      setDialogStep('addons');
+    }
   };
   
   const closeDialog = () => {
@@ -251,7 +264,7 @@ export default function PricingPage() {
           </div>
         </motion.section>
 
-        <Dialog open={!!selectedPlan} onOpenChange={closeDialog}>
+        <Dialog open={!!selectedPlan && dialogStep !== null} onOpenChange={closeDialog}>
           <DialogContent className="max-w-md">
              <DialogHeader>
               <DialogTitle className="font-headline text-2xl">{selectedPlan?.name}</DialogTitle>
@@ -263,7 +276,7 @@ export default function PricingPage() {
                   <div className="space-y-4 py-4">
                     <h4 className="font-semibold text-lg">Select Add-ons</h4>
                     <div className="space-y-3">
-                      {selectedPlan.addOns!.map((addon) => (
+                      {selectedPlan!.addOns!.map((addon) => (
                         <div key={addon} className="flex items-center space-x-3 bg-secondary/50 p-3 rounded-md">
                           <Checkbox 
                             id={addon} 

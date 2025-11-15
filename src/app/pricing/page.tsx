@@ -198,11 +198,22 @@ export default function PricingPage() {
                                                     </li>
                                                 ))}
                                             </ul>
+                                             {tier.delivery && (
+                                                <div className="flex items-center gap-3 mt-4 text-sm text-[#E0E0E0]">
+                                                    <Clock className="h-4 w-4 text-primary" />
+                                                    <span>Delivery: {tier.delivery}</span>
+                                                </div>
+                                            )}
+                                             {tier.addOns && (
+                                                <div className="mt-6 text-sm text-[#E0E0E0]/80">
+                                                    <p className="font-semibold text-white/90 mb-2">Add-Ons:</p>
+                                                    <ul className="list-disc list-inside space-y-1">
+                                                        {tier.addOns.map((addOn: string, i: number) => <li key={i}>{addOn}</li>)}
+                                                    </ul>
+                                                </div>
+                                            )}
                                         </div>
                                         <div className="mt-auto pt-6">
-                                             {tier.details && tier.details.length > 0 && (
-                                                <p className="text-xs text-muted-foreground mb-6">{tier.details[0]}</p>
-                                             )}
                                             <Button asChild className="w-full font-bold bg-primary text-white hover:bg-primary/80">
                                                 <Link href={`/?contact=true&service=${encodeURIComponent(tier.name)}#contact`}>{tier.buttonText}</Link>
                                             </Button>
@@ -222,3 +233,5 @@ export default function PricingPage() {
     </div>
   );
 }
+
+    

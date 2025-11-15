@@ -50,7 +50,7 @@ export function YouTubeChannelSection() {
                 >
                     <h2 className="text-4xl sm:text-5xl font-bold font-headline tracking-tighter flex items-center justify-center gap-4">
                         Check Out My 
-                        <Image src="/images/youtube-logo.png" alt="YouTube Logo" width={160} height={40} className="inline-block" data-ai-hint="youtube logo" />
+                        <Image src="/images/youtubelogo.png" alt="YouTube Logo" width="160" height="40" className="inline-block" data-ai-hint="youtube logo" />
                          Channel
                     </h2>
                     <p className="mt-4 md:mt-6 text-muted-foreground md:text-lg">
@@ -63,7 +63,7 @@ export function YouTubeChannelSection() {
                         <div className="relative aspect-video">
                              <a href={YOUTUBE_CHANNEL_URL} target="_blank" rel="noopener noreferrer" aria-label="YouTube Channel Preview">
                                 <Image
-                                    src="/images/youtubechannel.png"
+                                    src="https://picsum.photos/seed/youtube/1280/720"
                                     alt="YouTube Channel Preview"
                                     width={1280}
                                     height={720}

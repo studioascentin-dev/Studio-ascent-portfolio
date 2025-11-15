@@ -46,10 +46,13 @@ export function ContactForm() {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const searchParams = useSearchParams();
+
   const planParam = searchParams.get('service');
+  const messageParam = searchParams.get('message');
   
   let initialService = "";
   let initialPlan = "";
+  let initialMessage = messageParam || "";
 
   if(planParam) {
     if (planParam === "Something Else?") {
@@ -62,6 +65,10 @@ export function ContactForm() {
                 break;
             }
         }
+        if (!initialService) { // If it's a direct service name not a tier
+            const matchedService = Object.values(pricingData).find(s => s.title === planParam);
+            if(matchedService) initialService = matchedService.title;
+        }
     }
   }
 
@@ -72,7 +79,7 @@ export function ContactForm() {
       email: "",
       service: initialService,
       servicePlan: initialPlan,
-      message: "",
+      message: initialMessage,
     },
   });
 
@@ -94,13 +101,14 @@ export function ContactForm() {
   }, [selectedServiceTitle, form]);
   
   React.useEffect(() => {
-    if (initialService) {
-      form.setValue('service', initialService);
-      if (initialPlan) {
-        form.setValue('servicePlan', initialPlan);
-      }
+    form.setValue('service', initialService);
+    if (initialPlan) {
+      form.setValue('servicePlan', initialPlan);
     }
-  }, [initialService, initialPlan, form]);
+    if(initialMessage){
+        form.setValue('message', initialMessage)
+    }
+  }, [initialService, initialPlan, initialMessage, form]);
 
 
   const onSubmit = async (data: FormValues) => {
@@ -212,7 +220,7 @@ export function ContactForm() {
                     render={({ field }) => (
                     <FormItem>
                         <FormLabel>Service Plan</FormLabel>
-                        <Select onValueChange={field.onChange} value={field.value || ""} disabled={!selectedServiceTitle}>
+                        <Select onValueChange={field.onChange} value={field.value || ""} disabled={!selectedServiceTitle || availablePlans.length === 0}>
                         <FormControl>
                             <SelectTrigger className="light:shadow-sm">
                             <SelectValue placeholder="Select a plan" />
@@ -241,8 +249,8 @@ export function ContactForm() {
               <FormLabel>Message</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder="Tell me a little bit about your project"
-                  className="resize-none light:shadow-sm"
+                  placeholder="Tell me a little bit about your project, including any add-ons you selected."
+                  className="resize-none light:shadow-sm min-h-[120px]"
                   {...field}
                 />
               </FormControl>

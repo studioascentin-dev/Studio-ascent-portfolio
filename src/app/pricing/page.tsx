@@ -321,11 +321,11 @@ export default function PricingPage() {
                         />
                     )}
                   </div>
-                  <DialogFooter className="flex justify-between w-full">
-                    <Button variant="ghost" onClick={() => setDialogStep('addons')}>
+                  <DialogFooter className="flex-col sm:flex-row sm:justify-between w-full gap-2">
+                    <Button variant="ghost" onClick={() => setDialogStep('addons')} className="sm:order-1 order-3">
                         <ArrowLeft className="mr-2 h-4 w-4" /> Back
                     </Button>
-                    <div className="flex gap-2">
+                    <div className="flex gap-2 sm:order-2 order-1 justify-end">
                         <Button variant="outline" onClick={closeDialog}>Cancel</Button>
                         <Button onClick={handleContinue} disabled={!selectedPurpose || (selectedPurpose === 'Other' && !customPurpose)}>Continue</Button>
                     </div>

@@ -50,7 +50,7 @@ export function YouTubeChannelSection() {
                 >
                     <h2 className="text-4xl sm:text-5xl font-bold font-headline tracking-tighter flex items-center justify-center gap-4">
                         Check Out My 
-                        <Image src="/images/youtubelogo.png" alt="YouTube Logo" width="160" height="40" className="inline-block" data-ai-hint="youtube logo" />
+                        <Image src="/images/youtubelogo.png" alt="YouTube Logo" width={160} height={40} className="inline-block" data-ai-hint="youtube logo" />
                          Channel
                     </h2>
                     <p className="mt-4 md:mt-6 text-muted-foreground md:text-lg">
@@ -79,9 +79,9 @@ export function YouTubeChannelSection() {
                 </motion.div>
                 
                 <motion.div variants={itemVariants} className="text-center mt-12">
-                    <Button asChild size="lg" variant="glass" className="font-bold">
+                    <Button asChild size="lg" variant="glass" className="font-bold group">
                         <a href={YOUTUBE_CHANNEL_URL} target="_blank" rel="noopener noreferrer">
-                            Visit Channel <ArrowRight className="ml-2 h-5 w-5" />
+                            Visit Channel <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
                         </a>
                     </Button>
                 </motion.div>
@@ -89,3 +89,4 @@ export function YouTubeChannelSection() {
         </section>
     );
 }
+

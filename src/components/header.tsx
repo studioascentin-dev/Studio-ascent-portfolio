@@ -20,9 +20,9 @@ const navItems = [
     { name: "Contact", href: "/#contact" },
 ];
 
-const Logo = ({ showText = true }: { showText?: boolean }) => {
+const Logo = () => {
     return (
-        <>
+        <motion.div layoutId="logo" className="flex items-center gap-3">
             <div className="relative h-8 w-8 flex-shrink-0">
                 <Image 
                     src={LogoImage} 
@@ -33,14 +33,18 @@ const Logo = ({ showText = true }: { showText?: boolean }) => {
                     priority
                 />
             </div>
-            {showText && (
+            <motion.div 
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 1, duration: 0.5, ease: "easeOut" }}
+            >
                 <span className="font-headline text-lg font-bold">
                     <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-300 to-primary animate-shimmer bg-[length:200%_auto]">
                         Studio Ascent
                     </span>
                 </span>
-            )}
-        </>
+            </motion.div>
+        </motion.div>
     );
 };
 
@@ -132,7 +136,7 @@ export function Header() {
             >
                 <div className="flex h-16 md:h-24 items-center justify-between">
                     <Link href="/" className="flex items-center gap-3 px-4 py-2 bg-background/50 backdrop-blur-lg rounded-full border border-border shadow-lg">
-                        <Logo showText={true} />
+                        <Logo />
                     </Link>
                     
                     <div className="flex items-center gap-2">
@@ -177,7 +181,20 @@ export function Header() {
                                 <div className="flex flex-col h-full pt-10">
                                     <div className="mb-10 text-center">
                                          <Link href="/" onClick={() => setIsSheetOpen(false)} className="inline-flex items-center gap-3">
-                                            <Logo showText={true} />
+                                            <div className="relative h-8 w-8 flex-shrink-0">
+                                                <Image 
+                                                    src={LogoImage} 
+                                                    alt="Studio Ascent Logo" 
+                                                    fill
+                                                    sizes="32px"
+                                                    className="rounded-full object-cover"
+                                                />
+                                            </div>
+                                            <span className="font-headline text-lg font-bold">
+                                                <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-300 to-primary animate-shimmer bg-[length:200%_auto]">
+                                                    Studio Ascent
+                                                </span>
+                                            </span>
                                         </Link>
                                     </div>
                                     <nav className="flex flex-col items-center gap-6 text-lg">

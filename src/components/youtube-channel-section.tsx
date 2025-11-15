@@ -81,7 +81,7 @@ export function YouTubeChannelSection() {
                 <motion.div variants={itemVariants} className="text-center mt-12">
                     <Button asChild size="lg" variant="glass" className="font-bold group">
                         <a href={YOUTUBE_CHANNEL_URL} target="_blank" rel="noopener noreferrer">
-                            Visit Channel <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300" />
+                            Visit Channel <ArrowRight className="ml-2 h-5 w-5 opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0" />
                         </a>
                     </Button>
                 </motion.div>
@@ -89,5 +89,3 @@ export function YouTubeChannelSection() {
         </section>
     );
 }
-
-

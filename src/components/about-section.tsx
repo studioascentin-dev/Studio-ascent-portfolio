@@ -91,7 +91,7 @@ export function AboutSection() {
                      <p className="text-muted-foreground text-base md:text-lg max-w-3xl mx-auto mb-8">
                         My expertise lies in crafting dynamic web applications, developing intelligent AI chatbots, and producing compelling visual content through video and photo editing. I thrive on collaborating with clients to bring their digital visions to life.
                     </p>
-                    <Button asChild size="lg" className="font-bold">
+                    <Button asChild size="lg" variant="glass" className="font-bold">
                         <a href="#contact">Hire Me</a>
                     </Button>
                 </motion.div>

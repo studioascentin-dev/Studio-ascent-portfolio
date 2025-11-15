@@ -115,6 +115,17 @@ const ThemedPricingCard = ({ tier, onSelectPlan }: { tier: Tier, onSelectPlan: (
 const ServiceSection = ({ service, onSelectPlan }: { service: any, onSelectPlan: (tier: Tier) => void }) => {
     if (!service || !service.tiers) return null;
 
+    const gridColsClass = () => {
+      switch (service.tiers.length) {
+        case 4:
+          return 'lg:grid-cols-2';
+        case 3:
+          return 'lg:grid-cols-3';
+        default:
+          return 'lg:grid-cols-3';
+      }
+    };
+
     return (
         <motion.div variants={itemVariants} className="mb-16 md:mb-24">
             <div className="bg-[#0F0F0F] p-8 md:p-16 rounded-3xl -mx-4 md:-mx-8">
@@ -124,8 +135,7 @@ const ServiceSection = ({ service, onSelectPlan }: { service: any, onSelectPlan:
               </header>
               <div className={cn(
                   "grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 items-stretch",
-                   service.tiers.length === 4 ? 'lg:grid-cols-4' : '',
-                   service.tiers.length === 3 ? 'lg:grid-cols-3' : 'lg:grid-cols-3'
+                   gridColsClass()
               )}>
                   {service.tiers.map((tier: Tier) => (
                     <motion.div
@@ -164,10 +174,11 @@ export default function PricingPage() {
     if (!selectedPlan) return;
     
     const serviceName = selectedPlan.name;
-    let message = `Selected Plan: ${serviceName}`;
+    let message = `Hi, I'm interested in the "${serviceName}" plan and would like to get started.`;
 
     if (selectedAddons.length > 0) {
-      message += `\n\nSelected Add-ons:\n- ${selectedAddons.join('\n- ')}`;
+      message += `\n\nI'd also like to include the following add-ons:\n- ${selectedAddons.join('\n- ')}`;
+      message += `\n\nPlease let me know the next steps.`
     }
     
     const query = new URLSearchParams({

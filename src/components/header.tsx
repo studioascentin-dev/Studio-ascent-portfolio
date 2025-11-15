@@ -34,7 +34,7 @@ const Logo = ({ showText = true }: { showText?: boolean }) => {
                 />
             </div>
             {showText && (
-                <span className="font-headline text-lg font-bold hidden sm:inline">
+                <span className="font-headline text-lg font-bold">
                     <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-300 to-primary animate-shimmer bg-[length:200%_auto]">
                         Studio Ascent
                     </span>

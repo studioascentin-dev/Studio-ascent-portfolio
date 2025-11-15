@@ -124,8 +124,8 @@ export function TestimonialsSection() {
                     </p>
                     <Button
                         asChild
-                        variant="outline"
-                        className="mt-6 font-bold rounded-full"
+                        variant="default"
+                        className="mt-6 font-bold rounded-full bg-gradient-to-r from-orange-500 via-amber-500 to-orange-500 bg-[length:200%_auto] animate-shimmer-bg text-white hover:shadow-lg hover:shadow-orange-500/30 transition-shadow duration-300"
                     >
                         <a href="https://maps.app.goo.gl/dhkMzLEB5KPMcCjK9" target="_blank" rel="noopener noreferrer">Rate Us on Google</a>
                     </Button>

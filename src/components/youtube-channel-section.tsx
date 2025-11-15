@@ -60,7 +60,7 @@ export function YouTubeChannelSection() {
                     <Card className="overflow-hidden group shadow-lg border-border hover:border-primary transition-all duration-300">
                         <div className="relative aspect-video">
                             <Image
-                                src="https://picsum.photos/seed/youtube/1280/720"
+                                src="/images/youtubechannel.png"
                                 alt="YouTube Channel Preview"
                                 width={1280}
                                 height={720}

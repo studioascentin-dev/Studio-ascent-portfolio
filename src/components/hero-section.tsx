@@ -97,23 +97,7 @@ export function HeroSection() {
 
   return (
     <section id="home" className="relative w-full min-h-screen overflow-hidden flex items-center justify-center py-20">
-      <div className="absolute inset-0 z-0 text-primary/10 dark:text-primary/10 text-primary/5 filter blur-sm">
-          <motion.div variants={iconVariants(3, 0.5)} initial="initial" animate="animate" className="absolute top-20 left-10">
-              <Code className="h-16 w-16 md:h-24 md:w-24" strokeWidth={1} />
-          </motion.div>
-          <motion.div variants={iconVariants(4, 1)} initial="initial" animate="animate" className="absolute top-1/2 left-1/4 -translate-y-1/2">
-              <PenTool className="h-12 w-12 md:h-20 md:w-20" strokeWidth={1} />
-          </motion.div>
-          <motion.div variants={iconVariants(3.5, 0)} initial="initial" animate="animate" className="absolute bottom-24 right-20">
-              <Camera className="h-20 w-20 md:h-28 md:w-28" strokeWidth={1} />
-          </motion.div>
-          <motion.div variants={iconVariants(5, 1.5)} initial="initial" animate="animate" className="absolute bottom-1/3 right-1/2">
-              <Video className="h-10 w-10 md:h-16 md:w-16" strokeWidth={1} />
-          </motion.div>
-          <motion.div variants={iconVariants(3.8, 1.8)} initial="initial" animate="animate" className="absolute bottom-10 left-20">
-              <Code className="h-10 w-10 md:h-16 md:w-16" strokeWidth={1} />
-          </motion.div>
-      </div>
+      <div className="absolute inset-0 -z-10 h-full w-full bg-background bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
 
       <motion.div 
         variants={containerVariants}

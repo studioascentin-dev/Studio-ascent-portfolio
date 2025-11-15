@@ -95,7 +95,7 @@ const ThemedPricingCard = ({ tier, onSelectPlan }: { tier: Tier, onSelectPlan: (
             </div>
         )}
 
-        {tier.addOns && (
+        {tier.addOns && tier.addOns.length > 0 && (
             <div className="mt-6 text-sm text-[#E0E0E0]/80">
                 <p className="font-semibold text-white/90 mb-2">Add-Ons:</p>
                 <ul className="list-disc list-inside space-y-1">
@@ -214,10 +214,11 @@ export default function PricingPage() {
         purposeMessage = customPurpose || 'Other';
     }
     
-    let message = `Hi, I'm interested in the "${selectedPlan.name}" plan for my project.`;
-
+    let message = `Hi, I'm interested in the "${selectedPlan.name}" plan`;
     if (purposeMessage) {
-        message += ` It's for a(n) ${purposeMessage}.`;
+        message += ` for my ${purposeMessage.toLowerCase()}.`;
+    } else {
+        message += `.`;
     }
 
     if (selectedAddons.length > 0) {
@@ -265,16 +266,16 @@ export default function PricingPage() {
         </motion.section>
 
         <Dialog open={!!selectedPlan && dialogStep !== null} onOpenChange={closeDialog}>
-          <DialogContent className="max-w-md">
+          <DialogContent className="max-w-[90vw] sm:max-w-md">
              <DialogHeader>
-              <DialogTitle className="font-headline text-2xl">{selectedPlan?.name}</DialogTitle>
+              <DialogTitle className="font-headline text-xl sm:text-2xl">{selectedPlan?.name}</DialogTitle>
             </DialogHeader>
 
             {dialogStep === 'addons' && (
                 <>
                 {hasAddons ? (
                   <div className="space-y-4 py-4">
-                    <h4 className="font-semibold text-lg">Select Add-ons</h4>
+                    <h4 className="font-semibold text-base sm:text-lg">Select Add-ons</h4>
                     <div className="space-y-3">
                       {selectedPlan!.addOns!.map((addon) => (
                         <div key={addon} className="flex items-center space-x-3 bg-secondary/50 p-3 rounded-md">
@@ -283,7 +284,7 @@ export default function PricingPage() {
                             checked={selectedAddons.includes(addon)}
                             onCheckedChange={() => handleAddonToggle(addon)}
                           />
-                          <Label htmlFor={addon} className="flex-1 cursor-pointer text-sm">{addon}</Label>
+                          <Label htmlFor={addon} className="flex-1 cursor-pointer text-xs sm:text-sm">{addon}</Label>
                         </div>
                       ))}
                     </div>
@@ -301,13 +302,13 @@ export default function PricingPage() {
             {dialogStep === 'purpose' && (
                 <>
                  <div className="space-y-4 py-4">
-                    <h4 className="font-semibold text-lg">What is this project for?</h4>
+                    <h4 className="font-semibold text-base sm:text-lg">What is this project for?</h4>
                      <RadioGroup value={selectedPurpose} onValueChange={setSelectedPurpose}>
                       <div className="space-y-3">
                         {purposeOptions.map((purpose) => (
                           <div key={purpose} className="flex items-center space-x-3 bg-secondary/50 p-3 rounded-md">
                             <RadioGroupItem value={purpose} id={purpose} />
-                            <Label htmlFor={purpose} className="flex-1 cursor-pointer text-sm">{purpose}</Label>
+                            <Label htmlFor={purpose} className="flex-1 cursor-pointer text-xs sm:text-sm">{purpose}</Label>
                           </div>
                         ))}
                       </div>
@@ -317,7 +318,7 @@ export default function PricingPage() {
                             placeholder="Please describe your project..."
                             value={customPurpose}
                             onChange={(e) => setCustomPurpose(e.target.value)}
-                            className="mt-4"
+                            className="mt-4 text-sm sm:text-base"
                         />
                     )}
                   </div>

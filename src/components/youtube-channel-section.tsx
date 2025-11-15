@@ -48,10 +48,10 @@ export function YouTubeChannelSection() {
                     variants={itemVariants}
                     className="text-center max-w-3xl mx-auto mb-12 md:mb-16"
                 >
-                    <h2 className="text-4xl sm:text-5xl font-bold font-headline tracking-tighter flex items-center justify-center gap-4">
-                        Check Out My 
+                    <h2 className="text-4xl sm:text-5xl font-bold font-headline tracking-tighter flex items-center justify-center gap-2 sm:gap-4">
+                        <span className="hidden sm:inline">Check Out My</span>
                         <Image src="/images/youtubelogo.png" alt="YouTube Logo" width={160} height={40} className="inline-block" data-ai-hint="youtube logo" />
-                         Channel
+                        <span className="hidden sm:inline">Channel</span>
                     </h2>
                     <p className="mt-4 md:mt-6 text-muted-foreground md:text-lg">
                         Dive into tutorials, creative edits, and behind-the-scenes content.
@@ -89,4 +89,5 @@ export function YouTubeChannelSection() {
         </section>
     );
 }
+
 

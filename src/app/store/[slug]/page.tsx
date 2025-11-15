@@ -170,7 +170,7 @@ const SupportForm = ({ productName }: { productName: string }) => {
               )}
             />
             <div className="text-center">
-              <Button type="submit" disabled={isSubmitting} className="w-full font-bold py-3 text-base">
+              <Button type="submit" variant="primary" disabled={isSubmitting} className="w-full font-bold py-3 text-base">
                 {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                 Submit Support Request
               </Button>
@@ -273,7 +273,7 @@ export default function ProductDetailPage() {
                   {isRazorpayButton ? (
                     <RazorpayButton buttonId={staticItem.paymentLink} />
                   ) : (
-                    <Button asChild size="lg" className="w-full font-bold text-base md:text-lg py-4 md:py-6">
+                    <Button asChild variant="primary" size="lg" className="w-full font-bold text-base md:text-lg py-4 md:py-6">
                       <Link href={'paymentLink' in staticItem ? staticItem.paymentLink || '#' : '#'} target="_blank" rel="noopener noreferrer">
                         Buy Now
                       </Link>
@@ -294,7 +294,7 @@ export default function ProductDetailPage() {
               )}
 
               {!isPricedItem && (
-                <Button asChild size="lg" className="w-full font-bold">
+                <Button asChild variant="primary" size="lg" className="w-full font-bold">
                   <a href="/#contact">Contact For Details</a>
                 </Button>
               )}
@@ -385,7 +385,7 @@ export default function ProductDetailPage() {
                     <div className="bg-secondary/50 backdrop-blur-sm border rounded-lg p-6 md:p-8 flex flex-col items-center gap-4">
                       <h3 className="font-bold text-lg">Join our Telegram for the installation video.</h3>
                       <p className="text-muted-foreground text-sm">You'll find the installation guide and other resources in our official channel.</p>
-                      <Button asChild size="lg">
+                      <Button asChild size="lg" variant="primary">
                         <Link href={staticItem.tutorialLink} target="_blank" rel="noopener noreferrer">
                           <Send className="mr-2 h-4 w-4" />
                           Join Telegram Channel
@@ -393,7 +393,7 @@ export default function ProductDetailPage() {
                       </Button>
                     </div>
                   ) : (
-                    <Button asChild size="lg">
+                    <Button asChild size="lg" variant="primary">
                       <Link href={staticItem.tutorialLink} target="_blank" rel="noopener noreferrer">
                         <Youtube className="mr-2 h-4 w-4" />
                         View Tutorial

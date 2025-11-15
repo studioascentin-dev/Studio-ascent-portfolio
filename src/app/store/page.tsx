@@ -87,7 +87,7 @@ const StoreItemCard = ({ item }: { item: any }) => {
                     <span className="text-xl font-bold text-primary">₹{item.price}</span>
                     <span className="text-xs text-muted-foreground line-through">₹{item.originalPrice}</span>
                   </div>
-                  <Button className="font-semibold pointer-events-none text-xs px-3 h-8" size="sm">
+                  <Button variant="primary" className="font-semibold pointer-events-none text-xs px-3 h-8" size="sm">
                       View Details
                   </Button>
               </div>
@@ -102,7 +102,7 @@ const StoreItemCard = ({ item }: { item: any }) => {
                     <span className="text-xl font-bold text-primary">₹{item.price}</span>
                     <span className="text-xs text-muted-foreground line-through ml-1">₹{item.originalPrice}</span>
                 </div>
-                <Button className="w-full font-semibold pointer-events-none text-xs px-3 h-8 mt-2" size="sm">
+                <Button variant="primary" className="w-full font-semibold pointer-events-none text-xs px-3 h-8 mt-2" size="sm">
                     View Details
                 </Button>
             </div>

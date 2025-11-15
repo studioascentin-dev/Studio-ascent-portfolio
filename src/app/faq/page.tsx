@@ -32,9 +32,54 @@ const faqs = [
         category: "Digital Products"
     },
     {
-        question: "How do I start a project with you (e.g., web development, video editing)?",
-        answer: "The best way to start is by filling out the contact form on our homepage. Tell us about your project, your goals, and any specific requirements. We'll get back to you to discuss the details and next steps.",
-        category: "Services"
+        question: "Why is there a monthly fee for web development?",
+        answer: "The monthly fee covers ongoing maintenance, updates, bug fixes, backups, and support to ensure your website stays secure and performs well.",
+        category: "Web Development"
+    },
+    {
+        question: "What is the one-time setup fee for?",
+        answer: "The setup fee includes website design, development, CMS setup, page creation, and final deployment. This is paid once before the project begins.",
+        category: "Web Development"
+    },
+    {
+        question: "Is domain and hosting included in the plans?",
+        answer: "No. Domain and hosting are billed separately based on your requirements. We can assist in setting them up for you.",
+        category: "Web Development"
+    },
+    {
+        question: "What happens if I need more pages than the plan includes?",
+        answer: "Extra pages can be added at any time for an additional cost depending on complexity.",
+        category: "Web Development"
+    },
+    {
+        question: "Do you provide content writing or images?",
+        answer: "Content writing, branding, and images are not included by default. These services are available for an additional fee.",
+        category: "Web Development"
+    },
+    {
+        question: "Can you redesign or upgrade my existing website?",
+        answer: "Yes, we can modernize or rebuild your current website using Next.js, React, and updated design standards.",
+        category: "Web Development"
+    },
+    {
+        question: "What CMS do you use?",
+        answer: "We offer a custom CMS or integration with platforms like Firebase, Sanity, or a custom dashboard depending on your plan.",
+        category: "Web Development"
+    },
+    {
+        question: "What kind of support do I receive?",
+        answer: "Each plan includes 1 month of free support after launch. Continued support is part of the monthly maintenance fee.",
+        category: "Web Development"
+    },
+    {
+        question: "How long does development take?",
+        answer: "Basic: 5–10 days. Intermediate: 1–3 weeks. Enterprise: 3–8 weeks based on features.",
+        category: "Web Development"
+    },
+    {
+        question: "Do I get full ownership of the website?",
+        answer: "Yes. After project completion and payment, you receive full ownership and control over your website.",
+        category: "Web Development"
     },
     {
         question: "How many revisions are included in your service-based projects?",
@@ -104,7 +149,7 @@ export default function FAQPage() {
                   <h2 className="text-2xl font-bold font-headline mb-6 border-b-2 border-primary pb-2">{category}</h2>
                   <Accordion type="single" collapsible className="w-full space-y-4">
                     {faqs.filter(faq => faq.category === category).map((faq, index) => (
-                      <AccordionItem key={index} value={`item-${index}`} className="bg-secondary/30 border border-border rounded-lg px-6">
+                      <AccordionItem key={index} value={`item-${category}-${index}`} className="bg-secondary/30 border border-border rounded-lg px-6">
                         <AccordionTrigger className="text-left font-semibold text-base md:text-lg hover:no-underline">
                           {faq.question}
                         </AccordionTrigger>

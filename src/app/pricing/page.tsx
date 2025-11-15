@@ -188,19 +188,19 @@ export default function PricingPage() {
                                         )}
                                         <div className="flex-grow">
                                             <h3 className="text-xl font-bold font-headline text-white mb-2">{tier.name}</h3>
-                                            <p className="text-muted-foreground text-sm mb-4">{tier.description}</p>
-                                            <p className="text-4xl font-bold text-white mb-6">{tier.price}</p>
-                                            <ul className="space-y-4 text-sm text-[#E0E0E0]">
+                                            <p className="text-muted-foreground text-sm mb-4 min-h-[40px]">{tier.description}</p>
+                                            <p className="text-2xl font-bold text-white mb-6">{tier.price}</p>
+                                            <ul className="space-y-3 text-sm text-[#E0E0E0]">
                                                 {tier.features.map((feature: string, index: number) => (
-                                                    <li key={index} className="flex items-center gap-3">
-                                                        <Check className="h-4 w-4 text-primary" />
+                                                    <li key={index} className="flex items-start gap-3">
+                                                        <Check className="h-4 w-4 text-primary mt-1 flex-shrink-0" />
                                                         <span>{feature}</span>
                                                     </li>
                                                 ))}
                                             </ul>
                                         </div>
                                         <div className="mt-auto pt-6">
-                                             {tier.details && (
+                                             {tier.details && tier.details.length > 0 && (
                                                 <p className="text-xs text-muted-foreground mb-6">{tier.details[0]}</p>
                                              )}
                                             <Button asChild className="w-full font-bold bg-primary text-white hover:bg-primary/80">

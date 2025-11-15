@@ -115,7 +115,8 @@ const ServiceSection = ({ service }: { service: any }) => {
               </header>
               <div className={cn(
                   "grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 items-stretch",
-                   service.key === 'web-development' ? 'lg:grid-cols-3' : 'lg:grid-cols-4'
+                   service.tiers.length === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3',
+                   service.tiers.length === 3 ? 'sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3' : ''
               )}>
                   {service.tiers.map((tier: any) => (
                     <motion.div

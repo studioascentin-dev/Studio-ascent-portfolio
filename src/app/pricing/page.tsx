@@ -118,7 +118,7 @@ const ServiceSection = ({ service, onSelectPlan }: { service: any, onSelectPlan:
     const gridColsClass = () => {
       switch (service.tiers.length) {
         case 4:
-          return 'lg:grid-cols-2';
+          return 'lg:grid-cols-4';
         case 3:
           return 'lg:grid-cols-3';
         default:
@@ -178,8 +178,9 @@ export default function PricingPage() {
 
     if (selectedAddons.length > 0) {
       message += `\n\nI'd also like to include the following add-ons:\n- ${selectedAddons.join('\n- ')}`;
-      message += `\n\nPlease let me know the next steps.`
     }
+    
+    message += `\n\nPlease let me know the next steps.`
     
     const query = new URLSearchParams({
       service: serviceName,
@@ -253,3 +254,4 @@ export default function PricingPage() {
     </div>
   );
 }
+

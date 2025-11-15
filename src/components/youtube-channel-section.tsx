@@ -48,7 +48,7 @@ export function YouTubeChannelSection() {
                     variants={itemVariants}
                     className="text-center max-w-3xl mx-auto mb-12 md:mb-16"
                 >
-                    <h2 className="text-4xl sm:text-5xl font-bold font-headline tracking-tighter flex items-center justify-center gap-2 sm:gap-4">
+                    <h2 className="text-4xl sm:text-5xl font-bold font-headline tracking-tighter flex items-center justify-center gap-3 sm:gap-4">
                         <span className="hidden sm:inline">Check Out My</span>
                         <Image src="/images/youtubelogo.png" alt="YouTube Logo" width={160} height={40} className="inline-block" data-ai-hint="youtube logo" />
                         <span className="hidden sm:inline">Channel</span>
@@ -79,9 +79,12 @@ export function YouTubeChannelSection() {
                 </motion.div>
                 
                 <motion.div variants={itemVariants} className="text-center mt-12">
-                    <Button asChild size="lg" variant="glass" className="font-bold group">
+                    <Button asChild size="lg" variant="glass" className="font-bold group px-8">
                         <a href={YOUTUBE_CHANNEL_URL} target="_blank" rel="noopener noreferrer">
-                            Visit Channel <ArrowRight className="ml-2 h-5 w-5 opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0" />
+                             <span className="relative flex items-center justify-center w-full">
+                                <span className="transition-transform duration-300 ease-in-out group-hover:-translate-x-3">Visit Channel</span>
+                                <ArrowRight className="absolute right-0 h-5 w-5 opacity-0 transition-all duration-300 ease-in-out group-hover:opacity-100 group-hover:translate-x-4" />
+                            </span>
                         </a>
                     </Button>
                 </motion.div>

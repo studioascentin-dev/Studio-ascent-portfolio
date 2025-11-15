@@ -23,7 +23,7 @@ const buttonVariants = cva(
         primary:
           "bg-primary text-primary-foreground hover:bg-primary/90",
         glass:
-          "relative overflow-hidden bg-white text-black border border-border shadow-lg transition-all duration-300 ease-out bg-[length:100%_200%] bg-gradient-to-b from-primary from-50% to-white to-50% bg-no-repeat bg-[position:0%_100%] hover:bg-[position:0%_0%] hover:text-white",
+          "relative overflow-hidden bg-white text-black border border-border shadow-lg transition-all duration-500 ease-out bg-[length:100%_200%] bg-gradient-to-b from-primary from-50% to-white to-50% bg-no-repeat bg-[position:0%_100%] hover:bg-[position:0%_0%] hover:text-white",
       },
       size: {
         default: "h-10 px-4 py-2",

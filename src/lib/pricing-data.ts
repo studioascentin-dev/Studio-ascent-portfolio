@@ -10,6 +10,7 @@ export const pricingData = {
       {
         name: "Candy Style Edit",
         price: "₹1400",
+        description: "Soft, dreamy, and vibrant edits perfect for a sweet aesthetic.",
         features: [
           "Soft pastel color grading",
           "Dreamy transitions & beat sync",
@@ -30,6 +31,7 @@ export const pricingData = {
       {
         name: "Slo-Mo / Velocity Edit",
         price: "₹1700",
+        description: "Smooth, dynamic speed ramps and slow-motion effects.",
         features: [
           "Smooth slow motion (Twixtor-style)",
           "Beat-perfect velocity transitions",
@@ -50,6 +52,7 @@ export const pricingData = {
       {
         name: "Glitch & Sync Edit",
         price: "₹2500",
+        description: "High-energy, rhythmic edits with glitch effects and perfect sync.",
         features: [
           "Advanced beat sync effects",
           "Glitch overlays & motion text",
@@ -70,6 +73,7 @@ export const pricingData = {
       {
         name: "Trendy Reel Edit",
         price: "₹1800",
+        description: "Capitalize on the latest trends with catchy audio and captions.",
         features: [
           "Trend audio & captions",
           "Modern transitions",
@@ -90,26 +94,29 @@ export const pricingData = {
     ]
   },
   'ai-chatbot': {
-    title: 'AI Chatbot',
+    title: 'AI Chatbot Packages',
     key: 'ai-chatbot',
     description: 'Automate your customer interactions with intelligent, custom-built chatbots.',
     tiers: [
       {
         name: 'FAQ/Support Bot',
         price: '₹8,000',
+        description: "Instantly answer common questions and provide 24/7 support.",
         features: [
-          'Handles FAQs',
+          'Handles unlimited FAQs',
           'WhatsApp/Telegram Integration',
           'Deployed on chosen platform',
           '1 Month Free Support',
         ],
         details: ['Optional: Maintenance +₹2,000/month'],
         buttonText: 'Select Plan',
+        color: "blue",
       },
       {
         name: 'Booking Bot',
         price: '₹15,000',
         popular: true,
+        description: "Automate appointment and order taking via chat.",
         features: [
           'Order/Booking via Chat',
           'Google Sheet/Airtable Integration',
@@ -119,24 +126,27 @@ export const pricingData = {
         ],
         details: ['Optional: Maintenance +₹3,500/month'],
         buttonText: 'Select Plan',
+        color: "purple",
       },
       {
         name: 'GPT-Powered Bot',
         price: '₹25,000',
+        description: "Engage users with incredibly smart, human-like conversations.",
         features: [
           'Smart, Human-like Replies',
-          'Uses OpenAI Credits (*not included in price*)',
-          'Advanced Customization (intents, flows)',
+          'Uses OpenAI Credits (*not included*)',
+          'Advanced Customization',
           'Deployed on Website/WhatsApp/Telegram',
           '1 Month Free Support',
         ],
         details: ['Optional: Maintenance +₹5,000/month'],
         buttonText: 'Select Plan',
+        color: "green",
       },
     ],
   },
   'web-development': {
-    title: 'Web Development',
+    title: 'Web Development Packages',
     key: 'web-development',
     description: 'Flexible pricing for Next.js web development, designed to scale with your needs.',
     tiers: [
@@ -144,53 +154,46 @@ export const pricingData = {
             name: 'Basic Web Development',
             description: "Perfect for Small Businesses & Personal Sites",
             price: '₹1,800/mo',
-            priceSubtitle: 'For 12 months',
-            priceSubDescription: "Maintenance included. Contact for details.",
             features: [
-                { icon: LayoutTemplate, text: '1-3 Page Website' },
-                { icon: Zap, text: 'Next.js Framework' },
-                { icon: Database, text: 'Basic CMS Integration' },
-                { icon: Clock, text: '1 Month Free Support' },
+                '1-3 Page Website',
+                'Next.js Framework',
+                'Basic CMS Integration',
+                '1 Month Free Support',
             ],
+            details: ["For 12 months. Maintenance included. Contact for details."],
             buttonText: 'Start Small',
-            size: 'small',
+            color: 'blue'
         },
         {
             name: 'Intermediate Web Development',
             description: "Best for Growing Startups",
             price: '₹3,500/mo',
-            priceSubtitle: 'For 12 months',
-            priceSubDescription: "Maintenance included. Contact for details.",
             popular: true,
             features: [
-                { icon: Briefcase, text: 'Up to 6 Page Website' },
-                { icon: Zap, text: 'Next.js Framework' },
-                { icon: Database, text: 'Advanced CMS' },
-                { icon: Cog, text: 'Simple API Integrations' },
-                { icon: Clock, text: '1 Month Free Support' },
+                'Up to 6 Page Website',
+                'Next.js Framework',
+                'Advanced CMS',
+                'Simple API Integrations',
+                '1 Month Free Support',
             ],
+            details: ["For 12 months. Maintenance included. Contact for details."],
             buttonText: 'Grow Your Business',
-            size: 'medium',
+            color: 'purple'
         },
         {
             name: 'Enterprise Web Development',
             description: "Custom Solutions for Enterprises",
             price: '₹9,500/mo',
-            priceSubtitle: 'For 12 months',
-            priceSubDescription: "Maintenance included. Contact for details.",
             features: [
-                { icon: Globe, text: '10+ Page Application' },
-                { icon: Star, text: 'Performance Optimization' },
-                { icon: Shield, text: 'Advanced Security Setup' },
-                { icon: Bot, text: 'AI Feature Integration' },
-                { icon: Cloud, text: 'Multi-language Support' },
-                { icon: Palette, text: 'UI/UX Premium Design' },
-                { icon: UserCog, text: 'Custom Admin Dashboard' },
-                { icon: Cog, text: 'Custom Integrations' },
-                { icon: Clock, text: '1 Month Free Support' },
+                '10+ Page Application',
+                'Performance Optimization',
+                'Advanced Security Setup',
+                'AI Feature Integration',
+                '1 Month Free Support',
             ],
+            details: ["For 12 months. Maintenance included. Contact for details."],
             buttonText: 'Build Enterprise Solutions',
-            size: 'large',
+            color: 'green'
         },
     ]
   },

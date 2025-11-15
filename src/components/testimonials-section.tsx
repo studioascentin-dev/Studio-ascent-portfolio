@@ -124,8 +124,8 @@ export function TestimonialsSection() {
                     </p>
                     <Button
                         asChild
-                        variant="outline"
-                        className="mt-6 font-bold"
+                        variant="glass"
+                        className="mt-6 font-bold rounded-full"
                     >
                         <a href="https://maps.app.goo.gl/dhkMzLEB5KPMcCjK9" target="_blank" rel="noopener noreferrer">Rate Us on Google</a>
                     </Button>

@@ -63,7 +63,7 @@ export function YouTubeChannelSection() {
                         <div className="relative aspect-video">
                              <a href={YOUTUBE_CHANNEL_URL} target="_blank" rel="noopener noreferrer" aria-label="YouTube Channel Preview">
                                 <Image
-                                    src="https://picsum.photos/seed/youtube/1280/720"
+                                    src="/images/youtubechannel.png"
                                     alt="YouTube Channel Preview"
                                     width={1280}
                                     height={720}

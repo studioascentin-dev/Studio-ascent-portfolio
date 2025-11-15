@@ -20,7 +20,7 @@ const navItems = [
     { name: "Contact", href: "/#contact" },
 ];
 
-const Logo = () => {
+const Logo = ({ showText = true }: { showText?: boolean }) => {
     return (
         <>
             <div className="relative h-8 w-8 flex-shrink-0">
@@ -33,11 +33,13 @@ const Logo = () => {
                     priority
                 />
             </div>
-            <span className="font-headline text-lg font-bold">
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-300 to-primary animate-shimmer bg-[length:200%_auto]">
-                    Studio Ascent
+            {showText && (
+                <span className="font-headline text-lg font-bold hidden sm:inline">
+                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-300 to-primary animate-shimmer bg-[length:200%_auto]">
+                        Studio Ascent
+                    </span>
                 </span>
-            </span>
+            )}
         </>
     );
 };
@@ -128,9 +130,9 @@ export function Header() {
                 transition={{ type: "spring", stiffness: 100, damping: 20 }}
                 className="px-4 sm:px-8"
             >
-                <div className="flex h-24 items-center justify-between">
+                <div className="flex h-16 md:h-24 items-center justify-between">
                     <Link href="/" className="flex items-center gap-3 px-4 py-2 bg-background/50 backdrop-blur-lg rounded-full border border-border shadow-lg">
-                        <Logo />
+                        <Logo showText={true} />
                     </Link>
                     
                     <div className="flex items-center gap-2">
@@ -175,7 +177,7 @@ export function Header() {
                                 <div className="flex flex-col h-full pt-10">
                                     <div className="mb-10 text-center">
                                          <Link href="/" onClick={() => setIsSheetOpen(false)} className="inline-flex items-center gap-3">
-                                            <Logo />
+                                            <Logo showText={true} />
                                         </Link>
                                     </div>
                                     <nav className="flex flex-col items-center gap-6 text-lg">

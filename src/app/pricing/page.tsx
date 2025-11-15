@@ -5,16 +5,18 @@ import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
-import { Check, ArrowRight, Clock, X } from 'lucide-react';
+import { Check, ArrowRight, Clock, X, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import { pricingData } from '@/lib/pricing-data';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import React, { useState } from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogClose } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { useRouter } from 'next/navigation';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Textarea } from '@/components/ui/textarea';
 
 const sectionVariants = {
   hidden: { opacity: 0 },
@@ -154,15 +156,36 @@ const ServiceSection = ({ service, onSelectPlan }: { service: any, onSelectPlan:
 };
 
 
+const purposeOptions = [
+    "E-commerce / Online Store",
+    "Portfolio / Personal Website",
+    "Business / Corporate Site",
+    "Blog / Content Platform",
+    "Food / Restaurant Business",
+    "Other"
+];
+
 export default function PricingPage() {
   const router = useRouter();
+  const [dialogStep, setDialogStep] = useState<'addons' | 'purpose' | null>(null);
   const [selectedPlan, setSelectedPlan] = useState<Tier | null>(null);
   const [selectedAddons, setSelectedAddons] = useState<string[]>([]);
+  const [selectedPurpose, setSelectedPurpose] = useState('');
+  const [customPurpose, setCustomPurpose] = useState('');
 
   const handleSelectPlan = (tier: Tier) => {
     setSelectedPlan(tier);
     setSelectedAddons([]); 
+    setSelectedPurpose('');
+    setCustomPurpose('');
+    setDialogStep('addons');
   };
+  
+  const closeDialog = () => {
+    setDialogStep(null);
+    // Delay setting plan to null to avoid content flashing during exit animation
+    setTimeout(() => setSelectedPlan(null), 300);
+  }
 
   const handleAddonToggle = (addon: string) => {
     setSelectedAddons(prev => 
@@ -172,9 +195,17 @@ export default function PricingPage() {
 
   const handleContinue = () => {
     if (!selectedPlan) return;
+
+    let purposeMessage = selectedPurpose;
+    if (selectedPurpose === 'Other') {
+        purposeMessage = customPurpose || 'Other';
+    }
     
-    const serviceName = selectedPlan.name;
-    let message = `Hi, I'm interested in the "${serviceName}" plan and would like to get started.`;
+    let message = `Hi, I'm interested in the "${selectedPlan.name}" plan for my project.`;
+
+    if (purposeMessage) {
+        message += ` It's for a(n) ${purposeMessage}.`;
+    }
 
     if (selectedAddons.length > 0) {
       message += `\n\nI'd also like to include the following add-ons:\n- ${selectedAddons.join('\n- ')}`;
@@ -183,14 +214,15 @@ export default function PricingPage() {
     message += `\n\nPlease let me know the next steps.`
     
     const query = new URLSearchParams({
-      service: serviceName,
+      service: selectedPlan.name,
       message: message,
     }).toString();
 
     router.push(`/?contact=true&${query}#contact`);
-    setSelectedPlan(null);
+    closeDialog();
   };
 
+  const hasAddons = selectedPlan?.addOns && selectedPlan.addOns.length > 0;
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
@@ -219,34 +251,74 @@ export default function PricingPage() {
           </div>
         </motion.section>
 
-        <Dialog open={!!selectedPlan} onOpenChange={() => setSelectedPlan(null)}>
+        <Dialog open={!!selectedPlan} onOpenChange={closeDialog}>
           <DialogContent className="max-w-md">
-            <DialogHeader>
+             <DialogHeader>
               <DialogTitle className="font-headline text-2xl">{selectedPlan?.name}</DialogTitle>
             </DialogHeader>
-            {selectedPlan?.addOns && selectedPlan.addOns.length > 0 ? (
-              <div className="space-y-4 py-4">
-                <h4 className="font-semibold text-lg">Select Add-ons</h4>
-                <div className="space-y-3">
-                  {selectedPlan.addOns.map((addon) => (
-                    <div key={addon} className="flex items-center space-x-3 bg-secondary/50 p-3 rounded-md">
-                      <Checkbox 
-                        id={addon} 
-                        checked={selectedAddons.includes(addon)}
-                        onCheckedChange={() => handleAddonToggle(addon)}
-                      />
-                      <Label htmlFor={addon} className="flex-1 cursor-pointer text-sm">{addon}</Label>
+
+            {dialogStep === 'addons' && (
+                <>
+                {hasAddons ? (
+                  <div className="space-y-4 py-4">
+                    <h4 className="font-semibold text-lg">Select Add-ons</h4>
+                    <div className="space-y-3">
+                      {selectedPlan.addOns!.map((addon) => (
+                        <div key={addon} className="flex items-center space-x-3 bg-secondary/50 p-3 rounded-md">
+                          <Checkbox 
+                            id={addon} 
+                            checked={selectedAddons.includes(addon)}
+                            onCheckedChange={() => handleAddonToggle(addon)}
+                          />
+                          <Label htmlFor={addon} className="flex-1 cursor-pointer text-sm">{addon}</Label>
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
-              </div>
-            ) : (
-              <p className="py-4 text-muted-foreground">This plan has no available add-ons.</p>
+                  </div>
+                ) : (
+                  <p className="py-4 text-muted-foreground">This plan has no available add-ons.</p>
+                )}
+                 <DialogFooter>
+                    <Button variant="outline" onClick={closeDialog}>Cancel</Button>
+                    <Button onClick={() => setDialogStep('purpose')}>Continue</Button>
+                </DialogFooter>
+              </>
             )}
-            <DialogFooter>
-              <Button variant="outline" onClick={() => setSelectedPlan(null)}>Cancel</Button>
-              <Button onClick={handleContinue}>Continue</Button>
-            </DialogFooter>
+
+            {dialogStep === 'purpose' && (
+                <>
+                 <div className="space-y-4 py-4">
+                    <h4 className="font-semibold text-lg">What is this project for?</h4>
+                     <RadioGroup value={selectedPurpose} onValueChange={setSelectedPurpose}>
+                      <div className="space-y-3">
+                        {purposeOptions.map((purpose) => (
+                          <div key={purpose} className="flex items-center space-x-3 bg-secondary/50 p-3 rounded-md">
+                            <RadioGroupItem value={purpose} id={purpose} />
+                            <Label htmlFor={purpose} className="flex-1 cursor-pointer text-sm">{purpose}</Label>
+                          </div>
+                        ))}
+                      </div>
+                    </RadioGroup>
+                    {selectedPurpose === 'Other' && (
+                        <Textarea 
+                            placeholder="Please describe your project..."
+                            value={customPurpose}
+                            onChange={(e) => setCustomPurpose(e.target.value)}
+                            className="mt-4"
+                        />
+                    )}
+                  </div>
+                  <DialogFooter className="flex justify-between w-full">
+                    <Button variant="ghost" onClick={() => setDialogStep('addons')}>
+                        <ArrowLeft className="mr-2 h-4 w-4" /> Back
+                    </Button>
+                    <div className="flex gap-2">
+                        <Button variant="outline" onClick={closeDialog}>Cancel</Button>
+                        <Button onClick={handleContinue} disabled={!selectedPurpose || (selectedPurpose === 'Other' && !customPurpose)}>Continue</Button>
+                    </div>
+                </DialogFooter>
+                </>
+            )}
           </DialogContent>
         </Dialog>
       </main>
@@ -254,4 +326,3 @@ export default function PricingPage() {
     </div>
   );
 }
-

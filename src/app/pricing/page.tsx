@@ -115,8 +115,8 @@ const ServiceSection = ({ service }: { service: any }) => {
               </header>
               <div className={cn(
                   "grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 items-stretch",
-                   service.tiers.length === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3',
-                   service.tiers.length === 3 ? 'sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3' : ''
+                   service.tiers.length === 4 ? 'lg:grid-cols-4' : '',
+                   service.tiers.length === 3 ? 'lg:grid-cols-3' : ''
               )}>
                   {service.tiers.map((tier: any) => (
                     <motion.div
@@ -136,6 +136,8 @@ const ServiceSection = ({ service }: { service: any }) => {
 
 
 export default function PricingPage() {
+
+  const webDevService = pricingData['web-development'];
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
@@ -157,9 +159,61 @@ export default function PricingPage() {
               </p>
             </motion.div>
             
-            {Object.values(pricingData).map(service => (
-                <ServiceSection key={service.key} service={service} />
-            ))}
+            <ServiceSection service={pricingData['reel-editing']} />
+            <ServiceSection service={pricingData['ai-chatbot']} />
+
+            {webDevService && (
+                <motion.div variants={itemVariants} className="mb-16 md:mb-24">
+                    <div className="bg-[#0F0F0F] p-8 md:p-16 rounded-3xl -mx-4 md:-mx-8">
+                        <header className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
+                            <h2 className="text-3xl md:text-4xl font-bold font-headline text-white">{webDevService.title}</h2>
+                            <p className="mt-4 text-muted-foreground text-base md:text-lg">{webDevService.description}</p>
+                        </header>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+                            {webDevService.tiers.map((tier) => (
+                                <motion.div
+                                    key={tier.name}
+                                    whileHover={{ y: -8 }}
+                                    transition={{ type: 'spring', stiffness: 300 }}
+                                    className="flex"
+                                >
+                                    <div className={cn(
+                                        "relative flex flex-col h-full w-full rounded-2xl bg-black/50 border p-8 transition-all duration-300",
+                                        tier.popular ? "border-primary shadow-2xl shadow-primary/20" : "border-white/10"
+                                    )}>
+                                        {tier.popular && (
+                                            <Badge variant="default" className="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-primary text-white">
+                                                Most Popular
+                                            </Badge>
+                                        )}
+                                        <div className="flex-grow">
+                                            <h3 className="text-xl font-bold font-headline text-white mb-2">{tier.name}</h3>
+                                            <p className="text-muted-foreground text-sm mb-4">{tier.description}</p>
+                                            <p className="text-4xl font-bold text-white mb-6">{tier.price}</p>
+                                            <ul className="space-y-4 text-sm text-[#E0E0E0]">
+                                                {tier.features.map((feature: string, index: number) => (
+                                                    <li key={index} className="flex items-center gap-3">
+                                                        <Check className="h-4 w-4 text-primary" />
+                                                        <span>{feature}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                        <div className="mt-auto pt-6">
+                                             {tier.details && (
+                                                <p className="text-xs text-muted-foreground mb-6">{tier.details[0]}</p>
+                                             )}
+                                            <Button asChild className="w-full font-bold bg-primary text-white hover:bg-primary/80">
+                                                <Link href={`/?contact=true&service=${encodeURIComponent(tier.name)}#contact`}>{tier.buttonText}</Link>
+                                            </Button>
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+                </motion.div>
+            )}
 
           </div>
         </motion.section>
